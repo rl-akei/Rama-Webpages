@@ -763,127 +763,230 @@ section {
   margin-bottom: clamp(56px, 7vw, 96px);
 }
 
-.steps-list { display: flex; flex-direction: column; }
-.step-row {
+/* =============================================
+   FRESCO — services horizontal timeline
+   (ported from Framer LogicAILanding component)
+   ============================================= */
+.fresco-wrap { margin-top: var(--sp-12); position: relative; }
+.fresco-top {
   display: grid;
-  grid-template-columns: 96px minmax(180px, 260px) 1fr;
-  gap: clamp(24px, 4vw, 56px);
-  padding: clamp(32px, 4vw, 52px) 0;
-  border-top: 1px solid var(--border);
-  align-items: start;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  position: relative;
 }
-.step-row:last-child { border-bottom: 1px solid var(--border); }
+/* Pointillé timeline qui relie les 3 dots */
+.fresco-top::before {
+  content: '';
+  position: absolute;
+  top: 74px;
+  left: 8%; right: 8%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(13, 26, 20, 0.22) 0 6px,
+    transparent 6px 12px
+  );
+  z-index: 0;
+  pointer-events: none;
+}
 
-.step-num {
+.fresco-step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.fresco-tag {
+  text-align: center;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--aloe-dark);
-  padding-top: 8px;
 }
-.step-num span {
-  display: block;
-  font-size: 10px;
-  color: var(--aloe-light);
-  margin-top: 4px;
+.fresco-dot {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 4px solid var(--aloe);
+  margin: 60px auto 0;
+  position: relative;
+  z-index: 2;
+  box-shadow: var(--shadow-xs);
+}
+.fresco-step:nth-child(1) .fresco-dot {
+  background: var(--mindaro);
+  border-color: var(--ink);
+}
+.fresco-step:nth-child(2) .fresco-dot {
+  background: var(--aloe);
+  border-color: var(--cream);
+}
+.fresco-step:nth-child(3) .fresco-dot {
+  background: var(--ink);
+  border-color: var(--cream);
 }
 
-.step-name h3 {
+.fresco-card {
+  border-radius: var(--r-lg);
+  padding: clamp(22px, 2vw, 28px) clamp(20px, 2vw, 26px);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.fresco-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+.fresco-step:nth-child(1) .fresco-card {
+  background: var(--mindaro);
+  color: var(--ink);
+}
+.fresco-step:nth-child(2) .fresco-card {
+  background: var(--aloe);
+  color: var(--cream);
+}
+.fresco-step:nth-child(3) .fresco-card {
+  background: var(--ink);
+  color: var(--cream);
+}
+.fresco-card h3 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(28px, 3vw, 42px);
+  font-size: clamp(26px, 2.6vw, 32px);
   letter-spacing: -0.018em;
-  line-height: 1.06;
-  color: var(--ink);
-  margin-bottom: var(--sp-4);
+  line-height: 1.05;
 }
-.step-tags {
+.fresco-meta {
   display: flex;
-  gap: var(--sp-2);
+  gap: 6px;
   flex-wrap: wrap;
-  margin-top: var(--sp-4);
 }
-.step-tag {
+.fresco-meta span {
   font-family: var(--mono);
   font-size: 10.5px;
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 999px;
-  border: 1px solid var(--border-mid);
+  background: rgba(13, 26, 20, 0.18);
+  letter-spacing: 0.04em;
+}
+.fresco-step:nth-child(3) .fresco-meta span {
+  background: rgba(255, 252, 247, 0.15);
+}
+.fresco-card p {
+  font-size: 13.5px;
+  line-height: 1.5;
+  opacity: 0.92;
+}
+.fresco-card ul {
+  list-style: none;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid currentColor;
+  opacity: 0.85;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.fresco-card li {
+  font-size: 12.5px;
+  padding: 3px 0;
+  display: flex;
+  gap: 8px;
+  line-height: 1.4;
+}
+.fresco-card li::before {
+  content: '▸';
+  flex-shrink: 0;
+}
+
+/* Operate — récurrence (full-width sous la fresco) */
+.fresco-operate {
+  margin-top: 24px;
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  padding: 20px clamp(22px, 2vw, 28px);
+  border: 1px dashed var(--border-mid);
+  border-radius: var(--r-lg);
+  background: rgba(13, 26, 20, 0.02);
+}
+.fresco-operate-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--aloe-dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+.fresco-operate-label::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--aloe);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+.fresco-operate-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.fresco-operate-body h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(20px, 2vw, 24px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.fresco-operate-body p {
+  font-size: 14px;
   color: var(--slate);
+  line-height: 1.5;
+  flex: 1;
+  min-width: 240px;
+}
+.fresco-operate-meta {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.fresco-operate-meta span {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--border-mid);
+  color: var(--ink);
   letter-spacing: 0.04em;
 }
 
-.step-body p {
-  font-size: 15.5px;
-  color: var(--slate);
-  line-height: 1.65;
-  margin-bottom: var(--sp-6);
-  max-width: 60ch;
-}
-.step-delivers {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-3);
-}
-.step-delivers li {
-  font-size: 14px;
-  color: var(--ink);
-  display: flex;
-  gap: var(--sp-3);
-  align-items: start;
-}
-.step-delivers li::before {
-  content: '▸';
-  color: var(--aloe);
-  flex-shrink: 0;
-  font-size: 11px;
-  margin-top: 3px;
-}
-
-/* Operate row — recurring */
-.step-row.step-operate {
-  grid-template-columns: 96px 1fr auto;
-  background: transparent;
-  border-bottom: 1px solid var(--border);
-  align-items: center;
-}
-.step-operate-inner {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-3);
-}
-.step-operate-inner h3 {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(24px, 2.5vw, 36px);
-  letter-spacing: -0.018em;
-  line-height: 1.1;
-  color: var(--ink);
-}
-.step-operate-inner p {
-  font-size: 15px;
-  color: var(--slate);
-  line-height: 1.6;
-  max-width: 55ch;
-}
-.operate-pulse {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--sp-2);
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--aloe-dark);
-}
-.operate-pulse::before {
-  content: '';
-  width: 6px; height: 6px;
-  background: var(--aloe);
-  border-radius: 50%;
-  animation: pulse-dot 2s ease-in-out infinite;
+@media (max-width: 900px) {
+  .fresco-top {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .fresco-top::before { display: none; }
+  .fresco-dot { margin-top: 0; }
+  .fresco-operate {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .fresco-operate-body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }
 
 /* =============================================
@@ -1903,79 +2006,69 @@ footer {
       <p class="section-intro">Pas de big bang. On avance méthodiquement, on valide, on construit sur du solide.</p>
     </div>
 
-    <div class="steps-list">
-      <div class="step-row reveal">
-        <div class="step-num">
-          Étape 01
-          <span>Porte d'entrée</span>
-        </div>
-        <div class="step-name">
-          <h3>Audit</h3>
-          <div class="step-tags">
-            <span class="step-tag">1 semaine</span>
-            <span class="step-tag">2 sessions</span>
+    <div class="fresco-wrap reveal">
+      <div class="fresco-top">
+
+        <div class="fresco-step">
+          <div class="fresco-tag">Étape 01 · Porte d'entrée</div>
+          <div class="fresco-dot" aria-hidden="true"></div>
+          <div class="fresco-card">
+            <h3>Audit</h3>
+            <div class="fresco-meta">
+              <span>1 semaine</span>
+              <span>2 sessions</span>
+            </div>
+            <p>On cartographie tes 4 process, on identifie les goulots et on estime le potentiel IA.</p>
+            <ul role="list">
+              <li>Roadmap 90 jours</li>
+              <li>Matrice de priorisation</li>
+              <li>Un go/no-go clair</li>
+            </ul>
           </div>
         </div>
-        <div class="step-body">
-          <p>On cartographie tes 4 process, on identifie les goulots et on estime le potentiel IA.</p>
-          <ul class="step-delivers" role="list">
-            <li>Roadmap 90 jours</li>
-            <li>Matrice de priorisation</li>
-            <li>Un go/no-go clair</li>
-          </ul>
-        </div>
-      </div>
 
-      <div class="step-row reveal">
-        <div class="step-num">
-          Étape 02
-          <span>Noyau du programme</span>
-        </div>
-        <div class="step-name">
-          <h3>Construction</h3>
-          <div class="step-tags">
-            <span class="step-tag">4 à 6 sem.</span>
-            <span class="step-tag">Agents + formation</span>
+        <div class="fresco-step">
+          <div class="fresco-tag">Étape 02 · Noyau du programme</div>
+          <div class="fresco-dot" aria-hidden="true"></div>
+          <div class="fresco-card">
+            <h3>Construction</h3>
+            <div class="fresco-meta">
+              <span>4 à 6 sem.</span>
+              <span>Agents + formation</span>
+            </div>
+            <p>On construit l'architecture, on déploie 3 à 5 agents IA, on connecte les outils et on forme ton équipe.</p>
+            <ul role="list">
+              <li>CEO Cockpit, CRM, Projets, Docs</li>
+              <li>Agents documentation, playbook</li>
+              <li>Dashboard d'impact</li>
+            </ul>
           </div>
         </div>
-        <div class="step-body">
-          <p>On construit l'architecture, on déploie 3 à 5 agents IA, on connecte les outils et on forme ton équipe.</p>
-          <ul class="step-delivers" role="list">
-            <li>CEO Cockpit, CRM, Projets, Docs</li>
-            <li>Agents documentation + playbook</li>
-            <li>Dashboard d'impact</li>
-          </ul>
-        </div>
-      </div>
 
-      <div class="step-row reveal">
-        <div class="step-num">
-          Étape 03
-          <span>Optionnel</span>
-        </div>
-        <div class="step-name">
-          <h3>Scale</h3>
-          <div class="step-tags">
-            <span class="step-tag">4 semaines</span>
-            <span class="step-tag">Agents autonomes</span>
+        <div class="fresco-step">
+          <div class="fresco-tag">Étape 03 · Optionnel</div>
+          <div class="fresco-dot" aria-hidden="true"></div>
+          <div class="fresco-card">
+            <h3>Scale</h3>
+            <div class="fresco-meta">
+              <span>4 semaines</span>
+              <span>Agents autonomes</span>
+            </div>
+            <p>On passe des copilotes aux agents autonomes avec garde-fous. Ton équipe prend les rênes.</p>
           </div>
         </div>
-        <div class="step-body">
-          <p>On passe des copilotes aux agents autonomes avec garde-fous. Ton équipe prend les rênes.</p>
-        </div>
+
       </div>
 
-      <div class="step-row step-operate reveal">
-        <div class="step-num">
-          <span class="operate-pulse">Récurrence</span>
-        </div>
-        <div class="step-operate-inner">
+      <div class="fresco-operate">
+        <div class="fresco-operate-label">Récurrence</div>
+        <div class="fresco-operate-body">
           <h3>Operate</h3>
           <p>Pilotage mensuel, nouveaux use cases, maintenance, support prioritaire. L'IA vit dans ton business, elle ne stagne pas.</p>
-        </div>
-        <div class="step-tags">
-          <span class="step-tag">Mensuel</span>
-          <span class="step-tag">Engagement 3 mois mini</span>
+          <div class="fresco-operate-meta">
+            <span>Mensuel</span>
+            <span>Engagement 3 mois minimum</span>
+          </div>
         </div>
       </div>
     </div>
