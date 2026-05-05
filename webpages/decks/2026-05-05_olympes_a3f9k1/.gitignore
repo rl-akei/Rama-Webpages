@@ -1,0 +1,7 @@
+_build.py
+_screenshot.py
+_BRIEF.md
+BRIEF.md
+screenshots/
+__pycache__/
+*.pyc

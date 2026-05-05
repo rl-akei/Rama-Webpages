@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Olympes × Rama Logic · Proposition</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #fcf9f8;
+    --on-bg: #1c1b1b;
+    --primary: #446254;
+    --secondary: #56641e;
+    --surface-low: #f6f3f2;
+    --outline: #c1c8c2;
+    --on-surface-variant: #424844;
+    --secondary-fixed: #d9eb95;
+    --primary-fixed: #c8ead8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; }
+  body {
+    font-family: 'Work Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--on-bg);
+    display: flex;
+    flex-direction: column;
+  }
+  .deck { flex: 1; position: relative; overflow: hidden; }
+  .slide-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: var(--bg);
+    transition: opacity 0.25s ease-out;
+  }
+  .slide-frame.hidden { opacity: 0; pointer-events: none; }
+  .nav {
+    background: var(--bg);
+    border-top: 1px solid var(--outline);
+    padding: 12px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+  .nav-info {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--on-surface-variant);
+    text-transform: uppercase;
+  }
+  .nav-controls { display: flex; gap: 8px; align-items: center; }
+  .btn {
+    background: var(--on-bg);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.15s ease;
+  }
+  .btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  .btn:not(:disabled):hover { transform: translate(2px, -2px); }
+  .btn .material-symbols-outlined { font-size: 18px; font-variation-settings: 'FILL' 0, 'wght' 500; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--on-bg);
+    border: 1px solid var(--outline);
+  }
+  .counter {
+    font-family: 'Clash Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    padding: 0 8px;
+    color: var(--on-bg);
+  }
+  .counter .total { color: var(--on-surface-variant); font-size: 14px; }
+  /* Overview grid mode */
+  .overview {
+    position: absolute;
+    inset: 0;
+    background: var(--bg);
+    padding: 32px;
+    display: none;
+    overflow-y: auto;
+  }
+  .overview.active { display: block; }
+  .overview-title {
+    font-family: 'Clash Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .overview-card {
+    border: 1px solid var(--outline);
+    background: white;
+    padding: 12px;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+    position: relative;
+  }
+  .overview-card:hover { transform: translate(2px, -2px); }
+  .overview-card-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--primary);
+    letter-spacing: 0.1em;
+  }
+  .overview-card-title {
+    font-family: 'Clash Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 4px;
+    color: var(--on-bg);
+  }
+  /* Print mode for PDF export */
+  @media print {
+    .nav, .overview { display: none !important; }
+    .slide-frame { opacity: 1 !important; position: relative !important; page-break-after: always; height: 100vh; }
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  /* Loading state */
+  .loader {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--on-surface-variant);
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+  <div class="loader">CHARGEMENT...</div>
+  <iframe class="slide-frame hidden" id="slide-frame" src="" title="Slide"></iframe>
+
+  <div class="overview" id="overview">
+    <div class="overview-title">Olympes × Rama Logic — 18 slides</div>
+    <div class="overview-grid" id="overview-grid"></div>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="nav-info">
+    <span id="slide-title">—</span>
+  </div>
+  <div class="nav-controls">
+    <button class="btn btn-ghost" id="btn-overview" title="Vue d'ensemble (ESC)">
+      <span class="material-symbols-outlined">grid_view</span>
+      <span>Vue</span>
+    </button>
+    <button class="btn" id="btn-prev" title="Précédent (←)">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <span class="counter">
+      <span id="current">01</span><span class="total"> / 18</span>
+    </span>
+    <button class="btn" id="btn-next" title="Suivant (→)">
+      <span class="material-symbols-outlined">arrow_forward</span>
+    </button>
+  </div>
+  <div class="nav-info" style="text-align: right;">
+    Confidentiel · 5 mai 2026
+  </div>
+</nav>
+
+<script>
+  const SLIDES = [
+    ['slide_00_cover.html', 'Cover'],
+    ['slide_01_contexte.html', 'Contexte · 3 chantiers'],
+    ['slide_02_probleme_pilotage.html', 'Problème · Silo pilotage'],
+    ['slide_03_probleme_goulot.html', 'Problème · Bottleneck CEO'],
+    ['slide_04_probleme_tech.html', 'Problème · Risque tech'],
+    ['slide_05_impact_temps_ceo.html', 'Impact · Temps CEO'],
+    ['slide_06_impact_generaly.html', 'Impact · Generaly'],
+    ['slide_07_impact_retard.html', 'Impact · Retard launch'],
+    ['slide_08_synthese_impact.html', 'Synthèse impact'],
+    ['slide_10_pilier_a_notion.html', 'Pilier A · Setup Notion'],
+    ['slide_11_pilier_b_coo.html', 'Pilier B · COO'],
+    ['slide_12_pourquoi_coo.html', 'Pourquoi un COO'],
+    ['slide_13_garder_lacher.html', 'Garder · Lâcher'],
+    ['slide_14_retroplanning.html', 'Rétroplanning'],
+    ['slide_15_chiffrage.html', 'Chiffrage'],
+    ['slide_16_paiement.html', 'Conditions paiement'],
+    ['slide_17_closing.html', 'Closing'],
+    ['slide_18_merci.html', 'Merci'],
+  ];
+
+  let current = 0;
+  let overviewActive = false;
+
+  const frame = document.getElementById('slide-frame');
+  const loader = document.querySelector('.loader');
+  const titleEl = document.getElementById('slide-title');
+  const currentEl = document.getElementById('current');
+  const prevBtn = document.getElementById('btn-prev');
+  const nextBtn = document.getElementById('btn-next');
+  const overviewBtn = document.getElementById('btn-overview');
+  const overview = document.getElementById('overview');
+  const overviewGrid = document.getElementById('overview-grid');
+
+  function go(i) {
+    if (i < 0 || i >= SLIDES.length) return;
+    current = i;
+    const [src, title] = SLIDES[i];
+    if (loader) loader.style.display = 'none';
+    frame.classList.add('hidden');
+    setTimeout(() => {
+      frame.src = src;
+      frame.onload = () => frame.classList.remove('hidden');
+    }, 100);
+    titleEl.textContent = title;
+    currentEl.textContent = String(i + 1).padStart(2, '0');
+    prevBtn.disabled = i === 0;
+    nextBtn.disabled = i === SLIDES.length - 1;
+    // Update URL hash
+    history.replaceState(null, '', '#' + (i + 1));
+    closeOverview();
+  }
+
+  function next() { go(current + 1); }
+  function prev() { go(current - 1); }
+
+  function toggleOverview() {
+    overviewActive = !overviewActive;
+    overview.classList.toggle('active', overviewActive);
+    if (overviewActive) {
+      overviewBtn.querySelector('span:last-child').textContent = 'Fermer';
+    } else {
+      overviewBtn.querySelector('span:last-child').textContent = 'Vue';
+    }
+  }
+
+  function closeOverview() {
+    overviewActive = false;
+    overview.classList.remove('active');
+    overviewBtn.querySelector('span:last-child').textContent = 'Vue';
+  }
+
+  // Build overview grid
+  SLIDES.forEach(([src, title], i) => {
+    const card = document.createElement('div');
+    card.className = 'overview-card';
+    card.innerHTML = `
+      <div class="overview-card-num">SLIDE ${String(i + 1).padStart(2, '0')}</div>
+      <div class="overview-card-title">${title}</div>
+    `;
+    card.addEventListener('click', () => go(i));
+    overviewGrid.appendChild(card);
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault();
+      next();
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      prev();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      toggleOverview();
+    } else if (e.key === 'Home') {
+      go(0);
+    } else if (e.key === 'End') {
+      go(SLIDES.length - 1);
+    } else if (e.key >= '1' && e.key <= '9') {
+      go(parseInt(e.key) - 1);
+    }
+  });
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+  overviewBtn.addEventListener('click', toggleOverview);
+
+  // Initial slide from URL hash or 0
+  const initial = parseInt(location.hash.slice(1)) - 1;
+  go(isNaN(initial) || initial < 0 ? 0 : initial);
+</script>
+</body></html>

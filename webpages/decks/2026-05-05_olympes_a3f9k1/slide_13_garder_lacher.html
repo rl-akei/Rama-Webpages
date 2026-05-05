@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Garder · Lâcher · Olympes × Rama Logic</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#446254", "on-primary": "#ffffff", "primary-container": "#5c7b6c", "on-primary-container": "#f5fff7",
+        "primary-fixed": "#c8ead8", "primary-fixed-dim": "#accebc", "on-primary-fixed": "#012115", "on-primary-fixed-variant": "#2f4d3f",
+        "secondary": "#56641e", "on-secondary": "#ffffff", "secondary-container": "#d9eb95", "on-secondary-container": "#5c6b24",
+        "secondary-fixed": "#d9eb95", "secondary-fixed-dim": "#bdcf7c", "on-secondary-fixed": "#171e00", "on-secondary-fixed-variant": "#3f4c05",
+        "tertiary": "#4d5e6a", "on-tertiary": "#ffffff", "tertiary-container": "#657783", "on-tertiary-container": "#fcfcff",
+        "tertiary-fixed": "#d3e5f3", "tertiary-fixed-dim": "#b7c9d6",
+        "background": "#fcf9f8", "on-background": "#1c1b1b",
+        "surface": "#fcf9f8", "surface-dim": "#dcd9d9", "surface-bright": "#fcf9f8",
+        "surface-container-lowest": "#ffffff", "surface-container-low": "#f6f3f2",
+        "surface-container": "#f0edec", "surface-container-high": "#ebe7e7", "surface-container-highest": "#e5e2e1",
+        "surface-variant": "#e5e2e1", "on-surface": "#1c1b1b", "on-surface-variant": "#424844",
+        "outline": "#727974", "outline-variant": "#c1c8c2",
+        "error": "#ba1a1a", "on-error": "#ffffff", "error-container": "#ffdad6", "on-error-container": "#93000a",
+        "inverse-surface": "#313030", "inverse-on-surface": "#f3f0ef", "inverse-primary": "#accebc",
+        "surface-tint": "#466556"
+      },
+      borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+      spacing: { "xs": "4px", "sm": "12px", "base": "8px", "md": "24px", "lg": "48px", "xl": "80px", "gutter": "24px", "margin": "32px" },
+      fontFamily: {
+        "body-reg": ["Work Sans"], "code-label": ["Space Mono"], "title-sm": ["Clash Grotesk"],
+        "eyebrow": ["Space Mono"], "display-lg": ["Clash Grotesk"], "headline-md": ["Clash Grotesk"]
+      },
+      fontSize: {
+        "body-reg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+        "code-label": ["14px", { "lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400" }],
+        "title-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "500" }],
+        "eyebrow": ["12px", { "lineHeight": "1.0", "fontWeight": "500" }],
+        "display-lg": ["80px", { "lineHeight": "1.1", "fontWeight": "500" }],
+        "headline-md": ["48px", { "lineHeight": "1.2", "fontWeight": "500" }]
+      }
+    }
+  }
+}
+</script>
+<style>
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(28, 27, 27, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28, 27, 27, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.socket { width: 8px; height: 8px; background-color: #1c1b1b; position: absolute; }
+.socket-tl { top: -4px; left: -4px; }
+.socket-tr { top: -4px; right: -4px; }
+.socket-bl { bottom: -4px; left: -4px; }
+.socket-br { bottom: -4px; right: -4px; }
+</style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-reg antialiased grid-bg">
+<header class="bg-background border-b border-outline-variant w-full px-margin py-base flex justify-between items-center z-50 sticky top-0">
+<div class="flex items-center gap-md">
+<span class="font-title-sm text-title-sm font-medium text-on-background">Rama Logic</span>
+<span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest hidden md:inline">× Olympes</span>
+</div>
+<div class="font-eyebrow text-eyebrow text-on-surface-variant uppercase tracking-widest">5 mai 2026 · Confidentiel</div>
+</header>
+<main class="flex-grow w-full max-w-7xl mx-auto px-margin py-xl flex flex-col">
+<div class="mb-lg">
+<div class="inline-flex items-center space-x-sm mb-sm">
+<div class="w-2 h-2 bg-primary rounded-none"></div>
+<span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">13 · Répartition</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-background max-w-4xl leading-none">Tu gardes la vision. Je porte l'ops.</h1>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter flex-grow mt-md">
+
+<div class="bg-primary text-on-primary p-lg relative flex flex-col">
+<div class="socket socket-tl bg-secondary-fixed"></div><div class="socket socket-tr bg-secondary-fixed"></div>
+<div class="font-code-label text-code-label text-secondary-fixed mb-md">▸ TU GARDES · 4 axes irremplaçables</div>
+<h3 class="font-headline-md text-headline-md mb-md leading-tight">Ce que toi seule peux faire.</h3>
+
+<div class="space-y-md mt-md flex-grow">
+<div class="border-l-2 border-secondary-fixed pl-md">
+<div class="font-title-sm text-title-sm">Croissance & fundraising</div>
+<p class="font-body-reg text-sm opacity-80">Generaly · pipeline LP secondaires · partenariats B2B distribution</p>
+</div>
+<div class="border-l-2 border-secondary-fixed pl-md">
+<div class="font-title-sm text-title-sm">Politique & représentation</div>
+<p class="font-body-reg text-sm opacity-80">Tribunes presse · panels · lobby · écosystème fintech-femmes</p>
+</div>
+<div class="border-l-2 border-secondary-fixed pl-md">
+<div class="font-title-sm text-title-sm">Contenu marketing & incarnation</div>
+<p class="font-body-reg text-sm opacity-80">LinkedIn perso · podcasts invités · newsletter · presse</p>
+</div>
+<div class="border-l-2 border-secondary-fixed pl-md">
+<div class="font-title-sm text-title-sm">Vision produit & utilisateurs</div>
+<p class="font-body-reg text-sm opacity-80">Interviews early users · cap stratégique · prep Series A 2027</p>
+</div>
+</div>
+
+<div class="mt-md pt-md border-t border-on-primary/30 flex items-baseline justify-between">
+<span class="font-code-label text-code-label opacity-70">VOLUME RÉCUPÉRÉ</span>
+<span class="font-display-lg text-headline-md text-secondary-fixed">96 jours</span>
+</div>
+</div>
+
+<div class="bg-surface-container-lowest border border-on-background p-lg relative flex flex-col">
+<div class="socket socket-tl"></div><div class="socket socket-tr"></div>
+<div class="font-code-label text-code-label text-on-surface-variant mb-md">▸ TU LÂCHES · ops déléguées</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-md leading-tight">Ce que je porte pour toi.</h3>
+
+<div class="space-y-md mt-md flex-grow">
+<div class="border-l-2 border-outline pl-md">
+<div class="font-title-sm text-title-sm text-on-background">Animation des sprints</div>
+<p class="font-body-reg text-sm text-on-surface-variant">Standups, weekly, monthly review, monthly coachs.</p>
+</div>
+<div class="border-l-2 border-outline pl-md">
+<div class="font-title-sm text-title-sm text-on-background">Pilotage roadmap MVP</div>
+<p class="font-body-reg text-sm text-on-surface-variant">Burndown 10/11 monitoré chaque vendredi.</p>
+</div>
+<div class="border-l-2 border-outline pl-md">
+<div class="font-title-sm text-title-sm text-on-background">Coordination prestataires</div>
+<p class="font-body-reg text-sm text-on-surface-variant">Lead Dev · UX · coachs · comm · growth · juridique · paiement.</p>
+</div>
+<div class="border-l-2 border-outline pl-md">
+<div class="font-title-sm text-title-sm text-on-background">Management coachs</div>
+<p class="font-body-reg text-sm text-on-surface-variant">Recrutement · planning · QC · reporting. Tu fais review qualité 1×/mois.</p>
+</div>
+<div class="border-l-2 border-outline pl-md">
+<div class="font-title-sm text-title-sm text-on-background">Dataroom Generaly</div>
+<p class="font-body-reg text-sm text-on-surface-variant">Je le construis et le maintiens à jour. Tu pitches.</p>
+</div>
+</div>
+
+<div class="mt-md pt-md border-t border-outline-variant flex items-baseline justify-between">
+<span class="font-code-label text-code-label text-on-surface-variant">VOLUME PRIS EN CHARGE</span>
+<span class="font-display-lg text-headline-md text-primary">51 j/COO</span>
+</div>
+</div>
+
+</div>
+</main><footer class="bg-surface-container-lowest border-t border-outline-variant w-full flex justify-between items-center px-margin py-sm mt-auto">
+<div class="font-code-label text-code-label text-on-surface-variant">Olympes × Rama Logic</div>
+<div class="font-code-label text-code-label text-on-surface-variant">13 / 18</div>
+<div class="font-code-label text-code-label text-secondary">Logic distilled.</div>
+</footer>
+</body></html>
