@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Shika Consulting × Rama Logic</title>
+
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-dim":"#dcd9d9","secondary-fixed-dim":"#bdcf7c","secondary-fixed":"#d9eb95",
+        "on-tertiary":"#ffffff","surface-tint":"#466556","on-secondary":"#ffffff",
+        "on-background":"#1c1b1b","surface-container-highest":"#e5e2e1","inverse-primary":"#accebc",
+        "error":"#ba1a1a","on-tertiary-fixed":"#0c1d27","background":"#fcf9f8",
+        "on-primary-fixed-variant":"#2f4d3f","primary-fixed-dim":"#accebc","on-primary-container":"#f5fff7",
+        "surface-container-lowest":"#ffffff","primary-fixed":"#c8ead8","surface-variant":"#e5e2e1",
+        "on-primary":"#ffffff","on-error-container":"#93000a","on-error":"#ffffff",
+        "primary":"#446254","outline":"#727974","on-surface":"#1c1b1b",
+        "tertiary-container":"#657783","on-tertiary-container":"#fcfcff",
+        "on-tertiary-fixed-variant":"#384954","tertiary":"#4d5e6a","on-surface-variant":"#424844",
+        "surface-bright":"#fcf9f8","error-container":"#ffdad6","on-secondary-container":"#5c6b24",
+        "surface-container-high":"#ebe7e7","on-secondary-fixed":"#171e00","secondary-container":"#d9eb95",
+        "inverse-surface":"#313030","outline-variant":"#c1c8c2","surface-container-low":"#f6f3f2",
+        "secondary":"#56641e","on-primary-fixed":"#012115","on-secondary-fixed-variant":"#3f4c05",
+        "inverse-on-surface":"#f3f0ef","surface-container":"#f0edec","primary-container":"#5c7b6c",
+        "tertiary-fixed-dim":"#b7c9d6","tertiary-fixed":"#d3e5f3","surface":"#fcf9f8"
+      },
+      borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},
+      spacing:{"md":"24px","margin":"32px","lg":"48px","xl":"80px","sm":"12px","gutter":"24px","base":"8px","xs":"4px"},
+      fontFamily:{
+        "body-reg":["Work Sans","system-ui","sans-serif"],
+        "code-label":["Space Mono","monospace"],
+        "title-sm":["Clash Grotesk","Work Sans","sans-serif"],
+        "eyebrow":["Space Mono","monospace"],
+        "display-lg":["Clash Grotesk","Work Sans","sans-serif"],
+        "headline-md":["Clash Grotesk","Work Sans","sans-serif"]
+      },
+      fontSize:{
+        "body-reg":["16px",{"lineHeight":"1.6","fontWeight":"400"}],
+        "code-label":["14px",{"lineHeight":"1.5","letterSpacing":"0.05em","fontWeight":"400"}],
+        "title-sm":["24px",{"lineHeight":"1.4","fontWeight":"500"}],
+        "eyebrow":["12px",{"lineHeight":"1.0","fontWeight":"500"}],
+        "display-lg":["80px",{"lineHeight":"1.05","fontWeight":"500"}],
+        "headline-md":["48px",{"lineHeight":"1.15","fontWeight":"500"}]
+      }
+    }
+  }
+}
+</script>
+
+<style>
+html, body { scroll-behavior: smooth; }
+body { font-family: 'Work Sans', system-ui, sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(28,27,27,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28,27,27,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.slides-viewport {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 0;
+}
+.slide {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.socket-corner-tl, .socket-corner-tr, .socket-corner-bl, .socket-corner-br {
+  position: absolute;
+  width: 8px; height: 8px;
+  background-color: #1c1b1b;
+}
+.socket-corner-tl { top: -4px; left: -4px; }
+.socket-corner-tr { top: -4px; right: -4px; }
+.socket-corner-bl { bottom: -4px; left: -4px; }
+.socket-corner-br { bottom: -4px; right: -4px; }
+
+.print-only { display: none; }
+
+@media print {
+  .slides-viewport { height: auto; overflow: visible; scroll-snap-type: none; }
+  .slide { page-break-after: always; min-height: auto; height: auto; }
+  .nav-controls, .header-bar { display: none !important; }
+  .print-only { display: block; }
+}
+</style>
+</head>
+<body class="bg-background text-on-background antialiased">
+
+<!-- ====== STICKY HEADER ====== -->
+<header class="header-bar fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant">
+  <div class="flex justify-between items-center px-margin py-base max-w-[1600px] mx-auto">
+    <div class="flex items-center gap-md">
+      <div class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</div>
+      <div class="hidden md:block w-px h-4 bg-outline-variant"></div>
+      <div class="hidden md:block font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Préparé pour Shika Consulting</div>
+    </div>
+    <div class="flex items-center gap-md">
+      <div class="font-code-label text-code-label text-on-surface-variant">
+        <span id="current-slide" class="text-on-background font-medium">01</span>
+        <span class="text-outline-variant mx-1">/</span>
+        <span id="total-slides">24</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ====== SLIDES VIEWPORT ====== -->
+<main class="slides-viewport pt-[57px]">
+
+<!-- ============================================================ -->
+<!-- SLIDE 0 — COVER                                                -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-0" data-slide="0">
+  <div class="flex-grow flex items-center justify-center relative overflow-hidden p-margin">
+    <div class="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+    <div class="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-secondary-container opacity-40 rounded-full blur-[100px] -z-10 mix-blend-multiply"></div>
+
+    <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-12 gap-gutter relative z-10">
+      <div class="hidden md:block absolute left-0 top-0 bottom-0 w-px bg-on-background opacity-10"></div>
+      <div class="hidden md:block absolute right-0 top-0 bottom-0 w-px bg-on-background opacity-10"></div>
+
+      <div class="col-span-1 md:col-span-10 md:col-start-2 py-xl border-l border-r border-on-background/10 px-margin relative bg-surface-container-lowest/80 backdrop-blur-sm rounded-lg border border-outline-variant">
+        <div class="socket-corner-tl"></div>
+        <div class="socket-corner-tr"></div>
+        <div class="socket-corner-bl"></div>
+        <div class="socket-corner-br"></div>
+
+        <div class="mb-lg">
+          <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase py-xs px-sm bg-primary-fixed/30 rounded border border-primary-fixed inline-block">18 Mai 2026</span>
+        </div>
+
+        <div class="mb-xl relative">
+          <h1 class="font-display-lg text-display-lg text-on-background mb-md tracking-tight leading-none">
+            Shika Consulting <span class="text-outline font-light">×</span><br/>
+            Rama Logic
+          </h1>
+          <div class="w-24 h-1 bg-secondary mb-md"></div>
+          <p class="font-headline-md text-headline-md text-on-surface-variant max-w-3xl leading-tight">
+            Du cabinet réactif au cabinet pilotable.
+          </p>
+        </div>
+
+        <div class="mt-auto pt-lg border-t border-outline-variant flex items-center gap-sm">
+          <span class="material-symbols-outlined text-tertiary text-2xl">account_circle</span>
+          <p class="font-code-label text-code-label text-tertiary uppercase tracking-wider">
+            Préparé par Sylvain Ramaradjou · Confidentiel
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 1 — SOMMAIRE                                             -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-1" data-slide="1">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-xl">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Sommaire</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">
+        Ce qu'on va voir <span class="text-primary italic">ensemble</span>
+      </h1>
+    </div>
+
+    <div class="flex-grow flex flex-col">
+      <a href="#slide-2" class="group flex items-baseline gap-lg py-md border-b border-outline-variant transition-colors hover:bg-surface-container-low">
+        <span class="font-code-label text-code-label text-outline w-12">01</span>
+        <h3 class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Qui suis-je ?</h3>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+      </a>
+      <a href="#slide-6" class="group flex items-baseline gap-lg py-md border-b border-outline-variant transition-colors hover:bg-surface-container-low">
+        <span class="font-code-label text-code-label text-outline w-12">02</span>
+        <h3 class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Contexte</h3>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+      </a>
+      <a href="#slide-8" class="group flex items-baseline gap-lg py-md border-b border-outline-variant transition-colors hover:bg-surface-container-low">
+        <span class="font-code-label text-code-label text-outline w-12">03</span>
+        <h3 class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Problématiques identifiées</h3>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+      </a>
+      <a href="#slide-13" class="group flex items-baseline gap-lg py-md border-b border-outline-variant transition-colors hover:bg-surface-container-low">
+        <span class="font-code-label text-code-label text-outline w-12">04</span>
+        <h3 class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Impacts chiffrés</h3>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+      </a>
+      <a href="#slide-15" class="group flex items-baseline gap-lg py-md border-b border-outline-variant transition-colors hover:bg-surface-container-low">
+        <span class="font-code-label text-code-label text-outline w-12">05</span>
+        <h3 class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Solution</h3>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+      </a>
+      <a href="#slide-19" class="group flex items-baseline gap-lg py-md border-b border-outline-variant transition-colors hover:bg-surface-container-low">
+        <span class="font-code-label text-code-label text-outline w-12">06</span>
+        <h3 class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Rétro planning</h3>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+      </a>
+      <a href="#slide-21" class="group flex items-baseline gap-lg py-md border-b border-outline-variant transition-colors hover:bg-surface-container-low">
+        <span class="font-code-label text-code-label text-outline w-12">07</span>
+        <h3 class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Offre</h3>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2 — DIVIDER 01 : QUI SUIS-JE ?                           -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-2" data-slide="2">
+  <div class="flex-grow flex items-center px-margin py-xl max-w-7xl mx-auto w-full">
+    <div class="relative w-full py-xl border-l border-r border-on-background/10 px-margin">
+      <div class="socket-corner-tl"></div>
+      <div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div>
+      <div class="socket-corner-br"></div>
+      <div class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase mb-md">01 / 07</div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none">
+        Qui suis-je ?
+      </h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-md max-w-xl border-l-2 border-primary pl-md">
+        Un partenaire qui connaît ton métier et qui code la mécanique.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3 — QSJ #1 : MISSION                                     -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-3" data-slide="3">
+  <div class="flex-grow flex flex-col items-center justify-center px-margin py-xl w-full max-w-7xl mx-auto">
+    <div class="w-full max-w-5xl mx-auto">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Qui suis-je · 01</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight leading-tight mb-xl">
+        J'aide les entreprises à aligner <span class="text-primary italic">vision</span>, <span class="text-primary italic">outils</span> et <span class="text-primary italic">collaborateurs</span>
+      </h1>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-md mb-xl relative">
+        <div class="hidden md:block absolute top-1/2 left-0 w-full h-px bg-on-background opacity-10 -translate-y-1/2 z-0"></div>
+        <article class="bg-surface-container-lowest border border-on-background p-md relative z-10 hover:bg-surface-container-low transition-colors">
+          <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+          <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+          <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+          <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+          <div class="font-code-label text-code-label text-secondary mb-sm">/ 01</div>
+          <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Optimiser leurs processus</h3>
+          <div class="w-8 h-px bg-on-background opacity-20"></div>
+        </article>
+        <article class="bg-surface-container-lowest border border-on-background p-md relative z-10 hover:bg-surface-container-low transition-colors">
+          <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+          <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+          <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+          <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+          <div class="font-code-label text-code-label text-secondary mb-sm">/ 02</div>
+          <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Automatiser intelligemment</h3>
+          <div class="w-8 h-px bg-on-background opacity-20"></div>
+        </article>
+        <article class="bg-surface-container-lowest border border-on-background p-md relative z-10 hover:bg-surface-container-low transition-colors">
+          <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+          <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+          <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+          <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+          <div class="font-code-label text-code-label text-secondary mb-sm">/ 03</div>
+          <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Améliorer leur communication</h3>
+          <div class="w-8 h-px bg-on-background opacity-20"></div>
+        </article>
+      </div>
+      <div class="flex items-center justify-center mt-lg">
+        <div class="bg-on-background text-on-primary px-lg py-md flex items-center gap-md font-title-sm text-title-sm relative">
+          <div class="absolute top-0 left-0 w-2 h-2 bg-secondary-container -translate-x-1/2 -translate-y-1/2 rounded-full"></div>
+          <span class="text-secondary-container">=</span>
+          <span>afin d'atteindre leurs objectifs</span>
+          <span class="text-2xl">🎯</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4 — QSJ #2 : LOGOS CLIENTS                               -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-4" data-slide="4">
+  <div class="flex-grow flex flex-col items-center justify-center px-margin py-xl w-full max-w-7xl mx-auto">
+    <div class="w-full mb-xl">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Qui suis-je · 02</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">
+        Ils m'ont fait <span class="text-primary italic">confiance</span>
+      </h1>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-md w-full">
+      <div class="bg-surface-container-lowest border border-on-background relative aspect-[4/3] flex items-center justify-center p-md group overflow-hidden transition-colors hover:bg-surface-container-low">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <img alt="Cleany" src="../_assets/logos/Cleany.png" class="max-w-[80%] max-h-[70%] object-contain grayscale group-hover:grayscale-0 mix-blend-multiply transition-all duration-300"/>
+      </div>
+      <div class="bg-surface-container-lowest border border-on-background relative aspect-[4/3] flex items-center justify-center p-md group overflow-hidden transition-colors hover:bg-surface-container-low">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <img alt="Denis Constant" src="../_assets/logos/Denis%20Constant.jpeg" class="max-w-[80%] max-h-[70%] object-contain grayscale group-hover:grayscale-0 mix-blend-multiply transition-all duration-300"/>
+      </div>
+      <div class="bg-surface-container-lowest border border-on-background relative aspect-[4/3] flex items-center justify-center p-md group overflow-hidden transition-colors hover:bg-surface-container-low">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <img alt="Firefight" src="../_assets/logos/Firefight.jpg" class="max-w-[80%] max-h-[70%] object-contain grayscale group-hover:grayscale-0 mix-blend-multiply transition-all duration-300"/>
+      </div>
+      <div class="bg-surface-container-lowest border border-on-background relative aspect-[4/3] flex items-center justify-center p-md group overflow-hidden transition-colors hover:bg-surface-container-low">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <img alt="Ibrahim" src="../_assets/logos/Ibrahim.jpg" class="max-w-[80%] max-h-[70%] object-contain grayscale group-hover:grayscale-0 mix-blend-multiply transition-all duration-300"/>
+      </div>
+      <div class="bg-surface-container-lowest border border-on-background relative aspect-[4/3] flex items-center justify-center p-md group overflow-hidden transition-colors hover:bg-surface-container-low">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <img alt="Ittai Studio" src="../_assets/logos/Ittai%20Studio.jpg" class="max-w-[80%] max-h-[70%] object-contain grayscale group-hover:grayscale-0 mix-blend-multiply transition-all duration-300"/>
+      </div>
+      <div class="bg-surface-container-lowest border border-on-background relative aspect-[4/3] flex items-center justify-center p-md group overflow-hidden transition-colors hover:bg-surface-container-low">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <img alt="Station Krishna" src="../_assets/logos/Station%20Kirshna.png" class="max-w-[80%] max-h-[70%] object-contain grayscale group-hover:grayscale-0 mix-blend-multiply transition-all duration-300"/>
+      </div>
+      <div class="bg-surface-container-lowest border border-on-background relative aspect-[4/3] flex items-center justify-center p-md group overflow-hidden transition-colors hover:bg-surface-container-low">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <img alt="Swile" src="../_assets/logos/Swile.png" class="max-w-[80%] max-h-[70%] object-contain grayscale group-hover:grayscale-0 mix-blend-multiply transition-all duration-300"/>
+      </div>
+      <div class="bg-surface-container-lowest border border-on-background relative aspect-[4/3] flex items-center justify-center p-md group overflow-hidden transition-colors hover:bg-surface-container-low">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <img alt="OPTRA" src="../_assets/logos/images.png" class="max-w-[80%] max-h-[70%] object-contain grayscale group-hover:grayscale-0 mix-blend-multiply transition-all duration-300"/>
+      </div>
+      <div class="bg-surface-container-lowest border border-on-background relative aspect-[4/3] flex items-center justify-center p-md group overflow-hidden transition-colors hover:bg-surface-container-low">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <img alt="Kamak SEO" src="../_assets/logos/kamak.jpeg" class="max-w-[80%] max-h-[70%] object-contain grayscale group-hover:grayscale-0 mix-blend-multiply transition-all duration-300"/>
+      </div>
+      <div class="bg-surface-container-lowest border border-on-background relative aspect-[4/3] flex items-center justify-center p-md group overflow-hidden transition-colors hover:bg-surface-container-low">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <img alt="Ledger" src="../_assets/logos/ledger.png" class="max-w-[80%] max-h-[70%] object-contain grayscale group-hover:grayscale-0 mix-blend-multiply transition-all duration-300"/>
+      </div>
+      <div class="bg-surface-container-lowest border border-on-background relative aspect-[4/3] flex items-center justify-center p-md group overflow-hidden transition-colors hover:bg-surface-container-low">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <img alt="meedIA" src="../_assets/logos/meedIA.png" class="max-w-[80%] max-h-[70%] object-contain grayscale group-hover:grayscale-0 mix-blend-multiply transition-all duration-300"/>
+      </div>
+    </div>
+
+    <div class="w-full flex justify-center mt-xl opacity-30">
+      <div class="flex items-center">
+        <div class="w-16 h-px bg-on-background"></div>
+        <div class="w-2 h-2 border border-on-background rotate-45"></div>
+        <div class="w-16 h-px bg-on-background"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5 — QSJ #3 : CRÉDENTIALS                                 -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-5" data-slide="5">
+  <div class="flex-grow flex flex-col items-center justify-center px-margin py-xl w-full max-w-7xl mx-auto">
+    <div class="w-full">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Qui suis-je · 03</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight mb-xl">
+        Pourquoi me faire <span class="text-primary italic">confiance</span>
+      </h1>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+        <article class="bg-surface-container-lowest border border-on-background p-lg relative flex flex-col h-full overflow-hidden hover:bg-surface-container-low transition-colors">
+          <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute top-2 right-2 opacity-10 pointer-events-none">
+            <span class="material-symbols-outlined text-5xl">verified</span>
+          </div>
+          <div class="bg-secondary-container text-on-secondary-container font-code-label text-code-label inline-flex px-sm py-xs self-start items-center mb-md">
+            <span class="material-symbols-outlined text-[14px] mr-1">workspace_premium</span>
+            <span>PARTNER</span>
+          </div>
+          <h2 class="font-title-sm text-title-sm text-on-background mb-sm relative z-10">Notion Solution Partner</h2>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mb-md relative z-10">Certification officielle Notion. Moins de <span class="font-medium text-on-background">200 partenaires</span> dans le monde.</p>
+          <div class="mt-auto pt-md border-t border-outline-variant relative z-10">
+            <div class="flex items-center gap-xs">
+              <div class="w-2 h-2 bg-primary rounded-full"></div>
+              <span class="font-code-label text-code-label text-outline">Architecture &amp; déploiement</span>
+            </div>
+          </div>
+        </article>
+        <article class="bg-surface-container-lowest border border-on-background p-lg relative flex flex-col h-full overflow-hidden hover:bg-surface-container-low transition-colors">
+          <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute top-2 right-2 opacity-10 pointer-events-none">
+            <span class="material-symbols-outlined text-5xl">school</span>
+          </div>
+          <div class="bg-primary-fixed text-on-primary-fixed font-code-label text-code-label inline-flex px-sm py-xs self-start items-center mb-md">
+            <span class="material-symbols-outlined text-[14px] mr-1">military_tech</span>
+            <span>CERTIFICATION</span>
+          </div>
+          <h2 class="font-title-sm text-title-sm text-on-background mb-sm relative z-10">PMP®</h2>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mb-md relative z-10">Project Management Professional. Certification du <span class="font-medium text-on-background">Project Management Institute</span>.</p>
+          <div class="mt-auto pt-md border-t border-outline-variant relative z-10">
+            <div class="flex items-center gap-xs">
+              <div class="w-2 h-2 bg-primary rounded-full"></div>
+              <span class="font-code-label text-code-label text-outline">Pilotage projet</span>
+            </div>
+          </div>
+        </article>
+        <article class="bg-surface-container-lowest border border-on-background p-lg relative flex flex-col h-full overflow-hidden hover:bg-surface-container-low transition-colors">
+          <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute top-2 right-2 opacity-10 pointer-events-none">
+            <span class="material-symbols-outlined text-5xl">trending_up</span>
+          </div>
+          <div class="bg-on-background text-on-primary font-code-label text-code-label inline-flex px-sm py-xs self-start items-center mb-md">
+            <span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>
+            <span>METHODE</span>
+          </div>
+          <h2 class="font-title-sm text-title-sm text-on-background mb-sm relative z-10">Black Belt Lean Six Sigma</h2>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mb-md relative z-10">Amélioration continue. Méthode <span class="font-medium text-on-background">DMAIC</span> pour mesurer, analyser et optimiser.</p>
+          <div class="mt-auto pt-md border-t border-outline-variant relative z-10">
+            <div class="flex items-center gap-xs">
+              <div class="w-2 h-2 bg-primary rounded-full"></div>
+              <span class="font-code-label text-code-label text-outline">Optimisation process</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6 — DIVIDER 02 : CONTEXTE                                -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-6" data-slide="6">
+  <div class="flex-grow flex items-center px-margin py-xl max-w-7xl mx-auto w-full">
+    <div class="relative w-full py-xl border-l border-r border-on-background/10 px-margin">
+      <div class="socket-corner-tl"></div>
+      <div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div>
+      <div class="socket-corner-br"></div>
+      <div class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase mb-md">02 / 07</div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none">
+        Contexte
+      </h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-md max-w-xl border-l-2 border-primary pl-md">
+        Là où tu en es aujourd'hui.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7 — CONTEXTE                                             -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-7" data-slide="7">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-7xl mx-auto w-full justify-center">
+    <div class="mb-lg flex flex-col space-y-md">
+      <div class="inline-flex items-center space-x-sm self-start">
+        <div class="w-2 h-2 bg-primary"></div>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Shika Consulting en mai 2026</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background max-w-4xl leading-tight">
+        Un cabinet qui a déjà fait le pas.
+      </h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl mt-sm border-l-2 border-primary pl-md py-sm">
+        Cabinet expert-comptable + commissaire aux comptes basé à Lyon. Toi + 2 collaboratrices. 50% clients associatifs, 50% TPE-PME. Le CAC pèse 10-15% du CA, concentré sur un mois par an. Tu as déjà Notion pour ton CRM et le suivi des missions, PennyLane pour la compta, Microsoft pour le reste. Tu as même commencé à tester Claude — il t'a sorti une cinquantaine de procédures à retravailler.
+      </p>
+    </div>
+
+    <div class="relative mt-xl">
+      <div class="absolute top-1/2 left-0 right-0 h-px bg-on-background/10 -translate-y-1/2 hidden md:block"></div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-lg relative z-10">
+
+        <div class="bg-surface-container-lowest border border-outline p-md relative">
+          <div class="absolute -top-2 -left-2 w-4 h-4 bg-primary border-2 border-background"></div>
+          <div class="flex flex-col h-full space-y-md">
+            <div class="bg-secondary-container text-on-secondary-container font-code-label text-code-label inline-flex px-sm py-xs self-start items-center space-x-xs">
+              <span class="material-symbols-outlined text-[16px]">trending_up</span>
+              <span>Aujourd'hui</span>
+            </div>
+            <div>
+              <h3 class="font-title-sm text-title-sm mb-xs">Stack déjà choisie</h3>
+              <p class="text-on-surface-variant text-sm">Notion (CRM + missions), PennyLane (compta), Microsoft (Outlook/Teams). Le terrain est prêt.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest border border-outline p-md relative">
+          <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-error border-2 border-background md:-left-2 md:top-1/2 md:-translate-y-1/2 md:translate-x-0"></div>
+          <div class="flex flex-col h-full space-y-md">
+            <div class="bg-error-container text-on-error-container font-code-label text-code-label inline-flex px-sm py-xs self-start items-center space-x-xs">
+              <span class="material-symbols-outlined text-[16px]">warning</span>
+              <span>Friction</span>
+            </div>
+            <div>
+              <h3 class="font-title-sm text-title-sm mb-xs">Pas encore de système</h3>
+              <p class="text-on-surface-variant text-sm">L'équipe court derrière les documents et les étapes. Les procédures sont dans les têtes, pas dans les flux.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest border border-outline p-md relative">
+          <div class="absolute -top-2 right-1/2 translate-x-1/2 w-4 h-4 bg-primary border-2 border-background md:-right-2 md:top-1/2 md:-translate-y-1/2 md:translate-x-0"></div>
+          <div class="flex flex-col h-full space-y-md">
+            <div class="bg-primary-container text-on-primary-container font-code-label text-code-label inline-flex px-sm py-xs self-start items-center space-x-xs">
+              <span class="material-symbols-outlined text-[16px]">target</span>
+              <span>Objectif</span>
+            </div>
+            <div>
+              <h3 class="font-title-sm text-title-sm mb-xs">Conseil-first &amp; pilotable</h3>
+              <p class="text-on-surface-variant text-sm">Sortir du réactif. Faire monter les collabs sur du conseil. Pricer chaque dossier sur sa rentabilité réelle.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-xl">
+      <div class="inline-flex items-center space-x-sm bg-on-background text-on-primary px-lg py-sm font-code-label text-code-label rounded-full relative">
+        <div class="w-2 h-2 bg-on-primary absolute left-4"></div>
+        <span class="ml-4">STRUCTURER_LE_SYSTEME</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8 — DIVIDER 03 : PROBLÉMATIQUES                          -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-8" data-slide="8">
+  <div class="flex-grow flex items-center px-margin py-xl max-w-7xl mx-auto w-full">
+    <div class="relative w-full py-xl border-l border-r border-on-background/10 px-margin">
+      <div class="socket-corner-tl"></div>
+      <div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div>
+      <div class="socket-corner-br"></div>
+      <div class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase mb-md">03 / 07</div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none">
+        Problématiques<br/>identifiées
+      </h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-md max-w-xl border-l-2 border-primary pl-md">
+        Les 3 frictions que tu as énoncées toi-même.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9 — OVERVIEW 3 FRICTIONS                                 -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-9" data-slide="9">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-7xl mx-auto w-full justify-center">
+    <section class="mb-lg relative">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Problématiques · Overview</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background max-w-4xl tracking-tight">
+        3 frictions, <span class="text-primary italic">une seule cause</span> : pas de système qui tient
+      </h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl mt-md border-l-2 border-primary pl-md">
+        Tu as toi-même énoncé ces 3 frictions dans notre échange. Elles ne sont pas indépendantes : elles découlent toutes du fait que les procédures vivent dans les têtes, pas dans des flux. On part de là.
+      </p>
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-gutter relative">
+      <article class="bg-surface-container-lowest border border-on-background relative flex flex-col h-full overflow-hidden">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="h-32 w-full border-b border-on-background bg-primary/5 relative">
+          <div class="absolute inset-0 grid-bg"></div>
+          <div class="absolute top-sm left-sm bg-surface-tint text-on-primary px-sm py-xs border border-on-background font-code-label text-code-label z-10 shadow-[2px_2px_0px_rgba(28,27,27,1)]">
+            /COLLECTE
+          </div>
+          <div class="absolute bottom-sm right-sm font-display-lg text-display-lg text-on-background opacity-10 leading-none">01</div>
+        </div>
+        <div class="p-md flex flex-col flex-grow relative">
+          <div class="absolute top-2 right-2 opacity-10 pointer-events-none">
+            <span class="material-symbols-outlined text-4xl">description</span>
+          </div>
+          <div class="flex items-start justify-between mb-sm relative z-10">
+            <h2 class="font-title-sm text-title-sm text-on-background">Collecte des documents</h2>
+            <span class="material-symbols-outlined text-outline">hourglass_empty</span>
+          </div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mb-md flex-grow relative z-10">
+            Ta douleur n°1. L'équipe passe son temps à relancer les clients pour récupérer factures et pièces.
+          </p>
+          <div class="mt-auto border-t border-outline-variant pt-sm flex items-center gap-xs relative z-10">
+            <span class="material-symbols-outlined text-error text-sm">warning</span>
+            <span class="font-code-label text-code-label text-error font-medium">Impact: bilans dans le rouge</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="bg-surface-container-lowest border border-on-background relative flex flex-col h-full overflow-hidden">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="h-32 w-full border-b border-on-background bg-secondary/5 relative">
+          <div class="absolute inset-0 grid-bg"></div>
+          <div class="absolute top-sm left-sm bg-secondary text-on-secondary px-sm py-xs border border-on-background font-code-label text-code-label z-10 shadow-[2px_2px_0px_rgba(28,27,27,1)]">
+            /ONBOARDING
+          </div>
+          <div class="absolute bottom-sm right-sm font-display-lg text-display-lg text-on-background opacity-10 leading-none">02</div>
+        </div>
+        <div class="p-md flex flex-col flex-grow relative">
+          <div class="absolute top-2 right-2 opacity-10 pointer-events-none">
+            <span class="material-symbols-outlined text-4xl">checklist</span>
+          </div>
+          <div class="flex items-start justify-between mb-sm relative z-10">
+            <h2 class="font-title-sm text-title-sm text-on-background">Onboarding client</h2>
+            <span class="material-symbols-outlined text-outline">layers_clear</span>
+          </div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mb-md flex-grow relative z-10">
+            Ton 2ème sujet principal. Des étapes qui sautent en silence : facturation, mandat, comptes impôts.
+          </p>
+          <div class="mt-auto border-t border-outline-variant pt-sm flex items-center gap-xs relative z-10">
+            <span class="material-symbols-outlined text-error text-sm">error</span>
+            <span class="font-code-label text-code-label text-error font-medium">Impact: trous de 3 mois après coup</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="bg-surface-container-lowest border border-on-background relative flex flex-col h-full overflow-hidden">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="h-32 w-full border-b border-on-background bg-tertiary/5 relative">
+          <div class="absolute inset-0 grid-bg"></div>
+          <div class="absolute top-sm left-sm bg-tertiary text-on-tertiary px-sm py-xs border border-on-background font-code-label text-code-label z-10 shadow-[2px_2px_0px_rgba(28,27,27,1)]">
+            /COMMUNICATION
+          </div>
+          <div class="absolute bottom-sm right-sm font-display-lg text-display-lg text-on-background opacity-10 leading-none">03</div>
+        </div>
+        <div class="p-md flex flex-col flex-grow relative">
+          <div class="absolute top-2 right-2 opacity-10 pointer-events-none">
+            <span class="material-symbols-outlined text-4xl">forum</span>
+          </div>
+          <div class="flex items-start justify-between mb-sm relative z-10">
+            <h2 class="font-title-sm text-title-sm text-on-background">Communication client</h2>
+            <span class="material-symbols-outlined text-outline">scatter_plot</span>
+          </div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mb-md flex-grow relative z-10">
+            4 canaux non arbitrés. Les petits dossiers consomment plus de temps que les gros.
+          </p>
+          <div class="mt-auto border-t border-outline-variant pt-sm flex items-center gap-xs relative z-10">
+            <span class="material-symbols-outlined text-error text-sm">trending_down</span>
+            <span class="font-code-label text-code-label text-error font-medium">Impact: marge brûlée à bas bruit</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="w-full flex justify-center mt-xl opacity-30">
+      <div class="flex items-center">
+        <div class="w-16 h-px bg-on-background"></div>
+        <div class="w-2 h-2 border border-on-background rotate-45"></div>
+        <div class="w-16 h-px bg-on-background"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10 — FRICTION #1 : COLLECTE DES DOCUMENTS                -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-10" data-slide="10">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-6xl mx-auto w-full justify-center">
+
+    <div class="mb-lg flex flex-col md:flex-row md:items-end md:justify-between gap-md">
+      <div>
+        <div class="inline-flex items-center gap-2 mb-md">
+          <div class="h-2 w-2 bg-error"></div>
+          <span class="font-code-label text-code-label text-error uppercase tracking-widest">Friction 01 · /COLLECTE</span>
+        </div>
+        <h1 class="font-headline-md text-headline-md text-on-background tracking-tight leading-tight">
+          Tes équipes <span class="text-error italic">courent après</span> les documents
+        </h1>
+      </div>
+      <div class="hidden md:flex bg-surface-tint text-on-primary px-sm py-xs border border-on-background font-code-label text-code-label items-center shadow-[3px_3px_0px_rgba(28,27,27,1)]">
+        <span class="material-symbols-outlined text-[14px] mr-1">priority_high</span>
+        <span>DOULEUR N°1</span>
+      </div>
+    </div>
+
+    <div class="bg-surface-container-lowest border border-on-background p-lg relative mb-lg">
+      <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+      <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+      <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+      <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+        <div class="md:col-span-2 flex md:flex-col items-start gap-sm border-r border-outline-variant pr-md">
+          <span class="material-symbols-outlined text-4xl text-on-background opacity-60">format_quote</span>
+        </div>
+        <div class="md:col-span-10">
+          <p class="font-title-sm text-title-sm text-on-background leading-snug mb-md">
+            « Bilan à finir pour le 15 mai. Aucune facture 2025. Le bilan doit être fini dans 4 jours. »
+          </p>
+          <div class="font-code-label text-code-label text-on-surface-variant">Toi · meeting du 11 mai 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+      <article class="border-l-2 border-error pl-md py-sm">
+        <div class="font-eyebrow text-eyebrow text-error uppercase tracking-widest mb-sm">Ce que ça produit</div>
+        <ul class="space-y-sm font-body-reg text-body-reg text-on-background">
+          <li class="flex items-start gap-sm">
+            <span class="material-symbols-outlined text-error mt-0.5 text-[18px]">cycle</span>
+            <span>Relances mensuelles à répétition sur tous les dossiers</span>
+          </li>
+          <li class="flex items-start gap-sm">
+            <span class="material-symbols-outlined text-error mt-0.5 text-[18px]">schedule</span>
+            <span>Bilans bouclés en dernière semaine, en urgence</span>
+          </li>
+          <li class="flex items-start gap-sm">
+            <span class="material-symbols-outlined text-error mt-0.5 text-[18px]">person_off</span>
+            <span>Capacité comptable détournée vers du chasing</span>
+          </li>
+        </ul>
+      </article>
+
+      <article class="border-l-2 border-primary pl-md py-sm">
+        <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">Pourquoi la facture élec ne suffit pas</div>
+        <p class="font-body-reg text-body-reg text-on-background mb-md">
+          Septembre 2027 résoudra le sujet pour les TPE-PME. <span class="font-medium">Mais les associations non fiscalisées en sont exemptées</span> — soit 50% de tes dossiers. La douleur reste entière.
+        </p>
+        <div class="font-code-label text-code-label text-on-surface-variant inline-flex items-center gap-xs bg-secondary-container px-sm py-xs">
+          <span class="material-symbols-outlined text-[14px]">info</span>
+          <span>50% du portefeuille hors scope facture élec</span>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11 — FRICTION #2 : ONBOARDING                            -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-11" data-slide="11">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-6xl mx-auto w-full justify-center">
+
+    <div class="mb-lg flex flex-col md:flex-row md:items-end md:justify-between gap-md">
+      <div>
+        <div class="inline-flex items-center gap-2 mb-md">
+          <div class="h-2 w-2 bg-secondary"></div>
+          <span class="font-code-label text-code-label text-secondary uppercase tracking-widest">Friction 02 · /ONBOARDING</span>
+        </div>
+        <h1 class="font-headline-md text-headline-md text-on-background tracking-tight leading-tight">
+          Des onboardings où <span class="text-secondary italic">des étapes sautent</span>
+        </h1>
+      </div>
+      <div class="hidden md:flex bg-secondary text-on-secondary px-sm py-xs border border-on-background font-code-label text-code-label items-center shadow-[3px_3px_0px_rgba(28,27,27,1)]">
+        <span class="material-symbols-outlined text-[14px] mr-1">flag</span>
+        <span>SUJET PRINCIPAL N°2</span>
+      </div>
+    </div>
+
+    <div class="bg-surface-container-lowest border border-on-background p-lg relative mb-lg">
+      <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+      <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+      <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+      <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+        <div class="md:col-span-2 flex md:flex-col items-start gap-sm border-r border-outline-variant pr-md">
+          <span class="material-symbols-outlined text-4xl text-on-background opacity-60">format_quote</span>
+        </div>
+        <div class="md:col-span-10">
+          <p class="font-title-sm text-title-sm text-on-background leading-snug mb-md">
+            « Trois mois après, on se rend compte qu'on a oublié une étape… La facturation, la signature du mandat de prélèvement. On est en train de courir derrière les impôts la dernière semaine avant d'envoyer les liasses. »
+          </p>
+          <div class="font-code-label text-code-label text-on-surface-variant">Toi · meeting du 11 mai 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+      <article class="bg-surface-container-lowest border border-on-background p-md relative">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-error mb-sm flex items-center gap-xs">
+          <span class="material-symbols-outlined text-[14px]">close</span>
+          <span>OUBLI #1</span>
+        </div>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-xs">Facturation</h3>
+        <p class="font-body-reg text-sm text-on-surface-variant">Setup facturation oublié. Découverte 3 mois plus tard.</p>
+      </article>
+      <article class="bg-surface-container-lowest border border-on-background p-md relative">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-error mb-sm flex items-center gap-xs">
+          <span class="material-symbols-outlined text-[14px]">close</span>
+          <span>OUBLI #2</span>
+        </div>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-xs">Mandat de prélèvement</h3>
+        <p class="font-body-reg text-sm text-on-surface-variant">Signature non récupérée à la signature du contrat.</p>
+      </article>
+      <article class="bg-surface-container-lowest border border-on-background p-md relative">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-error mb-sm flex items-center gap-xs">
+          <span class="material-symbols-outlined text-[14px]">close</span>
+          <span>OUBLI #3</span>
+        </div>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-xs">Compte impôts</h3>
+        <p class="font-body-reg text-sm text-on-surface-variant">Récupéré en J-7 avant deadline liasse. Scramble.</p>
+      </article>
+    </div>
+
+    <div class="mt-lg border-t border-outline-variant pt-md flex items-center gap-sm">
+      <span class="material-symbols-outlined text-on-surface-variant">visibility</span>
+      <p class="font-body-reg text-body-reg text-on-surface-variant">
+        Ce n'est pas un problème de rigueur. C'est un problème de séquence : <span class="text-on-background font-medium">le système ne vérifie pas</span> que chaque étape est close avant de passer à la suivante.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12 — FRICTION #3 : COMMUNICATION CLIENT                  -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-12" data-slide="12">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-6xl mx-auto w-full justify-center">
+
+    <div class="mb-lg flex flex-col md:flex-row md:items-end md:justify-between gap-md">
+      <div>
+        <div class="inline-flex items-center gap-2 mb-md">
+          <div class="h-2 w-2 bg-tertiary"></div>
+          <span class="font-code-label text-code-label text-tertiary uppercase tracking-widest">Friction 03 · /COMMUNICATION</span>
+        </div>
+        <h1 class="font-headline-md text-headline-md text-on-background tracking-tight leading-tight">
+          4 canaux <span class="text-tertiary italic">non arbitrés</span>
+        </h1>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-lg">
+      <div class="md:col-span-7">
+        <div class="bg-surface-container-lowest border border-on-background p-md relative">
+          <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="grid grid-cols-2 gap-md">
+            <div class="flex items-center gap-sm border border-outline-variant p-sm">
+              <span class="material-symbols-outlined text-tertiary">calendar_month</span>
+              <div>
+                <div class="font-code-label text-code-label text-outline">Canal 01</div>
+                <div class="font-title-sm text-[16px] font-medium">Calendly</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-sm border border-outline-variant p-sm">
+              <span class="material-symbols-outlined text-tertiary">chat</span>
+              <div>
+                <div class="font-code-label text-code-label text-outline">Canal 02</div>
+                <div class="font-title-sm text-[16px] font-medium">WhatsApp</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-sm border border-outline-variant p-sm">
+              <span class="material-symbols-outlined text-tertiary">mail</span>
+              <div>
+                <div class="font-code-label text-code-label text-outline">Canal 03</div>
+                <div class="font-title-sm text-[16px] font-medium">Mail</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-sm border border-outline-variant p-sm">
+              <span class="material-symbols-outlined text-tertiary">call</span>
+              <div>
+                <div class="font-code-label text-code-label text-outline">Canal 04</div>
+                <div class="font-title-sm text-[16px] font-medium">Téléphone direct</div>
+              </div>
+            </div>
+          </div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mt-md">
+            Pas de règle d'usage. Tu absorbes ce qui arrive sur tous les canaux à la fois.
+          </p>
+        </div>
+      </div>
+
+      <div class="md:col-span-5">
+        <div class="bg-on-background text-on-primary p-lg relative h-full flex flex-col justify-center">
+          <div class="font-eyebrow text-eyebrow text-primary-fixed-dim uppercase tracking-widest mb-sm">L'aberration économique</div>
+          <p class="font-headline-md text-[36px] text-on-primary leading-tight mb-md">
+            Un dossier à <span class="text-secondary-container">1 500 €/an</span>
+          </p>
+          <p class="font-body-reg text-body-reg text-surface-variant mb-md">qui te génère <span class="text-on-primary font-medium">5 appels par mois</span> sans ticket de support associé.</p>
+          <div class="border-t border-primary-container pt-sm">
+            <span class="font-code-label text-code-label text-secondary-container">Marge réelle ≈ négative</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-secondary-container border border-on-background p-md flex items-start gap-md">
+      <span class="material-symbols-outlined text-on-secondary-container mt-0.5">lightbulb</span>
+      <p class="font-body-reg text-body-reg text-on-secondary-container">
+        <span class="font-medium">À noter</span> — Tu nous as dit que tu prévoyais déjà de restructurer ton offre et recalibrer les rendez-vous. On le prendra en compte dans la phase 2, après les 2 procédures prioritaires.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 13 — DIVIDER 04 : IMPACTS CHIFFRÉS                       -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-13" data-slide="13">
+  <div class="flex-grow flex items-center px-margin py-xl max-w-7xl mx-auto w-full">
+    <div class="relative w-full py-xl border-l border-r border-on-background/10 px-margin">
+      <div class="socket-corner-tl"></div>
+      <div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div>
+      <div class="socket-corner-br"></div>
+      <div class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase mb-md">04 / 07</div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none">
+        Impacts chiffrés
+      </h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-md max-w-xl border-l-2 border-primary pl-md">
+        Ce que ces frictions te coûtent — estimations à valider après audit.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 14 — IMPACTS CHIFFRÉS                                    -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-14" data-slide="14">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-7xl mx-auto w-full justify-center">
+    <div class="mb-lg relative z-10">
+      <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm block">Impacts chiffrés</span>
+      <h1 class="font-display-lg text-display-lg text-on-background max-w-4xl leading-tight">Ce que ça te coûte vraiment</h1>
+      <div class="h-px w-xl bg-on-background mt-md opacity-20"></div>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl mt-md">
+        Estimations prudentes pour un cabinet de 3 personnes — chaque chiffre est <span class="font-medium">à valider lors de l'audit</span>.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter mb-lg relative z-10">
+      <div class="bg-surface-container-lowest border border-outline-variant p-md relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-6 h-6 border-l border-b border-outline-variant flex items-center justify-center opacity-50">
+          <div class="w-1 h-1 bg-on-background"></div>
+        </div>
+        <span class="font-code-label text-code-label text-secondary mb-xs block bg-secondary-container w-fit px-2 py-0.5">TEMPS PERDU</span>
+        <div class="font-display-lg text-display-lg text-on-background mt-md mb-xs leading-none">~15h</div>
+        <div class="font-title-sm text-title-sm text-on-surface-variant mb-md">par semaine, équipe</div>
+        <p class="font-body-reg text-sm text-on-surface-variant border-t border-outline-variant pt-sm">Relances clients + reconstitution dossiers + ré-explications. Estimation 5h/personne/semaine sur 3 personnes.</p>
+      </div>
+
+      <div class="bg-surface-container-lowest border border-outline-variant p-md relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-6 h-6 border-l border-b border-outline-variant flex items-center justify-center opacity-50">
+          <div class="w-1 h-1 bg-on-background"></div>
+        </div>
+        <span class="font-code-label text-code-label text-error mb-xs block bg-error-container w-fit px-2 py-0.5">RISQUE FISCAL</span>
+        <div class="font-display-lg text-display-lg text-on-background mt-md mb-xs leading-none">J-4</div>
+        <div class="font-title-sm text-title-sm text-on-surface-variant mb-md">avant deadline bilan</div>
+        <p class="font-body-reg text-sm text-on-surface-variant border-t border-outline-variant pt-sm">Cas réel cité : bilan dû 15 mai, 0 facture 2025. Chaque bilan tardif = risque pénalité + relation client tendue.</p>
+      </div>
+
+      <div class="bg-surface-container-lowest border border-outline-variant p-md relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-6 h-6 border-l border-b border-outline-variant flex items-center justify-center opacity-50">
+          <div class="w-1 h-1 bg-on-background"></div>
+        </div>
+        <span class="font-code-label text-code-label text-primary mb-xs block bg-primary-fixed w-fit px-2 py-0.5">MARGE BRÛLÉE</span>
+        <div class="font-display-lg text-display-lg text-on-background mt-md mb-xs leading-none">~30%</div>
+        <div class="font-title-sm text-title-sm text-on-surface-variant mb-md">petits dossiers en négatif</div>
+        <p class="font-body-reg text-sm text-on-surface-variant border-t border-outline-variant pt-sm">Dossiers à 1 500 €/an sur-consomment du temps non facturé. Sans suivi rentabilité, impossible de savoir lesquels.</p>
+      </div>
+    </div>
+
+    <div class="bg-on-background text-on-primary p-md md:p-lg flex flex-col md:flex-row items-start md:items-center justify-between border border-on-background relative overflow-hidden">
+      <div class="relative z-10 flex items-center gap-md mb-md md:mb-0">
+        <div class="w-12 h-12 bg-on-primary rounded-full flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-on-background text-[24px]">warning</span>
+        </div>
+        <div>
+          <h2 class="font-headline-md text-[28px] text-on-primary leading-tight">Coût caché annuel estimé</h2>
+          <span class="font-code-label text-code-label text-surface-variant opacity-80 block mt-xs">15h/sem × 45 sem × ~75€/h interne — hors risque fiscal et marge brûlée.</span>
+        </div>
+      </div>
+      <div class="relative z-10 shrink-0">
+        <div class="font-display-lg text-display-lg text-primary-fixed leading-none">~50 000€<span class="font-title-sm text-title-sm">/an</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 15 — DIVIDER 05 : SOLUTION                               -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-15" data-slide="15">
+  <div class="flex-grow flex items-center px-margin py-xl max-w-7xl mx-auto w-full">
+    <div class="relative w-full py-xl border-l border-r border-on-background/10 px-margin">
+      <div class="socket-corner-tl"></div>
+      <div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div>
+      <div class="socket-corner-br"></div>
+      <div class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase mb-md">05 / 07</div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none">
+        Solution
+      </h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-md max-w-xl border-l-2 border-primary pl-md">
+        On part de ce que tu as énoncé. On audite. On attaque 2 procédures en V1.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 16 — SOLUTION OVERVIEW : MÉTHODO                         -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-16" data-slide="16">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-7xl mx-auto w-full justify-center">
+
+    <div class="mb-lg">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Solution · Méthodologie</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight leading-tight max-w-4xl">
+        On <span class="text-primary italic">cartographie</span>, on <span class="text-primary italic">priorise</span>, on <span class="text-primary italic">reconstruit</span>
+      </h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-lg relative">
+      <div class="hidden md:block absolute top-1/2 left-0 right-0 h-px bg-on-background/10 -translate-y-1/2 z-0"></div>
+
+      <article class="bg-surface-container-lowest border border-on-background p-md relative z-10">
+        <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-primary mb-sm">// 01 · CARTOGRAPHIE</div>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Mapping des processus</h3>
+        <p class="font-body-reg text-sm text-on-surface-variant mb-md">Chaque processus est identifié, ses entrées et sorties posées. La chaîne de valeur du cabinet apparaît noir sur blanc.</p>
+        <div class="font-code-label text-code-label text-outline border-t border-outline-variant pt-sm">Output : la carte</div>
+      </article>
+
+      <article class="bg-surface-container-lowest border border-on-background p-md relative z-10">
+        <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-primary mb-sm">// 02 · ARBITRAGE</div>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">3 voies pour chaque processus</h3>
+        <ul class="font-body-reg text-sm text-on-surface-variant space-y-xs mb-md">
+          <li class="flex gap-xs"><span class="text-primary">→</span> Optimiser au quotidien</li>
+          <li class="flex gap-xs"><span class="text-primary">→</span> Externaliser (avec doc)</li>
+          <li class="flex gap-xs"><span class="text-primary">→</span> Automatiser</li>
+        </ul>
+        <div class="font-code-label text-code-label text-outline border-t border-outline-variant pt-sm">Output : la roadmap</div>
+      </article>
+
+      <article class="bg-surface-container-lowest border border-on-background p-md relative z-10">
+        <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-primary mb-sm">// 03 · ANCRAGE</div>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Notion = Single Source of Truth</h3>
+        <p class="font-body-reg text-sm text-on-surface-variant mb-md">SOPs, décisions, CRM, objectifs : tout vit dans Notion. Décorrélé du LLM. Demain tu changes de modèle, ton système ne bouge pas.</p>
+        <div class="font-code-label text-code-label text-outline border-t border-outline-variant pt-sm">Output : la mémoire boîte</div>
+      </article>
+    </div>
+
+    <div class="bg-on-background text-on-primary p-md md:p-lg border border-on-background flex flex-col md:flex-row md:items-center justify-between gap-md">
+      <div>
+        <div class="font-eyebrow text-eyebrow text-secondary-container uppercase tracking-widest mb-xs">En V1 — Forfait Audit + 2 processus</div>
+        <p class="font-title-sm text-title-sm text-on-primary">
+          On audite l'ensemble, on attaque <span class="text-secondary-container">Collecte des documents</span> et <span class="text-secondary-container">Onboarding</span>. Communication client = chantier de phase 2.
+        </p>
+      </div>
+      <div class="shrink-0">
+        <span class="material-symbols-outlined text-secondary-container text-5xl">arrow_forward</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 17 — PROCESS #1 À RECONSTRUIRE : COLLECTE                -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-17" data-slide="17">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-7xl mx-auto w-full justify-center">
+
+    <div class="mb-lg flex flex-col md:flex-row md:items-end md:justify-between gap-md">
+      <div>
+        <div class="inline-flex items-center gap-2 mb-md">
+          <div class="h-2 w-2 bg-primary"></div>
+          <span class="font-code-label text-code-label text-primary uppercase tracking-widest">Process à reconstruire · 01</span>
+        </div>
+        <h1 class="font-headline-md text-headline-md text-on-background tracking-tight leading-tight">
+          La <span class="text-primary italic">collecte des documents</span>
+        </h1>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-md max-w-3xl">
+          C'est ta douleur n°1 énoncée. <span class="font-medium text-on-background">On part de là.</span> L'audit confirme le périmètre et les leviers exacts. La liste ci-dessous indique la direction.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+
+      <div class="md:col-span-5">
+        <div class="bg-surface-container-lowest border border-on-background p-md relative h-full">
+          <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="font-eyebrow text-eyebrow text-error uppercase tracking-widest mb-md">Audit · à confirmer</div>
+          <h3 class="font-title-sm text-title-sm text-on-background mb-md">Diagnostic</h3>
+          <ul class="space-y-sm font-body-reg text-body-reg text-on-background">
+            <li class="flex items-start gap-sm">
+              <span class="material-symbols-outlined text-outline mt-0.5 text-[18px]">search</span>
+              <span>Où sont les fuites (canaux, segments clients, types de docs)</span>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="material-symbols-outlined text-outline mt-0.5 text-[18px]">groups</span>
+              <span>Qui relance qui aujourd'hui, sur quoi, à quelle fréquence</span>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="material-symbols-outlined text-outline mt-0.5 text-[18px]">corporate_fare</span>
+              <span>Spécificité associations vs TPE-PME (hors facture élec)</span>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="material-symbols-outlined text-outline mt-0.5 text-[18px]">link</span>
+              <span>Points de raccord avec PennyLane existants</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="md:col-span-7">
+        <div class="bg-primary-fixed border border-on-background p-md relative h-full">
+          <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="font-eyebrow text-eyebrow text-on-primary-fixed-variant uppercase tracking-widest mb-md">Leviers à activer · direction</div>
+          <h3 class="font-title-sm text-title-sm text-on-primary-fixed mb-md">Reconstruction</h3>
+          <ol class="space-y-md font-body-reg text-body-reg text-on-primary-fixed">
+            <li class="flex items-start gap-sm">
+              <span class="font-code-label text-code-label text-primary bg-background border border-on-background w-7 h-7 flex items-center justify-center shrink-0">01</span>
+              <div>
+                <div class="font-medium">Portail client pour le dépôt</div>
+                <div class="text-sm text-on-primary-fixed-variant">Un seul endroit pour déposer ses pièces, sans passer par le mail ou WhatsApp.</div>
+              </div>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="font-code-label text-code-label text-primary bg-background border border-on-background w-7 h-7 flex items-center justify-center shrink-0">02</span>
+              <div>
+                <div class="font-medium">Relances automatiques cadencées</div>
+                <div class="text-sm text-on-primary-fixed-variant">J+2, J+5, J+10. Le système relance, pas tes collabs.</div>
+              </div>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="font-code-label text-code-label text-primary bg-background border border-on-background w-7 h-7 flex items-center justify-center shrink-0">03</span>
+              <div>
+                <div class="font-medium">Escalade au collab à J+7</div>
+                <div class="text-sm text-on-primary-fixed-variant">Tâche Notion auto-créée : "appeler le client". Plus de oublis silencieux.</div>
+              </div>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="font-code-label text-code-label text-primary bg-background border border-on-background w-7 h-7 flex items-center justify-center shrink-0">04</span>
+              <div>
+                <div class="font-medium">Dashboard Notion temps réel</div>
+                <div class="text-sm text-on-primary-fixed-variant">Qui doit quoi, depuis quand. Tu vois venir les bilans à risque.</div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 18 — PROCESS #2 À RECONSTRUIRE : ONBOARDING              -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-18" data-slide="18">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-7xl mx-auto w-full justify-center">
+
+    <div class="mb-lg flex flex-col md:flex-row md:items-end md:justify-between gap-md">
+      <div>
+        <div class="inline-flex items-center gap-2 mb-md">
+          <div class="h-2 w-2 bg-secondary"></div>
+          <span class="font-code-label text-code-label text-secondary uppercase tracking-widest">Process à reconstruire · 02</span>
+        </div>
+        <h1 class="font-headline-md text-headline-md text-on-background tracking-tight leading-tight">
+          L'<span class="text-secondary italic">onboarding</span> client
+        </h1>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-md max-w-3xl">
+          C'est ton 2ème sujet principal énoncé. <span class="font-medium text-on-background">On part de là.</span> Pareil — l'audit confirme la séquence exacte et les leviers à activer.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+
+      <div class="md:col-span-5">
+        <div class="bg-surface-container-lowest border border-on-background p-md relative h-full">
+          <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="font-eyebrow text-eyebrow text-error uppercase tracking-widest mb-md">Audit · à confirmer</div>
+          <h3 class="font-title-sm text-title-sm text-on-background mb-md">Diagnostic</h3>
+          <ul class="space-y-sm font-body-reg text-body-reg text-on-background">
+            <li class="flex items-start gap-sm">
+              <span class="material-symbols-outlined text-outline mt-0.5 text-[18px]">timeline</span>
+              <span>Séquence réelle vs séquence documentée d'onboarding</span>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="material-symbols-outlined text-outline mt-0.5 text-[18px]">cancel</span>
+              <span>Étapes qui sautent : facturation, mandat, compte impôts</span>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="material-symbols-outlined text-outline mt-0.5 text-[18px]">verified_user</span>
+              <span>Quels contrôles bloquants ajouter pour valider chaque étape</span>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="material-symbols-outlined text-outline mt-0.5 text-[18px]">person</span>
+              <span>Rôles : qui pilote chaque étape côté Shika</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="md:col-span-7">
+        <div class="bg-secondary-fixed border border-on-background p-md relative h-full">
+          <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+          <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+          <div class="font-eyebrow text-eyebrow text-on-secondary-fixed-variant uppercase tracking-widest mb-md">Leviers à activer · direction</div>
+          <h3 class="font-title-sm text-title-sm text-on-secondary-fixed mb-md">Reconstruction</h3>
+          <ol class="space-y-md font-body-reg text-body-reg text-on-secondary-fixed">
+            <li class="flex items-start gap-sm">
+              <span class="font-code-label text-code-label text-secondary bg-background border border-on-background w-7 h-7 flex items-center justify-center shrink-0">01</span>
+              <div>
+                <div class="font-medium">Checklist déclenchée à signature</div>
+                <div class="text-sm text-on-secondary-fixed-variant">Signature lettre de mission = onboarding lancé automatiquement, étapes générées dans Notion.</div>
+              </div>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="font-code-label text-code-label text-secondary bg-background border border-on-background w-7 h-7 flex items-center justify-center shrink-0">02</span>
+              <div>
+                <div class="font-medium">Dossier client Notion auto-généré</div>
+                <div class="text-sm text-on-secondary-fixed-variant">Structure standard, relations CRM remplies, prêt pour la collab assignée.</div>
+              </div>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="font-code-label text-code-label text-secondary bg-background border border-on-background w-7 h-7 flex items-center justify-center shrink-0">03</span>
+              <div>
+                <div class="font-medium">Verrouillage des étapes critiques</div>
+                <div class="text-sm text-on-secondary-fixed-variant">Pas de passage à l'étape suivante tant que mandat / facturation / compte impôts ne sont pas marqués clos.</div>
+              </div>
+            </li>
+            <li class="flex items-start gap-sm">
+              <span class="font-code-label text-code-label text-secondary bg-background border border-on-background w-7 h-7 flex items-center justify-center shrink-0">04</span>
+              <div>
+                <div class="font-medium">Premier call client structuré</div>
+                <div class="text-sm text-on-secondary-fixed-variant">Trame Notion, check-list à valider, sortie = dossier prêt à produire.</div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 19 — DIVIDER 06 : RÉTRO PLANNING                         -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-19" data-slide="19">
+  <div class="flex-grow flex items-center px-margin py-xl max-w-7xl mx-auto w-full">
+    <div class="relative w-full py-xl border-l border-r border-on-background/10 px-margin">
+      <div class="socket-corner-tl"></div>
+      <div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div>
+      <div class="socket-corner-br"></div>
+      <div class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase mb-md">06 / 07</div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none">
+        Rétro planning
+      </h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-md max-w-xl border-l-2 border-primary pl-md">
+        Démarrage S+1 après signature. V1 du premier process sous 2 semaines.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 20 — RÉTRO PLANNING                                      -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-20" data-slide="20">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-7xl mx-auto w-full justify-center">
+
+    <div class="mb-lg">
+      <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm block">Rétro planning</span>
+      <h1 class="font-display-lg text-[64px] text-on-background leading-tight">
+        6 semaines, 4 phases
+      </h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter relative">
+      <div class="hidden md:block absolute top-12 left-0 right-0 h-px bg-on-background/10 z-0"></div>
+
+      <article class="bg-surface-container-lowest border border-on-background p-md relative z-10">
+        <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+        <div class="bg-on-background text-on-primary font-code-label text-code-label inline-flex px-sm py-xs items-center mb-md">
+          <span>S1 — S2</span>
+        </div>
+        <h3 class="font-title-sm text-title-sm mb-sm">Audit</h3>
+        <p class="font-body-reg text-sm text-on-surface-variant">Cartographie des processus, entretiens avec toi + tes 2 collabs, qualification des 3 frictions, restitution écrite.</p>
+      </article>
+
+      <article class="bg-surface-container-lowest border border-on-background p-md relative z-10">
+        <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+        <div class="bg-primary text-on-primary font-code-label text-code-label inline-flex px-sm py-xs items-center mb-md">
+          <span>S3 — S4</span>
+        </div>
+        <h3 class="font-title-sm text-title-sm mb-sm">Build process #1</h3>
+        <p class="font-body-reg text-sm text-on-surface-variant">Reconstruction de la collecte des documents. V1 livrée, testée sur 2-3 dossiers réels.</p>
+      </article>
+
+      <article class="bg-surface-container-lowest border border-on-background p-md relative z-10">
+        <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+        <div class="bg-secondary text-on-secondary font-code-label text-code-label inline-flex px-sm py-xs items-center mb-md">
+          <span>S5 — S6</span>
+        </div>
+        <h3 class="font-title-sm text-title-sm mb-sm">Build process #2</h3>
+        <p class="font-body-reg text-sm text-on-surface-variant">Reconstruction de l'onboarding client. V1 livrée, testée sur un onboarding réel en parallèle.</p>
+      </article>
+
+      <article class="bg-secondary-fixed border border-on-background p-md relative z-10">
+        <div class="absolute top-0 left-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute top-0 right-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute bottom-0 left-0 w-2 h-2 bg-on-background"></div>
+        <div class="absolute bottom-0 right-0 w-2 h-2 bg-on-background"></div>
+        <div class="bg-on-background text-on-primary font-code-label text-code-label inline-flex px-sm py-xs items-center mb-md">
+          <span>S+6</span>
+        </div>
+        <h3 class="font-title-sm text-title-sm mb-sm text-on-secondary-fixed">Run + ajustements</h3>
+        <p class="font-body-reg text-sm text-on-secondary-fixed-variant">30 jours de support : on observe en réel, on corrige, on documente les SOPs définitives.</p>
+      </article>
+    </div>
+
+    <div class="mt-lg grid grid-cols-1 md:grid-cols-3 gap-gutter">
+      <div class="bg-on-background text-on-primary p-md flex items-center gap-sm">
+        <span class="material-symbols-outlined text-secondary-container">flag</span>
+        <div>
+          <div class="font-code-label text-code-label text-surface-variant uppercase tracking-widest mb-xs">Signature visée</div>
+          <div class="font-title-sm text-[16px]">Semaine du 18 mai</div>
+        </div>
+      </div>
+      <div class="bg-surface-container-lowest border border-on-background p-md flex items-center gap-sm">
+        <span class="material-symbols-outlined text-primary">play_circle</span>
+        <div>
+          <div class="font-code-label text-code-label text-outline uppercase tracking-widest mb-xs">Kick-off audit</div>
+          <div class="font-title-sm text-[16px]">25 mai 2026</div>
+        </div>
+      </div>
+      <div class="bg-surface-container-lowest border border-on-background p-md flex items-center gap-sm">
+        <span class="material-symbols-outlined text-primary">task_alt</span>
+        <div>
+          <div class="font-code-label text-code-label text-outline uppercase tracking-widest mb-xs">Livraison finale</div>
+          <div class="font-title-sm text-[16px]">~ 6 juillet 2026</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 21 — DIVIDER 07 : OFFRE                                  -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-21" data-slide="21">
+  <div class="flex-grow flex items-center px-margin py-xl max-w-7xl mx-auto w-full">
+    <div class="relative w-full py-xl border-l border-r border-on-background/10 px-margin">
+      <div class="socket-corner-tl"></div>
+      <div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div>
+      <div class="socket-corner-br"></div>
+      <div class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase mb-md">07 / 07</div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none">
+        Offre
+      </h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-md max-w-xl border-l-2 border-primary pl-md">
+        Ce qu'on signe ensemble.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 22 — OFFRE / PRIX                                        -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-22" data-slide="22">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-6xl mx-auto w-full justify-center">
+
+    <div class="mb-lg flex flex-col md:flex-row md:items-end md:justify-between gap-md">
+      <div>
+        <span class="font-code-label text-code-label text-tertiary bg-surface-container-high px-sm py-xs rounded-full border border-outline-variant inline-flex items-center gap-xs mb-sm">
+          <span class="w-2 h-2 bg-primary rounded-full"></span>
+          Section 07 · Offre
+        </span>
+        <h1 class="font-display-lg text-display-lg text-on-surface leading-none tracking-tight">
+          Investissement
+        </h1>
+      </div>
+      <div class="hidden md:flex items-center gap-sm self-end pb-xs">
+        <div class="bg-on-background text-on-primary p-sm inline-flex items-center gap-sm">
+          <span class="material-symbols-outlined text-[20px]">workspace_premium</span>
+          <div class="font-code-label text-code-label">Notion Solution Partner</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-surface-container-lowest border border-on-surface relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-2 h-2 border-b border-r border-on-surface"></div>
+      <div class="absolute top-0 right-0 w-2 h-2 border-b border-l border-on-surface"></div>
+      <div class="absolute bottom-0 left-0 w-2 h-2 border-t border-r border-on-surface"></div>
+      <div class="absolute bottom-0 right-0 w-2 h-2 border-t border-l border-on-surface"></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 divide-y md:divide-y-0 md:divide-x divide-on-surface">
+
+        <!-- Card title + price -->
+        <div class="md:col-span-5 p-lg flex flex-col justify-between">
+          <div>
+            <div class="font-code-label text-code-label text-outline uppercase tracking-widest mb-xs">Forfait · 6 semaines</div>
+            <h2 class="font-headline-md text-headline-md text-on-surface relative z-10 leading-tight mb-md">Audit<br/>+ 2 processus revus</h2>
+            <p class="font-body-reg text-body-reg text-on-surface-variant max-w-md mb-lg">
+              Un audit complet de tes processus, puis la reconstruction des 2 procédures que tu as priorisées : collecte des documents + onboarding client.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-md mt-md">
+            <div>
+              <div class="font-eyebrow text-eyebrow text-outline uppercase mb-xs">Prix</div>
+              <div class="font-display-lg text-[64px] leading-none text-on-surface bg-secondary-fixed px-md py-sm border border-on-surface inline-block">6 400€ <span class="font-title-sm text-title-sm">HT</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inclus -->
+        <div class="md:col-span-7 p-lg bg-surface">
+          <h3 class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider mb-md border-b border-outline-variant pb-xs">Inclus</h3>
+          <ul class="space-y-sm">
+            <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-surface">
+              <span class="material-symbols-outlined text-primary mt-0.5 text-[18px]">check_box</span>
+              Audit complet : mapping des processus + entretiens collabs + restitution écrite
+            </li>
+            <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-surface">
+              <span class="material-symbols-outlined text-primary mt-0.5 text-[18px]">check_box</span>
+              Process #1 : reconstruction de la collecte des documents (portail + relances auto + escalade)
+            </li>
+            <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-surface">
+              <span class="material-symbols-outlined text-primary mt-0.5 text-[18px]">check_box</span>
+              Process #2 : reconstruction de l'onboarding (checklist auto + dossier Notion + verrouillage étapes)
+            </li>
+            <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-surface">
+              <span class="material-symbols-outlined text-primary mt-0.5 text-[18px]">check_box</span>
+              Structuration Notion : Single Source of Truth (CRM + SOPs + dashboard)
+            </li>
+            <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-surface">
+              <span class="material-symbols-outlined text-primary mt-0.5 text-[18px]">check_box</span>
+              Session de formation (2h) pour toi + tes 2 collabs
+            </li>
+            <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-surface">
+              <span class="material-symbols-outlined text-primary mt-0.5 text-[18px]">check_box</span>
+              30 jours de support post-livraison (ajustements + Q&amp;R)
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-on-surface grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-on-surface bg-surface-container-high">
+        <div class="p-md flex flex-col justify-center">
+          <span class="font-eyebrow text-eyebrow text-on-surface-variant uppercase mb-xs">Modalités</span>
+          <span class="font-code-label text-code-label text-on-surface">50% à la signature · 50% à la livraison</span>
+        </div>
+        <div class="p-md flex items-center gap-sm bg-primary-container text-on-primary-container">
+          <span class="material-symbols-outlined">schedule</span>
+          <span class="font-title-sm text-[16px] font-medium">Livraison : ~6 juillet 2026</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 23 — REMERCIEMENT / CLOSING                              -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-23" data-slide="23">
+  <div class="flex-grow flex items-center justify-center px-margin py-xl">
+    <div class="max-w-5xl w-full grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+
+      <div class="lg:col-span-5 hidden lg:flex items-stretch">
+        <div class="h-full w-full rounded-xl border border-on-background overflow-hidden relative bg-secondary-container">
+          <div class="absolute top-0 right-0 w-8 h-8 border-l border-b border-on-background bg-secondary-fixed z-10 flex items-center justify-center">
+            <div class="w-1.5 h-1.5 bg-on-background rounded-full"></div>
+          </div>
+          <div class="absolute inset-0 grid-bg opacity-50"></div>
+          <div class="relative h-full flex items-end p-md">
+            <div>
+              <div class="font-code-label text-code-label text-on-secondary-container mb-xs">// SIGNATURE</div>
+              <div class="font-headline-md text-[32px] text-on-secondary-container leading-tight">Sylvain<br/>Ramaradjou</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 flex flex-col justify-center py-xl">
+        <div class="mb-lg">
+          <span class="font-eyebrow text-eyebrow text-tertiary tracking-widest uppercase mb-sm block">Closing</span>
+          <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none">Prochaine étape</h1>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-lg relative">
+          <div class="hidden md:block absolute top-1/2 left-0 w-full h-px bg-on-background opacity-10 -translate-y-1/2"></div>
+          <div class="bg-surface-container-lowest border border-on-background p-md relative z-10">
+            <div class="absolute top-0 left-0 w-3 h-3 bg-on-background -translate-x-1/2 -translate-y-1/2 rounded-full"></div>
+            <div class="font-code-label text-code-label text-secondary mb-xs">Action 01</div>
+            <div class="font-title-sm text-title-sm text-on-background">Validation de la propale — lundi 18/05 à 14h30</div>
+          </div>
+          <div class="bg-secondary-fixed border border-on-background p-md relative z-10">
+            <div class="absolute top-0 right-0 w-3 h-3 bg-on-background translate-x-1/2 -translate-y-1/2"></div>
+            <div class="font-code-label text-code-label text-on-secondary-fixed-variant mb-xs">Action 02</div>
+            <div class="font-title-sm text-title-sm text-on-secondary-fixed">Signature + kick-off audit la semaine du 25/05</div>
+          </div>
+        </div>
+
+        <div class="border-l-2 border-primary pl-md mb-lg">
+          <p class="font-headline-md text-headline-md text-primary-container leading-tight italic">
+            "On en parle quand tu veux."
+          </p>
+        </div>
+
+        <div class="mt-auto pt-lg border-t border-outline-variant flex flex-col sm:flex-row items-start sm:items-center justify-between gap-md">
+          <div>
+            <div class="font-code-label text-code-label text-on-surface-variant mb-xs">Contact</div>
+            <a href="mailto:sylvain@ramalogic.com" class="font-body-reg text-body-reg font-medium text-on-background hover:text-primary transition-colors flex items-center gap-xs">
+              <span class="material-symbols-outlined text-lg">mail</span>
+              sylvain@ramalogic.com
+            </a>
+          </div>
+          <a href="mailto:sylvain@ramalogic.com?subject=Shika%20Consulting%20×%20Rama%20Logic%20·%20validation%20propale" class="bg-on-background text-on-primary rounded-full px-lg py-sm flex items-center gap-sm hover:opacity-90 transition-opacity">
+            <span class="w-1.5 h-1.5 bg-on-primary rounded-full"></span>
+            <span class="font-code-label text-code-label">Initier le contact</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ====== NAVIGATION CONTROLS ====== -->
+<nav class="nav-controls fixed bottom-margin right-margin z-50 flex flex-col gap-sm">
+  <button id="prev-btn" aria-label="Slide précédente" class="bg-surface-container-lowest border border-on-background w-12 h-12 flex items-center justify-center hover:bg-on-background hover:text-on-primary transition-colors group">
+    <span class="material-symbols-outlined">arrow_upward</span>
+  </button>
+  <button id="next-btn" aria-label="Slide suivante" class="bg-on-background text-on-primary border border-on-background w-12 h-12 flex items-center justify-center hover:bg-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_downward</span>
+  </button>
+</nav>
+
+<!-- ====== CONFIDENTIAL FOOTER ====== -->
+<footer class="fixed bottom-0 left-0 right-margin md:right-auto z-40 hidden md:block bg-on-background text-on-primary px-md py-xs font-eyebrow text-eyebrow uppercase tracking-widest">
+  Confidentiel · Préparé pour Shika Consulting
+</footer>
+
+<script>
+  const viewport = document.querySelector('.slides-viewport');
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  document.getElementById('total-slides').textContent = String(total).padStart(2, '0');
+
+  let currentIdx = 0;
+
+  function updateCounter() {
+    const viewportRect = viewport.getBoundingClientRect();
+    const center = viewportRect.top + viewportRect.height / 2;
+    let closest = 0;
+    let closestDist = Infinity;
+    slides.forEach((slide, idx) => {
+      const r = slide.getBoundingClientRect();
+      const slideCenter = r.top + r.height / 2;
+      const dist = Math.abs(slideCenter - center);
+      if (dist < closestDist) { closestDist = dist; closest = idx; }
+    });
+    currentIdx = closest;
+    document.getElementById('current-slide').textContent = String(closest + 1).padStart(2, '0');
+  }
+
+  function goToSlide(idx) {
+    if (idx < 0 || idx >= total) return;
+    slides[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.getElementById('prev-btn').addEventListener('click', () => goToSlide(currentIdx - 1));
+  document.getElementById('next-btn').addEventListener('click', () => goToSlide(currentIdx + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) {
+      e.preventDefault();
+      goToSlide(currentIdx + 1);
+    } else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) {
+      e.preventDefault();
+      goToSlide(currentIdx - 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      goToSlide(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      goToSlide(total - 1);
+    }
+  });
+
+  viewport.addEventListener('scroll', () => {
+    requestAnimationFrame(updateCounter);
+  });
+
+  updateCounter();
+</script>
+
+</body>
+</html>
