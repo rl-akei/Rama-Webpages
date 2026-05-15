@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>LOGIC AI · Agents IA opérationnels pour PME — Rama Logic</title>
-<meta name="description" content="42% des projets IA abandonnés en 2025. Rama Logic identifie les process qui comptent vraiment, déploie des agents sur mesure, et accompagne tes équipes jusqu'à l'adoption réelle. 6 semaines." />
-<meta property="og:title" content="LOGIC AI · Agents IA opérationnels pour PME" />
-<meta property="og:description" content="Audit, implémentation, formation. L'IA intégrée dans tes process. Adoptée par tes équipes." />
+<title>Rama Logic · Notion + IA en 90 jours pour PME</title>
+<meta name="description" content="Rama Logic structure tes process sur Notion, déploie des agents IA sur mesure et forme ton équipe à les piloter. Audit, construction, formation. Déploiement en 90 jours." />
+<meta property="og:title" content="Rama Logic · Notion + IA en 90 jours" />
+<meta property="og:description" content="Tes process organisés, tes tâches automatisées, ton équipe concentrée sur l'essentiel. Rama Logic installe le tout." />
 <meta property="og:image" content="rama-brand/Size=Large, Format=Horizontal, Color=Dark Green.svg" />
 <meta property="og:type" content="website" />
 <meta name="theme-color" content="#FFFCF7" />
@@ -362,7 +362,7 @@ section {
    ============================================= */
 .hero {
   padding-top: clamp(120px, 14vw, 200px);
-  padding-bottom: clamp(80px, 10vw, 140px);
+  padding-bottom: clamp(56px, 7vw, 96px);
   overflow: hidden;
   position: relative;
 }
@@ -405,11 +405,11 @@ section {
 .hero-h1 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(44px, 7.2vw, 100px);
-  line-height: 1.04;
+  font-size: clamp(40px, 6.5vw, 92px);
+  line-height: 1.05;
   letter-spacing: -0.025em;
   margin: 0 auto var(--sp-8);
-  max-width: 18ch;
+  max-width: 24ch;
   overflow: hidden;
 }
 .hero-h1-line {
@@ -559,8 +559,8 @@ section {
 .hero-stats {
   display: flex;
   gap: var(--sp-12);
-  margin-top: clamp(56px, 7vw, 96px);
-  padding-top: clamp(32px, 4vw, 48px);
+  margin-top: clamp(40px, 5vw, 64px);
+  padding-top: clamp(28px, 3vw, 40px);
   border-top: 1px solid var(--border);
   flex-wrap: wrap;
   justify-content: center;
@@ -581,6 +581,98 @@ section {
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
+
+/* =============================================
+   SECTION: TICKER LOGOS (social proof)
+   ============================================= */
+.ticker-strip {
+  overflow: hidden;
+  padding: clamp(28px, 3.5vw, 44px) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--cream);
+  position: relative;
+}
+.ticker-strip::before,
+.ticker-strip::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+.ticker-strip::before {
+  left: 0;
+  background: linear-gradient(to right, var(--cream), transparent);
+}
+.ticker-strip::after {
+  right: 0;
+  background: linear-gradient(to left, var(--cream), transparent);
+}
+.ticker-label {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--beige);
+  margin-bottom: clamp(16px, 2vw, 24px);
+}
+.ticker-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(48px, 6vw, 80px);
+  white-space: nowrap;
+  width: max-content;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ticker-track {
+    animation: ticker-scroll 32s linear infinite;
+  }
+  .ticker-track:hover { animation-play-state: paused; }
+}
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-shrink: 0;
+  transition: opacity var(--dur-fast);
+}
+.ticker-item:hover { opacity: 1 !important; }
+.ticker-track:not(:hover) .ticker-item { opacity: 0.45; }
+.ticker-item:hover { opacity: 1; }
+
+.ticker-monogram {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: var(--aloe-light);
+  color: var(--aloe-dark);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  flex-shrink: 0;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.ticker-item:hover .ticker-monogram {
+  background: var(--aloe-dark);
+  color: var(--cream);
+}
+.ticker-name {
+  font-family: var(--sans);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--slate);
+  letter-spacing: -0.01em;
+  transition: color var(--dur-fast);
+}
+.ticker-item:hover .ticker-name { color: var(--ink); }
 
 /* =============================================
    SECTION: PROBLÈME
@@ -659,11 +751,11 @@ section {
 .punchline {
   text-align: center;
   font-family: var(--serif);
-  font-size: clamp(36px, 5.5vw, 76px);
+  font-size: clamp(30px, 4.5vw, 62px);
   font-weight: 400;
-  line-height: 1.06;
+  line-height: 1.1;
   letter-spacing: -0.022em;
-  max-width: 22ch;
+  max-width: 32ch;
   margin: 0 auto;
   padding: clamp(56px, 6vw, 96px) 0;
 }
@@ -990,77 +1082,6 @@ section {
 }
 
 /* =============================================
-   SECTION: MÉTHODOLOGIE
-   ============================================= */
-#methodo h2 {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(34px, 4vw, 58px);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  margin-bottom: var(--sp-6);
-  max-width: 24ch;
-}
-#methodo .section-intro {
-  font-size: 17px;
-  color: var(--slate);
-  line-height: 1.65;
-  max-width: 60ch;
-  margin-bottom: clamp(48px, 6vw, 80px);
-}
-
-.methodo-row {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-}
-.methodo-cell {
-  padding: clamp(20px, 2.5vw, 32px) clamp(16px, 2vw, 24px);
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-4);
-  transition: background var(--dur-base) var(--ease-std);
-}
-.methodo-cell:hover { background: var(--mindaro-light); }
-.methodo-cell:last-child { border-right: none; }
-.methodo-letter {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 64px;
-  line-height: 0.85;
-  color: var(--aloe-light);
-  letter-spacing: -0.03em;
-  transition: color var(--dur-base);
-}
-.methodo-cell:hover .methodo-letter { color: var(--aloe-dark); }
-.methodo-cell h4 {
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--ink);
-  letter-spacing: 0.02em;
-}
-.methodo-cell p {
-  font-size: 13px;
-  color: var(--slate);
-  line-height: 1.55;
-  flex: 1;
-}
-.methodo-output {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  color: var(--aloe-dark);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding-top: var(--sp-3);
-  border-top: 1px solid var(--border);
-  margin-top: auto;
-}
-
-/* =============================================
    SECTION: AVANT / APRÈS
    ============================================= */
 #resultats h2 {
@@ -1143,6 +1164,15 @@ section {
 .gain-label {
   font-size: 13px;
   color: var(--slate);
+}
+.gain-num-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--aloe-dark);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  font-weight: 400;
 }
 
 /* =============================================
@@ -1801,10 +1831,6 @@ footer {
   .footer-inner { flex-direction: column; align-items: flex-start; }
 }
 
-@media (max-width: 480px) {
-  .methodo-row { grid-template-columns: 1fr; }
-  .methodo-cell { border-right: none; }
-}
 </style>
 </head>
 
@@ -1872,23 +1898,23 @@ footer {
   <div class="container">
     <div class="hero-eyebrow reveal">
       <span class="hero-eyebrow-dot" aria-hidden="true"></span>
-      <span class="hero-eyebrow-text">LOGIC AI · Agents IA opérationnels en 6 semaines</span>
+      <span class="hero-eyebrow-text">Notion + IA · Déploiement en 90 jours</span>
     </div>
 
-    <h1 class="hero-h1" id="hero-headline" aria-label="L'IA, intégrée dans tes process. Adoptée par tes équipes.">
+    <h1 class="hero-h1" id="hero-headline" aria-label="Notion pour structurer. L'IA pour exécuter. Ton équipe pour briller.">
       <span class="hero-h1-line">
-        <span class="word"><span class="word-inner">L'IA,</span></span>
+        <span class="word"><span class="word-inner">Notion</span></span><span>&nbsp;</span><span class="word"><span class="word-inner">pour</span></span><span>&nbsp;</span><span class="word"><span class="word-inner"><em>structurer.</em></span></span>
       </span>
       <span class="hero-h1-line">
-        <span class="word"><span class="word-inner em"><em>Intégrée</em></span></span><span>&nbsp;</span><span class="word"><span class="word-inner">dans</span></span><span>&nbsp;</span><span class="word"><span class="word-inner">tes</span></span><span>&nbsp;</span><span class="word"><span class="word-inner">process.</span></span>
+        <span class="word"><span class="word-inner">L'IA</span></span><span>&nbsp;</span><span class="word"><span class="word-inner">pour</span></span><span>&nbsp;</span><span class="word"><span class="word-inner"><em>exécuter.</em></span></span>
       </span>
       <span class="hero-h1-line">
-        <span class="word"><span class="word-inner em"><em>Adoptée</em></span></span><span>&nbsp;</span><span class="word"><span class="word-inner">par</span></span><span>&nbsp;</span><span class="word"><span class="word-inner">tes</span></span><span>&nbsp;</span><span class="word"><span class="word-inner">équipes.</span></span>
+        <span class="word"><span class="word-inner">Ton</span></span><span>&nbsp;</span><span class="word"><span class="word-inner">équipe</span></span><span>&nbsp;</span><span class="word"><span class="word-inner">pour</span></span><span>&nbsp;</span><span class="word"><span class="word-inner"><em>briller.</em></span></span>
       </span>
     </h1>
 
     <p class="hero-sub reveal">
-      <strong>42%</strong> des entreprises ont abandonné leurs projets IA en 2025. Chez Rama Logic, on identifie les process qui comptent vraiment, on déploie des agents sur mesure, et on accompagne tes équipes jusqu'à l'adoption réelle.
+      Tes process organisés, tes tâches répétitives automatisées, et ton équipe concentrée sur l'essentiel. Rama Logic installe le tout.
     </p>
 
     <div class="btn-row reveal">
@@ -1926,6 +1952,55 @@ footer {
   </div>
 </section>
 
+<!-- TICKER LOGOS -->
+<div class="ticker-strip" aria-label="Clients accompagnés">
+  <p class="ticker-label">Ils ont déjà fait le choix</p>
+  <div class="ticker-track" aria-hidden="true">
+    <!-- Set 1 -->
+    <span class="ticker-item">
+      <span class="ticker-monogram">IS</span>
+      <span class="ticker-name">Ittai Studio</span>
+    </span>
+    <span class="ticker-item">
+      <span class="ticker-monogram">K</span>
+      <span class="ticker-name">Kamak</span>
+    </span>
+    <span class="ticker-item">
+      <span class="ticker-monogram">IK</span>
+      <span class="ticker-name">Ibrahim Konto</span>
+    </span>
+    <span class="ticker-item">
+      <span class="ticker-monogram">SK</span>
+      <span class="ticker-name">Station Krishna</span>
+    </span>
+    <span class="ticker-item">
+      <span class="ticker-monogram">RL</span>
+      <span class="ticker-name">+25 PME accompagnées</span>
+    </span>
+    <!-- Set 2 (dupliqué pour le ticker infini) -->
+    <span class="ticker-item">
+      <span class="ticker-monogram">IS</span>
+      <span class="ticker-name">Ittai Studio</span>
+    </span>
+    <span class="ticker-item">
+      <span class="ticker-monogram">K</span>
+      <span class="ticker-name">Kamak</span>
+    </span>
+    <span class="ticker-item">
+      <span class="ticker-monogram">IK</span>
+      <span class="ticker-name">Ibrahim Konto</span>
+    </span>
+    <span class="ticker-item">
+      <span class="ticker-monogram">SK</span>
+      <span class="ticker-name">Station Krishna</span>
+    </span>
+    <span class="ticker-item">
+      <span class="ticker-monogram">RL</span>
+      <span class="ticker-name">+25 PME accompagnées</span>
+    </span>
+  </div>
+</div>
+
 <!-- PROBLÈME -->
 <section id="probleme">
   <div class="container">
@@ -1939,26 +2014,26 @@ footer {
       <div class="problem-col reveal">
         <div class="problem-col-label">Ce que tu sais déjà</div>
         <ul class="problem-list" role="list">
-          <li><span class="li-marker" aria-hidden="true">→</span>Qu'il faut automatiser certains process</li>
-          <li><span class="li-marker" aria-hidden="true">→</span>Que l'IA peut faire gagner du temps à tes équipes</li>
-          <li><span class="li-marker" aria-hidden="true">→</span>Que tes concurrents s'y mettent</li>
-          <li><span class="li-marker" aria-hidden="true">→</span>Que ne rien faire coûtera plus cher demain</li>
+          <li><span class="li-marker" aria-hidden="true">→</span>Que ton savoir-faire d'entreprise est dispersé dans des têtes et des fichiers</li>
+          <li><span class="li-marker" aria-hidden="true">→</span>Que l'IA peut faire gagner du temps à ton équipe, si elle est bien intégrée</li>
+          <li><span class="li-marker" aria-hidden="true">→</span>Que des outils existent, mais qu'ils ne se parlent pas entre eux</li>
+          <li><span class="li-marker" aria-hidden="true">→</span>Que ne rien faire t'enfermera dans un statu quo qui coûte cher</li>
         </ul>
       </div>
       <div class="problem-col friction reveal">
         <div class="problem-col-label">Ce qui te bloque concrètement</div>
         <ul class="problem-list" role="list">
-          <li><span class="li-marker" aria-hidden="true">×</span>Par quel process commencer, sans te tromper ?</li>
-          <li><span class="li-marker" aria-hidden="true">×</span>Comment embarquer l'équipe sans résistance ?</li>
-          <li><span class="li-marker" aria-hidden="true">×</span>Comment mesurer un ROI réel, pas juste de l'activité ?</li>
-          <li><span class="li-marker" aria-hidden="true">×</span>Comment s'assurer que ça tienne dans le temps ?</li>
+          <li><span class="li-marker" aria-hidden="true">×</span>Par où commencer, sans te tromper de process ?</li>
+          <li><span class="li-marker" aria-hidden="true">×</span>Comment centraliser le savoir-faire de ton équipe ?</li>
+          <li><span class="li-marker" aria-hidden="true">×</span>Comment faire travailler ensemble Notion, l'IA et tes outils existants ?</li>
+          <li><span class="li-marker" aria-hidden="true">×</span>Comment s'assurer que ton équipe adopte vraiment le système ?</li>
         </ul>
       </div>
     </div>
 
     <p class="punchline reveal">
-      Le problème, ce n'est pas la technologie.<br>
-      <em>C'est l'implémentation.</em>
+      Le problème, ce n'est pas l'IA.<br>
+      <em>C'est de l'ancrer dans tes process et dans ton équipe.</em>
     </p>
   </div>
 </section>
@@ -1968,30 +2043,30 @@ footer {
   <div class="container">
     <div class="section-header reveal">
       <span class="label">// Ce qu'on fait</span>
-      <h2>Déployer l'IA, c'est facile.<br>La faire adopter, c'est notre métier.</h2>
-      <p class="section-intro">Tout business de services repose sur quatre process : acquérir, vendre, délivrer, fidéliser. On audite chacun, on identifie où l'IA crée vraiment de la valeur, on déploie avec ton équipe pour que ça dure.</p>
+      <h2>Un programme en 90 jours pour ancrer Notion et l'IA dans ton entreprise.</h2>
+      <p class="section-intro"><em>Acquérir · Vendre · Délivrer · Fidéliser</em><br><br>Rama Logic audite ces quatre process, déploie Notion et des agents IA sur chacun, et forme ton équipe à piloter le tout. Pas un POC, pas un outil de plus : un système qui tient.</p>
     </div>
 
     <div class="process-grid reveal-stagger">
       <div class="process-card">
         <div class="process-card-letter" aria-hidden="true">A</div>
         <h3>Acquérir</h3>
-        <p>Les agents alimentent ton pipeline. Ton équipe se concentre sur les relations.</p>
+        <p>Ton savoir-faire structuré dans Notion. Les agents IA alimentent ton pipeline, ton équipe se concentre sur les relations.</p>
       </div>
       <div class="process-card">
         <div class="process-card-letter" aria-hidden="true">V</div>
         <h3>Vendre</h3>
-        <p>CRM structuré, propositions générées, relances automatiques. Rien ne passe entre les mailles.</p>
+        <p>CRM Notion structuré, propositions automatisées, relances sans friction. Rien ne passe entre les mailles.</p>
       </div>
       <div class="process-card">
         <div class="process-card-letter" aria-hidden="true">D</div>
         <h3>Délivrer</h3>
-        <p><em>Les agents gèrent l'opérationnel. Ton équipe gère la valeur.</em></p>
+        <p>Onboarding standardisé, documentation vivante, agents qui gèrent l'opérationnel. <em>Ton équipe gère la valeur.</em></p>
       </div>
       <div class="process-card">
         <div class="process-card-letter" aria-hidden="true">F</div>
         <h3>Fidéliser</h3>
-        <p>Satisfaction, upsell, renouvellement. Les agents repèrent les opportunités, ton équipe les transforme.</p>
+        <p>Satisfaction, upsell, renouvellement. Les agents repèrent les signaux, ton équipe transforme les opportunités.</p>
       </div>
     </div>
   </div>
@@ -2003,7 +2078,7 @@ footer {
     <div class="reveal">
       <span class="label">// Services</span>
       <h2>Un programme en trois étapes,<br>construit pour durer.</h2>
-      <p class="section-intro">Pas de big bang. On avance méthodiquement, on valide, on construit sur du solide.</p>
+      <p class="section-intro">Pas de big bang. Une avancée méthodique, des étapes validées, des fondations solides.</p>
     </div>
 
     <div class="fresco-wrap reveal">
@@ -2018,7 +2093,7 @@ footer {
               <span>1 semaine</span>
               <span>2 sessions</span>
             </div>
-            <p>On cartographie tes 4 process, on identifie les goulots et on estime le potentiel IA.</p>
+            <p>Cartographie de tes quatre process, identification des goulots et scoring du potentiel Notion + IA.</p>
             <ul role="list">
               <li>Roadmap 90 jours</li>
               <li>Matrice de priorisation</li>
@@ -2036,7 +2111,7 @@ footer {
               <span>4 à 6 sem.</span>
               <span>Agents + formation</span>
             </div>
-            <p>On construit l'architecture, on déploie 3 à 5 agents IA, on connecte les outils et on forme ton équipe.</p>
+            <p>On construit l'architecture, on déploie 3 à 5 agents IA, on connecte les outils et on forme ton équipe à piloter le système.</p>
             <ul role="list">
               <li>CEO Cockpit, CRM, Projets, Docs</li>
               <li>Agents documentation, playbook</li>
@@ -2054,7 +2129,7 @@ footer {
               <span>4 semaines</span>
               <span>Agents autonomes</span>
             </div>
-            <p>On passe des copilotes aux agents autonomes avec garde-fous. Ton équipe prend les rênes.</p>
+            <p>On passe des copilotes aux agents autonomes avec garde-fous. Ton équipe prend les rênes du système.</p>
           </div>
         </div>
 
@@ -2070,50 +2145,6 @@ footer {
             <span>Engagement 3 mois minimum</span>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MÉTHODOLOGIE -->
-<section id="methodo">
-  <div class="container">
-    <div class="reveal">
-      <span class="label">// Méthodologie Rama Logic</span>
-      <h2>La méthode Logic derrière chaque projet.</h2>
-      <p class="section-intro">Cinq lettres, cinq actions, un système qui ne laisse rien au hasard.</p>
-    </div>
-
-    <div class="methodo-row reveal-stagger">
-      <div class="methodo-cell">
-        <div class="methodo-letter" aria-hidden="true">L</div>
-        <h4>Localiser</h4>
-        <p>On cartographie tes process, on identifie les goulots, on score le potentiel IA.</p>
-        <div class="methodo-output">→ Matrice de priorisation</div>
-      </div>
-      <div class="methodo-cell">
-        <div class="methodo-letter" aria-hidden="true">O</div>
-        <h4>Organiser</h4>
-        <p>On structure tes données et ton environnement pour qu'il soit prêt à accueillir des agents.</p>
-        <div class="methodo-output">→ Archi IA-ready</div>
-      </div>
-      <div class="methodo-cell">
-        <div class="methodo-letter" aria-hidden="true">G</div>
-        <h4>Généraliser</h4>
-        <p>On déploie les agents sur les process prioritaires et on forme ton équipe.</p>
-        <div class="methodo-output">→ Agents + playbook</div>
-      </div>
-      <div class="methodo-cell">
-        <div class="methodo-letter" aria-hidden="true">I</div>
-        <h4>Implémenter</h4>
-        <p>On connecte les outils, on automatise, on pose les garde-fous. Rien ne tourne sans filet.</p>
-        <div class="methodo-output">→ En production</div>
-      </div>
-      <div class="methodo-cell">
-        <div class="methodo-letter" aria-hidden="true">C</div>
-        <h4>Consolider</h4>
-        <p>On mesure le ROI, on ajuste, on identifie les prochains use cases. L'amélioration devient continue.</p>
-        <div class="methodo-output">→ Dashboard</div>
       </div>
     </div>
   </div>
