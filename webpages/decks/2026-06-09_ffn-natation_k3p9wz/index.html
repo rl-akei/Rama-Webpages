@@ -917,53 +917,50 @@ body { font-family: 'Work Sans', system-ui, sans-serif; }
       <div class="hidden md:block font-title-sm text-title-sm text-primary font-medium uppercase tracking-widest shrink-0">Sprint · 2 semaines</div>
     </div>
 
-    <div class="flex-grow flex flex-col gap-sm overflow-x-auto">
-      <div class="min-w-[760px] flex flex-col gap-sm">
+    <div class="flex-grow flex flex-col justify-center overflow-x-auto">
+      <div class="min-w-[880px] flex flex-col gap-1.5">
+
         <!-- QUOI -->
-        <div class="relative bg-secondary-fixed/30 px-sm py-sm flex items-center gap-sm">
-          <div class="w-28 shrink-0 flex items-center gap-xs"><span class="font-code-label text-code-label text-secondary uppercase">Quoi ?</span><span class="material-symbols-outlined text-secondary text-base">arrow_forward</span></div>
-          <div class="flex-grow flex items-center gap-xs">
-            <span class="font-code-label text-[11px] text-secondary border border-secondary/50 bg-secondary-fixed/50 px-xs py-1 whitespace-nowrap">Diagnostiquer</span>
-            <span class="font-code-label text-[11px] text-secondary border border-secondary/50 bg-secondary-fixed/50 px-xs py-1 whitespace-nowrap">Cartographier</span>
-            <span class="font-code-label text-[11px] text-secondary border border-secondary/50 bg-secondary-fixed/50 px-xs py-1 whitespace-nowrap">Définir cible</span>
-            <span class="flex flex-col items-center shrink-0 px-1"><span class="font-eyebrow text-[9px] text-on-background uppercase text-center leading-tight">Valider<br/>les specs</span><span class="block w-0 h-0 border-l-[6px] border-r-[6px] border-t-[8px] border-l-transparent border-r-transparent border-t-secondary mt-1"></span></span>
-            <span class="font-code-label text-[11px] text-secondary border border-secondary/50 bg-secondary-fixed/50 px-xs py-1 whitespace-nowrap">Construire (Notion)</span>
-            <span class="font-code-label text-[11px] text-secondary border border-secondary/50 bg-secondary-fixed/50 px-xs py-1 whitespace-nowrap">Former</span>
-            <span class="font-code-label text-[11px] text-secondary border border-secondary/50 bg-secondary-fixed/50 px-xs py-1 whitespace-nowrap">Tester</span>
-            <span class="font-code-label text-[11px] text-secondary border border-secondary/50 bg-secondary-fixed/50 px-xs py-1 whitespace-nowrap">Ajuster</span>
-          </div>
+        <div class="grid grid-cols-[100px_repeat(8,minmax(0,1fr))] gap-x-1 items-stretch bg-secondary-fixed/30 px-sm py-2">
+          <div class="flex items-center gap-xs"><span class="font-code-label text-code-label text-secondary uppercase">Quoi&nbsp;?</span><span class="material-symbols-outlined text-secondary text-base">arrow_forward</span></div>
+          <div class="col-span-1 flex items-center justify-center text-center border border-secondary/40 bg-secondary-fixed/50 text-secondary font-code-label text-[11px] leading-tight px-1 py-1.5">Diagnostiquer</div>
+          <div class="col-span-1 flex items-center justify-center text-center border border-secondary/40 bg-secondary-fixed/50 text-secondary font-code-label text-[11px] leading-tight px-1 py-1.5">Cartographier</div>
+          <div class="col-span-1 flex items-center justify-center text-center border border-secondary/40 bg-secondary-fixed/50 text-secondary font-code-label text-[11px] leading-tight px-1 py-1.5">Définir cible</div>
+          <div class="col-span-1 flex flex-col items-center justify-center text-center px-0.5"><span class="font-eyebrow text-[9px] text-on-background uppercase leading-tight">Valider<br/>les specs</span><span class="block w-0 h-0 border-l-[6px] border-r-[6px] border-t-[9px] border-l-transparent border-r-transparent border-t-secondary mt-1"></span></div>
+          <div class="col-span-1 flex items-center justify-center text-center border border-secondary/40 bg-secondary-fixed/50 text-secondary font-code-label text-[11px] leading-tight px-1 py-1.5">Construire</div>
+          <div class="col-span-1 flex items-center justify-center text-center border border-secondary/40 bg-secondary-fixed/50 text-secondary font-code-label text-[11px] leading-tight px-1 py-1.5">Former</div>
+          <div class="col-span-1 flex items-center justify-center text-center border border-secondary/40 bg-secondary-fixed/50 text-secondary font-code-label text-[11px] leading-tight px-1 py-1.5">Tester</div>
+          <div class="col-span-1 flex items-center justify-center text-center border border-secondary/40 bg-secondary-fixed/50 text-secondary font-code-label text-[11px] leading-tight px-1 py-1.5">Ajuster</div>
         </div>
+
         <!-- QUI -->
-        <div class="relative bg-tertiary-fixed/40 px-sm py-sm flex items-center gap-sm">
-          <div class="w-28 shrink-0 flex items-center gap-xs"><span class="font-code-label text-code-label text-tertiary uppercase">Qui ?</span><span class="material-symbols-outlined text-tertiary text-base">arrow_forward</span></div>
-          <div class="flex-grow flex items-center gap-xs">
-            <span class="font-code-label text-[11px] text-tertiary border border-tertiary/40 bg-tertiary-fixed/60 px-sm py-1 text-center" style="flex:5">Rama Logic + Client</span>
-            <span class="font-code-label text-[11px] text-tertiary border border-tertiary/40 bg-tertiary-fixed/60 px-sm py-1 text-center" style="flex:3">Rama Logic</span>
-            <span class="font-code-label text-[11px] text-tertiary border border-tertiary/40 bg-tertiary-fixed/60 px-sm py-1 text-center" style="flex:2">Client</span>
-            <span class="font-code-label text-[11px] text-tertiary border border-tertiary/40 bg-tertiary-fixed/60 px-sm py-1 text-center" style="flex:1">Rama Logic</span>
-          </div>
+        <div class="grid grid-cols-[100px_repeat(8,minmax(0,1fr))] gap-x-1 items-stretch bg-tertiary-fixed/40 px-sm py-2">
+          <div class="flex items-center gap-xs"><span class="font-code-label text-code-label text-tertiary uppercase">Qui&nbsp;?</span><span class="material-symbols-outlined text-tertiary text-base">arrow_forward</span></div>
+          <div class="col-span-4 flex items-center justify-center text-center border border-tertiary/40 bg-tertiary-fixed/60 text-tertiary font-code-label text-[11px] px-1 py-1.5">Rama Logic + Client</div>
+          <div class="col-span-2 flex items-center justify-center text-center border border-tertiary/40 bg-tertiary-fixed/60 text-tertiary font-code-label text-[11px] px-1 py-1.5">Rama Logic</div>
+          <div class="col-span-1 flex items-center justify-center text-center border border-tertiary/40 bg-tertiary-fixed/60 text-tertiary font-code-label text-[11px] px-1 py-1.5">Client</div>
+          <div class="col-span-1 flex items-center justify-center text-center border border-tertiary/40 bg-tertiary-fixed/60 text-tertiary font-code-label text-[11px] px-1 py-1.5">Rama Logic</div>
         </div>
+
         <!-- LIVRABLES -->
-        <div class="relative bg-primary-fixed/20 px-sm py-sm flex items-center gap-sm">
-          <div class="w-28 shrink-0 flex items-center gap-xs"><span class="font-code-label text-code-label text-primary uppercase">Livrables</span><span class="material-symbols-outlined text-primary text-base">arrow_forward</span></div>
-          <div class="flex-grow flex items-stretch gap-xs">
-            <div class="relative border border-on-background/30 bg-surface-container-lowest rounded-lg px-sm py-1 flex flex-col items-center justify-center text-center" style="flex:5"><span class="font-body-reg text-[11px] text-on-background leading-tight">Miro : audit existant + processus cible</span><span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span></div>
-            <div class="relative border border-on-background/30 bg-surface-container-lowest rounded-lg px-sm py-1 flex flex-col items-center justify-center text-center" style="flex:2"><span class="font-body-reg text-[11px] text-on-background leading-tight">Cahier des charges</span><span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span></div>
-            <div class="relative border border-on-background/30 bg-surface-container-lowest rounded-lg px-sm py-1 flex flex-col items-center justify-center text-center" style="flex:2"><span class="font-body-reg text-[11px] text-on-background leading-tight">Espace Notion + automatisations</span><span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span></div>
-            <div class="relative border border-on-background/30 bg-surface-container-lowest rounded-lg px-1 py-1 flex flex-col items-center justify-center text-center" style="flex:1"><span class="font-body-reg text-[11px] text-on-background leading-tight">SOP</span><span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span></div>
-            <div class="relative border border-on-background/30 bg-surface-container-lowest rounded-lg px-1 py-1 flex flex-col items-center justify-center text-center" style="flex:1"><span class="font-body-reg text-[11px] text-on-background leading-tight">Recette</span><span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span></div>
-          </div>
+        <div class="grid grid-cols-[100px_repeat(8,minmax(0,1fr))] gap-x-1 items-stretch bg-primary-fixed/20 px-sm py-2">
+          <div class="flex items-center gap-xs"><span class="font-code-label text-code-label text-primary uppercase">Livrables</span><span class="material-symbols-outlined text-primary text-base">arrow_forward</span></div>
+          <div class="col-span-3 flex flex-col items-center justify-center text-center gap-1 border border-on-background/25 bg-surface-container-lowest rounded-lg px-sm py-2"><span class="font-body-reg text-[11px] text-on-background leading-tight">Miro · audit existant + processus cible</span><span class="material-symbols-outlined text-primary text-base">check_circle</span></div>
+          <div class="col-span-1 flex flex-col items-center justify-center text-center gap-1 border border-on-background/25 bg-surface-container-lowest rounded-lg px-1 py-2"><span class="font-body-reg text-[11px] text-on-background leading-tight">Cahier des charges</span><span class="material-symbols-outlined text-primary text-base">check_circle</span></div>
+          <div class="col-span-2 flex flex-col items-center justify-center text-center gap-1 border border-on-background/25 bg-surface-container-lowest rounded-lg px-sm py-2"><span class="font-body-reg text-[11px] text-on-background leading-tight">Espace Notion + automatisations</span><span class="material-symbols-outlined text-primary text-base">check_circle</span></div>
+          <div class="col-span-1 flex flex-col items-center justify-center text-center gap-1 border border-on-background/25 bg-surface-container-lowest rounded-lg px-1 py-2"><span class="font-body-reg text-[11px] text-on-background leading-tight">SOP</span><span class="material-symbols-outlined text-primary text-base">check_circle</span></div>
+          <div class="col-span-1 flex flex-col items-center justify-center text-center gap-1 border border-on-background/25 bg-surface-container-lowest rounded-lg px-1 py-2"><span class="font-body-reg text-[11px] text-on-background leading-tight">Recette</span><span class="material-symbols-outlined text-primary text-base">check_circle</span></div>
         </div>
+
         <!-- BÉNÉFICE -->
-        <div class="relative bg-surface-container-low px-sm py-sm flex items-center gap-sm">
-          <div class="w-28 shrink-0 flex items-center gap-xs"><span class="font-code-label text-code-label text-outline uppercase">Bénéfice</span><span class="material-symbols-outlined text-primary text-base">arrow_forward</span></div>
-          <div class="flex-grow flex items-center gap-xs">
-            <span class="font-code-label text-[11px] text-primary font-medium px-sm text-center" style="flex:5">→ cadrage partagé DTN + FFN</span>
-            <span class="font-code-label text-[11px] text-primary font-medium px-sm text-center" style="flex:2">→ -60% de process raté</span>
-            <span class="font-code-label text-[11px] text-primary font-medium px-sm text-center" style="flex:2">→ process fiable &amp; documenté</span>
-            <span class="font-code-label text-[11px] text-primary font-medium px-sm text-center" style="flex:2">→ 100% des cadres formés</span>
-          </div>
+        <div class="grid grid-cols-[100px_repeat(8,minmax(0,1fr))] gap-x-1 items-stretch bg-surface-container-low px-sm py-2">
+          <div class="flex items-center gap-xs"><span class="font-code-label text-code-label text-outline uppercase">Bénéfice</span><span class="material-symbols-outlined text-primary text-base">arrow_forward</span></div>
+          <div class="col-span-4 flex items-center justify-center text-center font-code-label text-[11px] text-primary font-medium px-sm leading-tight">→ cadrage partagé DTN + FFN</div>
+          <div class="col-span-2 flex items-center justify-center text-center font-code-label text-[11px] text-primary font-medium px-1 leading-tight">→ -60% de process raté</div>
+          <div class="col-span-1 flex items-center justify-center text-center font-code-label text-[11px] text-primary font-medium px-1 leading-tight">→ process fiable</div>
+          <div class="col-span-1 flex items-center justify-center text-center font-code-label text-[11px] text-primary font-medium px-1 leading-tight">→ 100% formés</div>
         </div>
+
       </div>
     </div>
     <p class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest mt-sm">Ce cycle se répète à l'identique pour chacun des 5 processus.</p>
