@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Vivatech 2026 · Pourquoi l'IA la plus utile n'est pas la plus intelligente</title>
+
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-dim":"#dcd9d9","secondary-fixed-dim":"#bdcf7c","secondary-fixed":"#d9eb95",
+        "on-tertiary":"#ffffff","surface-tint":"#466556","on-secondary":"#ffffff",
+        "on-background":"#1c1b1b","surface-container-highest":"#e5e2e1","inverse-primary":"#accebc",
+        "error":"#ba1a1a","on-tertiary-fixed":"#0c1d27","background":"#fcf9f8",
+        "on-primary-fixed-variant":"#2f4d3f","primary-fixed-dim":"#accebc","on-primary-container":"#f5fff7",
+        "surface-container-lowest":"#ffffff","primary-fixed":"#c8ead8","surface-variant":"#e5e2e1",
+        "on-primary":"#ffffff","on-error-container":"#93000a","on-error":"#ffffff",
+        "primary":"#446254","outline":"#727974","on-surface":"#1c1b1b",
+        "tertiary-container":"#657783","on-tertiary-container":"#fcfcff",
+        "on-tertiary-fixed-variant":"#384954","tertiary":"#4d5e6a","on-surface-variant":"#424844",
+        "surface-bright":"#fcf9f8","error-container":"#ffdad6","on-secondary-container":"#5c6b24",
+        "surface-container-high":"#ebe7e7",
+        "inverse-surface":"#313030","outline-variant":"#c1c8c2","surface-container-low":"#f6f3f2",
+        "secondary":"#56641e","on-primary-fixed":"#012115","on-secondary-fixed-variant":"#3f4c05",
+        "inverse-on-surface":"#f3f0ef","surface-container":"#f0edec","primary-container":"#5c7b6c",
+        "tertiary-fixed-dim":"#b7c9d6","tertiary-fixed":"#d3e5f3","surface":"#fcf9f8",
+        "on-secondary-fixed":"#171e00","secondary-container":"#d9eb95"
+      },
+      borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},
+      spacing:{"md":"24px","margin":"32px","lg":"48px","xl":"80px","sm":"12px","gutter":"24px","base":"8px","xs":"4px"},
+      fontFamily:{
+        "body-reg":["Work Sans","system-ui","sans-serif"],
+        "code-label":["Space Mono","monospace"],
+        "title-sm":["Clash Grotesk","Work Sans","sans-serif"],
+        "eyebrow":["Space Mono","monospace"],
+        "display-lg":["Clash Grotesk","Work Sans","sans-serif"],
+        "headline-md":["Clash Grotesk","Work Sans","sans-serif"]
+      },
+      fontSize:{
+        "body-reg":["16px",{"lineHeight":"1.6","fontWeight":"400"}],
+        "body-lg":["20px",{"lineHeight":"1.6","fontWeight":"400"}],
+        "code-label":["14px",{"lineHeight":"1.5","letterSpacing":"0.05em","fontWeight":"400"}],
+        "title-sm":["24px",{"lineHeight":"1.4","fontWeight":"500"}],
+        "eyebrow":["12px",{"lineHeight":"1.0","fontWeight":"500"}],
+        "display-lg":["80px",{"lineHeight":"1.05","fontWeight":"500"}],
+        "display-md":["60px",{"lineHeight":"1.1","fontWeight":"500"}],
+        "headline-md":["48px",{"lineHeight":"1.2","fontWeight":"500"}],
+        "headline-sm":["34px",{"lineHeight":"1.25","fontWeight":"500"}]
+      }
+    }
+  }
+}
+</script>
+
+<style>
+html, body { scroll-behavior: smooth; }
+body { font-family: 'Work Sans', system-ui, sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(28,27,27,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28,27,27,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.grid-bg-dark {
+  background-image:
+    linear-gradient(to right, rgba(252,249,248,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(252,249,248,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.slides-viewport {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+.slide {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.socket-corner-tl, .socket-corner-tr, .socket-corner-bl, .socket-corner-br {
+  position: absolute;
+  width: 8px; height: 8px;
+  background-color: #1c1b1b;
+}
+.socket-corner-tl { top: -4px; left: -4px; }
+.socket-corner-tr { top: -4px; right: -4px; }
+.socket-corner-bl { bottom: -4px; left: -4px; }
+.socket-corner-br { bottom: -4px; right: -4px; }
+.socket-light .socket-corner-tl, .socket-light .socket-corner-tr,
+.socket-light .socket-corner-bl, .socket-light .socket-corner-br { background-color: #fcf9f8; }
+
+@media (max-width: 768px) {
+  .text-display-lg { font-size: 42px !important; }
+  .text-display-md { font-size: 34px !important; }
+  .text-headline-md { font-size: 30px !important; }
+  .text-headline-sm { font-size: 24px !important; }
+}
+
+@media print {
+  .slides-viewport { height: auto; overflow: visible; scroll-snap-type: none; }
+  .slide { page-break-after: always; min-height: auto; height: auto; }
+  .nav-controls, .header-bar { display: none !important; }
+}
+</style>
+</head>
+<body class="bg-background text-on-background antialiased">
+
+<!-- ====== STICKY HEADER ====== -->
+<header class="header-bar fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant">
+  <div class="flex justify-between items-center px-margin py-base max-w-[1600px] mx-auto">
+    <div class="flex items-center gap-md">
+      <img src="assets/rama-logic.png" alt="Rama Logic" class="h-6 w-auto"/>
+      <div class="hidden md:block w-px h-4 bg-outline-variant"></div>
+      <div class="hidden md:block font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Vivatech 2026 · Paris</div>
+    </div>
+    <div class="font-code-label text-code-label text-on-surface-variant">
+      <span id="current-slide" class="text-on-background font-medium">01</span>
+      <span class="text-outline-variant mx-1">/</span>
+      <span id="total-slides">16</span>
+    </div>
+  </div>
+</header>
+
+<main class="slides-viewport pt-[57px]">
+
+<!-- ============================================================ -->
+<!-- SLIDE 0 — COLD OPEN · LA NOTIFICATION DE 7H03 (DARK)          -->
+<!-- ============================================================ -->
+<section class="slide grid-bg-dark bg-on-background" id="slide-0" data-slide="0">
+  <div class="flex-grow flex items-center justify-center p-margin">
+    <div class="max-w-3xl w-full">
+      <div class="font-eyebrow text-eyebrow text-primary-fixed-dim uppercase tracking-widest mb-md">Telegram · RL System · Lundi 07:03</div>
+      <div class="relative bg-inverse-surface border border-background/20 rounded-lg p-lg socket-light">
+        <div class="socket-corner-tl"></div>
+        <div class="socket-corner-tr"></div>
+        <div class="socket-corner-bl"></div>
+        <div class="socket-corner-br"></div>
+        <div class="font-title-sm text-title-sm text-background mb-md">☀️ Brief Matinal · Lundi</div>
+        <div class="flex flex-col gap-sm font-body-reg text-body-lg text-background/80">
+          <div class="flex gap-sm"><span class="text-secondary-fixed font-code-label text-code-label pt-1">PIPELINE</span><span>4 opportunités actives. 2 relances à faire aujourd'hui, dont une qui attend depuis 6 jours.</span></div>
+          <div class="flex gap-sm"><span class="text-secondary-fixed font-code-label text-code-label pt-1">FINANCE</span><span>Trésorerie OK. 1 facture à émettre cette semaine.</span></div>
+          <div class="flex gap-sm"><span class="text-secondary-fixed font-code-label text-code-label pt-1">AGENDA</span><span>2 calls aujourd'hui. La prep du call de 14h est prête, liée au compte rendu du dernier échange.</span></div>
+          <div class="flex gap-sm"><span class="text-secondary-fixed font-code-label text-code-label pt-1">FOCUS</span><span>Ta priorité du jour : la relance Altercosmeto. Tout le reste peut attendre.</span></div>
+        </div>
+      </div>
+      <p class="font-code-label text-code-label text-background/60 uppercase tracking-widest mt-lg">Personne n'a écrit ce message. Je dormais encore.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 1 — TITRE                                               -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-1" data-slide="1">
+  <div class="flex-grow flex items-center justify-center relative overflow-hidden p-margin">
+    <div class="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+    <div class="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-secondary-container opacity-40 rounded-full blur-[100px] -z-10 mix-blend-multiply"></div>
+    <div class="max-w-6xl w-full relative">
+      <div class="relative bg-surface-container-lowest/80 backdrop-blur-sm rounded-lg border border-outline-variant p-xl grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+        <div class="socket-corner-tl"></div>
+        <div class="socket-corner-tr"></div>
+        <div class="socket-corner-bl"></div>
+        <div class="socket-corner-br"></div>
+        <div class="md:col-span-8">
+          <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase py-xs px-sm bg-primary-fixed/30 rounded border border-primary-fixed inline-block mb-lg">Vivatech · Paris · 14 juin 2026</span>
+          <h1 class="font-display-lg text-display-lg tracking-tight mb-md">Pourquoi l'IA la plus utile n'est pas la plus <span class="text-primary">intelligente</span>.</h1>
+          <div class="w-24 h-1 bg-secondary mb-md"></div>
+          <p class="font-headline-md text-headline-sm text-on-surface-variant leading-tight max-w-2xl">Comment je dirige mon entreprise avec Claude et Notion. Seul. Sans équipe. Sans no-code.</p>
+        </div>
+        <div class="md:col-span-4 flex flex-col items-start md:items-end gap-md">
+          <img src="assets/sylvain.jpg" alt="Sylvain Ramaradjou" class="w-48 h-48 object-cover rounded-lg border border-on-background grayscale-[20%]"/>
+          <div class="text-left md:text-right">
+            <div class="font-title-sm text-title-sm">Sylvain Ramaradjou</div>
+            <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Fondateur · Rama Logic<br/>Notion Solution Partner</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2 — LA COURSE AU MAUVAIS CHIFFRE                        -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-2" data-slide="2">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">01 · Le paradoxe</div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg max-w-4xl">Chaque mois, un nouveau modèle « le plus intelligent du monde ».</h2>
+    <div class="grid grid-cols-3 md:grid-cols-6 gap-gutter items-end mb-lg" aria-hidden="true">
+      <div class="flex flex-col gap-xs items-center"><div class="w-full bg-surface-container-highest border border-outline-variant" style="height:60px"></div><span class="font-code-label text-code-label text-on-surface-variant">2022</span></div>
+      <div class="flex flex-col gap-xs items-center"><div class="w-full bg-surface-container-highest border border-outline-variant" style="height:90px"></div><span class="font-code-label text-code-label text-on-surface-variant">2023</span></div>
+      <div class="flex flex-col gap-xs items-center"><div class="w-full bg-primary-fixed border border-outline-variant" style="height:120px"></div><span class="font-code-label text-code-label text-on-surface-variant">2024</span></div>
+      <div class="flex flex-col gap-xs items-center"><div class="w-full bg-primary-fixed-dim border border-outline-variant" style="height:155px"></div><span class="font-code-label text-code-label text-on-surface-variant">2025</span></div>
+      <div class="flex flex-col gap-xs items-center"><div class="w-full bg-primary-container border border-outline-variant" style="height:190px"></div><span class="font-code-label text-code-label text-on-surface-variant">2026</span></div>
+      <div class="flex flex-col gap-xs items-center"><div class="w-full bg-primary border border-on-background" style="height:225px"></div><span class="font-code-label text-code-label text-primary font-bold">QI ↑</span></div>
+    </div>
+    <div class="relative border-l-2 border-error pl-md max-w-3xl">
+      <p class="font-headline-md text-headline-sm leading-tight mb-sm">Et pourtant, quand vous l'ouvrez, il ne sait <span class="italic">rien</span> de votre entreprise.</p>
+      <p class="font-body-reg text-body-lg text-on-surface-variant">Vous avez embauché un génie. Mais un génie amnésique : tous les matins, il a tout oublié.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3 — LA THÈSE (DARK)                                     -->
+<!-- ============================================================ -->
+<section class="slide grid-bg-dark bg-on-background" id="slide-3" data-slide="3">
+  <div class="flex-grow flex flex-col items-start justify-center max-w-6xl mx-auto w-full px-margin">
+    <div class="font-eyebrow text-eyebrow text-primary-fixed-dim uppercase tracking-widest mb-lg">La thèse de ce talk</div>
+    <p class="font-display-lg text-display-lg text-background tracking-tight mb-lg">Utilité = Intelligence <span class="text-secondary-fixed">× Mémoire</span></p>
+    <div class="w-24 h-1 bg-secondary-fixed mb-lg"></div>
+    <p class="font-headline-md text-headline-sm text-background/80 leading-tight max-w-3xl mb-md">Si la mémoire est à zéro, l'utilité est à zéro. Peu importe l'intelligence.</p>
+    <p class="font-body-reg text-body-lg text-background/60 max-w-3xl">Un modèle moyen qui connaît toute votre entreprise battra toujours un génie qui repart de zéro. La vraie course n'est pas au QI. Elle est à la mémoire.</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4 — MON CAS                                             -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-4" data-slide="4">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">02 · Le terrain de jeu</div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg">Pas une démo de labo. Mon entreprise réelle.</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-lg">
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-md">
+        <div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-display-lg text-display-md text-primary">1</div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider mt-xs">humain<br/>(moi)</div>
+      </div>
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-md">
+        <div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-display-lg text-display-md text-primary">~100K€</div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider mt-xs">de chiffre d'affaires<br/>annualisé</div>
+      </div>
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-md">
+        <div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-display-lg text-display-md text-primary">7</div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider mt-xs">agents planifiés<br/>qui tournent seuls</div>
+      </div>
+      <div class="relative bg-surface-container-lowest border border-on-background rounded-lg p-md bg-secondary-fixed/20">
+        <div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-display-lg text-display-md text-secondary">0</div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider mt-xs">Make · n8n · Zapier<br/>zéro no-code</div>
+      </div>
+    </div>
+    <p class="font-body-reg text-body-lg text-on-surface-variant max-w-3xl">Deux briques seulement : <span class="font-medium text-on-background">Notion</span> comme mémoire, <span class="font-medium text-on-background">Claude</span> comme orchestrateur. Tout le reste s'y branche.</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5 — LE SYSTÈME (VISUEL ARCHITECTURE)                    -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-5" data-slide="5">
+  <div class="flex-grow flex flex-col justify-center max-w-7xl mx-auto w-full px-margin py-md">
+    <div class="flex items-baseline justify-between mb-sm flex-wrap gap-sm">
+      <div>
+        <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-xs">03 · Le système complet</div>
+        <h2 class="font-headline-md text-headline-sm tracking-tight">L'IA n'est pas un modèle. C'est un système.</h2>
+      </div>
+      <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">4 couches · les modèles sont interchangeables, la mémoire non</div>
+    </div>
+    <div class="relative border border-on-background rounded-lg overflow-hidden bg-surface-container-lowest">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <img src="assets/architecture-macro.png" alt="Architecture Logic AI : couche Intelligence multi-modèles, Knowledge Layer Notion, interface humain + agents, outils connectés, agents autonomes, orchestrateur" class="w-full h-auto max-h-[72vh] object-contain"/>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6 — LA MÉMOIRE = NOTION                                 -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-6" data-slide="6">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">04 · La couche mémoire</div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-sm">Un seul cerveau : 32 databases Notion.</h2>
+    <p class="font-body-reg text-body-lg text-on-surface-variant max-w-3xl mb-lg">Tout ce que mon entreprise sait est là. Pas dans ma tête, pas dans 14 outils.</p>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-gutter">
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-md"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-wider mb-xs">/Strategy</div>
+        <div class="font-title-sm text-title-sm mb-xs">Objectifs &amp; OKR</div>
+        <div class="font-body-reg text-body-reg text-on-surface-variant">Où on va, et si on est en avance ou en retard.</div>
+      </div>
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-md"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-wider mb-xs">/CRM</div>
+        <div class="font-title-sm text-title-sm mb-xs">Contacts &amp; pipeline</div>
+        <div class="font-body-reg text-body-reg text-on-surface-variant">Chaque contact, chaque opportunité, chaque relance.</div>
+      </div>
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-md"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-wider mb-xs">/Projects</div>
+        <div class="font-title-sm text-title-sm mb-xs">Projets clients</div>
+        <div class="font-body-reg text-body-reg text-on-surface-variant">Livrables, jalons, historique de chaque mission.</div>
+      </div>
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-md"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-wider mb-xs">/Daily-Ops</div>
+        <div class="font-title-sm text-title-sm mb-xs">Tâches &amp; meetings</div>
+        <div class="font-body-reg text-body-reg text-on-surface-variant">To-do, comptes rendus de calls, SOP, inbox de capture.</div>
+      </div>
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-md"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-wider mb-xs">/Marketing</div>
+        <div class="font-title-sm text-title-sm mb-xs">Contenus &amp; audience</div>
+        <div class="font-body-reg text-body-reg text-on-surface-variant">Posts, newsletter, verbatims clients, mots-clés.</div>
+      </div>
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-md"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-wider mb-xs">/Finance</div>
+        <div class="font-title-sm text-title-sm mb-xs">Cash &amp; factures</div>
+        <div class="font-body-reg text-body-reg text-on-surface-variant">Dépenses, abonnements, facturation, prévisionnel.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7 — LA CARTE DU CERVEAU (INDEX)                         -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-7" data-slide="7">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-xl items-center">
+      <div>
+        <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">05 · Le secret</div>
+        <h2 class="font-headline-md text-headline-md tracking-tight mb-md">32 databases, c'est trop. Pour un humain comme pour une IA.</h2>
+        <p class="font-body-reg text-body-lg text-on-surface-variant mb-md">La pièce maîtresse n'est pas une database. C'est <span class="font-medium text-on-background">une page d'index</span> : la carte que l'agent lit en premier, à chaque session.</p>
+        <p class="font-body-reg text-body-lg text-on-surface-variant">C'est le document d'onboarding d'un nouvel employé. Sauf que cet employé le lit en 3 secondes, à chaque fois qu'il commence sa journée.</p>
+      </div>
+      <div class="relative bg-on-background rounded-lg p-lg socket-light">
+        <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary-fixed uppercase tracking-widest mb-md">// index-claude.notion</div>
+        <div class="flex flex-col gap-sm font-code-label text-code-label text-background/80">
+          <div><span class="text-primary-fixed-dim">RL-Contacts</span> → qui on connaît, et d'où</div>
+          <div><span class="text-primary-fixed-dim">RL-Opportunity</span> → ce qu'on est en train de vendre</div>
+          <div><span class="text-primary-fixed-dim">RL-To-do</span> → ce qu'il faut faire, et pour quand</div>
+          <div><span class="text-primary-fixed-dim">RL-Video-call</span> → ce qui s'est dit, mot pour mot</div>
+          <div><span class="text-primary-fixed-dim">RL-Key-Result</span> → ce qu'on s'est promis ce trimestre</div>
+          <div class="text-background/40">… + 27 autres, avec leurs relations</div>
+          <div class="pt-sm border-t border-background/20 text-secondary-fixed">+ les règles de la maison : zéro doublon, zéro orphelin, toujours relier une action à un objectif.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8 — LA BOUCLE                                           -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-8" data-slide="8">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">06 · Ce qui change tout</div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg max-w-4xl">L'agent ne fait pas que lire la mémoire. <span class="text-primary">Il l'écrit.</span></h2>
+    <div class="flex flex-col md:flex-row items-stretch gap-xs mb-lg">
+      <div class="flex-1 relative bg-surface-container-lowest border border-outline-variant rounded-lg p-md"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase mb-xs">1 · Capturer</div>
+        <div class="font-body-reg text-body-reg text-on-surface-variant">Une idée, un call, un mail, un message vocal : tout part dans une inbox unique.</div>
+      </div>
+      <div class="flex items-center justify-center px-xs text-outline"><span class="material-symbols-outlined">arrow_forward</span></div>
+      <div class="flex-1 relative bg-surface-container-lowest border border-outline-variant rounded-lg p-md"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase mb-xs">2 · Dispatcher</div>
+        <div class="font-body-reg text-body-reg text-on-surface-variant">Chaque soir à 20h03, un agent trie et range chaque élément dans la bonne database, avec les bonnes relations.</div>
+      </div>
+      <div class="flex items-center justify-center px-xs text-outline"><span class="material-symbols-outlined">arrow_forward</span></div>
+      <div class="flex-1 relative bg-primary-fixed/30 border border-primary rounded-lg p-md"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-primary uppercase mb-xs">3 · Mémoriser</div>
+        <div class="font-body-reg text-body-reg text-on-surface-variant">La mémoire s'enrichit. Les agents de demain matin travaillent avec ce que j'ai appris aujourd'hui.</div>
+      </div>
+      <div class="flex items-center justify-center px-xs text-outline"><span class="material-symbols-outlined">replay</span></div>
+    </div>
+    <div class="border-l-2 border-secondary pl-md max-w-3xl">
+      <p class="font-headline-md text-headline-sm leading-tight">Un logiciel s'use avec le temps. Ce système fait l'inverse : <span class="text-primary">il s'apprécie</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9 — 07:03 · LE BRIEF MATINAL                            -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-9" data-slide="9">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">07 · Une journée avec le système</div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-xl items-center">
+      <div class="md:col-span-4">
+        <div class="font-display-lg text-display-lg text-primary tracking-tight">07:03</div>
+        <div class="font-title-sm text-title-sm mt-xs">Le Brief Matinal</div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider mt-xs">du lundi au vendredi · pendant que je dors</div>
+      </div>
+      <div class="md:col-span-8">
+        <p class="font-headline-md text-headline-sm leading-tight mb-md">Vous vous souvenez de la première slide ? C'était lui.</p>
+        <p class="font-body-reg text-body-lg text-on-surface-variant mb-md">Un agent lit le CRM, la banque, l'agenda et les objectifs du trimestre. Puis il croise tout ça et me dit : voilà où tu en es, voilà ta priorité du jour.</p>
+        <div class="flex flex-wrap gap-sm">
+          <span class="font-code-label text-code-label py-xs px-sm bg-primary-fixed/30 border border-primary-fixed rounded uppercase">Lit le pipeline</span>
+          <span class="font-code-label text-code-label py-xs px-sm bg-primary-fixed/30 border border-primary-fixed rounded uppercase">Lit la trésorerie</span>
+          <span class="font-code-label text-code-label py-xs px-sm bg-primary-fixed/30 border border-primary-fixed rounded uppercase">Lit l'agenda</span>
+          <span class="font-code-label text-code-label py-xs px-sm bg-secondary-fixed/40 border border-secondary rounded uppercase">Décide la priorité</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10 — 12:02 · LES CALLS DEVIENNENT DU CRM                -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-10" data-slide="10">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">08 · Une journée avec le système</div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-xl items-center">
+      <div class="md:col-span-4">
+        <div class="font-display-lg text-display-lg text-primary tracking-tight">12:02</div>
+        <div class="font-title-sm text-title-sm mt-xs">Les calls deviennent du CRM</div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider mt-xs">2 fois par jour · midi et soir</div>
+      </div>
+      <div class="md:col-span-8">
+        <p class="font-body-reg text-body-lg text-on-surface-variant mb-md">Je fais un call client. Fathom transcrit. Un agent passe derrière et range : compte rendu lié au bon contact et à la bonne opportunité, synthèse en 3 lignes, prochaine action datée dans ma to-do.</p>
+        <div class="border-l-2 border-secondary pl-md">
+          <p class="font-headline-md text-headline-sm leading-tight">Je n'ai pas touché mon CRM à la main depuis des mois.<br/><span class="text-primary">Il n'a jamais été aussi propre.</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11 — VENDREDI 13:00 · LE CFO                            -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-11" data-slide="11">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">09 · Une journée avec le système</div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-xl items-center">
+      <div class="md:col-span-4">
+        <div class="font-display-lg text-display-md text-primary tracking-tight">VEN.<br/>13:00</div>
+        <div class="font-title-sm text-title-sm mt-xs">Le CFO passe au bureau</div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider mt-xs">chaque semaine · dashboard publié</div>
+      </div>
+      <div class="md:col-span-8">
+        <p class="font-body-reg text-body-lg text-on-surface-variant mb-md">Chaque vendredi, un agent croise la banque, Stripe et la facturation, puis publie mon dashboard CFO.</p>
+        <div class="grid grid-cols-3 gap-gutter mb-md">
+          <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-md"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+            <div class="font-code-label text-code-label text-on-surface-variant uppercase mb-xs">Trésorerie</div>
+            <div class="font-display-lg text-headline-md text-on-background tracking-tight">●●●€</div>
+          </div>
+          <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-md"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+            <div class="font-code-label text-code-label text-on-surface-variant uppercase mb-xs">Burn mensuel</div>
+            <div class="font-display-lg text-headline-md text-on-background tracking-tight">●●●€</div>
+          </div>
+          <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-md"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+            <div class="font-code-label text-code-label text-on-surface-variant uppercase mb-xs">Pipeline pondéré</div>
+            <div class="font-display-lg text-headline-md text-on-background tracking-tight">●●●€</div>
+          </div>
+        </div>
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Les vrais chiffres sont dans le dashboard. Pas sur un écran géant à Vivatech.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12 — LE MOMENT WOW · /REFLECT (DARK)                    -->
+<!-- ============================================================ -->
+<section class="slide grid-bg-dark bg-on-background" id="slide-12" data-slide="12">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary-fixed-dim uppercase tracking-widest mb-sm">10 · Et la nuit…</div>
+    <h2 class="font-headline-md text-headline-md text-background tracking-tight mb-lg max-w-4xl">L'agent relit ses journées et réécrit ses propres instructions.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-xl items-center">
+      <div class="flex flex-col gap-sm">
+        <div class="relative bg-inverse-surface border border-background/20 rounded-lg p-md socket-light max-w-md">
+          <div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+          <div class="font-code-label text-code-label text-secondary-fixed uppercase mb-xs">Agent · 07:03</div>
+          <div class="font-body-reg text-body-reg text-background/80">Self-updates proposées :<br/>1. Toujours vérifier les doublons CRM avant création<br/>2. Résumer les calls de plus de 45 min en 5 lignes au lieu de 3<br/>3. Ajouter le solde Qonto au brief du lundi</div>
+        </div>
+        <div class="relative bg-primary rounded-lg p-md max-w-[280px] self-end">
+          <div class="font-code-label text-code-label text-primary-fixed uppercase mb-xs">Sylvain · 07:41</div>
+          <div class="font-title-sm text-title-sm text-on-primary">« go sur les 3 »</div>
+        </div>
+        <div class="relative bg-inverse-surface border border-background/20 rounded-lg p-md socket-light max-w-md">
+          <div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+          <div class="font-code-label text-code-label text-secondary-fixed uppercase mb-xs">Agent · 07:42</div>
+          <div class="font-body-reg text-body-reg text-background/80">✅ Appliqué. 3 fichiers d'instructions mis à jour.</div>
+        </div>
+      </div>
+      <div>
+        <p class="font-headline-md text-headline-sm text-background leading-tight mb-md">Mon système d'hier est moins bon que celui d'aujourd'hui.</p>
+        <p class="font-body-reg text-body-lg text-background/70">Et je n'ai pas écrit une ligne de code. J'ai répondu à un message Telegram. C'est ça, une mémoire qui compose : chaque jour de travail améliore l'outil qui travaille.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 13 — LE VRAI MOAT                                       -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-13" data-slide="13">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">11 · Ce que ça veut dire pour vous</div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg max-w-4xl">Les modèles sont des commodités. Votre contexte est votre actif.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-lg"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider mb-md">Remplaçable en 1 ligne de config</div>
+        <div class="flex flex-wrap gap-sm mb-md">
+          <span class="font-code-label text-code-label py-xs px-sm border border-outline-variant rounded text-on-surface-variant">GPT-n</span>
+          <span class="font-code-label text-code-label py-xs px-sm border border-outline-variant rounded text-on-surface-variant">Claude n+1</span>
+          <span class="font-code-label text-code-label py-xs px-sm border border-outline-variant rounded text-on-surface-variant">Gemini n+2</span>
+          <span class="font-code-label text-code-label py-xs px-sm border border-outline-variant rounded text-on-surface-variant">le prochain</span>
+        </div>
+        <p class="font-body-reg text-body-lg text-on-surface-variant">Demain, un meilleur modèle sort. Je change une ligne. Le système, lui, ne bouge pas.</p>
+      </div>
+      <div class="relative bg-on-background rounded-lg p-lg socket-light"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary-fixed uppercase tracking-wider mb-md">Irremplaçable</div>
+        <p class="font-headline-md text-headline-sm text-background leading-tight mb-md">18 mois de mémoire structurée.</p>
+        <p class="font-body-reg text-body-lg text-background/70">Chaque call, chaque décision, chaque client, chaque erreur documentée. Personne ne peut vous le racheter, et aucun concurrent ne peut le copier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 14 — COMMENCER LUNDI                                    -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-14" data-slide="14">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">12 · Par où commencer</div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg">Trois étapes. Lundi matin.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-lg">
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-lg"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-wider mb-sm">Étape 01</div>
+        <div class="font-title-sm text-title-sm mb-sm">Centralisez</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Un seul endroit structuré pour tout ce que votre boîte sait. Notion ou autre, peu importe : un seul cerveau.</p>
+      </div>
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-lg"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-wider mb-sm">Étape 02</div>
+        <div class="font-title-sm text-title-sm mb-sm">Cartographiez</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Écrivez la page d'index que vous donneriez à un nouvel employé : où est quoi, et les règles de la maison.</p>
+      </div>
+      <div class="relative bg-primary-fixed/30 border border-primary rounded-lg p-lg"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-wider mb-sm">Étape 03</div>
+        <div class="font-title-sm text-title-sm mb-sm">Bouclez</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Donnez à l'agent le droit d'écrire dans la mémoire, pas seulement de la lire. C'est là que ça compose.</p>
+      </div>
+    </div>
+    <div class="border-l-2 border-error pl-md max-w-3xl">
+      <p class="font-headline-md text-headline-sm leading-tight">L'erreur classique : commencer par l'agent.<br/><span class="text-primary">Commencez par la mémoire.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 15 — CLOSE + QR LINKEDIN (DARK)                         -->
+<!-- ============================================================ -->
+<section class="slide grid-bg-dark bg-on-background" id="slide-15" data-slide="15">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-xl items-center">
+      <div class="md:col-span-7">
+        <p class="font-display-lg text-display-md text-background tracking-tight mb-md">La course à l'intelligence, c'est leur problème.<br/><span class="text-secondary-fixed">La course à la mémoire, c'est le vôtre.</span></p>
+        <p class="font-code-label text-code-label text-background/60 uppercase tracking-widest mb-lg">Utilité = Intelligence × Mémoire · Elle commence lundi.</p>
+        <div class="relative bg-inverse-surface border border-background/20 rounded-lg p-md socket-light max-w-xl">
+          <div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+          <div class="flex items-center gap-md">
+            <img src="assets/sylvain.jpg" alt="Sylvain Ramaradjou" class="w-20 h-20 object-cover rounded-full border-2 border-background/30"/>
+            <div>
+              <div class="font-title-sm text-title-sm text-background">Sylvain Ramaradjou</div>
+              <div class="font-body-reg text-body-reg text-background/70 leading-snug">J'implémente l'IA dans les TPE, PME et startups.<br/>Notion &amp; IA &amp; Automatisation · Méthode LOGIC<br/><span class="text-background/50">Ex-Ledger, Swile, Edenred · Paris</span></div>
+              <div class="font-code-label text-code-label text-secondary-fixed mt-xs">sylvain@ramalogic.com · ramalogic.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="md:col-span-5 flex flex-col items-center gap-md">
+        <div class="bg-background rounded-xl p-md w-full max-w-[320px]">
+          <img src="assets/qr-linkedin.png" alt="QR code vers le profil LinkedIn de Sylvain Ramaradjou" class="w-full h-auto rounded-lg"/>
+          <div class="flex items-center justify-center gap-sm bg-on-background rounded-full py-sm px-md mt-sm">
+            <span class="material-symbols-outlined text-background text-xl">qr_code_2</span>
+            <span class="font-code-label text-code-label text-background uppercase tracking-widest font-bold">Rama Logic</span>
+          </div>
+        </div>
+        <div class="font-code-label text-code-label text-background/60 uppercase tracking-widest text-center">Scannez · on se retrouve sur LinkedIn<br/><span class="text-background/40">linkedin.com/in/sylvainramaradjou</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<nav class="nav-controls fixed bottom-margin right-margin z-50 flex flex-col gap-sm">
+  <button id="prev-btn" aria-label="Slide précédente" class="bg-surface-container-lowest border border-on-background w-12 h-12 flex items-center justify-center hover:bg-on-background hover:text-on-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_upward</span>
+  </button>
+  <button id="next-btn" aria-label="Slide suivante" class="bg-on-background text-on-primary border border-on-background w-12 h-12 flex items-center justify-center hover:bg-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_downward</span>
+  </button>
+</nav>
+
+<script>
+  const viewport = document.querySelector('.slides-viewport');
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  document.getElementById('total-slides').textContent = String(total).padStart(2, '0');
+  let currentIdx = 0;
+  function updateCounter() {
+    const viewportRect = viewport.getBoundingClientRect();
+    const center = viewportRect.top + viewportRect.height / 2;
+    let closest = 0, closestDist = Infinity;
+    slides.forEach((slide, idx) => {
+      const r = slide.getBoundingClientRect();
+      const slideCenter = r.top + r.height / 2;
+      const dist = Math.abs(slideCenter - center);
+      if (dist < closestDist) { closestDist = dist; closest = idx; }
+    });
+    currentIdx = closest;
+    document.getElementById('current-slide').textContent = String(closest + 1).padStart(2, '0');
+  }
+  function goToSlide(idx) { if (idx < 0 || idx >= total) return; slides[idx].scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  document.getElementById('prev-btn').addEventListener('click', () => goToSlide(currentIdx - 1));
+  document.getElementById('next-btn').addEventListener('click', () => goToSlide(currentIdx + 1));
+  document.addEventListener('keydown', (e) => {
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); goToSlide(currentIdx + 1); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); goToSlide(currentIdx - 1); }
+    else if (e.key === 'Home') { e.preventDefault(); goToSlide(0); }
+    else if (e.key === 'End') { e.preventDefault(); goToSlide(total - 1); }
+  });
+  viewport.addEventListener('scroll', () => { requestAnimationFrame(updateCounter); });
+  updateCounter();
+</script>
+
+</body>
+</html>
