@@ -14,6 +14,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+/* Hallmark · component: slide · genre: atmospheric · theme: Ink/Aloe/Mindaro
+ * pre-emit critique: P5 H4 E5 S4 R4 V4
+ * honest-copy: le 3200€ est un exemple explicitement étiqueté "chiffre inventé"
+ */
 /* ═══ RESET & TOKENS ═══════════════════════════════════════════════ */
 :root{
   --ink:#0D1A14; --ink2:#11221a; --ink3:#16291f;
@@ -50,7 +54,7 @@ html,body{
 
 /* Grille texture — fixe dans la slide */
 #slide::before{
-  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.45;
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.26;
   background-image:
     linear-gradient(rgba(255,252,247,.018) 1px,transparent 1px),
     linear-gradient(90deg,rgba(255,252,247,.018) 1px,transparent 1px);
@@ -157,6 +161,10 @@ svg.diagram{
   transition:opacity .55s;fill:none;
 }
 .mode-guessing .src-line{opacity:.03;animation-play-state:paused}
+.eco-feed{stroke:var(--aloe);stroke-width:1;opacity:.32;stroke-dasharray:4 6;fill:none;transition:opacity .55s var(--ease);animation:flow 2s linear infinite}
+.mode-guessing .eco-feed{opacity:.05;animation-play-state:paused}
+.eco-panel{fill:rgba(106,141,126,.035);stroke:rgba(71,94,84,.3);stroke-width:1;transition:opacity .55s var(--ease)}
+.mode-guessing .eco-panel{opacity:.4}
 
 /* NODE STATES */
 .icon{fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
@@ -341,6 +349,11 @@ svg.diagram{
         <animateMotion dur="2.6s" begin="1.74s" repeatCount="indefinite"><mpath href="#pRetrieve"/></animateMotion>
       </circle>
 
+      <!-- Panneau écosystème : groupe les 16 sources + 1 connecteur unique vers la base -->
+      <path class="eco-feed" d="M 814 150 C 742 168, 698 196, 640 206"/>
+      <rect class="eco-panel" x="814" y="18" width="386" height="250" rx="16"/>
+      <text class="n-tag" x="1007" y="42" text-anchor="middle" fill="var(--aloe-light)" font-size="9">TON ÉCOSYSTÈME · 16 SOURCES</text>
+
       <!-- Chips sources (injectées par JS) -->
       <g id="srcChips"></g>
 
@@ -388,8 +401,8 @@ svg.diagram{
           <path d="M 0 8 L 0 42 C 0 47 12 52 26 52 C 40 52 52 47 52 42 L 52 8"/>
           <path d="M 0 26 C 0 31 12 36 26 36 C 40 36 52 31 52 26" opacity=".5"/>
         </g>
-        <text class="n-tag" x="610" y="268" text-anchor="middle" fill="var(--aloe)">TON ÉCOSYSTÈME</text>
-        <text class="n-sub" x="610" y="282" text-anchor="middle">32 bases Notion · 16 sources</text>
+        <text class="n-tag" x="610" y="268" text-anchor="middle" fill="var(--aloe)">BASE DE CONNAISSANCE</text>
+        <text class="n-sub" x="610" y="282" text-anchor="middle">indexée · toujours à jour</text>
       </g>
 
       <!-- ══ AUGMENT (x=760, y=345) ══════════════════════════ -->
@@ -421,7 +434,7 @@ svg.diagram{
           <line x1="954" y1="392" x2="968" y2="406" stroke="var(--red)" stroke-width="1.8" stroke-linecap="round"/>
           <line x1="968" y1="392" x2="954" y2="406" stroke="var(--red)" stroke-width="1.8" stroke-linecap="round"/>
           <text x="984" y="390" class="n-title" font-size="15" font-weight="700" fill="var(--red)">≈ 3 200 € / mois</text>
-          <text x="984" y="408" class="n-sub" font-size="9.5" fill="var(--muted)">inventé · aucune source</text>
+          <text x="984" y="408" class="n-sub" font-size="9.5" fill="var(--muted)">chiffre inventé · aucune source</text>
           <text x="984" y="423" class="n-sub" font-size="9.5" fill="var(--muted)">confiant mais faux</text>
         </g>
 
@@ -499,7 +512,7 @@ const SOURCES = [
 // Col X : 870 / 960 / 1055 / 1148
 // Row Y : 42 / 96 / 150 / 204
 const COL_X = [870, 960, 1055, 1148];
-const ROW_Y = [42, 96, 150, 204];
+const ROW_Y = [80, 128, 176, 224];
 
 // Centre haut du cylindre Écosystème pour les lignes convergentes
 const ECO_CX = 610, ECO_CY = 192;
@@ -518,15 +531,6 @@ SOURCES.forEach((s, i) => {
   const row = Math.floor(i / 4);
   const cx  = COL_X[col];
   const cy  = ROW_Y[row];
-
-  // Ligne source → écosystème
-  const ln = document.createElementNS(NS, "path");
-  ln.setAttribute("class", "src-line");
-  const midX = (cx + ECO_CX) / 2 + 20;
-  const midY = (cy + ECO_CY) / 2 - 20;
-  ln.setAttribute("d", `M ${cx} ${cy + 12} C ${midX} ${midY+30}, ${ECO_CX+60} ${ECO_CY-20}, ${ECO_CX} ${ECO_CY}`);
-  ln.style.animationDelay = (i * 0.10) + "s";
-  lines.appendChild(ln);
 
   // Chip
   const g = document.createElementNS(NS, "g");
