@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rama Logic · LOGIC AI, l'architecture la plus puissante</title>
+<meta name="description" content="LOGIC AI : un agent intelligent qui apprend ton écosystème (32 bases Notion + 16 sources connectées) et fonde chaque réponse sur tes vraies données. Il n'hallucine plus." />
+<meta property="og:title" content="LOGIC AI · l'architecture la plus puissante" />
+<meta property="og:description" content="Un agent intelligent qui apprend ton écosystème et n'hallucine plus." />
+<meta name="theme-color" content="#fcf9f8" />
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@300,400,500,600,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300..600;1,300..500&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · component: slide · genre: editorial · theme: Cream/Aloe/Mindaro (RamaLogic Core)
+ * pre-emit critique: P5 H4 E5 S4 R5 V4
+ * Rebrand cream clair sur tokens DESIGN.md (bg #fcf9f8, primary #446254, secondary #56641e)
+ * Fonts brand : Clash Grotesk + Work Sans + Space Mono (Boska/JetBrains retires)
+ * honest-copy: le 3200€ est un exemple explicitement etiquete "chiffre invente"
+ */
+/* ═══ RESET & TOKENS (light theme — noms de palette conserves, valeurs recalees) ═════ */
+:root{
+  /* texte (dark sur cream) */
+  --ink:#1c1b1b; --ink2:#424844; --ink3:#727974;
+  --cream:#1c1b1b;   /* role : texte fort (ex-texte clair, devenu dark sur cream) */
+  --beige:#424844;   /* role : texte secondaire */
+  --muted:#727974;   /* labels muted */
+  --faint:#9aa39d;   /* tres discret */
+  /* surfaces */
+  --bg:#fcf9f8; --panel:#f0edec; --line:rgba(28,27,27,.12);
+  /* aloe (primary) */
+  --aloe-dark:#2f4d3f; --aloe:#446254; --aloe-light:#4a6657;
+  /* mindaro (secondary lime → olive lisible sur cream) */
+  --mindaro-dark:#3f4c05; --mindaro:#56641e; --mindaro-light:#7a8b2a;
+  /* fills accent + support */
+  --mindaro-fill:#d9eb95; --aloe-fill:rgba(68,98,84,.06);
+  --blue:#4d6a7a; --red:#ba1a1a; --red-fill:#ffdad6;
+  --ease:cubic-bezier(.16,1,.3,1); --ease-std:cubic-bezier(.4,0,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* ═══ VIEWPORT : ZÉRO SCROLL (scale-to-fit letterbox) ════════════════════ */
+html,body{
+  width:100%;height:100%;overflow:hidden;
+  background:#eeeae8;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Clash Grotesk','General Sans',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ═══ SLIDE CONTAINER : 1280×720, scale-to-fit ════════════════════ */
+#slide{
+  width:1280px;height:720px;
+  flex-shrink:0;
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(900px 420px at 30% -10%, rgba(68,98,84,.06), transparent 65%),
+    radial-gradient(620px 480px at 88% 72%, rgba(86,100,30,.05), transparent 62%),
+    #fcf9f8;
+  transform-origin:center center;
+}
+
+/* Grille texture — tech black 5% sur cream */
+#slide::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.55;
+  background-image:
+    linear-gradient(rgba(28,27,27,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(28,27,27,.05) 1px,transparent 1px);
+  background-size:40px 40px;
+  mask-image:radial-gradient(ellipse 82% 72% at 38% 42%,#000 18%,transparent 82%);
+}
+
+/* ═══ BANDE HAUT (height: 68px) ═══════════════════════════════════ */
+.band-top{
+  position:absolute;top:0;left:0;right:0;height:68px;
+  display:flex;align-items:center;
+  padding:0 36px;z-index:10;
+  border-bottom:1px solid var(--line);
+}
+
+.logo{
+  height:30px;width:auto;flex-shrink:0;
+  filter:brightness(0);opacity:.82;
+}
+
+.title-block{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:1px;
+}
+.title-eyebrow{
+  font-family:'Space Mono',monospace;font-size:9.5px;
+  color:var(--muted);letter-spacing:.14em;text-transform:uppercase;
+  font-weight:400;
+}
+.title-main{
+  font-family:'Clash Grotesk',sans-serif;font-weight:600;
+  font-size:26px;line-height:1;letter-spacing:-.014em;color:var(--ink);
+  display:flex;align-items:baseline;gap:5px;
+}
+.title-main .ai{color:var(--mindaro)}
+.title-tagline{
+  font-family:'Work Sans',sans-serif;font-style:italic;font-weight:400;
+  font-size:12px;color:var(--aloe);letter-spacing:.005em;margin-top:2px;
+}
+
+/* TOGGLE */
+.toggle-area{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0}
+.toggle{
+  display:inline-flex;
+  border:1px solid rgba(68,98,84,.35);
+  border-radius:9999px;padding:3px;
+  background:rgba(255,255,255,.65);
+  backdrop-filter:blur(8px);
+}
+.toggle button{
+  font-family:'Space Mono',monospace;font-size:10px;font-weight:400;
+  letter-spacing:.1em;text-transform:uppercase;
+  border:0;background:transparent;color:var(--muted);
+  padding:7px 16px;border-radius:9999px;cursor:pointer;
+  transition:.3s var(--ease);
+  display:flex;align-items:center;gap:6px;line-height:1;
+}
+.toggle button:focus-visible{outline:2px solid var(--aloe);outline-offset:2px}
+.toggle button .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+.mode-guessing .toggle .t-guess{background:var(--red-fill);color:var(--red)}
+.mode-grounded .toggle .t-grounded{background:var(--mindaro-fill);color:var(--mindaro)}
+
+.hint-small{
+  font-family:'Space Mono',monospace;font-size:8.5px;
+  color:var(--faint);letter-spacing:.04em;
+}
+
+/* ═══ CORPS (entre bande-top et bande-bas) ════════════════════════ */
+.band-body{
+  position:absolute;top:68px;left:0;right:0;bottom:96px;
+}
+
+/* ══ SVG DIAGRAM — pleine taille du corps ═══════════════════════ */
+svg.diagram{
+  width:100%;height:100%;display:block;overflow:visible;
+}
+
+/* classes texte SVG */
+.n-tag{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;font-weight:700}
+.n-title{font-family:'Clash Grotesk',sans-serif;font-weight:600;font-size:18px;fill:var(--ink);letter-spacing:.01em}
+.n-sub{font-family:'Space Mono',monospace;font-size:9px;fill:var(--muted)}
+.n-cap{font-family:'Work Sans',sans-serif;font-style:italic;font-size:11px;fill:var(--aloe)}
+
+/* FLOW PATHS */
+.spine{
+  fill:none;stroke:var(--aloe);stroke-width:1.4;
+  stroke-dasharray:5 8;opacity:.5;
+  animation:flow 1.6s linear infinite;
+}
+.retrieve{
+  fill:none;stroke:var(--mindaro);stroke-width:1.8;
+  stroke-dasharray:6 7;opacity:.9;
+  animation:flow 1.4s linear infinite;
+  transition:opacity .6s var(--ease),stroke .6s;
+}
+@keyframes flow{to{stroke-dashoffset:-30}}
+.mode-guessing .retrieve{opacity:.1;stroke:var(--faint);animation-play-state:paused}
+.src-line{
+  stroke:var(--aloe);stroke-width:.8;opacity:.18;
+  stroke-dasharray:2 5;animation:flow 2.2s linear infinite;
+  transition:opacity .55s;fill:none;
+}
+.mode-guessing .src-line{opacity:.05;animation-play-state:paused}
+.eco-feed{stroke:var(--aloe);stroke-width:1;opacity:.35;stroke-dasharray:4 6;fill:none;transition:opacity .55s var(--ease);animation:flow 2s linear infinite}
+.mode-guessing .eco-feed{opacity:.08;animation-play-state:paused}
+.eco-panel{fill:rgba(68,98,84,.04);stroke:var(--line);stroke-width:1;transition:opacity .55s var(--ease)}
+.mode-guessing .eco-panel{opacity:.5}
+
+/* NODE STATES */
+.icon{fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.dim{transition:opacity .55s var(--ease),filter .55s}
+.mode-guessing .retr-node,.mode-guessing .eco-node{opacity:.28;filter:grayscale(.6)}
+.mode-grounded .retr-node,.mode-grounded .eco-node{opacity:1;filter:none}
+
+/* data packets */
+.packet{fill:var(--mindaro)}
+.mode-guessing .packet{opacity:0;transition:opacity .4s}
+
+/* source chips */
+.src-chip rect{transition:opacity .55s,stroke .55s,fill .55s}
+.src-chip text{font-family:'Space Mono',monospace;font-weight:500;transition:fill .55s,opacity .55s}
+.mode-guessing .src-chip rect{opacity:.3;stroke:var(--faint)!important;fill:rgba(255,255,255,.4)!important}
+.mode-guessing .src-chip text{fill:var(--faint)!important;opacity:.55}
+.src-chip{animation:twk 5s ease-in-out infinite}
+@keyframes twk{0%,100%{opacity:1}50%{opacity:.82}}
+
+/* answer states */
+.ans-g,.ans-gr{opacity:0;transition:opacity .55s var(--ease)}
+.mode-guessing .ans-g{opacity:1}
+.mode-grounded .ans-gr{opacity:1}
+
+/* claude pulse */
+.pulse{animation:pulse 3.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.92}50%{opacity:1}}
+
+/* pill */
+.pill-wrap{position:absolute;pointer-events:none;}
+.pill{
+  display:inline-block;font-size:10px;font-weight:400;
+  padding:6px 14px;border-radius:9999px;
+  border:1px solid var(--aloe-dark);
+  background:var(--aloe-fill);color:var(--aloe);
+  transition:.5s var(--ease);white-space:nowrap;
+  font-family:'Space Mono',monospace;letter-spacing:.03em;
+}
+
+/* ═══ BANDE BAS (height: 96px) ════════════════════════════════════ */
+.band-bot{
+  position:absolute;bottom:0;left:0;right:0;height:96px;
+  border-top:1px solid var(--line);
+  display:flex;align-items:center;
+  padding:0 36px;gap:32px;z-index:10;
+}
+.stats-row{display:flex;gap:12px;flex-shrink:0;}
+.stat{
+  border:1px solid rgba(28,27,27,.14);border-radius:10px;
+  padding:7px 16px;
+  background:rgba(68,98,84,.04);
+  text-align:center;min-width:80px;
+}
+.stat b{
+  display:block;font-family:'Clash Grotesk',sans-serif;
+  font-size:20px;font-weight:600;color:var(--ink);line-height:1.1;
+  font-feature-settings:"tnum";
+}
+.stat span{
+  font-family:'Space Mono',monospace;font-size:8px;
+  letter-spacing:.08em;color:var(--muted);text-transform:uppercase;
+  display:block;margin-top:3px;
+}
+.stat.hl{border-color:rgba(86,100,30,.4);background:rgba(86,100,30,.06)}
+.stat.hl b{color:var(--mindaro)}
+
+.verdict-col{flex:1;}
+.verdict-text{
+  font-family:'Work Sans',sans-serif;
+  font-size:11.5px;line-height:1.62;color:var(--beige);font-weight:400;
+}
+.verdict-text b{color:var(--ink);font-weight:600}
+.verdict-text .hl{color:var(--mindaro);font-weight:600}
+
+.credit-col{flex-shrink:0;text-align:right;}
+.credit{
+  font-family:'Space Mono',monospace;
+  font-size:8.5px;color:var(--faint);letter-spacing:.05em;line-height:1.6;
+}
+.credit b{color:var(--muted)}
+
+/* ═══ REDUCED MOTION ═══════════════════════════════════════════════ */
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:80ms!important}
+}
+</style>
+</head>
+<body class="mode-grounded">
+
+<div id="slide">
+
+  <!-- ══ BANDE HAUT ════════════════════════════════════════════════ -->
+  <div class="band-top">
+    <img class="logo" src="../_assets/logos/Rama%20Logic.png" alt="Rama Logic" />
+
+    <div class="title-block">
+      <div class="title-eyebrow">architecture LOGIC AI · ramalogic.com</div>
+      <div class="title-main">LOGIC <span class="ai">AI</span></div>
+      <div class="title-tagline">l'architecture la plus puissante</div>
+    </div>
+
+    <div class="toggle-area">
+      <div class="toggle" role="tablist" aria-label="Mode de réponse IA">
+        <button class="t-guess" onclick="setMode('guessing')" role="tab" aria-selected="false">
+          <span class="dot" aria-hidden="true"></span>Deviner
+        </button>
+        <button class="t-grounded" onclick="setMode('grounded')" role="tab" aria-selected="true">
+          <span class="dot" aria-hidden="true"></span>Fonder
+        </button>
+      </div>
+      <div class="hint-small" aria-live="polite">deviner vs fonder</div>
+    </div>
+  </div>
+
+  <!-- ══ CORPS : SCHÉMA SVG HORIZONTAL ════════════════════════════ -->
+  <div class="band-body">
+    <svg class="diagram" viewBox="0 0 1280 556" aria-label="Schéma de l'architecture LOGIC AI">
+      <defs>
+        <filter id="shadow-warm" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="2" stdDeviation="5" flood-color="#1c1b1b" flood-opacity=".10"/>
+        </filter>
+      </defs>
+
+      <!-- Lignes de sources (injectées par JS) -->
+      <g id="srcLines"></g>
+
+      <!-- ══ SPINE : Claude → Augment → Réponse ════════════════ -->
+      <path id="pSpine" class="spine"
+        d="M 166 295 C 380 320 600 365 760 375 C 870 380 970 385 1060 395"/>
+
+      <!-- ══ BOUCLE RETRIEVAL : Claude(haut) → Retriever → Écosystème → Augment ══ -->
+      <path id="pRetrieve" class="retrieve"
+        d="M 166 238
+           C 270 100 400 58 500 108
+           C 570 140 596 198 610 255
+           C 625 300 700 330 760 342"/>
+
+      <!-- Packets animés sur le retrieval path -->
+      <circle class="packet" r="4">
+        <animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#pRetrieve"/></animateMotion>
+      </circle>
+      <circle class="packet" r="3" opacity=".7">
+        <animateMotion dur="2.6s" begin="0.87s" repeatCount="indefinite"><mpath href="#pRetrieve"/></animateMotion>
+      </circle>
+      <circle class="packet" r="2.5" opacity=".42">
+        <animateMotion dur="2.6s" begin="1.74s" repeatCount="indefinite"><mpath href="#pRetrieve"/></animateMotion>
+      </circle>
+
+      <!-- Panneau écosystème : groupe les 16 sources + 1 connecteur unique vers la base -->
+      <path class="eco-feed" d="M 814 150 C 742 168, 698 196, 640 206"/>
+      <rect class="eco-panel" x="814" y="18" width="386" height="250" rx="16"/>
+      <text class="n-tag" x="1007" y="42" text-anchor="middle" fill="var(--aloe)" font-size="9">TON ÉCOSYSTÈME · 16 SOURCES</text>
+
+      <!-- Chips sources (injectées par JS) -->
+      <g id="srcChips"></g>
+
+      <!-- ══ CLAUDE · nœud agent (GAUCHE, centré y~278) ════════ -->
+      <g class="pulse" transform="translate(82, 216)">
+        <g class="icon" stroke="var(--mindaro)" transform="translate(28, 0)">
+          <rect x="0" y="0" width="56" height="56" rx="12"/>
+          <line x1="14" y1="-6" x2="14" y2="0"/>
+          <line x1="42" y1="-6" x2="42" y2="0"/>
+          <line x1="14" y1="56" x2="14" y2="62"/>
+          <line x1="42" y1="56" x2="42" y2="62"/>
+          <line x1="-6" y1="16" x2="0" y2="16"/>
+          <line x1="-6" y1="40" x2="0" y2="40"/>
+          <line x1="56" y1="16" x2="62" y2="16"/>
+          <line x1="56" y1="40" x2="62" y2="40"/>
+          <circle cx="17" cy="18" r="2.8"/>
+          <circle cx="39" cy="18" r="2.8"/>
+          <circle cx="17" cy="38" r="2.8"/>
+          <circle cx="39" cy="38" r="2.8"/>
+          <line x1="17" y1="18" x2="39" y2="38"/>
+          <line x1="39" y1="18" x2="17" y2="38"/>
+        </g>
+        <text class="n-tag" x="56" y="76" text-anchor="middle" fill="var(--mindaro-dark)">REQUÊTE</text>
+        <text class="n-title" x="56" y="96" text-anchor="middle" fill="var(--mindaro)" font-size="17">Claude</text>
+        <text class="n-sub" x="56" y="114" text-anchor="middle" font-size="8.5">agent intelligent</text>
+        <text class="n-sub" x="56" y="126" text-anchor="middle" font-size="8.5">apprend ton écosystème</text>
+        <text class="n-cap" x="56" y="144" text-anchor="middle" font-size="10">"c'est quoi notre MRR ?"</text>
+      </g>
+
+      <!-- ══ RETRIEVER (haut, x=500, y=108) ════════════════════ -->
+      <g class="retr-node dim">
+        <g class="icon" stroke="var(--aloe)" transform="translate(476, 70)">
+          <circle cx="16" cy="16" r="14"/>
+          <circle cx="16" cy="16" r="7" opacity=".4"/>
+          <line x1="26" y1="26" x2="40" y2="40"/>
+        </g>
+        <text class="n-tag" x="500" y="138" text-anchor="middle" fill="var(--aloe)">RETRIEVER</text>
+        <text class="n-sub" x="500" y="152" text-anchor="middle">recherche sémantique</text>
+      </g>
+
+      <!-- ══ ÉCOSYSTÈME / cylindre (x=610, y=245) ════════════ -->
+      <g class="eco-node dim">
+        <g class="icon" stroke="var(--aloe)" transform="translate(584, 192)">
+          <ellipse cx="26" cy="8" rx="26" ry="8"/>
+          <path d="M 0 8 L 0 42 C 0 47 12 52 26 52 C 40 52 52 47 52 42 L 52 8"/>
+          <path d="M 0 26 C 0 31 12 36 26 36 C 40 36 52 31 52 26" opacity=".5"/>
+        </g>
+        <text class="n-tag" x="610" y="268" text-anchor="middle" fill="var(--aloe)">BASE DE CONNAISSANCE</text>
+        <text class="n-sub" x="610" y="282" text-anchor="middle">indexée · toujours à jour</text>
+      </g>
+
+      <!-- ══ AUGMENT (x=760, y=345) ══════════════════════════ -->
+      <g>
+        <g class="icon" stroke="var(--aloe)" transform="translate(739, 300)">
+          <rect x="8" y="0" width="38" height="38" rx="8"/>
+          <rect x="0" y="10" width="38" height="38" rx="8" fill="#fcf9f8" stroke="var(--aloe)"/>
+          <line x1="19" y1="24" x2="19" y2="34"/>
+          <line x1="14" y1="29" x2="24" y2="29"/>
+        </g>
+        <text class="n-tag" x="760" y="364" text-anchor="middle" fill="var(--aloe)">AUGMENT</text>
+        <text class="n-sub" x="760" y="377" text-anchor="middle">données + requête</text>
+      </g>
+
+      <!-- Connexion Spine → Réponse (ligne pointillée fine) -->
+      <path fill="none" stroke="var(--aloe)" stroke-width=".9" opacity=".4"
+        stroke-dasharray="3 6"
+        d="M 1060 395 L 1060 362"/>
+
+      <!-- ══ RÉPONSE (bas-droit, x=1060, y=385) — séparée des sources -->
+      <g>
+        <text class="n-tag" x="1060" y="360" text-anchor="middle" fill="var(--muted)" font-size="8.5">RÉPONSE</text>
+
+        <!-- état GUESSING -->
+        <g class="ans-g">
+          <rect x="930" y="368" width="260" height="80" rx="14"
+            fill="rgba(186,26,26,.06)" stroke="var(--red)" stroke-width="1.3"/>
+          <line x1="954" y1="392" x2="968" y2="406" stroke="var(--red)" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="968" y1="392" x2="954" y2="406" stroke="var(--red)" stroke-width="1.8" stroke-linecap="round"/>
+          <text x="984" y="390" class="n-title" font-size="15" font-weight="700" fill="var(--red)">≈ 3 200 € / mois</text>
+          <text x="984" y="408" class="n-sub" font-size="9.5" fill="var(--muted)">chiffre inventé · aucune source</text>
+          <text x="984" y="423" class="n-sub" font-size="9.5" fill="var(--muted)">confiant mais faux</text>
+        </g>
+
+        <!-- état GROUNDED -->
+        <g class="ans-gr">
+          <rect x="922" y="368" width="268" height="80" rx="14"
+            fill="rgba(86,100,30,.07)" stroke="var(--mindaro)" stroke-width="1.3"/>
+          <path d="M 946 405 l 8 9 l 18 -20" fill="none" stroke="var(--mindaro)"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="978" y="388" class="n-title" font-size="14" font-weight="700" fill="var(--mindaro)">chiffre réel, vérifiable</text>
+          <text x="978" y="408" class="n-sub" font-size="9" fill="var(--muted)">source · RL-Dashboard Activity</text>
+          <text x="978" y="423" class="n-sub" font-size="9" fill="var(--mindaro-dark)">0 hallucination</text>
+        </g>
+      </g>
+
+      <!-- ══ PILL badge (sous la réponse) ══════════════════════ -->
+      <g id="pillSvg">
+        <rect id="pillRect" x="930" y="456" width="260" height="26" rx="13"
+          fill="var(--aloe-fill)" stroke="var(--aloe-dark)" stroke-width="1"/>
+        <text id="pillText" x="1060" y="473" text-anchor="middle"
+          font-family="'Space Mono',monospace" font-size="8.5" fill="var(--aloe)"
+          letter-spacing=".025em">branché à ton écosystème, il n'hallucine plus</text>
+      </g>
+
+    </svg>
+  </div>
+
+  <!-- ══ BANDE BAS ══════════════════════════════════════════════════ -->
+  <div class="band-bot">
+    <div class="stats-row">
+      <div class="stat"><b>32</b><span>bases Notion</span></div>
+      <div class="stat"><b>16+</b><span>sources</span></div>
+      <div class="stat hl"><b>0</b><span>hallucination</span></div>
+      <div class="stat hl"><b>100%</b><span>sourçable</span></div>
+    </div>
+
+    <div class="verdict-col">
+      <p class="verdict-text">
+        On ne configure pas un chatbot. On fait <b>grandir un agent intelligent</b> qui apprend ton écosystème
+        et <span class="hl">fonde chaque réponse sur tes vraies données</span>.
+        Il cite sa source, ou il dit "je n'ai pas la donnée". <b>Il n'hallucine plus.</b>
+      </p>
+    </div>
+
+    <div class="credit-col">
+      <div class="credit">Architecture LOGIC AI · <b>Rama Logic</b><br>validé sur test live · 22 juin 2026</div>
+    </div>
+  </div>
+
+</div><!-- #slide -->
+
+<script>
+// ═══ SCALE-TO-FIT (letterbox) ════════════════════════════════════
+const slide = document.getElementById('slide');
+function fitSlide(){
+  const s = Math.min(window.innerWidth/1280, window.innerHeight/720);
+  slide.style.transform = 'scale('+s+')';
+}
+fitSlide();
+window.addEventListener('resize', fitSlide);
+
+// ═══ SOURCES ══════════════════════════════════════════════════════
+const SOURCES = [
+  {n:"Notion",  core:true},
+  {n:"Qonto"},  {n:"Stripe"},   {n:"Tiime"},
+  {n:"Telegram"},{n:"Gmail"},   {n:"Google Cal"},
+  {n:"G. Drive"},{n:"Fathom"},  {n:"Kondo"},
+  {n:"YouTube"}, {n:"GSC"},     {n:"Umami"},   {n:"Brevo"},
+  {n:"Health"},  {n:"Todoist"},
+];
+
+const COL_X = [870, 960, 1055, 1148];
+const ROW_Y = [80, 128, 176, 224];
+const ECO_CX = 610, ECO_CY = 192;
+
+const NS = "http://www.w3.org/2000/svg";
+const chips = document.getElementById("srcChips");
+const lines = document.getElementById("srcLines");
+
+const css = getComputedStyle(document.documentElement);
+const MIND   = css.getPropertyValue('--mindaro').trim();
+const ALOE_L = css.getPropertyValue('--aloe-light').trim();
+const ALOE   = css.getPropertyValue('--aloe').trim();
+
+SOURCES.forEach((s, i) => {
+  const col = i % 4;
+  const row = Math.floor(i / 4);
+  const cx  = COL_X[col];
+  const cy  = ROW_Y[row];
+
+  const g = document.createElementNS(NS, "g");
+  g.setAttribute("class", "src-chip");
+  g.style.animationDelay = (i * 0.25) + "s";
+
+  const w = s.core ? 76 : 68;
+  const h = 26;
+  const color = s.core ? MIND : ALOE_L;
+
+  const rect = document.createElementNS(NS, "rect");
+  rect.setAttribute("x", cx - w/2);
+  rect.setAttribute("y", cy - h/2);
+  rect.setAttribute("width", w);
+  rect.setAttribute("height", h);
+  rect.setAttribute("rx", 7);
+  rect.setAttribute("fill", s.core ? "rgba(86,100,30,.12)" : "rgba(68,98,84,.05)");
+  rect.setAttribute("stroke", color);
+  rect.setAttribute("stroke-width", s.core ? "1.4" : "0.9");
+
+  const txt = document.createElementNS(NS, "text");
+  txt.setAttribute("x", cx);
+  txt.setAttribute("y", cy + 4.5);
+  txt.setAttribute("text-anchor", "middle");
+  txt.setAttribute("font-size", s.core ? "12" : "10.5");
+  txt.setAttribute("font-weight", s.core ? "700" : "500");
+  txt.setAttribute("fill", color);
+  txt.textContent = s.n;
+
+  g.appendChild(rect);
+  g.appendChild(txt);
+  chips.appendChild(g);
+});
+
+// ═══ TOGGLE ════════════════════════════════════════════════════════
+let userActed = false;
+
+function setMode(m) {
+  document.body.classList.remove("mode-guessing","mode-grounded");
+  document.body.classList.add("mode-"+m);
+  document.querySelector('.t-guess').setAttribute('aria-selected', m==='guessing');
+  document.querySelector('.t-grounded').setAttribute('aria-selected', m==='grounded');
+
+  const pillText = document.getElementById("pillText");
+  const pillRect = document.getElementById("pillRect");
+  if(m==="guessing"){
+    pillText.textContent = "seul, sans tes données, il invente une réponse confiante";
+    pillText.setAttribute("fill","var(--red)");
+    pillRect.setAttribute("stroke","rgba(186,26,26,.45)");
+  } else {
+    pillText.textContent = "branché à ton écosystème, il n'hallucine plus";
+    pillText.setAttribute("fill","var(--aloe)");
+    pillRect.setAttribute("stroke","var(--aloe-dark)");
+  }
+}
+
+document.querySelectorAll(".toggle button").forEach(b =>
+  b.addEventListener("click", () => userActed = true)
+);
+
+setMode("guessing");
+setTimeout(() => { if(!userActed) setMode("grounded"); }, 2200);
+</script>
+</body>
+</html>
