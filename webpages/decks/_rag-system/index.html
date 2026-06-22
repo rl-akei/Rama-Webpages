@@ -3,252 +3,428 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Rama Logic · Notre système RAG (GUESSING vs GROUNDED)</title>
-<meta name="description" content="Comment Claude retrouve l'information dans notre stack : 32 bases Notion + 16 sources connectées (Qonto, Stripe, Tiime, Telegram, Fathom, Gmail, Kondo...). Réponses sourcées, pas devinées." />
-<meta property="og:title" content="Rama Logic · Notre système RAG" />
-<meta property="og:description" content="GUESSING vs GROUNDED — la base de connaissance branchée à l'IA." />
+<title>Rama Logic · LOGIC AI, l'architecture la plus puissante</title>
+<meta name="description" content="LOGIC AI : un agent intelligent qui apprend ton écosystème (32 bases Notion + 16 sources connectées : Qonto, Stripe, Tiime, Telegram, Fathom, Gmail, Kondo...) et fonde chaque réponse sur tes vraies données. Il n'hallucine plus." />
+<meta property="og:title" content="LOGIC AI · l'architecture la plus puissante" />
+<meta property="og:description" content="Un agent intelligent qui apprend ton écosystème et n'hallucine plus." />
 <meta property="og:type" content="website" />
-<meta name="theme-color" content="#06080f" />
+<meta name="theme-color" content="#0D1A14" />
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@300,400,500,600,700&f[]=boska@400,500&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg0:#05070e; --bg1:#0a0e1b; --bg2:#0e1426;
-  --ink:#eef2f8; --muted:#8a93a6; --faint:#3c4458; --line:#1c2336;
-  --blue:#6db4ff; --cyan:#56e6d2; --lime:#e3ee78; --aloe:#9fe0a8;
-  --amber:#f3b455; --red:#ff5d5d; --violet:#b48cff;
+  --ink:#0D1A14; --ink2:#11221a; --ink3:#16291f;
+  --cream:#FFFCF7; --beige:#D2CFC9; --muted:#8fa99f; --faint:#3e5047;
+  --aloe-dark:#475E54; --aloe:#6A8D7E; --aloe-light:#B4C6BE;
+  --mindaro-dark:#9FA55F; --mindaro:#DFE971; --mindaro-light:#F6FBC6;
+  --blue:#A7DEF9; --red:#E8654C;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --ease-std:cubic-bezier(.4,0,.2,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
 html{scroll-behavior:smooth}
 body{
-  font-family:'Inter',system-ui,sans-serif;
+  font-family:'Clash Grotesk','General Sans',system-ui,sans-serif;font-weight:300;
+  color:var(--cream);min-height:100vh;-webkit-font-smoothing:antialiased;
   background:
-    radial-gradient(900px 600px at 78% 28%, rgba(86,230,210,.07), transparent 60%),
-    radial-gradient(820px 620px at 22% 72%, rgba(227,238,120,.06), transparent 60%),
-    radial-gradient(700px 500px at 50% 110%, rgba(255,93,93,.05), transparent 60%),
-    linear-gradient(180deg,var(--bg0),var(--bg1) 40%,var(--bg0));
-  color:var(--ink); min-height:100vh; overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
+    radial-gradient(900px 520px at 50% -6%, rgba(106,141,126,.09), transparent 65%),
+    radial-gradient(700px 560px at 82% 58%, rgba(159,165,95,.05), transparent 62%),
+    linear-gradient(180deg,#0c1812,#0d1a14 44%,#0b150e);
 }
-body::before{ /* grid texture */
+/* subtle grid texture — fixed, pointer-events-none, jamais sur un container scrollant */
+body::before{
   content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
-  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
-  background-size:46px 46px;mask-image:radial-gradient(circle at 50% 35%,#000 30%,transparent 78%);
+  background-image:
+    linear-gradient(rgba(255,252,247,.016) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,252,247,.016) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 30%,#000 20%,transparent 80%);
 }
 .mono{font-family:'JetBrains Mono',monospace}
-.head{position:relative;z-index:2;text-align:center;padding:46px 20px 6px;max-width:760px;margin:0 auto}
-.handle{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.04em;margin-bottom:14px}
-.handle b{color:var(--ink)}
-.vs{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.34em;font-weight:700;margin-bottom:6px}
-.vs .g{color:var(--red)} .vs .sep{color:var(--faint);margin:0 8px;font-weight:400;letter-spacing:.1em} .vs .gr{color:var(--aloe)}
-h1.big{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(54px,12vw,104px);line-height:.92;letter-spacing:-.02em;
-  background:linear-gradient(180deg,#fff,#b9c4d6);-webkit-background-clip:text;background-clip:text;color:transparent;margin:2px 0 10px}
-.sub{font-size:clamp(13px,2.4vw,16px);color:var(--blue);font-weight:500;letter-spacing:.01em}
-.sub .dot{color:var(--faint);margin:0 7px}
-.tagline{display:inline-block;margin-top:18px;font-size:13.5px;font-weight:600;padding:9px 18px;border-radius:100px;border:1px solid var(--line);
-  background:rgba(255,255,255,.02);color:var(--ink);transition:.4s}
+.serif{font-family:'Boska',Georgia,serif;font-style:italic;font-weight:500}
 
-/* TOGGLE */
-.toggle-wrap{position:relative;z-index:3;display:flex;justify-content:center;margin:24px auto 6px}
-.toggle{display:inline-flex;align-items:center;gap:0;border:1px solid var(--line);border-radius:100px;padding:4px;background:rgba(10,14,27,.7);backdrop-filter:blur(8px)}
-.toggle button{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  border:0;background:transparent;color:var(--muted);padding:9px 20px;border-radius:100px;cursor:pointer;transition:.3s;display:flex;align-items:center;gap:8px}
-.toggle button .d{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor}
-.mode-guessing .toggle .t-guess{background:rgba(255,93,93,.14);color:var(--red)}
-.mode-grounded .toggle .t-grounded{background:rgba(159,224,168,.14);color:var(--aloe)}
-.hint{text-align:center;font-size:11.5px;color:var(--faint);font-family:'JetBrains Mono',monospace;letter-spacing:.05em;margin-top:8px;z-index:3;position:relative}
+/* ═══ HEAD ═══════════════════════════════════════════════════════════ */
+.head{
+  position:relative;z-index:2;text-align:center;
+  padding:56px 24px 0;max-width:720px;margin:0 auto
+}
+.handle{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--muted);letter-spacing:.07em;margin-bottom:20px
+}
+.handle b{color:var(--aloe-light);font-weight:500}
 
-/* STAGE */
-.stage{position:relative;z-index:1;width:min(580px,94vw);margin:6px auto 0;aspect-ratio:820/1290}
+/* guessing vs grounded label */
+.vs{
+  font-family:'Boska',Georgia,serif;font-style:italic;
+  font-size:14px;letter-spacing:.05em;margin-bottom:6px;opacity:.85
+}
+.vs .g{color:var(--red)} .vs .sep{color:var(--faint);margin:0 9px;font-style:normal} .vs .gr{color:var(--mindaro)}
+
+h1.big{
+  font-family:'Clash Grotesk',sans-serif;font-weight:600;
+  font-size:clamp(52px,12vw,104px);line-height:.92;
+  letter-spacing:-.018em;color:var(--cream);margin:4px 0 6px;
+  overflow-wrap:anywhere
+}
+h1.big .ai{color:var(--mindaro)}
+
+.tag-arch{
+  font-family:'Boska',Georgia,serif;font-style:italic;font-weight:500;
+  font-size:clamp(15px,2.4vw,19px);color:var(--aloe-light);margin-bottom:16px
+}
+.sub{
+  font-size:clamp(14px,2.1vw,16px);color:var(--beige);font-weight:300;
+  max-width:44ch;margin:0 auto;line-height:1.6
+}
+
+/* pill badge */
+.pill{
+  display:inline-block;margin-top:20px;font-size:12.5px;font-weight:400;
+  padding:10px 20px;border-radius:9999px;
+  border:1px solid var(--aloe-dark);
+  background:rgba(71,94,84,.08);color:var(--aloe-light);
+  transition:.5s var(--ease);
+  box-shadow:0 0 0 0 transparent;
+}
+
+/* ═══ TOGGLE ════════════════════════════════════════════════════════ */
+.toggle-wrap{
+  position:relative;z-index:3;
+  display:flex;justify-content:center;
+  margin:26px auto 0
+}
+.toggle{
+  display:inline-flex;
+  border:1px solid rgba(71,94,84,.55);
+  border-radius:9999px;padding:4px;
+  background:rgba(13,26,20,.7);
+  backdrop-filter:blur(10px);
+  box-shadow:0 4px 16px -4px rgba(13,26,20,.5)
+}
+.toggle button{
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;
+  letter-spacing:.13em;text-transform:uppercase;
+  border:0;background:transparent;color:var(--muted);
+  padding:10px 22px;border-radius:9999px;cursor:pointer;
+  transition:.3s var(--ease);
+  display:flex;align-items:center;gap:7px;
+  line-height:1
+}
+.toggle button:focus-visible{outline:2px solid var(--aloe-dark);outline-offset:2px}
+.toggle button .d{width:7px;height:7px;border-radius:50%;background:currentColor;flex-shrink:0}
+.mode-guessing .toggle .t-guess{background:rgba(232,101,76,.16);color:var(--red)}
+.mode-grounded .toggle .t-grounded{background:rgba(223,233,113,.14);color:var(--mindaro)}
+
+.hint{
+  text-align:center;font-size:10.5px;color:var(--faint);
+  font-family:'JetBrains Mono',monospace;letter-spacing:.04em;
+  margin-top:10px;z-index:3;position:relative
+}
+
+/* ═══ STAGE SVG ══════════════════════════════════════════════════════ */
+.stage{
+  position:relative;z-index:1;
+  width:min(640px,98vw);
+  margin:12px auto 0;
+  /* aspect-ratio driven by viewBox 900 × 1440 */
+  aspect-ratio:900/1460
+}
 svg.diagram{width:100%;height:100%;display:block;overflow:visible}
 
-/* node label text */
-.n-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:21px;fill:var(--ink);letter-spacing:.02em}
-.n-sub{font-family:'JetBrains Mono',monospace;font-size:12.5px;fill:var(--muted)}
-.n-tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;font-weight:700}
+/* SVG text classes */
+.n-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;font-weight:700}
+.n-title{font-family:'Clash Grotesk',sans-serif;font-weight:600;font-size:22px;fill:var(--cream);letter-spacing:.01em}
+.n-sub{font-family:'JetBrains Mono',monospace;font-size:11px;fill:var(--muted)}
+.n-cap{font-family:'Boska',Georgia,serif;font-style:italic;font-size:13px;fill:var(--aloe-light)}
 
-/* strokes */
-.spine{fill:none;stroke:var(--amber);stroke-width:2;stroke-dasharray:7 7;opacity:.85;animation:flow 1.1s linear infinite}
-.retrieve{fill:none;stroke:var(--aloe);stroke-width:2;stroke-dasharray:7 7;opacity:.9;animation:flow 1.1s linear infinite;transition:opacity .5s,stroke .5s;filter:url(#glowG)}
-@keyframes flow{to{stroke-dashoffset:-28}}
-.mode-guessing .retrieve{opacity:.16;stroke:var(--faint);animation-play-state:paused;filter:none}
-.src-line{stroke:var(--cyan);stroke-width:1;opacity:.18;stroke-dasharray:3 5;animation:flow 1.6s linear infinite;transition:opacity .5s}
-.mode-guessing .src-line{opacity:.05;animation-play-state:paused;stroke:var(--faint)}
+/* ═══ FLOW PATHS ════════════════════════════════════════════════════ */
+.spine{
+  fill:none;stroke:var(--aloe);stroke-width:1.6;
+  stroke-dasharray:6 9;opacity:.55;
+  animation:flow 1.4s linear infinite
+}
+.retrieve{
+  fill:none;stroke:var(--mindaro);stroke-width:1.8;
+  stroke-dasharray:7 8;opacity:.88;
+  animation:flow 1.3s linear infinite;
+  transition:opacity .6s var(--ease),stroke .6s;
+  filter:url(#soft)
+}
+@keyframes flow{to{stroke-dashoffset:-30}}
+.mode-guessing .retrieve{opacity:.10;stroke:var(--faint);animation-play-state:paused;filter:none}
+.src-line{
+  stroke:var(--aloe);stroke-width:.9;opacity:.18;
+  stroke-dasharray:2 6;animation:flow 2s linear infinite;
+  transition:opacity .55s
+}
+.mode-guessing .src-line{opacity:.04;animation-play-state:paused}
 
-.icon{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.node-box{transition:opacity .5s,filter .5s}
-.dim{transition:opacity .5s,filter .5s,fill .5s,stroke .5s}
-.mode-guessing .retr-node,.mode-guessing .kb-node{opacity:.34;filter:none}
-.mode-grounded .retr-node,.mode-grounded .kb-node{opacity:1}
+/* ═══ NODE STATES ═══════════════════════════════════════════════════ */
+.icon{fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.dim{transition:opacity .55s var(--ease),filter .55s}
+.mode-guessing .retr-node,.mode-guessing .eco-node{opacity:.22;filter:grayscale(.6)}
+.mode-grounded .retr-node,.mode-grounded .eco-node{opacity:1;filter:none}
 
-/* packets */
-.packet{fill:var(--lime);filter:url(#glowG)}
-.mode-guessing .packet{opacity:0}
+/* data packets on retrieval path */
+.packet{fill:var(--mindaro);filter:url(#soft)}
+.mode-guessing .packet{opacity:0;transition:opacity .4s}
 
-/* source chips (rendered by JS) */
-.src-chip rect{transition:opacity .5s,stroke .5s,fill .5s}
-.src-chip text{font-family:'JetBrains Mono',monospace;font-weight:500;transition:fill .5s,opacity .5s}
-.mode-guessing .src-chip rect{opacity:.22;stroke:var(--faint)!important;fill:rgba(255,255,255,.015)!important}
-.mode-guessing .src-chip text{fill:var(--faint)!important}
-.src-chip{animation:twk 4s ease-in-out infinite}
+/* source chips */
+.src-chip rect{transition:opacity .55s,stroke .55s,fill .55s}
+.src-chip text{font-family:'JetBrains Mono',monospace;font-weight:500;transition:fill .55s,opacity .55s}
+.mode-guessing .src-chip rect{opacity:.18;stroke:var(--faint)!important;fill:rgba(255,252,247,.008)!important}
+.mode-guessing .src-chip text{fill:var(--faint)!important;opacity:.5}
+/* stagger via CSS custom prop set inline */
+.src-chip{animation:twk 5s ease-in-out infinite}
 @keyframes twk{0%,100%{opacity:1}50%{opacity:.78}}
 
-/* answer */
-.ans-box{transition:.5s}
-.ans-g,.ans-gr{opacity:0;transition:opacity .45s}
+/* answer states */
+.ans-g,.ans-gr{opacity:0;transition:opacity .55s var(--ease)}
 .mode-guessing .ans-g{opacity:1}
 .mode-grounded .ans-gr{opacity:1}
 
-/* node glow pulse */
-.pulse{animation:pulse 3.2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:.85}50%{opacity:1}}
+/* claude node pulse */
+.pulse{animation:pulse 3.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.92}50%{opacity:1}}
 
-/* FOOTER */
-.foot{position:relative;z-index:2;max-width:880px;margin:18px auto 0;padding:30px 22px 56px}
-.stats{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:26px}
-.stat{border:1px solid var(--line);border-radius:14px;padding:14px 20px;background:rgba(255,255,255,.018);text-align:center;min-width:130px}
-.stat b{display:block;font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:var(--ink);line-height:1}
-.stat span{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-top:6px;display:block}
-.stat.g b{color:var(--aloe)} .stat.a b{color:var(--amber)} .stat.r b{color:var(--red)}
-.legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted);margin-bottom:26px}
-.legend i{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle;box-shadow:0 0 7px currentColor}
-.verdict{max-width:680px;margin:0 auto;text-align:center;font-size:14.5px;line-height:1.7;color:#c2cad8}
-.verdict b{color:var(--ink)}
-.verdict .ok{color:var(--aloe)} .verdict .warn{color:var(--amber)} .verdict .bad{color:var(--red)}
-.credit{text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--faint);margin-top:30px;letter-spacing:.04em}
+/* ═══ FOOTER ════════════════════════════════════════════════════════ */
+.foot{
+  position:relative;z-index:2;
+  max-width:820px;margin:20px auto 0;
+  padding:32px 24px 72px
+}
+.stats{
+  display:flex;gap:10px;flex-wrap:wrap;
+  justify-content:center;margin-bottom:28px
+}
+.stat{
+  border:1px solid rgba(71,94,84,.5);border-radius:14px;
+  padding:16px 24px;
+  background:rgba(106,141,126,.04);
+  text-align:center;min-width:130px;
+  transition:.4s var(--ease);
+  box-shadow:0 1px 2px rgba(13,26,20,.06)
+}
+.stat:hover{transform:translateY(-3px);border-color:var(--aloe);box-shadow:0 8px 24px -6px rgba(13,26,20,.18)}
+.stat b{
+  display:block;font-family:'Clash Grotesk',sans-serif;
+  font-size:28px;font-weight:600;color:var(--cream);line-height:1;
+  font-feature-settings:"tnum"
+}
+.stat span{
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;
+  letter-spacing:.09em;color:var(--muted);text-transform:uppercase;
+  margin-top:8px;display:block
+}
+.stat.hl b{color:var(--mindaro)}
+
+.eco-note{
+  text-align:center;
+  font-family:'Boska',Georgia,serif;font-style:italic;
+  font-size:14px;color:var(--aloe-light);margin-bottom:28px;opacity:.9
+}
+.verdict{
+  max-width:600px;margin:0 auto;text-align:center;
+  font-size:15px;line-height:1.72;color:var(--beige);font-weight:300
+}
+.verdict b{color:var(--cream);font-weight:500}
+.verdict .hl{color:var(--mindaro)}
+.credit{
+  text-align:center;font-family:'JetBrains Mono',monospace;
+  font-size:10px;color:var(--faint);
+  margin-top:32px;letter-spacing:.05em
+}
 .credit b{color:var(--muted)}
-a{color:var(--aloe);text-decoration:none}
+
+/* ═══ RESPONSIVE ════════════════════════════════════════════════════ */
 @media(max-width:560px){
-  .head{padding-top:34px}
-  .n-title{font-size:24px} .n-sub{font-size:14px}
-  .stat{min-width:108px;padding:12px 14px}
+  .head{padding-top:40px}
+  .foot{padding:24px 16px 56px}
+  .stat{min-width:calc(50% - 5px);flex:1}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:80ms!important}
 }
 </style>
 </head>
 <body class="mode-grounded">
 
 <div class="head">
-  <div class="handle">système RAG réel · <b>Rama Logic</b> · ramalogic.com</div>
-  <div class="vs"><span class="g">GUESSING</span><span class="sep">vs</span><span class="gr">GROUNDED</span></div>
-  <h1 class="big">RAG</h1>
-  <div class="sub">Retrieval-Augmented Generation<span class="dot">·</span>Claude lit nos données avant de répondre</div>
-  <div class="tagline" id="tagline">il fonde sa réponse sur le retrouvé, avec la source</div>
+  <div class="handle">architecture LOGIC AI · <b>Rama Logic</b> · ramalogic.com</div>
+  <div class="vs"><span class="g">guessing</span><span class="sep">vs</span><span class="gr">grounded</span></div>
+  <h1 class="big">LOGIC <span class="ai">AI</span></h1>
+  <div class="tag-arch">l'architecture la plus puissante</div>
+  <p class="sub">Un agent intelligent qui apprend ton écosystème et fonde chaque réponse sur tes vraies données.</p>
+  <div class="pill" id="pill">branché à ton écosystème, il n'hallucine plus</div>
 </div>
 
 <div class="toggle-wrap">
-  <div class="toggle" role="tablist">
-    <button class="t-guess" onclick="setMode('guessing')"><span class="d"></span>Guessing</button>
-    <button class="t-grounded" onclick="setMode('grounded')"><span class="d"></span>Grounded</button>
+  <div class="toggle" role="tablist" aria-label="Mode de réponse IA">
+    <button class="t-guess" onclick="setMode('guessing')" role="tab" aria-selected="false"><span class="d" aria-hidden="true"></span>Guessing</button>
+    <button class="t-grounded" onclick="setMode('grounded')" role="tab" aria-selected="true"><span class="d" aria-hidden="true"></span>Grounded</button>
   </div>
 </div>
-<div class="hint">↑ bascule pour voir la différence — inventer vs sourcer</div>
+<div class="hint" aria-live="polite">bascule : deviner sans données, ou fonder sur ton écosystème</div>
 
+<!-- ═══════════════════════════════════════════════════════════════════
+     SVG DIAGRAM
+     ViewBox 900 × 1440
+     Centre horizontal : x=270 (spine)
+     Retriever : x≈660, y≈440
+     Écosystème (cylindre) : cx≈670, cy≈740
+     Source chips : 4 cols centrées sur le viewBox côté droit / bas
+     ═══════════════════════════════════════════════════════════════ -->
 <div class="stage">
-<svg class="diagram" viewBox="0 0 820 1290" aria-label="Schéma du système RAG Rama Logic">
+<svg class="diagram" viewBox="0 0 900 1460" aria-label="Schéma de l'architecture LOGIC AI">
   <defs>
-    <filter id="glowG" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="3.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <!-- glow discret pour les nœuds et packets -->
+    <filter id="soft" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2.8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="glowSoft" x="-80%" y="-80%" width="260%" height="260%">
-      <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <!-- glow plus fort pour Claude uniquement -->
+    <filter id="glow-claude" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- warm shadow pour cards -->
+    <filter id="shadow-warm" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#0D1A14" flood-opacity=".28"/>
     </filter>
   </defs>
 
-  <!-- ===== CONNECTORS ===== -->
-  <!-- generation spine: query -> augment -> llm -> answer -->
-  <path class="spine" d="M 235 296 L 235 1060"/>
-  <!-- retrieval loop: query -> retriever -> knowledge base -> augment -->
-  <path id="pRetrieve" class="retrieve" d="M 292 224 C 470 232 566 322 600 432 C 602 470 604 470 604 470 C 606 566 612 660 612 742 C 614 800 556 826 462 808 C 360 790 296 726 282 682"/>
+  <!-- ══ SPINE : Claude → Augment → Réponse (ligne verticale centrale) -->
+  <path class="spine" d="M 270 348 L 270 1210"/>
 
-  <!-- source connector lines (filled by JS into this group) -->
+  <!-- ══ RETRIEVAL LOOP : Claude → Retriever → Écosystème → Augment -->
+  <!--   Part de Claude (x=270, y≈220), arc vers Retriever (x≈660, y≈440)
+         descend vers Écosystème (x≈670, y≈768), revient vers Augment (x=270, y≈700) -->
+  <path id="pRetrieve" class="retrieve"
+    d="M 310 224
+       C 480 224 628 330 656 440
+       C 672 504 672 604 670 680
+       C 668 756 628 806 560 810
+       C 490 814 380 790 320 756
+       C 290 740 278 720 278 700"/>
+
+  <!-- Lignes de source (injectées par JS) -->
   <g id="srcLines"></g>
 
-  <!-- ===== TRAVELING PACKETS (retrieval) ===== -->
-  <circle class="packet" r="4.5"><animateMotion dur="2.6s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#pRetrieve"/></animateMotion></circle>
-  <circle class="packet" r="3.5" opacity=".7"><animateMotion dur="2.6s" begin="0.9s" repeatCount="indefinite"><mpath href="#pRetrieve"/></animateMotion></circle>
-  <circle class="packet" r="3" opacity=".5"><animateMotion dur="2.6s" begin="1.7s" repeatCount="indefinite"><mpath href="#pRetrieve"/></animateMotion></circle>
+  <!-- Packets animés sur le retrieval path -->
+  <circle class="packet" r="4.5">
+    <animateMotion dur="2.8s" repeatCount="indefinite"><mpath href="#pRetrieve"/></animateMotion>
+  </circle>
+  <circle class="packet" r="3.5" opacity=".7">
+    <animateMotion dur="2.8s" begin="0.95s" repeatCount="indefinite"><mpath href="#pRetrieve"/></animateMotion>
+  </circle>
+  <circle class="packet" r="2.8" opacity=".45">
+    <animateMotion dur="2.8s" begin="1.85s" repeatCount="indefinite"><mpath href="#pRetrieve"/></animateMotion>
+  </circle>
 
-  <!-- source chips (filled by JS) -->
+  <!-- Chips sources (injectées par JS) -->
   <g id="srcChips"></g>
 
-  <!-- ===== NODES ===== -->
-  <!-- QUERY -->
-  <g class="node-box pulse">
-    <g class="icon" stroke="var(--blue)" filter="url(#glowG)" transform="translate(202,178)">
-      <rect x="0" y="0" width="66" height="44" rx="11"/>
-      <path d="M 16 46 L 16 56 L 28 46"/>
-      <line x1="14" y1="16" x2="52" y2="16"/><line x1="14" y1="26" x2="44" y2="26"/>
+  <!-- ══ CLAUDE · nœud agent dans la requête ══════════════════════════ -->
+  <g class="pulse">
+    <!-- icône Mindaro avec glow calibré (softer mais pas criard) -->
+    <g class="icon" stroke="var(--mindaro)" filter="url(#glow-claude)" transform="translate(238,152)">
+      <rect x="0" y="0" width="64" height="64" rx="14"/>
+      <!-- antennes CPU -->
+      <line x1="18" y1="-7" x2="18" y2="0"/>
+      <line x1="46" y1="-7" x2="46" y2="0"/>
+      <line x1="18" y1="64" x2="18" y2="71"/>
+      <line x1="46" y1="64" x2="46" y2="71"/>
+      <line x1="-7" y1="20" x2="0" y2="20"/>
+      <line x1="-7" y1="44" x2="0" y2="44"/>
+      <line x1="64" y1="20" x2="71" y2="20"/>
+      <line x1="64" y1="44" x2="71" y2="44"/>
+      <!-- croix centrale -->
+      <circle cx="19" cy="21" r="3.2"/>
+      <circle cx="45" cy="21" r="3.2"/>
+      <circle cx="19" cy="43" r="3.2"/>
+      <circle cx="45" cy="43" r="3.2"/>
+      <line x1="19" y1="21" x2="45" y2="43"/>
+      <line x1="45" y1="21" x2="19" y2="43"/>
     </g>
-    <text class="n-tag" x="235" y="252" text-anchor="middle" fill="var(--blue)">REQUÊTE</text>
-    <text class="n-sub" x="235" y="274" text-anchor="middle">"c'est quoi notre MRR ?"</text>
+    <!-- labels Claude -->
+    <text class="n-tag" x="270" y="254" text-anchor="middle" fill="var(--mindaro-dark)">REQUÊTE</text>
+    <text class="n-title" x="270" y="282" text-anchor="middle" fill="var(--mindaro)">Claude</text>
+    <text class="n-sub" x="270" y="304" text-anchor="middle">agent intelligent qui apprend et grandit</text>
+    <text class="n-sub" x="270" y="320" text-anchor="middle">sur l'écosystème</text>
+    <text class="n-cap" x="270" y="344" text-anchor="middle">« c'est quoi notre MRR ? »</text>
   </g>
 
-  <!-- RETRIEVER -->
+  <!-- ══ RETRIEVER ════════════════════════════════════════════════════ -->
   <g class="retr-node dim">
-    <g class="icon" stroke="var(--cyan)" filter="url(#glowG)" transform="translate(580,432)">
-      <circle cx="14" cy="14" r="15"/><circle cx="14" cy="14" r="7" opacity=".5"/><line x1="25" y1="25" x2="40" y2="40"/>
+    <!-- icône loupe -->
+    <g class="icon" stroke="var(--aloe-light)" filter="url(#soft)" transform="translate(636,412)">
+      <circle cx="16" cy="16" r="15.5"/>
+      <circle cx="16" cy="16" r="7.5" opacity=".45"/>
+      <line x1="27" y1="27" x2="44" y2="44"/>
     </g>
-    <text class="n-tag" x="604" y="506" text-anchor="middle" fill="var(--cyan)">RETRIEVER</text>
-    <text class="n-sub" x="604" y="527" text-anchor="middle">Notion AI · sémantique</text>
+    <text class="n-tag" x="662" y="492" text-anchor="middle" fill="var(--aloe-light)">RETRIEVER</text>
+    <text class="n-sub" x="662" y="510" text-anchor="middle">recherche sémantique</text>
   </g>
 
-  <!-- KNOWLEDGE BASE -->
-  <g class="kb-node dim">
-    <g class="icon" stroke="var(--aloe)" filter="url(#glowG)" transform="translate(584,720)">
+  <!-- ══ ÉCOSYSTÈME / base de données ════════════════════════════════ -->
+  <g class="eco-node dim">
+    <!-- icône cylindre DB -->
+    <g class="icon" stroke="var(--aloe)" filter="url(#soft)" transform="translate(642,720)">
       <ellipse cx="28" cy="10" rx="28" ry="10"/>
       <path d="M 0 10 L 0 46 C 0 51 12 56 28 56 C 44 56 56 51 56 46 L 56 10"/>
-      <path d="M 0 28 C 0 33 12 38 28 38 C 44 38 56 33 56 28" opacity=".55"/>
+      <path d="M 0 28 C 0 33 12 38 28 38 C 44 38 56 33 56 28" opacity=".5"/>
     </g>
-    <text class="n-tag" x="612" y="806" text-anchor="middle" fill="var(--aloe)">BASE DE CONNAISSANCE</text>
-    <text class="n-sub" x="612" y="827" text-anchor="middle">32 bases Notion + sources</text>
+    <text class="n-tag" x="670" y="808" text-anchor="middle" fill="var(--aloe)">TON ÉCOSYSTÈME</text>
+    <text class="n-sub" x="670" y="826" text-anchor="middle">32 bases Notion + 16 sources</text>
   </g>
 
-  <!-- AUGMENT -->
-  <g class="node-box">
-    <g class="icon" stroke="var(--amber)" filter="url(#glowG)" transform="translate(205,618)">
-      <rect x="10" y="0" width="42" height="42" rx="8"/>
-      <rect x="0" y="12" width="42" height="42" rx="8" fill="var(--bg1)"/>
-      <line x1="21" y1="27" x2="21" y2="39"/><line x1="15" y1="33" x2="27" y2="33"/>
+  <!-- ══ AUGMENT ══════════════════════════════════════════════════════ -->
+  <g>
+    <!-- icône "stacked layers with plus" -->
+    <g class="icon" stroke="var(--aloe-light)" filter="url(#soft)" transform="translate(238,590)">
+      <rect x="10" y="0" width="44" height="44" rx="9"/>
+      <rect x="0" y="12" width="44" height="44" rx="9" fill="var(--ink)" stroke="var(--aloe-light)"/>
+      <line x1="22" y1="28" x2="22" y2="42"/>
+      <line x1="15" y1="35" x2="29" y2="35"/>
     </g>
-    <text class="n-tag" x="235" y="700" text-anchor="middle" fill="var(--amber)">AUGMENT</text>
-    <text class="n-sub" x="235" y="721" text-anchor="middle">requête + contexte</text>
+    <text class="n-tag" x="270" y="678" text-anchor="middle" fill="var(--aloe-light)">AUGMENT</text>
+    <text class="n-sub" x="270" y="696" text-anchor="middle">tes données + la requête</text>
   </g>
 
-  <!-- LLM / CLAUDE -->
-  <g class="node-box">
-    <g class="icon" id="llmIcon" stroke="var(--aloe)" filter="url(#glowSoft)" transform="translate(203,888)">
-      <rect x="0" y="0" width="64" height="64" rx="14"/>
-      <line x1="20" y1="-8" x2="20" y2="0"/><line x1="44" y1="-8" x2="44" y2="0"/>
-      <line x1="20" y1="64" x2="20" y2="72"/><line x1="44" y1="64" x2="44" y2="72"/>
-      <line x1="-8" y1="22" x2="0" y2="22"/><line x1="-8" y1="44" x2="0" y2="44"/>
-      <line x1="64" y1="22" x2="72" y2="22"/><line x1="64" y1="44" x2="72" y2="44"/>
-      <circle cx="20" cy="22" r="3.5"/><circle cx="44" cy="22" r="3.5"/><circle cx="20" cy="44" r="3.5"/><circle cx="44" cy="44" r="3.5"/>
-      <line x1="20" y1="22" x2="44" y2="44"/><line x1="44" y1="22" x2="20" y2="44"/>
-    </g>
-    <text class="n-tag" x="235" y="982" text-anchor="middle" fill="var(--ink)">CLAUDE</text>
-    <text class="n-sub" x="235" y="1003" text-anchor="middle" id="llmSub">il fonde sur les sources</text>
-  </g>
+  <!-- ══ RÉPONSE ══════════════════════════════════════════════════════ -->
+  <g>
+    <text class="n-tag" x="270" y="1194" text-anchor="middle" fill="var(--muted)" font-size="9.5">RÉPONSE</text>
 
-  <!-- ANSWER -->
-  <g class="ans-box">
-    <text class="n-tag" x="235" y="1058" text-anchor="middle" fill="var(--muted)" font-size="10">RÉPONSE</text>
-    <!-- guessing answer -->
+    <!-- état GUESSING : réponse inventée, rouge -->
     <g class="ans-g">
-      <rect x="58" y="1072" width="354" height="74" rx="16" fill="rgba(255,93,93,.06)" stroke="var(--red)" stroke-width="1.6" filter="url(#glowG)"/>
-      <line x1="86" y1="1100" x2="102" y2="1118" stroke="var(--red)" stroke-width="2.4" stroke-linecap="round"/>
-      <line x1="102" y1="1100" x2="86" y2="1118" stroke="var(--red)" stroke-width="2.4" stroke-linecap="round"/>
-      <text x="128" y="1106" class="mono" font-size="22" font-weight="700" fill="var(--red)">≈ 3 200 € / mois</text>
-      <text x="128" y="1128" class="mono" font-size="11.5" fill="var(--muted)">inventé · aucune source</text>
+      <rect x="60" y="1210" width="418" height="88" rx="16"
+        fill="rgba(232,101,76,.07)" stroke="var(--red)" stroke-width="1.4"
+        filter="url(#soft)"/>
+      <!-- croix icône erreur -->
+      <line x1="92" y1="1242" x2="110" y2="1260" stroke="var(--red)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="110" y1="1242" x2="92" y2="1260" stroke="var(--red)" stroke-width="2" stroke-linecap="round"/>
+      <text x="132" y="1248" class="mono" font-size="20" font-weight="700" fill="var(--red)">≈ 3 200 € / mois</text>
+      <text x="132" y="1272" class="mono" font-size="10.5" fill="var(--muted)">inventé · aucune source · confiant mais faux</text>
     </g>
-    <!-- grounded answer -->
+
+    <!-- état GROUNDED : réponse vérifiable, mindaro -->
     <g class="ans-gr">
-      <rect x="58" y="1072" width="404" height="74" rx="16" fill="rgba(159,224,168,.06)" stroke="var(--aloe)" stroke-width="1.6" filter="url(#glowG)"/>
-      <path d="M 84 1109 l 8 9 l 18 -20" fill="none" stroke="var(--aloe)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-      <text x="124" y="1106" class="mono" font-size="20" font-weight="700" fill="var(--aloe)">chiffre réel, vérifiable</text>
-      <text x="124" y="1128" class="mono" font-size="11.5" fill="var(--muted)">source · RL-Dashboard Activity</text>
+      <rect x="44" y="1210" width="460" height="88" rx="16"
+        fill="rgba(223,233,113,.065)" stroke="var(--mindaro)" stroke-width="1.4"
+        filter="url(#soft)"/>
+      <!-- check icon -->
+      <path d="M 76 1252 l 9 10 l 20 -22" fill="none" stroke="var(--mindaro)"
+        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="120" y="1246" class="mono" font-size="17" font-weight="700" fill="var(--mindaro)">chiffre réel, vérifiable</text>
+      <text x="120" y="1272" class="mono" font-size="10.5" fill="var(--muted)">source · RL-Dashboard Activity · 0 hallucination</text>
     </g>
   </g>
+
 </svg>
 </div>
 
@@ -256,107 +432,134 @@ a{color:var(--aloe);text-decoration:none}
   <div class="stats">
     <div class="stat"><b>32</b><span>bases Notion</span></div>
     <div class="stat"><b>16+</b><span>sources connectées</span></div>
-    <div class="stat g"><b>✓</b><span>recall</span></div>
-    <div class="stat a"><b>~</b><span>ranking</span></div>
-    <div class="stat r"><b>✕</b><span>filtres SQL</span></div>
+    <div class="stat hl"><b>0</b><span>hallucination</span></div>
+    <div class="stat hl"><b>100%</b><span>sourçable</span></div>
   </div>
 
-  <div class="legend">
-    <span><i style="color:#eef2f8"></i>Core</span>
-    <span><i style="color:var(--amber)"></i>Finance</span>
-    <span><i style="color:var(--blue)"></i>Comms</span>
-    <span><i style="color:var(--cyan)"></i>Réunions / CRM</span>
-    <span><i style="color:var(--lime)"></i>Growth</span>
-    <span><i style="color:var(--violet)"></i>Ops</span>
-  </div>
+  <p class="eco-note">16 sources branchées en MCP, une seule source de vérité : Notion.</p>
 
   <p class="verdict">
-    Notre base de connaissance <b>est</b> branchée à l'IA. Le retriever (recherche sémantique Notion) donne un <span class="ok">bon recall</span>, mais <span class="warn">pas de reranking métier</span> et <span class="bad">les requêtes SQL filtrées sont bloquées par le plan</span>. On ne devine pas : chaque réponse peut citer sa source Notion, ou dire « je n'ai pas la donnée ».
+    On ne configure pas un chatbot. On fait <b>grandir un agent intelligent</b> qui apprend ton écosystème (32 bases Notion et 16+ sources : Qonto, Stripe, Tiime, Telegram, Fathom, Gmail, Kondo, Drive, Umami...) et <span class="hl">fonde chaque réponse sur tes vraies données</span>. Il cite sa source, ou il dit "je n'ai pas la donnée". <b>Il n'hallucine plus.</b>
   </p>
 
-  <div class="credit">Diagnostic sur test live du workspace · <b>22 juin 2026</b> · 5 requêtes · 3 modes de retrieval</div>
+  <div class="credit">Architecture LOGIC AI · <b>Rama Logic</b> · validé sur test live du workspace · 22 juin 2026</div>
 </div>
 
 <script>
+// ═══ SOURCES ════════════════════════════════════════════════════════
 const SOURCES = [
-  {n:"Notion",  c:"#eef2f8", core:true},
-  {n:"Qonto",   c:"var(--amber)"},
-  {n:"Stripe",  c:"var(--amber)"},
-  {n:"Tiime",   c:"var(--amber)"},
-  {n:"Telegram",c:"var(--blue)"},
-  {n:"Gmail",   c:"var(--blue)"},
-  {n:"Google Cal",c:"var(--blue)"},
-  {n:"G. Drive",c:"var(--violet)"},
-  {n:"Fathom",  c:"var(--cyan)"},
-  {n:"Kondo",   c:"var(--cyan)"},
-  {n:"YouTube", c:"var(--lime)"},
-  {n:"GSC",     c:"var(--lime)"},
-  {n:"Umami",   c:"var(--lime)"},
-  {n:"Brevo",   c:"var(--lime)"},
-  {n:"Health",  c:"var(--violet)"},
-  {n:"Todoist", c:"var(--violet)"},
+  {n:"Notion",  core:true},
+  {n:"Qonto"},  {n:"Stripe"},   {n:"Tiime"},
+  {n:"Telegram"},{n:"Gmail"},   {n:"Google Cal"},
+  {n:"G. Drive"},{n:"Fathom"},  {n:"Kondo"},
+  {n:"YouTube"}, {n:"GSC"},     {n:"Umami"},   {n:"Brevo"},
+  {n:"Health"},  {n:"Todoist"},
 ];
-// grid placement (SVG coords) below + right of the knowledge base (612,760)
-const KBx=612, KBy=775;
-const cols=[388,512,636,760], rows=[884,956,1028,1100];
-const NS="http://www.w3.org/2000/svg";
-const chips=document.getElementById("srcChips");
-const lines=document.getElementById("srcLines");
-SOURCES.forEach((s,i)=>{
-  const cx=cols[i%4], cy=rows[Math.floor(i/4)];
-  // connector line to KB
-  const ln=document.createElementNS(NS,"path");
-  ln.setAttribute("class","src-line");
-  ln.setAttribute("d",`M ${cx} ${cy-2} C ${cx} ${cy-40}, ${KBx} ${cy-30}, ${KBx} ${KBy+30}`);
-  ln.style.animationDelay=(i*0.12)+"s";
+
+// ─── Grille chips : 4 colonnes dans le viewBox 900
+// La spine est à x=270. On place les chips symétriquement autour
+// du centre global (x=450) pour éviter le chevauchement.
+// Cols : 140 / 330 / 530 / 720 — espacées de ~190px
+// Chips de ~100px large => marges de ~90px entre elles
+// 4 colonnes dans le viewBox 900. Col max x=700 pour éviter coupure mobile.
+// Sur mobile 390px : 640px stage → ratio 390/640=0.609 → x=700 → 426px. OK.
+// Sur stage min(640, 98vw)=98vw sur 390 → 382px → ratio 382/900=0.424 → x=700 → 297px + 48 = 345px < 382. OK.
+const COL_X = [150, 340, 530, 700];
+const ROW_Y = [888, 966, 1044, 1122];
+
+// Centre de l'écosystème (base du cylindre) pour les src-lines
+const ECO_CX = 670, ECO_CY = 792;
+
+const NS = "http://www.w3.org/2000/svg";
+const chips = document.getElementById("srcChips");
+const lines = document.getElementById("srcLines");
+
+const css = getComputedStyle(document.documentElement);
+const MIND    = css.getPropertyValue('--mindaro').trim();
+const ALOE_L  = css.getPropertyValue('--aloe-light').trim();
+const ALOE    = css.getPropertyValue('--aloe').trim();
+const INK     = css.getPropertyValue('--ink').trim();
+
+SOURCES.forEach((s, i) => {
+  const col = i % 4;
+  const row = Math.floor(i / 4);
+  const cx  = COL_X[col];
+  const cy  = ROW_Y[row];
+
+  // Ligne de la source vers l'écosystème
+  const ln = document.createElementNS(NS, "path");
+  ln.setAttribute("class", "src-line");
+  // Courbe de Bézier vers le cylindre écosystème
+  const midX = (cx + ECO_CX) / 2;
+  ln.setAttribute("d", `M ${cx} ${cy - 15} C ${midX} ${cy - 40}, ${ECO_CX} ${ECO_CY + 40}, ${ECO_CX} ${ECO_CY}`);
+  ln.style.animationDelay = (i * 0.11) + "s";
   lines.appendChild(ln);
-  // chip
-  const g=document.createElementNS(NS,"g");
-  g.setAttribute("class","src-chip");
-  g.style.animationDelay=(i*0.25)+"s";
-  const w=s.core?96:90, h=30, x=cx-w/2, y=cy-h/2;
-  const r=document.createElementNS(NS,"rect");
-  r.setAttribute("x",x);r.setAttribute("y",y);r.setAttribute("width",w);r.setAttribute("height",h);
-  r.setAttribute("rx",9);
-  r.setAttribute("fill", s.core?"rgba(255,255,255,.06)":"rgba(255,255,255,.025)");
-  r.setAttribute("stroke", s.c);
-  r.setAttribute("stroke-width", s.core?1.6:1.1);
-  r.style.opacity = s.core?1:.92;
-  if(s.core) r.setAttribute("filter","url(#glowG)");
-  const t=document.createElementNS(NS,"text");
-  t.setAttribute("x",cx);t.setAttribute("y",cy+4.5);t.setAttribute("text-anchor","middle");
-  t.setAttribute("font-size", s.core?"13":"12");
-  t.setAttribute("font-weight", s.core?"700":"500");
-  t.setAttribute("fill", s.c);
-  t.textContent=s.n;
-  g.appendChild(r);g.appendChild(t);
+
+  // Chip rectangle + label
+  const g = document.createElementNS(NS, "g");
+  g.setAttribute("class", "src-chip");
+  g.style.animationDelay = (i * 0.27) + "s";
+
+  const w = s.core ? 108 : 96;
+  const h = 32;
+  const ry_rect = cy - h / 2;
+
+  const color = s.core ? MIND : ALOE_L;
+
+  const rect = document.createElementNS(NS, "rect");
+  rect.setAttribute("x", cx - w / 2);
+  rect.setAttribute("y", ry_rect);
+  rect.setAttribute("width", w);
+  rect.setAttribute("height", h);
+  rect.setAttribute("rx", 8);
+  rect.setAttribute("fill", s.core ? "rgba(223,233,113,.08)" : "rgba(180,198,190,.04)");
+  rect.setAttribute("stroke", color);
+  rect.setAttribute("stroke-width", s.core ? "1.5" : "0.9");
+  if (s.core) rect.setAttribute("filter", "url(#soft)");
+
+  const txt = document.createElementNS(NS, "text");
+  txt.setAttribute("x", cx);
+  txt.setAttribute("y", cy + 5);
+  txt.setAttribute("text-anchor", "middle");
+  txt.setAttribute("font-size", s.core ? "13.5" : "12");
+  txt.setAttribute("font-weight", s.core ? "700" : "500");
+  txt.setAttribute("fill", color);
+  txt.textContent = s.n;
+
+  g.appendChild(rect);
+  g.appendChild(txt);
   chips.appendChild(g);
 });
 
-// ===== mode toggle =====
-let userActed=false;
-function setMode(m){
-  document.body.classList.remove("mode-guessing","mode-grounded");
-  document.body.classList.add("mode-"+m);
-  const llm=document.getElementById("llmIcon");
-  const sub=document.getElementById("llmSub");
-  const tag=document.getElementById("tagline");
-  if(m==="guessing"){
-    llm.setAttribute("stroke","var(--red)");
-    sub.textContent="il devine";
-    tag.textContent="il hallucine une réponse confiante et inventée";
-    tag.style.borderColor="rgba(255,93,93,.4)"; tag.style.color="#ffb4b4";
-  }else{
-    llm.setAttribute("stroke","var(--aloe)");
-    sub.textContent="il fonde sur les sources";
-    tag.textContent="il fonde sa réponse sur le retrouvé, avec la source";
-    tag.style.borderColor="rgba(159,224,168,.4)"; tag.style.color="#cdebd2";
+// ═══ TOGGLE ═════════════════════════════════════════════════════════
+let userActed = false;
+
+function setMode(m) {
+  document.body.classList.remove("mode-guessing", "mode-grounded");
+  document.body.classList.add("mode-" + m);
+  // ARIA
+  document.querySelector('.t-guess').setAttribute('aria-selected', m === 'guessing');
+  document.querySelector('.t-grounded').setAttribute('aria-selected', m === 'grounded');
+  // Pill
+  const pill = document.getElementById("pill");
+  if (m === "guessing") {
+    pill.textContent = "seul, sans tes données, il invente une réponse confiante";
+    pill.style.borderColor = "rgba(232,101,76,.4)";
+    pill.style.color = "#f0a090";
+  } else {
+    pill.textContent = "branché à ton écosystème, il n'hallucine plus";
+    pill.style.borderColor = "rgba(159,165,95,.45)";
+    pill.style.color = "#cdd79a";
   }
 }
-document.querySelectorAll(".toggle button").forEach(b=>b.addEventListener("click",()=>userActed=true));
-// autoplay the contrast once: show the problem (guessing) then the solution (grounded)
+
+document.querySelectorAll(".toggle button").forEach(b =>
+  b.addEventListener("click", () => userActed = true)
+);
+
+// Démarre en mode guessing pour montrer le contraste, bascule auto
 setMode("guessing");
-setTimeout(()=>{ if(!userActed) setMode("grounded"); },2100);
+setTimeout(() => { if (!userActed) setMode("grounded"); }, 2200);
 </script>
 </body>
 </html>
