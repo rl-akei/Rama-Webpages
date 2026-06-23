@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>Claude, tu te souviens ? · Trame vidéo RAG · Rama Logic</title>
+<meta name="theme-color" content="#0D1A14" />
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@300,400,500,600,700&f[]=boska@400,500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Trame vidéo "Claude, tu te souviens ?" — design system LOGIC AI (Ink/Aloe/Mindaro) */
+:root{
+  --ink:#0D1A14; --ink2:#11221a; --ink3:#16291f;
+  --cream:#FFFCF7; --beige:#D2CFC9; --muted:#8fa99f; --faint:#3e5047;
+  --aloe-dark:#475E54; --aloe:#6A8D7E; --aloe-light:#B4C6BE;
+  --mindaro-dark:#9FA55F; --mindaro:#DFE971; --mindaro-light:#F6FBC6;
+  --blue:#A7DEF9; --red:#E8654C;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  width:100%;height:100%;overflow:hidden;background:#0a1208;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Clash Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+}
+
+/* ═══ STAGE : 1280×720 scale-to-fit ═══ */
+#stage{width:1280px;height:720px;flex-shrink:0;position:relative;transform-origin:center center}
+
+.slide{
+  position:absolute;inset:0;overflow:hidden;
+  padding:64px 72px;
+  display:none;flex-direction:column;
+  background:
+    radial-gradient(900px 420px at 28% -12%, rgba(106,141,126,.12), transparent 64%),
+    radial-gradient(620px 480px at 90% 72%, rgba(159,165,95,.06), transparent 62%),
+    linear-gradient(165deg,#0c1812 0%,#0d1a14 48%,#0b150e 100%);
+}
+.slide.active{display:flex;animation:fade .5s var(--ease)}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* grille texture */
+.slide::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.22;
+  background-image:
+    linear-gradient(rgba(255,252,247,.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,252,247,.018) 1px,transparent 1px);
+  background-size:40px 40px;
+  mask-image:radial-gradient(ellipse 82% 72% at 36% 38%,#000 18%,transparent 82%);
+}
+.slide > *{position:relative;z-index:1}
+
+/* header / footer */
+.s-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:auto}
+.s-head .logo{height:26px;width:auto;filter:brightness(0) invert(1);opacity:.85}
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--aloe-light);
+}
+.s-foot{
+  margin-top:auto;display:flex;align-items:center;justify-content:space-between;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--faint);letter-spacing:.04em;
+}
+
+/* typographie */
+h1{font-family:'Clash Grotesk',sans-serif;font-weight:600;color:var(--cream);letter-spacing:-.02em;line-height:1.02}
+.t-xl{font-size:74px}
+.t-lg{font-size:52px}
+.t-md{font-size:40px}
+.mind{color:var(--mindaro)}
+.aloe{color:var(--aloe-light)}
+.serif{font-family:'Boska',Georgia,serif;font-style:italic;font-weight:500;color:var(--aloe-light)}
+.lead{font-size:20px;line-height:1.6;color:var(--beige);font-weight:300;max-width:62ch}
+.lead b{color:var(--cream);font-weight:500}
+.kicker{
+  margin-top:26px;font-family:'Boska',Georgia,serif;font-style:italic;
+  font-size:21px;color:var(--mindaro-light);opacity:.92;
+}
+
+/* blocs centraux */
+.body-zone{display:flex;flex-direction:column;justify-content:center;flex:1;gap:18px;padding:30px 0}
+.cover-zone{display:flex;flex-direction:column;justify-content:center;flex:1;gap:22px}
+
+/* listes */
+.pts{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.pt{display:flex;gap:14px;align-items:flex-start;font-size:19px;line-height:1.5;color:var(--beige)}
+.pt .b{color:var(--mindaro);font-family:'JetBrains Mono',monospace;font-size:14px;margin-top:4px;flex-shrink:0}
+.pt b{color:var(--cream);font-weight:500}
+
+/* cards 3-temps */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:10px}
+.card{
+  border:1px solid rgba(71,94,84,.45);border-radius:16px;padding:24px 22px;
+  background:rgba(106,141,126,.04);display:flex;flex-direction:column;gap:10px;
+}
+.card .n{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--mindaro-dark)}
+.card h3{font-family:'Clash Grotesk';font-weight:600;font-size:23px;color:var(--cream)}
+.card p{font-size:15px;line-height:1.5;color:var(--muted)}
+
+/* stat row */
+.stats{display:flex;gap:14px;margin-top:8px}
+.stat{border:1px solid rgba(71,94,84,.4);border-radius:12px;padding:12px 20px;background:rgba(106,141,126,.04);text-align:center}
+.stat b{display:block;font-size:28px;font-weight:600;color:var(--mindaro);line-height:1;font-feature-settings:"tnum"}
+.stat span{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;display:block;margin-top:6px}
+
+/* faux réponse hallucinée */
+.halluc{
+  margin-top:14px;display:inline-flex;flex-direction:column;gap:2px;
+  border:1.3px solid var(--red);border-radius:14px;padding:16px 22px;
+  background:rgba(232,101,76,.07);max-width:380px;
+}
+.halluc .v{font-family:'Clash Grotesk';font-weight:700;font-size:24px;color:var(--red)}
+.halluc .s{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+
+/* sources grid */
+.srcs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px;max-width:760px}
+.chip{
+  border:1px solid rgba(180,198,190,.3);border-radius:9px;padding:10px 6px;text-align:center;
+  font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--aloe-light);
+  background:rgba(180,198,190,.03);
+}
+.chip.core{border-color:var(--mindaro);color:var(--mindaro);background:rgba(223,233,113,.08);font-weight:700}
+
+/* étapes pour toi */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+.step{border-left:2px solid var(--mindaro);padding:6px 0 6px 18px}
+.step .n{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mindaro-dark);letter-spacing:.12em}
+.step h3{font-family:'Clash Grotesk';font-weight:600;font-size:22px;color:var(--cream);margin-top:4px}
+.step p{font-size:14px;color:var(--muted);line-height:1.45;margin-top:4px}
+
+/* formule */
+.formula{font-family:'Clash Grotesk';font-weight:600;font-size:46px;color:var(--cream);letter-spacing:-.01em}
+.formula .x{color:var(--aloe);font-style:normal}
+.formula .mind{color:var(--mindaro)}
+
+/* CTA */
+.cta-row{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap}
+.cta{
+  border:1px solid var(--aloe-dark);border-radius:9999px;padding:12px 22px;
+  font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--aloe-light);letter-spacing:.03em;
+  background:rgba(71,94,84,.1);
+}
+.cta.fill{background:var(--mindaro);color:var(--ink);border-color:var(--mindaro);font-weight:700}
+
+/* ═══ NAV ═══ */
+#nav{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:50;
+  display:flex;align-items:center;gap:14px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);
+  background:rgba(13,26,20,.7);backdrop-filter:blur(8px);
+  border:1px solid rgba(71,94,84,.5);border-radius:9999px;padding:7px 14px}
+#nav button{background:transparent;border:0;color:var(--aloe-light);cursor:pointer;font-size:16px;line-height:1;padding:2px 6px;border-radius:6px}
+#nav button:hover{color:var(--mindaro)}
+#count{min-width:46px;text-align:center;letter-spacing:.08em}
+.hint{position:fixed;bottom:20px;right:18px;z-index:50;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--faint)}
+@media print{#nav,.hint{display:none}}
+</style>
+</head>
+<body>
+
+<div id="stage">
+
+  <!-- ░░ 1 · COVER ░░ -->
+  <section class="slide active">
+    <div class="s-head">
+      <img class="logo" src="../_assets/logos/Rama%20Logic.png" alt="Rama Logic" />
+      <span class="eyebrow">Rama Logic · LOGIC AI</span>
+    </div>
+    <div class="cover-zone">
+      <h1 class="t-xl">Claude,<br>tu te <span class="mind">souviens</span> ?</h1>
+      <p class="serif" style="font-size:24px">Comment j'ai donné une mémoire à mon IA.</p>
+    </div>
+    <div class="s-foot">
+      <span>Le RAG, expliqué sur Notion + Claude</span>
+      <span>Sylvain Ramaradjou</span>
+    </div>
+  </section>
+
+  <!-- ░░ 2 · LE PROBLÈME ░░ -->
+  <section class="slide">
+    <div class="s-head">
+      <span class="eyebrow">01 · Le problème</span>
+      <span class="eyebrow aloe">l'amnésie</span>
+    </div>
+    <div class="body-zone">
+      <h1 class="t-lg">Une IA, par défaut,<br>est un <span class="mind">génie amnésique</span>.</h1>
+      <div class="pts">
+        <div class="pt"><span class="b">—</span><span>Chaque session, elle repart d'une <b>page blanche</b>. Elle oublie ton métier, tes clients, tes chiffres.</span></div>
+        <div class="pt"><span class="b">—</span><span>Tu lui demandes un chiffre ? Elle ne dit pas « je ne sais pas ». <b>Elle invente.</b></span></div>
+      </div>
+      <div class="halluc">
+        <span class="v">≈ 3 200 € / mois</span>
+        <span class="s">chiffre inventé · aucune source · confiant mais faux</span>
+      </div>
+      <p class="kicker">Le danger : ce n'est pas qu'elle se trompe. C'est qu'elle se trompe avec aplomb.</p>
+    </div>
+    <div class="s-foot"><span>Rama Logic</span><span>Claude, tu te souviens ?</span></div>
+  </section>
+
+  <!-- ░░ 3 · C'EST QUOI LE RAG ░░ -->
+  <section class="slide">
+    <div class="s-head">
+      <span class="eyebrow">02 · La solution</span>
+      <span class="eyebrow aloe">RAG</span>
+    </div>
+    <div class="body-zone">
+      <h1 class="t-md">Le RAG : il <span class="mind">cherche</span> avant de répondre.</h1>
+      <div class="cards">
+        <div class="card"><span class="n">1 · RETRIEVE</span><h3>Chercher</h3><p>Avant de répondre, l'agent va chercher la vraie donnée dans ta base (recherche sémantique).</p></div>
+        <div class="card"><span class="n">2 · AUGMENT</span><h3>Augmenter</h3><p>Il colle cette donnée réelle à ta question.</p></div>
+        <div class="card"><span class="n">3 · GENERATE</span><h3>Répondre</h3><p>Il répond en citant sa source. Ou il dit « je n'ai pas la donnée ».</p></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>0</b><span>hallucination</span></div>
+        <div class="stat"><b>100%</b><span>sourçable</span></div>
+      </div>
+    </div>
+    <div class="s-foot"><span>Retrieval-Augmented Generation</span><span>Démo live : deck RAG · toggle Deviner / Fonder</span></div>
+  </section>
+
+  <!-- ░░ 4 · LA MÉMOIRE D'ABORD ░░ -->
+  <section class="slide">
+    <div class="s-head">
+      <span class="eyebrow">03 · Comment je l'ai fait</span>
+      <span class="eyebrow aloe">la mémoire</span>
+    </div>
+    <div class="body-zone">
+      <h1 class="t-lg">La <span class="mind">mémoire</span> d'abord,<br>pas l'agent.</h1>
+      <div class="pts">
+        <div class="pt"><span class="b">01</span><span><b>32 bases Notion</b> reliées : CRM, finance, projets, contenu. Un seul cerveau.</span></div>
+        <div class="pt"><span class="b">02</span><span>L'<b>Index Claude</b> = la carte de la maison. La page que tu donnerais à un nouvel employé.</span></div>
+        <div class="pt"><span class="b">03</span><span>Le chiffre se lit dans <b>RL-Dashboard Activity</b>. Traçable, pas inventé.</span></div>
+      </div>
+      <p class="kicker">L'erreur classique : commencer par l'agent. Commence par la mémoire.</p>
+    </div>
+    <div class="s-foot"><span>Rama Logic</span><span>Écran : Notion</span></div>
+  </section>
+
+  <!-- ░░ 5 · 16 SOURCES ░░ -->
+  <section class="slide">
+    <div class="s-head">
+      <span class="eyebrow">04 · La mémoire est large</span>
+      <span class="eyebrow aloe">16 sources</span>
+    </div>
+    <div class="body-zone">
+      <h1 class="t-md">Pas que Notion : <span class="mind">16 sources</span> branchées.</h1>
+      <div class="srcs">
+        <div class="chip core">Notion</div><div class="chip">Qonto</div><div class="chip">Stripe</div><div class="chip">Tiime</div>
+        <div class="chip">Telegram</div><div class="chip">Gmail</div><div class="chip">Google Cal</div><div class="chip">G. Drive</div>
+        <div class="chip">Fathom</div><div class="chip">Kondo</div><div class="chip">YouTube</div><div class="chip">GSC</div>
+        <div class="chip">Umami</div><div class="chip">Brevo</div><div class="chip">Health</div><div class="chip">Todoist</div>
+      </div>
+      <p class="kicker">Brief Matinal du lundi 07:03 : tout est compilé et m'arrive. Seul.</p>
+    </div>
+    <div class="s-foot"><span>Rama Logic</span><span>Écran : connecteurs + Telegram</span></div>
+  </section>
+
+  <!-- ░░ 6 · IL ÉCRIT ░░ -->
+  <section class="slide">
+    <div class="s-head">
+      <span class="eyebrow">05 · Ce qui change tout</span>
+      <span class="eyebrow aloe">il écrit</span>
+    </div>
+    <div class="body-zone">
+      <h1 class="t-lg">Il a le droit d'<span class="mind">écrire</span><br>dans sa mémoire.</h1>
+      <div class="pts">
+        <div class="pt"><span class="b">—</span><span>Jusqu'ici il <b>lit</b> la mémoire. Le vrai déclic : il a le droit d'y <b>écrire</b>.</span></div>
+        <div class="pt"><span class="b">—</span><span>Il pose des <b>Notes Claude</b> sur les fiches, met à jour le contexte au fil de l'eau.</span></div>
+        <div class="pt"><span class="b">—</span><span>La nuit, <b>/reflect</b> : il relit ses journées et réécrit ses propres instructions.</span></div>
+      </div>
+      <p class="kicker">Un système vivant, pas un gadget.</p>
+    </div>
+    <div class="s-foot"><span>Rama Logic</span><span>Écran : Notes Claude · /reflect</span></div>
+  </section>
+
+  <!-- ░░ 7 · POUR TOI ░░ -->
+  <section class="slide">
+    <div class="s-head">
+      <span class="eyebrow">06 · Pour toi</span>
+      <span class="eyebrow aloe">lundi matin</span>
+    </div>
+    <div class="body-zone">
+      <p class="formula"><span class="mind">Utilité</span> = Intelligence <span class="x">×</span> <span class="mind">Mémoire</span></p>
+      <div class="steps">
+        <div class="step"><span class="n">ÉTAPE 01</span><h3>Centralise</h3><p>Un seul endroit structuré pour tout ce que ta boîte sait.</p></div>
+        <div class="step"><span class="n">ÉTAPE 02</span><h3>Cartographie</h3><p>Écris la page d'index : où est quoi, et les règles de la maison.</p></div>
+        <div class="step"><span class="n">ÉTAPE 03</span><h3>Donne le droit d'écrire</h3><p>Pas seulement de lire. C'est là que ça compose.</p></div>
+      </div>
+      <p class="kicker">La course à l'intelligence, c'est leur problème. La course à la mémoire, c'est le tien.</p>
+    </div>
+    <div class="s-foot"><span>Rama Logic</span><span>Slide finale VivaTech</span></div>
+  </section>
+
+  <!-- ░░ 8 · CTA ░░ -->
+  <section class="slide">
+    <div class="s-head">
+      <img class="logo" src="../_assets/logos/Rama%20Logic.png" alt="Rama Logic" />
+      <span class="eyebrow">on se parle ?</span>
+    </div>
+    <div class="cover-zone">
+      <h1 class="t-lg">Construis ta<br><span class="mind">mémoire d'entreprise</span>.</h1>
+      <p class="lead">Tu veux que je t'aide à donner cette mémoire à ton IA ? On en parle.</p>
+      <div class="cta-row">
+        <span class="cta fill">Audit LOGIC AI</span>
+        <span class="cta">ramalogic.com</span>
+        <span class="cta">linkedin.com/in/sylvainramaradjou</span>
+      </div>
+    </div>
+    <div class="s-foot"><span>Rama Logic · LOGIC AI</span><span>Ton IA, elle se souvient de quoi aujourd'hui ?</span></div>
+  </section>
+
+</div><!-- #stage -->
+
+<div id="nav">
+  <button id="prev" aria-label="Précédent">‹</button>
+  <span id="count">1 / 8</span>
+  <button id="next" aria-label="Suivant">›</button>
+</div>
+<div class="hint">← → pour naviguer</div>
+
+<script>
+const stage=document.getElementById('stage');
+const slides=[...document.querySelectorAll('.slide')];
+const count=document.getElementById('count');
+let i=0;
+function fit(){const s=Math.min(window.innerWidth/1280,window.innerHeight/720);stage.style.transform='scale('+s+')';}
+function show(n){
+  i=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+  count.textContent=(i+1)+' / '+slides.length;
+}
+document.getElementById('next').onclick=()=>show(i+1);
+document.getElementById('prev').onclick=()=>show(i-1);
+window.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();show(i+1);}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1);}
+  else if(e.key==='Home'){show(0);}else if(e.key==='End'){show(slides.length-1);}
+});
+window.addEventListener('resize',fit);
+fit();show(0);
+</script>
+</body>
+</html>
