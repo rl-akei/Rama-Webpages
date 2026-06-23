@@ -1,346 +1,427 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html>
+<html lang="fr" class="light">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="robots" content="noindex,nofollow" />
-<title>Claude, tu te souviens ? · Trame vidéo RAG · Rama Logic</title>
-<meta name="theme-color" content="#0D1A14" />
-<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@300,400,500,600,700&f[]=boska@400,500&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Claude, tu te souviens ? · Le RAG sur Notion + Claude · Rama Logic</title>
+
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-dim":"#dcd9d9","secondary-fixed-dim":"#bdcf7c","secondary-fixed":"#d9eb95",
+        "on-tertiary":"#ffffff","surface-tint":"#466556","on-secondary":"#ffffff",
+        "on-background":"#1c1b1b","surface-container-highest":"#e5e2e1","inverse-primary":"#accebc",
+        "error":"#ba1a1a","on-tertiary-fixed":"#0c1d27","background":"#fcf9f8",
+        "on-primary-fixed-variant":"#2f4d3f","primary-fixed-dim":"#accebc","on-primary-container":"#f5fff7",
+        "surface-container-lowest":"#ffffff","primary-fixed":"#c8ead8","surface-variant":"#e5e2e1",
+        "on-primary":"#ffffff","on-error-container":"#93000a","on-error":"#ffffff",
+        "primary":"#446254","outline":"#727974","on-surface":"#1c1b1b",
+        "tertiary-container":"#657783","on-tertiary-container":"#fcfcff",
+        "on-tertiary-fixed-variant":"#384954","tertiary":"#4d5e6a","on-surface-variant":"#424844",
+        "surface-bright":"#fcf9f8","error-container":"#ffdad6","on-secondary-container":"#5c6b24",
+        "surface-container-high":"#ebe7e7",
+        "inverse-surface":"#313030","outline-variant":"#c1c8c2","surface-container-low":"#f6f3f2",
+        "secondary":"#56641e","on-primary-fixed":"#012115","on-secondary-fixed-variant":"#3f4c05",
+        "inverse-on-surface":"#f3f0ef","surface-container":"#f0edec","primary-container":"#5c7b6c",
+        "tertiary-fixed-dim":"#b7c9d6","tertiary-fixed":"#d3e5f3","surface":"#fcf9f8",
+        "on-secondary-fixed":"#171e00","secondary-container":"#d9eb95"
+      },
+      borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},
+      spacing:{"md":"24px","margin":"32px","lg":"48px","xl":"80px","sm":"12px","gutter":"24px","base":"8px","xs":"4px"},
+      fontFamily:{
+        "body-reg":["Work Sans","system-ui","sans-serif"],
+        "code-label":["Space Mono","monospace"],
+        "title-sm":["Clash Grotesk","Work Sans","sans-serif"],
+        "eyebrow":["Space Mono","monospace"],
+        "display-lg":["Clash Grotesk","Work Sans","sans-serif"],
+        "headline-md":["Clash Grotesk","Work Sans","sans-serif"]
+      },
+      fontSize:{
+        "body-reg":["16px",{"lineHeight":"1.6","fontWeight":"400"}],
+        "body-lg":["20px",{"lineHeight":"1.6","fontWeight":"400"}],
+        "code-label":["14px",{"lineHeight":"1.5","letterSpacing":"0.05em","fontWeight":"400"}],
+        "title-sm":["24px",{"lineHeight":"1.4","fontWeight":"500"}],
+        "eyebrow":["12px",{"lineHeight":"1.0","fontWeight":"500"}],
+        "display-lg":["80px",{"lineHeight":"1.05","fontWeight":"500"}],
+        "display-md":["60px",{"lineHeight":"1.1","fontWeight":"500"}],
+        "headline-md":["48px",{"lineHeight":"1.2","fontWeight":"500"}],
+        "headline-sm":["34px",{"lineHeight":"1.25","fontWeight":"500"}]
+      }
+    }
+  }
+}
+</script>
+
 <style>
-/* Trame vidéo "Claude, tu te souviens ?" — design system LOGIC AI (Ink/Aloe/Mindaro) */
-:root{
-  --ink:#0D1A14; --ink2:#11221a; --ink3:#16291f;
-  --cream:#FFFCF7; --beige:#D2CFC9; --muted:#8fa99f; --faint:#3e5047;
-  --aloe-dark:#475E54; --aloe:#6A8D7E; --aloe-light:#B4C6BE;
-  --mindaro-dark:#9FA55F; --mindaro:#DFE971; --mindaro-light:#F6FBC6;
-  --blue:#A7DEF9; --red:#E8654C;
-  --ease:cubic-bezier(.16,1,.3,1);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{
-  width:100%;height:100%;overflow:hidden;background:#0a1208;
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Clash Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
-}
+html, body { scroll-behavior: smooth; }
+body { font-family: 'Work Sans', system-ui, sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
 
-/* ═══ STAGE : 1280×720 scale-to-fit ═══ */
-#stage{width:1280px;height:720px;flex-shrink:0;position:relative;transform-origin:center center}
-
-.slide{
-  position:absolute;inset:0;overflow:hidden;
-  padding:64px 72px;
-  display:none;flex-direction:column;
-  background:
-    radial-gradient(900px 420px at 28% -12%, rgba(106,141,126,.12), transparent 64%),
-    radial-gradient(620px 480px at 90% 72%, rgba(159,165,95,.06), transparent 62%),
-    linear-gradient(165deg,#0c1812 0%,#0d1a14 48%,#0b150e 100%);
-}
-.slide.active{display:flex;animation:fade .5s var(--ease)}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-/* grille texture */
-.slide::before{
-  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.22;
+.grid-bg {
   background-image:
-    linear-gradient(rgba(255,252,247,.018) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,252,247,.018) 1px,transparent 1px);
-  background-size:40px 40px;
-  mask-image:radial-gradient(ellipse 82% 72% at 36% 38%,#000 18%,transparent 82%);
+    linear-gradient(to right, rgba(28,27,27,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28,27,27,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
-.slide > *{position:relative;z-index:1}
-
-/* header / footer */
-.s-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:auto}
-.s-head .logo{height:26px;width:auto;filter:brightness(0) invert(1);opacity:.85}
-.eyebrow{
-  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--aloe-light);
-}
-.s-foot{
-  margin-top:auto;display:flex;align-items:center;justify-content:space-between;
-  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--faint);letter-spacing:.04em;
+.grid-bg-dark {
+  background-image:
+    linear-gradient(to right, rgba(252,249,248,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(252,249,248,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
-/* typographie */
-h1{font-family:'Clash Grotesk',sans-serif;font-weight:600;color:var(--cream);letter-spacing:-.02em;line-height:1.02}
-.t-xl{font-size:74px}
-.t-lg{font-size:52px}
-.t-md{font-size:40px}
-.mind{color:var(--mindaro)}
-.aloe{color:var(--aloe-light)}
-.serif{font-family:'Boska',Georgia,serif;font-style:italic;font-weight:500;color:var(--aloe-light)}
-.lead{font-size:20px;line-height:1.6;color:var(--beige);font-weight:300;max-width:62ch}
-.lead b{color:var(--cream);font-weight:500}
-.kicker{
-  margin-top:26px;font-family:'Boska',Georgia,serif;font-style:italic;
-  font-size:21px;color:var(--mindaro-light);opacity:.92;
+.slides-viewport {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+.slide {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-/* blocs centraux */
-.body-zone{display:flex;flex-direction:column;justify-content:center;flex:1;gap:18px;padding:30px 0}
-.cover-zone{display:flex;flex-direction:column;justify-content:center;flex:1;gap:22px}
-
-/* listes */
-.pts{display:flex;flex-direction:column;gap:14px;margin-top:6px}
-.pt{display:flex;gap:14px;align-items:flex-start;font-size:19px;line-height:1.5;color:var(--beige)}
-.pt .b{color:var(--mindaro);font-family:'JetBrains Mono',monospace;font-size:14px;margin-top:4px;flex-shrink:0}
-.pt b{color:var(--cream);font-weight:500}
-
-/* cards 3-temps */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:10px}
-.card{
-  border:1px solid rgba(71,94,84,.45);border-radius:16px;padding:24px 22px;
-  background:rgba(106,141,126,.04);display:flex;flex-direction:column;gap:10px;
+.socket-corner-tl, .socket-corner-tr, .socket-corner-bl, .socket-corner-br {
+  position: absolute;
+  width: 8px; height: 8px;
+  background-color: #1c1b1b;
 }
-.card .n{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--mindaro-dark)}
-.card h3{font-family:'Clash Grotesk';font-weight:600;font-size:23px;color:var(--cream)}
-.card p{font-size:15px;line-height:1.5;color:var(--muted)}
+.socket-corner-tl { top: -4px; left: -4px; }
+.socket-corner-tr { top: -4px; right: -4px; }
+.socket-corner-bl { bottom: -4px; left: -4px; }
+.socket-corner-br { bottom: -4px; right: -4px; }
+.socket-light .socket-corner-tl, .socket-light .socket-corner-tr,
+.socket-light .socket-corner-bl, .socket-light .socket-corner-br { background-color: #fcf9f8; }
 
-/* stat row */
-.stats{display:flex;gap:14px;margin-top:8px}
-.stat{border:1px solid rgba(71,94,84,.4);border-radius:12px;padding:12px 20px;background:rgba(106,141,126,.04);text-align:center}
-.stat b{display:block;font-size:28px;font-weight:600;color:var(--mindaro);line-height:1;font-feature-settings:"tnum"}
-.stat span{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;display:block;margin-top:6px}
-
-/* faux réponse hallucinée */
-.halluc{
-  margin-top:14px;display:inline-flex;flex-direction:column;gap:2px;
-  border:1.3px solid var(--red);border-radius:14px;padding:16px 22px;
-  background:rgba(232,101,76,.07);max-width:380px;
+@media (max-width: 768px) {
+  .text-display-lg { font-size: 42px !important; }
+  .text-display-md { font-size: 34px !important; }
+  .text-headline-md { font-size: 30px !important; }
+  .text-headline-sm { font-size: 24px !important; }
 }
-.halluc .v{font-family:'Clash Grotesk';font-weight:700;font-size:24px;color:var(--red)}
-.halluc .s{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
 
-/* sources grid */
-.srcs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px;max-width:760px}
-.chip{
-  border:1px solid rgba(180,198,190,.3);border-radius:9px;padding:10px 6px;text-align:center;
-  font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--aloe-light);
-  background:rgba(180,198,190,.03);
+@media print {
+  .slides-viewport { height: auto; overflow: visible; scroll-snap-type: none; }
+  .slide { page-break-after: always; min-height: auto; height: auto; }
+  .nav-controls, .header-bar { display: none !important; }
 }
-.chip.core{border-color:var(--mindaro);color:var(--mindaro);background:rgba(223,233,113,.08);font-weight:700}
-
-/* étapes pour toi */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
-.step{border-left:2px solid var(--mindaro);padding:6px 0 6px 18px}
-.step .n{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mindaro-dark);letter-spacing:.12em}
-.step h3{font-family:'Clash Grotesk';font-weight:600;font-size:22px;color:var(--cream);margin-top:4px}
-.step p{font-size:14px;color:var(--muted);line-height:1.45;margin-top:4px}
-
-/* formule */
-.formula{font-family:'Clash Grotesk';font-weight:600;font-size:46px;color:var(--cream);letter-spacing:-.01em}
-.formula .x{color:var(--aloe);font-style:normal}
-.formula .mind{color:var(--mindaro)}
-
-/* CTA */
-.cta-row{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap}
-.cta{
-  border:1px solid var(--aloe-dark);border-radius:9999px;padding:12px 22px;
-  font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--aloe-light);letter-spacing:.03em;
-  background:rgba(71,94,84,.1);
-}
-.cta.fill{background:var(--mindaro);color:var(--ink);border-color:var(--mindaro);font-weight:700}
-
-/* ═══ NAV ═══ */
-#nav{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:50;
-  display:flex;align-items:center;gap:14px;
-  font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);
-  background:rgba(13,26,20,.7);backdrop-filter:blur(8px);
-  border:1px solid rgba(71,94,84,.5);border-radius:9999px;padding:7px 14px}
-#nav button{background:transparent;border:0;color:var(--aloe-light);cursor:pointer;font-size:16px;line-height:1;padding:2px 6px;border-radius:6px}
-#nav button:hover{color:var(--mindaro)}
-#count{min-width:46px;text-align:center;letter-spacing:.08em}
-.hint{position:fixed;bottom:20px;right:18px;z-index:50;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--faint)}
-@media print{#nav,.hint{display:none}}
 </style>
 </head>
-<body>
+<body class="bg-background text-on-background antialiased">
 
-<div id="stage">
+<!-- ====== STICKY HEADER ====== -->
+<header class="header-bar fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant">
+  <div class="flex justify-between items-center px-margin py-base max-w-[1600px] mx-auto">
+    <div class="flex items-center gap-md">
+      <img src="../_assets/logos/Rama%20Logic.png" alt="Rama Logic" class="h-6 w-auto"/>
+      <div class="hidden md:block w-px h-4 bg-outline-variant"></div>
+      <div class="hidden md:block font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Notion x Claude · Le RAG</div>
+    </div>
+    <div class="font-code-label text-code-label text-on-surface-variant">
+      <span id="current-slide" class="text-on-background font-medium">01</span>
+      <span class="text-outline-variant mx-1">/</span>
+      <span id="total-slides">09</span>
+    </div>
+  </div>
+</header>
 
-  <!-- ░░ 1 · COVER ░░ -->
-  <section class="slide active">
-    <div class="s-head">
-      <img class="logo" src="../_assets/logos/Rama%20Logic.png" alt="Rama Logic" />
-      <span class="eyebrow">Rama Logic · LOGIC AI</span>
-    </div>
-    <div class="cover-zone">
-      <h1 class="t-xl">Claude,<br>tu te <span class="mind">souviens</span> ?</h1>
-      <p class="serif" style="font-size:24px">Comment j'ai donné une mémoire à mon IA.</p>
-    </div>
-    <div class="s-foot">
-      <span>Le RAG, expliqué sur Notion + Claude</span>
-      <span>Sylvain Ramaradjou</span>
-    </div>
-  </section>
+<main class="slides-viewport pt-[57px]">
 
-  <!-- ░░ 2 · LE PROBLÈME ░░ -->
-  <section class="slide">
-    <div class="s-head">
-      <span class="eyebrow">01 · Le problème</span>
-      <span class="eyebrow aloe">l'amnésie</span>
-    </div>
-    <div class="body-zone">
-      <h1 class="t-lg">Une IA, par défaut,<br>est un <span class="mind">génie amnésique</span>.</h1>
-      <div class="pts">
-        <div class="pt"><span class="b">—</span><span>Chaque session, elle repart d'une <b>page blanche</b>. Elle oublie ton métier, tes clients, tes chiffres.</span></div>
-        <div class="pt"><span class="b">—</span><span>Tu lui demandes un chiffre ? Elle ne dit pas « je ne sais pas ». <b>Elle invente.</b></span></div>
-      </div>
-      <div class="halluc">
-        <span class="v">≈ 3 200 € / mois</span>
-        <span class="s">chiffre inventé · aucune source · confiant mais faux</span>
-      </div>
-      <p class="kicker">Le danger : ce n'est pas qu'elle se trompe. C'est qu'elle se trompe avec aplomb.</p>
-    </div>
-    <div class="s-foot"><span>Rama Logic</span><span>Claude, tu te souviens ?</span></div>
-  </section>
-
-  <!-- ░░ 3 · C'EST QUOI LE RAG ░░ -->
-  <section class="slide">
-    <div class="s-head">
-      <span class="eyebrow">02 · La solution</span>
-      <span class="eyebrow aloe">RAG</span>
-    </div>
-    <div class="body-zone">
-      <h1 class="t-md">Le RAG : il <span class="mind">cherche</span> avant de répondre.</h1>
-      <div class="cards">
-        <div class="card"><span class="n">1 · RETRIEVE</span><h3>Chercher</h3><p>Avant de répondre, l'agent va chercher la vraie donnée dans ta base (recherche sémantique).</p></div>
-        <div class="card"><span class="n">2 · AUGMENT</span><h3>Augmenter</h3><p>Il colle cette donnée réelle à ta question.</p></div>
-        <div class="card"><span class="n">3 · GENERATE</span><h3>Répondre</h3><p>Il répond en citant sa source. Ou il dit « je n'ai pas la donnée ».</p></div>
-      </div>
-      <div class="stats">
-        <div class="stat"><b>0</b><span>hallucination</span></div>
-        <div class="stat"><b>100%</b><span>sourçable</span></div>
+<!-- ============================================================ -->
+<!-- SLIDE 1 — COVER (sans photo)                                  -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-1" data-slide="1">
+  <div class="flex-grow flex items-center justify-center relative overflow-hidden p-margin">
+    <div class="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+    <div class="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-secondary-container opacity-40 rounded-full blur-[100px] -z-10 mix-blend-multiply"></div>
+    <div class="max-w-5xl w-full relative">
+      <div class="relative bg-surface-container-lowest/80 backdrop-blur-sm rounded-lg border border-outline-variant p-xl">
+        <div class="socket-corner-tl"></div>
+        <div class="socket-corner-tr"></div>
+        <div class="socket-corner-bl"></div>
+        <div class="socket-corner-br"></div>
+        <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase py-xs px-sm bg-primary-fixed/30 rounded border border-primary-fixed inline-block mb-lg">Notion x Claude · Vidéo</span>
+        <h1 class="font-display-lg text-display-lg tracking-tight mb-md">Claude, tu te <span class="text-primary">souviens</span> ?</h1>
+        <div class="w-24 h-1 bg-secondary mb-md"></div>
+        <p class="font-headline-md text-headline-sm text-on-surface-variant leading-tight max-w-2xl mb-lg">Comment j'ai donné une mémoire à mon IA. Le RAG, expliqué simplement, sur Notion et Claude.</p>
+        <div class="border-t border-outline-variant pt-md">
+          <div class="font-title-sm text-title-sm">Sylvain Ramaradjou</div>
+          <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Fondateur · Rama Logic · Notion Solution Partner</div>
+        </div>
       </div>
     </div>
-    <div class="s-foot"><span>Retrieval-Augmented Generation</span><span>Démo live : deck RAG · toggle Deviner / Fonder</span></div>
-  </section>
+  </div>
+</section>
 
-  <!-- ░░ 4 · LA MÉMOIRE D'ABORD ░░ -->
-  <section class="slide">
-    <div class="s-head">
-      <span class="eyebrow">03 · Comment je l'ai fait</span>
-      <span class="eyebrow aloe">la mémoire</span>
-    </div>
-    <div class="body-zone">
-      <h1 class="t-lg">La <span class="mind">mémoire</span> d'abord,<br>pas l'agent.</h1>
-      <div class="pts">
-        <div class="pt"><span class="b">01</span><span><b>32 bases Notion</b> reliées : CRM, finance, projets, contenu. Un seul cerveau.</span></div>
-        <div class="pt"><span class="b">02</span><span>L'<b>Index Claude</b> = la carte de la maison. La page que tu donnerais à un nouvel employé.</span></div>
-        <div class="pt"><span class="b">03</span><span>Le chiffre se lit dans <b>RL-Dashboard Activity</b>. Traçable, pas inventé.</span></div>
+<!-- ============================================================ -->
+<!-- SLIDE 2 — LE PROBLÈME (amnésie + hallucination)              -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-2" data-slide="2">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">01 · Le problème</div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg max-w-4xl">« Claude, tu te souviens de ce qu'on a dit hier ? »</h2>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-xl items-center">
+      <div class="md:col-span-7">
+        <p class="font-headline-md text-headline-sm leading-tight mb-md">« Je n'ai pas accès aux conversations précédentes. »</p>
+        <p class="font-body-reg text-body-lg text-on-surface-variant mb-sm">Une IA, par défaut, c'est un génie amnésique. Tous les matins, elle a tout oublié : ton métier, tes clients, tes chiffres.</p>
+        <p class="font-body-reg text-body-lg text-on-surface-variant">Tu lui demandes un chiffre ? Elle ne dit pas « je ne sais pas ». Elle invente.</p>
       </div>
-      <p class="kicker">L'erreur classique : commencer par l'agent. Commence par la mémoire.</p>
-    </div>
-    <div class="s-foot"><span>Rama Logic</span><span>Écran : Notion</span></div>
-  </section>
-
-  <!-- ░░ 5 · 16 SOURCES ░░ -->
-  <section class="slide">
-    <div class="s-head">
-      <span class="eyebrow">04 · La mémoire est large</span>
-      <span class="eyebrow aloe">16 sources</span>
-    </div>
-    <div class="body-zone">
-      <h1 class="t-md">Pas que Notion : <span class="mind">16 sources</span> branchées.</h1>
-      <div class="srcs">
-        <div class="chip core">Notion</div><div class="chip">Qonto</div><div class="chip">Stripe</div><div class="chip">Tiime</div>
-        <div class="chip">Telegram</div><div class="chip">Gmail</div><div class="chip">Google Cal</div><div class="chip">G. Drive</div>
-        <div class="chip">Fathom</div><div class="chip">Kondo</div><div class="chip">YouTube</div><div class="chip">GSC</div>
-        <div class="chip">Umami</div><div class="chip">Brevo</div><div class="chip">Health</div><div class="chip">Todoist</div>
-      </div>
-      <p class="kicker">Brief Matinal du lundi 07:03 : tout est compilé et m'arrive. Seul.</p>
-    </div>
-    <div class="s-foot"><span>Rama Logic</span><span>Écran : connecteurs + Telegram</span></div>
-  </section>
-
-  <!-- ░░ 6 · IL ÉCRIT ░░ -->
-  <section class="slide">
-    <div class="s-head">
-      <span class="eyebrow">05 · Ce qui change tout</span>
-      <span class="eyebrow aloe">il écrit</span>
-    </div>
-    <div class="body-zone">
-      <h1 class="t-lg">Il a le droit d'<span class="mind">écrire</span><br>dans sa mémoire.</h1>
-      <div class="pts">
-        <div class="pt"><span class="b">—</span><span>Jusqu'ici il <b>lit</b> la mémoire. Le vrai déclic : il a le droit d'y <b>écrire</b>.</span></div>
-        <div class="pt"><span class="b">—</span><span>Il pose des <b>Notes Claude</b> sur les fiches, met à jour le contexte au fil de l'eau.</span></div>
-        <div class="pt"><span class="b">—</span><span>La nuit, <b>/reflect</b> : il relit ses journées et réécrit ses propres instructions.</span></div>
-      </div>
-      <p class="kicker">Un système vivant, pas un gadget.</p>
-    </div>
-    <div class="s-foot"><span>Rama Logic</span><span>Écran : Notes Claude · /reflect</span></div>
-  </section>
-
-  <!-- ░░ 7 · POUR TOI ░░ -->
-  <section class="slide">
-    <div class="s-head">
-      <span class="eyebrow">06 · Pour toi</span>
-      <span class="eyebrow aloe">lundi matin</span>
-    </div>
-    <div class="body-zone">
-      <p class="formula"><span class="mind">Utilité</span> = Intelligence <span class="x">×</span> <span class="mind">Mémoire</span></p>
-      <div class="steps">
-        <div class="step"><span class="n">ÉTAPE 01</span><h3>Centralise</h3><p>Un seul endroit structuré pour tout ce que ta boîte sait.</p></div>
-        <div class="step"><span class="n">ÉTAPE 02</span><h3>Cartographie</h3><p>Écris la page d'index : où est quoi, et les règles de la maison.</p></div>
-        <div class="step"><span class="n">ÉTAPE 03</span><h3>Donne le droit d'écrire</h3><p>Pas seulement de lire. C'est là que ça compose.</p></div>
-      </div>
-      <p class="kicker">La course à l'intelligence, c'est leur problème. La course à la mémoire, c'est le tien.</p>
-    </div>
-    <div class="s-foot"><span>Rama Logic</span><span>Slide finale VivaTech</span></div>
-  </section>
-
-  <!-- ░░ 8 · CTA ░░ -->
-  <section class="slide">
-    <div class="s-head">
-      <img class="logo" src="../_assets/logos/Rama%20Logic.png" alt="Rama Logic" />
-      <span class="eyebrow">on se parle ?</span>
-    </div>
-    <div class="cover-zone">
-      <h1 class="t-lg">Construis ta<br><span class="mind">mémoire d'entreprise</span>.</h1>
-      <p class="lead">Tu veux que je t'aide à donner cette mémoire à ton IA ? On en parle.</p>
-      <div class="cta-row">
-        <span class="cta fill">Audit LOGIC AI</span>
-        <span class="cta">ramalogic.com</span>
-        <span class="cta">linkedin.com/in/sylvainramaradjou</span>
+      <div class="md:col-span-5">
+        <div class="relative bg-surface-container-lowest border-2 border-error rounded-lg p-lg">
+          <div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+          <div class="font-code-label text-code-label text-error uppercase tracking-wider mb-sm">Réponse de l'IA</div>
+          <div class="font-display-lg text-display-md text-error leading-none mb-sm">≈ 3 200 €<span class="font-body-reg text-body-lg">/mois</span></div>
+          <p class="font-code-label text-code-label text-on-surface-variant">chiffre inventé · aucune source · confiant mais faux</p>
+        </div>
       </div>
     </div>
-    <div class="s-foot"><span>Rama Logic · LOGIC AI</span><span>Ton IA, elle se souvient de quoi aujourd'hui ?</span></div>
-  </section>
+    <div class="border-l-2 border-error pl-md max-w-3xl mt-lg">
+      <p class="font-headline-md text-headline-sm leading-tight">Le danger : ce n'est pas qu'elle se trompe. C'est qu'elle se trompe <span class="italic">avec aplomb</span>.</p>
+    </div>
+  </div>
+</section>
 
-</div><!-- #stage -->
+<!-- ============================================================ -->
+<!-- SLIDE 3 — C'EST QUOI LE RAG                                   -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-3" data-slide="3">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">02 · La solution</div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg max-w-4xl">Le RAG : il cherche la vraie donnée <span class="text-primary">avant</span> de répondre.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-lg">
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-lg"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-wider mb-sm">1 · Retrieve</div>
+        <div class="font-title-sm text-title-sm mb-sm">Chercher</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Avant de répondre, l'agent va chercher la vraie donnée dans ta base (recherche sémantique).</p>
+      </div>
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-lg"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-wider mb-sm">2 · Augment</div>
+        <div class="font-title-sm text-title-sm mb-sm">Augmenter</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Il colle cette donnée réelle à ta question, avant de générer.</p>
+      </div>
+      <div class="relative bg-primary-fixed/30 border border-primary rounded-lg p-lg"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-wider mb-sm">3 · Generate</div>
+        <div class="font-title-sm text-title-sm mb-sm">Répondre</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Il répond en citant sa source. Ou il dit « je n'ai pas la donnée ».</p>
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center gap-gutter">
+      <div class="flex items-baseline gap-sm"><span class="font-display-lg text-display-md text-secondary leading-none">0</span><span class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">hallucination</span></div>
+      <div class="w-px h-10 bg-outline-variant"></div>
+      <div class="flex items-baseline gap-sm"><span class="font-display-lg text-display-md text-secondary leading-none">100%</span><span class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">sourçable</span></div>
+      <div class="w-px h-10 bg-outline-variant hidden md:block"></div>
+      <p class="font-body-reg text-body-lg text-on-surface-variant flex-1 min-w-[240px]">On ne configure pas un chatbot. On branche l'IA sur ta mémoire.</p>
+    </div>
+  </div>
+</section>
 
-<div id="nav">
-  <button id="prev" aria-label="Précédent">‹</button>
-  <span id="count">1 / 8</span>
-  <button id="next" aria-label="Suivant">›</button>
-</div>
-<div class="hint">← → pour naviguer</div>
+<!-- ============================================================ -->
+<!-- SLIDE 4 — LA MÉMOIRE D'ABORD (Notion)                        -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-4" data-slide="4">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">03 · Comment je l'ai fait</div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-xl items-center">
+      <div class="md:col-span-7">
+        <h2 class="font-headline-md text-headline-md tracking-tight mb-lg">La mémoire d'abord.<br/><span class="text-primary">Pas l'agent.</span></h2>
+        <div class="flex flex-col gap-sm mb-lg">
+          <div class="grid grid-cols-[auto_1fr] gap-md items-baseline border-b border-outline-variant pb-sm">
+            <span class="font-code-label text-code-label text-secondary">01</span>
+            <span class="font-body-reg text-body-lg"><span class="font-medium">32 bases Notion</span> reliées : CRM, finance, projets, contenu. Un seul cerveau.</span>
+          </div>
+          <div class="grid grid-cols-[auto_1fr] gap-md items-baseline border-b border-outline-variant pb-sm">
+            <span class="font-code-label text-code-label text-secondary">02</span>
+            <span class="font-body-reg text-body-lg"><span class="font-medium">L'Index Claude</span> : la carte de la maison. La page que tu donnerais à un nouvel employé.</span>
+          </div>
+          <div class="grid grid-cols-[auto_1fr] gap-md items-baseline">
+            <span class="font-code-label text-code-label text-secondary">03</span>
+            <span class="font-body-reg text-body-lg">Le chiffre se lit dans <span class="font-medium">RL-Dashboard Activity</span>. Traçable, pas inventé.</span>
+          </div>
+        </div>
+        <div class="border-l-2 border-secondary pl-md">
+          <p class="font-headline-md text-headline-sm leading-tight">Le cerveau le plus puissant de mon entreprise n'est pas le mien.</p>
+        </div>
+      </div>
+      <div class="md:col-span-5">
+        <div class="relative bg-on-background rounded-lg p-xl socket-light flex flex-col items-center justify-center text-center">
+          <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+          <div class="font-display-lg text-display-lg text-secondary-fixed leading-none">32</div>
+          <div class="font-code-label text-code-label text-background/70 uppercase tracking-widest mt-sm">bases reliées<br/>= 1 seul cerveau</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5 — 16 SOURCES                                          -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-5" data-slide="5">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">04 · La mémoire est large</div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg">Pas que Notion. <span class="text-primary">16 sources</span> branchées.</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-gutter mb-lg">
+      <div class="relative bg-secondary-fixed/40 border border-on-background rounded-lg py-md text-center font-code-label text-code-label font-bold uppercase tracking-wider"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>Notion</div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg py-md text-center font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Qonto</div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg py-md text-center font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Stripe</div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg py-md text-center font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Tiime</div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg py-md text-center font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Telegram</div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg py-md text-center font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Gmail</div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg py-md text-center font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Google Cal</div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg py-md text-center font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Drive</div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg py-md text-center font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Fathom</div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg py-md text-center font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Kondo</div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg py-md text-center font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">YouTube</div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg py-md text-center font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">GSC</div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg py-md text-center font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Umami</div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg py-md text-center font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Brevo</div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg py-md text-center font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Health</div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg py-md text-center font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Todoist</div>
+    </div>
+    <div class="border-l-2 border-secondary pl-md max-w-3xl">
+      <p class="font-headline-md text-headline-sm leading-tight">Brief Matinal du lundi 07:03 : tout est compilé et m'arrive. <span class="text-primary">Seul.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6 — IL ÉCRIT DANS SA MÉMOIRE                            -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-6" data-slide="6">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">05 · Ce qui change tout</div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg max-w-4xl">Il a le droit d'<span class="text-primary">écrire</span> dans sa mémoire. Pas juste de la lire.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-lg"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider mb-md">Il lit</div>
+        <p class="font-headline-md text-headline-sm leading-tight mb-sm">Il consulte la mémoire.</p>
+        <p class="font-body-reg text-body-lg text-on-surface-variant">Chaque réponse est fondée sur tes vraies données. C'est déjà le RAG.</p>
+      </div>
+      <div class="relative bg-on-background rounded-lg p-lg socket-light"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary-fixed uppercase tracking-wider mb-md">Il écrit</div>
+        <p class="font-headline-md text-headline-sm text-background leading-tight mb-sm">Il enrichit la mémoire.</p>
+        <p class="font-body-reg text-body-lg text-background/70">Notes Claude sur les fiches au fil de l'eau. Et la nuit, <span class="text-secondary-fixed">/reflect</span> : il relit ses journées et réécrit ses propres instructions.</p>
+      </div>
+    </div>
+    <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mt-lg">Un système vivant, pas un gadget.</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7 — LA THÈSE (DARK)                                     -->
+<!-- ============================================================ -->
+<section class="slide grid-bg-dark bg-on-background" id="slide-7" data-slide="7">
+  <div class="flex-grow flex flex-col items-start justify-center max-w-6xl mx-auto w-full px-margin">
+    <div class="font-eyebrow text-eyebrow text-primary-fixed-dim uppercase tracking-widest mb-lg">La thèse</div>
+    <p class="font-display-lg text-display-lg text-background tracking-tight mb-lg">Utilité = Intelligence <span class="text-secondary-fixed">× Mémoire</span></p>
+    <div class="w-24 h-1 bg-secondary-fixed mb-lg"></div>
+    <p class="font-headline-md text-headline-sm text-background/80 leading-tight max-w-3xl mb-md">Si la mémoire est à zéro, l'utilité est à zéro. Peu importe l'intelligence du modèle.</p>
+    <p class="font-body-reg text-body-lg text-background/60 max-w-3xl">Un modèle moyen branché sur toute ta mémoire battra toujours un génie qui repart de zéro chaque matin.</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8 — POUR TOI : 3 ÉTAPES                                 -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-8" data-slide="8">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">06 · Pour toi</div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg">Trois étapes. Lundi matin.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-lg">
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-lg"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-wider mb-sm">Étape 01</div>
+        <div class="font-title-sm text-title-sm mb-sm">Centralise</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Un seul endroit structuré pour tout ce que ta boîte sait. Un seul cerveau.</p>
+      </div>
+      <div class="relative bg-surface-container-lowest border border-outline-variant rounded-lg p-lg"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-wider mb-sm">Étape 02</div>
+        <div class="font-title-sm text-title-sm mb-sm">Cartographie</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Écris la page d'index : où est quoi, et les règles de la maison.</p>
+      </div>
+      <div class="relative bg-primary-fixed/30 border border-primary rounded-lg p-lg"><div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-wider mb-sm">Étape 03</div>
+        <div class="font-title-sm text-title-sm mb-sm">Donne le droit d'écrire</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Pas seulement de lire. C'est là que ça compose, que ça devient un système.</p>
+      </div>
+    </div>
+    <div class="border-l-2 border-error pl-md max-w-3xl">
+      <p class="font-headline-md text-headline-sm leading-tight">L'erreur classique : commencer par l'agent.<br/><span class="text-primary">Commence par la mémoire.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9 — CLOSING (DARK)                                      -->
+<!-- ============================================================ -->
+<section class="slide grid-bg-dark bg-on-background" id="slide-9" data-slide="9">
+  <div class="flex-grow flex flex-col justify-center max-w-6xl mx-auto w-full px-margin py-lg">
+    <p class="font-display-lg text-display-md text-background tracking-tight mb-md max-w-4xl">La course à l'intelligence, c'est leur problème.<br/><span class="text-secondary-fixed">La course à la mémoire, c'est la tienne.</span></p>
+    <p class="font-code-label text-code-label text-background/60 uppercase tracking-widest mb-lg">Ton IA, elle se souvient de quoi aujourd'hui ?</p>
+    <div class="relative bg-inverse-surface border border-background/20 rounded-lg p-lg socket-light max-w-3xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-br"></div>
+      <div class="font-code-label text-code-label text-secondary-fixed uppercase tracking-widest mb-sm">On en parle ?</div>
+      <p class="font-headline-md text-headline-sm text-background leading-tight mb-md">Construis ta mémoire d'entreprise. Audit LOGIC AI.</p>
+      <div class="font-title-sm text-title-sm text-background">Sylvain Ramaradjou</div>
+      <div class="font-body-reg text-body-reg text-background/70 leading-snug">J'implémente l'IA dans les TPE, PME et startups.<br/>Notion &amp; IA &amp; Automatisation · Méthode LOGIC</div>
+      <div class="font-code-label text-code-label text-secondary-fixed mt-sm">sylvain@ramalogic.com · ramalogic.com · linkedin.com/in/sylvainramaradjou</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<nav class="nav-controls fixed bottom-margin right-margin z-50 flex flex-col gap-sm">
+  <button id="prev-btn" aria-label="Slide précédente" class="bg-surface-container-lowest border border-on-background w-12 h-12 flex items-center justify-center hover:bg-on-background hover:text-on-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_upward</span>
+  </button>
+  <button id="next-btn" aria-label="Slide suivante" class="bg-on-background text-on-primary border border-on-background w-12 h-12 flex items-center justify-center hover:bg-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_downward</span>
+  </button>
+</nav>
 
 <script>
-const stage=document.getElementById('stage');
-const slides=[...document.querySelectorAll('.slide')];
-const count=document.getElementById('count');
-let i=0;
-function fit(){const s=Math.min(window.innerWidth/1280,window.innerHeight/720);stage.style.transform='scale('+s+')';}
-function show(n){
-  i=Math.max(0,Math.min(slides.length-1,n));
-  slides.forEach((s,k)=>s.classList.toggle('active',k===i));
-  count.textContent=(i+1)+' / '+slides.length;
-}
-document.getElementById('next').onclick=()=>show(i+1);
-document.getElementById('prev').onclick=()=>show(i-1);
-window.addEventListener('keydown',e=>{
-  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();show(i+1);}
-  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1);}
-  else if(e.key==='Home'){show(0);}else if(e.key==='End'){show(slides.length-1);}
-});
-window.addEventListener('resize',fit);
-fit();show(0);
+  const viewport = document.querySelector('.slides-viewport');
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  document.getElementById('total-slides').textContent = String(total).padStart(2, '0');
+  let currentIdx = 0;
+  function updateCounter() {
+    const viewportRect = viewport.getBoundingClientRect();
+    const center = viewportRect.top + viewportRect.height / 2;
+    let closest = 0, closestDist = Infinity;
+    slides.forEach((slide, idx) => {
+      const r = slide.getBoundingClientRect();
+      const slideCenter = r.top + r.height / 2;
+      const dist = Math.abs(slideCenter - center);
+      if (dist < closestDist) { closestDist = dist; closest = idx; }
+    });
+    currentIdx = closest;
+    document.getElementById('current-slide').textContent = String(closest + 1).padStart(2, '0');
+  }
+  function goToSlide(idx) { if (idx < 0 || idx >= total) return; slides[idx].scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  document.getElementById('prev-btn').addEventListener('click', () => goToSlide(currentIdx - 1));
+  document.getElementById('next-btn').addEventListener('click', () => goToSlide(currentIdx + 1));
+  document.addEventListener('keydown', (e) => {
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); goToSlide(currentIdx + 1); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); goToSlide(currentIdx - 1); }
+    else if (e.key === 'Home') { e.preventDefault(); goToSlide(0); }
+    else if (e.key === 'End') { e.preventDefault(); goToSlide(total - 1); }
+  });
+  viewport.addEventListener('scroll', () => { requestAnimationFrame(updateCounter); });
+  updateCounter();
 </script>
+
 </body>
 </html>
