@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Vert Durable × Rama Logic · Reprendre le pilotage de tes 300 copros</title>
+
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-dim":"#dcd9d9","secondary-fixed-dim":"#bdcf7c","secondary-fixed":"#d9eb95",
+        "on-tertiary":"#ffffff","surface-tint":"#466556","on-secondary":"#ffffff",
+        "on-background":"#1c1b1b","surface-container-highest":"#e5e2e1","inverse-primary":"#accebc",
+        "error":"#ba1a1a","on-tertiary-fixed":"#0c1d27","background":"#fcf9f8",
+        "on-primary-fixed-variant":"#2f4d3f","primary-fixed-dim":"#accebc","on-primary-container":"#f5fff7",
+        "surface-container-lowest":"#ffffff","primary-fixed":"#c8ead8","surface-variant":"#e5e2e1",
+        "on-primary":"#ffffff","on-error-container":"#93000a","on-error":"#ffffff",
+        "primary":"#446254","outline":"#727974","on-surface":"#1c1b1b",
+        "tertiary-container":"#657783","on-tertiary-container":"#fcfcff",
+        "on-tertiary-fixed-variant":"#384954","tertiary":"#4d5e6a","on-surface-variant":"#424844",
+        "surface-bright":"#fcf9f8","error-container":"#ffdad6","on-secondary-container":"#5c6b24",
+        "surface-container-high":"#ebe7e7",
+        "inverse-surface":"#313030","outline-variant":"#c1c8c2","surface-container-low":"#f6f3f2",
+        "secondary":"#56641e","on-primary-fixed":"#012115","on-secondary-fixed-variant":"#3f4c05",
+        "inverse-on-surface":"#f3f0ef","surface-container":"#f0edec","primary-container":"#5c7b6c",
+        "tertiary-fixed-dim":"#b7c9d6","tertiary-fixed":"#d3e5f3","surface":"#fcf9f8",
+        "on-secondary-fixed":"#171e00","secondary-container":"#d9eb95"
+      },
+      borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},
+      spacing:{"md":"24px","margin":"32px","lg":"48px","xl":"80px","sm":"12px","gutter":"24px","base":"8px","xs":"4px"},
+      fontFamily:{
+        "body-reg":["Work Sans","system-ui","sans-serif"],
+        "code-label":["Space Mono","monospace"],
+        "title-sm":["Clash Grotesk","Work Sans","sans-serif"],
+        "eyebrow":["Space Mono","monospace"],
+        "display-lg":["Clash Grotesk","Work Sans","sans-serif"],
+        "headline-md":["Clash Grotesk","Work Sans","sans-serif"]
+      },
+      fontSize:{
+        "body-reg":["16px",{"lineHeight":"1.6","fontWeight":"400"}],
+        "code-label":["14px",{"lineHeight":"1.5","letterSpacing":"0.05em","fontWeight":"400"}],
+        "title-sm":["24px",{"lineHeight":"1.4","fontWeight":"500"}],
+        "eyebrow":["12px",{"lineHeight":"1.0","fontWeight":"500"}],
+        "display-lg":["80px",{"lineHeight":"1.05","fontWeight":"500"}],
+        "headline-md":["48px",{"lineHeight":"1.15","fontWeight":"500"}]
+      }
+    }
+  }
+}
+</script>
+
+<style>
+html, body { scroll-behavior: smooth; }
+body { font-family: 'Work Sans', system-ui, sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(28,27,27,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28,27,27,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.slides-viewport {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 0;
+}
+.slide {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.socket-corner-tl, .socket-corner-tr, .socket-corner-bl, .socket-corner-br {
+  position: absolute;
+  width: 8px; height: 8px;
+  background-color: #1c1b1b;
+}
+.socket-corner-tl { top: -4px; left: -4px; }
+.socket-corner-tr { top: -4px; right: -4px; }
+.socket-corner-bl { bottom: -4px; left: -4px; }
+.socket-corner-br { bottom: -4px; right: -4px; }
+
+/* Divider big mono number */
+.divider-num {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 72px;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: #446254;
+}
+
+/* Overview grid (ESC) */
+.overview-card {
+  border: 1px solid #c1c8c2;
+  background: #ffffff;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  transition: border-color 160ms, background 160ms, transform 160ms;
+  min-height: 96px;
+}
+.overview-card:hover { border-color: #446254; background: #f6f3f2; transform: translateY(-2px); }
+.overview-card .ov-num { font-family: 'Space Mono', monospace; font-size: 13px; color: #446254; letter-spacing: 0.05em; }
+.overview-card .ov-label { font-family: 'Work Sans', sans-serif; font-size: 14px; color: #1c1b1b; line-height: 1.3; }
+
+.print-only { display: none; }
+
+@media print {
+  .slides-viewport { height: auto; overflow: visible; scroll-snap-type: none; }
+  .slide { page-break-after: always; min-height: auto; height: auto; }
+  .nav-controls, .header-bar, #overview { display: none !important; }
+  .print-only { display: block; }
+}
+</style>
+</head>
+<body class="bg-background text-on-background antialiased">
+
+<!-- ====== STICKY HEADER ====== -->
+<header class="header-bar fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant">
+  <div class="flex justify-between items-center px-margin py-base max-w-[1600px] mx-auto">
+    <div class="flex items-center gap-md">
+      <div class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</div>
+      <div class="hidden md:block w-px h-4 bg-outline-variant"></div>
+      <div class="hidden md:block font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Préparé pour Vert Durable</div>
+    </div>
+    <div class="flex items-center gap-md">
+      <button id="overview-btn" aria-label="Vue d'ensemble" class="hidden md:flex items-center gap-1 font-code-label text-code-label text-on-surface-variant hover:text-on-background transition-colors">
+        <span class="material-symbols-outlined text-lg">grid_view</span><span class="uppercase tracking-widest">ESC</span>
+      </button>
+      <div class="font-code-label text-code-label text-on-surface-variant">
+        <span id="current-slide" class="text-on-background font-medium">01</span>
+        <span class="text-outline-variant mx-1">/</span>
+        <span id="total-slides">30</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ====== SLIDES VIEWPORT ====== -->
+<main class="slides-viewport pt-[57px]">
+
+<!-- ============================================================ -->
+<!-- SLIDE 0 — COVER                                               -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-0" data-slide="0">
+  <div class="flex-grow flex items-center justify-center relative overflow-hidden p-margin">
+    <div class="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+    <div class="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-secondary-container opacity-40 rounded-full blur-[100px] -z-10 mix-blend-multiply"></div>
+
+    <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-12 gap-gutter relative z-10">
+      <div class="col-span-1 md:col-span-10 md:col-start-2 py-xl px-margin relative bg-surface-container-lowest/80 backdrop-blur-sm rounded-lg border border-outline-variant">
+        <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+
+        <div class="mb-lg">
+          <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase py-xs px-sm bg-primary-fixed/30 rounded border border-primary-fixed inline-block">Proposition d'accompagnement</span>
+        </div>
+
+        <div class="mb-xl relative">
+          <h1 class="font-display-lg text-display-lg text-on-background mb-md tracking-tight leading-none" style="font-size:64px">
+            Reprendre le pilotage<br/>de tes 300 copros sans passer<br/>ta semaine en réunions
+          </h1>
+          <div class="w-24 h-1 bg-secondary mb-md"></div>
+          <p class="font-headline-md text-on-surface-variant max-w-3xl leading-tight" style="font-size:40px">
+            Vert Durable
+          </p>
+        </div>
+
+        <div class="mt-auto pt-lg border-t border-outline-variant flex items-center justify-between flex-wrap gap-sm">
+          <div class="flex items-center gap-sm">
+            <div class="h-2 w-2 bg-primary"></div>
+            <span class="font-code-label text-code-label text-on-surface-variant">Sylvain Ramaradjou · Architecte Notion · Juin 2026</span>
+          </div>
+          <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Confidentiel · préparé pour Vert Durable</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 1 — SOMMAIRE                                            -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-1" data-slide="1">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Sommaire</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce qu'on va voir <span class="text-primary italic">ensemble</span></h1>
+      <p class="font-code-label text-code-label text-outline mt-sm uppercase tracking-widest">12 sections, du constat à l'offre.</p>
+    </div>
+
+    <div class="flex-grow flex flex-col">
+      <a href="#slide-2" class="group flex items-baseline gap-lg py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-12 shrink-0">01</span>
+        <span class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Contexte</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block">Là où tu en es aujourd'hui</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-4" class="group flex items-baseline gap-lg py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-12 shrink-0">02</span>
+        <span class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Problèmes</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block">Les 3 frictions qui cassent ton pilotage</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-6" class="group flex items-baseline gap-lg py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-12 shrink-0">03</span>
+        <span class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Impacts</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block">Ce que ça te coûte vraiment</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-8" class="group flex items-baseline gap-lg py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-12 shrink-0">04</span>
+        <span class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Ce que j'y vois</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block">La cause racine que personne n'a nommée</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-10" class="group flex items-baseline gap-lg py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-12 shrink-0">05</span>
+        <span class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Objectifs</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block">Là où on va</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-12" class="group flex items-baseline gap-lg py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-12 shrink-0">06</span>
+        <span class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Solution</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block">3 piliers pour une data fiable</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-14" class="group flex items-baseline gap-lg py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-12 shrink-0">07</span>
+        <span class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Pourquoi cette méthode</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block">Plutôt que les alternatives évidentes</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-16" class="group flex items-baseline gap-lg py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-12 shrink-0">08</span>
+        <span class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Plan d'action</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block">2 lots, du quick win au pilotage</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-20" class="group flex items-baseline gap-lg py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-12 shrink-0">09</span>
+        <span class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Roadmap</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block">Le calendrier, juillet à la rentrée</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-23" class="group flex items-baseline gap-lg py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-12 shrink-0">10</span>
+        <span class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Références</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block">Ils avaient les mêmes frictions</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-25" class="group flex items-baseline gap-lg py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-12 shrink-0">11</span>
+        <span class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Engagements</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block">Ce sur quoi tu peux compter</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-27" class="group flex items-baseline gap-lg py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-12 shrink-0">12</span>
+        <span class="font-title-sm text-title-sm text-on-background flex-grow group-hover:text-primary transition-colors">Offre</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block">L'investissement</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all text-lg">arrow_forward</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2 — DIVIDER CONTEXTE                                    -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-2" data-slide="2">
+  <div class="flex-grow flex flex-col justify-center px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">01</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none mb-md">Contexte</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant leading-tight" style="font-size:24px">Là où tu en es aujourd'hui.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3 — CONTEXTE                                            -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-3" data-slide="3">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-lg">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">01 · Contexte</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Vert Durable : 300 copros, un seul outil de pilotage</h1>
+    </div>
+
+    <div class="flex-grow flex flex-col gap-md">
+      <div class="relative border-l border-r border-on-background/10 px-margin py-lg">
+        <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+        <p class="font-body-reg text-body-reg text-on-background leading-relaxed max-w-3xl mb-md">
+          Tu accompagnes 200 à 300 copropriétés sur des rénovations énergétiques. Des projets de 4 à 6 ans, du montage de dossier de subvention jusqu'au versement. 15 personnes, moitié gestion de projet, moitié montage administratif.
+        </p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant leading-relaxed max-w-3xl">
+          Notion est ton seul outil de gestion de projet. Toute la mécanique de suivi vit dedans. Et c'est exactement là que ça coince.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-md mt-auto">
+        <div class="bg-surface-container-lowest border border-on-background/20 p-md relative flex flex-col">
+          <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+          <div class="font-code-label text-code-label text-primary uppercase mb-xs">Accompagnement</div>
+          <div class="font-title-sm text-title-sm text-on-background">1 à 3 ans</div>
+          <p class="font-code-label text-code-label text-outline mt-sm uppercase">Phase 1</p>
+        </div>
+        <div class="bg-surface-container-lowest border border-on-background/20 p-md relative flex flex-col">
+          <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+          <div class="font-code-label text-code-label text-primary uppercase mb-xs">Travaux</div>
+          <div class="font-title-sm text-title-sm text-on-background">~18 mois</div>
+          <p class="font-code-label text-code-label text-outline mt-sm uppercase">Phase 2</p>
+        </div>
+        <div class="bg-surface-container-lowest border border-on-background/20 p-md relative flex flex-col">
+          <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+          <div class="font-code-label text-code-label text-secondary uppercase mb-xs">Subvention</div>
+          <div class="font-title-sm text-title-sm text-on-background">~1 an après</div>
+          <p class="font-code-label text-code-label text-outline mt-sm uppercase">Phase 3</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4 — DIVIDER PROBLÈMES                                   -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-4" data-slide="4">
+  <div class="flex-grow flex flex-col justify-center px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">02</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none mb-md">Problèmes</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant leading-tight" style="font-size:24px">3 frictions qui cassent ton pilotage.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5 — PROBLÈMES (3 cards)                                 -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-5" data-slide="5">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">02 · Problèmes</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Trois frictions, un même symptôme</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md flex-grow">
+      <article class="bg-surface-container-lowest border border-on-background p-md relative flex flex-col">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="flex items-start gap-md mb-sm">
+          <span class="material-symbols-outlined text-primary text-3xl">visibility_off</span>
+          <div><div class="font-code-label text-code-label text-secondary mb-xs uppercase">/DATA MORTE</div><h3 class="font-title-sm text-title-sm text-on-background">La data n'est jamais à jour</h3></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-sm flex-grow">L'interface est trop chargée. Les équipes ne savent pas quoi remplir, alors elles le font en fin de semaine, ou pas du tout.</p>
+        <div class="border-t border-outline-variant pt-sm"><span class="font-code-label text-code-label text-error uppercase tracking-widest">Dashboards inexploitables</span></div>
+      </article>
+
+      <article class="bg-surface-container-lowest border border-on-background p-md relative flex flex-col">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="flex items-start gap-md mb-sm">
+          <span class="material-symbols-outlined text-primary text-3xl">history_toggle_off</span>
+          <div><div class="font-code-label text-code-label text-secondary mb-xs uppercase">/ZÉRO HISTORIQUE</div><h3 class="font-title-sm text-title-sm text-on-background">Aucune photo dans le temps</h3></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-sm flex-grow">Tu vois un taux à 25%, mais impossible de savoir s'il était déjà à 25% la semaine dernière. Tu ne sais pas qui a avancé.</p>
+        <div class="border-t border-outline-variant pt-sm"><span class="font-code-label text-code-label text-error uppercase tracking-widest">Blocages détectés trop tard</span></div>
+      </article>
+
+      <article class="bg-surface-container-lowest border border-on-background p-md relative flex flex-col">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="flex items-start gap-md mb-sm">
+          <span class="material-symbols-outlined text-primary text-3xl">warning</span>
+          <div><div class="font-code-label text-code-label text-secondary mb-xs uppercase">/SAISIE FRAGILE</div><h3 class="font-title-sm text-title-sm text-on-background">Les cases se décochent par erreur</h3></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-sm flex-grow">En manipulant le tableau, on décoche sans faire exprès. La donnée de contrôle devient fausse, et tout le pilotage avec.</p>
+        <div class="border-t border-outline-variant pt-sm"><span class="font-code-label text-code-label text-error uppercase tracking-widest">Pilotage à l'aveugle</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6 — DIVIDER IMPACTS                                     -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-6" data-slide="6">
+  <div class="flex-grow flex flex-col justify-center px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">03</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none mb-md">Impacts</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant leading-tight" style="font-size:24px">Ce que ça te coûte vraiment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7 — IMPACTS CHIFFRÉS                                    -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-7" data-slide="7">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">03 · Impacts</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce que ça te coûte vraiment</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md flex-grow">
+      <div class="relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md">Retard détecté</div>
+        <div class="font-display-lg leading-none font-medium text-error mb-xs" style="font-size:56px">3 à 6</div>
+        <div class="font-body-reg text-body-reg text-on-surface-variant mb-md">mois trop tard</div>
+        <div class="mt-auto border-t border-outline-variant pt-md"><div class="font-code-label text-code-label text-on-surface-variant">Des projets qui dérapent et qu'on découvre bien après, faute de visibilité semaine après semaine.</div></div>
+      </div>
+
+      <div class="relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md">Historique</div>
+        <div class="font-display-lg leading-none font-medium text-error mb-xs" style="font-size:56px">0</div>
+        <div class="font-body-reg text-body-reg text-on-surface-variant mb-md">photo dans le temps</div>
+        <div class="mt-auto border-t border-outline-variant pt-md"><div class="font-code-label text-code-label text-on-surface-variant">Impossible de dire si un dossier a avancé depuis la semaine dernière.</div></div>
+      </div>
+
+      <div class="relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md">Pilotage</div>
+        <div class="font-display-lg leading-none font-medium text-error mb-xs" style="font-size:56px">200-300</div>
+        <div class="font-body-reg text-body-reg text-on-surface-variant mb-md">copros sur une data peu fiable</div>
+        <div class="mt-auto border-t border-outline-variant pt-md"><div class="font-code-label text-code-label text-on-surface-variant">Tout le portefeuille suivi sur des tableaux dont la donnée n'est pas sûre.</div></div>
+      </div>
+    </div>
+
+    <div class="mt-md bg-on-background text-on-primary px-lg py-md">
+      <div class="font-code-label text-code-label uppercase tracking-widest">Résultat : tu pilotes en convoquant des réunions, et certaines échéances de subvention passent à la trappe avant que tu les voies arriver.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8 — DIVIDER CE QUE J'Y VOIS                             -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-8" data-slide="8">
+  <div class="flex-grow flex flex-col justify-center px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">04</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none mb-md">Ce que j'y vois</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant leading-tight" style="font-size:24px">La cause racine que personne n'a nommée.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9 — CE QUE J'Y VOIS (PIVOT)                             -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-9" data-slide="9">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">04 · Ce que j'y vois</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">La cause racine que personne n'a nommée</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md flex-grow">
+      <div class="relative border border-primary/40 p-lg flex flex-col bg-primary-fixed/10">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-primary"></div>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-md flex items-center gap-sm"><span class="material-symbols-outlined text-lg">center_focus_strong</span>La cause racine</div>
+        <p class="font-body-reg text-body-reg text-on-background mb-md leading-relaxed">Le problème n'est pas Notion. C'est que tu demandes à tes équipes de faire du reporting EN PLUS de leur métier. Tant que mettre à jour la data est une corvée séparée, elle sera faite en retard, mal, ou pas du tout.</p>
+        <p class="font-body-reg text-body-reg text-on-background font-medium leading-relaxed mt-auto pt-md border-t border-primary/20">La saisie doit devenir le sous-produit naturel du travail, pas une tâche en plus.</p>
+      </div>
+
+      <div class="relative border border-error/30 p-lg flex flex-col bg-error-container/20">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-error"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-error"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-error"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-error"></div>
+        <div class="font-code-label text-code-label text-error uppercase tracking-widest mb-md flex items-center gap-sm"><span class="material-symbols-outlined text-lg">trending_up</span>Si rien ne change...</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-md leading-relaxed">Tu continues à compenser le flou de l'outil par des réunions et ton attention perso. Ça tient tant que tu es dans chaque dossier.</p>
+        <p class="font-body-reg text-body-reg text-on-background font-medium leading-relaxed mt-auto pt-md border-t border-error/20">Mais à 300 copros et en croissance, ce modèle casse : c'est toi le point de contrôle, donc c'est toi le goulot.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10 — DIVIDER OBJECTIFS                                  -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-10" data-slide="10">
+  <div class="flex-grow flex flex-col justify-center px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">05</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none mb-md">Objectifs</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant leading-tight" style="font-size:24px">Là où on va.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11 — OBJECTIFS (AUJOURD'HUI vs DEMAIN)                  -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-11" data-slide="11">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">05 · Objectifs</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Là où on va</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md flex-grow">
+      <div class="relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-md border-b border-outline-variant pb-md">Aujourd'hui</div>
+        <ul class="flex flex-col gap-md flex-grow">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-surface-variant"><span class="font-code-label text-code-label text-outline mt-1 shrink-0">·</span><span>Vue Notion unique pour tous · bruit visuel, focus perdu</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-surface-variant"><span class="font-code-label text-code-label text-outline mt-1 shrink-0">·</span><span>Data remplie en fin de semaine · pilotage faux en haut</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-surface-variant"><span class="font-code-label text-code-label text-outline mt-1 shrink-0">·</span><span>État reconstruit en réunion · du temps perdu à la main</span></li>
+        </ul>
+      </div>
+
+      <div class="relative border border-primary/40 p-lg flex flex-col bg-primary-fixed/10">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-primary"></div>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-md border-b border-primary/20 pb-md">Demain</div>
+        <ul class="flex flex-col gap-md flex-grow">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary mt-1 shrink-0">→</span><span>Un dashboard par personne · uniquement ses tâches</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary mt-1 shrink-0">→</span><span>Saisie en 3 clics, alerte si oubli · data à jour en continu</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary mt-1 shrink-0">→</span><span>État lu en temps réel + historique · zéro réunion de contrôle</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-md bg-secondary text-on-secondary px-lg py-md flex items-center gap-md">
+      <span class="material-symbols-outlined text-2xl shrink-0">trending_up</span>
+      <p class="font-title-sm text-title-sm">= tu pilotes 300 copros d'un coup d'œil, sans rentrer dans chaque dossier.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12 — DIVIDER SOLUTION                                   -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-12" data-slide="12">
+  <div class="flex-grow flex flex-col justify-center px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">06</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none mb-md">Solution</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant leading-tight" style="font-size:24px">3 piliers pour une data enfin fiable.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 13 — SOLUTION (3 piliers)                              -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-13" data-slide="13">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">06 · Solution</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">3 piliers pour une data fiable</h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm max-w-3xl">On ne refait pas ta structure, elle est bonne. On agit sur la couche qui coince : ce que tes équipes voient et remplissent, et ce que toi tu lis.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md flex-grow">
+      <article class="bg-surface-container-lowest border border-on-background p-lg relative flex flex-col">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">account_circle</span>
+        <div class="font-code-label text-code-label text-secondary mb-sm uppercase">Pilier 1</div>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-md">Une vue par personne</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Chaque collaborateur arrive sur SON dashboard : ses tâches, rien d'autre. Boutons au lieu de cases fragiles, champs inutiles masqués selon la phase.</p>
+      </article>
+
+      <article class="bg-surface-container-lowest border border-on-background p-lg relative flex flex-col">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">task_alt</span>
+        <div class="font-code-label text-code-label text-secondary mb-sm uppercase">Pilier 2</div>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-md">La data se remplit presque toute seule</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Indicateur de complétude visible, alertes automatiques quand une donnée critique manque. Faire son métier suffit à alimenter le pilotage.</p>
+      </article>
+
+      <article class="bg-surface-container-lowest border border-on-background p-lg relative flex flex-col">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">query_stats</span>
+        <div class="font-code-label text-code-label text-secondary mb-sm uppercase">Pilier 3</div>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-md">L'historique enfin visible</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Une base de logs qui photographie l'avancement chaque jour. Tu vois les courbes dans le temps et tu repères un dossier figé à 25% avant qu'il soit trop tard.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 14 — DIVIDER POURQUOI CETTE MÉTHODE                     -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-14" data-slide="14">
+  <div class="flex-grow flex flex-col justify-center px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">07</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none mb-md">Pourquoi cette méthode</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant leading-tight" style="font-size:24px">Plutôt que les alternatives évidentes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 15 — POURQUOI CETTE MÉTHODE (3 colonnes)               -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-15" data-slide="15">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">07 · Pourquoi cette méthode</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Plutôt que les alternatives évidentes</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md flex-grow">
+      <div class="relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest mb-md border-b border-outline-variant pb-md">vs Le faire en interne</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow leading-relaxed">Ton dev code déjà tes outils maison. Mais chaque heure sur Notion, c'est une heure de moins sur ta base copropriétaires. Je livre la couche pilotage clé en main pendant qu'il reste sur son chantier prioritaire.</p>
+      </div>
+
+      <div class="relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest mb-md border-b border-outline-variant pb-md">vs Changer d'outil</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow leading-relaxed">Repartir sur un autre logiciel de gestion de projet, c'est des mois de migration et une équipe à reformer. Ta structure Notion est déjà bonne : on l'optimise au lieu de tout jeter.</p>
+      </div>
+
+      <div class="relative border border-primary/40 p-lg flex flex-col bg-primary-fixed/10">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-primary"></div>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-md border-b border-primary/20 pb-md">vs Rester comme ça</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow leading-relaxed">Les réunions et ton attention perso tiennent aujourd'hui. À 300 copros en croissance, ça casse, et c'est toi qui absorbes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 16 — DIVIDER PLAN D'ACTION                             -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-16" data-slide="16">
+  <div class="flex-grow flex flex-col justify-center px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">08</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none mb-md">Plan d'action</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant leading-tight" style="font-size:24px">2 lots, du quick win visible au pilotage complet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 17 — PLAN D'ACTION OVERVIEW (2 cards)                  -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-17" data-slide="17">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">08 · Plan d'action</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">2 lots pour avancer vite sans tout bloquer</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md flex-grow">
+      <article class="relative border border-primary p-lg bg-primary text-on-primary flex flex-col">
+        <div class="absolute top-0 left-0 w-2 h-2 bg-on-primary"></div><div class="absolute top-0 right-0 w-2 h-2 bg-on-primary"></div><div class="absolute bottom-0 left-0 w-2 h-2 bg-on-primary"></div><div class="absolute bottom-0 right-0 w-2 h-2 bg-on-primary"></div>
+        <div class="font-code-label text-code-label text-on-primary/70 uppercase mb-md tracking-widest">Lot 01 · Audit + Quick-wins UX</div>
+        <div class="font-display-lg leading-none font-medium text-on-primary mb-md" style="font-size:56px">01</div>
+        <p class="font-body-reg text-body-reg text-on-primary/80 flex-grow">On cadre, et on livre tout de suite les améliorations visibles côté utilisateur. Avant l'été.</p>
+      </article>
+
+      <article class="relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md tracking-widest">Lot 02 · Pilotage &amp; historisation</div>
+        <div class="font-display-lg leading-none font-medium text-on-background mb-md" style="font-size:56px">02</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">On construit la couche de suivi dans le temps et le dashboard de pilotage. À la rentrée.</p>
+      </article>
+    </div>
+
+    <div class="mt-md bg-on-background text-on-primary px-lg py-md flex items-center justify-center">
+      <div class="font-code-label text-code-label uppercase tracking-widest">Lot 1 : avant août · Lot 2 : à la rentrée</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 18 — PLAN D'ACTION · LOT 1                             -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-18" data-slide="18">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">08 · Plan d'action · Lot 01 sur 02</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Audit de cadrage + Quick-wins UX</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md flex-grow">
+      <div class="relative border border-on-background/10 p-lg flex flex-col bg-surface-container-low">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md border-b border-outline-variant pb-md">Pourquoi c'est indispensable</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant leading-relaxed">C'est la fondation. Tant que tes équipes ne remplissent pas la data correctement, aucun pilotage n'est fiable. Et l'audit cadre précisément ce qu'on construira au Lot 2.</p>
+      </div>
+
+      <div class="relative border border-primary/30 p-lg flex flex-col bg-primary-fixed/5">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-primary"></div>
+        <div class="font-code-label text-code-label text-primary uppercase mb-md border-b border-primary/20 pb-md">Ce qu'on va y faire</div>
+        <ol class="flex flex-col gap-sm">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">1.</span><span>Audit de l'usage Notion actuel : qui remplit quoi, où ça bloque, quelles données sont vraiment critiques.</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">2.</span><span>Un dashboard personnalisé par collaborateur : une seule vue, ses tâches, rien d'autre.</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">3.</span><span>Simplification UX : boutons au lieu de cases à cocher, champs masqués par phase, alertes de complétude.</span></li>
+        </ol>
+      </div>
+
+      <div class="relative border border-secondary/30 p-lg flex flex-col bg-secondary-fixed/10">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-secondary"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-secondary"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-secondary"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-secondary"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase mb-md border-b border-secondary/20 pb-md">Livrables</div>
+        <ul class="flex flex-col gap-sm">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Cartographie de l'usage + cahier des charges du Lot 2 (doc Notion)</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Dashboards perso déployés pour chaque poste</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Système d'alertes data manquante + boutons de saisie</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 19 — PLAN D'ACTION · LOT 2                             -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-19" data-slide="19">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">08 · Plan d'action · Lot 02 sur 02</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Pilotage &amp; historisation</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md flex-grow">
+      <div class="relative border border-on-background/10 p-lg flex flex-col bg-surface-container-low">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md border-b border-outline-variant pb-md">Pourquoi c'est indispensable</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant leading-relaxed">Une fois la data propre, on la fait parler dans le temps. C'est ce qui te manque vraiment : voir l'avancement évoluer et repérer les blocages avant qu'ils ne coûtent un retard.</p>
+      </div>
+
+      <div class="relative border border-primary/30 p-lg flex flex-col bg-primary-fixed/5">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-primary"></div>
+        <div class="font-code-label text-code-label text-primary uppercase mb-md border-b border-primary/20 pb-md">Ce qu'on va y faire</div>
+        <ol class="flex flex-col gap-sm">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">1.</span><span>Base de cohorte : un log quotidien de l'avancement de chaque projet.</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">2.</span><span>Reporting hebdo automatique : un récap des tâches qui n'ont pas bougé.</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">3.</span><span>Dashboard de pilotage externe (généré via Claude) : ta vue stratégique sur les 300 copros, échéances critiques en tête.</span></li>
+        </ol>
+      </div>
+
+      <div class="relative border border-secondary/30 p-lg flex flex-col bg-secondary-fixed/10">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-secondary"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-secondary"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-secondary"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-secondary"></div>
+        <div class="font-code-label text-code-label text-secondary uppercase mb-md border-b border-secondary/20 pb-md">Livrables</div>
+        <ul class="flex flex-col gap-sm">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Base de logs + graphiques d'avancement dans le temps</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Email de reporting hebdo automatisé</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Dashboard de pilotage avec alertes échéances critiques</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 20 — DIVIDER ROADMAP                                    -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-20" data-slide="20">
+  <div class="flex-grow flex flex-col justify-center px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">09</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none mb-md">Roadmap</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant leading-tight" style="font-size:24px">Le calendrier, de juillet à la rentrée.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 21 — ROADMAP (timeline)                                -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-21" data-slide="21">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">09 · Roadmap</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Le calendrier, juillet à la rentrée</h1>
+    </div>
+
+    <div class="relative border border-on-background/10 p-lg flex-grow flex flex-col justify-center bg-surface-container-lowest overflow-x-auto">
+      <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+
+      <div class="relative flex items-start justify-between mb-md min-w-[640px]">
+        <div class="absolute top-[5px] left-[6px] right-[6px] h-px bg-on-background/20 z-0"></div>
+        <div class="flex flex-col items-center flex-1"><div class="w-3 h-3 bg-primary rounded-full relative z-10 shrink-0"></div></div>
+        <div class="flex flex-col items-center flex-1"><div class="w-3 h-3 bg-primary rounded-full relative z-10 shrink-0"></div></div>
+        <div class="flex flex-col items-center flex-1"><div class="w-3 h-3 bg-on-background/30 rounded-full border border-on-background/20 relative z-10 shrink-0"></div></div>
+        <div class="flex flex-col items-center flex-1"><div class="w-3 h-3 bg-on-background/30 rounded-full border border-on-background/20 relative z-10 shrink-0"></div></div>
+        <div class="flex flex-col items-center flex-1"><div class="w-3 h-3 bg-secondary rounded-full border border-secondary relative z-10 shrink-0"></div></div>
+      </div>
+
+      <div class="flex items-start justify-between min-w-[640px]">
+        <div class="flex flex-col items-center flex-1 px-xs"><div class="font-eyebrow text-eyebrow text-primary uppercase text-center mb-xs leading-tight">Sem. 1 · juillet</div><div class="font-code-label text-code-label text-on-background text-center leading-tight">Audit + atelier équipes</div></div>
+        <div class="flex flex-col items-center flex-1 px-xs"><div class="font-eyebrow text-eyebrow text-primary uppercase text-center mb-xs leading-tight">Sem. 2-3 · juillet</div><div class="font-code-label text-code-label text-on-background text-center leading-tight">Dashboards perso + UX simplifiée</div><div class="font-eyebrow text-eyebrow text-outline text-center mt-xs leading-tight">Lot 1 livré</div></div>
+        <div class="flex flex-col items-center flex-1 px-xs"><div class="font-eyebrow text-eyebrow text-outline uppercase text-center mb-xs leading-tight">Août</div><div class="font-code-label text-code-label text-on-background text-center leading-tight">Pause</div><div class="font-eyebrow text-eyebrow text-outline text-center mt-xs leading-tight">Fermeture Vert Durable</div></div>
+        <div class="flex flex-col items-center flex-1 px-xs"><div class="font-eyebrow text-eyebrow text-outline uppercase text-center mb-xs leading-tight">Rentrée S1-2</div><div class="font-code-label text-code-label text-on-background text-center leading-tight">Base cohorte + logs</div></div>
+        <div class="flex flex-col items-center flex-1 px-xs"><div class="font-eyebrow text-eyebrow text-secondary uppercase text-center mb-xs leading-tight">Rentrée S3-4</div><div class="font-code-label text-code-label text-on-background text-center leading-tight">Reporting auto + dashboard pilotage</div><div class="font-eyebrow text-eyebrow text-outline text-center mt-xs leading-tight">Lot 2 livré</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 22 — TON IMPLICATION                                    -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-22" data-slide="22">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">09 · Roadmap · Ton implication</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Le temps qu'on te demande</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md flex-grow">
+      <div class="relative border border-primary/40 p-lg flex flex-col bg-primary-fixed/10">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-primary"></div>
+        <div class="font-code-label text-code-label text-primary uppercase mb-md tracking-widest">Au démarrage · une fois</div>
+        <div class="font-display-lg leading-none font-medium text-primary mb-md" style="font-size:56px">2h</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Atelier de cadrage avec un échantillon des équipes (gestion projet + montage admin).</p>
+      </div>
+
+      <div class="relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md tracking-widest">À chaque lot · récurrent</div>
+        <div class="font-display-lg leading-none font-medium text-on-background mb-md" style="font-size:56px">1h + 1h</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">1h de formation à la nouvelle UX pour les équipes · 1h de validation des livrables avec toi.</p>
+      </div>
+    </div>
+
+    <div class="mt-md bg-on-background text-on-primary px-lg py-md">
+      <div class="font-code-label text-code-label uppercase tracking-widest">C'est tout. Un relais interne côté chef de projet, et ta validation aux jalons. Le reste, c'est moi.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 23 — DIVIDER RÉFÉRENCES                                 -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-23" data-slide="23">
+  <div class="flex-grow flex flex-col justify-center px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">10</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none mb-md">Références</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant leading-tight" style="font-size:24px">Ils avaient les mêmes frictions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 24 — RÉFÉRENCES (2 placeholders)                       -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-24" data-slide="24">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">10 · Références</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ils avaient les mêmes frictions</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md flex-grow">
+      <article class="relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="mb-md"><span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest py-xs px-sm bg-primary-fixed/30 border border-primary-fixed inline-block">Énergie / Réno</span></div>
+        <div class="font-display-lg leading-none font-medium text-outline mb-md" style="font-size:44px">[ à compléter ]</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Cas client à confirmer en review (secteur énergie/réno).</p>
+        <div class="mt-auto pt-md border-t border-outline-variant"><a href="#" class="font-code-label text-code-label text-primary uppercase tracking-widest inline-flex items-center gap-1">Voir le cas <span class="material-symbols-outlined text-base">arrow_outward</span></a></div>
+      </article>
+
+      <article class="relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="mb-md"><span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest py-xs px-sm bg-primary-fixed/30 border border-primary-fixed inline-block">PME services</span></div>
+        <div class="font-display-lg leading-none font-medium text-outline mb-md" style="font-size:44px">[ à compléter ]</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Cas client à confirmer en review.</p>
+        <div class="mt-auto pt-md border-t border-outline-variant"><a href="#" class="font-code-label text-code-label text-primary uppercase tracking-widest inline-flex items-center gap-1">Voir le cas <span class="material-symbols-outlined text-base">arrow_outward</span></a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 25 — DIVIDER ENGAGEMENTS                                -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-25" data-slide="25">
+  <div class="flex-grow flex flex-col justify-center px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">11</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none mb-md">Engagements</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant leading-tight" style="font-size:24px">Ce sur quoi tu peux compter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 26 — ENGAGEMENTS (3 blocs + footer)                    -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-26" data-slide="26">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">11 · Engagements</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce sur quoi tu peux compter</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md flex-grow">
+      <div class="relative border border-on-background p-lg flex flex-col bg-surface-container-lowest">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">schedule</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-md">Délais tenus</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow leading-relaxed">Chaque livrable tombe au jour J. Si un truc doit glisser, je te préviens 48h avant, pas le jour même.</p>
+      </div>
+      <div class="relative border border-on-background p-lg flex flex-col bg-surface-container-lowest">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">visibility</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-md">Transparence</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow leading-relaxed">Un espace partagé à jour en continu, un point de 30 min par semaine, et je réponds sous 24h.</p>
+      </div>
+      <div class="relative border border-primary/40 p-lg flex flex-col bg-primary-fixed/10">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-primary"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-primary"></div>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">verified_user</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-md">Exigence</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow leading-relaxed">Si un livrable ne colle pas au cadrage validé, je le reprends sans surcoût. Tant que ce n'est pas net, on continue.</p>
+      </div>
+    </div>
+
+    <div class="mt-md pt-md border-t border-outline-variant">
+      <div class="font-code-label text-code-label text-outline uppercase tracking-widest text-center">
+        Notion Solution Partner &nbsp;·&nbsp; PMP® &nbsp;·&nbsp; Black Belt Lean Six Sigma
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 27 — DIVIDER OFFRE                                      -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-27" data-slide="27">
+  <div class="flex-grow flex flex-col justify-center px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">12</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none mb-md">Offre</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant leading-tight" style="font-size:24px">L'investissement.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 28 — OFFRE (prix ICI uniquement)                       -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-28" data-slide="28">
+  <div class="flex-grow flex flex-col px-margin py-xl max-w-5xl mx-auto w-full">
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-md">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">12 · Offre</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Reprendre le pilotage de tes copros, en 2 lots</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-md">
+      <div class="relative border border-primary p-lg bg-primary text-on-primary flex flex-col">
+        <div class="absolute top-0 left-0 w-2 h-2 bg-on-primary"></div><div class="absolute top-0 right-0 w-2 h-2 bg-on-primary"></div><div class="absolute bottom-0 left-0 w-2 h-2 bg-on-primary"></div><div class="absolute bottom-0 right-0 w-2 h-2 bg-on-primary"></div>
+        <div class="font-code-label text-code-label text-on-primary/70 uppercase mb-md tracking-widest">Lot 1 · Audit + Quick-wins UX</div>
+        <div class="border-y border-on-primary/20 py-md">
+          <div class="font-display-lg leading-none font-medium text-on-primary" style="font-size:48px">2 900 € <span style="font-size:18px">HT</span></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-primary/80 mt-md flex-grow">Avant l'été. L'audit inclus cadre le Lot 2.</p>
+      </div>
+
+      <div class="relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <div class="absolute top-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute top-0 right-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 left-0 w-1.5 h-1.5 bg-on-background"></div><div class="absolute bottom-0 right-0 w-1.5 h-1.5 bg-on-background"></div>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md tracking-widest">Lot 2 · Pilotage &amp; historisation</div>
+        <div class="border-y border-outline-variant py-md">
+          <div class="font-display-lg leading-none font-medium text-on-background" style="font-size:48px">7 500 € <span style="font-size:18px">HT</span></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-md flex-grow">À la rentrée, une fois le Lot 1 en main.</p>
+      </div>
+    </div>
+
+    <div class="bg-on-background text-on-primary px-lg py-md flex items-center justify-between flex-wrap gap-sm mb-md">
+      <div class="font-code-label text-code-label uppercase tracking-widest">Total</div>
+      <div class="font-title-sm text-title-sm text-secondary-container">10 400 € HT</div>
+      <div class="font-code-label text-code-label text-on-primary/60 uppercase">Étalé sur juillet et la rentrée</div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+      <div class="relative border border-on-background/10 p-md bg-surface-container-low">
+        <div class="font-code-label text-code-label text-outline uppercase mb-xs">Bénéfice clé</div>
+        <p class="font-body-reg text-body-reg text-on-background">Tu reprends la main sur 300 copros sans y passer tes semaines, et sans recruter.</p>
+      </div>
+      <div class="relative border border-on-background/10 p-md bg-surface-container-low">
+        <div class="font-code-label text-code-label text-outline uppercase mb-xs">Modalités</div>
+        <p class="font-body-reg text-body-reg text-on-background">Par lot : 50% au démarrage, 50% à la livraison. Lot 2 déclenché seulement quand tu veux à la rentrée.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 29 — CLOSING                                            -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-29" data-slide="29">
+  <div class="flex-grow flex items-center justify-center px-margin py-xl relative overflow-hidden">
+    <div class="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+    <div class="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-secondary-container opacity-40 rounded-full blur-[100px] -z-10 mix-blend-multiply"></div>
+
+    <div class="max-w-4xl w-full">
+      <div class="relative border-l border-r border-on-background/10 px-margin py-xl bg-surface-container-lowest/80 backdrop-blur-sm">
+        <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+
+        <div class="mb-xl">
+          <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none mb-md">On commence<br/>par le Lot 1 ?</h1>
+          <div class="w-24 h-1 bg-secondary mb-lg"></div>
+          <p class="font-headline-md text-on-surface-variant leading-tight max-w-xl" style="font-size:28px">On commence par le Lot 1, et tu vois le résultat avant l'été.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-lg mb-xl">
+          <div class="flex flex-col gap-md">
+            <div class="border-l-2 border-primary pl-md"><div class="font-code-label text-code-label text-outline uppercase mb-xs">Call de validation</div><div class="font-title-sm text-title-sm text-on-background">Mardi 30/06</div></div>
+            <div class="border-l-2 border-secondary pl-md"><div class="font-code-label text-code-label text-outline uppercase mb-xs">Démarrage Lot 1</div><div class="font-title-sm text-title-sm text-on-background">Juillet</div></div>
+          </div>
+          <div class="flex flex-col gap-md justify-center">
+            <div class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary">mail</span><a href="mailto:sylvain@ramalogic.com" class="font-body-reg text-body-reg text-on-background hover:text-primary transition-colors">sylvain@ramalogic.com</a></div>
+          </div>
+        </div>
+
+        <div class="pt-lg border-t border-outline-variant">
+          <p class="font-body-reg text-body-reg text-on-surface-variant italic mb-sm">Merci pour ta confiance. À dispo pour en discuter.</p>
+          <div class="font-code-label text-code-label text-outline uppercase tracking-widest">Confidentiel · préparé pour Vert Durable</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ====== OVERVIEW GRID (ESC) ====== -->
+<div id="overview" class="fixed inset-0 z-[60] bg-background/95 backdrop-blur-md hidden overflow-y-auto p-margin">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="flex items-center justify-between mb-lg sticky top-0 bg-background/0 py-sm">
+      <div class="flex items-center gap-md">
+        <div class="font-title-sm text-title-sm font-medium tracking-tight">Vue d'ensemble</div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Vert Durable · 30 slides</span>
+      </div>
+      <button id="overview-close" aria-label="Fermer" class="bg-surface-container-lowest border border-on-background w-10 h-10 flex items-center justify-center hover:bg-on-background hover:text-on-primary transition-colors">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div id="overview-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-md"></div>
+  </div>
+</div>
+
+<nav class="nav-controls fixed bottom-margin right-margin z-50 flex flex-col gap-sm">
+  <button id="prev-btn" aria-label="Slide précédente" class="bg-surface-container-lowest border border-on-background w-12 h-12 flex items-center justify-center hover:bg-on-background hover:text-on-primary transition-colors group">
+    <span class="material-symbols-outlined">arrow_upward</span>
+  </button>
+  <button id="next-btn" aria-label="Slide suivante" class="bg-on-background text-on-primary border border-on-background w-12 h-12 flex items-center justify-center hover:bg-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_downward</span>
+  </button>
+</nav>
+
+<footer class="fixed bottom-0 left-0 right-margin md:right-auto z-40 hidden md:block bg-on-background text-on-primary px-md py-xs font-eyebrow text-eyebrow uppercase tracking-widest">
+  Confidentiel · préparé pour Vert Durable
+</footer>
+
+<script>
+  const viewport = document.querySelector('.slides-viewport');
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  document.getElementById('total-slides').textContent = String(total).padStart(2, '0');
+
+  let currentIdx = 0;
+
+  function updateCounter() {
+    const viewportRect = viewport.getBoundingClientRect();
+    const center = viewportRect.top + viewportRect.height / 2;
+    let closest = 0;
+    let closestDist = Infinity;
+    slides.forEach((slide, idx) => {
+      const r = slide.getBoundingClientRect();
+      const slideCenter = r.top + r.height / 2;
+      const dist = Math.abs(slideCenter - center);
+      if (dist < closestDist) { closestDist = dist; closest = idx; }
+    });
+    currentIdx = closest;
+    document.getElementById('current-slide').textContent = String(closest + 1).padStart(2, '0');
+  }
+
+  function goToSlide(idx) {
+    if (idx < 0 || idx >= total) return;
+    slides[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.getElementById('prev-btn').addEventListener('click', () => goToSlide(currentIdx - 1));
+  document.getElementById('next-btn').addEventListener('click', () => goToSlide(currentIdx + 1));
+
+  /* ===== Overview grid (ESC) ===== */
+  const overview = document.getElementById('overview');
+  const overviewGrid = document.getElementById('overview-grid');
+  const labels = [
+    "Couverture", "Sommaire",
+    "01 · Contexte", "Contexte",
+    "02 · Problèmes", "Problèmes",
+    "03 · Impacts", "Impacts",
+    "04 · Ce que j'y vois", "Ce que j'y vois",
+    "05 · Objectifs", "Objectifs",
+    "06 · Solution", "Solution",
+    "07 · Pourquoi cette méthode", "Pourquoi cette méthode",
+    "08 · Plan d'action", "Plan d'action", "Lot 1 · Audit + UX", "Lot 2 · Pilotage",
+    "09 · Roadmap", "Roadmap", "Ton implication",
+    "10 · Références", "Références",
+    "11 · Engagements", "Engagements",
+    "12 · Offre", "Offre", "Closing"
+  ];
+  slides.forEach((slide, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'overview-card';
+    const num = document.createElement('span');
+    num.className = 'ov-num';
+    num.textContent = String(idx + 1).padStart(2, '0');
+    const label = document.createElement('span');
+    label.className = 'ov-label';
+    label.textContent = labels[idx] || ('Slide ' + (idx + 1));
+    btn.appendChild(num);
+    btn.appendChild(label);
+    btn.addEventListener('click', () => { closeOverview(); setTimeout(() => goToSlide(idx), 60); });
+    overviewGrid.appendChild(btn);
+  });
+  function openOverview() { overview.classList.remove('hidden'); }
+  function closeOverview() { overview.classList.add('hidden'); }
+  document.getElementById('overview-btn').addEventListener('click', openOverview);
+  document.getElementById('overview-close').addEventListener('click', closeOverview);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      overview.classList.contains('hidden') ? openOverview() : closeOverview();
+      return;
+    }
+    if (!overview.classList.contains('hidden')) return;
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) {
+      e.preventDefault();
+      goToSlide(currentIdx + 1);
+    } else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) {
+      e.preventDefault();
+      goToSlide(currentIdx - 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      goToSlide(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      goToSlide(total - 1);
+    }
+  });
+
+  viewport.addEventListener('scroll', () => {
+    requestAnimationFrame(updateCounter);
+  });
+
+  updateCounter();
+</script>
+
+</body>
+</html>
