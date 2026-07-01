@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Holy × Rama Logic — Proposal</title>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Work+Sans:ital,wght@0,300..700;1,300..600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-dim": "#dcd9d9", "secondary-fixed-dim": "#bdcf7c", "secondary-fixed": "#d9eb95",
+          "on-tertiary": "#ffffff", "surface-tint": "#466556", "on-secondary": "#ffffff",
+          "on-background": "#1c1b1b", "surface-container-highest": "#e5e2e1", "inverse-primary": "#accebc",
+          "error": "#ba1a1a", "on-tertiary-fixed": "#0c1d27", "background": "#fcf9f8",
+          "on-primary-fixed-variant": "#2f4d3f", "primary-fixed-dim": "#accebc", "on-primary-container": "#f5fff7",
+          "surface-container-lowest": "#ffffff", "primary-fixed": "#c8ead8", "surface-variant": "#e5e2e1",
+          "on-primary": "#ffffff", "on-error-container": "#93000a", "on-error": "#ffffff",
+          "primary": "#446254", "outline": "#727974", "on-surface": "#1c1b1b",
+          "tertiary-container": "#657783", "on-tertiary-container": "#fcfcff", "on-tertiary-fixed-variant": "#384954",
+          "tertiary": "#4d5e6a", "on-surface-variant": "#424844", "surface-bright": "#fcf9f8",
+          "error-container": "#ffdad6", "on-secondary-container": "#5c6b24", "surface-container-high": "#ebe7e7",
+          "on-secondary-fixed": "#171e00", "secondary-container": "#d9eb95", "inverse-surface": "#313030",
+          "outline-variant": "#c1c8c2", "surface-container-low": "#f6f3f2", "secondary": "#56641e",
+          "on-primary-fixed": "#012115", "on-secondary-fixed-variant": "#3f4c05", "inverse-on-surface": "#f3f0ef",
+          "surface-container": "#f0edec", "primary-container": "#5c7b6c", "tertiary-fixed-dim": "#b7c9d6",
+          "tertiary-fixed": "#d3e5f3", "surface": "#fcf9f8"
+        },
+        borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        spacing: {
+          "md": "24px", "margin": "clamp(16px, 3.3vw, 32px)", "lg": "clamp(24px, 5vw, 48px)",
+          "xl": "clamp(40px, 8vw, 80px)", "sm": "12px", "gutter": "24px", "base": "8px", "xs": "4px"
+        },
+        fontFamily: {
+          "body-reg": ["Work Sans"], "code-label": ["Space Mono"], "title-sm": ["Clash Grotesk"],
+          "eyebrow": ["Space Mono"], "display-lg": ["Clash Grotesk"], "headline-md": ["Clash Grotesk"]
+        },
+        fontSize: {
+          "display-lg":  ["clamp(2.75rem, 5.5vw, 5rem)",    { "lineHeight": "1.05", "fontWeight": "500" }],
+          "headline-md": ["clamp(1.75rem, 3.6vw, 3rem)",    { "lineHeight": "1.2",  "fontWeight": "500" }],
+          "title-sm":    ["clamp(1.05rem, 1.7vw, 1.5rem)",  { "lineHeight": "1.4",  "fontWeight": "500" }],
+          "body-reg":    ["clamp(0.9rem, 1vw, 1rem)",       { "lineHeight": "1.6",  "fontWeight": "400" }],
+          "code-label":  ["clamp(0.78rem, 0.9vw, 0.875rem)",{ "lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400" }],
+          "eyebrow":     ["clamp(0.7rem, 0.85vw, 0.75rem)", { "lineHeight": "1.0",  "fontWeight": "500" }]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(28,27,27,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(28,27,27,0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  /* viewport-fit (single-page) */
+  .slides-viewport { height: 100vh; height: 100dvh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+  .slide { height: 100vh; height: 100dvh; min-height: 100vh; overflow: hidden; scroll-snap-align: start; position: relative; }
+  .slide > * { min-height: 0; }
+  .slide img { max-height: min(50vh, 420px); object-fit: contain; }
+  .socket { position:absolute; width:6px; height:6px; background:#1c1b1b; }
+  .socket.tl{ top:0; left:0;} .socket.tr{ top:0; right:0;}
+  .socket.bl{ bottom:0; left:0;} .socket.br{ bottom:0; right:0;}
+  /* nav chrome */
+  #chrome { position: fixed; bottom: 18px; right: 18px; z-index: 90; display:flex; align-items:center; gap:8px; }
+  #chrome button { width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:#1c1b1b; color:#fcf9f8; border:none; cursor:pointer; transition:opacity .15s; }
+  #chrome button:hover { opacity:.85; }
+  #counter { font-family:'Space Mono',monospace; font-size:13px; background:#fcf9f8; border:1px solid #1c1b1b; padding:8px 12px; }
+  /* overview */
+  #overview { position:fixed; inset:0; z-index:100; background:rgba(28,27,27,.94); display:none; padding:5vh 5vw; overflow-y:auto; }
+  #overview.open { display:block; }
+  #overview h2 { font-family:'Clash Grotesk',sans-serif; color:#fcf9f8; font-size:1.5rem; margin-bottom:24px; }
+  #ovgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+  #ovgrid button { text-align:left; background:#fcf9f8; border:1px solid #727974; padding:14px 16px; cursor:pointer; display:flex; gap:12px; align-items:baseline; transition:background .15s; }
+  #ovgrid button:hover { background:#d9eb95; }
+  #ovgrid .n { font-family:'Space Mono',monospace; font-size:12px; color:#56641e; }
+  #ovgrid .t { font-family:'Work Sans',sans-serif; font-size:14px; color:#1c1b1b; }
+  @media (prefers-reduced-motion: reduce) { *,*::before,*::after{ animation-duration:.01ms!important; transition-duration:.2s!important;} .slides-viewport{scroll-behavior:auto;} }
+  /* mobile: dense slides stack, let them flow and scroll instead of clipping */
+  @media (max-width: 768px) {
+    .slides-viewport { scroll-snap-type: none; }
+    .slide { height: auto; min-height: 100vh; overflow: visible; scroll-snap-align: none; }
+  }
+  @media print {
+    #chrome,#overview{ display:none!important; }
+    .slides-viewport{ height:auto; overflow:visible; scroll-snap-type:none; }
+    .slide{ height:auto; min-height:0; page-break-after:always; border-bottom:1px solid #1c1b1b; }
+  }
+</style>
+</head>
+<body class="bg-background text-on-background font-body-reg antialiased">
+<div class="slides-viewport" id="viewport">
+
+<!-- ============ SLIDE 0 — COVER ============ -->
+<section class="slide grid-bg bg-background" data-slide="0" data-title="Cover">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Confidential</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin flex items-center relative overflow-hidden">
+      <div class="absolute top-1/4 -right-1/4 w-[700px] h-[700px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+      <div class="absolute -bottom-1/4 -left-1/4 w-[500px] h-[500px] bg-secondary-container opacity-40 rounded-full blur-[100px] -z-10 mix-blend-multiply"></div>
+      <div class="max-w-5xl w-full mx-auto relative">
+        <div class="mb-lg">
+          <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase py-xs px-sm bg-primary-fixed/40 border border-primary-fixed inline-block">Project Proposal · July 2026</span>
+        </div>
+        <h1 class="font-display-lg text-display-lg tracking-tight leading-none mb-md">Holy <span class="text-outline font-light">×</span> Rama Logic</h1>
+        <div class="w-24 h-1 bg-secondary mb-md"></div>
+        <p class="font-headline-md text-headline-md text-on-surface-variant max-w-3xl leading-tight">
+          Rebuilding your Creative Task Manager so 200 people move faster, without breaking what already works.
+        </p>
+        <div class="mt-lg pt-md border-t border-outline-variant flex flex-wrap items-center gap-x-lg gap-y-sm">
+          <div>
+            <div class="font-eyebrow text-eyebrow uppercase text-on-surface-variant tracking-widest mb-xs">Prepared for</div>
+            <div class="font-body-reg text-body-reg font-medium">Nikki Schaal &amp; Bella · Holy</div>
+          </div>
+          <div>
+            <div class="font-eyebrow text-eyebrow uppercase text-on-surface-variant tracking-widest mb-xs">By</div>
+            <div class="font-body-reg text-body-reg font-medium">Sylvain Ramaradjou · Notion Solution Partner</div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="px-margin py-sm shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy Softdrinks GmbH</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 1 — CONTENTS ============ -->
+<section class="slide grid-bg bg-background" data-slide="1" data-title="Contents">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Holy × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-5xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">Contents</span>
+        <h1 class="font-headline-md text-headline-md tracking-tight mb-lg">What we'll walk through</h1>
+        <div class="divide-y divide-on-background/10 border-t border-on-background/10">
+          <div class="flex items-baseline gap-md py-sm"><span class="font-eyebrow text-eyebrow text-secondary w-8 shrink-0">01</span><span class="font-title-sm text-title-sm w-56 shrink-0">Context</span><span class="font-body-reg text-body-reg text-on-surface-variant">Where your system stands today</span></div>
+          <div class="flex items-baseline gap-md py-sm"><span class="font-eyebrow text-eyebrow text-secondary w-8 shrink-0">02</span><span class="font-title-sm text-title-sm w-56 shrink-0">Problems &amp; cost</span><span class="font-body-reg text-body-reg text-on-surface-variant">Three frictions that stop the system scaling</span></div>
+          <div class="flex items-baseline gap-md py-sm"><span class="font-eyebrow text-eyebrow text-secondary w-8 shrink-0">03</span><span class="font-title-sm text-title-sm w-56 shrink-0">What I see</span><span class="font-body-reg text-body-reg text-on-surface-variant">The root cause under the surface</span></div>
+          <div class="flex items-baseline gap-md py-sm"><span class="font-eyebrow text-eyebrow text-secondary w-8 shrink-0">04</span><span class="font-title-sm text-title-sm w-56 shrink-0">The solution</span><span class="font-body-reg text-body-reg text-on-surface-variant">A new architecture, same daily habits</span></div>
+          <div class="flex items-baseline gap-md py-sm"><span class="font-eyebrow text-eyebrow text-secondary w-8 shrink-0">05</span><span class="font-title-sm text-title-sm w-56 shrink-0">The plan &amp; your role</span><span class="font-body-reg text-body-reg text-on-surface-variant">Audit, build in sprints, and what I need from you</span></div>
+          <div class="flex items-baseline gap-md py-sm"><span class="font-eyebrow text-eyebrow text-secondary w-8 shrink-0">06</span><span class="font-title-sm text-title-sm w-56 shrink-0">Proof &amp; offer</span><span class="font-body-reg text-body-reg text-on-surface-variant">A comparable case, my commitments, then the numbers</span></div>
+        </div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy · Logic distilled.</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 2 — CONTEXT ============ -->
+<section class="slide grid-bg bg-background" data-slide="2" data-title="Context">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Holy × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-5xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">01 · Context</span>
+        <h1 class="font-display-lg text-display-lg tracking-tight mb-lg">Where your system stands today</h1>
+        <div class="grid md:grid-cols-5 gap-gutter items-start">
+          <div class="md:col-span-3 space-y-md">
+            <p class="font-body-reg text-body-reg text-on-surface-variant">You built the Creative Task Manager 2.0 ten months ago so every department can brief your in-house agency, design, copy, translation and video, in one single place. No ticket, no work. It brought order to what used to live in Slack.</p>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">It works. Around 200 people rely on it every single day. That is exactly why we will not touch the core recklessly. We improve the engine while the car keeps driving.</p>
+          </div>
+          <div class="md:col-span-2 space-y-sm">
+            <div class="border border-on-background p-md bg-surface-container-lowest relative"><span class="socket tl"></span><span class="socket tr"></span><span class="socket bl"></span><span class="socket br"></span>
+              <div class="font-display-lg text-display-lg leading-none">~200</div><div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider mt-xs">daily users</div></div>
+            <div class="flex gap-sm">
+              <div class="flex-1 border border-outline-variant p-sm bg-surface-container-lowest"><div class="font-title-sm text-title-sm">~50</div><div class="font-code-label text-code-label text-on-surface-variant">linked views</div></div>
+              <div class="flex-1 border border-outline-variant p-sm bg-surface-container-lowest"><div class="font-title-sm text-title-sm">1</div><div class="font-code-label text-code-label text-on-surface-variant">linear pipeline</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy · Logic distilled.</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 3 — PROBLEMS ============ -->
+<section class="slide grid-bg bg-background" data-slide="3" data-title="Problems">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Holy × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-6xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">02 · Problems</span>
+        <h1 class="font-headline-md text-headline-md tracking-tight mb-lg">Three frictions that cost you time</h1>
+        <div class="grid md:grid-cols-3 gap-gutter">
+          <!-- card 1 -->
+          <article class="border border-on-background bg-surface-container-lowest relative flex flex-col"><span class="socket tl"></span><span class="socket tr"></span><span class="socket bl"></span><span class="socket br"></span>
+            <div class="px-md pt-md pb-sm border-b border-outline-variant flex items-center justify-between">
+              <span class="font-code-label text-code-label bg-surface-tint text-on-primary px-sm py-xs">/HIDDEN SUBTASKS</span>
+              <span class="material-symbols-outlined text-outline">layers</span>
+            </div>
+            <div class="p-md flex flex-col flex-grow">
+              <h2 class="font-title-sm text-title-sm mb-sm">Multi-team tickets</h2>
+              <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Several people work one ticket with different deadlines, so your teams build subtask tables inside the ticket. They stay invisible to the main views.</p>
+              <div class="mt-md pt-sm border-t border-outline-variant flex items-center gap-xs"><span class="material-symbols-outlined text-error text-base">trending_down</span><span class="font-code-label text-code-label text-error">Work slips through the cracks</span></div>
+            </div>
+          </article>
+          <!-- card 2 -->
+          <article class="border border-on-background bg-surface-container-lowest relative flex flex-col"><span class="socket tl"></span><span class="socket tr"></span><span class="socket bl"></span><span class="socket br"></span>
+            <div class="px-md pt-md pb-sm border-b border-outline-variant flex items-center justify-between">
+              <span class="font-code-label text-code-label bg-secondary text-on-secondary px-sm py-xs">/MANUAL PRIORITY</span>
+              <span class="material-symbols-outlined text-outline">low_priority</span>
+            </div>
+            <div class="p-md flex flex-col flex-grow">
+              <h2 class="font-title-sm text-title-sm mb-sm">Priority by hand</h2>
+              <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Retail outranks Paid Ads, but an urgent deadline flips that. Today you arbitrate it in your head, ticket by ticket, every morning.</p>
+              <div class="mt-md pt-sm border-t border-outline-variant flex items-center gap-xs"><span class="material-symbols-outlined text-error text-base">timer</span><span class="font-code-label text-code-label text-error">The PM becomes the bottleneck</span></div>
+            </div>
+          </article>
+          <!-- card 3 -->
+          <article class="border border-on-background bg-surface-container-lowest relative flex flex-col"><span class="socket tl"></span><span class="socket tr"></span><span class="socket bl"></span><span class="socket br"></span>
+            <div class="px-md pt-md pb-sm border-b border-outline-variant flex items-center justify-between">
+              <span class="font-code-label text-code-label bg-tertiary text-on-tertiary px-sm py-xs">/SINGLE OWNER</span>
+              <span class="material-symbols-outlined text-outline">person_off</span>
+            </div>
+            <div class="p-md flex flex-col flex-grow">
+              <h2 class="font-title-sm text-title-sm mb-sm">One person tagged</h2>
+              <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Automations tag one individual, Inga for Polish, Lisa for shop copy. If they are off, the ticket simply waits. Nobody else sees it.</p>
+              <div class="mt-md pt-sm border-t border-outline-variant flex items-center gap-xs"><span class="material-symbols-outlined text-error text-base">warning</span><span class="font-code-label text-code-label text-error">Single point of failure</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy · Logic distilled.</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 4 — THE HIDDEN COST ============ -->
+<section class="slide grid-bg bg-background" data-slide="4" data-title="The hidden cost">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Holy × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-6xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">02 · The hidden cost</span>
+        <h1 class="font-headline-md text-headline-md tracking-tight mb-lg">What it really costs today</h1>
+        <div class="grid md:grid-cols-3 gap-gutter mb-md">
+          <div class="border border-outline-variant bg-surface-container-lowest p-md relative"><span class="font-code-label text-code-label text-secondary bg-secondary-container w-fit px-2 py-1 block mb-sm">COORDINATION</span><div class="font-display-lg text-display-lg leading-none mb-xs">10 mo.</div><div class="font-title-sm text-title-sm text-on-surface-variant mb-sm">as a babysitter</div><p class="font-body-reg text-body-reg text-on-surface-variant border-t border-outline-variant pt-sm">Your first months went into chasing missing fields and re-briefing by hand.</p></div>
+          <div class="border border-outline-variant bg-surface-container-lowest p-md relative"><span class="font-code-label text-code-label text-primary bg-primary-fixed w-fit px-2 py-1 block mb-sm">VISIBILITY</span><div class="font-display-lg text-display-lg leading-none mb-xs">Hidden</div><div class="font-title-sm text-title-sm text-on-surface-variant mb-sm">subtask work</div><p class="font-body-reg text-body-reg text-on-surface-variant border-t border-outline-variant pt-sm">Assigned work lives in tables no one sees on their own board.</p></div>
+          <div class="border border-outline-variant bg-surface-container-lowest p-md relative"><span class="font-code-label text-code-label text-tertiary bg-tertiary-fixed w-fit px-2 py-1 block mb-sm">RESILIENCE</span><div class="font-display-lg text-display-lg leading-none mb-xs">1 name</div><div class="font-title-sm text-title-sm text-on-surface-variant mb-sm">= 1 point of failure</div><p class="font-body-reg text-body-reg text-on-surface-variant border-t border-outline-variant pt-sm">A market translation waits on a single person being available.</p></div>
+        </div>
+        <div class="bg-on-background text-on-primary p-md flex items-center gap-md border border-on-background">
+          <span class="material-symbols-outlined text-primary-fixed text-3xl">priority_high</span>
+          <p class="font-title-sm text-title-sm text-inverse-on-surface leading-snug">The real cost is not on an invoice: your best coordinator spends her week keeping the system alive instead of running the agency.</p>
+        </div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy · Logic distilled.</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 5 — WHAT I SEE ============ -->
+<section class="slide grid-bg bg-background" data-slide="5" data-title="What I see">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Holy × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-5xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">03 · What I see</span>
+        <h1 class="font-display-lg text-display-lg tracking-tight mb-lg">The root cause under the surface</h1>
+        <div class="grid md:grid-cols-2 gap-gutter">
+          <div class="border-l-2 border-primary pl-md">
+            <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-sm">The root cause</div>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">Your workflow is linear: Draft, Copy, Translation, Design, Approval. That is perfect for one team passing work down a line. It breaks the moment one request needs several teams in parallel, each with its own deadline. The subtask tables you built are a symptom, not the problem.</p>
+          </div>
+          <div class="border-l-2 border-error pl-md">
+            <div class="font-eyebrow text-eyebrow text-error uppercase tracking-widest mb-sm">If nothing changes</div>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">Every new market and every bigger campaign adds more hidden tables, more priority calls made by hand, more work depending on one person. The system that scaled you to 200 people becomes the thing that slows the next 100.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy · Logic distilled.</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 6 — WHERE WE'RE GOING ============ -->
+<section class="slide grid-bg bg-background" data-slide="6" data-title="Objectives">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Holy × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-5xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">03 · Objectives</span>
+        <h1 class="font-headline-md text-headline-md tracking-tight mb-lg">Where we're headed</h1>
+        <div class="grid md:grid-cols-2 gap-0 border border-on-background bg-surface-container-lowest">
+          <div class="p-md md:border-r border-outline-variant">
+            <div class="font-eyebrow text-eyebrow text-error uppercase tracking-widest mb-md">Today</div>
+            <ul class="space-y-sm font-body-reg text-body-reg">
+              <li class="flex gap-sm"><span class="text-error">—</span><span>Subtasks hidden inside tickets<span class="block text-on-surface-variant">invisible on people's boards</span></span></li>
+              <li class="flex gap-sm"><span class="text-error">—</span><span>Priorities arbitrated by hand<span class="block text-on-surface-variant">every single morning</span></span></li>
+              <li class="flex gap-sm"><span class="text-error">—</span><span>Work tagged to one person<span class="block text-on-surface-variant">stalls when they're off</span></span></li>
+            </ul>
+          </div>
+          <div class="p-md bg-primary-fixed/20">
+            <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-md">Tomorrow</div>
+            <ul class="space-y-sm font-body-reg text-body-reg">
+              <li class="flex gap-sm"><span class="text-primary">→</span><span>Real subtasks + linked tickets<span class="block text-on-surface-variant">everything visible in one place</span></span></li>
+              <li class="flex gap-sm"><span class="text-primary">→</span><span>Priorities set automatically<span class="block text-on-surface-variant">department then deadline logic</span></span></li>
+              <li class="flex gap-sm"><span class="text-primary">→</span><span>Work assigned to groups<span class="block text-on-surface-variant">nothing waits on one name</span></span></li>
+            </ul>
+          </div>
+        </div>
+        <p class="mt-md font-title-sm text-title-sm text-on-surface-variant"><span class="text-secondary">=</span> your team sees exactly what's theirs, and you stop being the system's safety net.</p>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy · Logic distilled.</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 7 — THE SOLUTION ============ -->
+<section class="slide grid-bg bg-background" data-slide="7" data-title="The solution">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Holy × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-6xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">04 · The solution</span>
+        <h1 class="font-headline-md text-headline-md tracking-tight mb-xs">A new architecture, same daily habits</h1>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-lg max-w-3xl">We rebuild the logic underneath, not the surface your 200 users already know.</p>
+        <div class="grid md:grid-cols-2 gap-gutter">
+          <div class="border border-on-background bg-surface-container-lowest p-md flex gap-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <span class="material-symbols-outlined text-primary text-3xl shrink-0">account_tree</span>
+            <div><h3 class="font-title-sm text-title-sm mb-xs">True subtasks + linked tickets</h3><p class="font-body-reg text-body-reg text-on-surface-variant">Group a project, split the work across teams, and keep every piece visible on the right board.</p></div>
+          </div>
+          <div class="border border-on-background bg-surface-container-lowest p-md flex gap-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <span class="material-symbols-outlined text-primary text-3xl shrink-0">dashboard</span>
+            <div><h3 class="font-title-sm text-title-sm mb-xs">Personal dashboards</h3><p class="font-body-reg text-body-reg text-on-surface-variant">One page per person with everything assigned to them, subtasks included. No more hunting across views.</p></div>
+          </div>
+          <div class="border border-on-background bg-surface-container-lowest p-md flex gap-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <span class="material-symbols-outlined text-secondary text-3xl shrink-0">bolt</span>
+            <div><h3 class="font-title-sm text-title-sm mb-xs">Priority automation <span class="font-code-label text-code-label text-secondary align-middle">· add-on</span></h3><p class="font-body-reg text-body-reg text-on-surface-variant">A daily agent that ranks every ticket by department, then deadline. Runs on its own usage cost.</p></div>
+          </div>
+          <div class="border border-on-background bg-surface-container-lowest p-md flex gap-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <span class="material-symbols-outlined text-primary text-3xl shrink-0">fact_check</span>
+            <div><h3 class="font-title-sm text-title-sm mb-xs">Guided ticket creation</h3><p class="font-body-reg text-body-reg text-on-surface-variant">A mandatory form so no ticket ever lands half-filled, and assignments go to groups, not one name.</p></div>
+          </div>
+        </div>
+        <p class="mt-md font-code-label text-code-label text-on-surface-variant flex items-center gap-xs"><span class="material-symbols-outlined text-primary text-base">lock</span> Your core structure and the views people rely on stay intact.</p>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy · Logic distilled.</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 8 — WHY THIS APPROACH ============ -->
+<section class="slide grid-bg bg-background" data-slide="8" data-title="Why this approach">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Holy × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-6xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">04 · Why this approach</span>
+        <h1 class="font-headline-md text-headline-md tracking-tight mb-lg">Why done-for-you, not do-it-yourself</h1>
+        <div class="grid md:grid-cols-3 gap-0 border border-on-background bg-surface-container-lowest divide-y md:divide-y-0 md:divide-x divide-outline-variant">
+          <div class="p-md"><h3 class="font-title-sm text-title-sm mb-sm">vs doing it yourself</h3><p class="font-body-reg text-body-reg text-on-surface-variant">You already know what you want. You don't have hours to sit and wire relations, rollups and agents. I build it in your workspace so you keep running the agency.</p></div>
+          <div class="p-md"><h3 class="font-title-sm text-title-sm mb-sm">vs Notion AI alone</h3><p class="font-body-reg text-body-reg text-on-surface-variant">Generic AI fills a field. It won't redesign an architecture 200 people depend on without breaking views. This needs system design, not a prompt.</p></div>
+          <div class="p-md"><h3 class="font-title-sm text-title-sm mb-sm">vs a big agency</h3><p class="font-body-reg text-body-reg text-on-surface-variant">No account managers, no six-week discovery. One Notion partner working directly in your workspace, shipping something you can test every two weeks.</p></div>
+        </div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy · Logic distilled.</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 9 — THE PLAN ============ -->
+<section class="slide grid-bg bg-background" data-slide="9" data-title="The plan">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Holy × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-6xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">05 · The plan</span>
+        <h1 class="font-headline-md text-headline-md tracking-tight mb-lg">Three steps, under two months</h1>
+        <div class="grid md:grid-cols-3 gap-gutter">
+          <div class="border border-on-background bg-surface-container-lowest p-md relative flex flex-col"><span class="socket tl"></span><span class="socket tr"></span>
+            <div class="font-code-label text-code-label text-secondary mb-sm">STEP 01 · AUDIT &amp; SPECS</div>
+            <h3 class="font-title-sm text-title-sm mb-sm">Understand &amp; align</h3>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">I map your current system, run one interview with a designer or translator, and we validate the spec together before a single change.</p>
+          </div>
+          <div class="border border-on-background bg-surface-container-lowest p-md relative flex flex-col"><span class="socket tl"></span><span class="socket tr"></span>
+            <div class="font-code-label text-code-label text-secondary mb-sm">STEP 02 · BUILD IN SPRINTS</div>
+            <h3 class="font-title-sm text-title-sm mb-sm">Ship every 2 weeks</h3>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">I develop directly in your workspace and hand you a working piece every two weeks for your team to test on real tickets.</p>
+          </div>
+          <div class="border border-on-background bg-surface-container-lowest p-md relative flex flex-col"><span class="socket tl"></span><span class="socket tr"></span>
+            <div class="font-code-label text-code-label text-secondary mb-sm">STEP 03 · HANDOVER</div>
+            <h3 class="font-title-sm text-title-sm mb-sm">Fully yours</h3>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">Short documentation, a training pass with your team, and the system is entirely yours. I stay reachable afterwards.</p>
+          </div>
+        </div>
+        <div class="mt-md bg-on-background text-on-primary px-md py-sm flex items-center justify-between">
+          <span class="font-code-label text-code-label text-inverse-on-surface tracking-widest">TOTAL · UNDER 8 WEEKS</span>
+          <span class="font-code-label text-code-label text-primary-fixed tracking-widest">DONE FOR YOU · IN YOUR WORKSPACE</span>
+        </div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy · Logic distilled.</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 10 — HOW A SPRINT WORKS ============ -->
+<section class="slide grid-bg bg-background" data-slide="10" data-title="How a sprint works">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Holy × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-6xl w-full mx-auto">
+        <div class="flex items-baseline justify-between mb-lg">
+          <div><span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">05 · How a sprint works</span><h1 class="font-headline-md text-headline-md tracking-tight">Every two weeks, a working piece</h1></div>
+          <span class="font-title-sm text-title-sm text-primary hidden md:block">Sprint · 2 weeks</span>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-0 border border-on-background bg-surface-container-lowest divide-x divide-outline-variant">
+          <div class="p-md relative"><div class="font-code-label text-code-label text-secondary mb-sm">01</div><div class="flex items-center gap-xs mb-sm"><span class="material-symbols-outlined text-primary">draw</span></div><h3 class="font-title-sm text-title-sm mb-xs">Scope &amp; validate specs</h3><p class="font-body-reg text-body-reg text-on-surface-variant">We agree exactly what this sprint delivers.</p></div>
+          <div class="p-md relative"><div class="font-code-label text-code-label text-secondary mb-sm">02</div><div class="flex items-center gap-xs mb-sm"><span class="material-symbols-outlined text-primary">build</span></div><h3 class="font-title-sm text-title-sm mb-xs">Build in your workspace</h3><p class="font-body-reg text-body-reg text-on-surface-variant">I develop it live, added as a consultant.</p></div>
+          <div class="p-md relative"><div class="font-code-label text-code-label text-secondary mb-sm">03</div><div class="flex items-center gap-xs mb-sm"><span class="material-symbols-outlined text-primary">science</span></div><h3 class="font-title-sm text-title-sm mb-xs">You test</h3><p class="font-body-reg text-body-reg text-on-surface-variant">Your team tries it on real tickets.</p></div>
+          <div class="p-md relative bg-primary-fixed/20"><div class="font-code-label text-code-label text-secondary mb-sm">04</div><div class="flex items-center gap-xs mb-sm"><span class="material-symbols-outlined text-primary">tune</span></div><h3 class="font-title-sm text-title-sm mb-xs">Adjust</h3><p class="font-body-reg text-body-reg text-on-surface-variant">We refine, then move to the next piece.</p></div>
+        </div>
+        <p class="mt-md font-body-reg text-body-reg text-on-surface-variant flex items-center gap-xs"><span class="material-symbols-outlined text-primary text-base">verified</span> You approve the specs before I build. No surprises, nothing breaks for your 200 users.</p>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy · Logic distilled.</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 11 — YOUR INVOLVEMENT ============ -->
+<section class="slide grid-bg bg-background" data-slide="11" data-title="Your involvement">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Holy × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-5xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">05 · Your involvement</span>
+        <h1 class="font-headline-md text-headline-md tracking-tight mb-lg">What I need from your side</h1>
+        <div class="grid md:grid-cols-2 gap-gutter">
+          <div class="border-2 border-primary bg-primary-fixed/15 p-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-sm">At kick-off · once</div>
+            <div class="font-display-lg text-display-lg leading-none mb-sm text-primary">≈3h</div>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">One audit workshop plus one short interview with a designer or translator, so the new architecture fits how your teams actually work.</p>
+          </div>
+          <div class="border border-on-background bg-surface-container-lowest p-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">Each sprint · recurring</div>
+            <div class="font-display-lg text-display-lg leading-none mb-sm">≈1h</div>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">A short review to test the delivery and validate the next spec. That is the whole ask on your team's time.</p>
+          </div>
+        </div>
+        <div class="mt-md bg-on-background text-on-primary px-md py-sm font-title-sm text-title-sm text-inverse-on-surface">That's it. You review, I build. The rest is on me.</div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy · Logic distilled.</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 12 — PROOF (FIREFIGHTBOX) ============ -->
+<section class="slide grid-bg bg-background" data-slide="12" data-title="Proof — Firefightbox">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Holy × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-5xl w-full mx-auto">
+        <div class="flex items-center gap-md mb-md"><span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase">06 · Proof</span><span class="font-eyebrow text-eyebrow text-on-surface-variant tracking-[0.2em] uppercase">One case</span></div>
+        <h1 class="font-headline-md text-headline-md tracking-tight mb-lg">Same playbook, another Notion system</h1>
+        <div class="border border-on-background bg-surface-container-lowest relative"><span class="socket tl"></span><span class="socket tr"></span><span class="socket bl"></span><span class="socket br"></span>
+          <div class="px-md py-sm border-b border-outline-variant flex items-center justify-between">
+            <span class="font-title-sm text-title-sm">Firefightbox</span>
+            <span class="font-code-label text-code-label bg-secondary-container text-on-secondary-container px-sm py-xs">E-COMMERCE · SUBSCRIPTION BOX</span>
+          </div>
+          <div class="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-outline-variant">
+            <div class="p-md"><div class="font-display-lg text-display-lg leading-none text-primary mb-xs">-10h</div><div class="font-body-reg text-body-reg text-on-surface-variant">per week of coordination freed for the founder</div></div>
+            <div class="p-md"><div class="font-display-lg text-display-lg leading-none text-primary mb-xs">70%</div><div class="font-body-reg text-body-reg text-on-surface-variant">of repetitive admin tasks automated natively</div></div>
+            <div class="p-md"><div class="font-display-lg text-display-lg leading-none text-primary mb-xs">&lt;3 wk</div><div class="font-body-reg text-body-reg text-on-surface-variant">to a positive return after go-live</div></div>
+          </div>
+          <div class="px-md py-sm border-t border-outline-variant space-y-xs">
+            <p class="font-body-reg text-body-reg text-on-surface-variant">A fast-growing e-commerce team drowning in scattered tools. I rebuilt one centralized Notion brain with native automations, no external apps bolted on.</p>
+            <p class="font-body-reg text-body-reg flex items-start gap-xs"><span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span><span>Role-based dashboards, visible only to the right person, exactly the permission logic your time tracking needs.</span></p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy · Logic distilled.</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 13 — COMMITMENTS ============ -->
+<section class="slide grid-bg bg-background" data-slide="13" data-title="Commitments">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Holy × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-6xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">06 · Commitments</span>
+        <h1 class="font-headline-md text-headline-md tracking-tight mb-lg">What you can count on</h1>
+        <div class="grid md:grid-cols-3 gap-gutter">
+          <div class="border border-on-background bg-surface-container-lowest p-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <span class="material-symbols-outlined text-primary mb-sm">event_available</span>
+            <h3 class="font-title-sm text-title-sm mb-xs">Deadlines held</h3>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">Every sprint ships on the day we agreed. If something is at risk, you hear it 48h early, not on the day.</p>
+          </div>
+          <div class="border border-on-background bg-surface-container-lowest p-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <span class="material-symbols-outlined text-primary mb-sm">shield</span>
+            <h3 class="font-title-sm text-title-sm mb-xs">Nothing breaks</h3>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">Your 200 people keep working through the whole project. I change the engine without stopping the car.</p>
+          </div>
+          <div class="border border-on-background bg-surface-container-lowest p-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <span class="material-symbols-outlined text-primary mb-sm">task_alt</span>
+            <h3 class="font-title-sm text-title-sm mb-xs">Right, or redone</h3>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">If a delivery doesn't match the spec we validated, I redo it at no extra cost. You sign off on every piece.</p>
+          </div>
+        </div>
+        <div class="mt-lg pt-sm border-t border-outline-variant flex items-center justify-center gap-md flex-wrap">
+          <span class="font-code-label text-code-label text-on-surface-variant tracking-[0.15em] uppercase">Notion Solution Partner</span><span class="text-outline">·</span>
+          <span class="font-code-label text-code-label text-on-surface-variant tracking-[0.15em] uppercase">PMP®</span><span class="text-outline">·</span>
+          <span class="font-code-label text-code-label text-on-surface-variant tracking-[0.15em] uppercase">Black Belt Lean Six Sigma</span>
+        </div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy · Logic distilled.</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 14 — THE OFFER ============ -->
+<section class="slide grid-bg bg-background" data-slide="14" data-title="The offer">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Confidential · prepared for Holy</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-6xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">06 · The offer</span>
+        <div class="grid md:grid-cols-5 gap-gutter items-stretch">
+          <!-- Core package -->
+          <div class="md:col-span-3 border border-on-background bg-surface-container-lowest relative flex flex-col"><span class="socket tl"></span><span class="socket tr"></span><span class="socket bl"></span><span class="socket br"></span>
+            <div class="p-md border-b border-on-background">
+              <h2 class="font-headline-md text-headline-md leading-tight mb-sm">Creative Task Manager 2.0<br/>Rebuild</h2>
+              <div class="flex items-end gap-sm"><span class="font-title-sm text-title-sm bg-secondary-fixed px-md py-xs border border-on-background">8 400€ HT</span><span class="font-code-label text-code-label text-on-surface-variant">fixed package · done for you</span></div>
+            </div>
+            <div class="p-md flex-grow">
+              <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider border-b border-outline-variant pb-xs mb-sm">Included</div>
+              <ul class="space-y-sm">
+                <li class="flex items-start gap-sm font-body-reg text-body-reg"><span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>New task architecture: real subtasks + linked tickets (parent-child)</li>
+                <li class="flex items-start gap-sm font-body-reg text-body-reg"><span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>Personal dashboards, one per user</li>
+                <li class="flex items-start gap-sm font-body-reg text-body-reg"><span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>Guided ticket-creation form + group assignment (no more single owner)</li>
+                <li class="flex items-start gap-sm font-body-reg text-body-reg"><span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>Full delivery in your workspace, sprint by sprint, under 8 weeks</li>
+              </ul>
+            </div>
+            <div class="border-t border-on-background grid grid-cols-2 divide-x divide-on-background bg-surface-container-high">
+              <div class="p-sm"><div class="font-eyebrow text-eyebrow text-on-surface-variant uppercase mb-xs">Payment</div><div class="font-code-label text-code-label">50% kick-off / 50% delivery</div></div>
+              <div class="p-sm bg-primary-container text-on-primary-container flex items-center gap-xs"><span class="material-symbols-outlined text-base">schedule</span><span class="font-code-label text-code-label">Under 8 weeks</span></div>
+            </div>
+          </div>
+          <!-- Add-ons -->
+          <div class="md:col-span-2 border border-outline-variant bg-surface-container-low p-md flex flex-col">
+            <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider border-b border-outline-variant pb-xs mb-sm">Add-ons · optional</div>
+            <div class="space-y-md flex-grow">
+              <div>
+                <div class="flex items-baseline justify-between gap-sm"><h4 class="font-title-sm text-title-sm">Priority automation agent</h4><span class="font-code-label text-code-label text-secondary whitespace-nowrap">usage-based</span></div>
+                <p class="font-body-reg text-body-reg text-on-surface-variant">Daily agent that ranks tickets by department then deadline. Runs on Notion AI custom-agent pricing (token-based), billed to Holy on usage, on top of the package.</p>
+              </div>
+              <div>
+                <div class="flex items-baseline justify-between gap-sm"><h4 class="font-title-sm text-title-sm">Time tracking + reporting</h4><span class="font-code-label text-code-label text-primary whitespace-nowrap">+1 500€ HT</span></div>
+                <p class="font-body-reg text-body-reg text-on-surface-variant">Native Notion time tracking, reporting and a permission set: visible to the creative team and managers only. Replaces EverHour.</p>
+              </div>
+              <div>
+                <div class="flex items-baseline justify-between gap-sm"><h4 class="font-title-sm text-title-sm">AI autofill for briefs</h4><span class="font-code-label text-code-label text-on-surface-variant whitespace-nowrap">on request</span></div>
+                <p class="font-body-reg text-body-reg text-on-surface-variant">Assists filling the ticket and flags missing fields. Quoted separately.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy · all amounts excl. VAT (HT) · Logic distilled.</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 15 — CLOSING ============ -->
+<section class="slide grid-bg bg-background" data-slide="15" data-title="Let's build it">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Closing</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin flex items-center relative overflow-hidden">
+      <div class="absolute -bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-secondary-container opacity-40 rounded-full blur-[110px] -z-10 mix-blend-multiply"></div>
+      <div class="max-w-5xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-tertiary tracking-[0.2em] uppercase mb-sm block">Next step</span>
+        <h1 class="font-display-lg text-display-lg tracking-tight mb-lg">Let's build it</h1>
+        <div class="grid md:grid-cols-2 gap-gutter mb-lg">
+          <div class="bg-surface-container-lowest border border-on-background p-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <div class="font-code-label text-code-label text-secondary mb-xs">Action 01</div>
+            <div class="font-title-sm text-title-sm">Proposal review · Tuesday, July 7 · 2:00 PM</div>
+            <div class="font-body-reg text-body-reg text-on-surface-variant">with Bella</div>
+          </div>
+          <div class="bg-secondary-fixed border border-on-background p-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <div class="font-code-label text-code-label text-on-secondary-fixed-variant mb-xs">Action 02</div>
+            <div class="font-title-sm text-title-sm text-on-secondary-fixed">Kick-off · as soon as you're ready</div>
+            <div class="font-body-reg text-body-reg text-on-secondary-fixed-variant">plenty of availability this summer</div>
+          </div>
+        </div>
+        <div class="border-l-2 border-primary pl-md mb-lg">
+          <p class="font-headline-md text-headline-md text-primary-container leading-tight">"You keep running the agency. I'll handle the system."</p>
+        </div>
+        <div class="pt-md border-t border-outline-variant flex items-center justify-between flex-wrap gap-md">
+          <a href="mailto:sylvain@ramalogic.com" class="font-body-reg text-body-reg font-medium flex items-center gap-xs hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">mail</span>sylvain@ramalogic.com</a>
+          <span class="font-code-label text-code-label text-on-surface-variant">Sylvain Ramaradjou · Rama Logic · Notion Solution Partner</span>
+        </div>
+      </div>
+    </main>
+    <footer class="px-margin py-sm shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidential — prepared for Holy Softdrinks GmbH</span></footer>
+  </div>
+</section>
+
+</div><!-- /slides-viewport -->
+
+<!-- nav chrome -->
+<div id="chrome">
+  <span id="counter">1 / 16</span>
+  <button id="btnOverview" title="Overview (Esc)"><span class="material-symbols-outlined">grid_view</span></button>
+  <button id="btnPrev" title="Previous"><span class="material-symbols-outlined">arrow_upward</span></button>
+  <button id="btnNext" title="Next"><span class="material-symbols-outlined">arrow_downward</span></button>
+</div>
+
+<!-- overview -->
+<div id="overview"><h2>Overview</h2><div id="ovgrid"></div></div>
+
+<script>
+  const viewport = document.getElementById('viewport');
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const counter = document.getElementById('counter');
+  const overview = document.getElementById('overview');
+  const ovgrid = document.getElementById('ovgrid');
+  let current = 0;
+
+  // build overview
+  slides.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.innerHTML = '<span class="n">' + String(i + 1).padStart(2, '0') + '</span><span class="t">' + (s.dataset.title || ('Slide ' + (i+1))) + '</span>';
+    b.addEventListener('click', () => { go(i); overview.classList.remove('open'); });
+    ovgrid.appendChild(b);
+  });
+
+  function go(i) {
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    slides[current].scrollIntoView({ behavior: 'smooth' });
+    updateCounter();
+  }
+  function updateCounter() { counter.textContent = (current + 1) + ' / ' + slides.length; }
+
+  // track current on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        current = slides.indexOf(e.target);
+        updateCounter();
+      }
+    });
+  }, { root: viewport, threshold: [0.5] });
+  slides.forEach(s => io.observe(s));
+
+  document.getElementById('btnNext').addEventListener('click', () => go(current + 1));
+  document.getElementById('btnPrev').addEventListener('click', () => go(current - 1));
+  document.getElementById('btnOverview').addEventListener('click', () => overview.classList.toggle('open'));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { overview.classList.toggle('open'); return; }
+    if (overview.classList.contains('open')) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); go(0); }
+    if (e.key === 'End') { e.preventDefault(); go(slides.length - 1); }
+  });
+</script>
+</body>
+</html>
