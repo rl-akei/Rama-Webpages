@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>L’Escalator × Rama Logic · Un workspace Notion unique, fiable, adopté</title>
+
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-dim":"#dcd9d9","secondary-fixed-dim":"#bdcf7c","secondary-fixed":"#d9eb95",
+        "on-tertiary":"#ffffff","surface-tint":"#466556","on-secondary":"#ffffff",
+        "on-background":"#1c1b1b","surface-container-highest":"#e5e2e1","inverse-primary":"#accebc",
+        "error":"#ba1a1a","on-tertiary-fixed":"#0c1d27","background":"#fcf9f8",
+        "on-primary-fixed-variant":"#2f4d3f","primary-fixed-dim":"#accebc","on-primary-container":"#f5fff7",
+        "surface-container-lowest":"#ffffff","primary-fixed":"#c8ead8","surface-variant":"#e5e2e1",
+        "on-primary":"#ffffff","on-error-container":"#93000a","on-error":"#ffffff",
+        "primary":"#446254","outline":"#727974","on-surface":"#1c1b1b",
+        "tertiary-container":"#657783","on-tertiary-container":"#fcfcff",
+        "on-tertiary-fixed-variant":"#384954","tertiary":"#4d5e6a","on-surface-variant":"#424844",
+        "surface-bright":"#fcf9f8","error-container":"#ffdad6","on-secondary-container":"#5c6b24",
+        "surface-container-high":"#ebe7e7",
+        "inverse-surface":"#313030","outline-variant":"#c1c8c2","surface-container-low":"#f6f3f2",
+        "secondary":"#56641e","on-primary-fixed":"#012115","on-secondary-fixed-variant":"#3f4c05",
+        "inverse-on-surface":"#f3f0ef","surface-container":"#f0edec","primary-container":"#5c7b6c",
+        "tertiary-fixed-dim":"#b7c9d6","tertiary-fixed":"#d3e5f3","surface":"#fcf9f8",
+        "on-secondary-fixed":"#171e00","secondary-container":"#d9eb95"
+      },
+      borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},
+      spacing:{
+        "xs":"4px","base":"8px",
+        "sm":"clamp(7px, 0.9vh, 12px)",
+        "md":"clamp(11px, 1.7vh, 22px)",
+        "lg":"clamp(16px, 2.6vh, 34px)",
+        "xl":"clamp(22px, 4vh, 56px)",
+        "gutter":"clamp(14px, 1.4vw, 24px)",
+        "margin":"clamp(20px, 3vw, 40px)"
+      },
+      fontFamily:{
+        "body-reg":["Work Sans","system-ui","sans-serif"],
+        "code-label":["Space Mono","monospace"],
+        "title-sm":["Clash Grotesk","Work Sans","sans-serif"],
+        "eyebrow":["Space Mono","monospace"],
+        "display-lg":["Clash Grotesk","Work Sans","sans-serif"],
+        "headline-md":["Clash Grotesk","Work Sans","sans-serif"]
+      },
+      fontSize:{
+        "body-reg":["clamp(12.5px, 1.02vw, 15.5px)",{"lineHeight":"1.5","fontWeight":"400"}],
+        "code-label":["clamp(10.5px, 0.82vw, 12.5px)",{"lineHeight":"1.45","letterSpacing":"0.05em","fontWeight":"400"}],
+        "title-sm":["clamp(16px, 1.45vw, 21px)",{"lineHeight":"1.3","fontWeight":"500"}],
+        "eyebrow":["clamp(9.5px, 0.72vw, 11.5px)",{"lineHeight":"1.0","fontWeight":"500"}],
+        "display-lg":["clamp(38px, 5vw, 68px)",{"lineHeight":"1.02","fontWeight":"500"}],
+        "headline-md":["clamp(24px, 3.2vw, 42px)",{"lineHeight":"1.1","fontWeight":"500"}]
+      }
+    }
+  }
+}
+</script>
+
+<style>
+:root { --header-h: 52px; }
+html, body { scroll-behavior: smooth; overflow-x: clip; }
+body { font-family: 'Work Sans', system-ui, sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+/* Long-word wrap safety on display / headline titles */
+.font-display-lg, .font-headline-md, h1 { overflow-wrap: anywhere; }
+
+/* Focus-visible ring (a11y) on all interactive elements */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #446254;
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(28,27,27,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28,27,27,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.slides-viewport {
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+.slide {
+  height: 100vh;
+  height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: var(--header-h);
+}
+/* Content wrapper : fills remaining height, allows children overflow control */
+.slide-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.socket-corner-tl, .socket-corner-tr, .socket-corner-bl, .socket-corner-br {
+  position: absolute;
+  width: 8px; height: 8px;
+  background-color: #1c1b1b;
+}
+.socket-corner-tl { top: -4px; left: -4px; }
+.socket-corner-tr { top: -4px; right: -4px; }
+.socket-corner-bl { bottom: -4px; left: -4px; }
+.socket-corner-br { bottom: -4px; right: -4px; }
+
+/* small corner sockets on cards */
+.card-sockets > .cs { position:absolute; width:6px; height:6px; background:#1c1b1b; }
+.card-sockets > .cs.tl { top:0; left:0; } .card-sockets > .cs.tr { top:0; right:0; }
+.card-sockets > .cs.bl { bottom:0; left:0; } .card-sockets > .cs.br { bottom:0; right:0; }
+
+.divider-num {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: #446254;
+}
+.big-num {
+  font-family: 'Clash Grotesk', 'Work Sans', sans-serif;
+  font-weight: 500;
+  line-height: 0.98;
+  font-size: clamp(32px, 4.4vw, 54px);
+}
+.big-num-sm { font-size: clamp(26px, 3.4vw, 42px); }
+
+.overview-card {
+  border: 1px solid #c1c8c2;
+  background: #ffffff;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  transition: border-color 160ms, background 160ms, transform 160ms;
+  min-height: 88px;
+}
+.overview-card:hover { border-color: #446254; background: #f6f3f2; transform: translateY(-2px); }
+.overview-card .ov-num { font-family: 'Space Mono', monospace; font-size: 12px; color: #446254; letter-spacing: 0.05em; }
+.overview-card .ov-label { font-family: 'Work Sans', sans-serif; font-size: 13px; color: #1c1b1b; line-height: 1.3; }
+
+@media (prefers-reduced-motion: reduce) {
+  html, body { scroll-behavior: auto; }
+  .overview-card, .group * { transition: none !important; }
+}
+
+/* Mobile : slides scrollables, contenu aligné en haut, rien de clippé */
+@media (max-width: 767px) {
+  .slides-viewport { scroll-snap-type: none; }
+  .slide { height: auto; min-height: 100dvh; overflow: visible; padding-bottom: 96px; }
+  .slide-body { justify-content: flex-start !important; }
+}
+
+.print-only { display: none; }
+@media print {
+  .slides-viewport { height: auto; overflow: visible; scroll-snap-type: none; }
+  .slide { page-break-after: always; height: auto; overflow: visible; }
+  .nav-controls, .header-bar, #overview { display: none !important; }
+  .print-only { display: block; }
+}
+</style>
+</head>
+<body class="bg-background text-on-background antialiased">
+
+<!-- ====== STICKY HEADER ====== -->
+<header class="header-bar fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant" style="height:52px">
+  <div class="flex justify-between items-center h-full px-margin max-w-[1600px] mx-auto">
+    <div class="flex items-center gap-md">
+      <div class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</div>
+      <div class="hidden md:block w-px h-4 bg-outline-variant"></div>
+      <div class="hidden md:block font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Préparé pour L’Escalator</div>
+    </div>
+    <div class="flex items-center gap-md">
+      <button id="overview-btn" aria-label="Vue d’ensemble" class="hidden md:flex items-center gap-1 font-code-label text-code-label text-on-surface-variant hover:text-on-background transition-colors">
+        <span class="material-symbols-outlined text-lg">grid_view</span><span class="uppercase tracking-widest">ESC</span>
+      </button>
+      <div class="font-code-label text-code-label text-on-surface-variant">
+        <span id="current-slide" class="text-on-background font-medium">01</span>
+        <span class="text-outline-variant mx-1">/</span>
+        <span id="total-slides">24</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ====== SLIDES VIEWPORT ====== -->
+<main class="slides-viewport">
+
+<!-- ============================================================ -->
+<!-- SLIDE 0 - COVER                                               -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-0" data-slide="0">
+  <div class="slide-body flex items-center justify-center relative overflow-hidden px-margin">
+    <div class="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+    <div class="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-secondary-container opacity-40 rounded-full blur-[100px] -z-10 mix-blend-multiply"></div>
+
+    <div class="max-w-5xl w-full relative z-10">
+      <div class="relative bg-surface-container-lowest/80 backdrop-blur-sm rounded-lg border border-outline-variant px-margin py-xl">
+        <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+
+        <div class="mb-lg">
+          <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase py-xs px-sm bg-primary-fixed/30 rounded border border-primary-fixed inline-block">Proposition · Confidentiel · Juillet 2026</span>
+        </div>
+
+        <h1 class="font-display-lg text-display-lg text-on-background mb-md tracking-tight">
+          Un workspace Notion unique,<br/>fiable, adopté par toute l’équipe.
+        </h1>
+        <div class="w-24 h-1 bg-secondary mb-md"></div>
+        <p class="font-headline-md text-on-surface-variant max-w-3xl" style="font-size:clamp(17px,2vw,26px);line-height:1.25">
+          Refonte de votre espace Notion et montée en compétence de vos équipes.
+        </p>
+
+        <div class="mt-lg flex items-baseline gap-sm">
+          <span class="font-display-lg text-on-background tracking-tight" style="font-size:clamp(28px,3.4vw,46px);line-height:1">L’Escalator</span>
+        </div>
+
+        <div class="mt-xl pt-lg border-t border-outline-variant flex items-center justify-between flex-wrap gap-sm">
+          <div class="flex items-center gap-sm">
+            <div class="h-2 w-2 bg-primary"></div>
+            <span class="font-code-label text-code-label text-on-surface-variant">Sylvain Ramaradjou · Architecte Notion · Rama Logic · 6 juillet 2026</span>
+          </div>
+          <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Confidentiel · préparé pour L’Escalator</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 1 - SOMMAIRE                                            -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-1" data-slide="1">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Sommaire</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce qu’on va voir <span class="text-primary italic">ensemble</span></h1>
+      <p class="font-code-label text-code-label text-outline mt-xs uppercase tracking-widest">10 sections, du constat à l’offre.</p>
+    </div>
+
+    <div class="flex-grow min-h-0 flex flex-col justify-center">
+      <a href="#slide-2" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">01</span>
+        <span class="font-title-sm text-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors">Contexte</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block flex-grow">Où en est votre Notion aujourd’hui</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-4" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">02</span>
+        <span class="font-title-sm text-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors">Problèmes</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block flex-grow">Les 3 frictions qui vous coûtent du temps</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-6" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">03</span>
+        <span class="font-title-sm text-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors">Impacts</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block flex-grow">Ce que ça pèse réellement</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-7" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">04</span>
+        <span class="font-title-sm text-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors">Ce que j’y vois</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block flex-grow">La cause racine et le coût de l’inaction</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-8" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">05</span>
+        <span class="font-title-sm text-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors">Objectifs</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block flex-grow">Là où on va</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-9" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">06</span>
+        <span class="font-title-sm text-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors">Solution</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block flex-grow">Un socle commun, pas des pages isolées</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-11" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">07</span>
+        <span class="font-title-sm text-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors">Pourquoi cette méthode</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block flex-grow">Plutôt que refaire seul ou brancher un outil</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-12" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">08</span>
+        <span class="font-title-sm text-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors">Plan d’action</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block flex-grow">3 étapes, environ 6 semaines</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-19" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">09</span>
+        <span class="font-title-sm text-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors">Références</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block flex-grow">Ils sont partis du même point</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-22" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">10</span>
+        <span class="font-title-sm text-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors">Offre</span>
+        <span class="font-body-reg text-body-reg text-on-surface-variant hidden md:block flex-grow">Le périmètre et le budget</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2 - DIVIDER 01 · LE DÉCOR                               -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-2" data-slide="2">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">01</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 05</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Le décor</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Là où en est votre Notion aujourd’hui.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3 - CONTEXTE                                            -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-3" data-slide="3">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">01 · Contexte</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Un Notion hérité, qui vous freine plus qu’il ne vous aide</h1>
+    </div>
+
+    <div class="flex-grow min-h-0 flex flex-col gap-md justify-center">
+      <div class="relative border-l border-r border-on-background/10 px-margin py-lg">
+        <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+        <p class="font-body-reg text-body-reg text-on-background leading-relaxed max-w-3xl">
+          L’Escalator accompagne environ 120 startups depuis six ans. Votre équipe de 8 personnes pilote l’accompagnement, la formation et les partenaires dans Notion. Mais cet espace a été hérité, jamais restructuré faute de temps, et chaque startup vit aujourd’hui dans sa propre page.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+        <div class="card-sockets relative bg-surface-container-lowest border border-on-background/20 p-md flex flex-col">
+          <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+          <div class="font-code-label text-code-label text-primary uppercase mb-xs">Volume</div>
+          <div class="font-title-sm text-title-sm text-on-background">~120 startups</div>
+          <p class="font-code-label text-code-label text-outline mt-sm uppercase">accompagnées en 6 ans</p>
+        </div>
+        <div class="card-sockets relative bg-surface-container-lowest border border-on-background/20 p-md flex flex-col">
+          <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+          <div class="font-code-label text-code-label text-primary uppercase mb-xs">Équipe</div>
+          <div class="font-title-sm text-title-sm text-on-background">8 personnes</div>
+          <p class="font-code-label text-code-label text-outline mt-sm uppercase">niveaux Notion très variés</p>
+        </div>
+        <div class="card-sockets relative bg-surface-container-lowest border border-on-background/20 p-md flex flex-col">
+          <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+          <div class="font-code-label text-code-label text-secondary uppercase mb-xs">Structure</div>
+          <div class="font-title-sm text-title-sm text-on-background">1 page / startup</div>
+          <p class="font-code-label text-code-label text-outline mt-sm uppercase">partagée aux partenaires</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4 - DIVIDER 02 · PROBLÈMES                              -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-4" data-slide="4">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">02</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 05</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Problèmes</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Trois frictions concrètes, remontées par votre équipe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5 - PROBLÈMES (3 cards)                                 -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-5" data-slide="5">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">02 · Problèmes</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Trois frictions, un même vol de temps</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+      <article class="card-sockets relative bg-surface-container-lowest border border-on-background p-md flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="flex items-start gap-sm mb-sm">
+          <span class="material-symbols-outlined text-primary text-3xl shrink-0">scatter_plot</span>
+          <div><div class="font-code-label text-code-label text-secondary mb-xs uppercase">/SILOS</div><h3 class="font-title-sm text-title-sm text-on-background">Chacun dans sa page, personne ne voit la même chose</h3></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-sm flex-grow">Les pages sont individuelles. Quand Joanna a voulu partager son CRM, sa collègue ne voyait pas la même vue.</p>
+        <div class="border-t border-outline-variant pt-sm"><span class="font-code-label text-code-label text-error uppercase tracking-widest">Le travail se duplique, rien ne circule</span></div>
+      </article>
+
+      <article class="card-sockets relative bg-surface-container-lowest border border-on-background p-md flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="flex items-start gap-sm mb-sm">
+          <span class="material-symbols-outlined text-primary text-3xl shrink-0">search_off</span>
+          <div><div class="font-code-label text-code-label text-secondary mb-xs uppercase">/MÉMOIRE</div><h3 class="font-title-sm text-title-sm text-on-background">L’information se perd</h3></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-sm flex-grow">Une page VivaTech créée par un ancien stagiaire, introuvable. Aucun rappel, aucune notification. L’info finit « mise n’importe où ».</p>
+        <div class="border-t border-outline-variant pt-sm"><span class="font-code-label text-code-label text-error uppercase tracking-widest">Ce qui existe déjà est refait de zéro</span></div>
+      </article>
+
+      <article class="card-sockets relative bg-surface-container-lowest border border-on-background p-md flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="flex items-start gap-sm mb-sm">
+          <span class="material-symbols-outlined text-primary text-3xl shrink-0">keyboard</span>
+          <div><div class="font-code-label text-code-label text-secondary mb-xs uppercase">/MANUEL</div><h3 class="font-title-sm text-title-sm text-on-background">Tout passe par la saisie à la main</h3></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-sm flex-grow">Quand une startup s’inscrit à un atelier, quelqu’un ajoute l’event dans les agendas, un par un.</p>
+        <div class="border-t border-outline-variant pt-sm"><span class="font-code-label text-code-label text-error uppercase tracking-widest">Du temps qualifié dépensé sur du copier-coller</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6 - IMPACTS CHIFFRÉS                                    -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-6" data-slide="6">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">03 · Impacts</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce que ça pèse, concrètement</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+      <div class="card-sockets relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase mb-sm">Temps</div>
+        <div class="big-num text-error mb-xs" style="white-space:nowrap">~1&nbsp;j</div>
+        <div class="font-body-reg text-body-reg text-on-surface-variant mb-md">par semaine, dispersé sur l’équipe</div>
+        <div class="mt-auto border-t border-outline-variant pt-md"><div class="font-code-label text-code-label text-on-surface-variant">Ressaisie d’events, recherche d’info, travail refait en double. Hypothèse à valider ensemble.</div></div>
+      </div>
+
+      <div class="card-sockets relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase mb-sm">Mémoire</div>
+        <div class="big-num text-error mb-xs">0</div>
+        <div class="font-body-reg text-body-reg text-on-surface-variant mb-md">système de rappel</div>
+        <div class="mt-auto border-t border-outline-variant pt-md"><div class="font-code-label text-code-label text-on-surface-variant">Aucune notification automatique. Les pages clés se retrouvent à la main, ou pas.</div></div>
+      </div>
+
+      <div class="card-sockets relative border border-secondary/40 p-lg flex flex-col bg-secondary-fixed/10">
+        <span class="cs tl" style="background:#56641e"></span><span class="cs tr" style="background:#56641e"></span><span class="cs bl" style="background:#56641e"></span><span class="cs br" style="background:#56641e"></span>
+        <div class="font-code-label text-code-label text-secondary uppercase mb-sm">Adoption</div>
+        <div class="big-num text-secondary mb-xs">8</div>
+        <div class="font-body-reg text-body-reg text-on-surface-variant mb-md">niveaux d’usage différents</div>
+        <div class="mt-auto border-t border-secondary/20 pt-md"><div class="font-code-label text-code-label text-on-surface-variant">De la personne à l’aise avec Notion à celle qui l’évite. Aucun socle commun.</div></div>
+      </div>
+    </div>
+
+    <div class="mt-md bg-on-background text-on-primary px-lg py-md shrink-0">
+      <div class="font-code-label text-code-label uppercase tracking-widest leading-relaxed">Soit l’équivalent d’environ 40 jours de temps qualifié par an absorbés par le manuel · hypothèse à valider</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7 - CE QUE J'Y VOIS (pivot)                             -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-7" data-slide="7">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">04 · Ce que j’y vois</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce que j’y vois</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+      <div class="card-sockets relative border border-primary/40 p-lg flex flex-col bg-primary-fixed/10">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-md flex items-center gap-sm"><span class="material-symbols-outlined text-lg">center_focus_strong</span>La cause racine</div>
+        <p class="font-body-reg text-body-reg text-on-background leading-relaxed">Le problème n’est pas Notion, c’est l’absence d’architecture. Votre espace a poussé page par page, sans colonne vertébrale commune. Résultat : l’info vit en silos et se perd. Tant qu’il n’y a pas un socle partagé, chaque nouvelle recrue et chaque nouveau batch de startups aggrave la dette.</p>
+      </div>
+
+      <div class="card-sockets relative border border-error/30 p-lg flex flex-col bg-error-container/20">
+        <span class="cs tl" style="background:#ba1a1a"></span><span class="cs tr" style="background:#ba1a1a"></span><span class="cs bl" style="background:#ba1a1a"></span><span class="cs br" style="background:#ba1a1a"></span>
+        <div class="font-code-label text-code-label text-error uppercase tracking-widest mb-md flex items-center gap-sm"><span class="material-symbols-outlined text-lg">trending_down</span>Si rien ne change</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant leading-relaxed">À chaque promotion, environ 20 startups de plus dans un espace déjà illisible. La connaissance des alumnis se dilue. Dans 12 à 18 mois, l’équipe contourne Notion et retourne au tableur et au mail. L’investissement Notion est perdu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8 - OBJECTIFS (aujourd'hui vs demain)                   -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-8" data-slide="8">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">05 · Objectifs</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Là où on va</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+      <div class="card-sockets relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-md border-b border-outline-variant pb-sm">Aujourd’hui</div>
+        <ul class="flex flex-col gap-md">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-surface-variant"><span class="font-code-label text-code-label text-outline mt-1 shrink-0">·</span><span>Chacun sa page · le CRM d’un collègue est invisible aux autres</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-surface-variant"><span class="font-code-label text-code-label text-outline mt-1 shrink-0">·</span><span>Info dispersée · une page clé introuvable, aucun rappel</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-surface-variant"><span class="font-code-label text-code-label text-outline mt-1 shrink-0">·</span><span>Inscriptions startups saisies à la main dans les agendas</span></li>
+        </ul>
+      </div>
+
+      <div class="card-sockets relative border border-primary/40 p-lg flex flex-col bg-primary-fixed/10">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-md border-b border-primary/20 pb-sm">Demain</div>
+        <ul class="flex flex-col gap-md">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary mt-1 shrink-0">→</span><span>Un socle commun · la même donnée pour tous, une vue par rôle</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary mt-1 shrink-0">→</span><span>Une mémoire fiable · chaque startup, event, ressource en 3 clics</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary mt-1 shrink-0">→</span><span>Inscriptions et rappels qui se propagent tout seuls dans Notion</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-md bg-secondary text-on-secondary px-lg py-md flex items-center gap-md shrink-0">
+      <span class="material-symbols-outlined text-2xl shrink-0">trending_up</span>
+      <p class="font-title-sm text-title-sm">= l’équipe arrête de compenser à la main, le workspace redevient l’outil de référence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9 - DIVIDER 03 · LA MÉTHODE                             -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-9" data-slide="9">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">03</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 05</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">La méthode</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Comment on transforme ça, sans casser ce qui marche.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10 - SOLUTION (3 piliers)                               -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-10" data-slide="10">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">06 · Solution</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Un socle commun, pas des pages isolées</h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm max-w-3xl">L’objectif n’est pas d’ajouter des outils, c’est de donner une colonne vertébrale à votre Notion.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+      <article class="card-sockets relative bg-primary text-on-primary border border-primary p-lg flex flex-col">
+        <span class="cs tl" style="background:#fff"></span><span class="cs tr" style="background:#fff"></span><span class="cs bl" style="background:#fff"></span><span class="cs br" style="background:#fff"></span>
+        <span class="material-symbols-outlined text-on-primary text-3xl mb-md">account_tree</span>
+        <div class="font-code-label text-code-label text-on-primary/70 mb-sm uppercase">Pilier 1</div>
+        <h3 class="font-title-sm text-title-sm text-on-primary mb-sm">Une colonne vertébrale unique</h3>
+        <p class="font-body-reg text-body-reg text-on-primary/80 flex-grow">Des bases reliées (contacts, startups, partenaires, events, tâches) au lieu de pages isolées. Une donnée saisie une fois, visible partout.</p>
+      </article>
+
+      <article class="card-sockets relative bg-surface-container-lowest border border-on-background p-lg flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">dashboard</span>
+        <div class="font-code-label text-code-label text-secondary mb-sm uppercase">Pilier 2</div>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Une vue par rôle, pas une par personne</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Des tableaux de bord par fonction (direction, programme, partenaires) sur la même donnée. Les moins à l’aise avec Notion ont une interface simple.</p>
+      </article>
+
+      <article class="card-sockets relative bg-surface-container-lowest border border-on-background p-lg flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">bolt</span>
+        <div class="font-code-label text-code-label text-secondary mb-sm uppercase">Pilier 3</div>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Le manuel qui disparaît</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Des automatisations construites dans Notion (rappels, propagation des inscriptions, statuts). Rien de technique à maintenir, l’équipe reste autonome.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11 - POURQUOI CETTE MÉTHODE (3 colonnes)                -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-11" data-slide="11">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">07 · Pourquoi cette méthode</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Pourquoi cette méthode</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+      <article class="card-sockets relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest mb-md border-b border-outline-variant pb-sm">Plutôt que refaire vous-mêmes</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Vous connaissez votre métier, pas l’architecture Notion. Vous avez déjà hérité d’un espace non optimisé faute de temps. J’apporte une architecture éprouvée et je migre sans rien perdre.</p>
+      </article>
+
+      <article class="card-sockets relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest mb-md border-b border-outline-variant pb-sm">Plutôt que brancher un outil externe</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Make, Zapier ou un SaaS ajoutent une couche technique fragile à maintenir. Je construis les automatisations dans Notion. Rien à maintenir côté technique.</p>
+      </article>
+
+      <article class="card-sockets relative border border-primary/40 p-lg bg-primary-fixed/10 flex flex-col">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-md border-b border-primary/20 pb-sm">Plutôt qu’un stagiaire ou un profil tech</div>
+        <p class="font-body-reg text-body-reg text-on-background flex-grow">Un stagiaire repart avec la connaissance, comme votre page VivaTech perdue. Je livre un système documenté et je forme l’équipe. La compétence reste chez vous.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12 - PLAN D'ACTION · OVERVIEW                           -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-12" data-slide="12">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">08 · Plan d’action</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">3 étapes pour y arriver</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+      <article class="card-sockets relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="big-num-sm text-primary mb-md">01</div>
+        <div class="font-code-label text-code-label text-secondary uppercase mb-sm tracking-widest">Étape 1</div>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Diagnostic &amp; cartographie</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Comprendre vos process réels et définir la cible.</p>
+      </article>
+
+      <article class="card-sockets relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="big-num-sm text-primary mb-md">02</div>
+        <div class="font-code-label text-code-label text-secondary uppercase mb-sm tracking-widest">Étape 2</div>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Refonte du workspace</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Bases reliées, vues par rôle, automatisations, migration sans perte.</p>
+      </article>
+
+      <article class="card-sockets relative border border-primary p-lg bg-primary text-on-primary flex flex-col">
+        <span class="cs tl" style="background:#fff"></span><span class="cs tr" style="background:#fff"></span><span class="cs bl" style="background:#fff"></span><span class="cs br" style="background:#fff"></span>
+        <div class="big-num-sm text-on-primary mb-md">03</div>
+        <div class="font-code-label text-code-label text-on-primary/70 uppercase mb-sm tracking-widest">Étape 3</div>
+        <h3 class="font-title-sm text-title-sm text-on-primary mb-sm">Formation &amp; autonomie</h3>
+        <p class="font-body-reg text-body-reg text-on-primary/80 flex-grow">Monter l’équipe en compétence, documenter, rendre autonome.</p>
+      </article>
+    </div>
+
+    <div class="mt-md bg-on-background text-on-primary px-lg py-md flex items-center justify-center shrink-0">
+      <div class="font-code-label text-code-label uppercase tracking-widest text-center">Durée totale : ~6 semaines · hypothèse à caler ensemble</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 13 - ÉTAPE 01                                           -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-13" data-slide="13">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Étape 01 sur 03</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Diagnostic &amp; cartographie</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-md">
+      <div class="card-sockets relative border border-on-background/10 p-lg flex flex-col bg-surface-container-low">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md border-b border-outline-variant pb-sm">Pourquoi c’est indispensable</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant leading-relaxed">On ne refond pas sur du sable. Vos process (accompagnement, events, partenaires) doivent être compris avant de toucher à Notion, sinon on reproduit les silos.</p>
+      </div>
+
+      <div class="card-sockets relative border border-primary/30 p-lg flex flex-col bg-primary-fixed/5">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <div class="font-code-label text-code-label text-primary uppercase mb-md border-b border-primary/20 pb-sm">Ce qu’on va y faire</div>
+        <ol class="flex flex-col gap-sm">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">1.</span><span>Atelier d’audit avec l’équipe, toutes fonctions présentes.</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">2.</span><span>Cartographie des flux d’information (Miro).</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">3.</span><span>Définition de l’architecture cible et validation.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card-sockets relative border-2 border-secondary p-lg bg-secondary-fixed/15 shrink-0">
+      <span class="cs tl" style="background:#56641e;width:8px;height:8px"></span><span class="cs tr" style="background:#56641e;width:8px;height:8px"></span><span class="cs bl" style="background:#56641e;width:8px;height:8px"></span><span class="cs br" style="background:#56641e;width:8px;height:8px"></span>
+      <div class="font-code-label text-code-label text-secondary uppercase mb-md tracking-widest">Livrables</div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Cartographie des process (Miro)</span></div>
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Plan d’architecture du workspace</span></div>
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Cahier des specs validé</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 14 - ÉTAPE 02                                           -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-14" data-slide="14">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Étape 02 sur 03</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Refonte du workspace</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-md">
+      <div class="card-sockets relative border border-on-background/10 p-lg flex flex-col bg-surface-container-low">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md border-b border-outline-variant pb-sm">Pourquoi c’est indispensable</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant leading-relaxed">C’est le cœur de la mission. Une colonne vertébrale commune remplace les pages isolées, une bonne fois.</p>
+      </div>
+
+      <div class="card-sockets relative border border-primary/30 p-lg flex flex-col bg-primary-fixed/5">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <div class="font-code-label text-code-label text-primary uppercase mb-md border-b border-primary/20 pb-sm">Ce qu’on va y faire</div>
+        <ol class="flex flex-col gap-sm">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">1.</span><span>Construire les bases reliées et les vues par rôle.</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">2.</span><span>Mettre en place les automatisations natives (rappels, propagation des inscriptions).</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">3.</span><span>Migrer l’existant sans aucune perte de données.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card-sockets relative border-2 border-secondary p-lg bg-secondary-fixed/15 shrink-0">
+      <span class="cs tl" style="background:#56641e;width:8px;height:8px"></span><span class="cs tr" style="background:#56641e;width:8px;height:8px"></span><span class="cs bl" style="background:#56641e;width:8px;height:8px"></span><span class="cs br" style="background:#56641e;width:8px;height:8px"></span>
+      <div class="font-code-label text-code-label text-secondary uppercase mb-md tracking-widest">Livrables</div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Workspace Notion restructuré</span></div>
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Automatisations natives en place</span></div>
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Données migrées et vérifiées</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 15 - ÉTAPE 03                                           -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-15" data-slide="15">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Étape 03 sur 03</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Formation &amp; autonomie</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-md">
+      <div class="card-sockets relative border border-on-background/10 p-lg flex flex-col bg-surface-container-low">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md border-b border-outline-variant pb-sm">Pourquoi c’est indispensable</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant leading-relaxed">Un beau système que personne ne sait utiliser ne sert à rien. Votre équipe a des niveaux très différents, la formation s’adapte à chacun.</p>
+      </div>
+
+      <div class="card-sockets relative border border-primary/30 p-lg flex flex-col bg-primary-fixed/5">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <div class="font-code-label text-code-label text-primary uppercase mb-md border-b border-primary/20 pb-sm">Ce qu’on va y faire</div>
+        <ol class="flex flex-col gap-sm">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">1.</span><span>Formation par groupe de niveau, du niveau zéro aux plus avancés.</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">2.</span><span>Documentation et SOP directement dans Notion.</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">3.</span><span>Prise en main accompagnée et point de suivi.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card-sockets relative border-2 border-secondary p-lg bg-secondary-fixed/15 shrink-0">
+      <span class="cs tl" style="background:#56641e;width:8px;height:8px"></span><span class="cs tr" style="background:#56641e;width:8px;height:8px"></span><span class="cs bl" style="background:#56641e;width:8px;height:8px"></span><span class="cs br" style="background:#56641e;width:8px;height:8px"></span>
+      <div class="font-code-label text-code-label text-secondary uppercase mb-md tracking-widest">Livrables</div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Sessions de formation par niveau</span></div>
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Documentation &amp; SOP dans Notion</span></div>
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Équipe autonome sur son workspace</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 16 - ROADMAP (timeline)                                 -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-16" data-slide="16">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">08 · Plan d’action · Roadmap</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Le calendrier de la mission</h1>
+    </div>
+
+    <div class="card-sockets relative border border-on-background/10 px-lg py-xl flex flex-col justify-center bg-surface-container-lowest overflow-x-auto">
+      <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+
+      <div class="relative flex items-start justify-between mb-md min-w-[680px]">
+        <div class="absolute top-[5px] left-[6px] right-[6px] h-px bg-on-background/20 z-0"></div>
+        <div class="flex flex-col items-center flex-1"><div class="w-3 h-3 bg-primary rounded-full relative z-10 shrink-0"></div></div>
+        <div class="flex flex-col items-center flex-1"><div class="w-3 h-3 bg-primary rounded-full relative z-10 shrink-0"></div></div>
+        <div class="flex flex-col items-center flex-1"><div class="w-3 h-3 bg-primary rounded-full relative z-10 shrink-0"></div></div>
+        <div class="flex flex-col items-center flex-1"><div class="w-3 h-3 bg-primary rounded-full relative z-10 shrink-0"></div></div>
+        <div class="flex flex-col items-center flex-1"><div class="w-3 h-3 bg-secondary rounded-full border border-secondary relative z-10 shrink-0"></div></div>
+      </div>
+
+      <div class="flex items-start justify-between min-w-[680px]">
+        <div class="flex flex-col items-center flex-1 px-xs"><div class="font-eyebrow text-eyebrow text-primary uppercase text-center mb-xs leading-tight">Sem. 1-2</div><div class="font-code-label text-code-label text-on-background text-center leading-tight">Diagnostic &amp; cartographie</div></div>
+        <div class="flex flex-col items-center flex-1 px-xs"><div class="font-eyebrow text-eyebrow text-primary uppercase text-center mb-xs leading-tight">Sem. 3-4</div><div class="font-code-label text-code-label text-on-background text-center leading-tight">Refonte : bases, vues, automatisations</div></div>
+        <div class="flex flex-col items-center flex-1 px-xs"><div class="font-eyebrow text-eyebrow text-primary uppercase text-center mb-xs leading-tight">Sem. 5</div><div class="font-code-label text-code-label text-on-background text-center leading-tight">Migration des données</div></div>
+        <div class="flex flex-col items-center flex-1 px-xs"><div class="font-eyebrow text-eyebrow text-primary uppercase text-center mb-xs leading-tight">Sem. 6</div><div class="font-code-label text-code-label text-on-background text-center leading-tight">Formation et prise en main</div></div>
+        <div class="flex flex-col items-center flex-1 px-xs"><div class="font-eyebrow text-eyebrow text-secondary uppercase text-center mb-xs leading-tight">J+30</div><div class="font-code-label text-code-label text-on-background text-center leading-tight">Point de suivi post-livraison</div></div>
+      </div>
+    </div>
+
+    <div class="mt-md bg-on-background text-on-primary px-lg py-md flex items-center justify-center shrink-0">
+      <div class="font-code-label text-code-label uppercase tracking-widest text-center">Environ 6 semaines de la mise en route au workspace adopté · hypothèse à caler ensemble</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 17 - VOTRE IMPLICATION                                  -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-17" data-slide="17">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">08 · Plan d’action · Votre implication</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce qu’on attend de vos équipes</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+      <div class="card-sockets relative border border-primary/40 p-lg flex flex-col bg-primary-fixed/10">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <div class="font-code-label text-code-label text-primary uppercase mb-md tracking-widest">Au démarrage · une fois</div>
+        <div class="big-num text-primary mb-md" style="white-space:nowrap">~4h</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Atelier d’audit avec l’équipe, toutes les fonctions présentes.</p>
+      </div>
+
+      <div class="card-sockets relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md tracking-widest">Pendant la mission · récurrent</div>
+        <div class="big-num text-on-background mb-md" style="white-space:nowrap">~1h/sem</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Points de validation + accès à vos experts métier. Formation : ~2h par groupe de niveau.</p>
+      </div>
+    </div>
+
+    <div class="mt-md bg-on-background text-on-primary px-lg py-md shrink-0">
+      <div class="font-code-label text-code-label uppercase tracking-widest leading-relaxed">C’est tout. Un référent côté L’Escalator et la validation des jalons. Le reste, c’est nous.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 18 - OPTION RÉCURRENTE STARTUPS (aucun prix)           -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-18" data-slide="18">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-secondary"></div>
+        <span class="font-code-label text-code-label text-secondary uppercase tracking-widest">En option · Récurrent</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Et vos startups ?</h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm max-w-3xl">Une fois votre équipe équipée, le même savoir-faire sert vos startups incubées. Un module pensé pour être répété à chaque promotion (environ 20 par an) et ouvert aux alumnis.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+      <article class="card-sockets relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">school</span>
+        <div class="flex items-baseline gap-sm mb-sm"><h3 class="font-title-sm text-title-sm text-on-background">Module 7h</h3><span class="font-code-label text-code-label text-outline uppercase tracking-widest">L’essentiel</span></div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">L’essentiel Notion pour piloter sa startup : structurer, suivre, partager avec les partenaires.</p>
+      </article>
+
+      <article class="card-sockets relative border border-primary/40 p-lg bg-primary-fixed/10 flex flex-col">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">menu_book</span>
+        <div class="flex items-baseline gap-sm mb-sm"><h3 class="font-title-sm text-title-sm text-on-background">Module 14h</h3><span class="font-code-label text-code-label text-primary uppercase tracking-widest">Approfondi</span></div>
+        <p class="font-body-reg text-body-reg text-on-background flex-grow">Version approfondie : CRM, pilotage, dataroom investisseurs.</p>
+      </article>
+    </div>
+
+    <div class="mt-md grid grid-cols-1 md:grid-cols-2 gap-md shrink-0">
+      <div class="bg-secondary text-on-secondary px-lg py-md flex items-center gap-sm">
+        <span class="material-symbols-outlined text-xl shrink-0">redeem</span>
+        <p class="font-body-reg text-body-reg">Un livrable de plus à offrir à vos startups, sans charge supplémentaire pour votre équipe.</p>
+      </div>
+      <div class="border border-on-background/10 bg-surface-container-low px-lg py-md flex items-center">
+        <p class="font-code-label text-code-label text-outline uppercase tracking-widest leading-relaxed">Chiffré séparément de la refonte, par batch. Détail budget sur la slide suivante.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 19 - DIVIDER 04 · LA PREUVE                             -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-19" data-slide="19">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">04</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 05</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">La preuve</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Ils sont partis exactement du même point.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 20 - RÉFÉRENCES (2 cas)                                 -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-20" data-slide="20">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">09 · Références</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ils sont partis du même point</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+      <article class="card-sockets relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="mb-sm"><span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest py-xs px-sm bg-primary-fixed/30 border border-primary-fixed inline-block">Incubateur · Business School</span></div>
+        <div class="flex items-baseline gap-sm mb-sm">
+          <div class="big-num-sm text-primary" style="white-space:nowrap">3 → 1</div>
+        </div>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest mb-md">prestataires en lice, un seul retenu : nous</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Incubateur multi-campus (Bordeaux, Marseille). Même besoin que vous : refondre Notion et former les équipes. Nous ont choisis pour la méthode lean et la montée en compétence des équipes.</p>
+        <div class="mt-auto pt-md border-t border-outline-variant"><span class="font-code-label text-code-label text-outline uppercase tracking-widest">KEDGE Entrepreneurship</span></div>
+      </article>
+
+      <article class="card-sockets relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="mb-sm"><span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest py-xs px-sm bg-primary-fixed/30 border border-primary-fixed inline-block">Cabinet · 254 clients</span></div>
+        <div class="flex items-baseline gap-sm mb-sm">
+          <div class="big-num-sm text-primary">254</div>
+        </div>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest mb-md">dossiers migrés vers un seul Notion</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Cabinet comptable, équipe formée de zéro sur Notion. 8 bases reliées, CRM unifié, formation par lots. Même point de départ que vous : un outil à structurer et une équipe à embarquer.</p>
+        <div class="mt-auto pt-md border-t border-outline-variant"><span class="font-code-label text-code-label text-outline uppercase tracking-widest">PB-associés</span></div>
+      </article>
+    </div>
+
+    <div class="mt-md pt-sm shrink-0">
+      <p class="font-code-label text-code-label text-outline uppercase tracking-widest text-center">Missions récentes · résultats en cours de mesure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 21 - ENGAGEMENTS (+ crédentials footer)                -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-21" data-slide="21">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Engagements</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce sur quoi vous pouvez compter</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+      <div class="card-sockets relative border border-on-background p-lg flex flex-col bg-surface-container-lowest">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">schedule</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Délais tenus</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow leading-relaxed">Chaque livrable arrive au jour J. Si un risque de retard apparaît, vous êtes prévenu 48h avant, pas le jour même.</p>
+      </div>
+      <div class="card-sockets relative border border-on-background p-lg flex flex-col bg-surface-container-lowest">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">visibility</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Transparence</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow leading-relaxed">Un point hebdo de 30 minutes, un espace partagé à jour en temps réel, une réponse sous 24h.</p>
+      </div>
+      <div class="card-sockets relative border border-primary/40 p-lg flex flex-col bg-primary-fixed/10">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">verified_user</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Exigence sur le résultat</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow leading-relaxed">Si un livrable ne colle pas au brief validé, je le reprends sans surcoût. Le workspace doit être adopté, pas seulement livré.</p>
+      </div>
+    </div>
+
+    <div class="mt-md pt-md border-t border-outline-variant shrink-0">
+      <div class="font-code-label text-code-label text-outline uppercase tracking-widest text-center">
+        Notion Solution Partner &nbsp;·&nbsp; PMP® &nbsp;·&nbsp; Black Belt Lean Six Sigma
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 22 - OFFRE (prix ICI · avant-dernière)                 -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-22" data-slide="22">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">10 · Offre</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Refonte du workspace + montée en compétence de l’équipe</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+      <div class="card-sockets relative border border-primary p-lg bg-primary text-on-primary flex flex-col">
+        <span class="cs tl" style="background:#fff"></span><span class="cs tr" style="background:#fff"></span><span class="cs bl" style="background:#fff"></span><span class="cs br" style="background:#fff"></span>
+        <div class="font-code-label text-code-label text-on-primary/70 uppercase mb-sm tracking-widest">Offre principale</div>
+        <div class="border-y border-on-primary/20 py-sm mb-md">
+          <div class="big-num text-on-primary" style="white-space:nowrap">6&nbsp;500&nbsp;€ <span style="font-size:0.42em;vertical-align:baseline">HT</span></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-primary/85 mb-md">Un espace Notion unique, fiable et adopté par toute l’équipe. Fini les silos et la ressaisie à la main.</p>
+        <div class="mt-auto flex flex-col gap-sm">
+          <div class="border-t border-on-primary/20 pt-sm">
+            <div class="font-code-label text-code-label text-on-primary/70 uppercase mb-xs">Modalités</div>
+            <p class="font-body-reg text-on-primary" style="font-size:clamp(12px,1vw,14px)">50 % au démarrage · 50 % à la livraison</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-sockets relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md tracking-widest">Ce qui est inclus</div>
+        <ul class="flex flex-col gap-sm flex-grow">
+          <li class="flex items-start gap-sm"><span class="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">check_circle</span><div><span class="font-body-reg text-on-background" style="font-size:clamp(12px,1vw,14.5px)">Diagnostic + cartographie des process</span> <span class="font-code-label text-outline" style="font-size:clamp(10px,0.8vw,12px)">· 2 sem · atelier équipe + Miro</span></div></li>
+          <li class="flex items-start gap-sm"><span class="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">check_circle</span><div><span class="font-body-reg text-on-background" style="font-size:clamp(12px,1vw,14.5px)">Refonte complète du workspace</span> <span class="font-code-label text-outline" style="font-size:clamp(10px,0.8vw,12px)">· bases reliées, vues par rôle, automatisations natives</span></div></li>
+          <li class="flex items-start gap-sm"><span class="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">check_circle</span><div><span class="font-body-reg text-on-background" style="font-size:clamp(12px,1vw,14.5px)">Migration des données existantes</span> <span class="font-code-label text-outline" style="font-size:clamp(10px,0.8vw,12px)">· sans perte</span></div></li>
+          <li class="flex items-start gap-sm"><span class="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">check_circle</span><div><span class="font-body-reg text-on-background" style="font-size:clamp(12px,1vw,14.5px)">Formation de l’équipe par niveau</span> <span class="font-code-label text-outline" style="font-size:clamp(10px,0.8vw,12px)">· du niveau zéro aux avancés</span></div></li>
+          <li class="flex items-start gap-sm"><span class="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">check_circle</span><div><span class="font-body-reg text-on-background" style="font-size:clamp(12px,1vw,14.5px)">Documentation &amp; SOP dans Notion</span> <span class="font-code-label text-outline" style="font-size:clamp(10px,0.8vw,12px)">· l’équipe reste autonome</span></div></li>
+          <li class="flex items-start gap-sm"><span class="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">check_circle</span><div><span class="font-body-reg text-on-background" style="font-size:clamp(12px,1vw,14.5px)">Point de suivi à J+30</span> <span class="font-code-label text-outline" style="font-size:clamp(10px,0.8vw,12px)">· on vérifie l’adoption</span></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-md grid grid-cols-1 md:grid-cols-2 gap-md shrink-0">
+      <div class="border border-on-background/10 bg-surface-container-low px-md py-sm">
+        <div class="font-code-label text-code-label text-secondary uppercase mb-xs">En option, récurrent</div>
+        <p class="font-body-reg text-on-background" style="font-size:clamp(11.5px,0.95vw,14px)">Modules formation startups 7h / 14h, chiffrés par batch, à cadrer ensemble.</p>
+      </div>
+      <div class="border border-on-background/10 bg-surface-container-low px-md py-sm flex flex-col justify-center">
+        <p class="font-body-reg text-on-surface-variant" style="font-size:clamp(11.5px,0.95vw,14px)">Le temps équipe récupéré rembourse la mission en quelques mois · hypothèse.</p>
+      </div>
+    </div>
+
+    <div class="mt-sm shrink-0"><span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Confidentiel · préparé pour L’Escalator</span></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 23 - REMERCIEMENT / CLOSING                             -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-23" data-slide="23">
+  <div class="slide-body justify-center relative overflow-hidden px-margin py-md">
+    <div class="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+    <div class="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-secondary-container opacity-40 rounded-full blur-[100px] -z-10 mix-blend-multiply"></div>
+
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="relative border-l border-r border-on-background/10 px-margin py-xl bg-surface-container-lowest/80 backdrop-blur-sm">
+        <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+
+        <div class="mb-lg">
+          <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-sm">Merci.</h1>
+          <div class="w-24 h-1 bg-secondary mb-md"></div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant max-w-2xl">Merci pour votre confiance, et merci à Ghalia pour la mise en relation.</p>
+        </div>
+
+        <div class="mb-lg">
+          <p class="font-headline-md text-on-background tracking-tight" style="font-size:clamp(22px,2.8vw,36px);line-height:1.1">On avance ensemble ?</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-lg mb-lg">
+          <div class="border-l-2 border-primary pl-md">
+            <div class="font-code-label text-code-label text-outline uppercase mb-xs">Calendrier</div>
+            <div class="font-body-reg text-body-reg text-on-background">Validation souhaitée courant juillet · démarrage possible dès la mi-juillet (dispo Joanna) ou à la rentrée si vous préférez.</div>
+          </div>
+          <div class="flex flex-col justify-center gap-sm">
+            <div class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary">mail</span><a href="mailto:sylvain@ramalogic.com" class="font-body-reg text-body-reg text-on-background hover:text-primary transition-colors">sylvain@ramalogic.com</a></div>
+            <p class="font-body-reg text-body-reg text-on-surface-variant italic">On en parle quand vous voulez.</p>
+          </div>
+        </div>
+
+        <div class="pt-md border-t border-outline-variant">
+          <div class="font-code-label text-code-label text-outline uppercase tracking-widest">Confidentiel · préparé pour L’Escalator</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ====== OVERVIEW GRID (ESC) ====== -->
+<div id="overview" class="fixed inset-0 z-[60] bg-background/95 backdrop-blur-md hidden overflow-y-auto p-margin">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="flex items-center justify-between mb-lg sticky top-0 py-sm">
+      <div class="flex items-center gap-md">
+        <div class="font-title-sm text-title-sm font-medium tracking-tight">Vue d’ensemble</div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">L’Escalator · 24 slides</span>
+      </div>
+      <button id="overview-close" aria-label="Fermer" class="bg-surface-container-lowest border border-on-background w-10 h-10 flex items-center justify-center hover:bg-on-background hover:text-on-primary transition-colors">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div id="overview-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-md"></div>
+  </div>
+</div>
+
+<nav class="nav-controls fixed bottom-margin right-margin z-50 flex flex-col gap-sm">
+  <button id="prev-btn" aria-label="Slide précédente" class="bg-surface-container-lowest border border-on-background w-12 h-12 flex items-center justify-center hover:bg-on-background hover:text-on-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_upward</span>
+  </button>
+  <button id="next-btn" aria-label="Slide suivante" class="bg-on-background text-on-primary border border-on-background w-12 h-12 flex items-center justify-center hover:bg-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_downward</span>
+  </button>
+</nav>
+
+<script>
+  const viewport = document.querySelector('.slides-viewport');
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  document.getElementById('total-slides').textContent = String(total).padStart(2, '0');
+
+  let currentIdx = 0;
+
+  function updateCounter() {
+    const viewportRect = viewport.getBoundingClientRect();
+    const center = viewportRect.top + viewportRect.height / 2;
+    let closest = 0;
+    let closestDist = Infinity;
+    slides.forEach((slide, idx) => {
+      const r = slide.getBoundingClientRect();
+      const slideCenter = r.top + r.height / 2;
+      const dist = Math.abs(slideCenter - center);
+      if (dist < closestDist) { closestDist = dist; closest = idx; }
+    });
+    currentIdx = closest;
+    document.getElementById('current-slide').textContent = String(closest + 1).padStart(2, '0');
+  }
+
+  function goToSlide(idx) {
+    if (idx < 0 || idx >= total) return;
+    slides[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.getElementById('prev-btn').addEventListener('click', () => goToSlide(currentIdx - 1));
+  document.getElementById('next-btn').addEventListener('click', () => goToSlide(currentIdx + 1));
+
+  /* ===== Overview grid (ESC) ===== */
+  const overview = document.getElementById('overview');
+  const overviewGrid = document.getElementById('overview-grid');
+  const labels = [
+    "Couverture", "Sommaire",
+    "01 / 05 · Le décor", "01 · Contexte",
+    "02 / 05 · Problèmes", "02 · Problèmes", "03 · Impacts", "04 · Ce que j’y vois", "05 · Objectifs",
+    "03 / 05 · La méthode", "06 · Solution", "07 · Pourquoi cette méthode", "08 · Plan d’action",
+    "Étape 01 · Diagnostic", "Étape 02 · Refonte", "Étape 03 · Formation", "Roadmap", "Votre implication", "Option · Startups",
+    "04 / 05 · La preuve", "09 · Références", "Engagements",
+    "10 · Offre", "Merci"
+  ];
+  slides.forEach((slide, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'overview-card';
+    const num = document.createElement('span');
+    num.className = 'ov-num';
+    num.textContent = String(idx + 1).padStart(2, '0');
+    const label = document.createElement('span');
+    label.className = 'ov-label';
+    label.textContent = labels[idx] || ('Slide ' + (idx + 1));
+    btn.appendChild(num);
+    btn.appendChild(label);
+    btn.addEventListener('click', () => { closeOverview(); setTimeout(() => goToSlide(idx), 60); });
+    overviewGrid.appendChild(btn);
+  });
+  function openOverview() { overview.classList.remove('hidden'); }
+  function closeOverview() { overview.classList.add('hidden'); }
+  document.getElementById('overview-btn').addEventListener('click', openOverview);
+  document.getElementById('overview-close').addEventListener('click', closeOverview);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      overview.classList.contains('hidden') ? openOverview() : closeOverview();
+      return;
+    }
+    if (!overview.classList.contains('hidden')) return;
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) {
+      e.preventDefault();
+      goToSlide(currentIdx + 1);
+    } else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) {
+      e.preventDefault();
+      goToSlide(currentIdx - 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      goToSlide(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      goToSlide(total - 1);
+    }
+  });
+
+  viewport.addEventListener('scroll', () => {
+    requestAnimationFrame(updateCounter);
+  });
+
+  updateCounter();
+</script>
+
+</body>
+</html>
