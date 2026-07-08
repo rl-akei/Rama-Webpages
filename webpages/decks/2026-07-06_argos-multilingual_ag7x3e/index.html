@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Argos Multilingual × Rama Logic · One memory for your Data Services BU</title>
+
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-dim":"#dcd9d9","secondary-fixed-dim":"#bdcf7c","secondary-fixed":"#d9eb95",
+        "on-tertiary":"#ffffff","surface-tint":"#466556","on-secondary":"#ffffff",
+        "on-background":"#1c1b1b","surface-container-highest":"#e5e2e1","inverse-primary":"#accebc",
+        "error":"#ba1a1a","on-tertiary-fixed":"#0c1d27","background":"#fcf9f8",
+        "on-primary-fixed-variant":"#2f4d3f","primary-fixed-dim":"#accebc","on-primary-container":"#f5fff7",
+        "surface-container-lowest":"#ffffff","primary-fixed":"#c8ead8","surface-variant":"#e5e2e1",
+        "on-primary":"#ffffff","on-error-container":"#93000a","on-error":"#ffffff",
+        "primary":"#446254","outline":"#727974","on-surface":"#1c1b1b",
+        "tertiary-container":"#657783","on-tertiary-container":"#fcfcff",
+        "on-tertiary-fixed-variant":"#384954","tertiary":"#4d5e6a","on-surface-variant":"#424844",
+        "surface-bright":"#fcf9f8","error-container":"#ffdad6","on-secondary-container":"#5c6b24",
+        "surface-container-high":"#ebe7e7",
+        "inverse-surface":"#313030","outline-variant":"#c1c8c2","surface-container-low":"#f6f3f2",
+        "secondary":"#56641e","on-primary-fixed":"#012115","on-secondary-fixed-variant":"#3f4c05",
+        "inverse-on-surface":"#f3f0ef","surface-container":"#f0edec","primary-container":"#5c7b6c",
+        "tertiary-fixed-dim":"#b7c9d6","tertiary-fixed":"#d3e5f3","surface":"#fcf9f8",
+        "on-secondary-fixed":"#171e00","secondary-container":"#d9eb95"
+      },
+      borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},
+      spacing:{
+        "xs":"4px","base":"8px",
+        "sm":"clamp(7px, 0.9vh, 12px)",
+        "md":"clamp(11px, 1.7vh, 22px)",
+        "lg":"clamp(16px, 2.6vh, 34px)",
+        "xl":"clamp(22px, 4vh, 56px)",
+        "gutter":"clamp(14px, 1.4vw, 24px)",
+        "margin":"clamp(20px, 3vw, 40px)"
+      },
+      fontFamily:{
+        "body-reg":["Work Sans","system-ui","sans-serif"],
+        "code-label":["Space Mono","monospace"],
+        "title-sm":["Clash Grotesk","Work Sans","sans-serif"],
+        "eyebrow":["Space Mono","monospace"],
+        "display-lg":["Clash Grotesk","Work Sans","sans-serif"],
+        "headline-md":["Clash Grotesk","Work Sans","sans-serif"]
+      },
+      fontSize:{
+        "body-reg":["clamp(12.5px, 1.02vw, 15.5px)",{"lineHeight":"1.5","fontWeight":"400"}],
+        "code-label":["clamp(10.5px, 0.82vw, 12.5px)",{"lineHeight":"1.45","letterSpacing":"0.05em","fontWeight":"400"}],
+        "title-sm":["clamp(16px, 1.45vw, 21px)",{"lineHeight":"1.3","fontWeight":"500"}],
+        "eyebrow":["clamp(9.5px, 0.72vw, 11.5px)",{"lineHeight":"1.0","fontWeight":"500"}],
+        "display-lg":["clamp(38px, 5vw, 68px)",{"lineHeight":"1.02","fontWeight":"500"}],
+        "headline-md":["clamp(24px, 3.2vw, 42px)",{"lineHeight":"1.1","fontWeight":"500"}]
+      }
+    }
+  }
+}
+</script>
+
+<style>
+:root { --header-h: 52px; }
+html, body { scroll-behavior: smooth; overflow-x: clip; }
+body { font-family: 'Work Sans', system-ui, sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+.font-display-lg, .font-headline-md, h1 { overflow-wrap: anywhere; }
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #446254;
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(28,27,27,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28,27,27,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.slides-viewport {
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+.slide {
+  height: 100vh;
+  height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: var(--header-h);
+}
+.slide-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.socket-corner-tl, .socket-corner-tr, .socket-corner-bl, .socket-corner-br {
+  position: absolute;
+  width: 8px; height: 8px;
+  background-color: #1c1b1b;
+}
+.socket-corner-tl { top: -4px; left: -4px; }
+.socket-corner-tr { top: -4px; right: -4px; }
+.socket-corner-bl { bottom: -4px; left: -4px; }
+.socket-corner-br { bottom: -4px; right: -4px; }
+
+.card-sockets > .cs { position:absolute; width:6px; height:6px; background:#1c1b1b; }
+.card-sockets > .cs.tl { top:0; left:0; } .card-sockets > .cs.tr { top:0; right:0; }
+.card-sockets > .cs.bl { bottom:0; left:0; } .card-sockets > .cs.br { bottom:0; right:0; }
+
+.divider-num {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: #446254;
+}
+.big-num {
+  font-family: 'Clash Grotesk', 'Work Sans', sans-serif;
+  font-weight: 500;
+  line-height: 0.98;
+  font-size: clamp(32px, 4.4vw, 54px);
+}
+.big-num-sm { font-size: clamp(26px, 3.4vw, 42px); }
+
+.overview-card {
+  border: 1px solid #c1c8c2;
+  background: #ffffff;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  transition: border-color 160ms, background 160ms, transform 160ms;
+  min-height: 88px;
+}
+.overview-card:hover { border-color: #446254; background: #f6f3f2; transform: translateY(-2px); }
+.overview-card .ov-num { font-family: 'Space Mono', monospace; font-size: 12px; color: #446254; letter-spacing: 0.05em; }
+.overview-card .ov-label { font-family: 'Work Sans', sans-serif; font-size: 13px; color: #1c1b1b; line-height: 1.3; }
+
+@media (prefers-reduced-motion: reduce) {
+  html, body { scroll-behavior: auto; }
+  .overview-card, .group * { transition: none !important; }
+}
+
+@media (max-width: 767px) {
+  .slides-viewport { scroll-snap-type: none; }
+  .slide { height: auto; min-height: 100dvh; overflow: visible; padding-bottom: 96px; }
+  .slide-body { justify-content: flex-start !important; }
+}
+
+.print-only { display: none; }
+@media print {
+  .slides-viewport { height: auto; overflow: visible; scroll-snap-type: none; }
+  .slide { page-break-after: always; height: auto; overflow: visible; }
+  .nav-controls, .header-bar, #overview { display: none !important; }
+  .print-only { display: block; }
+}
+</style>
+</head>
+<body class="bg-background text-on-background antialiased">
+
+<!-- ====== STICKY HEADER ====== -->
+<header class="header-bar fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant" style="height:52px">
+  <div class="flex justify-between items-center h-full px-margin max-w-[1600px] mx-auto">
+    <div class="flex items-center gap-md">
+      <div class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</div>
+      <div class="hidden md:block w-px h-4 bg-outline-variant"></div>
+      <div class="hidden md:block font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Prepared for Argos Multilingual</div>
+    </div>
+    <div class="flex items-center gap-md">
+      <button id="overview-btn" aria-label="Overview" class="hidden md:flex items-center gap-1 font-code-label text-code-label text-on-surface-variant hover:text-on-background transition-colors">
+        <span class="material-symbols-outlined text-lg">grid_view</span><span class="uppercase tracking-widest">ESC</span>
+      </button>
+      <div class="font-code-label text-code-label text-on-surface-variant">
+        <span id="current-slide" class="text-on-background font-medium">01</span>
+        <span class="text-outline-variant mx-1">/</span>
+        <span id="total-slides">34</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ====== SLIDES VIEWPORT ====== -->
+<main class="slides-viewport">
+
+<!-- ============================================================ -->
+<!-- SLIDE 0 - COVER                                               -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-0" data-slide="0">
+  <div class="slide-body flex items-center justify-center relative overflow-hidden px-margin">
+    <div class="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+    <div class="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-secondary-container opacity-40 rounded-full blur-[100px] -z-10 mix-blend-multiply"></div>
+
+    <div class="max-w-5xl w-full relative z-10">
+      <div class="relative bg-surface-container-lowest/80 backdrop-blur-sm rounded-lg border border-outline-variant px-margin py-xl">
+        <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+
+        <div class="mb-lg">
+          <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase py-xs px-sm bg-primary-fixed/30 rounded border border-primary-fixed inline-block">Proposal · Confidential · July 13, 2026</span>
+        </div>
+
+        <h1 class="font-display-lg text-display-lg text-on-background mb-md tracking-tight">
+          One memory for your<br/>Data Services BU.
+        </h1>
+        <div class="w-24 h-1 bg-secondary mb-md"></div>
+        <p class="font-headline-md text-on-surface-variant max-w-3xl" style="font-size:clamp(17px,2vw,26px);line-height:1.25">
+          A unified Notion workspace: real-time P&amp;L, freelancer quality tracking, and AI that finally knows your business.
+        </p>
+
+        <div class="mt-lg flex items-baseline gap-sm">
+          <span class="font-display-lg text-on-background tracking-tight" style="font-size:clamp(28px,3.4vw,46px);line-height:1">Argos Multilingual</span>
+        </div>
+
+        <div class="mt-xl pt-lg border-t border-outline-variant flex items-center justify-between flex-wrap gap-sm">
+          <div class="flex items-center gap-sm">
+            <div class="h-2 w-2 bg-primary"></div>
+            <span class="font-code-label text-code-label text-on-surface-variant">Sylvain Ramaradjou · Notion Architect · Rama Logic · July 13, 2026</span>
+          </div>
+          <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Confidential · prepared for Argos Multilingual</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 1 - AGENDA                                              -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-1" data-slide="1">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Agenda</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">What we'll cover <span class="text-primary italic">together</span></h1>
+      <p class="font-code-label text-code-label text-outline mt-xs uppercase tracking-widest">12 sections, from your context to the offer.</p>
+    </div>
+
+    <div class="flex flex-col">
+      <a href="#slide-2" class="group flex items-baseline gap-md py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">01</span>
+        <span class="font-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,17px)">Context</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Where the Data Services BU stands today</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-4" class="group flex items-baseline gap-md py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">02</span>
+        <span class="font-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,17px)">Problems</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Three frictions your team lives with</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-6" class="group flex items-baseline gap-md py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">03</span>
+        <span class="font-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,17px)">Impact</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">What these frictions cost, concretely</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-8" class="group flex items-baseline gap-md py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">04</span>
+        <span class="font-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,17px)">What I see</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">The root cause, and the cost of waiting</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-10" class="group flex items-baseline gap-md py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">05</span>
+        <span class="font-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,17px)">Objectives</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Today vs tomorrow, side by side</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-12" class="group flex items-baseline gap-md py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">06</span>
+        <span class="font-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,17px)">Solution</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">One memory, live dashboards, business-aware AI</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-14" class="group flex items-baseline gap-md py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">07</span>
+        <span class="font-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,17px)">Why this approach</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">And why security holds up</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-17" class="group flex items-baseline gap-md py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">08</span>
+        <span class="font-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,17px)">Action plan</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Three steps, one commitment today</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-23" class="group flex items-baseline gap-md py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">09</span>
+        <span class="font-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,17px)">Roadmap</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Timing, your part, adoption pace</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-27" class="group flex items-baseline gap-md py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">10</span>
+        <span class="font-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,17px)">References</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Two teams that made the same move</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-29" class="group flex items-baseline gap-md py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">11</span>
+        <span class="font-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,17px)">Commitments</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">What you can hold me to</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-31" class="group flex items-baseline gap-md py-xs border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">12</span>
+        <span class="font-title-sm text-on-background w-44 md:w-64 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,17px)">Offer</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Scope and budget</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2 - DIVIDER 01 · CONTEXT                                -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-2" data-slide="2">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">01</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Context</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Where the Data Services BU stands today.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3 - CONTEXT                                             -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-3" data-slide="3">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">01 · Context</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">A BU that outgrew its own structure</h1>
+    </div>
+
+    <div class="flex flex-col gap-md">
+      <div class="relative border-l border-r border-on-background/10 px-margin py-lg">
+        <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+        <p class="font-body-reg text-body-reg text-on-background leading-relaxed max-w-3xl">
+          Inside Argos Multilingual, your Data Services BU annotates and curates the data that major tech companies use to train and evaluate their AI models. Few clients, large and complex niche projects, top-tier quality expectations. And while other BUs slow down, yours is absorbing volumes it was never structured for.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+        <div class="card-sockets relative bg-surface-container-lowest border border-on-background/20 p-md flex flex-col">
+          <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+          <div class="font-code-label text-code-label text-primary uppercase mb-xs">Growth</div>
+          <div class="font-title-sm text-title-sm text-on-background">4 → 14 PMs</div>
+          <p class="font-code-label text-code-label text-outline mt-sm uppercase">20-25 people across PM, quality &amp; sourcing</p>
+        </div>
+        <div class="card-sockets relative bg-surface-container-lowest border border-on-background/20 p-md flex flex-col">
+          <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+          <div class="font-code-label text-code-label text-primary uppercase mb-xs">Production</div>
+          <div class="font-title-sm text-title-sm text-on-background">100% external</div>
+          <p class="font-code-label text-code-label text-outline mt-sm uppercase">all production runs on freelancers</p>
+        </div>
+        <div class="card-sockets relative bg-surface-container-lowest border border-on-background/20 p-md flex flex-col">
+          <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+          <div class="font-code-label text-code-label text-secondary uppercase mb-xs">Right now</div>
+          <div class="font-title-sm text-title-sm text-on-background">Restructuring</div>
+          <p class="font-code-label text-code-label text-outline mt-sm uppercase">new General Manager owning P&amp;L</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4 - DIVIDER 02 · PROBLEMS                               -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-4" data-slide="4">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">02</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Problems</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Three frictions, in your own words.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5 - PROBLEMS (editorial rows)                           -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-5" data-slide="5">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">02 · Problems</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">"We're a bit everywhere, and therefore nowhere."</h1>
+    </div>
+
+    <div class="flex flex-col gap-md">
+      <article class="card-sockets relative bg-surface-container-lowest border border-on-background p-md flex flex-col md:flex-row md:items-center gap-md">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="flex items-center gap-sm md:w-64 shrink-0">
+          <span class="material-symbols-outlined text-primary text-3xl shrink-0">scatter_plot</span>
+          <div><div class="font-code-label text-code-label text-secondary uppercase mb-xs">/SCATTERED</div><h3 class="font-title-sm text-title-sm text-on-background">Operations live in 7 places</h3></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Asana on a free plan, XTRF on its way out, Tableau for ops only, Google Drive on one side, Teams and SharePoint trackers on the other, a weekly OneNote, plus your internal tools.</p>
+        <div class="md:w-52 shrink-0 md:border-l border-outline-variant md:pl-md"><span class="font-code-label text-code-label text-error uppercase tracking-widest">Nothing connects to anything</span></div>
+      </article>
+
+      <article class="card-sockets relative bg-surface-container-lowest border border-on-background p-md flex flex-col md:flex-row md:items-center gap-md">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="flex items-center gap-sm md:w-64 shrink-0">
+          <span class="material-symbols-outlined text-primary text-3xl shrink-0">visibility_off</span>
+          <div><div class="font-code-label text-code-label text-secondary uppercase mb-xs">/BLIND</div><h3 class="font-title-sm text-title-sm text-on-background">No view of P&amp;L, capacity or quality</h3></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Your new GM's first question was "how do we see profitability?". Today the answer lives in your head. And although 100% of production is external, no shared system tracks freelancer quality or productivity.</p>
+        <div class="md:w-52 shrink-0 md:border-l border-outline-variant md:pl-md"><span class="font-code-label text-code-label text-error uppercase tracking-widest">Steering decisions fly blind</span></div>
+      </article>
+
+      <article class="card-sockets relative bg-surface-container-lowest border border-on-background p-md flex flex-col md:flex-row md:items-center gap-md">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="flex items-center gap-sm md:w-64 shrink-0">
+          <span class="material-symbols-outlined text-primary text-3xl shrink-0">history_toggle_off</span>
+          <div><div class="font-code-label text-code-label text-secondary uppercase mb-xs">/AMNESIA</div><h3 class="font-title-sm text-title-sm text-on-background">Every project starts from scratch</h3></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">80-page guidelines, complex niche scoping, and no shared templates or project history. Each PM scopes alone, with a personal AI tool that knows nothing about your past projects.</p>
+        <div class="md:w-52 shrink-0 md:border-l border-outline-variant md:pl-md"><span class="font-code-label text-code-label text-error uppercase tracking-widest">Consistency depends on who scopes</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6 - DIVIDER 03 · IMPACT                                 -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-6" data-slide="6">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">03</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Impact</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">The questions you can't answer today.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7 - IMPACT (unanswered questions)                       -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-7" data-slide="7">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">03 · Impact</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Three questions with no answer today</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+      <div class="card-sockets relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase mb-sm">Profitability</div>
+        <div class="font-title-sm text-on-background mb-md" style="font-size:clamp(17px,1.6vw,23px);line-height:1.25">"Which projects actually make money?"</div>
+        <div class="mt-auto border-t border-outline-variant pt-md">
+          <div class="big-num-sm text-error mb-xs">0</div>
+          <div class="font-code-label text-code-label text-on-surface-variant">live per-project P&amp;L view. The answer sits in Tableau extracts and in one person's head.</div>
+        </div>
+      </div>
+
+      <div class="card-sockets relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase mb-sm">Quality</div>
+        <div class="font-title-sm text-on-background mb-md" style="font-size:clamp(17px,1.6vw,23px);line-height:1.25">"Who are your best freelancers?"</div>
+        <div class="mt-auto border-t border-outline-variant pt-md">
+          <div class="big-num-sm text-error mb-xs">0</div>
+          <div class="font-code-label text-code-label text-on-surface-variant">shared record of quality or productivity, for a production that is 100% external.</div>
+        </div>
+      </div>
+
+      <div class="card-sockets relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase mb-sm">Knowledge</div>
+        <div class="font-title-sm text-on-background mb-md" style="font-size:clamp(17px,1.6vw,23px);line-height:1.25">"What did the last similar project teach you?"</div>
+        <div class="mt-auto border-t border-outline-variant pt-md">
+          <div class="big-num-sm text-error mb-xs">0</div>
+          <div class="font-code-label text-code-label text-on-surface-variant">shared templates or history. 14 PMs scope in parallel, each from scratch.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-md bg-on-background text-on-primary px-lg py-md shrink-0">
+      <div class="font-code-label text-code-label uppercase tracking-widest leading-relaxed">Working hypothesis: half a day per PM per week lost to searching, re-scoping and manual reporting ≈ 1.5 full-time PMs per year · validated or corrected during the audit</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8 - DIVIDER 04 · WHAT I SEE                             -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-8" data-slide="8">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">04</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">What I see</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">The root cause behind all three frictions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9 - WHAT I SEE (root cause / if nothing changes)        -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-9" data-slide="9">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">04 · What I see</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Not a tools problem. A memory problem.</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+      <div class="card-sockets relative border border-primary/40 p-lg flex flex-col bg-primary-fixed/10">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-md flex items-center gap-sm"><span class="material-symbols-outlined text-lg">center_focus_strong</span>The root cause</div>
+        <p class="font-body-reg text-body-reg text-on-background leading-relaxed">Each of your seven tools holds a fragment of the truth. No place holds all of it. That is why dashboards can't exist yet, and why your internal AI bot feels weak: you told me yourself, it has no memory to work from. Intelligence needs structure underneath. Build the memory first, and both problems dissolve together.</p>
+      </div>
+
+      <div class="card-sockets relative border border-error/30 p-lg flex flex-col bg-error-container/20">
+        <span class="cs tl" style="background:#ba1a1a"></span><span class="cs tr" style="background:#ba1a1a"></span><span class="cs bl" style="background:#ba1a1a"></span><span class="cs br" style="background:#ba1a1a"></span>
+        <div class="font-code-label text-code-label text-error uppercase tracking-widest mb-md flex items-center gap-sm"><span class="material-symbols-outlined text-lg">trending_down</span>If nothing changes</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant leading-relaxed">The BU keeps scaling, visibility doesn't. Your GM steers P&amp;L blind through the strongest growth phase Argos has. Scoping quality keeps depending on who does it. Confidential context keeps leaking into personal AI accounts. This was absorbable at 4 PMs. It won't be at 14, and every month adds history that someone will have to migrate later.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10 - DIVIDER 05 · OBJECTIVES                            -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-10" data-slide="10">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">05</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Objectives</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Where we take this, side by side.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11 - OBJECTIVES (today vs tomorrow)                     -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-11" data-slide="11">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">05 · Objectives</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Where we take this</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+      <div class="card-sockets relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-md border-b border-outline-variant pb-sm">Today</div>
+        <ul class="flex flex-col gap-md">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-surface-variant"><span class="font-code-label text-code-label text-outline mt-1 shrink-0">·</span><span>Profitability in one person's head · one OneNote a week</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-surface-variant"><span class="font-code-label text-code-label text-outline mt-1 shrink-0">·</span><span>Freelancer quality invisible · no shared record</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-surface-variant"><span class="font-code-label text-code-label text-outline mt-1 shrink-0">·</span><span>Scoping from scratch · consistency depends on the PM</span></li>
+        </ul>
+      </div>
+
+      <div class="card-sockets relative border border-primary/40 p-lg flex flex-col bg-primary-fixed/10">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-md border-b border-primary/20 pb-sm">Tomorrow</div>
+        <ul class="flex flex-col gap-md">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary mt-1 shrink-0">→</span><span>Live P&amp;L and capacity dashboards · for you, the GM, leadership</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary mt-1 shrink-0">→</span><span>Freelancer performance tracked · quality and productivity per project</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary mt-1 shrink-0">→</span><span>Scoping from your own history · templates and a knowledge base that compounds</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-md bg-secondary text-on-secondary px-lg py-md flex items-center gap-md shrink-0">
+      <span class="material-symbols-outlined text-2xl shrink-0">query_stats</span>
+      <p class="font-title-sm text-title-sm">= the GM's questions answered in three clicks. Not from memory.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12 - DIVIDER 06 · SOLUTION                              -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-12" data-slide="12">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">06</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Solution</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">One company memory. Structure first, intelligence second.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 13 - SOLUTION (3 stacked layers)                        -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-13" data-slide="13">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">06 · Solution</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Your company memory, in three layers</h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm max-w-3xl">Each layer only works because the one below it exists.</p>
+    </div>
+
+    <div class="flex flex-col gap-sm">
+      <article class="card-sockets relative bg-surface-container-lowest border border-on-background p-md flex flex-col md:flex-row md:items-center gap-md">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="flex items-center gap-sm md:w-72 shrink-0">
+          <span class="material-symbols-outlined text-primary text-3xl shrink-0">neurology</span>
+          <div><div class="font-code-label text-code-label text-secondary uppercase mb-xs">Layer 3 · The intelligence</div><h3 class="font-title-sm text-title-sm text-on-background">AI that knows your business</h3></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">AI working inside the workspace, with your full project history as context. Scoping assisted by what you already delivered, not by a blank chatbot. Open to your internal freelancer platform and tools.</p>
+      </article>
+
+      <div class="flex items-center gap-sm px-md shrink-0"><span class="flex-grow h-px bg-on-background/10"></span><span class="font-code-label text-code-label text-outline uppercase tracking-widest">runs on</span><span class="material-symbols-outlined text-primary text-lg">arrow_downward</span><span class="flex-grow h-px bg-on-background/10"></span></div>
+
+      <article class="card-sockets relative bg-surface-container-lowest border border-on-background p-md flex flex-col md:flex-row md:items-center gap-md">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="flex items-center gap-sm md:w-72 shrink-0">
+          <span class="material-symbols-outlined text-primary text-3xl shrink-0">monitoring</span>
+          <div><div class="font-code-label text-code-label text-secondary uppercase mb-xs">Layer 2 · The cockpit</div><h3 class="font-title-sm text-title-sm text-on-background">Dashboards on live data</h3></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Per-project P&amp;L, freelancer quality and productivity, team capacity. One view for you, one for the GM, one for leadership. Your weekly report becomes a by-product, not a chore.</p>
+      </article>
+
+      <div class="flex items-center gap-sm px-md shrink-0"><span class="flex-grow h-px bg-on-background/10"></span><span class="font-code-label text-code-label text-outline uppercase tracking-widest">runs on</span><span class="material-symbols-outlined text-primary text-lg">arrow_downward</span><span class="flex-grow h-px bg-on-background/10"></span></div>
+
+      <article class="card-sockets relative bg-primary text-on-primary border border-primary p-md flex flex-col md:flex-row md:items-center gap-md">
+        <span class="cs tl" style="background:#fff"></span><span class="cs tr" style="background:#fff"></span><span class="cs bl" style="background:#fff"></span><span class="cs br" style="background:#fff"></span>
+        <div class="flex items-center gap-sm md:w-72 shrink-0">
+          <span class="material-symbols-outlined text-on-primary text-3xl shrink-0">foundation</span>
+          <div><div class="font-code-label text-code-label text-on-primary/70 uppercase mb-xs">Layer 1 · The foundation</div><h3 class="font-title-sm text-title-sm text-on-primary">One source of truth</h3></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-primary/85 flex-grow">Projects, clients, freelancers, guidelines and scoping knowledge in one connected workspace. A data point entered once, visible everywhere. The Asana structures your team likes are rebuilt inside, not thrown away.</p>
+      </article>
+    </div>
+
+  </section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 14 - DIVIDER 07 · WHY THIS APPROACH                     -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-14" data-slide="14">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">07</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Why this approach</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Against the honest alternatives. And why security holds up.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 15 - WHY THIS APPROACH (3 rows)                         -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-15" data-slide="15">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">07 · Why this approach</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Why this, and not the alternatives</h1>
+    </div>
+
+    <div class="flex flex-col gap-md">
+      <article class="card-sockets relative border border-on-background/20 p-md bg-surface-container-lowest flex flex-col md:flex-row md:items-center gap-md">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest md:w-64 shrink-0">vs adding another tool</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">An 8th tool means an 8th silo. The point is not more software, it is one memory. We consolidate, and the tools that earn their place stay: your internal platform does.</p>
+      </article>
+
+      <article class="card-sockets relative border border-on-background/20 p-md bg-surface-container-lowest flex flex-col md:flex-row md:items-center gap-md">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest md:w-64 shrink-0">vs building it internally</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Your developers already build annotation tooling, and that is exactly where their time pays off. An ops backbone is a different craft: architecture, governance, adoption. Your internal bot already showed what AI on scattered data delivers.</p>
+      </article>
+
+      <article class="card-sockets relative border border-primary/40 p-md bg-primary-fixed/10 flex flex-col md:flex-row md:items-center gap-md">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest md:w-64 shrink-0">vs waiting</div>
+        <p class="font-body-reg text-body-reg text-on-background flex-grow">The chaos was absorbable at 4 PMs. At 14, with a GM asking for P&amp;L, every month adds history that will have to be migrated someday. Waiting makes the project bigger, not smaller.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 16 - DATA SECURITY & AI GOVERNANCE                      -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-16" data-slide="16">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">07 · Why this approach · Security</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Data security &amp; AI governance</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+      <div class="card-sockets relative border border-on-background/20 p-md bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-sm">lock</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Your data stays yours</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">On an enterprise workspace, your content stays isolated in your environment and is not used to train the models.</p>
+      </div>
+      <div class="card-sockets relative border border-on-background/20 p-md bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-sm">swap_horiz</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">LLM-agnostic</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Notion works with the leading models on the market. You choose, you can switch, you are not locked into one AI provider.</p>
+      </div>
+      <div class="card-sockets relative border border-on-background/20 p-md bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-sm">shield_person</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Governed access</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Permissions per role. Leadership, PMs and quality each see exactly what they should, and nothing else.</p>
+      </div>
+      <div class="card-sockets relative border border-primary/40 p-md bg-primary-fixed/10 flex flex-col">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-sm">visibility</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">The end of shadow AI</h3>
+        <p class="font-body-reg text-body-reg text-on-background flex-grow">Today, confidential context goes into personal AI accounts because the sanctioned option is weaker. Tomorrow, AI use happens inside one governed workspace: a policy your security team can actually approve.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 17 - DIVIDER 08 · ACTION PLAN                           -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-17" data-slide="17">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">08</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Action plan</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Three steps. Only the first one is a commitment today.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 18 - PLAN OVERVIEW                                      -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-18" data-slide="18">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">08 · Action plan</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Three steps to get there</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+      <article class="card-sockets relative border border-primary p-lg bg-primary text-on-primary flex flex-col">
+        <span class="cs tl" style="background:#fff"></span><span class="cs tr" style="background:#fff"></span><span class="cs bl" style="background:#fff"></span><span class="cs br" style="background:#fff"></span>
+        <div class="big-num-sm text-on-primary mb-md">01</div>
+        <div class="font-code-label text-code-label text-on-primary/70 uppercase mb-sm tracking-widest">Step 1 · The commitment</div>
+        <h3 class="font-title-sm text-title-sm text-on-primary mb-sm">Audit &amp; target architecture</h3>
+        <p class="font-body-reg text-body-reg text-on-primary/80 flex-grow">Two weeks to map the real operations and design the target. Ends with a blueprint and a firm build quote.</p>
+      </article>
+
+      <article class="card-sockets relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="big-num-sm text-primary mb-md">02</div>
+        <div class="font-code-label text-code-label text-secondary uppercase mb-sm tracking-widest">Step 2</div>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Build the workspace</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Connected databases, dashboards, AI and integrations, delivered in 2-week sprints.</p>
+      </article>
+
+      <article class="card-sockets relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="big-num-sm text-primary mb-md">03</div>
+        <div class="font-code-label text-code-label text-secondary uppercase mb-sm tracking-widest">Step 3</div>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Adoption &amp; autonomy</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Training by role and level, SOPs in the workspace, progressive rollout.</p>
+      </article>
+    </div>
+
+    <div class="mt-md bg-on-background text-on-primary px-lg py-md flex items-center justify-center shrink-0">
+      <div class="font-code-label text-code-label uppercase tracking-widest text-center">Today's decision covers step 1 only · steps 2 and 3 are quoted firm at the audit restitution</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 19 - STEP 01 · AUDIT                                    -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-19" data-slide="19">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Step 01 of 03</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Audit &amp; target architecture</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-md">
+      <div class="card-sockets relative border border-on-background/10 p-lg flex flex-col bg-surface-container-low">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md border-b border-outline-variant pb-sm">Why it can't be skipped</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant leading-relaxed">Your BU is niche and complex: an internal platform, a restructuring in progress, seven data sources. Building before mapping means rebuilding the silos in a nicer tool. The audit is also what turns the build estimate into a firm quote.</p>
+      </div>
+
+      <div class="card-sockets relative border border-primary/30 p-lg flex flex-col bg-primary-fixed/5">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <div class="font-code-label text-code-label text-primary uppercase mb-md border-b border-primary/20 pb-sm">What we do</div>
+        <ol class="flex flex-col gap-sm">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">1.</span><span>Audit workshop with the team: PMs, quality, supply chain, all functions.</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">2.</span><span>Map information flows across the seven sources (Miro).</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">3.</span><span>Design the target architecture and price the build, firm.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card-sockets relative border-2 border-secondary p-lg bg-secondary-fixed/15 shrink-0">
+      <span class="cs tl" style="background:#56641e;width:8px;height:8px"></span><span class="cs tr" style="background:#56641e;width:8px;height:8px"></span><span class="cs bl" style="background:#56641e;width:8px;height:8px"></span><span class="cs br" style="background:#56641e;width:8px;height:8px"></span>
+      <div class="font-code-label text-code-label text-secondary uppercase mb-md tracking-widest">Deliverables</div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Process &amp; data map (Miro)</span></div>
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Target architecture blueprint</span></div>
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Build roadmap + firm quote · your GM's go/no-go document</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 20 - STEP 02 · BUILD                                    -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-20" data-slide="20">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Step 02 of 03</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Build the workspace</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-md">
+      <div class="card-sockets relative border border-on-background/10 p-lg flex flex-col bg-surface-container-low">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md border-b border-outline-variant pb-sm">Why it can't be skipped</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant leading-relaxed">This is where the memory gets built. One connected backbone replaces scattered pages and trackers, once. Everything that comes after (dashboards, AI, consistency) stands on this.</p>
+      </div>
+
+      <div class="card-sockets relative border border-primary/30 p-lg flex flex-col bg-primary-fixed/5">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <div class="font-code-label text-code-label text-primary uppercase mb-md border-b border-primary/20 pb-sm">What we do</div>
+        <ol class="flex flex-col gap-sm">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">1.</span><span>Build the connected databases: projects, clients, freelancers, scoping knowledge base.</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">2.</span><span>Build the dashboards (P&amp;L, quality, capacity) and plug AI into the workspace and your internal platform.</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">3.</span><span>Migrate what deserves to live on from Asana, Drive and the trackers.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card-sockets relative border-2 border-secondary p-lg bg-secondary-fixed/15 shrink-0">
+      <span class="cs tl" style="background:#56641e;width:8px;height:8px"></span><span class="cs tr" style="background:#56641e;width:8px;height:8px"></span><span class="cs bl" style="background:#56641e;width:8px;height:8px"></span><span class="cs br" style="background:#56641e;width:8px;height:8px"></span>
+      <div class="font-code-label text-code-label text-secondary uppercase mb-md tracking-widest">Deliverables</div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Live workspace with dashboards</span></div>
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>AI configured on your memory</span></div>
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Data migrated and verified</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 21 - STEP 03 · ADOPTION                                 -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-21" data-slide="21">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Step 03 of 03</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Adoption &amp; autonomy</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-md">
+      <div class="card-sockets relative border border-on-background/10 p-lg flex flex-col bg-surface-container-low">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md border-b border-outline-variant pb-sm">Why it can't be skipped</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant leading-relaxed">A system nobody adopts is a failure, whatever it cost. Your team spans coordinators to senior PMs: training has to meet each level where it is, in the middle of a restructuring.</p>
+      </div>
+
+      <div class="card-sockets relative border border-primary/30 p-lg flex flex-col bg-primary-fixed/5">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <div class="font-code-label text-code-label text-primary uppercase mb-md border-b border-primary/20 pb-sm">What we do</div>
+        <ol class="flex flex-col gap-sm">
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">1.</span><span>Train by role and level, from Notion beginners to power users.</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">2.</span><span>Document SOPs directly inside the workspace.</span></li>
+          <li class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="font-code-label text-code-label text-primary shrink-0 mt-0.5">3.</span><span>Roll out process by process, then check adoption at +30 days.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card-sockets relative border-2 border-secondary p-lg bg-secondary-fixed/15 shrink-0">
+      <span class="cs tl" style="background:#56641e;width:8px;height:8px"></span><span class="cs tr" style="background:#56641e;width:8px;height:8px"></span><span class="cs bl" style="background:#56641e;width:8px;height:8px"></span><span class="cs br" style="background:#56641e;width:8px;height:8px"></span>
+      <div class="font-code-label text-code-label text-secondary uppercase mb-md tracking-widest">Deliverables</div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>Team trained, by level</span></div>
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>SOPs living in the workspace</span></div>
+        <div class="flex items-start gap-sm font-body-reg text-body-reg text-on-background"><span class="material-symbols-outlined text-secondary text-lg shrink-0 mt-0.5">check_circle</span><span>+30-day adoption check</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 22 - HOW A SPRINT RUNS (swimlane)                       -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-22" data-slide="22">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0 flex items-end justify-between flex-wrap gap-sm">
+      <div>
+        <div class="inline-flex items-center gap-2 mb-sm">
+          <div class="h-2 w-2 bg-primary"></div>
+          <span class="font-code-label text-code-label text-outline uppercase tracking-widest">08 · Action plan · Delivery</span>
+        </div>
+        <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">How a build sprint runs</h1>
+      </div>
+      <div class="font-title-sm text-title-sm text-primary shrink-0">SPRINT · 2 WEEKS</div>
+    </div>
+
+    <div class="overflow-x-auto">
+      <div class="min-w-[760px] flex flex-col gap-sm">
+
+        <div class="flex items-stretch gap-sm">
+          <div class="w-28 shrink-0 flex items-center gap-xs font-code-label text-code-label text-on-background uppercase">What <span class="material-symbols-outlined text-sm">arrow_forward</span></div>
+          <div class="flex-grow bg-secondary-fixed/30 border border-on-background/10 p-sm flex items-center gap-xs flex-wrap">
+            <span class="font-code-label text-code-label bg-surface-container-lowest border border-on-background/20 px-sm py-xs">Diagnose</span>
+            <span class="font-code-label text-code-label bg-surface-container-lowest border border-on-background/20 px-sm py-xs">Map</span>
+            <span class="font-code-label text-code-label bg-surface-container-lowest border border-on-background/20 px-sm py-xs">Specify target</span>
+            <span class="material-symbols-outlined text-secondary text-lg" title="Gate: specs validated">change_history</span>
+            <span class="font-code-label text-code-label bg-on-background text-on-primary px-sm py-xs">Specs validated</span>
+            <span class="font-code-label text-code-label bg-surface-container-lowest border border-on-background/20 px-sm py-xs">Build</span>
+            <span class="font-code-label text-code-label bg-surface-container-lowest border border-on-background/20 px-sm py-xs">Train</span>
+            <span class="font-code-label text-code-label bg-surface-container-lowest border border-on-background/20 px-sm py-xs">Test</span>
+            <span class="font-code-label text-code-label bg-surface-container-lowest border border-on-background/20 px-sm py-xs">Adjust</span>
+          </div>
+        </div>
+
+        <div class="flex items-stretch gap-sm">
+          <div class="w-28 shrink-0 flex items-center gap-xs font-code-label text-code-label text-on-background uppercase">Who <span class="material-symbols-outlined text-sm">arrow_forward</span></div>
+          <div class="flex-grow bg-tertiary-fixed/40 border border-on-background/10 p-sm flex items-center gap-xs">
+            <span class="font-code-label text-code-label bg-surface-container-lowest border border-on-background/20 px-sm py-xs flex-grow text-center" style="flex-basis:38%">Rama Logic + your team</span>
+            <span class="font-code-label text-code-label bg-surface-container-lowest border border-on-background/20 px-sm py-xs flex-grow text-center" style="flex-basis:26%">Rama Logic</span>
+            <span class="font-code-label text-code-label bg-surface-container-lowest border border-on-background/20 px-sm py-xs flex-grow text-center" style="flex-basis:20%">Your team</span>
+            <span class="font-code-label text-code-label bg-surface-container-lowest border border-on-background/20 px-sm py-xs flex-grow text-center" style="flex-basis:16%">Rama Logic</span>
+          </div>
+        </div>
+
+        <div class="flex items-stretch gap-sm">
+          <div class="w-28 shrink-0 flex items-center gap-xs font-code-label text-code-label text-on-background uppercase">Ships <span class="material-symbols-outlined text-sm">arrow_forward</span></div>
+          <div class="flex-grow bg-primary-fixed/20 border border-on-background/10 p-sm flex items-center gap-xs flex-wrap">
+            <span class="font-code-label text-code-label bg-surface-container-lowest border border-on-background/20 px-sm py-xs flex items-center gap-xs"><span class="material-symbols-outlined text-primary text-sm">check_circle</span>Specs doc</span>
+            <span class="font-code-label text-code-label bg-surface-container-lowest border border-on-background/20 px-sm py-xs flex items-center gap-xs"><span class="material-symbols-outlined text-primary text-sm">check_circle</span>Live module in the workspace</span>
+            <span class="font-code-label text-code-label bg-surface-container-lowest border border-on-background/20 px-sm py-xs flex items-center gap-xs"><span class="material-symbols-outlined text-primary text-sm">check_circle</span>SOP</span>
+            <span class="font-code-label text-code-label bg-surface-container-lowest border border-on-background/20 px-sm py-xs flex items-center gap-xs"><span class="material-symbols-outlined text-primary text-sm">check_circle</span>Acceptance test</span>
+          </div>
+        </div>
+
+        <div class="flex items-stretch gap-sm">
+          <div class="w-28 shrink-0 flex items-center gap-xs font-code-label text-code-label text-on-background uppercase">Benefit <span class="material-symbols-outlined text-sm">arrow_forward</span></div>
+          <div class="flex-grow border border-on-background/10 p-sm flex items-center bg-surface-container-lowest">
+            <span class="font-body-reg text-body-reg text-on-background"><span class="text-primary">→</span> Each sprint ships one working process, adopted before the next one starts. No tunnel effect.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="mt-md shrink-0">
+      <p class="font-code-label text-code-label text-outline uppercase tracking-widest">The cycle repeats identically for every process in scope.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 23 - DIVIDER 09 · ROADMAP                               -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-23" data-slide="23">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">09</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Roadmap</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">At your pace. You asked not to rush it, we won't.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 24 - ROADMAP (timeline)                                 -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-24" data-slide="24">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">09 · Roadmap</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">The mission calendar</h1>
+    </div>
+
+    <div class="card-sockets relative border border-on-background/10 px-lg py-xl flex flex-col justify-center bg-surface-container-lowest overflow-x-auto">
+      <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+
+      <div class="relative flex items-start justify-between mb-md min-w-[680px]">
+        <div class="absolute top-[5px] left-[6px] right-[6px] h-px bg-on-background/20 z-0"></div>
+        <div class="flex flex-col items-center flex-1"><div class="w-3 h-3 bg-primary rounded-full relative z-10 shrink-0"></div></div>
+        <div class="flex flex-col items-center flex-1"><div class="w-3 h-3 bg-on-background rounded-full relative z-10 shrink-0"></div></div>
+        <div class="flex flex-col items-center flex-1"><div class="w-3 h-3 bg-primary rounded-full relative z-10 shrink-0"></div></div>
+        <div class="flex flex-col items-center flex-1"><div class="w-3 h-3 bg-primary rounded-full relative z-10 shrink-0"></div></div>
+        <div class="flex flex-col items-center flex-1"><div class="w-3 h-3 bg-secondary rounded-full border border-secondary relative z-10 shrink-0"></div></div>
+      </div>
+
+      <div class="flex items-start justify-between min-w-[680px]">
+        <div class="flex flex-col items-center flex-1 px-xs"><div class="font-eyebrow text-eyebrow text-primary uppercase text-center mb-xs leading-tight">Weeks 1-2</div><div class="font-code-label text-code-label text-on-background text-center leading-tight">Audit &amp; target design</div></div>
+        <div class="flex flex-col items-center flex-1 px-xs"><div class="font-eyebrow text-eyebrow text-on-background uppercase text-center mb-xs leading-tight">Gate</div><div class="font-code-label text-code-label text-on-background text-center leading-tight">Restitution: blueprint + firm quote · go / no-go</div></div>
+        <div class="flex flex-col items-center flex-1 px-xs"><div class="font-eyebrow text-eyebrow text-primary uppercase text-center mb-xs leading-tight">~6 weeks</div><div class="font-code-label text-code-label text-on-background text-center leading-tight">Build sprints · 2-week cycles</div></div>
+        <div class="flex flex-col items-center flex-1 px-xs"><div class="font-eyebrow text-eyebrow text-primary uppercase text-center mb-xs leading-tight">Every sprint</div><div class="font-code-label text-code-label text-on-background text-center leading-tight">Training embedded, per level</div></div>
+        <div class="flex flex-col items-center flex-1 px-xs"><div class="font-eyebrow text-eyebrow text-secondary uppercase text-center mb-xs leading-tight">+30 days</div><div class="font-code-label text-code-label text-on-background text-center leading-tight">Adoption follow-up</div></div>
+      </div>
+    </div>
+
+    <div class="mt-md bg-on-background text-on-primary px-lg py-md flex items-center justify-center shrink-0">
+      <div class="font-code-label text-code-label uppercase tracking-widest text-center">Audit can start the week of July 20 · the build is scheduled at your pace, after the restitution</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 25 - YOUR PART                                          -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-25" data-slide="25">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">09 · Roadmap · Your part</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">What we need from your team</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+      <div class="card-sockets relative border border-primary/40 p-lg flex flex-col bg-primary-fixed/10">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <div class="font-code-label text-code-label text-primary uppercase mb-md tracking-widest">At kick-off · once</div>
+        <div class="big-num text-primary mb-md" style="white-space:nowrap">~4h</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Audit workshop with the team, all functions present: PMs, quality, supply chain.</p>
+      </div>
+
+      <div class="card-sockets relative border border-on-background/20 p-lg flex flex-col bg-surface-container-lowest">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase mb-md tracking-widest">During the build · per sprint</div>
+        <div class="big-num text-on-background mb-md" style="white-space:nowrap">~2h + 2h</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Around 2h of spec validation and 2h of training per group, each sprint.</p>
+      </div>
+    </div>
+
+    <div class="mt-md bg-on-background text-on-primary px-lg py-md shrink-0">
+      <div class="font-code-label text-code-label uppercase tracking-widest leading-relaxed">That's it. One point of contact and milestone validations. Checkpoints set for CET afternoons = New York mornings, so the GM can join live.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 26 - ADOPTION-FIRST                                     -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-26" data-slide="26">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">09 · Roadmap · Change</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">A change your team can absorb</h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm max-w-3xl">You said it yourself: a lot is already changing, and one more big-bang would be too much. Agreed. This is how we keep it light.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+      <div class="card-sockets relative border border-on-background p-lg flex flex-col bg-surface-container-lowest">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">recycling</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Keep what works</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow leading-relaxed">Your team likes Asana's structure. Those habits are rebuilt inside the workspace, not erased. Nothing is switched off until its replacement is adopted.</p>
+      </div>
+      <div class="card-sockets relative border border-on-background p-lg flex flex-col bg-surface-container-lowest">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">steps</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">One change at a time</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow leading-relaxed">You are already restructuring the team. The rollout goes process by process, at your pace. Each sprint lands one adopted piece, never a big-bang migration.</p>
+      </div>
+      <div class="card-sockets relative border border-primary/40 p-lg flex flex-col bg-primary-fixed/10">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">how_to_reg</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Adoption is the deliverable</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow leading-relaxed">Training by level, SOPs inside the workspace and the +30-day check are part of the mission, not options. A workspace nobody uses is a failed project, whatever it cost.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 27 - DIVIDER 10 · REFERENCES                            -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-27" data-slide="27">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">10</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">References</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Two teams that made the same move.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 28 - REFERENCES (2 cases)                               -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-28" data-slide="28">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">10 · References</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">You already know one of them</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+      <article class="card-sockets relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="mb-sm"><span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest py-xs px-sm bg-primary-fixed/30 border border-primary-fixed inline-block">AI-native consulting</span></div>
+        <div class="flex items-baseline gap-sm mb-sm">
+          <div class="big-num-sm text-primary">1</div>
+        </div>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest mb-md">shared memory for humans and AI agents</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">The company behind your introduction, via Jules's network. Notion is their single company memory: consultants and AI coding agents work in the same workspace, and everything they produce lands back into it. The exact pattern we are proposing for your BU.</p>
+        <div class="mt-auto pt-md border-t border-outline-variant"><span class="font-code-label text-code-label text-outline uppercase tracking-widest">Hush</span></div>
+      </article>
+
+      <article class="card-sockets relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="mb-sm"><span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest py-xs px-sm bg-primary-fixed/30 border border-primary-fixed inline-block">Tech · Multi-team</span></div>
+        <div class="flex items-baseline gap-sm mb-sm">
+          <div class="big-num-sm text-primary">5</div>
+        </div>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest mb-md">workstreams: audit → build → migration → templates → training</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow">Full operational implementation for a tech company: global workspace, data migration, custom templates and team training. The same sequence we are proposing: understand first, build second, train last.</p>
+        <div class="mt-auto pt-md border-t border-outline-variant"><span class="font-code-label text-code-label text-outline uppercase tracking-widest">Colossos</span></div>
+      </article>
+    </div>
+
+    <div class="mt-md pt-sm shrink-0">
+      <p class="font-code-label text-code-label text-outline uppercase tracking-widest text-center">Happy to go deeper on either case, live or async.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 29 - DIVIDER 11 · COMMITMENTS                           -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-29" data-slide="29">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">11</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Commitments</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">What you can hold me to, in writing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 30 - COMMITMENTS (+ credentials footer)                 -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-30" data-slide="30">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">11 · Commitments</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">What you can count on</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+      <div class="card-sockets relative border border-on-background p-lg flex flex-col bg-surface-container-lowest">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">schedule</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Deadlines held</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow leading-relaxed">Every deliverable lands on the agreed date. If a risk of delay appears, you know 48 hours ahead, not on the day.</p>
+      </div>
+      <div class="card-sockets relative border border-on-background p-lg flex flex-col bg-surface-container-lowest">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">visibility</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Full transparency</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow leading-relaxed">A weekly 30-minute checkpoint, a shared workspace updated in real time, answers within 24 hours. In English, across time zones.</p>
+      </div>
+      <div class="card-sockets relative border border-primary/40 p-lg flex flex-col bg-primary-fixed/10">
+        <span class="cs tl" style="background:#446254"></span><span class="cs tr" style="background:#446254"></span><span class="cs bl" style="background:#446254"></span><span class="cs br" style="background:#446254"></span>
+        <span class="material-symbols-outlined text-primary text-3xl mb-md">verified_user</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mb-sm">Held to the result</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-grow leading-relaxed">If a deliverable doesn't match the validated spec, I redo it at no extra cost. The workspace has to be adopted, not just delivered.</p>
+      </div>
+    </div>
+
+    <div class="mt-md pt-md border-t border-outline-variant shrink-0">
+      <div class="font-code-label text-code-label text-outline uppercase tracking-widest text-center">
+        Notion Solution Partner &nbsp;·&nbsp; PMP® &nbsp;·&nbsp; Black Belt Lean Six Sigma
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 31 - DIVIDER 12 · OFFER                                 -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-31" data-slide="31">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">12</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 12</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Offer</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">One commitment today. The rest, with the blueprint in hand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 32 - OFFER (price HERE · second-to-last)                -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-32" data-slide="32">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">12 · Offer</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">One commitment today: the audit</h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+      <div class="card-sockets relative border border-primary p-lg bg-primary text-on-primary flex flex-col">
+        <span class="cs tl" style="background:#fff"></span><span class="cs tr" style="background:#fff"></span><span class="cs bl" style="background:#fff"></span><span class="cs br" style="background:#fff"></span>
+        <div class="font-code-label text-code-label text-on-primary/70 uppercase mb-sm tracking-widest">Step 1 · Audit &amp; target architecture · Firm</div>
+        <div class="border-y border-on-primary/20 py-sm mb-md">
+          <div class="big-num text-on-primary" style="white-space:nowrap">€2,399 <span style="font-size:0.42em;vertical-align:baseline">excl. VAT</span></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-primary/85 mb-md">Two weeks to map your operations and design the target. You leave with the blueprint and a firm build quote. Valuable even if you stop there.</p>
+        <ul class="flex flex-col gap-xs mb-md">
+          <li class="flex items-start gap-sm"><span class="material-symbols-outlined text-on-primary/80 text-base shrink-0 mt-0.5">check_circle</span><span class="font-body-reg text-on-primary" style="font-size:clamp(12px,1vw,14.5px)">Audit workshop, all functions</span></li>
+          <li class="flex items-start gap-sm"><span class="material-symbols-outlined text-on-primary/80 text-base shrink-0 mt-0.5">check_circle</span><span class="font-body-reg text-on-primary" style="font-size:clamp(12px,1vw,14.5px)">Process &amp; data map (Miro)</span></li>
+          <li class="flex items-start gap-sm"><span class="material-symbols-outlined text-on-primary/80 text-base shrink-0 mt-0.5">check_circle</span><span class="font-body-reg text-on-primary" style="font-size:clamp(12px,1vw,14.5px)">Target architecture blueprint</span></li>
+          <li class="flex items-start gap-sm"><span class="material-symbols-outlined text-on-primary/80 text-base shrink-0 mt-0.5">check_circle</span><span class="font-body-reg text-on-primary" style="font-size:clamp(12px,1vw,14.5px)">Build roadmap + firm quote</span></li>
+        </ul>
+        <div class="mt-auto border-t border-on-primary/20 pt-sm">
+          <div class="font-code-label text-code-label text-on-primary/70 uppercase mb-xs">Terms</div>
+          <p class="font-body-reg text-on-primary" style="font-size:clamp(12px,1vw,14px)">Invoiced at kick-off · restitution to you and the GM</p>
+        </div>
+      </div>
+
+      <div class="card-sockets relative border border-on-background/20 p-lg bg-surface-container-lowest flex flex-col">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-outline uppercase mb-sm tracking-widest">Steps 2-3 · Build &amp; adoption · Quoted at restitution</div>
+        <div class="border-y border-outline-variant py-sm mb-md">
+          <div class="big-num-sm text-on-background">€8,000 to €12,000 <span style="font-size:0.42em;vertical-align:baseline;white-space:nowrap">excl. VAT · estimate</span></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-md">The connected workspace, dashboards, AI and adoption, delivered in 2-week sprints. The audit turns this range into a firm number.</p>
+        <ul class="flex flex-col gap-xs flex-grow">
+          <li class="flex items-start gap-sm"><span class="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">check_circle</span><span class="font-body-reg text-on-background" style="font-size:clamp(12px,1vw,14.5px)">Connected workspace · projects, freelancers, knowledge base</span></li>
+          <li class="flex items-start gap-sm"><span class="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">check_circle</span><span class="font-body-reg text-on-background" style="font-size:clamp(12px,1vw,14.5px)">P&amp;L, quality and capacity dashboards</span></li>
+          <li class="flex items-start gap-sm"><span class="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">check_circle</span><span class="font-body-reg text-on-background" style="font-size:clamp(12px,1vw,14.5px)">AI setup + integrations, incl. your internal platform</span></li>
+          <li class="flex items-start gap-sm"><span class="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">check_circle</span><span class="font-body-reg text-on-background" style="font-size:clamp(12px,1vw,14.5px)">Migration from Asana, Drive and trackers</span></li>
+          <li class="flex items-start gap-sm"><span class="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">check_circle</span><span class="font-body-reg text-on-background" style="font-size:clamp(12px,1vw,14.5px)">Training by level, SOPs, +30-day follow-up</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-md grid grid-cols-1 md:grid-cols-2 gap-md shrink-0">
+      <div class="border border-on-background/10 bg-surface-container-low px-md py-sm flex items-center">
+        <p class="font-body-reg text-on-background" style="font-size:clamp(11.5px,0.95vw,14px)">You only commit to the audit today. The build decision is made with the blueprint in hand, at your pace.</p>
+      </div>
+      <div class="border border-on-background/10 bg-surface-container-low px-md py-sm flex items-center justify-between gap-sm">
+        <p class="font-body-reg text-on-surface-variant" style="font-size:clamp(11.5px,0.95vw,14px)">If the hypothesis of 1.5 FTE lost per year holds, the full project pays for itself in months.</p>
+        <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest shrink-0">Confidential</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SLIDE 33 - THANK YOU / CLOSING                                -->
+<!-- ============================================================ -->
+<section class="slide grid-bg" id="slide-33" data-slide="33">
+  <div class="slide-body justify-center relative overflow-hidden px-margin py-md">
+    <div class="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+    <div class="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-secondary-container opacity-40 rounded-full blur-[100px] -z-10 mix-blend-multiply"></div>
+
+    <div class="max-w-4xl w-full mx-auto">
+      <div class="relative border-l border-r border-on-background/10 px-margin py-xl bg-surface-container-lowest/80 backdrop-blur-sm">
+        <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+
+        <div class="mb-lg">
+          <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-sm">Thank you.</h1>
+          <div class="w-24 h-1 bg-secondary mb-md"></div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant max-w-2xl">Thanks for your time, and thanks to Jules for the introduction.</p>
+        </div>
+
+        <div class="mb-lg">
+          <p class="font-headline-md text-on-background tracking-tight" style="font-size:clamp(22px,2.8vw,36px);line-height:1.1">Shall we give your BU its memory?</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-lg mb-lg">
+          <div class="border-l-2 border-primary pl-md">
+            <div class="font-code-label text-code-label text-outline uppercase mb-xs">Calendar</div>
+            <div class="font-body-reg text-body-reg text-on-background">Decision at your pace after this meeting · audit kick-off possible from the week of July 20, or after the summer if you prefer.</div>
+          </div>
+          <div class="flex flex-col justify-center gap-sm">
+            <div class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary">mail</span><a href="mailto:sylvain@ramalogic.com" class="font-body-reg text-body-reg text-on-background hover:text-primary transition-colors">sylvain@ramalogic.com</a></div>
+            <p class="font-body-reg text-body-reg text-on-surface-variant italic">Questions welcome anytime, in English, async or live.</p>
+          </div>
+        </div>
+
+        <div class="pt-md border-t border-outline-variant">
+          <div class="font-code-label text-code-label text-outline uppercase tracking-widest">Confidential · prepared for Argos Multilingual</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ====== OVERVIEW GRID (ESC) ====== -->
+<div id="overview" class="fixed inset-0 z-[60] bg-background/95 backdrop-blur-md hidden overflow-y-auto p-margin">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="flex items-center justify-between mb-lg sticky top-0 py-sm">
+      <div class="flex items-center gap-md">
+        <div class="font-title-sm text-title-sm font-medium tracking-tight">Overview</div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Argos Multilingual · 34 slides</span>
+      </div>
+      <button id="overview-close" aria-label="Close" class="bg-surface-container-lowest border border-on-background w-10 h-10 flex items-center justify-center hover:bg-on-background hover:text-on-primary transition-colors">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div id="overview-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-md"></div>
+  </div>
+</div>
+
+<nav class="nav-controls fixed bottom-margin right-margin z-50 flex flex-col gap-sm">
+  <button id="prev-btn" aria-label="Previous slide" class="bg-surface-container-lowest border border-on-background w-12 h-12 flex items-center justify-center hover:bg-on-background hover:text-on-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_upward</span>
+  </button>
+  <button id="next-btn" aria-label="Next slide" class="bg-on-background text-on-primary border border-on-background w-12 h-12 flex items-center justify-center hover:bg-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_downward</span>
+  </button>
+</nav>
+
+<script>
+  const viewport = document.querySelector('.slides-viewport');
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  document.getElementById('total-slides').textContent = String(total).padStart(2, '0');
+
+  let currentIdx = 0;
+
+  function updateCounter() {
+    const viewportRect = viewport.getBoundingClientRect();
+    const center = viewportRect.top + viewportRect.height / 2;
+    let closest = 0;
+    let closestDist = Infinity;
+    slides.forEach((slide, idx) => {
+      const r = slide.getBoundingClientRect();
+      const slideCenter = r.top + r.height / 2;
+      const dist = Math.abs(slideCenter - center);
+      if (dist < closestDist) { closestDist = dist; closest = idx; }
+    });
+    currentIdx = closest;
+    document.getElementById('current-slide').textContent = String(closest + 1).padStart(2, '0');
+  }
+
+  function goToSlide(idx) {
+    if (idx < 0 || idx >= total) return;
+    slides[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.getElementById('prev-btn').addEventListener('click', () => goToSlide(currentIdx - 1));
+  document.getElementById('next-btn').addEventListener('click', () => goToSlide(currentIdx + 1));
+
+  /* ===== Overview grid (ESC) ===== */
+  const overview = document.getElementById('overview');
+  const overviewGrid = document.getElementById('overview-grid');
+  const labels = [
+    "Cover", "Agenda",
+    "01 / 12 · Context", "01 · Context",
+    "02 / 12 · Problems", "02 · Problems",
+    "03 / 12 · Impact", "03 · Impact",
+    "04 / 12 · What I see", "04 · What I see",
+    "05 / 12 · Objectives", "05 · Objectives",
+    "06 / 12 · Solution", "06 · Solution",
+    "07 / 12 · Why this approach", "07 · Why this approach", "Security & AI governance",
+    "08 / 12 · Action plan", "08 · Plan overview", "Step 01 · Audit", "Step 02 · Build", "Step 03 · Adoption", "How a sprint runs",
+    "09 / 12 · Roadmap", "09 · Roadmap", "Your part", "Adoption-first",
+    "10 / 12 · References", "10 · References",
+    "11 / 12 · Commitments", "11 · Commitments",
+    "12 / 12 · Offer", "12 · Offer",
+    "Thank you"
+  ];
+  slides.forEach((slide, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'overview-card';
+    const num = document.createElement('span');
+    num.className = 'ov-num';
+    num.textContent = String(idx + 1).padStart(2, '0');
+    const label = document.createElement('span');
+    label.className = 'ov-label';
+    label.textContent = labels[idx] || ('Slide ' + (idx + 1));
+    btn.appendChild(num);
+    btn.appendChild(label);
+    btn.addEventListener('click', () => { closeOverview(); setTimeout(() => goToSlide(idx), 60); });
+    overviewGrid.appendChild(btn);
+  });
+  function openOverview() { overview.classList.remove('hidden'); }
+  function closeOverview() { overview.classList.add('hidden'); }
+  document.getElementById('overview-btn').addEventListener('click', openOverview);
+  document.getElementById('overview-close').addEventListener('click', closeOverview);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      overview.classList.contains('hidden') ? openOverview() : closeOverview();
+      return;
+    }
+    if (!overview.classList.contains('hidden')) return;
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) {
+      e.preventDefault();
+      goToSlide(currentIdx + 1);
+    } else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) {
+      e.preventDefault();
+      goToSlide(currentIdx - 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      goToSlide(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      goToSlide(total - 1);
+    }
+  });
+
+  viewport.addEventListener('scroll', () => {
+    requestAnimationFrame(updateCounter);
+  });
+
+  updateCounter();
+</script>
+
+</body>
+</html>

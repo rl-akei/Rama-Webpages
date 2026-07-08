@@ -1,0 +1,15 @@
+[
+  {
+    "deck": "2026-07-06_argos-multilingual_ag7x3e",
+    "date": "2026-07-06",
+    "macrostructures": {
+      "problems": "editorial full-width rows (icon+tag left, prose middle, impact banner right) — vs 3 cards horizontales (lescalator)",
+      "impact": "3 unanswered-questions cards (question as hero, 0 metric footer) + hypothesis black band",
+      "solution": "architecture stack 3 layers (intelligence top -> foundation bottom, 'runs on' connectors) — vs 3 pillar cards",
+      "why_method": "3 full-width rows label-left — vs 3 colonnes",
+      "references": "2 factual cases (no invented metrics), big-num structurel (1 memory / 5 workstreams)",
+      "offer": "dual card ferme vs estimate (audit-first)"
+    },
+    "preemit": "P5 H4 E4 S5 R4 V4"
+  }
+]
