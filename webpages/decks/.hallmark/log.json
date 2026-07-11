@@ -11,5 +11,22 @@
       "offer": "dual card ferme vs estimate (audit-first)"
     },
     "preemit": "P5 H4 E4 S5 R4 V4"
+  },
+  {
+    "deck": "2026-07-11_evmt-v2_aa7044",
+    "date": "2026-07-11",
+    "macrostructures": {
+      "context": "timeline verticale editoriale 4 jalons (date-rail a gauche, dot 2px, titre+prose) + bande noire de recadrage 'plan d'execution'",
+      "constat_fichiers": "grille 2x2 de cards 'classeur' avec onglet Space Mono en haut (folder-tab Mindaro, border 1px sockets) + bande noire ressaisie x4-5 -- vs editorial full-width rows (argos)",
+      "insight": "diptyque cause racine (accent Aloe) vs si rien ne change (accent error), pas de metric-cards",
+      "why_now": "3 bandes horizontales chronologiques label-court a gauche (juillet/aout/rentree, la derniere en accent secondary) + bande noire",
+      "plan_overview": "3 bandes horizontales chronologiques numerotees big-num (aout/sept/oct, phase 3 en secondary-fixed) + footer Space Mono '10 semaines' -- vs architecture stack 3 layers (argos)",
+      "phases": "template rigide repete x3 : 2 colonnes haut (pourquoi c'est indispensable / ce qu'on va y faire numerote) + grand rectangle LIVRABLES pleine largeur 2px secondary, fond secondary-fixed/15, 3 colonnes check_circle",
+      "premier_livrable": "verbatim grande citation a gauche (border-l 2px) + flux 3 etapes cartes empilees avec connecteurs arrow_downward a droite + bande metric secondary '1 a 3 h'",
+      "roadmap": "timeline HORIZONTALE 6 jalons (rail 2px, premier dot primary rempli, dernier secondary rempli), colonnes date+prose",
+      "ton_implication": "3 cards big-num (1 h / 30 min-sem / 2 sessions), 1re en accent primary + bande noire 'c'est tout'",
+      "offer": "carte principale asymetrique (7 col, fond primary) 8 400 EUR HT + carte satellite Operate mensuelle (5 col, neutre) 1 500 EUR HT/mois -- vs dual card ferme vs estimate (argos)"
+    },
+    "preemit": "P5 H5 E4 S5 R4 V5"
   }
 ]
