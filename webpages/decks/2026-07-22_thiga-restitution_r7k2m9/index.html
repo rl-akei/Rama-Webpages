@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html class="light" lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Plan directeur Notion chez Thiga · Restitution direction</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;family=Work+Sans:ital,wght@0,300..900;1,300..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-dim": "#dcd9d9", "secondary-fixed-dim": "#bdcf7c", "secondary-fixed": "#d9eb95",
+          "on-tertiary": "#ffffff", "surface-tint": "#466556", "on-secondary": "#ffffff",
+          "on-background": "#1c1b1b", "surface-container-highest": "#e5e2e1", "inverse-primary": "#accebc",
+          "error": "#ba1a1a", "on-tertiary-fixed": "#0c1d27", "background": "#fcf9f8",
+          "on-primary-fixed-variant": "#2f4d3f", "primary-fixed-dim": "#accebc", "on-primary-container": "#f5fff7",
+          "surface-container-lowest": "#ffffff", "primary-fixed": "#c8ead8", "surface-variant": "#e5e2e1",
+          "on-primary": "#ffffff", "on-error-container": "#93000a", "on-error": "#ffffff", "primary": "#446254",
+          "outline": "#727974", "on-surface": "#1c1b1b", "tertiary-container": "#657783",
+          "on-tertiary-container": "#fcfcff", "on-tertiary-fixed-variant": "#384954", "tertiary": "#4d5e6a",
+          "on-surface-variant": "#424844", "surface-bright": "#fcf9f8", "error-container": "#ffdad6",
+          "on-secondary-container": "#5c6b24", "surface-container-high": "#ebe7e7", "on-secondary-fixed": "#171e00",
+          "secondary-container": "#d9eb95", "inverse-surface": "#313030", "outline-variant": "#c1c8c2",
+          "surface-container-low": "#f6f3f2", "secondary": "#56641e", "on-primary-fixed": "#012115",
+          "on-secondary-fixed-variant": "#3f4c05", "inverse-on-surface": "#f3f0ef", "surface-container": "#f0edec",
+          "primary-container": "#5c7b6c", "tertiary-fixed-dim": "#b7c9d6", "tertiary-fixed": "#d3e5f3", "surface": "#fcf9f8"
+        },
+        borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        spacing: {
+          "xs": "4px", "sm": "12px", "base": "8px", "gutter": "24px", "md": "24px",
+          "margin": "clamp(20px, 3.3vw, 32px)", "lg": "clamp(24px, 5vw, 48px)", "xl": "clamp(36px, 7vw, 80px)"
+        },
+        fontFamily: {
+          "body-reg": ["Work Sans"], "code-label": ["Space Mono"], "title-sm": ["Clash Grotesk"],
+          "eyebrow": ["Space Mono"], "display-lg": ["Clash Grotesk"], "headline-md": ["Clash Grotesk"]
+        },
+        fontSize: {
+          "display-lg":  ["clamp(2.5rem, 5.2vw, 4.75rem)", { lineHeight: "1.05", fontWeight: "500" }],
+          "headline-md": ["clamp(1.6rem, 3.4vw, 2.85rem)", { lineHeight: "1.15", fontWeight: "500" }],
+          "title-sm":    ["clamp(1rem, 1.65vw, 1.45rem)",  { lineHeight: "1.35", fontWeight: "500" }],
+          "body-reg":    ["clamp(0.88rem, 1vw, 1rem)",     { lineHeight: "1.55", fontWeight: "400" }],
+          "code-label":  ["clamp(0.72rem, 0.9vw, 0.85rem)",{ lineHeight: "1.45", letterSpacing: "0.05em", fontWeight: "400" }],
+          "eyebrow":     ["clamp(0.66rem, 0.82vw, 0.75rem)",{ lineHeight: "1.0", fontWeight: "500" }]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(28,27,27,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(28,27,27,0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  /* viewport-fit */
+  .slides-viewport { height: 100vh; height: 100dvh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+  .slide { height: 100vh; height: 100dvh; min-height: 100vh; overflow: hidden; scroll-snap-align: start; position: relative; }
+  .slide > * { min-height: 0; }
+  .slide img { max-height: min(50vh, 420px); object-fit: contain; }
+  .slide-inner { height: 100%; display: flex; flex-direction: column; padding: clamp(18px, 3vw, 40px) clamp(20px, 4vw, 64px); }
+  .socket::before,.socket::after,.socket>.sk{position:absolute;width:7px;height:7px;background:#1c1b1b;}
+  .socket{position:relative;}
+  .socket::before{content:'';top:-3.5px;left:-3.5px;}
+  .socket::after{content:'';top:-3.5px;right:-3.5px;}
+  .socket>.sk-bl{bottom:-3.5px;left:-3.5px;}
+  .socket>.sk-br{bottom:-3.5px;right:-3.5px;}
+  ::-webkit-scrollbar{width:0;height:0;}
+  /* nav */
+  #nav{position:fixed;bottom:16px;right:20px;z-index:80;display:flex;align-items:center;gap:10px;
+       background:#1c1b1b;color:#fcf9f8;padding:7px 12px;border-radius:9999px;font-family:'Space Mono';font-size:12px;}
+  #nav button{color:#fcf9f8;opacity:.75;transition:opacity .15s;line-height:0;}
+  #nav button:hover{opacity:1;}
+  #overview{position:fixed;inset:0;z-index:90;background:rgba(28,27,27,.96);display:none;overflow-y:auto;padding:32px;}
+  #overview.on{display:block;}
+  #ovgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;max-width:1200px;margin:0 auto;}
+  .ovcard{aspect-ratio:16/9;border:1px solid #727974;background:#fcf9f8;cursor:pointer;position:relative;overflow:hidden;
+          padding:12px;display:flex;flex-direction:column;justify-content:space-between;transition:border-color .15s;}
+  .ovcard:hover{border-color:#c8ead8;}
+  .ovcard .n{font-family:'Space Mono';font-size:11px;color:#446254;}
+  .ovcard .t{font-family:'Clash Grotesk';font-size:15px;color:#1c1b1b;line-height:1.2;}
+  @media print{
+    .slides-viewport{height:auto;overflow:visible;scroll-snap-type:none;}
+    .slide{height:100vh;page-break-after:always;break-after:page;}
+    #nav,#overview{display:none!important;}
+  }
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.2s!important;}.slides-viewport{scroll-behavior:auto;}}
+</style>
+</head>
+<body class="bg-background text-on-background font-body-reg antialiased">
+<div class="slides-viewport" id="vp">
+
+<!-- ============ SLIDE 1 · COVER ============ -->
+<section class="slide grid-bg" data-slide="1" data-title="Couverture">
+  <div class="slide-inner items-center justify-center text-center relative">
+    <div class="absolute top-1/4 -right-1/4 w-[700px] h-[700px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+    <div class="absolute -bottom-1/4 -left-1/4 w-[520px] h-[520px] bg-secondary-container opacity-40 rounded-full blur-[100px] -z-10 mix-blend-multiply"></div>
+    <div class="socket max-w-4xl w-full bg-surface-container-lowest/80 border border-outline-variant px-lg py-xl backdrop-blur-sm">
+      <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+      <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase py-xs px-sm bg-primary-fixed/30 rounded border border-primary-fixed inline-block mb-lg">Plan directeur · Restitution direction</span>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight leading-none mb-md">Notion chez Thiga</h1>
+      <div class="w-24 h-1 bg-secondary mx-auto mb-md"></div>
+      <p class="font-headline-md text-headline-md text-on-surface-variant max-w-2xl mx-auto leading-tight">Diviser la facture par 20. Transformer la connaissance en actif.</p>
+      <div class="mt-xl pt-lg border-t border-outline-variant flex items-center justify-center gap-sm">
+        <span class="font-code-label text-code-label text-tertiary uppercase tracking-wider">Rama Logic × Numericoach · Sylvain Ramaradjou · Juillet 2026</span>
+      </div>
+    </div>
+    <p class="absolute bottom-6 font-code-label text-code-label text-outline">Confidentiel · préparé pour Thiga</p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 2 · EN UNE PHRASE ============ -->
+<section class="slide grid-bg" data-slide="2" data-title="En une phrase">
+  <div class="slide-inner">
+    <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-lg">
+      <span class="font-title-sm text-title-sm">Rama Logic</span>
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">En une phrase</span>
+    </div>
+    <div class="flex-1 min-h-0 flex flex-col justify-center max-w-5xl">
+      <div class="inline-flex items-center gap-2 mb-md"><div class="h-2 w-2 bg-primary"></div><span class="font-code-label text-code-label text-outline uppercase tracking-widest">Ce qu'on retient</span></div>
+      <h1 class="font-display-lg text-display-lg tracking-tight leading-[1.02] mb-lg">Le problème n'est pas Notion. C'est l'absence de <span class="text-primary">gouvernance documentaire</span>.</h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl leading-relaxed">Vous voyez une facture de <strong class="text-on-background">35 760 $/an</strong>. Le vrai coût est ailleurs, et bien plus grand : des consultants qui perdent du temps chaque semaine à chercher une info, un REX, une propale, et une connaissance jamais capitalisée. On peut diviser la facture par 20 <strong class="text-on-background">et</strong> transformer la connaissance en actif, à condition de poser des règles, des garants, et une logique qui tient dans le temps.</p>
+    </div>
+    <div class="pt-sm border-t border-outline-variant flex justify-between font-code-label text-code-label text-outline"><span>Confidentiel · Thiga</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 3 · LE MANDAT & LA MÉTHODE ============ -->
+<section class="slide grid-bg" data-slide="3" data-title="Le mandat">
+  <div class="slide-inner">
+    <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-lg">
+      <span class="font-title-sm text-title-sm">Rama Logic</span>
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Le mandat</span>
+    </div>
+    <div class="mb-lg">
+      <div class="inline-flex items-center gap-2 mb-sm"><div class="h-2 w-2 bg-primary"></div><span class="font-code-label text-code-label text-outline uppercase tracking-widest">Ce qu'on a fait</span></div>
+      <h1 class="font-headline-md text-headline-md tracking-tight max-w-4xl">Auditer, définir la cible, chiffrer la décision</h1>
+    </div>
+    <div class="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+      <div class="socket bg-surface-container-lowest border border-on-background p-md flex flex-col">
+        <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+        <span class="font-code-label text-code-label text-secondary bg-secondary-container w-fit px-2 py-1 mb-md">LA MISSION</span>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Auditer les usages et le contenu Notion de Thiga, définir la cible et la gouvernance, et livrer un plan directeur chiffré pour décider <strong class="text-on-background">GO / NO-GO</strong> avant le renouvellement du contrat Notion.</p>
+      </div>
+      <div class="socket bg-surface-container-lowest border border-on-background p-md flex flex-col">
+        <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+        <span class="font-code-label text-code-label text-primary bg-primary-fixed w-fit px-2 py-1 mb-md">LA MÉTHODE</span>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-md">Audit automatisé du <strong class="text-on-background">workspace complet</strong> croisé avec des entretiens terrain de power users : usage réel confronté à l'usage déclaré.</p>
+        <div class="mt-auto pt-sm border-t border-outline-variant flex items-center gap-sm">
+          <span class="material-symbols-outlined text-primary text-[20px]">record_voice_over</span>
+          <span class="font-code-label text-code-label text-on-surface-variant">Entretiens · Océane Royer Dewilde · Sarah Djellouli</span>
+        </div>
+      </div>
+    </div>
+    <div class="pt-sm border-t border-outline-variant flex justify-between font-code-label text-code-label text-outline"><span>Confidentiel · Thiga</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 4 · LE DIAGNOSTIC ============ -->
+<section class="slide grid-bg" data-slide="4" data-title="Le diagnostic">
+  <div class="slide-inner">
+    <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-md">
+      <span class="font-title-sm text-title-sm">Rama Logic</span>
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Le diagnostic</span>
+    </div>
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-sm"><div class="h-2 w-2 bg-primary"></div><span class="font-code-label text-code-label text-outline uppercase tracking-widest">Les chiffres</span></div>
+      <h1 class="font-headline-md text-headline-md tracking-tight">Ce que l'audit a mesuré</h1>
+    </div>
+    <div class="flex-1 min-h-0 flex flex-col gap-gutter">
+      <div class="grid grid-cols-3 gap-gutter">
+        <div class="socket bg-surface-container-lowest border border-outline-variant p-md">
+          <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+          <span class="font-code-label text-code-label text-error bg-error-container w-fit px-2 py-1 mb-sm block">FACTURE</span>
+          <div class="font-display-lg text-display-lg leading-none mb-1">35 760<span class="font-title-sm text-title-sm"> $/an</span></div>
+          <p class="font-code-label text-code-label text-on-surface-variant">295 membres · renouvellement 22/11/2026</p>
+        </div>
+        <div class="socket bg-surface-container-lowest border border-outline-variant p-md">
+          <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+          <span class="font-code-label text-code-label text-secondary bg-secondary-container w-fit px-2 py-1 mb-sm block">USAGE RÉEL</span>
+          <div class="font-display-lg text-display-lg leading-none mb-1">~70<span class="font-title-sm text-title-sm"> %</span></div>
+          <p class="font-code-label text-code-label text-on-surface-variant">des membres en simple lecture</p>
+        </div>
+        <div class="socket bg-surface-container-lowest border border-outline-variant p-md">
+          <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+          <span class="font-code-label text-code-label text-tertiary bg-tertiary-fixed w-fit px-2 py-1 mb-sm block">DONNÉES DORMANTES</span>
+          <div class="font-display-lg text-display-lg leading-none mb-1">~90<span class="font-title-sm text-title-sm"> %</span></div>
+          <p class="font-code-label text-code-label text-on-surface-variant">des bases non touchées depuis &gt; 6 mois</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-3 gap-gutter">
+        <div class="border border-outline-variant p-sm flex items-baseline gap-sm"><span class="font-title-sm text-title-sm text-primary">2 900+</span><span class="font-code-label text-code-label text-on-surface-variant">bases (doublons, duplicats)</span></div>
+        <div class="border border-outline-variant p-sm flex items-baseline gap-sm"><span class="font-title-sm text-title-sm text-primary">~22 %</span><span class="font-code-label text-code-label text-on-surface-variant">de bases connectées entre elles</span></div>
+        <div class="border border-outline-variant p-sm flex items-baseline gap-sm"><span class="font-title-sm text-title-sm text-primary">~63 %</span><span class="font-code-label text-code-label text-on-surface-variant">de champs remplis</span></div>
+      </div>
+      <div class="mt-auto bg-on-background text-on-primary p-md flex items-center gap-md">
+        <span class="material-symbols-outlined text-primary-fixed text-[26px]">insights</span>
+        <p class="font-body-reg text-body-reg text-inverse-on-surface">On a payé un couteau suisse à 295 personnes. La plupart s'en servent pour lire le code Wi-Fi. Ce ne sont pas des pages dans des workflows, ce sont des pages dans des pages.</p>
+      </div>
+    </div>
+    <div class="pt-sm border-t border-outline-variant flex justify-between font-code-label text-code-label text-outline"><span>Confidentiel · Thiga</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 5 · LE TERRAIN CONFIRME ============ -->
+<section class="slide grid-bg" data-slide="5" data-title="Le terrain confirme">
+  <div class="slide-inner">
+    <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-md">
+      <span class="font-title-sm text-title-sm">Rama Logic</span>
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Le terrain</span>
+    </div>
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-sm"><div class="h-2 w-2 bg-primary"></div><span class="font-code-label text-code-label text-outline uppercase tracking-widest">Le terrain confirme, mot pour mot</span></div>
+      <h1 class="font-headline-md text-headline-md tracking-tight max-w-4xl">Pas un problème d'outil. Un problème de discipline.</h1>
+    </div>
+    <div class="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+      <div class="flex flex-col gap-gutter">
+        <div class="socket bg-surface-container-lowest border border-on-background p-md flex-1 flex flex-col justify-center">
+          <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+          <p class="font-title-sm text-title-sm leading-snug mb-sm">« Au lieu de parler de migration de Notion, c'était vraiment du knowledge management qu'il fallait creuser, et après trouver l'outil. »</p>
+          <span class="font-code-label text-code-label text-primary">— Océane</span>
+        </div>
+        <div class="socket bg-surface-container-lowest border border-on-background p-md flex-1 flex flex-col justify-center">
+          <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+          <p class="font-title-sm text-title-sm leading-snug mb-sm">« Notre knowledge n'est pas capitalisé. C'est la conséquence d'une mauvaise utilisation, un sujet de discipline interne. »</p>
+          <span class="font-code-label text-code-label text-primary">— Sarah</span>
+        </div>
+      </div>
+      <div class="flex flex-col gap-sm">
+        <div class="border border-outline-variant p-md"><div class="flex items-center gap-sm mb-1"><span class="material-symbols-outlined text-error text-[20px]">ac_unit</span><span class="font-code-label text-code-label text-on-background font-bold">Effet gel</span></div><p class="font-body-reg text-body-reg text-on-surface-variant">Depuis l'annonce de la migration, les gens ont arrêté d'alimenter Notion. La donnée dormante s'aggrave toute seule.</p></div>
+        <div class="border border-outline-variant p-md"><div class="flex items-center gap-sm mb-1"><span class="material-symbols-outlined text-error text-[20px]">call_split</span><span class="font-code-label text-code-label text-on-background font-bold">Effet Luc</span></div><p class="font-body-reg text-body-reg text-on-surface-variant">Les bases bien construites n'ont jamais été réutilisées. Chacun a recréé les siennes. Zéro base parente, zéro liant.</p></div>
+        <div class="border border-outline-variant p-md"><div class="flex items-center gap-sm mb-1"><span class="material-symbols-outlined text-error text-[20px]">search_off</span><span class="font-code-label text-code-label text-on-background font-bold">Recherche cassée</span></div><p class="font-body-reg text-body-reg text-on-surface-variant">Pas de nomenclature : « si je ne trouve pas, ça n'existe pas, donc je recrée ». Les docs finissent dans Slack.</p></div>
+      </div>
+    </div>
+    <div class="pt-sm border-t border-outline-variant flex justify-between font-code-label text-code-label text-outline"><span>Confidentiel · Thiga</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 6 · L'ICEBERG (GAIN vs COÛT INACTION) ============ -->
+<section class="slide grid-bg" data-slide="6" data-title="L'iceberg">
+  <div class="slide-inner">
+    <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-md">
+      <span class="font-title-sm text-title-sm">Rama Logic</span>
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Ce que ça coûte vraiment</span>
+    </div>
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-sm"><div class="h-2 w-2 bg-primary"></div><span class="font-code-label text-code-label text-outline uppercase tracking-widest">L'iceberg</span></div>
+      <h1 class="font-headline-md text-headline-md tracking-tight max-w-4xl">La facture visible cache le vrai coût</h1>
+    </div>
+    <div class="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+      <div class="socket bg-primary-fixed/25 border border-primary p-md flex flex-col justify-center">
+        <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+        <span class="font-code-label text-code-label text-primary uppercase tracking-widest mb-sm">Ce que vous économisez en agissant</span>
+        <div class="font-display-lg text-display-lg text-primary leading-none mb-sm">~34 000<span class="font-title-sm text-title-sm"> $/an</span></div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Licences coupées : on passe de <strong class="text-on-background">295</strong> à <strong class="text-on-background">10 à 15</strong> sièges éditeurs. La partie visible de l'iceberg.</p>
+      </div>
+      <div class="socket bg-on-background text-inverse-on-surface border border-on-background p-md flex flex-col justify-center relative overflow-hidden">
+        <span class="sk sk-bl" style="background:#fcf9f8"></span><span class="sk sk-br" style="background:#fcf9f8"></span>
+        <span class="font-code-label text-code-label text-error-container uppercase tracking-widest mb-sm">Ce que vous perdez en ne faisant rien</span>
+        <div class="font-display-lg text-display-lg text-primary-fixed leading-none mb-sm">~340 k€<span class="font-title-sm text-title-sm"> à 675 k€/an</span></div>
+        <p class="font-body-reg text-body-reg text-surface-variant">Temps perdu à chercher un REX, une propale, une procédure. Hypothèse conservatrice : 1 à 2 h/semaine × ~150 consultants × ~50 €/h.</p>
+      </div>
+    </div>
+    <div class="mt-md flex items-center justify-between gap-md">
+      <p class="font-body-reg text-body-reg text-on-background"><strong>Le temps perdu coûte ~10× la facture Notion.</strong> C'est là qu'est le vrai argent en jeu.</p>
+      <span class="font-code-label text-code-label text-outline text-right shrink-0">Ordre de grandeur · à caler avec vos données RH</span>
+    </div>
+    <div class="pt-sm mt-sm border-t border-outline-variant flex justify-between font-code-label text-code-label text-outline"><span>Confidentiel · Thiga</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 7 · LA CAUSE RACINE (5 POURQUOI) ============ -->
+<section class="slide grid-bg" data-slide="7" data-title="Cause racine · 5 pourquoi">
+  <div class="slide-inner">
+    <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-md">
+      <span class="font-title-sm text-title-sm">Rama Logic</span>
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">La cause racine</span>
+    </div>
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-sm"><div class="h-2 w-2 bg-primary"></div><span class="font-code-label text-code-label text-outline uppercase tracking-widest">Les 5 pourquoi</span></div>
+      <h1 class="font-headline-md text-headline-md tracking-tight">On descend jusqu'à la vraie cause</h1>
+    </div>
+    <div class="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-5 gap-gutter">
+      <div class="lg:col-span-3 flex flex-col justify-between gap-2">
+        <div class="flex items-start gap-sm border-l-2 border-primary pl-sm"><span class="font-code-label text-code-label text-primary shrink-0 w-6">1</span><p class="font-body-reg text-body-reg"><strong>Pourquoi Notion existe chez Thiga ?</strong> Pour centraliser la connaissance (REX, propales, procédures) et que chacun s'y retrouve.</p></div>
+        <div class="flex items-start gap-sm border-l-2 border-primary pl-sm"><span class="font-code-label text-code-label text-primary shrink-0 w-6">2</span><p class="font-body-reg text-body-reg"><strong>Pourquoi la promesse n'a pas tenu ?</strong> La connaissance n'est pas capitalisée : ~90 % de bases dormantes, recherche cassée, on ne trouve rien.</p></div>
+        <div class="flex items-start gap-sm border-l-2 border-primary pl-sm"><span class="font-code-label text-code-label text-primary shrink-0 w-6">3</span><p class="font-body-reg text-body-reg"><strong>Pourquoi on ne trouve rien ?</strong> Aucune nomenclature ni source unique. Chacun recrée : « si je ne trouve pas, je recrée ». Doublons et orphelins.</p></div>
+        <div class="flex items-start gap-sm border-l-2 border-primary pl-sm"><span class="font-code-label text-code-label text-primary shrink-0 w-6">4</span><p class="font-body-reg text-body-reg"><strong>Pourquoi chacun recrée dans son coin ?</strong> Aucune règle sur qui documente quoi, où, et comment.</p></div>
+        <div class="flex items-start gap-sm border-l-2 border-error pl-sm"><span class="font-code-label text-code-label text-error shrink-0 w-6">5</span><p class="font-body-reg text-body-reg"><strong>Pourquoi aucune règle ?</strong> Personne n'est garant de la connaissance. La doc est l'affaire de tous, donc de personne.</p></div>
+      </div>
+      <div class="lg:col-span-2 socket bg-on-background text-inverse-on-surface p-md flex flex-col justify-center">
+        <span class="sk sk-bl" style="background:#fcf9f8"></span><span class="sk sk-br" style="background:#fcf9f8"></span>
+        <span class="font-code-label text-code-label text-primary-fixed uppercase tracking-widest mb-sm">La cause racine</span>
+        <p class="font-headline-md text-headline-md text-inverse-on-surface leading-tight mb-md">Absence de gouvernance documentaire.</p>
+        <p class="font-body-reg text-body-reg text-surface-variant">Le procès fait à Notion est une erreur de diagnostic. Changer d'outil sans poser les règles, c'est le même chaos dans 6 mois.</p>
+      </div>
+    </div>
+    <div class="pt-sm mt-sm border-t border-outline-variant flex justify-between font-code-label text-code-label text-outline"><span>Confidentiel · Thiga</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 8 · AHA · 2 TYPES DE DOC ============ -->
+<section class="slide grid-bg" data-slide="8" data-title="Deux types de documents">
+  <div class="slide-inner">
+    <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-md">
+      <span class="font-title-sm text-title-sm">Rama Logic</span>
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Le principe clé</span>
+    </div>
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-sm"><div class="h-2 w-2 bg-primary"></div><span class="font-code-label text-code-label text-outline uppercase tracking-widest">Ce qu'il faut comprendre avant tout</span></div>
+      <h1 class="font-headline-md text-headline-md tracking-tight">Deux types de documents, deux maisons</h1>
+    </div>
+    <div class="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+      <div class="socket bg-surface-container-lowest border border-on-background p-md flex flex-col justify-center">
+        <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+        <div class="flex items-center gap-sm mb-md"><span class="material-symbols-outlined text-tertiary text-[24px]">draft</span><span class="font-code-label text-code-label text-tertiary bg-tertiary-fixed px-2 py-1">DOC DE TRAVAIL</span></div>
+        <p class="font-title-sm text-title-sm mb-sm">Reste sur Google.</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-md">Brouillon, propale en cours, co-écriture à plusieurs. C'est fait pour ça : on collabore, on itère, on n'y touche pas.</p>
+        <div class="mt-md flex flex-wrap gap-1"><span class="font-code-label text-code-label border border-outline-variant px-2 py-1">Docs / Slides / Drive</span><span class="font-code-label text-code-label border border-outline-variant px-2 py-1">En mouvement</span></div>
+      </div>
+      <div class="socket bg-primary-fixed/25 border-2 border-primary p-md flex flex-col justify-center">
+        <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+        <div class="flex items-center gap-sm mb-md"><span class="material-symbols-outlined text-primary text-[24px]">verified</span><span class="font-code-label text-code-label text-primary bg-primary-fixed px-2 py-1">DOC SOURCE DE VÉRITÉ</span></div>
+        <p class="font-title-sm text-title-sm mb-sm">Déposé dans le Hub.</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-md">REX, procédure, propale <strong class="text-on-background">signée</strong>, fiche client, doc de début de mission. Version unique, cherchable, qui fait foi.</p>
+        <div class="mt-md flex flex-wrap gap-1"><span class="font-code-label text-code-label border border-primary text-primary px-2 py-1">Une seule maison</span><span class="font-code-label text-code-label border border-primary text-primary px-2 py-1">Figé · qui fait foi</span></div>
+      </div>
+    </div>
+    <div class="mt-md bg-on-background text-inverse-on-surface p-sm px-md flex items-center gap-sm">
+      <span class="material-symbols-outlined text-primary-fixed text-[20px]">rule</span>
+      <p class="font-body-reg text-body-reg">La règle : <strong class="text-primary-fixed">le document final vit dans le Hub</strong>. Le reste vit où vous voulez.</p>
+    </div>
+    <div class="pt-sm mt-sm border-t border-outline-variant flex justify-between font-code-label text-code-label text-outline"><span>Confidentiel · Thiga</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 9 · LA CIBLE ============ -->
+<section class="slide grid-bg" data-slide="9" data-title="La cible">
+  <div class="slide-inner">
+    <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-md">
+      <span class="font-title-sm text-title-sm">Rama Logic</span>
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">La cible</span>
+    </div>
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-sm"><div class="h-2 w-2 bg-primary"></div><span class="font-code-label text-code-label text-outline uppercase tracking-widest">Commune aux scénarios retenus</span></div>
+      <h1 class="font-headline-md text-headline-md tracking-tight">Un socle documentaire unique et simple</h1>
+    </div>
+    <div class="flex-1 min-h-0 flex flex-col gap-gutter">
+      <div class="grid grid-cols-3 gap-gutter">
+        <div class="socket bg-surface-container-lowest border border-on-background p-md"><span class="sk sk-bl"></span><span class="sk sk-br"></span><span class="material-symbols-outlined text-primary text-[22px] mb-1">public</span><h3 class="font-title-sm text-title-sm mb-1">Transversal Thiga</h3><p class="font-code-label text-code-label text-on-surface-variant">Congés, accès locaux, faire un REX, démarrer une mission.</p></div>
+        <div class="socket bg-surface-container-lowest border border-on-background p-md"><span class="sk sk-bl"></span><span class="sk sk-br"></span><span class="material-symbols-outlined text-primary text-[22px] mb-1">work</span><h3 class="font-title-sm text-title-sm mb-1">Missions</h3><p class="font-code-label text-code-label text-on-surface-variant">Cycle vente → delivery → REX, assets, livrables, propales.</p></div>
+        <div class="socket bg-surface-container-lowest border border-on-background p-md"><span class="sk sk-bl"></span><span class="sk sk-br"></span><span class="material-symbols-outlined text-primary text-[22px] mb-1">apartment</span><h3 class="font-title-sm text-title-sm mb-1">Clients</h3><p class="font-code-label text-code-label text-on-surface-variant">Logistique par client, accès sites, bons interlocuteurs.</p></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mt-auto">
+        <div class="md:col-span-2 border border-outline-variant p-md flex flex-col justify-center">
+          <span class="font-code-label text-code-label text-secondary uppercase tracking-widest mb-1">Principe directeur</span>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">La masse <strong class="text-on-background">lit</strong> et propose via <strong class="text-on-background">formulaire</strong> (sans rien casser). Quelques personnes désignées <strong class="text-on-background">alimentent</strong>. Une seule <strong class="text-on-background">source de vérité</strong> par information.</p>
+        </div>
+        <div class="bg-on-background text-inverse-on-surface p-md flex flex-col justify-center">
+          <span class="font-code-label text-code-label text-primary-fixed uppercase tracking-widest mb-1">Non négociable</span>
+          <p class="font-body-reg text-body-reg"><strong class="text-primary-fixed">2 à 3 Knowledge Managers</strong> (~0,2 ETP). Sans garants, n'importe quel scénario redevient un bordel en 6 mois.</p>
+        </div>
+      </div>
+    </div>
+    <div class="pt-sm mt-sm border-t border-outline-variant flex justify-between font-code-label text-code-label text-outline"><span>Confidentiel · Thiga</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 10 · LES 2 SCÉNARIOS ============ -->
+<section class="slide grid-bg" data-slide="10" data-title="Les scénarios">
+  <div class="slide-inner">
+    <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-md">
+      <span class="font-title-sm text-title-sm">Rama Logic</span>
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Les scénarios</span>
+    </div>
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-sm"><div class="h-2 w-2 bg-primary"></div><span class="font-code-label text-code-label text-outline uppercase tracking-widest">Deux chemins recommandés, une même logique</span></div>
+      <h1 class="font-headline-md text-headline-md tracking-tight">P1 ou P3 : les deux tiennent</h1>
+    </div>
+    <div class="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+      <div class="socket bg-surface-container-lowest border-2 border-primary p-md flex flex-col justify-center">
+        <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+        <div class="flex items-center justify-between mb-sm"><span class="font-code-label text-code-label text-primary bg-primary-fixed px-2 py-1">P1 · NOTION RESSERRÉ</span><span class="font-code-label text-code-label text-secondary">SIMPLE &amp; RAPIDE</span></div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-sm">On garde Notion mais on ferme les vannes : quelques power users alimentent, tous les autres passent en lecture + formulaires. De <strong class="text-on-background">295 à 10-15 sièges</strong> éditeurs.</p>
+        <ul class="mt-md space-y-1 font-code-label text-code-label text-on-surface-variant">
+          <li class="flex gap-sm"><span class="material-symbols-outlined text-primary text-[16px]">check</span>Les garants connaissent déjà Notion : zéro courbe d'apprentissage</li>
+          <li class="flex gap-sm"><span class="material-symbols-outlined text-primary text-[16px]">check</span>Faisable avant le 22/11 · zéro dépendance externe</li>
+          <li class="flex gap-sm"><span class="material-symbols-outlined text-primary text-[16px]">check</span>Notion gère nativement le cycle de vie du document</li>
+        </ul>
+      </div>
+      <div class="socket bg-surface-container-lowest border-2 border-secondary p-md flex flex-col justify-center">
+        <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+        <div class="flex items-center justify-between mb-sm"><span class="font-code-label text-code-label text-secondary bg-secondary-container px-2 py-1">P3 · HYBRIDE</span><span class="font-code-label text-code-label text-primary">L'INTRANET QUI MANQUE</span></div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-sm">Une base propre (éditée par les 10-15 garants) + un front sur-mesure très simple : l'intranet que Thiga n'a pas. La masse consulte un <strong class="text-on-background">hub clair et design</strong>, sans licence.</p>
+        <ul class="mt-md space-y-1 font-code-label text-code-label text-on-surface-variant">
+          <li class="flex gap-sm"><span class="material-symbols-outlined text-secondary text-[16px]">check</span>Centralisation + vraie expérience de lecture</li>
+          <li class="flex gap-sm"><span class="material-symbols-outlined text-secondary text-[16px]">check</span>La version qui fait foi vit ici · évolutif</li>
+          <li class="flex gap-sm"><span class="material-symbols-outlined text-secondary text-[16px]">check</span>Même logique que P1, en montée en gamme</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-md border border-outline-variant border-dashed p-sm px-md flex items-center gap-sm">
+      <span class="material-symbols-outlined text-outline text-[20px]">block</span>
+      <p class="font-code-label text-code-label text-on-surface-variant"><strong class="text-on-background">P2 · Full Google écarté.</strong> Google ne gère pas le cycle de vie d'un document : 5 versions, 3 dossiers, aucune qui fait foi. On recrée le désordre + risque de perte de données à la migration.</p>
+    </div>
+    <div class="pt-sm mt-sm border-t border-outline-variant flex justify-between font-code-label text-code-label text-outline"><span>Confidentiel · Thiga</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 11 · À QUOI ÇA RESSEMBLE (MAQUETTES) ============ -->
+<section class="slide grid-bg" data-slide="11" data-title="Le Thiga Hub">
+  <div class="slide-inner">
+    <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-md">
+      <span class="font-title-sm text-title-sm">Rama Logic</span>
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">À quoi ça ressemble</span>
+    </div>
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-sm"><div class="h-2 w-2 bg-primary"></div><span class="font-code-label text-code-label text-outline uppercase tracking-widest">Le même socle · deux niveaux de finition</span></div>
+      <h1 class="font-headline-md text-headline-md tracking-tight">Le Thiga Hub</h1>
+    </div>
+    <div class="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+
+      <!-- P3 : Hub sur-mesure -->
+      <div class="flex flex-col min-h-0">
+        <div class="flex items-center gap-sm mb-sm"><span class="font-code-label text-code-label text-secondary bg-secondary-container px-2 py-1">P3 · HUB SUR-MESURE</span><span class="font-code-label text-code-label text-outline">front premium</span></div>
+        <div class="socket flex-1 min-h-0 bg-surface-container-lowest border-2 border-secondary p-sm flex flex-col overflow-hidden">
+          <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+          <div class="flex items-center justify-between pb-sm border-b border-outline-variant mb-sm">
+            <span class="font-title-sm text-title-sm">Thiga <span class="text-secondary">Hub</span></span>
+            <span class="font-code-label text-[10px] border border-on-background px-2 py-1">+ Proposer une ressource</span>
+          </div>
+          <div class="flex items-center gap-sm border border-outline-variant bg-background px-sm py-1 mb-sm">
+            <span class="material-symbols-outlined text-outline text-[16px]">search</span>
+            <span class="font-code-label text-[10px] text-outline">Rechercher un REX, un client, une procédure…</span>
+          </div>
+          <div class="grid grid-cols-2 gap-1 flex-1 min-h-0">
+            <div class="border border-outline-variant p-1.5 flex flex-col justify-between"><span class="material-symbols-outlined text-primary text-[16px]">menu_book</span><div><p class="font-code-label text-[10px] font-bold leading-tight">Documentation transversale</p><p class="font-code-label text-[9px] text-outline">congés · locaux · onboarding</p></div></div>
+            <div class="border border-outline-variant p-1.5 flex flex-col justify-between"><span class="material-symbols-outlined text-primary text-[16px]">history_edu</span><div><p class="font-code-label text-[10px] font-bold leading-tight">REX &amp; assets missions</p><p class="font-code-label text-[9px] text-outline">le capital à sauver</p></div></div>
+            <div class="border border-outline-variant p-1.5 flex flex-col justify-between"><span class="material-symbols-outlined text-primary text-[16px]">badge</span><div><p class="font-code-label text-[10px] font-bold leading-tight">Fiches clients</p><p class="font-code-label text-[9px] text-outline">accès · contacts · logistique</p></div></div>
+            <div class="border border-outline-variant p-1.5 flex flex-col justify-between"><span class="material-symbols-outlined text-primary text-[16px]">groups</span><div><p class="font-code-label text-[10px] font-bold leading-tight">Trombinoscope / staffing</p><p class="font-code-label text-[9px] text-outline">programme de la semaine</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- P1 : le même socle dans Notion -->
+      <div class="flex flex-col min-h-0">
+        <div class="flex items-center gap-sm mb-sm"><span class="font-code-label text-code-label text-primary bg-primary-fixed px-2 py-1">P1 · LE MÊME SOCLE, DANS NOTION</span></div>
+        <div class="socket flex-1 min-h-0 bg-surface-container-lowest border border-outline-variant p-sm flex overflow-hidden">
+          <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+          <div class="hidden sm:flex flex-col gap-1 w-1/4 border-r border-outline-variant pr-sm mr-sm">
+            <span class="font-code-label text-[10px] text-on-surface-variant">🏠 Thiga Hub</span>
+            <span class="font-code-label text-[9px] text-outline pl-1">Transversal</span>
+            <span class="font-code-label text-[9px] text-outline pl-1">Missions</span>
+            <span class="font-code-label text-[9px] text-outline pl-1">Clients</span>
+            <span class="font-code-label text-[9px] text-outline pl-1">Staffing</span>
+          </div>
+          <div class="flex-1 flex flex-col min-h-0">
+            <span class="font-code-label text-[11px] font-bold mb-sm">📚 Base documentaire</span>
+            <div class="flex flex-col gap-1 flex-1 min-h-0">
+              <div class="flex items-center gap-sm border-b border-outline-variant pb-1"><span class="text-[11px]">📄</span><span class="font-code-label text-[10px]">Documentation transversale</span></div>
+              <div class="flex items-center gap-sm border-b border-outline-variant pb-1"><span class="text-[11px]">📄</span><span class="font-code-label text-[10px]">REX &amp; assets missions</span></div>
+              <div class="flex items-center gap-sm border-b border-outline-variant pb-1"><span class="text-[11px]">📄</span><span class="font-code-label text-[10px]">Fiches clients</span></div>
+              <div class="flex items-center gap-sm border-b border-outline-variant pb-1"><span class="text-[11px]">📄</span><span class="font-code-label text-[10px]">Trombinoscope / staffing</span></div>
+            </div>
+            <span class="font-code-label text-[9px] text-outline mt-sm">Vue native Notion · lecture + formulaire</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-md flex items-center gap-sm"><span class="material-symbols-outlined text-primary text-[18px]">trending_up</span><p class="font-code-label text-code-label text-on-surface-variant">Même contenu, même gouvernance. P3 ajoute l'expérience de lecture premium et un intranet que vous pouvez faire grandir.</p></div>
+    <div class="pt-sm mt-sm border-t border-outline-variant flex justify-between font-code-label text-code-label text-outline"><span>Confidentiel · Thiga · maquette illustrative</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 12 · COMPARATIF DE DÉCISION ============ -->
+<section class="slide grid-bg" data-slide="12" data-title="Comparatif de décision">
+  <div class="slide-inner">
+    <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-md">
+      <span class="font-title-sm text-title-sm">Rama Logic</span>
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">La décision</span>
+    </div>
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-sm"><div class="h-2 w-2 bg-primary"></div><span class="font-code-label text-code-label text-outline uppercase tracking-widest">Comparatif de décision</span></div>
+      <h1 class="font-headline-md text-headline-md tracking-tight">Les scénarios sur 8 critères</h1>
+    </div>
+    <div class="flex-1 min-h-0 overflow-hidden border border-on-background">
+      <table class="w-full h-full border-collapse font-body-reg text-code-label">
+        <thead>
+          <tr class="bg-on-background text-inverse-on-surface font-code-label">
+            <th class="text-left px-md py-sm">Critère</th>
+            <th class="text-center px-sm py-sm border-l border-outline">P1 · Notion resserré</th>
+            <th class="text-center px-sm py-sm border-l border-outline">P2 · Full Google</th>
+            <th class="text-center px-sm py-sm border-l border-outline">P3 · Hybride</th>
+          </tr>
+        </thead>
+        <tbody class="text-on-surface-variant">
+          <tr class="border-t border-outline-variant"><td class="px-md py-1 text-on-background">Sièges conservés</td><td class="text-center border-l border-outline-variant">~10-15</td><td class="text-center border-l border-outline-variant">0</td><td class="text-center border-l border-outline-variant">~10-15</td></tr>
+          <tr class="border-t border-outline-variant bg-surface-container-low"><td class="px-md py-1 text-on-background">Économie licences /an</td><td class="text-center border-l border-outline-variant">~34 k$</td><td class="text-center border-l border-outline-variant">~35,7 k$</td><td class="text-center border-l border-outline-variant">~34 k$</td></tr>
+          <tr class="border-t border-outline-variant"><td class="px-md py-1 text-on-background">Effort de mise en place</td><td class="text-center border-l border-outline-variant text-primary">Faible</td><td class="text-center border-l border-outline-variant text-error">Élevé</td><td class="text-center border-l border-outline-variant">Moyen</td></tr>
+          <tr class="border-t border-outline-variant bg-surface-container-low"><td class="px-md py-1 text-on-background">Dépendance externe</td><td class="text-center border-l border-outline-variant text-primary">Aucune</td><td class="text-center border-l border-outline-variant text-error">Forte</td><td class="text-center border-l border-outline-variant">Faible</td></tr>
+          <tr class="border-t border-outline-variant"><td class="px-md py-1 text-on-background">Risque perte de données</td><td class="text-center border-l border-outline-variant text-primary">Faible</td><td class="text-center border-l border-outline-variant text-error font-bold">Élevé</td><td class="text-center border-l border-outline-variant text-primary">Faible</td></tr>
+          <tr class="border-t border-outline-variant bg-surface-container-low"><td class="px-md py-1 text-on-background font-bold">Gère le cycle de vie du doc</td><td class="text-center border-l border-outline-variant text-primary font-bold">Oui</td><td class="text-center border-l border-outline-variant text-error font-bold">Non</td><td class="text-center border-l border-outline-variant text-primary font-bold">Oui</td></tr>
+          <tr class="border-t border-outline-variant"><td class="px-md py-1 text-on-background">Résout le knowledge ?</td><td class="text-center border-l border-outline-variant text-primary">Oui (si discipline)</td><td class="text-center border-l border-outline-variant text-error">Non (le déplace)</td><td class="text-center border-l border-outline-variant text-primary">Oui + intranet</td></tr>
+          <tr class="border-t border-outline-variant bg-surface-container-low"><td class="px-md py-1 text-on-background">Faisable avant 22/11</td><td class="text-center border-l border-outline-variant text-primary">Oui</td><td class="text-center border-l border-outline-variant text-error">Tendu</td><td class="text-center border-l border-outline-variant text-primary">Oui</td></tr>
+          <tr class="border-t border-on-background bg-on-background text-inverse-on-surface font-code-label"><td class="px-md py-sm">Recommandation</td><td class="text-center border-l border-outline text-primary-fixed text-lg">✅</td><td class="text-center border-l border-outline text-lg">⛔</td><td class="text-center border-l border-outline text-primary-fixed text-lg">✅</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pt-sm mt-sm border-t border-outline-variant flex justify-between font-code-label text-code-label text-outline"><span>Confidentiel · Thiga</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 13 · CE QUI FAIT QUE ÇA TIENT ============ -->
+<section class="slide grid-bg" data-slide="13" data-title="Ce qui fait que ça tient">
+  <div class="slide-inner">
+    <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-md">
+      <span class="font-title-sm text-title-sm">Rama Logic</span>
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Gouvernance &amp; maintien</span>
+    </div>
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-sm"><div class="h-2 w-2 bg-primary"></div><span class="font-code-label text-code-label text-outline uppercase tracking-widest">La logique qui fait que ça tient</span></div>
+      <h1 class="font-headline-md text-headline-md tracking-tight">Couper les licences ne suffit pas</h1>
+    </div>
+    <div class="flex-1 min-h-0 grid grid-cols-3 gap-gutter">
+      <div class="socket bg-surface-container-lowest border border-on-background p-md flex flex-col"><span class="sk sk-bl"></span><span class="sk sk-br"></span>
+        <span class="font-code-label text-code-label text-primary mb-sm">01</span>
+        <h3 class="font-title-sm text-title-sm mb-sm">Knowledge Managers</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">2 à 3 garants (~0,2 ETP) de l'unicité et de la fraîcheur. Ils arbitrent garder / supprimer. Des power users déjà à l'aise avec Notion.</p>
+      </div>
+      <div class="socket bg-surface-container-lowest border border-on-background p-md flex flex-col"><span class="sk sk-bl"></span><span class="sk sk-br"></span>
+        <span class="font-code-label text-code-label text-primary mb-sm">02</span>
+        <h3 class="font-title-sm text-title-sm mb-sm">Les formulaires</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">La masse propose sans pouvoir casser quoi que ce soit. Zéro doublon accidentel, zéro page orpheline.</p>
+      </div>
+      <div class="socket bg-surface-container-lowest border border-on-background p-md flex flex-col"><span class="sk sk-bl"></span><span class="sk sk-br"></span>
+        <span class="font-code-label text-code-label text-primary mb-sm">03</span>
+        <h3 class="font-title-sm text-title-sm mb-sm">Les nudges cycle de vie</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">La propale finale déposée ouvre les droits de mission. La clôture de facturation déclenche l'alerte « dépose ton REX ».</p>
+      </div>
+    </div>
+    <div class="mt-md bg-on-background text-inverse-on-surface p-sm px-md flex items-center gap-sm">
+      <span class="material-symbols-outlined text-primary-fixed text-[20px]">save</span>
+      <p class="font-body-reg text-body-reg"><strong class="text-primary-fixed">Migration :</strong> on ne migre que le vivant. Les REX en priorité (le capital à sauver), puis les bases actives. Le reste part en archive markdown froide, jamais réinjectée.</p>
+    </div>
+    <div class="pt-sm mt-sm border-t border-outline-variant flex justify-between font-code-label text-code-label text-outline"><span>Confidentiel · Thiga</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 14 · LA DÉCISION DEMANDÉE ============ -->
+<section class="slide grid-bg" data-slide="14" data-title="La décision demandée">
+  <div class="slide-inner items-center justify-center text-center relative">
+    <div class="absolute top-1/4 -right-1/4 w-[600px] h-[600px] bg-primary-fixed opacity-25 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+    <div class="socket max-w-4xl w-full bg-surface-container-lowest/80 border border-outline-variant px-lg py-xl backdrop-blur-sm">
+      <span class="sk sk-bl"></span><span class="sk sk-br"></span>
+      <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase py-xs px-sm bg-primary-fixed/30 rounded border border-primary-fixed inline-block mb-lg">La décision demandée</span>
+      <h1 class="font-display-lg text-display-lg tracking-tight leading-none mb-lg">GO / NO-GO</h1>
+      <p class="font-headline-md text-headline-md text-on-surface-variant max-w-2xl mx-auto leading-tight mb-lg">Et le choix du scénario : <span class="text-primary">P1</span> ou <span class="text-secondary">P3</span>.</p>
+      <div class="flex items-center justify-center gap-md mb-xl">
+        <div class="border-2 border-primary px-md py-sm"><span class="font-code-label text-code-label text-primary">P1 · Notion resserré</span></div>
+        <span class="font-code-label text-code-label text-outline">ou</span>
+        <div class="border-2 border-secondary px-md py-sm"><span class="font-code-label text-code-label text-secondary">P3 · Hybride</span></div>
+      </div>
+      <div class="pt-lg border-t border-outline-variant flex items-center justify-center gap-sm">
+        <span class="material-symbols-outlined text-error text-[20px]">event</span>
+        <span class="font-code-label text-code-label text-on-surface-variant">Jalon dur : résiliation / réduction effective avant le 22/11/2026</span>
+      </div>
+    </div>
+    <p class="absolute bottom-6 font-code-label text-code-label text-outline">Rama Logic × Numericoach · sylvain@ramalogic.com</p>
+  </div>
+</section>
+
+</div><!-- /slides-viewport -->
+
+<!-- NAV -->
+<div id="nav" data-pdf-hide>
+  <button id="prev" aria-label="Précédent"><span class="material-symbols-outlined" style="font-size:20px">chevron_left</span></button>
+  <span id="counter">01 / 14</span>
+  <button id="next" aria-label="Suivant"><span class="material-symbols-outlined" style="font-size:20px">chevron_right</span></button>
+  <button id="grid" aria-label="Vue d'ensemble"><span class="material-symbols-outlined" style="font-size:18px">grid_view</span></button>
+</div>
+
+<!-- OVERVIEW -->
+<div id="overview" data-pdf-hide><div id="ovgrid"></div></div>
+
+<script>
+(function(){
+  const vp = document.getElementById('vp');
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  const counter = document.getElementById('counter');
+  const pad = n => String(n).padStart(2,'0');
+  let current = 0;
+
+  function updateCounter(){
+    let idx = 0, min = Infinity;
+    slides.forEach((s,i)=>{ const d = Math.abs(s.getBoundingClientRect().top); if(d<min){min=d;idx=i;} });
+    current = idx;
+    counter.textContent = pad(idx+1)+' / '+pad(total);
+  }
+  function go(i){ i=Math.max(0,Math.min(total-1,i)); slides[i].scrollIntoView({behavior:'smooth'}); }
+
+  document.getElementById('next').onclick = ()=>go(current+1);
+  document.getElementById('prev').onclick = ()=>go(current-1);
+  vp.addEventListener('scroll', ()=>{ window.requestAnimationFrame(updateCounter); }, {passive:true});
+
+  // overview
+  const overview = document.getElementById('overview');
+  const ovgrid = document.getElementById('ovgrid');
+  slides.forEach((s,i)=>{
+    const c = document.createElement('div');
+    c.className='ovcard';
+    c.innerHTML = '<div class="n">'+pad(i+1)+' / '+pad(total)+'</div><div class="t">'+(s.dataset.title||'')+'</div>';
+    c.onclick = ()=>{ overview.classList.remove('on'); go(i); };
+    ovgrid.appendChild(c);
+  });
+  document.getElementById('grid').onclick = ()=> overview.classList.toggle('on');
+
+  document.addEventListener('keydown', e=>{
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){ e.preventDefault(); go(current+1); }
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){ e.preventDefault(); go(current-1); }
+    else if(e.key==='Escape'){ overview.classList.toggle('on'); }
+    else if(e.key==='Home'){ go(0); }
+    else if(e.key==='End'){ go(total-1); }
+  });
+  updateCounter();
+})();
+</script>
+</body>
+</html>
