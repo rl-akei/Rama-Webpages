@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html class="light" lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>EDHEC Online × Rama Logic — Système Notion &amp; formation</title>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Work+Sans:ital,wght@0,300..700;1,300..600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-dim": "#dcd9d9", "secondary-fixed-dim": "#bdcf7c", "secondary-fixed": "#d9eb95",
+          "on-tertiary": "#ffffff", "surface-tint": "#466556", "on-secondary": "#ffffff",
+          "on-background": "#1c1b1b", "surface-container-highest": "#e5e2e1", "inverse-primary": "#accebc",
+          "error": "#ba1a1a", "on-tertiary-fixed": "#0c1d27", "background": "#fcf9f8",
+          "on-primary-fixed-variant": "#2f4d3f", "primary-fixed-dim": "#accebc", "on-primary-container": "#f5fff7",
+          "surface-container-lowest": "#ffffff", "primary-fixed": "#c8ead8", "surface-variant": "#e5e2e1",
+          "on-primary": "#ffffff", "on-error-container": "#93000a", "on-error": "#ffffff",
+          "primary": "#446254", "outline": "#727974", "on-surface": "#1c1b1b",
+          "tertiary-container": "#657783", "on-tertiary-container": "#fcfcff", "on-tertiary-fixed-variant": "#384954",
+          "tertiary": "#4d5e6a", "on-surface-variant": "#424844", "surface-bright": "#fcf9f8",
+          "error-container": "#ffdad6", "on-secondary-container": "#5c6b24", "surface-container-high": "#ebe7e7",
+          "on-secondary-fixed": "#171e00", "secondary-container": "#d9eb95", "inverse-surface": "#313030",
+          "outline-variant": "#c1c8c2", "surface-container-low": "#f6f3f2", "secondary": "#56641e",
+          "on-primary-fixed": "#012115", "on-secondary-fixed-variant": "#3f4c05", "inverse-on-surface": "#f3f0ef",
+          "surface-container": "#f0edec", "primary-container": "#5c7b6c", "tertiary-fixed-dim": "#b7c9d6",
+          "tertiary-fixed": "#d3e5f3", "surface": "#fcf9f8"
+        },
+        borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        spacing: {
+          "md": "24px", "margin": "clamp(16px, 3.3vw, 32px)", "lg": "clamp(24px, 5vw, 48px)",
+          "xl": "clamp(40px, 8vw, 80px)", "sm": "12px", "gutter": "24px", "base": "8px", "xs": "4px"
+        },
+        fontFamily: {
+          "body-reg": ["Work Sans"], "code-label": ["Space Mono"], "title-sm": ["Clash Grotesk"],
+          "eyebrow": ["Space Mono"], "display-lg": ["Clash Grotesk"], "headline-md": ["Clash Grotesk"]
+        },
+        fontSize: {
+          "display-lg":  ["clamp(2.75rem, 5.5vw, 5rem)",    { "lineHeight": "1.05", "fontWeight": "500" }],
+          "headline-md": ["clamp(1.75rem, 3.6vw, 3rem)",    { "lineHeight": "1.2",  "fontWeight": "500" }],
+          "title-sm":    ["clamp(1.05rem, 1.7vw, 1.5rem)",  { "lineHeight": "1.4",  "fontWeight": "500" }],
+          "body-reg":    ["clamp(0.9rem, 1vw, 1rem)",       { "lineHeight": "1.6",  "fontWeight": "400" }],
+          "code-label":  ["clamp(0.78rem, 0.9vw, 0.875rem)",{ "lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400" }],
+          "eyebrow":     ["clamp(0.7rem, 0.85vw, 0.75rem)", { "lineHeight": "1.0",  "fontWeight": "500" }]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(28,27,27,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(28,27,27,0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  /* viewport-fit (single-page) */
+  .slides-viewport { height: 100vh; height: 100dvh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+  .slide { height: 100vh; height: 100dvh; min-height: 100vh; overflow: hidden; scroll-snap-align: start; position: relative; }
+  .slide > * { min-height: 0; }
+  .slide img { max-height: min(50vh, 420px); object-fit: contain; }
+  .socket { position:absolute; width:6px; height:6px; background:#1c1b1b; }
+  .socket.tl{ top:0; left:0;} .socket.tr{ top:0; right:0;}
+  .socket.bl{ bottom:0; left:0;} .socket.br{ bottom:0; right:0;}
+  /* nav chrome */
+  #chrome { position: fixed; bottom: 18px; right: 18px; z-index: 90; display:flex; align-items:center; gap:8px; }
+  #chrome button { width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:#1c1b1b; color:#fcf9f8; border:none; cursor:pointer; transition:opacity .15s; }
+  #chrome button:hover { opacity:.85; }
+  #counter { font-family:'Space Mono',monospace; font-size:13px; background:#fcf9f8; border:1px solid #1c1b1b; padding:8px 12px; }
+  /* overview */
+  #overview { position:fixed; inset:0; z-index:100; background:rgba(28,27,27,.94); display:none; padding:5vh 5vw; overflow-y:auto; }
+  #overview.open { display:block; }
+  #overview h2 { font-family:'Clash Grotesk',sans-serif; color:#fcf9f8; font-size:1.5rem; margin-bottom:24px; }
+  #ovgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+  #ovgrid button { text-align:left; background:#fcf9f8; border:1px solid #727974; padding:14px 16px; cursor:pointer; display:flex; gap:12px; align-items:baseline; transition:background .15s; }
+  #ovgrid button:hover { background:#d9eb95; }
+  #ovgrid .n { font-family:'Space Mono',monospace; font-size:12px; color:#56641e; }
+  #ovgrid .t { font-family:'Work Sans',sans-serif; font-size:14px; color:#1c1b1b; }
+  @media (prefers-reduced-motion: reduce) { *,*::before,*::after{ animation-duration:.01ms!important; transition-duration:.2s!important;} .slides-viewport{scroll-behavior:auto;} }
+  /* mobile: dense slides stack, let them flow and scroll instead of clipping */
+  @media (max-width: 768px) {
+    .slides-viewport { scroll-snap-type: none; }
+    .slide { height: auto; min-height: 100vh; overflow: visible; scroll-snap-align: none; }
+  }
+  @media print {
+    #chrome,#overview{ display:none!important; }
+    .slides-viewport{ height:auto; overflow:visible; scroll-snap-type:none; }
+    .slide{ height:auto; min-height:0; page-break-after:always; border-bottom:1px solid #1c1b1b; }
+  }
+</style>
+</head>
+<body class="bg-background text-on-background font-body-reg antialiased">
+<div class="slides-viewport" id="viewport">
+
+<!-- ============ SLIDE 0 — COUVERTURE ============ -->
+<section class="slide grid-bg bg-background" data-slide="0" data-title="Couverture">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Confidentiel</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin flex items-center relative overflow-hidden">
+      <div class="absolute top-1/4 -right-1/4 w-[700px] h-[700px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+      <div class="absolute -bottom-1/4 -left-1/4 w-[500px] h-[500px] bg-secondary-container opacity-40 rounded-full blur-[100px] -z-10 mix-blend-multiply"></div>
+      <div class="max-w-5xl w-full mx-auto relative">
+        <div class="mb-lg">
+          <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase py-xs px-sm bg-primary-fixed/40 border border-primary-fixed inline-block">Démonstration · Mercredi 29 juillet 2026</span>
+        </div>
+        <h1 class="font-display-lg text-display-lg tracking-tight leading-none mb-md">EDHEC Online <span class="text-outline font-light">×</span> Rama Logic</h1>
+        <div class="w-24 h-1 bg-secondary mb-md"></div>
+        <p class="font-headline-md text-headline-md text-on-surface-variant max-w-3xl leading-tight">
+          Le système Notion qui centralise la connaissance produit de l'équipe marketing, et l'équipe formée pour le faire vivre.
+        </p>
+        <div class="mt-lg pt-md border-t border-outline-variant flex flex-wrap items-center gap-x-lg gap-y-sm">
+          <div>
+            <div class="font-eyebrow text-eyebrow uppercase text-on-surface-variant tracking-widest mb-xs">Préparé pour</div>
+            <div class="font-body-reg text-body-reg font-medium">Christelle De Poncins · EDHEC Online</div>
+          </div>
+          <div>
+            <div class="font-eyebrow text-eyebrow uppercase text-on-surface-variant tracking-widest mb-xs">Par</div>
+            <div class="font-body-reg text-body-reg font-medium">Sylvain Ramaradjou · Notion Solution Partner</div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="px-margin py-sm shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidentiel — préparé pour EDHEC Online</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 1 — OÙ ON EN EST ============ -->
+<section class="slide grid-bg bg-background" data-slide="1" data-title="Où on en est">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">EDHEC Online × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-5xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">01 · Où on en est</span>
+        <h1 class="font-display-lg text-display-lg tracking-tight mb-lg">Ce qui tourne déjà</h1>
+        <div class="grid md:grid-cols-5 gap-gutter items-start">
+          <div class="md:col-span-3 space-y-md">
+            <p class="font-body-reg text-body-reg text-on-surface-variant">Avant, l'information vivait dans une multitude de bases éparpillées. Chacun recréait sa doc dans son coin, et personne ne savait où était la bonne version.</p>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">On a remis de l'ordre avec deux bases socle : les <span class="font-medium text-on-surface">Programmes</span> et la <span class="font-medium text-on-surface">Documentation</span>, reliées entre elles. Une doc, un programme. Une seule source de vérité.</p>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">Le proto est déjà peuplé des 21 programmes du site, avec un propriétaire et une date de validité sur chaque document.</p>
+          </div>
+          <div class="md:col-span-2 space-y-sm">
+            <div class="border border-on-background p-md bg-surface-container-lowest relative"><span class="socket tl"></span><span class="socket tr"></span><span class="socket bl"></span><span class="socket br"></span>
+              <div class="font-display-lg text-display-lg leading-none">21</div><div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider mt-xs">programmes importés</div></div>
+            <div class="flex gap-sm">
+              <div class="flex-1 border border-outline-variant p-sm bg-surface-container-lowest"><div class="font-title-sm text-title-sm">2</div><div class="font-code-label text-code-label text-on-surface-variant">bases socle</div></div>
+              <div class="flex-1 border border-outline-variant p-sm bg-surface-container-lowest"><div class="font-title-sm text-title-sm">1</div><div class="font-code-label text-code-label text-on-surface-variant">source de vérité</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidentiel — préparé pour EDHEC Online</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 2 — LA DÉMONSTRATION ============ -->
+<section class="slide grid-bg bg-background" data-slide="2" data-title="La démonstration">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">EDHEC Online × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-5xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">02 · La démonstration</span>
+        <h1 class="font-headline-md text-headline-md tracking-tight mb-xs">L'agent IA répond à la place de Lidia</h1>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-lg max-w-3xl">Une vraie question de l'équipe sales, posée à l'agent, qui va chercher la réponse dans la documentation. En direct.</p>
+        <div class="grid md:grid-cols-5 gap-gutter items-stretch">
+          <div class="md:col-span-3 border border-on-background bg-surface-container-lowest relative flex flex-col"><span class="socket tl"></span><span class="socket tr"></span><span class="socket bl"></span><span class="socket br"></span>
+            <div class="px-md py-sm border-b border-outline-variant flex items-center gap-xs">
+              <span class="material-symbols-outlined text-primary text-base">smart_toy</span>
+              <span class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Agent · Q&amp;R documentation</span>
+            </div>
+            <div class="p-md space-y-md flex-grow">
+              <div class="flex justify-end">
+                <div class="bg-secondary-fixed border border-on-background px-md py-sm max-w-sm"><p class="font-body-reg text-body-reg">« Quel est le prix du MSc Marketing Management, et sur combien de temps ? »</p></div>
+              </div>
+              <div class="flex justify-start">
+                <div class="bg-surface-container-high border border-outline-variant px-md py-sm max-w-md"><p class="font-body-reg text-body-reg">Voici la fiche du MSc Marketing Management : durée, tarif et la battle card associée.</p><div class="mt-xs flex items-center gap-xs font-code-label text-code-label text-primary"><span class="material-symbols-outlined text-sm">link</span>source : base Documentation</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-2 flex flex-col gap-sm">
+            <div class="border-l-2 border-primary pl-md py-xs">
+              <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-xs">Le bénéfice</div>
+              <p class="font-body-reg text-body-reg text-on-surface-variant">L'équipe trouve la réponse seule, sans passer par Lidia ou Jennifer.</p>
+            </div>
+            <div class="border border-on-background bg-on-background text-on-primary p-md flex-grow flex flex-col justify-center">
+              <span class="material-symbols-outlined text-primary-fixed" style="font-size:52px">trending_down</span>
+              <p class="font-title-sm text-title-sm text-inverse-on-surface leading-snug mt-sm">Moins de sollicitations directes sur les mêmes questions, tous les jours.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidentiel — préparé pour EDHEC Online</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 3 — CE QU'IL RESTE À CONSTRUIRE ============ -->
+<section class="slide grid-bg bg-background" data-slide="3" data-title="Ce qu'il reste">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">EDHEC Online × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-6xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">03 · Ce qu'il reste</span>
+        <h1 class="font-headline-md text-headline-md tracking-tight mb-xs">Ce qui manque pour tenir à l'échelle</h1>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-lg max-w-3xl">Le socle est là. Voici ce qu'on construit pour qu'il serve toute l'équipe au quotidien.</p>
+        <div class="grid md:grid-cols-2 gap-gutter">
+          <div class="border border-on-background bg-surface-container-lowest p-md flex gap-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <span class="material-symbols-outlined text-primary text-3xl shrink-0">checklist</span>
+            <div><h3 class="font-title-sm text-title-sm mb-xs">Gestion des tâches</h3><p class="font-body-reg text-body-reg text-on-surface-variant">Qui produit quelle doc, pour quand. Si quelqu'un est absent, un autre reprend sans que rien ne se perde.</p></div>
+          </div>
+          <div class="border border-on-background bg-surface-container-lowest p-md flex gap-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <span class="material-symbols-outlined text-primary text-3xl shrink-0">dashboard</span>
+            <div><h3 class="font-title-sm text-title-sm mb-xs">Tableaux de bord par rôle</h3><p class="font-body-reg text-body-reg text-on-surface-variant">Une vue direction pour le pilotage, et une vue perso pour chacun : ses documents à produire et ses tâches, rien d'autre.</p></div>
+          </div>
+          <div class="border border-on-background bg-surface-container-lowest p-md flex gap-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <span class="material-symbols-outlined text-primary text-3xl shrink-0">verified</span>
+            <div><h3 class="font-title-sm text-title-sm mb-xs">Gouvernance de la doc</h3><p class="font-body-reg text-body-reg text-on-surface-variant">Chaque document a un propriétaire et une date de validité. Passé le délai, il est signalé comme à vérifier. La connaissance reste à jour.</p></div>
+          </div>
+          <div class="border border-on-background bg-surface-container-lowest p-md flex gap-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <span class="material-symbols-outlined text-secondary text-3xl shrink-0">smart_toy</span>
+            <div><h3 class="font-title-sm text-title-sm mb-xs">Agent IA sur toute la doc</h3><p class="font-body-reg text-body-reg text-on-surface-variant">Entraîné sur la documentation complète, il répond aux questions récurrentes de l'équipe sales à la source.</p></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidentiel — préparé pour EDHEC Online</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 4 — FORMER L'ÉQUIPE ============ -->
+<section class="slide grid-bg bg-background" data-slide="4" data-title="La formation">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">EDHEC Online × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-6xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">04 · La formation</span>
+        <h1 class="font-headline-md text-headline-md tracking-tight mb-xs">Un système adopté, pas seulement livré</h1>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-lg max-w-3xl">30 personnes, réparties sur plusieurs campus, formées en ligne. Trois modules d'une demi-journée, avec le replay des sessions pour ceux qui ne peuvent pas être là.</p>
+        <div class="grid md:grid-cols-3 gap-gutter">
+          <div class="border border-on-background bg-surface-container-lowest p-md relative flex flex-col"><span class="socket tl"></span><span class="socket tr"></span>
+            <div class="font-code-label text-code-label text-secondary mb-sm">MODULE 01 · DEMI-JOURNÉE</div>
+            <h3 class="font-title-sm text-title-sm mb-sm">Notion 101</h3>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">Les bases, la prise en main, les bons réflexes pour être à l'aise dès le premier jour.</p>
+          </div>
+          <div class="border border-on-background bg-surface-container-lowest p-md relative flex flex-col"><span class="socket tl"></span><span class="socket tr"></span>
+            <div class="font-code-label text-code-label text-secondary mb-sm">MODULE 02 · DEMI-JOURNÉE</div>
+            <h3 class="font-title-sm text-title-sm mb-sm">Prendre en main le système</h3>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">Naviguer les programmes, trouver la bonne doc, utiliser son tableau de bord perso et l'agent IA.</p>
+          </div>
+          <div class="border border-on-background bg-surface-container-lowest p-md relative flex flex-col"><span class="socket tl"></span><span class="socket tr"></span>
+            <div class="font-code-label text-code-label text-secondary mb-sm">MODULE 03 · DEMI-JOURNÉE</div>
+            <h3 class="font-title-sm text-title-sm mb-sm">Produire &amp; maintenir</h3>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">Créer et tenir la doc à jour, gérer les statuts et les dates de validité, faire vivre la connaissance.</p>
+          </div>
+        </div>
+        <div class="mt-md bg-on-background text-on-primary px-md py-sm flex items-center justify-between flex-wrap gap-sm">
+          <span class="font-code-label text-code-label text-inverse-on-surface tracking-widest">3 MODULES · 30 PERSONNES · EN LIGNE · REPLAY INCLUS</span>
+          <span class="font-code-label text-code-label text-primary-fixed tracking-widest">OBJECTIF : 100 % D'ADOPTION</span>
+        </div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidentiel — préparé pour EDHEC Online</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 5 — CE QUE ÇA CHANGE ============ -->
+<section class="slide grid-bg bg-background" data-slide="5" data-title="Ce que ça change">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">EDHEC Online × Rama Logic</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-5xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">05 · Ce que ça change</span>
+        <h1 class="font-headline-md text-headline-md tracking-tight mb-lg">Avant, après</h1>
+        <div class="grid md:grid-cols-2 gap-0 border border-on-background bg-surface-container-lowest">
+          <div class="p-md md:border-r border-outline-variant">
+            <div class="font-eyebrow text-eyebrow text-error uppercase tracking-widest mb-md">Aujourd'hui</div>
+            <ul class="space-y-sm font-body-reg text-body-reg">
+              <li class="flex gap-sm"><span class="text-error">—</span><span>Doc éparpillée dans plusieurs bases<span class="block text-on-surface-variant">on ne sait pas où est la bonne version</span></span></li>
+              <li class="flex gap-sm"><span class="text-error">—</span><span>Les mêmes questions à Lidia et Jennifer<span class="block text-on-surface-variant">tous les jours, sur les mêmes sujets</span></span></li>
+              <li class="flex gap-sm"><span class="text-error">—</span><span>La doc vieillit sans qu'on le voie<span class="block text-on-surface-variant">personne ne sait ce qui est encore juste</span></span></li>
+            </ul>
+          </div>
+          <div class="p-md bg-primary-fixed/20">
+            <div class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest mb-md">Demain</div>
+            <ul class="space-y-sm font-body-reg text-body-reg">
+              <li class="flex gap-sm"><span class="text-primary">→</span><span>Une source unique, reliée aux programmes<span class="block text-on-surface-variant">chacun trouve seul, ou demande à l'agent</span></span></li>
+              <li class="flex gap-sm"><span class="text-primary">→</span><span>L'équipe est autonome sur ses réponses<span class="block text-on-surface-variant">Lidia et Jennifer déchargées</span></span></li>
+              <li class="flex gap-sm"><span class="text-primary">→</span><span>La doc se signale quand elle expire<span class="block text-on-surface-variant">la connaissance reste fiable</span></span></li>
+            </ul>
+          </div>
+        </div>
+        <p class="mt-md font-title-sm text-title-sm text-on-surface-variant"><span class="text-secondary">=</span> une équipe qui avance seule sur un système qu'elle maîtrise, et une connaissance qui ne se périme plus en silence.</p>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidentiel — préparé pour EDHEC Online</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 6 — L'OFFRE ============ -->
+<section class="slide grid-bg bg-background" data-slide="6" data-title="L'offre">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base border-b border-outline-variant shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Confidentiel · préparé pour EDHEC Online</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin pt-xl pb-lg flex flex-col justify-start">
+      <div class="max-w-6xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase mb-sm block">06 · L'offre</span>
+        <div class="grid md:grid-cols-5 gap-gutter items-stretch">
+          <div class="md:col-span-3 border border-on-background bg-surface-container-lowest relative flex flex-col"><span class="socket tl"></span><span class="socket tr"></span><span class="socket bl"></span><span class="socket br"></span>
+            <div class="p-md border-b border-on-background">
+              <h2 class="font-headline-md text-headline-md leading-tight mb-sm">Programme de formation Notion<br/>Équipe marketing · 30 personnes</h2>
+              <div class="flex items-end gap-sm flex-wrap"><span class="font-title-sm text-title-sm bg-secondary-fixed px-md py-xs border border-on-background">5 500€ HT</span><span class="font-code-label text-code-label text-on-surface-variant">forfait · budget RH · démarrage septembre</span></div>
+            </div>
+            <div class="p-md flex-grow">
+              <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider border-b border-outline-variant pb-xs mb-sm">Inclus</div>
+              <ul class="space-y-sm">
+                <li class="flex items-start gap-sm font-body-reg text-body-reg"><span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>Finalisation complète du système : gestion des tâches, tableaux de bord par rôle, gouvernance de la doc</li>
+                <li class="flex items-start gap-sm font-body-reg text-body-reg"><span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>Agent IA de questions-réponses entraîné sur toute la documentation</li>
+                <li class="flex items-start gap-sm font-body-reg text-body-reg"><span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>3 modules de formation (9h) pour les 30 personnes, en ligne, avec replay</li>
+                <li class="flex items-start gap-sm font-body-reg text-body-reg"><span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>Supports, guide utilisateur et environnement d'entraînement</li>
+              </ul>
+            </div>
+            <div class="border-t border-on-background grid grid-cols-2 divide-x divide-on-background bg-surface-container-high">
+              <div class="p-sm"><div class="font-eyebrow text-eyebrow text-on-surface-variant uppercase mb-xs">Budget</div><div class="font-code-label text-code-label">Ressources humaines</div></div>
+              <div class="p-sm bg-primary-container text-on-primary-container flex items-center gap-xs"><span class="material-symbols-outlined text-base">schedule</span><span class="font-code-label text-code-label">Démarrage septembre</span></div>
+            </div>
+          </div>
+          <div class="md:col-span-2 border border-outline-variant bg-surface-container-low p-md flex flex-col">
+            <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider border-b border-outline-variant pb-xs mb-sm">Pourquoi tout en un</div>
+            <div class="space-y-md flex-grow">
+              <div class="flex gap-sm">
+                <span class="material-symbols-outlined text-primary text-xl shrink-0">group</span>
+                <p class="font-body-reg text-body-reg text-on-surface-variant">Le système finalisé et l'équipe formée avancent ensemble. Un outil livré sans formation ne s'adopte pas.</p>
+              </div>
+              <div class="flex gap-sm">
+                <span class="material-symbols-outlined text-primary text-xl shrink-0">rocket_launch</span>
+                <p class="font-body-reg text-body-reg text-on-surface-variant">On lance à la rentrée de septembre, pour que l'équipe démarre l'année avec le système en main.</p>
+              </div>
+              <div class="flex gap-sm">
+                <span class="material-symbols-outlined text-primary text-xl shrink-0">workspace_premium</span>
+                <p class="font-body-reg text-body-reg text-on-surface-variant">Garantie adoption : on continue jusqu'à ce que l'équipe soit à l'aise et autonome.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="flex items-center px-margin py-sm border-t border-outline-variant shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidentiel — préparé pour EDHEC Online · montant en HT · Logic distilled.</span></footer>
+  </div>
+</section>
+
+<!-- ============ SLIDE 7 — CLOSING ============ -->
+<section class="slide grid-bg bg-background" data-slide="7" data-title="On lance en septembre">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Prochaine étape</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin flex items-center relative overflow-hidden">
+      <div class="absolute -bottom-1/4 -right-1/4 w-[600px] h-[600px] bg-secondary-container opacity-40 rounded-full blur-[110px] -z-10 mix-blend-multiply"></div>
+      <div class="max-w-5xl w-full mx-auto">
+        <span class="font-eyebrow text-eyebrow text-tertiary tracking-[0.2em] uppercase mb-sm block">Prochaine étape</span>
+        <h1 class="font-display-lg text-display-lg tracking-tight mb-lg">On lance en septembre</h1>
+        <div class="grid md:grid-cols-2 gap-gutter mb-lg">
+          <div class="bg-surface-container-lowest border border-on-background p-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <div class="font-code-label text-code-label text-secondary mb-xs">Étape 01</div>
+            <div class="font-title-sm text-title-sm">Validation du budget RH</div>
+            <div class="font-body-reg text-body-reg text-on-surface-variant">de votre côté, pour caler le programme sur septembre</div>
+          </div>
+          <div class="bg-secondary-fixed border border-on-background p-md relative"><span class="socket tl"></span><span class="socket br"></span>
+            <div class="font-code-label text-code-label text-on-secondary-fixed-variant mb-xs">Étape 02</div>
+            <div class="font-title-sm text-title-sm text-on-secondary-fixed">Lancement de la formation · septembre</div>
+            <div class="font-body-reg text-body-reg text-on-secondary-fixed-variant">finalisation du système puis montée en compétence de l'équipe</div>
+          </div>
+        </div>
+        <div class="border-l-2 border-primary pl-md mb-lg">
+          <p class="font-headline-md text-headline-md text-primary-container leading-tight">« Vous gardez la main sur le marketing. On s'occupe du système et de vos équipes. »</p>
+        </div>
+        <div class="pt-md border-t border-outline-variant flex items-center justify-between flex-wrap gap-md">
+          <a href="mailto:sylvain@ramalogic.com" class="font-body-reg text-body-reg font-medium flex items-center gap-xs hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">mail</span>sylvain@ramalogic.com</a>
+          <span class="font-code-label text-code-label text-on-surface-variant">Sylvain Ramaradjou · Rama Logic · Notion Solution Partner</span>
+        </div>
+      </div>
+    </main>
+    <footer class="px-margin py-sm shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Confidentiel — préparé pour EDHEC Online</span></footer>
+  </div>
+</section>
+
+</div><!-- /slides-viewport -->
+
+<!-- nav chrome -->
+<div id="chrome">
+  <span id="counter">1 / 8</span>
+  <button id="btnOverview" title="Vue d'ensemble (Échap)"><span class="material-symbols-outlined">grid_view</span></button>
+  <button id="btnPrev" title="Précédent"><span class="material-symbols-outlined">arrow_upward</span></button>
+  <button id="btnNext" title="Suivant"><span class="material-symbols-outlined">arrow_downward</span></button>
+</div>
+
+<!-- overview -->
+<div id="overview"><h2>Vue d'ensemble</h2><div id="ovgrid"></div></div>
+
+<script>
+  const viewport = document.getElementById('viewport');
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const counter = document.getElementById('counter');
+  const overview = document.getElementById('overview');
+  const ovgrid = document.getElementById('ovgrid');
+  let current = 0;
+
+  slides.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.innerHTML = '<span class="n">' + String(i + 1).padStart(2, '0') + '</span><span class="t">' + (s.dataset.title || ('Slide ' + (i+1))) + '</span>';
+    b.addEventListener('click', () => { go(i); overview.classList.remove('open'); });
+    ovgrid.appendChild(b);
+  });
+
+  function go(i) {
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    slides[current].scrollIntoView({ behavior: 'smooth' });
+    updateCounter();
+  }
+  function updateCounter() { counter.textContent = (current + 1) + ' / ' + slides.length; }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        current = slides.indexOf(e.target);
+        updateCounter();
+      }
+    });
+  }, { root: viewport, threshold: [0.5] });
+  slides.forEach(s => io.observe(s));
+
+  document.getElementById('btnNext').addEventListener('click', () => go(current + 1));
+  document.getElementById('btnPrev').addEventListener('click', () => go(current - 1));
+  document.getElementById('btnOverview').addEventListener('click', () => overview.classList.toggle('open'));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { overview.classList.toggle('open'); return; }
+    if (overview.classList.contains('open')) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); go(0); }
+    if (e.key === 'End') { e.preventDefault(); go(slides.length - 1); }
+  });
+</script>
+</body>
+</html>
