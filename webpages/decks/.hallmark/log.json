@@ -28,5 +28,24 @@
       "offer": "carte principale asymetrique (7 col, fond primary) 8 400 EUR HT + carte satellite Operate mensuelle (5 col, neutre) 1 500 EUR HT/mois -- vs dual card ferme vs estimate (argos)"
     },
     "preemit": "P5 H5 E4 S5 R4 V5"
+  },
+  {
+    "deck": "2026-07-27_cleany_c8m4x1",
+    "date": "2026-07-27",
+    "macrostructures": {
+      "context": "diptyque asymetrique 3/5 + 2/5 : card 'deja construit' avec 3 metriques inline en pied vs card accent secondary big-num unique '52 k€/mois' -- vs timeline verticale (evmt)",
+      "frustration": "grille 2x4 de chips 'sujets ouverts' avec statut Space Mono par chip (dans ta tete / teste), 1 chip en etat is-tested contraste + bande noire verdict verbatim client -- macrostructure neuve",
+      "frictions": "grille 2x2 verbatim-first : la citation client EST le hero de la card, le constat passe en pied sous separateur -- vs rows editoriales (argos) et cards classeur (evmt)",
+      "cout": "3 colonnes border-top 2px sans aucune metrique + bande d'aveu assume 'je ne mets pas de chiffre ici' -- vs 3 unanswered-questions cards (argos)",
+      "insight": "pivot VERTICAL : question barree (pivot-strike rouge, opacity 70) -> fleche arrow_downward -> question accent primary -- vs diptyque cote a cote (evmt)",
+      "these_data": "equation typographique empilee (IA sans memoire = / IA + memoire =) + bande noire principe -- macrostructure neuve",
+      "peurs": "3 rows split 50/50 peur-verbatim (fond dim) / reponse (fond clair), pas de cards",
+      "plan_overview": "chaine horizontale 3 maillons avec connecteurs arrow_forward entre cards, 3e maillon en accent secondary -- vs bandes horizontales (evmt), stack layers (argos)",
+      "lots": "template rigide repete x3 (standard skill) : 2 colonnes pourquoi/actions + grand rectangle LIVRABLES 2px secondary",
+      "zoom_agents": "agent 1 = flux horizontal 3 etapes ; agent 2 = comparatif avant/apres en 2 colonnes numerotees -- 2 macrostructures distinctes pour ne pas dupliquer",
+      "roadmap": "rail vertical 5 jalons avec un jalon 'pause' grise (absence Sylvain) intercale -- vs timeline horizontale (evmt)",
+      "offer": "carte prix asymetrique 5/12 fond primary + carte inclus 7/12 en grille 2x3, forfait unique sans ventilation ni jours -- vs carte + satellite Operate (evmt), dual ferme/estimate (argos)"
+    },
+    "preemit": "P5 H5 E4 S5 R4 V5"
   }
 ]

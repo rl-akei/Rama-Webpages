@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<meta name="description" content="Cleany × Rama Logic · Proposition confidentielle"/>
+<title>Cleany × Rama Logic · Attaquer l'acquisition</title>
+
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600;700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-dim":"#dcd9d9","secondary-fixed-dim":"#bdcf7c","secondary-fixed":"#d9eb95",
+        "on-tertiary":"#ffffff","surface-tint":"#466556","on-secondary":"#ffffff",
+        "on-background":"#1c1b1b","surface-container-highest":"#e5e2e1","inverse-primary":"#accebc",
+        "error":"#ba1a1a","on-tertiary-fixed":"#0c1d27","background":"#fcf9f8",
+        "on-primary-fixed-variant":"#2f4d3f","primary-fixed-dim":"#accebc","on-primary-container":"#f5fff7",
+        "surface-container-lowest":"#ffffff","primary-fixed":"#c8ead8","surface-variant":"#e5e2e1",
+        "on-primary":"#ffffff","on-error-container":"#93000a","on-error":"#ffffff",
+        "primary":"#446254","outline":"#727974","on-surface":"#1c1b1b",
+        "tertiary-container":"#657783","on-tertiary-container":"#fcfcff",
+        "on-tertiary-fixed-variant":"#384954","tertiary":"#4d5e6a","on-surface-variant":"#424844",
+        "surface-bright":"#fcf9f8","error-container":"#ffdad6","on-secondary-container":"#5c6b24",
+        "surface-container-high":"#ebe7e7",
+        "inverse-surface":"#313030","outline-variant":"#c1c8c2","surface-container-low":"#f6f3f2",
+        "secondary":"#56641e","on-primary-fixed":"#012115","on-secondary-fixed-variant":"#3f4c05",
+        "inverse-on-surface":"#f3f0ef","surface-container":"#f0edec","primary-container":"#5c7b6c",
+        "tertiary-fixed-dim":"#b7c9d6","tertiary-fixed":"#d3e5f3","surface":"#fcf9f8",
+        "on-secondary-fixed":"#171e00","secondary-container":"#d9eb95"
+      },
+      borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},
+      spacing:{
+        "xs":"4px","base":"8px",
+        "sm":"clamp(7px, 0.9vh, 12px)",
+        "md":"clamp(11px, 1.7vh, 22px)",
+        "lg":"clamp(16px, 2.6vh, 34px)",
+        "xl":"clamp(22px, 4vh, 56px)",
+        "gutter":"clamp(14px, 1.4vw, 24px)",
+        "margin":"clamp(20px, 3vw, 40px)"
+      },
+      fontFamily:{
+        "body-reg":["Work Sans","system-ui","sans-serif"],
+        "code-label":["Space Mono","monospace"],
+        "title-sm":["Clash Grotesk","Work Sans","sans-serif"],
+        "eyebrow":["Space Mono","monospace"],
+        "display-lg":["Clash Grotesk","Work Sans","sans-serif"],
+        "headline-md":["Clash Grotesk","Work Sans","sans-serif"]
+      },
+      fontSize:{
+        "body-reg":["clamp(12.5px, 1.02vw, 15.5px)",{"lineHeight":"1.5","fontWeight":"400"}],
+        "code-label":["clamp(10.5px, 0.82vw, 12.5px)",{"lineHeight":"1.45","letterSpacing":"0.05em","fontWeight":"400"}],
+        "title-sm":["clamp(16px, 1.45vw, 21px)",{"lineHeight":"1.3","fontWeight":"500"}],
+        "eyebrow":["clamp(9.5px, 0.72vw, 11.5px)",{"lineHeight":"1.0","fontWeight":"500"}],
+        "display-lg":["clamp(38px, 5vw, 68px)",{"lineHeight":"1.02","fontWeight":"500"}],
+        "headline-md":["clamp(24px, 3.2vw, 42px)",{"lineHeight":"1.1","fontWeight":"500"}]
+      }
+    }
+  }
+}
+</script>
+
+<style>
+:root { --header-h: 52px; }
+html, body { scroll-behavior: smooth; overflow-x: clip; }
+body { font-family: 'Work Sans', system-ui, sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+.font-display-lg, .font-headline-md, h1 { overflow-wrap: anywhere; }
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #446254;
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(28,27,27,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28,27,27,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ===== viewport-fit ===== */
+.slides-viewport {
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+.slide {
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: var(--header-h);
+}
+.slide > * { min-height: 0; }
+.slide img { max-height: min(50vh, 420px); object-fit: contain; }
+.slide-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Socket corners ===== */
+.socket-corner-tl, .socket-corner-tr, .socket-corner-bl, .socket-corner-br {
+  position: absolute;
+  width: 8px; height: 8px;
+  background-color: #1c1b1b;
+}
+.socket-corner-tl { top: -4px; left: -4px; }
+.socket-corner-tr { top: -4px; right: -4px; }
+.socket-corner-bl { bottom: -4px; left: -4px; }
+.socket-corner-br { bottom: -4px; right: -4px; }
+
+.card-sockets > .cs { position:absolute; width:6px; height:6px; background:#1c1b1b; }
+.card-sockets > .cs.tl { top:0; left:0; } .card-sockets > .cs.tr { top:0; right:0; }
+.card-sockets > .cs.bl { bottom:0; left:0; } .card-sockets > .cs.br { bottom:0; right:0; }
+
+.divider-num {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: #446254;
+}
+.big-num {
+  font-family: 'Clash Grotesk', 'Work Sans', sans-serif;
+  font-weight: 500;
+  line-height: 0.98;
+  font-size: clamp(32px, 4.4vw, 54px);
+}
+.big-num-sm { font-size: clamp(24px, 3.1vw, 38px); }
+.big-num-xl { font-size: clamp(44px, 6.4vw, 88px); }
+
+/* ===== Chips "sujets ouverts" (slide 02.1) ===== */
+.subject-chip {
+  border: 1px solid #c1c8c2;
+  background: #ffffff;
+  padding: clamp(8px,1.2vh,14px) clamp(10px,1vw,16px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+}
+.subject-chip.is-tested { border-color: #1c1b1b; background: #f0edec; }
+
+/* ===== Pivot vertical (slide 03.1) ===== */
+.pivot-strike { position: relative; display: inline; }
+.pivot-strike::after {
+  content: ""; position: absolute; left: -2px; right: -2px; top: 52%;
+  height: 2px; background: #ba1a1a; opacity: .55;
+}
+
+/* ===== Rail vertical (roadmap) ===== */
+.tl-item { position: relative; padding-left: clamp(22px, 2.4vw, 34px); }
+.tl-item::before {
+  content: ""; position: absolute; left: 0; top: 6px;
+  width: 11px; height: 11px; background: #fcf9f8;
+  border: 2px solid #446254;
+}
+.tl-item:not(:last-child)::after {
+  content: ""; position: absolute; left: 5px; top: 17px; bottom: -2px;
+  width: 1px; background: #c1c8c2;
+}
+.tl-item.tl-accent-2::before { border-color: #56641e; }
+.tl-item.tl-pause::before { border-color: #727974; background: #e5e2e1; }
+
+/* ===== Connecteurs horizontaux (plan overview) ===== */
+.chain-arrow {
+  display: flex; align-items: center; justify-content: center;
+  color: #446254;
+}
+
+.overview-card {
+  border: 1px solid #c1c8c2;
+  background: #ffffff;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  transition: border-color 160ms, background 160ms, transform 160ms;
+  min-height: 80px;
+}
+.overview-card:hover { border-color: #446254; background: #f6f3f2; transform: translateY(-2px); }
+.overview-card .ov-num { font-family: 'Space Mono', monospace; font-size: 12px; color: #446254; letter-spacing: 0.05em; }
+.overview-card .ov-label { font-family: 'Work Sans', sans-serif; font-size: 13px; color: #1c1b1b; line-height: 1.3; }
+
+.header-bar { transition: opacity 200ms ease; }
+.header-bar.is-hidden { opacity: 0; pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html, body { scroll-behavior: auto; }
+  .overview-card, .group *, .header-bar { transition: none !important; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+}
+
+@media (max-width: 767px) {
+  .slides-viewport { scroll-snap-type: none; scroll-padding-top: var(--header-h); }
+  .slide { height: auto; min-height: 100dvh; overflow: visible; padding-top: 0; padding-bottom: 96px; }
+  .slide-body { justify-content: flex-start !important; padding-top: var(--header-h) !important; }
+  .chain-arrow { transform: rotate(90deg); }
+  /* Slide Offre : compacter pour tenir dans un viewport mobile sans rogner
+     le titre en haut ni la mention légale en bas. */
+  #slide-29 { padding-bottom: 56px; }
+  #slide-29 .slide-body { padding-bottom: 0 !important; }
+  #slide-29 .card-sockets { padding-top: 12px !important; padding-bottom: 12px !important; }
+  #slide-29 .big-num-xl { font-size: 34px; }
+  #slide-29 .slide-body > div:last-child { padding-right: 72px; margin-top: 8px !important; }
+}
+
+.print-only { display: none; }
+@media print {
+  .slides-viewport { height: auto; overflow: visible; scroll-snap-type: none; }
+  .slide { page-break-after: always; height: auto; overflow: visible; min-height: 0; }
+  .nav-controls, .header-bar, #overview { display: none !important; }
+  .print-only { display: block; }
+}
+</style>
+</head>
+<body class="bg-background text-on-background antialiased">
+
+<!-- ====== STICKY HEADER ====== -->
+<header id="header-bar" class="header-bar fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant" style="height:52px">
+  <div class="flex justify-between items-center h-full px-margin max-w-[1600px] mx-auto">
+    <div class="flex items-center gap-md">
+      <div class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</div>
+      <div class="hidden md:block w-px h-4 bg-outline-variant"></div>
+      <div class="hidden md:block font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Préparé pour Cleany</div>
+    </div>
+    <div class="flex items-center gap-md" data-pdf-hide>
+      <button id="overview-btn" aria-label="Vue d'ensemble" class="hidden md:flex items-center gap-1 font-code-label text-code-label text-on-surface-variant hover:text-on-background transition-colors">
+        <span class="material-symbols-outlined text-lg">grid_view</span><span class="uppercase tracking-widest">ESC</span>
+      </button>
+      <div class="font-code-label text-code-label text-on-surface-variant">
+        <span id="current-slide" class="text-on-background font-medium">1</span>
+        <span class="text-outline-variant mx-1">/</span>
+        <span id="total-slides">31</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="slides-viewport">
+
+<!-- ============ SLIDE 0 · COVER ============ -->
+<section class="slide grid-bg" id="slide-0" data-slide="0">
+  <div class="slide-body flex items-center justify-center relative overflow-hidden px-margin">
+    <div class="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+    <div class="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-secondary-container opacity-40 rounded-full blur-[100px] -z-10 mix-blend-multiply"></div>
+
+    <div class="max-w-5xl w-full relative z-10">
+      <div class="relative bg-surface-container-lowest/80 backdrop-blur-sm rounded-lg border border-outline-variant px-margin py-xl">
+        <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+
+        <div class="flex items-center justify-between flex-wrap gap-sm mb-lg">
+          <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase py-xs px-sm bg-primary-fixed/30 rounded border border-primary-fixed inline-block">Proposition · Suite du call du 24 juillet 2026</span>
+          <span class="font-title-sm text-title-sm font-medium tracking-tight text-on-background">Rama Logic</span>
+        </div>
+
+        <h1 class="font-display-lg text-display-lg text-on-background mb-md tracking-tight">
+          Arrêter de chercher où mettre de l'IA. Commencer par ce qui fait grossir Cleany : l'acquisition.
+        </h1>
+        <div class="w-24 h-1 bg-secondary mb-lg"></div>
+
+        <div class="flex items-end gap-md flex-wrap mb-lg">
+          <span class="font-display-lg text-on-background tracking-tight leading-none" style="font-size:clamp(40px,5vw,72px)">Cleany</span>
+          <span class="font-code-label text-code-label text-on-surface-variant pb-1 uppercase tracking-widest">Alexandre Bellity · CEO &amp; CRO · avec Gérard</span>
+        </div>
+
+        <div class="pt-lg border-t border-outline-variant flex items-center justify-between flex-wrap gap-sm">
+          <div class="flex items-center gap-sm">
+            <div class="h-2 w-2 bg-primary"></div>
+            <span class="font-code-label text-code-label text-on-surface-variant">Sylvain Ramaradjou · Architecte Notion &amp; IA · Juillet 2026</span>
+          </div>
+          <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Confidentiel · préparé pour Cleany</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 1 · SOMMAIRE ============ -->
+<section class="slide grid-bg" id="slide-1" data-slide="1">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Sommaire</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce qu'on va voir <span class="text-primary italic">ensemble</span></h1>
+      <p class="font-code-label text-code-label text-outline mt-xs uppercase tracking-widest">8 sections, du constat à l'offre.</p>
+    </div>
+
+    <div class="flex flex-col">
+      <a href="#slide-2" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">01</span>
+        <span class="font-title-sm text-on-background w-52 md:w-72 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,18px)">Où on en est</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Ce qu'on a déjà construit, et ce qui vient de changer.</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-4" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">02</span>
+        <span class="font-title-sm text-on-background w-52 md:w-72 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,18px)">Le vrai sujet</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">L'IA partout, et pourtant rien qui tourne chez toi.</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-8" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">03</span>
+        <span class="font-title-sm text-on-background w-52 md:w-72 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,18px)">Ce que j'y vois</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">La question que tu poses n'est pas la bonne.</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-13" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">04</span>
+        <span class="font-title-sm text-on-background w-52 md:w-72 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,18px)">Là où on va</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Ce que ça change pour Julien, pour Gérard, pour toi.</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-15" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">05</span>
+        <span class="font-title-sm text-on-background w-52 md:w-72 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,18px)">La méthode</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Comment on attaque, en 3 lots.</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-23" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">06</span>
+        <span class="font-title-sm text-on-background w-52 md:w-72 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,18px)">Roadmap</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Le calendrier, et le temps que ça te coûte.</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-26" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">07</span>
+        <span class="font-title-sm text-on-background w-52 md:w-72 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,18px)">Engagements</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Ce sur quoi tu peux compter.</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-28" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">08</span>
+        <span class="font-title-sm text-on-background w-52 md:w-72 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,18px)">Offre</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">L'investissement, sans surprise.</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 2 · DIVIDER 01 ============ -->
+<section class="slide grid-bg" id="slide-2" data-slide="2">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">01</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 08</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Où on en est</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Ce qu'on a déjà construit, et ce qui vient de changer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 3 · OÙ ON EN EST ============ -->
+<section class="slide grid-bg" id="slide-3" data-slide="3">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">01 · Où on en est</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">On ne repart pas de <span class="text-primary italic">zéro</span></h1>
+    </div>
+
+    <div class="grid md:grid-cols-5 gap-gutter items-stretch">
+      <div class="md:col-span-3 relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Ce qu'on a construit ensemble · 2025</span>
+        <h2 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">La relation client, instrumentée</h2>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mb-md">Front en inbox unique, Notion pour les process, un scoring de santé client. Le premier maillon de la chaîne a arrêté de fonctionner au feeling.</p>
+        <div class="grid grid-cols-3 gap-sm border-t border-outline-variant pt-md">
+          <div>
+            <div class="big-num big-num-sm text-on-background">72h→12h</div>
+            <p class="font-code-label text-code-label text-outline uppercase tracking-widest mt-xs">Temps de réponse</p>
+          </div>
+          <div>
+            <div class="big-num big-num-sm text-on-background">4h</div>
+            <p class="font-code-label text-code-label text-outline uppercase tracking-widest mt-xs">Par semaine et par responsable de secteur</p>
+          </div>
+          <div>
+            <div class="big-num big-num-sm text-on-background">100%</div>
+            <p class="font-code-label text-code-label text-outline uppercase tracking-widest mt-xs">Des interactions tracées</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-2 relative border-2 border-secondary bg-secondary-fixed/15 p-md card-sockets flex flex-col justify-center">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-secondary uppercase tracking-widest">Ce qui vient de changer · juillet 2026</span>
+        <div class="big-num big-num-xl text-on-background mt-sm">52 k€</div>
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">par mois</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Le plus gros contrat de l'histoire de Cleany. 32 k€ de ménage, 20 k€ de petits travaux. Le précédent record, Webedia, était à 30 k€.</p>
+      </div>
+    </div>
+
+    <div class="mt-md bg-on-background text-inverse-on-surface px-md py-sm flex items-center gap-sm flex-wrap shrink-0">
+      <span class="material-symbols-outlined text-secondary-fixed-dim text-lg">arrow_forward</span>
+      <p class="font-body-reg text-body-reg">On a instrumenté ce qui se passe <span class="text-secondary-fixed">après</span> la signature. Ce qui te fait grandir aujourd'hui, c'est ce qui se passe <span class="text-secondary-fixed">avant</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 4 · DIVIDER 02 ============ -->
+<section class="slide grid-bg" id="slide-4" data-slide="4">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">02</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 08</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Le vrai sujet</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">L'IA partout, et pourtant rien qui tourne chez toi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 5 · L'IA PARTOUT, NULLE PART ============ -->
+<section class="slide grid-bg" id="slide-5" data-slide="5">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">02 · Le vrai sujet</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Huit sujets ouverts. <span class="text-primary italic">Aucun en production.</span></h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-xs">Tout ce que tu m'as cité en 46 minutes de call, tel quel.</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-sm">
+      <div class="subject-chip"><span class="font-body-reg text-body-reg text-on-background">Agent renégociation</span><span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Dans ta tête</span></div>
+      <div class="subject-chip"><span class="font-body-reg text-body-reg text-on-background">Agent lune de miel</span><span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Dans ta tête</span></div>
+      <div class="subject-chip"><span class="font-body-reg text-body-reg text-on-background">Classification des leads Salesforce</span><span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Dans ta tête</span></div>
+      <div class="subject-chip"><span class="font-body-reg text-body-reg text-on-background">Rédaction des comptes rendus</span><span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Dans ta tête</span></div>
+      <div class="subject-chip is-tested"><span class="font-body-reg text-body-reg text-on-background">Claude branché sur tes mails</span><span class="font-eyebrow text-eyebrow text-error uppercase tracking-widest">Testé · perfectible</span></div>
+      <div class="subject-chip"><span class="font-body-reg text-body-reg text-on-background">Tout piloter à l'oral</span><span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Dans ta tête</span></div>
+      <div class="subject-chip"><span class="font-body-reg text-body-reg text-on-background">Un cockpit de pilotage</span><span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Dans ta tête</span></div>
+      <div class="subject-chip"><span class="font-body-reg text-body-reg text-on-background">Un chief of staff IA</span><span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Dans ta tête</span></div>
+    </div>
+
+    <div class="mt-md bg-on-background text-inverse-on-surface px-md py-md shrink-0">
+      <span class="font-eyebrow text-eyebrow text-secondary-fixed-dim uppercase tracking-widest">Ton verdict, pas le mien</span>
+      <p class="font-body-reg mt-sm italic" style="font-size:clamp(14px,1.35vw,20px);line-height:1.4">« J'ai testé quelques trucs, mais j'ai l'impression de le faire un peu comme le Pékin lambda. Un peu pimpé peut-être, mais pas beaucoup plus. »</p>
+      <p class="font-code-label text-code-label text-outline-variant mt-sm uppercase tracking-widest">Alexandre Bellity · 24 juillet 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 6 · LES 4 FRICTIONS ============ -->
+<section class="slide grid-bg" id="slide-6" data-slide="6">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">02 · Le vrai sujet</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Et pendant ce temps, quatre choses <span class="text-primary italic">se dégradent</span></h1>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-gutter">
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Le Drive</span>
+        <p class="font-body-reg text-on-background mt-sm mb-sm italic" style="font-size:clamp(13px,1.1vw,17px);line-height:1.4">« Quand je me connecte à mon Drive, je vois le nombre de merde que j'ai. »</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant border-t border-outline-variant pt-sm">Quinze ans d'archives. Aucun classement exploitable, ni par un humain ni par une IA.</p>
+      </div>
+
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Les propales</span>
+        <p class="font-body-reg text-on-background mt-sm mb-sm italic" style="font-size:clamp(13px,1.1vw,17px);line-height:1.4">« Il y en a au moins cinq. Une V2, V3, V4, V5. Tu ne sais pas laquelle a closé. »</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant border-t border-outline-variant pt-sm">Personne ne peut dire ce qui gagne. Donc personne ne peut le réutiliser, et surtout pas une IA.</p>
+      </div>
+
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Salesforce</span>
+        <p class="font-body-reg text-on-background mt-sm mb-sm italic" style="font-size:clamp(13px,1.1vw,17px);line-height:1.4">« Ne pas rentrer les champs, ne pas rentrer les leads, laisser perdurer des leads qui sont trop vieux. »</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant border-t border-outline-variant pt-sm">La donnée commerciale se dégrade chaque semaine. Gérard et toi le voyez, sans pouvoir l'arrêter.</p>
+      </div>
+
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Le pilotage</span>
+        <p class="font-body-reg text-on-background mt-sm mb-sm italic" style="font-size:clamp(13px,1.1vw,17px);line-height:1.4">« Ça, c'est un peu le rêve. »</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant border-t border-outline-variant pt-sm">Ta réaction en voyant mon cockpit. Aujourd'hui tu n'as pas de vue fiable sur ton funnel : R1, R2, signés, en production.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 7 · CE QUE ÇA COÛTE ============ -->
+<section class="slide grid-bg" id="slide-7" data-slide="7">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">02 · Le vrai sujet</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Le coût n'est pas dans les heures.<br/>Il est dans <span class="text-primary italic">ton attention</span>.</h1>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-gutter">
+      <div class="border-t-2 border-on-background pt-md">
+        <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Ce que ça te prend</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Ton attention de dirigeant</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Huit sujets ouverts, aucun terminé. Chaque conversation avec un pote CEO en rouvre un neuvième, et tout repart de zéro.</p>
+      </div>
+      <div class="border-t-2 border-on-background pt-md">
+        <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Ce que ça prend à Julien</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Du temps de terrain</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Chercher la bonne version, remettre en forme, ressaisir dans Salesforce. Du temps qui ne sert ni à tchatcher ni à se présenter en rendez-vous.</p>
+      </div>
+      <div class="border-t-2 border-error pt-md">
+        <span class="font-eyebrow text-eyebrow text-error uppercase tracking-widest">Ce que ça te cache</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Où ça bloque vraiment</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Sans vue sur le funnel, impossible de savoir si le problème est le volume de leads, la qualification ou la transformation. Donc impossible de décider où pousser.</p>
+      </div>
+    </div>
+
+    <div class="mt-lg border border-on-background bg-surface-container-low px-md py-sm flex items-start gap-sm shrink-0">
+      <span class="material-symbols-outlined text-primary text-lg mt-px">info</span>
+      <p class="font-body-reg text-body-reg text-on-surface-variant">Je ne mets pas de chiffre ici. Je n'en ai pas encore, et un chiffre inventé ne t'aiderait pas à décider. Le coût réel se mesure en semaine 1 de l'audit, et il devient la ligne de base du projet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 8 · DIVIDER 03 ============ -->
+<section class="slide grid-bg" id="slide-8" data-slide="8">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">03</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 08</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Ce que j'y vois</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">La question que tu poses n'est pas la bonne.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 9 · PROBLÈME DE FOCUS ============ -->
+<section class="slide grid-bg" id="slide-9" data-slide="9">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">03 · Ce que j'y vois</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce n'est pas un problème d'IA.<br/>C'est un problème de <span class="text-primary italic">focus</span>.</h1>
+    </div>
+
+    <div class="relative border border-outline-variant bg-surface-container p-md card-sockets opacity-70">
+      <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+      <span class="font-eyebrow text-eyebrow text-error uppercase tracking-widest">La question qui disperse</span>
+      <p class="font-headline-md text-on-surface-variant mt-sm" style="font-size:clamp(18px,2.4vw,32px);line-height:1.2"><span class="pivot-strike">« Comment je mets de l'IA chez Cleany ? »</span></p>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Elle produit une liste de sujets. Huit, dans ton cas. Elle ne produit jamais de priorité, donc rien ne va jusqu'au bout.</p>
+    </div>
+
+    <div class="flex justify-center py-sm shrink-0">
+      <span class="material-symbols-outlined text-primary" style="font-size:clamp(24px,3vw,40px)">arrow_downward</span>
+    </div>
+
+    <div class="relative border-2 border-primary bg-primary-fixed/25 p-md card-sockets">
+      <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+      <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">La question qui focalise</span>
+      <p class="font-headline-md text-on-background mt-sm" style="font-size:clamp(18px,2.4vw,32px);line-height:1.2">« Quelle problématique je dois tacler pour faire grossir Cleany ? »</p>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Elle produit un chantier. Un seul. Et l'IA redevient ce qu'elle doit être : un moyen, jamais un objectif.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 10 · TA RÉPONSE EST DÉJÀ LÀ ============ -->
+<section class="slide grid-bg" id="slide-10" data-slide="10">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">03 · Ce que j'y vois</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ta réponse était <span class="text-primary italic">déjà là</span></h1>
+    </div>
+
+    <div class="grid md:grid-cols-5 gap-gutter items-center">
+      <div class="md:col-span-2">
+        <div class="big-num big-num-xl text-primary">52 k€</div>
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mt-xs">par mois · signés en juillet</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-md border-t border-outline-variant pt-md">Tu ne m'as pas parlé d'IA en premier. Tu m'as parlé du plus gros contrat de l'histoire de Cleany. C'est ça, ton driver.</p>
+      </div>
+
+      <div class="md:col-span-3 flex flex-col gap-sm">
+        <div class="flex items-start gap-sm border-l-2 border-primary pl-md py-xs">
+          <div>
+            <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Ce qui fait grossir Cleany</span>
+            <p class="font-body-reg text-body-reg text-on-background mt-xs">L'acquisition. En signer d'autres comme celui-là, et raccourcir le chemin entre un lead et une signature.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-sm border-l-2 border-primary pl-md py-xs">
+          <div>
+            <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Ce qui la protège</span>
+            <p class="font-body-reg text-body-reg text-on-background mt-xs">Les ops. Tenir la qualité quand le volume monte. On a commencé en 2025, on saura y revenir avec Gérard.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-sm border-l-2 border-secondary pl-md py-xs bg-secondary-fixed/20">
+          <div>
+            <span class="font-eyebrow text-eyebrow text-secondary uppercase tracking-widest">Donc le premier chantier</span>
+            <p class="font-body-reg text-body-reg text-on-background mt-xs">Ce n'est pas « l'IA ». C'est l'acquisition, avec l'IA dedans. Un seul chantier, mené jusqu'en production.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 11 · ET DONC, LA DATA ============ -->
+<section class="slide grid-bg" id="slide-11" data-slide="11">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">03 · Ce que j'y vois</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Et c'est là que la <span class="text-primary italic">data</span> arrive</h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-xs">Pas comme un chantier de rangement. Comme la condition pour que l'IA serve à quelque chose.</p>
+    </div>
+
+    <div class="flex flex-col gap-sm">
+      <div class="relative border border-outline-variant bg-surface-container p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(17px,2.2vw,30px);line-height:1.2">IA <span class="text-outline">sans</span> ta mémoire <span class="text-outline">=</span> le Pékin lambda</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">C'est exactement ce qui s'est passé quand tu as branché Claude sur tes mails. Il ne connaît ni tes clients, ni tes prix, ni ce qui a marché. Il devine.</p>
+      </div>
+
+      <div class="relative border-2 border-primary bg-primary-fixed/25 p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <p class="font-headline-md text-on-background" style="font-size:clamp(17px,2.2vw,30px);line-height:1.2">IA <span class="text-primary">+</span> ta mémoire <span class="text-primary">=</span> un avantage que personne ne peut copier</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Vos 300 sites, vos prix, vos quinze ans de dossiers, la propale qui a réellement gagné. Ça, aucun concurrent ne l'a.</p>
+      </div>
+    </div>
+
+    <div class="mt-md bg-on-background text-inverse-on-surface px-md py-md shrink-0">
+      <span class="font-eyebrow text-eyebrow text-secondary-fixed-dim uppercase tracking-widest">Le principe, en une phrase</span>
+      <p class="font-body-reg mt-sm" style="font-size:clamp(14px,1.35vw,20px);line-height:1.4">Personne ne construit une solution IA. On construit sur sa data, et l'IA vient se poser dessus. <span class="text-secondary-fixed">L'intelligence est une commodité : demain ton fournisseur double ses prix, tu changes de modèle en une journée. Ta mémoire d'entreprise, elle, ne se remplace pas.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 12 · TES 3 PEURS ============ -->
+<section class="slide grid-bg" id="slide-12" data-slide="12">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">03 · Ce que j'y vois</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Tes trois peurs tombent avec <span class="text-primary italic">cette seule décision</span></h1>
+    </div>
+
+    <div class="flex flex-col gap-sm">
+      <div class="grid md:grid-cols-2 gap-0 border border-outline-variant bg-surface-container-lowest">
+        <div class="p-md border-b md:border-b-0 md:border-r border-outline-variant bg-surface-container-low">
+          <span class="font-eyebrow text-eyebrow text-error uppercase tracking-widest">L'hallucination</span>
+          <p class="font-body-reg text-on-background mt-sm italic" style="font-size:clamp(12.5px,1.05vw,16px);line-height:1.4">« Comment tu fais que le truc n'a pas halluciné, que tu as 200 000 balles de cash alors qu'en fait tu en as 30 ? »</p>
+        </div>
+        <div class="p-md">
+          <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Ce que la data règle</span>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Chaque réponse est sourcée sur une donnée précise, avec son origine. Sur mon cockpit, la trésorerie vient directement de la banque. Le modèle ne l'invente pas, il la lit.</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-0 border border-outline-variant bg-surface-container-lowest">
+        <div class="p-md border-b md:border-b-0 md:border-r border-outline-variant bg-surface-container-low">
+          <span class="font-eyebrow text-eyebrow text-error uppercase tracking-widest">La dépendance</span>
+          <p class="font-body-reg text-on-background mt-sm italic" style="font-size:clamp(12.5px,1.05vw,16px);line-height:1.4">« Le jour où Anthropic passe son forfait de 20 balles à 5 000 balles par mois, de me prendre une grande saucisse. »</p>
+        </div>
+        <div class="p-md">
+          <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Ce que la data règle</span>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Ta mémoire vit chez toi, pas chez le fournisseur. Le modèle se débranche et se rebranche en une journée, sans rien perdre. C'est le sens de « l'intelligence est une commodité ».</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-0 border border-outline-variant bg-surface-container-lowest">
+        <div class="p-md border-b md:border-b-0 md:border-r border-outline-variant bg-surface-container-low">
+          <span class="font-eyebrow text-eyebrow text-error uppercase tracking-widest">Le pare-feu</span>
+          <p class="font-body-reg text-on-background mt-sm italic" style="font-size:clamp(12.5px,1.05vw,16px);line-height:1.4">« J'ai peur que ça fasse des conneries aussi. Quel pare-feu tu mets pour faire ce truc-là ? »</p>
+        </div>
+        <div class="p-md">
+          <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Ce que la data règle</span>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Les règles sont écrites par tes équipes, pas par le modèle. Rien ne part vers un client sans validation humaine tant que tu ne l'as pas explicitement décidé.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 13 · DIVIDER 04 ============ -->
+<section class="slide grid-bg" id="slide-13" data-slide="13">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">04</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 08</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Là où on va</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Ce que ça change pour Julien, pour Gérard, pour toi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 14 · OBJECTIFS ============ -->
+<section class="slide grid-bg" id="slide-14" data-slide="14">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">04 · Là où on va</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Trois moments du <span class="text-primary italic">quotidien commercial</span></h1>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-0 border border-outline-variant">
+      <div class="p-md border-b md:border-b-0 md:border-r border-outline-variant bg-surface-container-low">
+        <span class="font-eyebrow text-eyebrow text-error uppercase tracking-widest">Aujourd'hui</span>
+        <div class="mt-md flex flex-col gap-md">
+          <div>
+            <p class="font-body-reg text-body-reg text-on-background font-medium">Un lead arrive</p>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">Personne ne sait ce que Cleany sait déjà sur cette boîte.</p>
+          </div>
+          <div>
+            <p class="font-body-reg text-body-reg text-on-background font-medium">Une propale à produire</p>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">On rouvre le Drive et on cherche la bonne version, sans certitude.</p>
+          </div>
+          <div>
+            <p class="font-body-reg text-body-reg text-on-background font-medium">Un funnel à piloter</p>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">On demande à Julien, ou on ouvre Salesforce et on doute du chiffre.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-md bg-primary-fixed/20">
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Demain</span>
+        <div class="mt-md flex flex-col gap-md">
+          <div>
+            <p class="font-body-reg text-body-reg text-on-background font-medium">Un lead arrive</p>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">Le brief est prêt avant le rendez-vous, sourcé sur vos propres données.</p>
+          </div>
+          <div>
+            <p class="font-body-reg text-body-reg text-on-background font-medium">Un rendez-vous se termine</p>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">La propale part à 95 %, basée sur celles qui ont réellement gagné.</p>
+          </div>
+          <div>
+            <p class="font-body-reg text-body-reg text-on-background font-medium">Un funnel à piloter</p>
+            <p class="font-body-reg text-body-reg text-on-surface-variant">Un cockpit à jour chaque matin, sourcé, sans une seule ressaisie.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-md bg-on-background text-inverse-on-surface px-md py-sm flex items-center gap-sm flex-wrap shrink-0">
+      <span class="material-symbols-outlined text-secondary-fixed-dim text-lg">check_circle</span>
+      <p class="font-body-reg text-body-reg">Résultat : Julien passe son temps là où il est bon. En rendez-vous, à tchatcher, pas sur de la mise en forme.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 15 · DIVIDER 05 ============ -->
+<section class="slide grid-bg" id="slide-15" data-slide="15">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">05</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 08</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">La méthode</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Comment on attaque, en 3 lots.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 16 · POURQUOI CETTE MÉTHODE ============ -->
+<section class="slide grid-bg" id="slide-16" data-slide="16">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">05 · La méthode</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Pourquoi <span class="text-primary italic">comme ça</span></h1>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-0 border border-outline-variant bg-surface-container-lowest">
+      <div class="p-md border-b md:border-b-0 md:border-r border-outline-variant relative card-sockets">
+        <span class="cs tl"></span><span class="cs bl"></span>
+        <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">vs le faire toi-même</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Tu l'as déjà fait</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Et tu as toi-même qualifié le résultat. Le blocage n'est pas ta compétence, c'est que personne ne peut poser les règles du jeu à la place de tout le monde en même temps.</p>
+      </div>
+      <div class="p-md border-b md:border-b-0 md:border-r border-outline-variant">
+        <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">vs un outil second cerveau</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Ils rangent des fichiers</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Aucun ne sait ce qu'est un site Cleany, un contrat de ménage ou une propale qui a closé. La valeur est dans ta structure à toi, pas dans l'outil qu'on achète.</p>
+      </div>
+      <div class="p-md relative card-sockets">
+        <span class="cs tr"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">vs un dev ou un stagiaire IA</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Il codera sur du sable</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Il construira des automatisations sur une donnée sale. Le problème n'est pas technique, il est organisationnel : qui saisit quoi, où, et à quel moment.</p>
+      </div>
+    </div>
+
+    <div class="mt-md border-l-2 border-secondary bg-secondary-fixed/20 px-md py-sm shrink-0">
+      <p class="font-body-reg text-body-reg text-on-background">La méthode est celle qu'on a déjà appliquée ensemble sur le service client en 2025 : on prend un maillon de la chaîne de valeur, on le mène jusqu'en production, et on passe au suivant.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 17 · PLAN OVERVIEW ============ -->
+<section class="slide grid-bg" id="slide-17" data-slide="17">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">05 · La méthode</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Trois lots, <span class="text-primary italic">un seul chantier</span></h1>
+    </div>
+
+    <div class="flex flex-col md:flex-row items-stretch gap-sm">
+      <div class="flex-1 relative border border-on-background bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Lot 01</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Auditer la chaîne d'acquisition</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">On regarde toute la chaîne de valeur, y compris les ops, et on décide où vit chaque donnée.</p>
+      </div>
+
+      <div class="chain-arrow shrink-0 px-xs"><span class="material-symbols-outlined">arrow_forward</span></div>
+
+      <div class="flex-1 relative border border-on-background bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Lot 02</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Construire la mémoire</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Notion structuré, Drive commercial reclassé, Salesforce remis au propre, capture automatique.</p>
+      </div>
+
+      <div class="chain-arrow shrink-0 px-xs"><span class="material-symbols-outlined">arrow_forward</span></div>
+
+      <div class="flex-1 relative border-2 border-secondary bg-secondary-fixed/15 p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-secondary uppercase tracking-widest">Lot 03</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Le cockpit et les deux agents</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Le moment où la mémoire devient du résultat visible, pour toi et pour Julien.</p>
+      </div>
+    </div>
+
+    <div class="mt-md flex items-center justify-between flex-wrap gap-sm border-t border-outline-variant pt-md shrink-0">
+      <span class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Août → mi-octobre 2026</span>
+      <span class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Mené jusqu'en production, pas jusqu'à la démo</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 18 · LOT 1 ============ -->
+<section class="slide grid-bg" id="slide-18" data-slide="18">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Lot 01 sur 03 · Août</span>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight mt-xs">Auditer la chaîne d'acquisition</h1>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-gutter mb-md">
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Pourquoi c'est indispensable</span>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Aucun agent ne peut travailler sur une donnée dont personne ne sait où elle vit. Et tant qu'on n'a pas vu la chaîne complète, on ne sait pas si le goulot est dans la qualification, dans la propale ou dans le suivi. L'audit couvre toute la chaîne de valeur, ops comprises, pour que tu puisses décider de la suite avec Gérard sur des faits.</p>
+      </div>
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Ce qu'on va y faire</span>
+        <ol class="mt-sm flex flex-col gap-sm">
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">1.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Atelier de cadrage avec toi, Gérard et Julien.</span></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">2.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Inventaire de chaque source : Salesforce, Drive, Gmail, Notion, Front.</span></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">3.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Cartographie de la chaîne : qui saisit quoi, où, et ce qui se perd en route.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="relative border-2 border-secondary bg-secondary-fixed/15 p-md card-sockets shrink-0">
+      <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+      <span class="font-eyebrow text-eyebrow text-secondary uppercase tracking-widest">Livrables</span>
+      <div class="grid md:grid-cols-3 gap-sm mt-sm">
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">La carte de ta chaîne d'acquisition, du lead à la signature</span></div>
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">L'architecture cible : où vit chaque donnée, et qui l'alimente</span></div>
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Le cadrage de la phase Ops, prêt à décider avec Gérard</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 19 · LOT 2 ============ -->
+<section class="slide grid-bg" id="slide-19" data-slide="19">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Lot 02 sur 03 · Septembre</span>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight mt-xs">Construire la mémoire de l'acquisition</h1>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-gutter mb-md">
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Pourquoi c'est indispensable</span>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">C'est le socle sur lequel tout le reste se pose. Sans lui, un agent est un gadget qui répond à côté, et tu retombes sur le résultat que tu as déjà obtenu tout seul. Avec lui, il connaît vos prix, vos 300 sites et la propale qui a réellement gagné.</p>
+      </div>
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Ce qu'on va y faire</span>
+        <ol class="mt-sm flex flex-col gap-sm">
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">1.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Structurer l'espace Notion et poser les règles du jeu, en formant les équipes.</span></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">2.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Reclasser le Drive commercial avec l'IA, et acter une seule version de référence.</span></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">3.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Remettre Salesforce au propre : champs utiles, cycle de vie du lead, leads morts sortis.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="relative border-2 border-secondary bg-secondary-fixed/15 p-md card-sockets shrink-0">
+      <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+      <span class="font-eyebrow text-eyebrow text-secondary uppercase tracking-widest">Livrables</span>
+      <div class="grid md:grid-cols-3 gap-sm mt-sm">
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Une source de vérité unique par type de donnée commerciale</span></div>
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Le Drive commercial reclassé, une seule version fait foi</span></div>
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">La capture automatique : mails, comptes rendus et propales rangés sans effort</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 20 · LOT 3 ============ -->
+<section class="slide grid-bg" id="slide-20" data-slide="20">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Lot 03 sur 03 · Fin septembre → mi-octobre</span>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight mt-xs">Le cockpit et les deux agents</h1>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-gutter mb-md">
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Pourquoi c'est indispensable</span>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">C'est le moment où la mémoire devient du résultat visible. Tu vois enfin ton funnel sans demander à personne, et Julien récupère du temps de terrain. Sans ce lot, le socle reste un beau rangement dont personne ne mesure l'effet.</p>
+      </div>
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Ce qu'on va y faire</span>
+        <ol class="mt-sm flex flex-col gap-sm">
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">1.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Monter le cockpit d'acquisition, sourcé directement sur vos outils.</span></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">2.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Livrer l'agent brief prospect et l'agent propale, avec validation humaine.</span></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">3.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Recette avec Julien sur des affaires réelles, puis ajustement.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="relative border-2 border-secondary bg-secondary-fixed/15 p-md card-sockets shrink-0">
+      <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+      <span class="font-eyebrow text-eyebrow text-secondary uppercase tracking-widest">Livrables</span>
+      <div class="grid md:grid-cols-3 gap-sm mt-sm">
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Le cockpit d'acquisition : R1, R2, signés, en production, à jour chaque matin</span></div>
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">L'agent brief prospect, opérationnel avant chaque rendez-vous</span></div>
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">L'agent propale, livré à 95 % après chaque rendez-vous</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 21 · ZOOM AGENT 1 ============ -->
+<section class="slide grid-bg" id="slide-21" data-slide="21">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">05 · Zoom · Agent 1 sur 2</span>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight mt-xs">Le brief, <span class="text-primary italic">avant</span> le rendez-vous</h1>
+    </div>
+
+    <div class="border-l-2 border-on-background pl-md mb-md shrink-0">
+      <p class="font-body-reg text-on-background italic" style="font-size:clamp(13px,1.15vw,18px);line-height:1.4">« On a reçu un lead de Coca-Cola. Ça te crée un niveau de knowledge sur la boîte, t'arrives en rendez-vous une heure après, t'es une machine de guerre. »</p>
+      <p class="font-code-label text-code-label text-outline mt-xs uppercase tracking-widest">Alexandre, 24 juillet</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-sm items-stretch">
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Étape 1</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Un lead entre</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Formulaire, appel, recommandation. Il arrive dans Salesforce comme aujourd'hui, sans changer les habitudes.</p>
+      </div>
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Étape 2</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">L'agent croise</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Votre historique si le compte existe déjà, le secteur, la typologie de sites, et ce qui a marché sur des comptes comparables.</p>
+      </div>
+      <div class="relative border-2 border-primary bg-primary-fixed/25 p-md card-sockets">
+        <span class="cs tl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Étape 3</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Le brief arrive</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Dans la boîte mail de Julien avant le rendez-vous. Une page, lisible dans le métro.</p>
+      </div>
+    </div>
+
+    <div class="mt-md bg-on-background text-inverse-on-surface px-md py-sm shrink-0">
+      <p class="font-body-reg text-body-reg">Ce que ça change : Julien arrive préparé sur <span class="text-secondary-fixed">chaque</span> rendez-vous, pas seulement sur les gros comptes où il a pris le temps.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 22 · ZOOM AGENT 2 ============ -->
+<section class="slide grid-bg" id="slide-22" data-slide="22">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">05 · Zoom · Agent 2 sur 2</span>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight mt-xs">La propale, <span class="text-primary italic">après</span> le rendez-vous</h1>
+    </div>
+
+    <div class="border-l-2 border-on-background pl-md mb-md shrink-0">
+      <p class="font-body-reg text-on-background italic" style="font-size:clamp(13px,1.15vw,18px);line-height:1.4">« Je lance mon IA quand j'arrive, je la mets dans ma poche, l'IA écoute. Au moment où je dis rendez-vous terminé, elle m'envoie par mail une propale juste à 95 %. »</p>
+      <p class="font-code-label text-code-label text-outline mt-xs uppercase tracking-widest">Alexandre, 24 juillet</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-0 border border-outline-variant">
+      <div class="p-md border-b md:border-b-0 md:border-r border-outline-variant bg-surface-container-low">
+        <span class="font-eyebrow text-eyebrow text-error uppercase tracking-widest">Aujourd'hui</span>
+        <ol class="mt-sm flex flex-col gap-xs">
+          <li class="font-body-reg text-body-reg text-on-surface-variant">Le rendez-vous se termine.</li>
+          <li class="font-body-reg text-body-reg text-on-surface-variant">On rouvre le Drive et on cherche une propale ressemblante.</li>
+          <li class="font-body-reg text-body-reg text-on-surface-variant">On tombe sur cinq versions et on prend la plus récente, sans savoir si c'est la bonne.</li>
+          <li class="font-body-reg text-body-reg text-on-surface-variant">On remet en forme, on rechiffre, on renvoie deux jours plus tard.</li>
+        </ol>
+      </div>
+      <div class="p-md bg-primary-fixed/20">
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Demain</span>
+        <ol class="mt-sm flex flex-col gap-xs">
+          <li class="font-body-reg text-body-reg text-on-surface-variant">Le rendez-vous se termine.</li>
+          <li class="font-body-reg text-body-reg text-on-surface-variant">L'agent a écouté. Il connaît vos prix et les propales qui ont réellement gagné.</li>
+          <li class="font-body-reg text-body-reg text-on-surface-variant">La propale arrive par mail, structurée et pré-chiffrée.</li>
+          <li class="font-body-reg text-body-reg text-on-surface-variant">Julien relit, ajuste, envoie le jour même.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="mt-md border-l-2 border-secondary bg-secondary-fixed/20 px-md py-sm shrink-0">
+      <p class="font-body-reg text-body-reg text-on-background">Ce n'est pas de la magie. C'est possible <span class="font-medium">uniquement</span> parce que le Lot 2 a acté quelle propale fait foi. Sans ce travail, l'agent produit une propale moyenne à partir de cinq versions contradictoires.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 23 · DIVIDER 06 ============ -->
+<section class="slide grid-bg" id="slide-23" data-slide="23">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">06</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 08</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Roadmap</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Le calendrier, et le temps que ça te coûte.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 24 · ROADMAP ============ -->
+<section class="slide grid-bg" id="slide-24" data-slide="24">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">06 · Roadmap</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Du <span class="text-primary italic">4 août</span> à la mi-octobre</h1>
+    </div>
+
+    <div class="flex flex-col gap-md">
+      <div class="tl-item">
+        <span class="font-code-label text-code-label text-primary uppercase tracking-widest">4 août</span>
+        <h3 class="font-title-sm text-title-sm text-on-background">Kick-off</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Atelier de cadrage avec toi, Gérard et Julien. Le seul moment où j'ai besoin de tout le monde en même temps.</p>
+      </div>
+      <div class="tl-item">
+        <span class="font-code-label text-code-label text-primary uppercase tracking-widest">4 → 22 août</span>
+        <h3 class="font-title-sm text-title-sm text-on-background">Lot 1 · Audit et architecture cible</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Chaîne de valeur complète, ops comprises. Restitution à toi et Gérard le 22.</p>
+      </div>
+      <div class="tl-item tl-pause">
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">25 août → 5 septembre</span>
+        <h3 class="font-title-sm text-title-sm text-on-surface-variant">Coupure · je suis absent</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Je le dis tout de suite pour que ce ne soit pas une surprise. Vos équipes appliquent les premières règles pendant ce temps.</p>
+      </div>
+      <div class="tl-item">
+        <span class="font-code-label text-code-label text-primary uppercase tracking-widest">8 → 26 septembre</span>
+        <h3 class="font-title-sm text-title-sm text-on-background">Lot 2 · Le socle</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Notion, Drive commercial, Salesforce, capture automatique. Formation des équipes en continu.</p>
+      </div>
+      <div class="tl-item tl-accent-2">
+        <span class="font-code-label text-code-label text-secondary uppercase tracking-widest">29 septembre → 17 octobre</span>
+        <h3 class="font-title-sm text-title-sm text-on-background">Lot 3 · Cockpit et agents</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Le cockpit, les deux agents, la recette avec Julien sur des affaires réelles.</p>
+      </div>
+    </div>
+
+    <div class="mt-md border-t border-outline-variant pt-sm shrink-0">
+      <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Dix semaines de travail effectif, coupure de fin août déjà déduite du calendrier.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 25 · VOTRE IMPLICATION ============ -->
+<section class="slide grid-bg" id="slide-25" data-slide="25">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">06 · Roadmap</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce qu'on attend <span class="text-primary italic">de vos équipes</span></h1>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-gutter">
+      <div class="relative border-2 border-primary bg-primary-fixed/25 p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Au démarrage · une fois</span>
+        <div class="big-num text-on-background mt-sm">4 h</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Un atelier de cadrage avec toi, Gérard et Julien. C'est le seul moment où j'ai besoin de tout le monde en même temps.</p>
+      </div>
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">À chaque lot · récurrent</span>
+        <div class="big-num text-on-background mt-sm">1 h + 1 h</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Une heure pour valider les livrables du lot, une heure de formation sur ce qui vient d'être livré. Trois fois sur toute la mission.</p>
+      </div>
+    </div>
+
+    <div class="mt-md bg-on-background text-inverse-on-surface px-md py-sm shrink-0">
+      <p class="font-body-reg text-body-reg">C'est tout. Un référent joignable dans la semaine et la validation des jalons. <span class="text-secondary-fixed">Le reste, c'est nous.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 26 · DIVIDER 07 ============ -->
+<section class="slide grid-bg" id="slide-26" data-slide="26">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">07</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 08</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Engagements</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Ce sur quoi tu peux compter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 27 · ENGAGEMENTS ============ -->
+<section class="slide grid-bg" id="slide-27" data-slide="27">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">07 · Engagements</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce sur quoi tu peux <span class="text-primary italic">compter</span></h1>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-gutter">
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary">schedule</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Délais tenus</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Chaque livrable arrive au jour prévu. Si ça glisse, tu le sais 48 h avant, pas le jour J.</p>
+      </div>
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary">visibility</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Transparence totale</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Un point de 30 minutes par semaine, un espace partagé à jour en permanence, une réponse sous 24 h.</p>
+      </div>
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary">verified</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Exigence sur les résultats</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Si un livrable ne correspond pas à ce qu'on a validé ensemble, je le reprends sans surcoût.</p>
+      </div>
+    </div>
+
+    <div class="mt-lg border-t border-outline-variant pt-md flex items-center gap-md flex-wrap shrink-0">
+      <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Partner · Certification · Méthode</span>
+      <span class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Notion Solution Partner · PMP® · Black Belt Lean Six Sigma</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 28 · DIVIDER 08 ============ -->
+<section class="slide grid-bg" id="slide-28" data-slide="28">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">08</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 08</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Offre</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">L'investissement, sans surprise.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 29 · OFFRE ============ -->
+<section class="slide grid-bg" id="slide-29" data-slide="29">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">08 · Offre</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Attaquer l'acquisition</h1>
+      <p class="font-code-label text-code-label text-on-surface-variant mt-xs uppercase tracking-widest">Août → mi-octobre 2026 · les 3 lots, menés jusqu'en production</p>
+    </div>
+
+    <div class="grid md:grid-cols-12 gap-gutter items-stretch">
+      <div class="md:col-span-5 relative bg-primary text-on-primary p-md card-sockets flex flex-col justify-center">
+        <span class="cs tl" style="background:#fcf9f8"></span><span class="cs tr" style="background:#fcf9f8"></span><span class="cs bl" style="background:#fcf9f8"></span><span class="cs br" style="background:#fcf9f8"></span>
+        <span class="font-eyebrow text-eyebrow uppercase tracking-widest opacity-80">Forfait global</span>
+        <div class="big-num big-num-xl mt-sm whitespace-nowrap">15 000&nbsp;€<span class="big-num" style="font-size:clamp(18px,2.2vw,30px)">&nbsp;HT</span></div>
+        <p class="font-body-reg text-body-reg mt-md opacity-90 border-t border-on-primary/25 pt-md">Une chaîne d'acquisition dont la donnée est fiable, un cockpit qui la pilote, et deux agents qui prennent l'administratif à la place de Julien.</p>
+      </div>
+
+      <div class="md:col-span-7 relative border border-on-background bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Ce qui est inclus</span>
+        <div class="grid sm:grid-cols-2 gap-sm mt-sm">
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Audit de toute la chaîne de valeur, restitution à toi et Gérard</span></div>
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">L'architecture cible : où vit chaque donnée, qui l'alimente</span></div>
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Espace Notion structuré, règles du jeu, équipes formées</span></div>
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Drive commercial reclassé, Salesforce remis au propre</span></div>
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Le cockpit d'acquisition, à jour chaque matin</span></div>
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Agent brief prospect et agent propale, en production</span></div>
+        </div>
+        <div class="border-t border-outline-variant mt-md pt-sm flex flex-wrap gap-md">
+          <div>
+            <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Paiement</span>
+            <p class="font-body-reg text-body-reg text-on-background">30 % à la signature · 30 % à la restitution d'audit · 40 % à la livraison du cockpit</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-md flex items-center gap-sm flex-wrap shrink-0">
+      <span class="material-symbols-outlined text-outline text-lg">lock</span>
+      <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Forfait au livrable. Aucune facturation en jours-homme ni en régie. Confidentiel, préparé pour Cleany.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 30 · MERCI ============ -->
+<section class="slide grid-bg" id="slide-30" data-slide="30">
+  <div class="slide-body flex items-center justify-center relative overflow-hidden px-margin">
+    <div class="absolute top-1/4 -left-1/4 w-[700px] h-[700px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+
+    <div class="max-w-4xl w-full relative z-10">
+      <div class="relative bg-surface-container-lowest/80 backdrop-blur-sm rounded-lg border border-outline-variant px-margin py-xl">
+        <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+
+        <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Merci Alexandre.</h1>
+        <div class="w-24 h-1 bg-secondary mb-lg"></div>
+        <p class="font-headline-md text-on-surface-variant mb-lg" style="font-size:clamp(16px,2.2vw,28px);line-height:1.25">On valide, et on attaque l'acquisition dès le 4 août. Le reste des sujets attendra son tour, et c'est très bien comme ça.</p>
+
+        <div class="grid sm:grid-cols-2 gap-md border-t border-outline-variant pt-lg">
+          <div>
+            <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Dates clés</span>
+            <p class="font-body-reg text-body-reg text-on-background mt-xs">Validation souhaitée : 31 juillet<br/>Kick-off : 4 août 2026</p>
+          </div>
+          <div>
+            <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Contact</span>
+            <p class="font-body-reg text-body-reg text-on-background mt-xs">Sylvain Ramaradjou<br/>sylvain@ramalogic.com</p>
+          </div>
+        </div>
+
+        <div class="mt-lg pt-md border-t border-outline-variant flex items-center justify-between flex-wrap gap-sm">
+          <div class="flex items-center gap-sm">
+            <div class="h-2 w-2 bg-primary"></div>
+            <span class="font-code-label text-code-label text-on-surface-variant">Rama Logic · Architecte Notion &amp; IA</span>
+          </div>
+          <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Confidentiel · préparé pour Cleany</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ====== OVERVIEW GRID (ESC) ====== -->
+<div id="overview" class="fixed inset-0 z-[60] bg-background/95 backdrop-blur-md hidden overflow-y-auto p-margin">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="flex items-center justify-between mb-lg sticky top-0 py-sm">
+      <div class="flex items-center gap-md">
+        <div class="font-title-sm text-title-sm font-medium tracking-tight">Vue d'ensemble</div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Cleany · 31 slides</span>
+      </div>
+      <button id="overview-close" aria-label="Fermer" class="bg-surface-container-lowest border border-on-background w-10 h-10 flex items-center justify-center hover:bg-on-background hover:text-on-primary transition-colors">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div id="overview-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-md"></div>
+  </div>
+</div>
+
+<nav class="nav-controls fixed bottom-margin right-margin z-50 flex flex-col gap-sm">
+  <button id="prev-btn" aria-label="Slide précédente" class="bg-surface-container-lowest border border-on-background w-12 h-12 flex items-center justify-center hover:bg-on-background hover:text-on-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_upward</span>
+  </button>
+  <button id="next-btn" aria-label="Slide suivante" class="bg-on-background text-on-primary border border-on-background w-12 h-12 flex items-center justify-center hover:bg-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_downward</span>
+  </button>
+</nav>
+
+<script>
+  const viewport = document.querySelector('.slides-viewport');
+  const slides = document.querySelectorAll('.slide');
+  const headerBar = document.getElementById('header-bar');
+  const total = slides.length;
+  document.getElementById('total-slides').textContent = String(total);
+
+  let currentIdx = 0;
+
+  function updateCounter() {
+    const viewportRect = viewport.getBoundingClientRect();
+    const center = viewportRect.top + viewportRect.height / 2;
+    let closest = 0;
+    let closestDist = Infinity;
+    slides.forEach((slide, idx) => {
+      const r = slide.getBoundingClientRect();
+      const slideCenter = r.top + r.height / 2;
+      const dist = Math.abs(slideCenter - center);
+      if (dist < closestDist) { closestDist = dist; closest = idx; }
+    });
+    currentIdx = closest;
+    document.getElementById('current-slide').textContent = String(closest + 1);
+    if (closest === 0) { headerBar.classList.add('is-hidden'); }
+    else { headerBar.classList.remove('is-hidden'); }
+  }
+
+  function goToSlide(idx) {
+    if (idx < 0 || idx >= total) return;
+    slides[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.getElementById('prev-btn').addEventListener('click', () => goToSlide(currentIdx - 1));
+  document.getElementById('next-btn').addEventListener('click', () => goToSlide(currentIdx + 1));
+
+  const overview = document.getElementById('overview');
+  const overviewGrid = document.getElementById('overview-grid');
+  const labels = [
+    "Cover", "Sommaire",
+    "01 / 08 · Où on en est", "01 · On ne repart pas de zéro",
+    "02 / 08 · Le vrai sujet", "02 · Huit sujets, zéro en prod", "02 · Quatre choses se dégradent", "02 · Le coût réel",
+    "03 / 08 · Ce que j'y vois", "03 · Un problème de focus", "03 · Ta réponse était déjà là", "03 · Et donc, la data", "03 · Tes trois peurs",
+    "04 / 08 · Là où on va", "04 · Trois moments du quotidien",
+    "05 / 08 · La méthode", "05 · Pourquoi comme ça", "05 · Trois lots", "Lot 1 · Audit", "Lot 2 · Le socle", "Lot 3 · Cockpit & agents",
+    "Zoom · Brief avant RDV", "Zoom · Propale après RDV",
+    "06 / 08 · Roadmap", "06 · Calendrier", "06 · Votre implication",
+    "07 / 08 · Engagements", "07 · Ce sur quoi tu peux compter",
+    "08 / 08 · Offre", "08 · L'investissement",
+    "Merci Alexandre"
+  ];
+  slides.forEach((slide, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'overview-card';
+    const num = document.createElement('span');
+    num.className = 'ov-num';
+    num.textContent = String(idx + 1).padStart(2, '0');
+    const label = document.createElement('span');
+    label.className = 'ov-label';
+    label.textContent = labels[idx] || ('Slide ' + (idx + 1));
+    btn.appendChild(num);
+    btn.appendChild(label);
+    btn.addEventListener('click', () => { closeOverview(); setTimeout(() => goToSlide(idx), 60); });
+    overviewGrid.appendChild(btn);
+  });
+  function openOverview() { overview.classList.remove('hidden'); }
+  function closeOverview() { overview.classList.add('hidden'); }
+  document.getElementById('overview-btn').addEventListener('click', openOverview);
+  document.getElementById('overview-close').addEventListener('click', closeOverview);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      overview.classList.contains('hidden') ? openOverview() : closeOverview();
+      return;
+    }
+    if (!overview.classList.contains('hidden')) return;
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) {
+      e.preventDefault();
+      goToSlide(currentIdx + 1);
+    } else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) {
+      e.preventDefault();
+      goToSlide(currentIdx - 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      goToSlide(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      goToSlide(total - 1);
+    }
+  });
+
+  viewport.addEventListener('scroll', () => {
+    requestAnimationFrame(updateCounter);
+  });
+
+  updateCounter();
+</script>
+
+</body>
+</html>
