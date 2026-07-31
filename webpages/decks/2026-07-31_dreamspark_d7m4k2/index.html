@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<meta name="description" content="Dreamspark × Rama Logic · Proposition confidentielle"/>
+<title>Dreamspark × Rama Logic · Construire l'exosquelette</title>
+
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600;700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-dim":"#dcd9d9","secondary-fixed-dim":"#bdcf7c","secondary-fixed":"#d9eb95",
+        "on-tertiary":"#ffffff","surface-tint":"#466556","on-secondary":"#ffffff",
+        "on-background":"#1c1b1b","surface-container-highest":"#e5e2e1","inverse-primary":"#accebc",
+        "error":"#ba1a1a","on-tertiary-fixed":"#0c1d27","background":"#fcf9f8",
+        "on-primary-fixed-variant":"#2f4d3f","primary-fixed-dim":"#accebc","on-primary-container":"#f5fff7",
+        "surface-container-lowest":"#ffffff","primary-fixed":"#c8ead8","surface-variant":"#e5e2e1",
+        "on-primary":"#ffffff","on-error-container":"#93000a","on-error":"#ffffff",
+        "primary":"#446254","outline":"#727974","on-surface":"#1c1b1b",
+        "tertiary-container":"#657783","on-tertiary-container":"#fcfcff",
+        "on-tertiary-fixed-variant":"#384954","tertiary":"#4d5e6a","on-surface-variant":"#424844",
+        "surface-bright":"#fcf9f8","error-container":"#ffdad6","on-secondary-container":"#5c6b24",
+        "surface-container-high":"#ebe7e7",
+        "inverse-surface":"#313030","outline-variant":"#c1c8c2","surface-container-low":"#f6f3f2",
+        "secondary":"#56641e","on-primary-fixed":"#012115","on-secondary-fixed-variant":"#3f4c05",
+        "inverse-on-surface":"#f3f0ef","surface-container":"#f0edec","primary-container":"#5c7b6c",
+        "tertiary-fixed-dim":"#b7c9d6","tertiary-fixed":"#d3e5f3","surface":"#fcf9f8",
+        "on-secondary-fixed":"#171e00","secondary-container":"#d9eb95"
+      },
+      borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},
+      spacing:{
+        "xs":"4px","base":"8px",
+        "sm":"clamp(7px, 0.9vh, 12px)",
+        "md":"clamp(11px, 1.7vh, 22px)",
+        "lg":"clamp(16px, 2.6vh, 34px)",
+        "xl":"clamp(22px, 4vh, 56px)",
+        "gutter":"clamp(14px, 1.4vw, 24px)",
+        "margin":"clamp(20px, 3vw, 40px)"
+      },
+      fontFamily:{
+        "body-reg":["Work Sans","system-ui","sans-serif"],
+        "code-label":["Space Mono","monospace"],
+        "title-sm":["Clash Grotesk","Work Sans","sans-serif"],
+        "eyebrow":["Space Mono","monospace"],
+        "display-lg":["Clash Grotesk","Work Sans","sans-serif"],
+        "headline-md":["Clash Grotesk","Work Sans","sans-serif"]
+      },
+      fontSize:{
+        "body-reg":["clamp(12.5px, 1.02vw, 15.5px)",{"lineHeight":"1.5","fontWeight":"400"}],
+        "code-label":["clamp(10.5px, 0.82vw, 12.5px)",{"lineHeight":"1.45","letterSpacing":"0.05em","fontWeight":"400"}],
+        "title-sm":["clamp(16px, 1.45vw, 21px)",{"lineHeight":"1.3","fontWeight":"500"}],
+        "eyebrow":["clamp(9.5px, 0.72vw, 11.5px)",{"lineHeight":"1.0","fontWeight":"500"}],
+        "display-lg":["clamp(38px, 5vw, 68px)",{"lineHeight":"1.02","fontWeight":"500"}],
+        "headline-md":["clamp(24px, 3.2vw, 42px)",{"lineHeight":"1.1","fontWeight":"500"}]
+      }
+    }
+  }
+}
+</script>
+
+<style>
+:root { --header-h: 52px; }
+html, body { scroll-behavior: smooth; overflow-x: clip; }
+body { font-family: 'Work Sans', system-ui, sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+.font-display-lg, .font-headline-md, h1 { overflow-wrap: anywhere; }
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #446254;
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(28,27,27,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28,27,27,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ===== viewport-fit ===== */
+.slides-viewport {
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+.slide {
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: var(--header-h);
+}
+.slide > * { min-height: 0; }
+.slide img { max-height: min(50vh, 420px); object-fit: contain; }
+.slide-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Socket corners ===== */
+.socket-corner-tl, .socket-corner-tr, .socket-corner-bl, .socket-corner-br {
+  position: absolute;
+  width: 8px; height: 8px;
+  background-color: #1c1b1b;
+}
+.socket-corner-tl { top: -4px; left: -4px; }
+.socket-corner-tr { top: -4px; right: -4px; }
+.socket-corner-bl { bottom: -4px; left: -4px; }
+.socket-corner-br { bottom: -4px; right: -4px; }
+
+.card-sockets > .cs { position:absolute; width:6px; height:6px; background:#1c1b1b; }
+.card-sockets > .cs.tl { top:0; left:0; } .card-sockets > .cs.tr { top:0; right:0; }
+.card-sockets > .cs.bl { bottom:0; left:0; } .card-sockets > .cs.br { bottom:0; right:0; }
+
+.divider-num {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: #446254;
+}
+.big-num {
+  font-family: 'Clash Grotesk', 'Work Sans', sans-serif;
+  font-weight: 500;
+  line-height: 0.98;
+  font-size: clamp(32px, 4.4vw, 54px);
+}
+.big-num-sm { font-size: clamp(24px, 3.1vw, 38px); }
+.big-num-xl { font-size: clamp(44px, 6.4vw, 88px); }
+
+/* ===== Chaîne verticale du cycle de vente (slide 07) ===== */
+.chain-link {
+  position: relative;
+  padding-left: clamp(26px, 2.6vw, 38px);
+  padding-bottom: clamp(4px, 0.9vh, 10px);
+}
+.chain-link::before {
+  content: attr(data-n);
+  position: absolute; left: 0; top: 1px;
+  width: clamp(17px, 1.7vw, 21px); height: clamp(17px, 1.7vw, 21px);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(8.5px, 0.68vw, 10.5px);
+  color: #fcf9f8; background: #446254;
+}
+.chain-link:not(:last-child)::after {
+  content: ""; position: absolute;
+  left: calc(clamp(17px, 1.7vw, 21px) / 2 - 0.5px);
+  top: clamp(17px, 1.7vw, 21px); bottom: 0;
+  width: 1px; background: #c1c8c2;
+}
+
+/* ===== Rangées horaires (slide 17) ===== */
+.cron-row {
+  display: grid;
+  grid-template-columns: clamp(86px, 9vw, 124px) 1fr;
+  gap: clamp(10px, 1.2vw, 20px);
+  align-items: baseline;
+  padding: clamp(6px, 1.1vh, 12px) 0;
+  border-top: 1px solid #c1c8c2;
+}
+.cron-row:last-child { border-bottom: 1px solid #c1c8c2; }
+.cron-time {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(11px, 0.95vw, 14px);
+  color: #446254;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* ===== Zones de savoir (slide 11) ===== */
+.zone {
+  border: 1px solid #c1c8c2;
+  background: #ffffff;
+  padding: clamp(12px, 1.8vh, 20px);
+  position: relative;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.zone.is-orphan { border: 2px dashed #ba1a1a; background: #fcf9f8; }
+
+/* ===== Colonnes calendrier (slide 25) ===== */
+.month-col {
+  border-top: 2px solid #c1c8c2;
+  padding-top: clamp(8px, 1.2vh, 14px);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.month-col.is-active { border-top-color: #446254; }
+.month-col.is-last { border-top-color: #56641e; }
+.month-col.is-pause { border-top-color: #727974; opacity: .62; }
+
+/* ===== Swimlane (slide 23) ===== */
+.lane { display: grid; grid-template-columns: clamp(66px, 7vw, 92px) 1fr; align-items: stretch; }
+.lane-label {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(9.5px, 0.75vw, 11.5px);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: #424844;
+  display: flex; align-items: center; gap: 4px;
+  padding-right: 8px;
+}
+
+.overview-card {
+  border: 1px solid #c1c8c2;
+  background: #ffffff;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  transition: border-color 160ms, background 160ms, transform 160ms;
+  min-height: 80px;
+}
+.overview-card:hover { border-color: #446254; background: #f6f3f2; transform: translateY(-2px); }
+.overview-card .ov-num { font-family: 'Space Mono', monospace; font-size: 12px; color: #446254; letter-spacing: 0.05em; }
+.overview-card .ov-label { font-family: 'Work Sans', sans-serif; font-size: 13px; color: #1c1b1b; line-height: 1.3; }
+
+.header-bar { transition: opacity 200ms ease; }
+.header-bar.is-hidden { opacity: 0; pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html, body { scroll-behavior: auto; }
+  .overview-card, .group *, .header-bar { transition: none !important; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+}
+
+@media (max-width: 767px) {
+  .slides-viewport { scroll-snap-type: none; scroll-padding-top: var(--header-h); }
+  .slide { height: auto; min-height: 100dvh; overflow: visible; padding-top: 0; padding-bottom: 40px; }
+  .slide-body { justify-content: flex-start !important; padding-top: var(--header-h) !important; }
+  .lane { grid-template-columns: 1fr; }
+  .lane-label { padding-bottom: 4px; }
+  .cron-row { grid-template-columns: 1fr; gap: 2px; }
+  /* Le scroll natif remplace les fleches : elles recouvraient le texte de bas de slide. */
+  .nav-controls { display: none !important; }
+  /* Slide Offre : compacter pour tenir dans un viewport mobile. */
+  #slide-32 .big-num-xl { font-size: 38px; }
+  #slide-32 .card-sockets { padding-top: 12px !important; padding-bottom: 12px !important; }
+}
+
+.print-only { display: none; }
+@media print {
+  .slides-viewport { height: auto; overflow: visible; scroll-snap-type: none; }
+  .slide { page-break-after: always; height: auto; overflow: visible; min-height: 0; }
+  .nav-controls, .header-bar, #overview { display: none !important; }
+  .print-only { display: block; }
+}
+</style>
+</head>
+<body class="bg-background text-on-background antialiased">
+
+<!-- ====== STICKY HEADER ====== -->
+<header id="header-bar" class="header-bar fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant" style="height:52px">
+  <div class="flex justify-between items-center h-full px-margin max-w-[1600px] mx-auto">
+    <div class="flex items-center gap-md">
+      <div class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</div>
+      <div class="hidden md:block w-px h-4 bg-outline-variant"></div>
+      <div class="hidden md:block font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Préparé pour Dreamspark</div>
+    </div>
+    <div class="flex items-center gap-md" data-pdf-hide>
+      <button id="overview-btn" aria-label="Vue d'ensemble" class="hidden md:flex items-center gap-1 font-code-label text-code-label text-on-surface-variant hover:text-on-background transition-colors">
+        <span class="material-symbols-outlined text-lg">grid_view</span><span class="uppercase tracking-widest">ESC</span>
+      </button>
+      <div class="font-code-label text-code-label text-on-surface-variant">
+        <span id="current-slide" class="text-on-background font-medium">1</span>
+        <span class="text-outline-variant mx-1">/</span>
+        <span id="total-slides">33</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="slides-viewport">
+
+<!-- ============ SLIDE 1 · COVER ============ -->
+<section class="slide grid-bg" id="slide-1">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="max-w-[1080px]">
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-primary mb-md">Objectif de la mission</div>
+      <h1 class="font-display-lg text-display-lg tracking-tight mb-lg">
+        Construire<br/>l'exosquelette<br/>de <span class="text-primary">Dreamspark</span>
+      </h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-[620px] mb-xl">
+        Sortir l'IA du navigateur de Moe pour la mettre dans les process de toute l'équipe, en commençant par celui qui prend 80 % du temps.
+      </p>
+      <div class="flex flex-wrap items-center gap-md pt-md border-t border-outline-variant max-w-[620px]">
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Sylvain Ramaradjou</div>
+        <div class="w-px h-3 bg-outline-variant"></div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Architecte Notion &amp; IA</div>
+        <div class="w-px h-3 bg-outline-variant"></div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">31 juillet 2026</div>
+      </div>
+      <div class="font-code-label text-code-label text-outline uppercase tracking-widest mt-lg">Confidentiel · préparé pour Dreamspark</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 2 · SOMMAIRE ============ -->
+<section class="slide" id="slide-2">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-lg">
+      <div class="h-2 w-2 bg-primary"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">Sommaire</div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-x-xl gap-y-0 max-w-[1280px]">
+      <div>
+        <a href="#slide-3" class="flex gap-md py-sm border-t border-outline-variant group">
+          <span class="font-code-label text-code-label text-primary pt-1 shrink-0">01</span>
+          <span><span class="font-title-sm text-title-sm block group-hover:text-primary transition-colors">Contexte</span><span class="font-body-reg text-body-reg text-on-surface-variant">Ce qui est déjà construit chez vous.</span></span>
+        </a>
+        <a href="#slide-6" class="flex gap-md py-sm border-t border-outline-variant group">
+          <span class="font-code-label text-code-label text-primary pt-1 shrink-0">02</span>
+          <span><span class="font-title-sm text-title-sm block group-hover:text-primary transition-colors">Le cœur du réacteur</span><span class="font-body-reg text-body-reg text-on-surface-variant">Le cycle de vente, maillon par maillon.</span></span>
+        </a>
+        <a href="#slide-10" class="flex gap-md py-sm border-t border-outline-variant group">
+          <span class="font-code-label text-code-label text-primary pt-1 shrink-0">03</span>
+          <span><span class="font-title-sm text-title-sm block group-hover:text-primary transition-colors">Ce que j'y vois</span><span class="font-body-reg text-body-reg text-on-surface-variant">La cause racine et le coût de l'attente.</span></span>
+        </a>
+        <a href="#slide-14" class="flex gap-md py-sm border-t border-outline-variant group">
+          <span class="font-code-label text-code-label text-primary pt-1 shrink-0">04</span>
+          <span><span class="font-title-sm text-title-sm block group-hover:text-primary transition-colors">Là où on va</span><span class="font-body-reg text-body-reg text-on-surface-variant">Aujourd'hui contre demain.</span></span>
+        </a>
+        <a href="#slide-16" class="flex gap-md py-sm border-t border-b border-outline-variant group">
+          <span class="font-code-label text-code-label text-primary pt-1 shrink-0">05</span>
+          <span><span class="font-title-sm text-title-sm block group-hover:text-primary transition-colors">La méthode</span><span class="font-body-reg text-body-reg text-on-surface-variant">Ce qui tourne déjà chez moi, et comment on l'installe chez vous.</span></span>
+        </a>
+      </div>
+      <div>
+        <a href="#slide-24" class="flex gap-md py-sm border-t border-outline-variant group">
+          <span class="font-code-label text-code-label text-primary pt-1 shrink-0">06</span>
+          <span><span class="font-title-sm text-title-sm block group-hover:text-primary transition-colors">Roadmap</span><span class="font-body-reg text-body-reg text-on-surface-variant">Le calendrier et votre temps.</span></span>
+        </a>
+        <a href="#slide-27" class="flex gap-md py-sm border-t border-outline-variant group">
+          <span class="font-code-label text-code-label text-primary pt-1 shrink-0">07</span>
+          <span><span class="font-title-sm text-title-sm block group-hover:text-primary transition-colors">Références</span><span class="font-body-reg text-body-reg text-on-surface-variant">Deux cas proches du vôtre.</span></span>
+        </a>
+        <a href="#slide-29" class="flex gap-md py-sm border-t border-outline-variant group">
+          <span class="font-code-label text-code-label text-primary pt-1 shrink-0">08</span>
+          <span><span class="font-title-sm text-title-sm block group-hover:text-primary transition-colors">Engagements</span><span class="font-body-reg text-body-reg text-on-surface-variant">Ce sur quoi tu peux compter.</span></span>
+        </a>
+        <a href="#slide-31" class="flex gap-md py-sm border-t border-b border-outline-variant group">
+          <span class="font-code-label text-code-label text-primary pt-1 shrink-0">09</span>
+          <span><span class="font-title-sm text-title-sm block group-hover:text-primary transition-colors">Offre</span><span class="font-body-reg text-body-reg text-on-surface-variant">Ce que ça coûte et ce que ça comprend.</span></span>
+        </a>
+        <div class="mt-lg pt-md border-t border-on-background">
+          <p class="font-body-reg text-body-reg text-on-surface-variant">
+            Cette proposition est écrite <span class="text-on-background">avant</span> votre liste d'automatisations. C'est volontaire : la méthode ne dépend pas de la liste, et la liste se construit au diagnostic.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 3 · DIVIDER 01 ============ -->
+<section class="slide grid-bg" id="slide-3">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="relative border border-on-background bg-surface-container-lowest p-xl max-w-[900px]">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="divider-num mb-md">01</div>
+      <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">01 / 09</div>
+      <h2 class="font-display-lg text-display-lg tracking-tight mb-md">Contexte</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-[560px]">Ce qui est déjà construit chez vous, et ce qui ne l'est pas encore.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 4 · ON NE REPART PAS DE ZÉRO ============ -->
+<section class="slide" id="slide-4">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-sm">
+      <div class="h-2 w-2 bg-primary"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">01 · Contexte</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg max-w-[900px]">On ne repart pas de zéro, et c'est ce qui change tout</h2>
+
+    <div class="mb-md">
+      <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-sm">Déjà construit avec Numa, dans Notion</div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+        <div class="card-sockets relative border border-outline-variant bg-surface-container-lowest px-md py-sm">
+          <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+          <div class="font-title-sm text-title-sm">Base contacts</div>
+        </div>
+        <div class="card-sockets relative border border-outline-variant bg-surface-container-lowest px-md py-sm">
+          <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+          <div class="font-title-sm text-title-sm">Base sociétés</div>
+        </div>
+        <div class="card-sockets relative border border-outline-variant bg-surface-container-lowest px-md py-sm">
+          <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+          <div class="font-title-sm text-title-sm">Catalogue de projets</div>
+        </div>
+        <div class="card-sockets relative border border-outline-variant bg-surface-container-lowest px-md py-sm">
+          <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+          <div class="font-title-sm text-title-sm">Suivi de production</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-l-2 border-primary pl-md py-sm mb-md max-w-[860px]">
+      <p class="font-body-reg text-body-reg italic text-on-surface-variant">« On a déjà tous nos projets. On a déjà la base client, la base société, la base... Tout ça, on l'avait construit avec Numa, dans Notion. »</p>
+      <div class="font-code-label text-code-label text-outline uppercase tracking-widest mt-xs">Moe · 30 juillet</div>
+    </div>
+
+    <div class="bg-on-background text-inverse-on-surface px-md py-md">
+      <p class="font-body-reg text-body-reg">
+        Ma mission n'est donc pas de reconstruire votre Notion. C'est de poser une couche d'intelligence par-dessus ce qui existe. Si ça se fait, j'appelle Numa avant de toucher quoi que ce soit.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 5 · L'IA CHEZ VOUS AUJOURD'HUI ============ -->
+<section class="slide" id="slide-5">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-sm">
+      <div class="h-2 w-2 bg-primary"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">01 · Contexte</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-md max-w-[900px]">L'IA tourne déjà chez vous. Mais toujours pour une seule personne à la fois</h2>
+
+    <div class="grid md:grid-cols-3 gap-gutter mb-md">
+      <div class="card-sockets relative border border-outline-variant bg-surface-container-lowest p-md flex flex-col gap-sm">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest">Création</div>
+        <div class="font-title-sm text-title-sm">Les trailers</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-1">Direction artistique maison, puis génération. Ça marche, et ça marche bien.</p>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest pt-sm border-t border-outline-variant">Studio artistique</div>
+      </div>
+      <div class="card-sockets relative border border-outline-variant bg-surface-container-lowest p-md flex flex-col gap-sm">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest">Direction</div>
+        <div class="font-title-sm text-title-sm">Le Claude de Moe</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-1">Trois mois d'usage, un assistant légal, un scoring de contacts depuis les mails, une grille de décision.</p>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest pt-sm border-t border-outline-variant">1 licence, 1 personne</div>
+      </div>
+      <div class="card-sockets relative border border-outline-variant bg-surface-container-lowest p-md flex flex-col gap-sm">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest">Production</div>
+        <div class="font-title-sm text-title-sm">Le test Loups-Garous</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-1">Comptes rendus automatiques des candidats, comparés aux comptes rendus humains. Testé, puis mis de côté.</p>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest pt-sm border-t border-outline-variant">Il y a 3 mois</div>
+      </div>
+    </div>
+
+    <div class="border-t border-on-background pt-md max-w-[980px]">
+      <p class="font-body-reg text-body-reg">
+        Trois usages réels, trois succès partiels, <span class="text-primary">zéro chose que l'équipe utilise ensemble</span>. C'est exactement le moment où une boîte passe du bricolage individuel au système. Ou bien reste au bricolage.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 6 · DIVIDER 02 ============ -->
+<section class="slide grid-bg" id="slide-6">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="relative border border-on-background bg-surface-container-lowest p-xl max-w-[900px]">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="divider-num mb-md">02</div>
+      <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">02 / 09</div>
+      <h2 class="font-display-lg text-display-lg tracking-tight mb-md">Le cœur du réacteur</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-[560px]">Le cycle de vente, tel que tu me l'as raconté. Maillon par maillon.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 7 · LE CYCLE DE VENTE ============ -->
+<section class="slide" id="slide-7">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center justify-between gap-md mb-sm flex-wrap">
+      <div class="flex items-center gap-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">02 · Le cœur du réacteur</div>
+      </div>
+      <div class="font-code-label text-code-label text-primary uppercase tracking-widest">9 maillons · 50 clients clés</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-md max-w-[900px]">Le cycle de vente, tel que tu me l'as raconté</h2>
+
+    <div class="grid md:grid-cols-2 gap-x-xl gap-y-0 max-w-[1360px]">
+      <div>
+        <div class="chain-link" data-n="1">
+          <div class="font-title-sm text-title-sm">Identifier les clients clés</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">Une cinquantaine. 10 en France, 40 à l'international.</p>
+        </div>
+        <div class="chain-link" data-n="2">
+          <div class="font-title-sm text-title-sm">Poser une priorité et une fréquence</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">On les voit tous les 2, 3 ou 6 mois selon le compte.</p>
+        </div>
+        <div class="chain-link" data-n="3">
+          <div class="font-title-sm text-title-sm">Le rappel tombe</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">« Allez voir Sylvain chez TF1. »</p>
+        </div>
+        <div class="chain-link" data-n="4">
+          <div class="font-title-sm text-title-sm">Choisir quoi pitcher</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">Réunion avec l'équipe de dev. Qu'est-ce qu'on leur a déjà pitché, qu'est-ce qui reste au catalogue.</p>
+        </div>
+        <div class="chain-link" data-n="5">
+          <div class="font-title-sm text-title-sm">Recueillir leurs besoins</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">Au fil des échanges. À reporter dans une table, à croiser avec le catalogue.</p>
+        </div>
+      </div>
+      <div>
+        <div class="chain-link" data-n="6">
+          <div class="font-title-sm text-title-sm">Caler le rendez-vous</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">Fabienne le prend. Le statut du compte doit changer.</p>
+        </div>
+        <div class="chain-link" data-n="7">
+          <div class="font-title-sm text-title-sm">Pitcher</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">Projet A, projet B, projet C. Chacun ressort en lead, pass ou strong lead.</p>
+        </div>
+        <div class="chain-link" data-n="8">
+          <div class="font-title-sm text-title-sm">Relancer</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">Écrire le mail, retrouver les liens, envoyer les Docsend, fournir les éléments complémentaires demandés.</p>
+        </div>
+        <div class="chain-link" data-n="9">
+          <div class="font-title-sm text-title-sm">Signer, puis passer en prod</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">Budget, contrat, développement ou prépa. L'équipe de prod prend le relais dans Notion.</p>
+        </div>
+        <div class="mt-md border-l-2 border-secondary pl-md py-sm">
+          <p class="font-body-reg text-body-reg italic text-on-surface-variant">« On s'arrête à la vente parce que c'est le cœur du réacteur. C'est ce qui prend le plus, 80 % de notre temps. »</p>
+          <div class="font-code-label text-code-label text-outline uppercase tracking-widest mt-xs">Moe · 30 juillet</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 8 · OÙ ÇA CASSE ============ -->
+<section class="slide" id="slide-8">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-sm">
+      <div class="h-2 w-2 bg-error"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">02 · Le cœur du réacteur</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-md max-w-[980px]">Cinq maillons sur neuf tiennent parce que quelqu'un y pense</h2>
+
+    <div class="max-w-[1360px]">
+      <div class="grid grid-cols-[auto_1fr_auto] md:grid-cols-[auto_1fr_minmax(200px,300px)] gap-x-md items-baseline py-sm border-t border-outline-variant">
+        <span class="font-code-label text-code-label text-error">02</span>
+        <div><span class="font-title-sm text-title-sm">La fréquence de contact</span> <span class="font-body-reg text-body-reg text-on-surface-variant">50 comptes, trois rythmes différents, aucun rappel automatique.</span></div>
+        <span class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest text-right hidden md:block">Tenu de tête</span>
+      </div>
+      <div class="grid grid-cols-[auto_1fr_auto] md:grid-cols-[auto_1fr_minmax(200px,300px)] gap-x-md items-baseline py-sm border-t border-outline-variant">
+        <span class="font-code-label text-code-label text-error">03</span>
+        <div><span class="font-title-sm text-title-sm">Le déclenchement</span> <span class="font-body-reg text-body-reg text-on-surface-variant">Personne ne reçoit « il est temps de rappeler Canal ». Il faut y penser.</span></div>
+        <span class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest text-right hidden md:block">Aucun signal</span>
+      </div>
+      <div class="grid grid-cols-[auto_1fr_auto] md:grid-cols-[auto_1fr_minmax(200px,300px)] gap-x-md items-baseline py-sm border-t border-outline-variant">
+        <span class="font-code-label text-code-label text-error">04</span>
+        <div><span class="font-title-sm text-title-sm">Le choix du pitch</span> <span class="font-body-reg text-body-reg text-on-surface-variant">Une réunion humaine à chaque fois, pour croiser deux tables que vous avez déjà.</span></div>
+        <span class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest text-right hidden md:block">Réunion à chaque cycle</span>
+      </div>
+      <div class="grid grid-cols-[auto_1fr_auto] md:grid-cols-[auto_1fr_minmax(200px,300px)] gap-x-md items-baseline py-sm border-t border-outline-variant">
+        <span class="font-code-label text-code-label text-error">06</span>
+        <div><span class="font-title-sm text-title-sm">Le statut après RDV</span> <span class="font-body-reg text-body-reg text-on-surface-variant">Le rendez-vous a lieu, quelqu'un doit se souvenir d'aller changer la ligne.</span></div>
+        <span class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest text-right hidden md:block">Ressaisie</span>
+      </div>
+      <div class="grid grid-cols-[auto_1fr_auto] md:grid-cols-[auto_1fr_minmax(200px,300px)] gap-x-md items-baseline py-sm border-t border-b border-outline-variant">
+        <span class="font-code-label text-code-label text-error">08</span>
+        <div><span class="font-title-sm text-title-sm">La relance</span> <span class="font-body-reg text-body-reg text-on-surface-variant">Mail écrit à la main, liens Docsend retrouvés et collés un par un.</span></div>
+        <span class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest text-right hidden md:block">Entièrement manuel</span>
+      </div>
+    </div>
+
+    <div class="bg-on-background text-inverse-on-surface px-md py-md mt-md max-w-[1360px]">
+      <p class="font-body-reg text-body-reg">
+        Aucun de ces cinq points n'est un problème de logiciel. Vous avez déjà les tables. Ce qui manque, c'est ce qui les fait bouger toutes seules.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 9 · LE SEUL CHIFFRE ============ -->
+<section class="slide grid-bg" id="slide-9">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-sm">
+      <div class="h-2 w-2 bg-primary"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">02 · Le cœur du réacteur</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg max-w-[900px]">Le seul chiffre qu'on ait aujourd'hui</h2>
+
+    <div class="flex flex-col md:flex-row md:items-end gap-md md:gap-xl mb-lg">
+      <div class="big-num-xl text-primary leading-none">80 %</div>
+      <div class="max-w-[520px] pb-1">
+        <p class="font-body-reg text-body-reg">du temps de l'équipe passe dans ce cycle. C'est ton chiffre, pas le mien.</p>
+      </div>
+    </div>
+
+    <div class="border-t border-on-background pt-md max-w-[1200px]">
+      <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">Ce qu'on ne sait pas encore, et qu'on mesure au diagnostic</div>
+      <div class="grid md:grid-cols-3 gap-gutter">
+        <div class="border-l-2 border-outline-variant pl-md">
+          <p class="font-body-reg text-body-reg">Combien d'heures par semaine sur les cinq maillons manuels ?</p>
+        </div>
+        <div class="border-l-2 border-outline-variant pl-md">
+          <p class="font-body-reg text-body-reg">Combien de comptes clés dépassent leur fréquence de contact aujourd'hui ?</p>
+        </div>
+        <div class="border-l-2 border-outline-variant pl-md">
+          <p class="font-body-reg text-body-reg">Combien de pitchs restent sans relance au-delà de deux semaines ?</p>
+        </div>
+      </div>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-md">
+        Je ne mets pas de montant en euros sur cette page. Je n'ai pas encore de quoi le calculer honnêtement, et un chiffre inventé ne vaut rien devant un CEO qui sait compter.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 10 · DIVIDER 03 ============ -->
+<section class="slide grid-bg" id="slide-10">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="relative border border-on-background bg-surface-container-lowest p-xl max-w-[900px]">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="divider-num mb-md">03</div>
+      <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">03 / 09</div>
+      <h2 class="font-display-lg text-display-lg tracking-tight mb-md">Ce que j'y vois</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-[560px]">La partie que vous n'avez pas formulée pendant le call.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 11 · LA CAUSE RACINE ============ -->
+<section class="slide" id="slide-11">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-sm">
+      <div class="h-2 w-2 bg-primary"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">03 · Ce que j'y vois</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-md max-w-[980px]">Votre intelligence est au bon endroit. Votre mémoire aussi. Elles ne se parlent pas</h2>
+
+    <div class="grid md:grid-cols-3 gap-gutter mb-md items-stretch">
+      <div class="zone">
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest">La mémoire</div>
+        <div class="font-title-sm text-title-sm">Notion</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Contacts, sociétés, catalogue de projets, suivi de production. Complet, à jour, partagé par tout le monde.</p>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest mt-auto pt-sm border-t border-outline-variant">Ne décide de rien</div>
+      </div>
+      <div class="zone is-orphan">
+        <div class="font-code-label text-code-label text-error uppercase tracking-widest">L'intelligence</div>
+        <div class="font-title-sm text-title-sm">Le Claude de Moe</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Scoring de contacts, assistant légal, grille de décision. Trois mois d'apprentissage sur ton contexte.</p>
+        <div class="font-code-label text-code-label text-error uppercase tracking-widest mt-auto pt-sm border-t border-outline-variant">Ne voit pas Notion, s'arrête à toi</div>
+      </div>
+      <div class="zone">
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest">L'exécution</div>
+        <div class="font-title-sm text-title-sm">Fabienne et l'équipe</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Prise de rendez-vous, mise à jour des statuts, relances, éléments complémentaires.</p>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest mt-auto pt-sm border-t border-outline-variant">Fait à la main ce que l'IA sait faire</div>
+      </div>
+    </div>
+
+    <div class="border-t-2 border-on-background pt-md">
+      <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">La cause racine</div>
+      <p class="font-body-reg text-body-reg">
+        Le problème n'est pas que vous manquez d'IA. C'est que <span class="text-primary">l'intelligence que tu as construite en trois mois vit dans ton navigateur</span>, pas dans le système de l'entreprise. Elle ne peut pas lire vos tables, elle ne peut pas écrire dedans, et elle disparaît quand tu fermes l'onglet. Fabienne n'y a pas accès. Le DG non plus.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 12 · SI RIEN NE CHANGE ============ -->
+<section class="slide" id="slide-12">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-sm">
+      <div class="h-2 w-2 bg-error"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">03 · Ce que j'y vois</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg max-w-[900px]">Si rien ne change d'ici la rentrée</h2>
+
+    <div class="grid md:grid-cols-3 gap-gutter mb-lg">
+      <div class="border-t-2 border-error pt-sm">
+        <div class="font-code-label text-code-label text-error uppercase tracking-widest mb-xs">Dans 6 mois</div>
+        <p class="font-body-reg text-body-reg">Ton Claude perso sera encore meilleur. Et il sera toujours le seul à savoir. L'écart entre ce que toi tu produis et ce que l'équipe produit se creuse.</p>
+      </div>
+      <div class="border-t-2 border-error pt-sm">
+        <div class="font-code-label text-code-label text-error uppercase tracking-widest mb-xs">Dans 12 mois</div>
+        <p class="font-body-reg text-body-reg">Vous aurez testé quatre ou cinq outils de plus, chacun bien, aucun branché sur les autres. C'est le scénario par défaut quand personne n'est chargé du système.</p>
+      </div>
+      <div class="border-t-2 border-error pt-sm">
+        <div class="font-code-label text-code-label text-error uppercase tracking-widest mb-xs">Le vrai risque</div>
+        <p class="font-body-reg text-body-reg">La promesse de 2022, la première boîte de prod augmentée par l'IA, reste une promesse d'actionnaire. Pas un avantage que vos concurrents constatent.</p>
+      </div>
+    </div>
+
+    <div class="bg-on-background text-inverse-on-surface px-md py-md max-w-[1200px]">
+      <p class="font-body-reg text-body-reg">
+        Tu l'as dit toi-même : <span class="text-secondary-fixed">« on est au bord du gouffre entre juillet et août »</span>. Ce n'est pas une blague de fin de saison. C'est le symptôme d'une boîte où le cycle qui rapporte tient sur la mémoire de deux personnes.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 13 · LE POINT AVEUGLE ============ -->
+<section class="slide grid-bg" id="slide-13">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-sm">
+      <div class="h-2 w-2 bg-secondary"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">03 · Ce que j'y vois</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg max-w-[980px]">Le point aveugle : vous avez déjà la donnée d'intention d'achat</h2>
+
+    <div class="grid md:grid-cols-[1.1fr_1fr] gap-xl items-start">
+      <div>
+        <div class="border-l-2 border-secondary pl-md py-sm mb-md">
+          <p class="font-body-reg text-body-reg italic text-on-surface-variant">« Avec Docsend, on sait qui a vu quoi, à quel moment. Mais on n'utilise pas la donnée Docsend. On n'en fait pas une analyse. »</p>
+          <div class="font-code-label text-code-label text-outline uppercase tracking-widest mt-xs">Moe · 30 juillet</div>
+        </div>
+        <p class="font-body-reg text-body-reg mb-sm">
+          Un acheteur de format qui rouvre trois fois votre deck deux semaines après le pitch vous dit quelque chose. Un acheteur qui ne l'a jamais ouvert vous dit autre chose. Aujourd'hui ces deux comptes se ressemblent dans votre base.
+        </p>
+        <p class="font-body-reg text-body-reg">
+          C'est la seule chose de tout le call qui coûte cher sans coûter de temps. Vous payez déjà pour collecter ce signal, personne ne le lit.
+        </p>
+      </div>
+      <div class="card-sockets relative border-2 border-secondary bg-secondary-fixed/15 p-md">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-widest mb-sm">Ce que ça donne branché</div>
+        <div class="flex flex-col gap-sm">
+          <div class="flex gap-sm items-start">
+            <span class="material-symbols-outlined text-secondary text-lg leading-none mt-[2px]">arrow_forward</span>
+            <p class="font-body-reg text-body-reg">Le nombre d'ouvertures remonte sur la fiche du compte, sans que personne le saisisse.</p>
+          </div>
+          <div class="flex gap-sm items-start">
+            <span class="material-symbols-outlined text-secondary text-lg leading-none mt-[2px]">arrow_forward</span>
+            <p class="font-body-reg text-body-reg">Un pitch rouvert plusieurs fois passe en haut de la liste de relance du matin.</p>
+          </div>
+          <div class="flex gap-sm items-start">
+            <span class="material-symbols-outlined text-secondary text-lg leading-none mt-[2px]">arrow_forward</span>
+            <p class="font-body-reg text-body-reg">Un pitch jamais ouvert déclenche un autre message, pas la même relance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 14 · DIVIDER 04 ============ -->
+<section class="slide grid-bg" id="slide-14">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="relative border border-on-background bg-surface-container-lowest p-xl max-w-[900px]">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="divider-num mb-md">04</div>
+      <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">04 / 09</div>
+      <h2 class="font-display-lg text-display-lg tracking-tight mb-md">Là où on va</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-[560px]">Le même cycle, six mois plus tard.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 15 · OBJECTIFS ============ -->
+<section class="slide" id="slide-15">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-sm">
+      <div class="h-2 w-2 bg-primary"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">04 · Là où on va</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg max-w-[900px]">Là où on va</h2>
+
+    <div class="grid md:grid-cols-2 gap-0 max-w-[1360px]">
+      <div class="md:pr-xl md:border-r border-outline-variant">
+        <div class="font-code-label text-code-label text-error uppercase tracking-widest mb-md">Aujourd'hui</div>
+        <div class="flex flex-col gap-md">
+          <div class="flex gap-sm items-baseline">
+            <span class="text-outline shrink-0">—</span>
+            <p class="font-body-reg text-body-reg">Les relances des 50 comptes clés <span class="text-on-surface-variant">· tenues de tête, aucun rappel</span></p>
+          </div>
+          <div class="flex gap-sm items-baseline">
+            <span class="text-outline shrink-0">—</span>
+            <p class="font-body-reg text-body-reg">Le choix du pitch <span class="text-on-surface-variant">· une réunion humaine à chaque cycle</span></p>
+          </div>
+          <div class="flex gap-sm items-baseline">
+            <span class="text-outline shrink-0">—</span>
+            <p class="font-body-reg text-body-reg">La prise de rendez-vous <span class="text-on-surface-variant">· Fabienne exécute de bout en bout</span></p>
+          </div>
+          <div class="flex gap-sm items-baseline">
+            <span class="text-outline shrink-0">—</span>
+            <p class="font-body-reg text-body-reg">Le signal Docsend <span class="text-on-surface-variant">· collecté, jamais lu</span></p>
+          </div>
+          <div class="flex gap-sm items-baseline">
+            <span class="text-outline shrink-0">—</span>
+            <p class="font-body-reg text-body-reg">L'IA <span class="text-on-surface-variant">· une licence, une personne</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="md:pl-xl pt-lg md:pt-0">
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-md">Demain</div>
+        <div class="flex flex-col gap-md">
+          <div class="flex gap-sm items-baseline">
+            <span class="text-primary shrink-0">→</span>
+            <p class="font-body-reg text-body-reg">Les relances des 50 comptes clés <span class="text-on-surface-variant">· sortent seules le matin, classées par priorité</span></p>
+          </div>
+          <div class="flex gap-sm items-baseline">
+            <span class="text-primary shrink-0">→</span>
+            <p class="font-body-reg text-body-reg">Le choix du pitch <span class="text-on-surface-variant">· proposé avant la réunion, vous arbitrez</span></p>
+          </div>
+          <div class="flex gap-sm items-baseline">
+            <span class="text-primary shrink-0">→</span>
+            <p class="font-body-reg text-body-reg">La prise de rendez-vous <span class="text-on-surface-variant">· Fabienne valide des créneaux proposés</span></p>
+          </div>
+          <div class="flex gap-sm items-baseline">
+            <span class="text-primary shrink-0">→</span>
+            <p class="font-body-reg text-body-reg">Le signal Docsend <span class="text-on-surface-variant">· remonte sur la fiche et pilote la relance</span></p>
+          </div>
+          <div class="flex gap-sm items-baseline">
+            <span class="text-primary shrink-0">→</span>
+            <p class="font-body-reg text-body-reg">L'IA <span class="text-on-surface-variant">· dans Notion, pour toute l'équipe</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-lg pt-md border-t-2 border-on-background max-w-[1360px]">
+      <p class="font-body-reg text-body-reg">
+        <span class="text-primary">=</span> Fabienne valide au lieu d'exécuter. C'est mot pour mot ce qu'elle a demandé pendant le call.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 16 · DIVIDER 05 ============ -->
+<section class="slide grid-bg" id="slide-16">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="relative border border-on-background bg-surface-container-lowest p-xl max-w-[900px]">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="divider-num mb-md">05</div>
+      <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">05 / 09</div>
+      <h2 class="font-display-lg text-display-lg tracking-tight mb-md">La méthode</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-[560px]">Ce qui tourne déjà chez moi, et comment on l'installe chez vous.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 17 · CE QUI TOURNE CHEZ MOI ============ -->
+<section class="slide" id="slide-17">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center justify-between gap-md mb-sm flex-wrap">
+      <div class="flex items-center gap-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">05 · La méthode</div>
+      </div>
+      <div class="font-code-label text-code-label text-primary uppercase tracking-widest">Ma propre boîte · tous les jours</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-md max-w-[980px]">Je ne vends pas une idée. Voici ce qui tourne chez moi pendant que je dors</h2>
+
+    <div class="max-w-[1360px]">
+      <div class="cron-row">
+        <div class="cron-time">04:58 · lun-ven</div>
+        <div>
+          <span class="font-title-sm text-title-sm">Le brief du matin</span>
+          <span class="font-body-reg text-body-reg text-on-surface-variant">Il lit tout le pipeline, sort les relances du jour, crée les tâches datées et réécrit la synthèse de chaque opportunité active. J'ouvre mon téléphone, c'est déjà fait.</span>
+        </div>
+      </div>
+      <div class="cron-row">
+        <div class="cron-time">07:33 · lundi</div>
+        <div>
+          <span class="font-title-sm text-title-sm">Le cockpit</span>
+          <span class="font-body-reg text-body-reg text-on-surface-variant">Il recalcule la chaîne de valeur de A à Z, publie le tableau de bord et me dit où est le goulot de la semaine.</span>
+        </div>
+      </div>
+      <div class="cron-row">
+        <div class="cron-time">07:45 · lundi</div>
+        <div>
+          <span class="font-title-sm text-title-sm">Le radar</span>
+          <span class="font-body-reg text-body-reg text-on-surface-variant">Pour chaque prospect, l'angle d'approche et la température du contact. C'est très exactement ton maillon numéro 4.</span>
+        </div>
+      </div>
+      <div class="cron-row">
+        <div class="cron-time">12:02 &amp; 19:05</div>
+        <div>
+          <span class="font-title-sm text-title-sm">Les visios</span>
+          <span class="font-body-reg text-body-reg text-on-surface-variant">Chaque appel devient une fiche, et l'opportunité liée se met à jour toute seule. Ce call du 30 juillet est arrivé dans mon Notion sans que j'y touche.</span>
+        </div>
+      </div>
+      <div class="cron-row">
+        <div class="cron-time">20:03 · tous</div>
+        <div>
+          <span class="font-title-sm text-title-sm">Le tri du soir</span>
+          <span class="font-body-reg text-body-reg text-on-surface-variant">Tout ce qui a été capturé dans la journée part dans la bonne base, puis un contrôle de cohérence signale ce qui manque.</span>
+        </div>
+      </div>
+      <div class="cron-row">
+        <div class="cron-time">Au fil de l'eau</div>
+        <div>
+          <span class="font-title-sm text-title-sm">Les événements</span>
+          <span class="font-body-reg text-body-reg text-on-surface-variant">Un rendez-vous pris met à jour la fiche du contact. Un contrat signé crée le projet et pose le montant. Un lien envoyé me dit qui l'a ouvert, et quand.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-on-background text-inverse-on-surface px-md py-md mt-md max-w-[1360px]">
+      <p class="font-body-reg text-body-reg">
+        Une trentaine d'agents, zéro Make, zéro n8n, zéro ligne de code à maintenir pour la personne qui utilise le système. Tout vit dans Notion.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 18 · CE QUE ÇA DONNE CHEZ VOUS ============ -->
+<section class="slide" id="slide-18">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-sm">
+      <div class="h-2 w-2 bg-primary"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">05 · La méthode</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-md max-w-[980px]">Chacune de vos douleurs a déjà son équivalent qui tourne</h2>
+
+    <div class="max-w-[1400px]">
+      <div class="grid md:grid-cols-[1fr_auto_1fr] gap-x-md items-center py-sm border-t border-outline-variant">
+        <p class="font-body-reg text-body-reg italic text-on-surface-variant">« Il faut un rappel, on doit les voir tous les deux, trois ou six mois »</p>
+        <span class="material-symbols-outlined text-primary hidden md:block">arrow_forward</span>
+        <p class="font-body-reg text-body-reg">Le brief du matin sort les comptes à rappeler et crée la tâche datée</p>
+      </div>
+      <div class="grid md:grid-cols-[1fr_auto_1fr] gap-x-md items-center py-sm border-t border-outline-variant">
+        <p class="font-body-reg text-body-reg italic text-on-surface-variant">« Quel projet on va lui pitcher ? Quel projet on leur a déjà pitché ? »</p>
+        <span class="material-symbols-outlined text-primary hidden md:block">arrow_forward</span>
+        <p class="font-body-reg text-body-reg">Le radar croise catalogue et historique, et propose l'angle avant la réunion</p>
+      </div>
+      <div class="grid md:grid-cols-[1fr_auto_1fr] gap-x-md items-center py-sm border-t border-outline-variant">
+        <p class="font-body-reg text-body-reg italic text-on-surface-variant">« Le rendez-vous a été pris, ça change de statut »</p>
+        <span class="material-symbols-outlined text-primary hidden md:block">arrow_forward</span>
+        <p class="font-body-reg text-body-reg">Le rendez-vous pris met la fiche à jour, sans ressaisie</p>
+      </div>
+      <div class="grid md:grid-cols-[1fr_auto_1fr] gap-x-md items-center py-sm border-t border-outline-variant">
+        <p class="font-body-reg text-body-reg italic text-on-surface-variant">« Il va falloir faire les follow-up, écrire le mail, mettre les liens »</p>
+        <span class="material-symbols-outlined text-primary hidden md:block">arrow_forward</span>
+        <p class="font-body-reg text-body-reg">La visio devient une fiche, et la relance est écrite en brouillon pour vous</p>
+      </div>
+      <div class="grid md:grid-cols-[1fr_auto_1fr] gap-x-md items-center py-sm border-t border-outline-variant">
+        <p class="font-body-reg text-body-reg italic text-on-surface-variant">« On n'utilise pas la donnée Docsend »</p>
+        <span class="material-symbols-outlined text-primary hidden md:block">arrow_forward</span>
+        <p class="font-body-reg text-body-reg">Les liens tracés remontent qui a ouvert, quand, et combien de fois</p>
+      </div>
+      <div class="grid md:grid-cols-[1fr_auto_1fr] gap-x-md items-center py-sm border-t border-outline-variant">
+        <p class="font-body-reg text-body-reg italic text-on-surface-variant">« Warning facture, warning envoyer, warning relance »</p>
+        <span class="material-symbols-outlined text-primary hidden md:block">arrow_forward</span>
+        <p class="font-body-reg text-body-reg">La signature déclenche la facture, l'impayé déclenche la relance</p>
+      </div>
+      <div class="grid md:grid-cols-[1fr_auto_1fr] gap-x-md items-center py-sm border-t border-b border-outline-variant">
+        <p class="font-body-reg text-body-reg italic text-on-surface-variant">« Business plan, contrôle de gestion, trésorerie, encore artisanal sur Excel »</p>
+        <span class="material-symbols-outlined text-primary hidden md:block">arrow_forward</span>
+        <p class="font-body-reg text-body-reg">Le cockpit du lundi : trésorerie, provisions, marge, sans ressaisie</p>
+      </div>
+    </div>
+
+    <p class="font-body-reg text-body-reg text-on-surface-variant mt-md max-w-[1400px]">
+      Rien de tout ça n'est à inventer. C'est du transfert, pas de la recherche. C'est aussi pour ça que je peux m'engager sur un rythme mensuel.
+    </p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 19 · POURQUOI COMME ÇA ============ -->
+<section class="slide grid-bg" id="slide-19">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-sm">
+      <div class="h-2 w-2 bg-primary"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">05 · La méthode</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg max-w-[900px]">Pourquoi comme ça, et pas autrement</h2>
+
+    <div class="grid md:grid-cols-3 gap-0 max-w-[1400px]">
+      <div class="md:pr-lg md:border-r border-outline-variant">
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">vs Make, n8n, Zapier</div>
+        <p class="font-body-reg text-body-reg mb-sm">Ces outils déplacent de la donnée entre deux applications. Ils ne savent pas ce qu'est un compte clé chez vous, ni pourquoi celui-là se rappelle tous les deux mois et l'autre tous les six.</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">On construit l'intelligence là où votre mémoire est déjà. Et le jour où Claude est dépassé par Mistral, on change le moteur sans rien casser.</p>
+      </div>
+      <div class="md:px-lg md:border-r border-outline-variant pt-lg md:pt-0">
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">vs votre actionnaire ingénieur</div>
+        <p class="font-body-reg text-body-reg mb-sm">Il peut tout coder, mieux que moi sur la partie modèle. La question n'est pas la faisabilité, c'est de savoir qui maintient le truc quand il est sur un autre sujet.</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Ce que j'installe se modifie dans Notion, par Fabienne, sans une ligne de code. Et lui reste disponible pour ce que lui seul sait faire.</p>
+      </div>
+      <div class="md:pl-lg pt-lg md:pt-0">
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">vs continuer en solo</div>
+        <p class="font-body-reg text-body-reg mb-sm">Ton Claude perso marche déjà, et il va continuer à progresser. Le problème n'est pas sa qualité, c'est qu'il s'arrête à toi.</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Ce qu'on installe, Fabienne l'utilise sans savoir qu'il existe. C'est la différence entre un outil personnel et un exosquelette d'entreprise.</p>
+      </div>
+    </div>
+
+    <div class="mt-lg pt-md border-t-2 border-on-background max-w-[1400px]">
+      <p class="font-body-reg text-body-reg text-on-surface-variant">Ce sont les trois options que tu as réellement sur la table. Je ne t'en invente pas une quatrième plus facile à démonter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 20 · DEUX TEMPS ============ -->
+<section class="slide" id="slide-20">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-sm">
+      <div class="h-2 w-2 bg-primary"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">05 · La méthode</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-md max-w-[900px]">Deux temps, exactement comme tu l'as demandé</h2>
+    <p class="font-body-reg text-body-reg text-on-surface-variant mb-lg max-w-[860px]">
+      « Un diagnostic d'abord, venir sur notre Notion, regarder comment c'est. Et après on se prend au fur et à mesure. » C'est ta phrase, c'est la structure.
+    </p>
+
+    <div class="grid md:grid-cols-[1fr_2.2fr] gap-gutter max-w-[1400px] items-stretch">
+      <div class="card-sockets relative border border-on-background bg-surface-container-lowest p-md flex flex-col gap-sm">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest">Temps 1</div>
+        <div class="big-num-sm big-num">Diagnostic</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-1">On regarde avant de construire. Je viens dans votre Notion, je parle à Numa, je cartographie le cycle de vente et je sors un backlog priorisé.</p>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest pt-sm border-t border-outline-variant">2 semaines · septembre</div>
+      </div>
+      <div class="card-sockets relative border-2 border-primary bg-primary text-on-primary p-md flex flex-col gap-sm">
+        <span class="cs tl" style="background:#fcf9f8"></span><span class="cs tr" style="background:#fcf9f8"></span>
+        <span class="cs bl" style="background:#fcf9f8"></span><span class="cs br" style="background:#fcf9f8"></span>
+        <div class="font-code-label text-code-label uppercase tracking-widest opacity-80">Temps 2</div>
+        <div class="big-num-sm big-num">Mise en autonomie</div>
+        <p class="font-body-reg text-body-reg opacity-90 flex-1">Un processus complet mis en autonomie chaque mois, construit dans votre Notion, formé auprès de l'équipe, corrigé jusqu'à ce qu'il soit utilisé. Le premier, c'est le cycle de vente.</p>
+        <div class="grid grid-cols-3 gap-base pt-sm border-t border-on-primary/25">
+          <div><div class="font-code-label text-code-label uppercase tracking-widest opacity-70">Mois 1</div><div class="font-body-reg text-body-reg">Cycle de vente</div></div>
+          <div><div class="font-code-label text-code-label uppercase tracking-widest opacity-70">Mois 2</div><div class="font-body-reg text-body-reg">Choisi au diagnostic</div></div>
+          <div><div class="font-code-label text-code-label uppercase tracking-widest opacity-70">Mois 3</div><div class="font-body-reg text-body-reg">Choisi au diagnostic</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-md pt-md border-t border-outline-variant max-w-[1400px]">
+      <p class="font-body-reg text-body-reg">
+        <span class="text-primary">L'unité, c'est le processus, pas l'automatisation.</span> Un processus, c'est ce que tu m'as raconté du début à la fin : le rappel, le choix du pitch, le rendez-vous, le statut, la relance, le signal Docsend. Compter les automatisations mènerait à en livrer beaucoup de petites plutôt qu'une qui change le quotidien.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 21 · TEMPS 1 ============ -->
+<section class="slide" id="slide-21">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-sm">Temps 1 sur 2</div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-md max-w-[900px]">Le diagnostic</h2>
+
+    <div class="grid md:grid-cols-2 gap-xl mb-md max-w-[1400px]">
+      <div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">Pourquoi c'est indispensable</div>
+        <p class="font-body-reg text-body-reg mb-sm">Numa a construit votre Notion. Je ne sais pas encore comment il l'a pensé, ni ce qui s'y branche proprement. Construire sans ça, c'est prendre le risque de casser ce qui marche.</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Et c'est ce qui remplace la liste d'automatisations que vous n'avez pas encore eu le temps de faire. Vous n'avez pas à savoir ce que vous voulez avant : c'est mon travail de le sortir.</p>
+      </div>
+      <div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">Ce qu'on va y faire</div>
+        <ol class="flex flex-col gap-sm">
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary pt-[3px]">1.</span><p class="font-body-reg text-body-reg">Un atelier de cartographie de 4h avec toi, Fabienne et le DG. On pose le cycle de vente au mur, maillon par maillon.</p></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary pt-[3px]">2.</span><p class="font-body-reg text-body-reg">30 min avec Numa sur l'architecture existante, comme tu l'as proposé.</p></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary pt-[3px]">3.</span><p class="font-body-reg text-body-reg">Le chiffrage des trois inconnues de la page 9, et le classement des processus par gain sur effort.</p></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card-sockets relative border-2 border-secondary bg-secondary-fixed/15 p-md max-w-[1400px]">
+      <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+      <div class="font-code-label text-code-label text-secondary uppercase tracking-widest mb-sm">Livrables</div>
+      <div class="grid md:grid-cols-3 gap-gutter">
+        <div class="flex gap-sm items-start">
+          <span class="material-symbols-outlined text-secondary text-xl leading-none">check_circle</span>
+          <p class="font-body-reg text-body-reg">La carte du cycle de vente, 9 maillons, avec le temps réel passé sur chacun</p>
+        </div>
+        <div class="flex gap-sm items-start">
+          <span class="material-symbols-outlined text-secondary text-xl leading-none">check_circle</span>
+          <p class="font-body-reg text-body-reg">Le backlog priorisé des processus, chiffré en gain et en effort</p>
+        </div>
+        <div class="flex gap-sm items-start">
+          <span class="material-symbols-outlined text-secondary text-xl leading-none">check_circle</span>
+          <p class="font-body-reg text-body-reg">La spécification du premier processus, prête à construire</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 22 · TEMPS 2 ============ -->
+<section class="slide" id="slide-22">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-sm">Temps 2 sur 2</div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-md max-w-[900px]">La mise en autonomie, un processus par mois</h2>
+
+    <div class="grid md:grid-cols-2 gap-xl mb-md max-w-[1400px]">
+      <div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">Pourquoi c'est indispensable</div>
+        <p class="font-body-reg text-body-reg mb-sm">Un processus mis en autonomie n'est pas fini le jour où il est construit. Il est fini le jour où l'équipe l'utilise sans y penser. Entre les deux, il y a un mois d'ajustements.</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">C'est pour ça que je vends un rythme et pas un livrable ponctuel : sur cette matière, le forfait qui s'arrête à la livraison produit des outils que personne n'ouvre.</p>
+      </div>
+      <div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">Ce qu'on va y faire, chaque mois</div>
+        <ol class="flex flex-col gap-sm">
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary pt-[3px]">1.</span><p class="font-body-reg text-body-reg">On choisit le processus du mois dans le backlog, et je vous écris la spec avant de toucher au clavier.</p></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary pt-[3px]">2.</span><p class="font-body-reg text-body-reg">Je construis dans votre Notion, sur une base neuve, sans toucher à ce qui est en production.</p></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary pt-[3px]">3.</span><p class="font-body-reg text-body-reg">Formation de l'équipe, mise en service, puis corrections jusqu'à ce que ce soit utilisé.</p></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card-sockets relative border-2 border-secondary bg-secondary-fixed/15 p-md max-w-[1400px]">
+      <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+      <div class="font-code-label text-code-label text-secondary uppercase tracking-widest mb-sm">Livrables, chaque mois</div>
+      <div class="grid md:grid-cols-3 gap-gutter">
+        <div class="flex gap-sm items-start">
+          <span class="material-symbols-outlined text-secondary text-xl leading-none">check_circle</span>
+          <p class="font-body-reg text-body-reg">Un processus en service dans votre Notion, utilisé par l'équipe</p>
+        </div>
+        <div class="flex gap-sm items-start">
+          <span class="material-symbols-outlined text-secondary text-xl leading-none">check_circle</span>
+          <p class="font-body-reg text-body-reg">La fiche d'usage d'une page pour les personnes qui s'en servent</p>
+        </div>
+        <div class="flex gap-sm items-start">
+          <span class="material-symbols-outlined text-secondary text-xl leading-none">check_circle</span>
+          <p class="font-body-reg text-body-reg">Le point de fin de mois : ce qui est passé en autonomie, ce qui reste manuel</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 23 · COMMENT SE DÉROULE UN MOIS ============ -->
+<section class="slide" id="slide-23">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center justify-between gap-md mb-sm flex-wrap">
+      <div class="flex items-center gap-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">05 · La méthode</div>
+      </div>
+      <div class="font-title-sm text-title-sm text-primary">Un mois · 4 semaines</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-md max-w-[900px]">Comment se déroule un mois</h2>
+
+    <div class="overflow-x-auto max-w-[1400px]">
+      <div class="min-w-[760px] flex flex-col gap-base">
+        <div class="lane">
+          <div class="lane-label"><span class="material-symbols-outlined text-sm">arrow_forward</span>Quoi</div>
+          <div class="bg-secondary-fixed/30 p-sm grid grid-cols-6 gap-base items-center">
+            <div class="font-body-reg text-body-reg text-center">Choisir</div>
+            <div class="font-body-reg text-body-reg text-center">Spécifier</div>
+            <div class="flex items-center justify-center"><span class="font-code-label text-code-label text-error uppercase tracking-wide text-center leading-tight">Valider<br/>la spec</span></div>
+            <div class="font-body-reg text-body-reg text-center">Construire</div>
+            <div class="font-body-reg text-body-reg text-center">Former</div>
+            <div class="font-body-reg text-body-reg text-center">Ajuster</div>
+          </div>
+        </div>
+        <div class="lane">
+          <div class="lane-label"><span class="material-symbols-outlined text-sm">arrow_forward</span>Qui</div>
+          <div class="bg-tertiary-fixed/40 p-sm grid grid-cols-6 gap-base">
+            <div class="col-span-2 bg-surface-container-lowest border border-outline-variant px-sm py-xs font-code-label text-code-label text-center">Rama Logic + vous</div>
+            <div class="bg-surface-container-lowest border border-outline-variant px-sm py-xs font-code-label text-code-label text-center">Vous</div>
+            <div class="bg-surface-container-lowest border border-outline-variant px-sm py-xs font-code-label text-code-label text-center">Rama Logic</div>
+            <div class="col-span-2 bg-surface-container-lowest border border-outline-variant px-sm py-xs font-code-label text-code-label text-center">Rama Logic + équipe</div>
+          </div>
+        </div>
+        <div class="lane">
+          <div class="lane-label"><span class="material-symbols-outlined text-sm">arrow_forward</span>Livrables</div>
+          <div class="bg-primary-fixed/20 p-sm grid grid-cols-6 gap-base">
+            <div class="col-span-2 bg-surface-container-lowest border border-outline-variant px-sm py-xs flex gap-1 items-start">
+              <span class="material-symbols-outlined text-primary text-sm leading-none">check_circle</span>
+              <span class="font-body-reg text-body-reg leading-tight">La spec du processus</span>
+            </div>
+            <div class="col-span-2 bg-surface-container-lowest border border-outline-variant px-sm py-xs flex gap-1 items-start">
+              <span class="material-symbols-outlined text-primary text-sm leading-none">check_circle</span>
+              <span class="font-body-reg text-body-reg leading-tight">Le processus en service</span>
+            </div>
+            <div class="col-span-2 bg-surface-container-lowest border border-outline-variant px-sm py-xs flex gap-1 items-start">
+              <span class="material-symbols-outlined text-primary text-sm leading-none">check_circle</span>
+              <span class="font-body-reg text-body-reg leading-tight">La fiche d'usage + le point de fin de mois</span>
+            </div>
+          </div>
+        </div>
+        <div class="lane">
+          <div class="lane-label"><span class="material-symbols-outlined text-sm">arrow_forward</span>Bénéfice</div>
+          <div class="bg-surface-container-low p-sm grid grid-cols-6 gap-base">
+            <div class="col-span-3 flex gap-1 items-baseline"><span class="text-primary">→</span><span class="font-body-reg text-body-reg">Vous savez ce que vous allez recevoir avant que je construise</span></div>
+            <div class="col-span-3 flex gap-1 items-baseline"><span class="text-primary">→</span><span class="font-body-reg text-body-reg">Le processus est utilisé avant la fin du mois, pas trois mois après</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mt-md">Ce cycle se répète à l'identique pour chacun des 3 processus</div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 24 · DIVIDER 06 ============ -->
+<section class="slide grid-bg" id="slide-24">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="relative border border-on-background bg-surface-container-lowest p-xl max-w-[900px]">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="divider-num mb-md">06</div>
+      <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">06 / 09</div>
+      <h2 class="font-display-lg text-display-lg tracking-tight mb-md">Roadmap</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-[560px]">Le calendrier réel, absences comprises. Et le temps que ça vous prend.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 25 · LE CALENDRIER ============ -->
+<section class="slide" id="slide-25">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-sm">
+      <div class="h-2 w-2 bg-primary"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">06 · Roadmap</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-md max-w-[900px]">Le calendrier, absences comprises</h2>
+
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-gutter max-w-[1400px] mb-md">
+      <div class="month-col is-pause">
+        <div class="font-code-label text-code-label uppercase tracking-widest text-on-surface-variant">Août</div>
+        <div class="font-title-sm text-title-sm">Pause</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Dreamspark s'arrête le 14. Je suis absent du 24/08 au 06/09. Rien n'est daté ici, exprès.</p>
+      </div>
+      <div class="month-col is-active">
+        <div class="font-code-label text-code-label uppercase tracking-widest text-primary">Sept. · S2-S3</div>
+        <div class="font-title-sm text-title-sm">Diagnostic</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Atelier de cartographie 4h. 30 min avec Numa. Restitution du backlog priorisé et choix des 3 processus.</p>
+      </div>
+      <div class="month-col is-active">
+        <div class="font-code-label text-code-label uppercase tracking-widest text-primary">Octobre</div>
+        <div class="font-title-sm text-title-sm">Mois 1</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Le cycle de vente. Le plus gros morceau, traité en premier parce que c'est 80 % du temps.</p>
+      </div>
+      <div class="month-col is-active">
+        <div class="font-code-label text-code-label uppercase tracking-widest text-primary">Novembre</div>
+        <div class="font-title-sm text-title-sm">Mois 2</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Le processus n° 2 du backlog. Décidé en septembre, pas aujourd'hui.</p>
+      </div>
+      <div class="month-col is-last">
+        <div class="font-code-label text-code-label uppercase tracking-widest text-secondary">Décembre</div>
+        <div class="font-title-sm text-title-sm">Mois 3</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Le processus n° 3, puis le bilan : ce qui tourne seul, ce qu'on reconduit ou pas.</p>
+      </div>
+    </div>
+
+    <div class="bg-on-background text-inverse-on-surface px-md py-md max-w-[1400px]">
+      <p class="font-body-reg text-body-reg">
+        Le seul jalon à tenir avant l'été, c'est la décision. Si c'est validé avant le 12 septembre, l'atelier se cale la semaine du 15 et le premier processus est en service fin octobre.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 26 · VOTRE IMPLICATION ============ -->
+<section class="slide grid-bg" id="slide-26">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-sm">
+      <div class="h-2 w-2 bg-primary"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">06 · Roadmap</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg max-w-[900px]">Ce qu'on attend de vos équipes</h2>
+
+    <div class="grid md:grid-cols-2 gap-gutter max-w-[1240px] mb-md">
+      <div class="card-sockets relative border-2 border-primary bg-surface-container-lowest p-md flex flex-col gap-sm">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest">Au démarrage · une fois</div>
+        <div class="big-num text-primary">4h</div>
+        <p class="font-body-reg text-body-reg">L'atelier de cartographie, avec toi, Fabienne et le DG dans la même pièce. C'est la seule séance où j'ai besoin de tout le monde en même temps.</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Plus 30 min de Numa, que tu as déjà proposées.</p>
+      </div>
+      <div class="card-sockets relative border border-outline-variant bg-surface-container-lowest p-md flex flex-col gap-sm">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Chaque mois · récurrent</div>
+        <div class="big-num">1h + 1h</div>
+        <p class="font-body-reg text-body-reg">1h de validation de la spec en début de mois. C'est le seul moment où vous décidez.</p>
+        <p class="font-body-reg text-body-reg">1h de prise en main en fin de mois, avec les personnes qui vont s'en servir tous les jours.</p>
+      </div>
+    </div>
+
+    <div class="bg-on-background text-inverse-on-surface px-md py-md max-w-[1240px]">
+      <p class="font-body-reg text-body-reg">
+        C'est tout. Un point de 30 min par semaine si vous le voulez, sinon rien. Le reste, c'est nous.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 27 · DIVIDER 07 ============ -->
+<section class="slide grid-bg" id="slide-27">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="relative border border-on-background bg-surface-container-lowest p-xl max-w-[900px]">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="divider-num mb-md">07</div>
+      <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">07 / 09</div>
+      <h2 class="font-display-lg text-display-lg tracking-tight mb-md">Références</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-[560px]">Deux cas proches du vôtre. Pas une grille de logos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 28 · DEUX CAS PROCHES ============ -->
+<section class="slide" id="slide-28">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center justify-between gap-md mb-sm flex-wrap">
+      <div class="flex items-center gap-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">07 · Références</div>
+      </div>
+      <div class="font-code-label text-code-label text-primary uppercase tracking-widest">2 cas concrets</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-md max-w-[980px]">Deux boîtes qui avaient déjà leur Notion, et le même problème que vous</h2>
+
+    <div class="grid md:grid-cols-2 gap-gutter max-w-[1400px]">
+      <div class="card-sockets relative border border-outline-variant bg-surface-container-lowest p-md flex flex-col gap-sm">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="flex items-baseline justify-between gap-sm flex-wrap">
+          <div class="font-title-sm text-title-sm">HOLY Softdrinks</div>
+          <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Studio créatif interne · Berlin</div>
+        </div>
+        <div class="big-num text-primary">8 étapes</div>
+        <p class="font-body-reg text-body-reg">de process créatif cartographiées en un atelier de 3h, et 4 décisions d'architecture tranchées dans la foulée.</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-1">Ils avaient déjà un outil Notion en production, monté par quelqu'un d'autre. On a construit à côté sans y toucher, puis basculé un week-end. Le point qui bloquait depuis dix mois, une relance permanente sur les délais, a été remplacé par une règle de calcul dans le formulaire.</p>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest pt-sm border-t border-outline-variant">Signé 20/07/2026 · en production</div>
+      </div>
+      <div class="card-sockets relative border border-outline-variant bg-surface-container-lowest p-md flex flex-col gap-sm">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="flex items-baseline justify-between gap-sm flex-wrap">
+          <div class="font-title-sm text-title-sm">Station Krishna</div>
+          <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Événementiel · cycle long</div>
+        </div>
+        <div class="big-num text-primary">35 étapes</div>
+        <p class="font-body-reg text-body-reg">sur 60 à 90 jours, du premier contact client jusqu'à la livraison, modélisées de bout en bout dans Notion.</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant flex-1">Même forme que votre cycle de vente : un parcours long, répétable, avec des gates de décision et des relances qui tombaient à travers. La dégustation avant signature joue exactement le rôle de votre pitch. Livré, en service.</p>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest pt-sm border-t border-outline-variant">Avril à juillet 2026 · livré</div>
+      </div>
+    </div>
+
+    <p class="font-body-reg text-body-reg text-on-surface-variant mt-md max-w-[1400px]">
+      Je n'ai pas de référence en production audiovisuelle, et je préfère te le dire que de te vendre un cas approximatif. Ce que ces deux-là partagent avec vous, c'est la forme du problème, pas le secteur.
+    </p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 29 · DIVIDER 08 ============ -->
+<section class="slide grid-bg" id="slide-29">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="relative border border-on-background bg-surface-container-lowest p-xl max-w-[900px]">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="divider-num mb-md">08</div>
+      <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">08 / 09</div>
+      <h2 class="font-display-lg text-display-lg tracking-tight mb-md">Engagements</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-[560px]">Des comportements vérifiables, pas des promesses.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 30 · ENGAGEMENTS ============ -->
+<section class="slide" id="slide-30">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-sm">
+      <div class="h-2 w-2 bg-primary"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">08 · Engagements</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-lg max-w-[900px]">Ce sur quoi tu peux compter</h2>
+
+    <div class="grid md:grid-cols-3 gap-gutter max-w-[1400px] mb-lg">
+      <div class="border-t-2 border-primary pt-sm">
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-xs">Délais tenus</div>
+        <p class="font-body-reg text-body-reg">Chaque mois a sa date de mise en service. Si elle doit bouger, tu le sais 48h avant, pas le jour même.</p>
+      </div>
+      <div class="border-t-2 border-primary pt-sm">
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-xs">Transparence</div>
+        <p class="font-body-reg text-body-reg">Tout ce que je construis vit dans votre Notion, jamais chez moi. À n'importe quel moment tu ouvres et tu regardes où j'en suis. Et je ne touche jamais à ce qui est en production sans vous le dire.</p>
+      </div>
+      <div class="border-t-2 border-primary pt-sm">
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-xs">Exigence sur l'usage</div>
+        <p class="font-body-reg text-body-reg">Si un processus livré n'est pas utilisé par l'équipe un mois après, je le reprends sans surcoût. Un agent que personne n'ouvre ne compte pas comme livré.</p>
+      </div>
+    </div>
+
+    <div class="mb-lg max-w-[1400px]">
+      <div class="border-l-2 border-secondary pl-md py-sm">
+        <p class="font-body-reg text-body-reg">
+          Et un engagement de plus, propre à votre situation : <span class="text-on-background">je ne démonte rien de ce que Numa a construit</span>. Je l'appelle avant de commencer, et ce que j'ajoute se branche sur son travail au lieu de le remplacer.
+        </p>
+      </div>
+    </div>
+
+    <div class="pt-md border-t border-outline-variant max-w-[1400px]">
+      <div class="font-code-label text-code-label text-outline uppercase tracking-[0.16em]">Notion Solution Partner · PMP® · Black Belt Lean Six Sigma</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 31 · DIVIDER 09 ============ -->
+<section class="slide grid-bg" id="slide-31">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="relative border border-on-background bg-surface-container-lowest p-xl max-w-[900px]">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div>
+      <div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="divider-num mb-md">09</div>
+      <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mb-sm">09 / 09</div>
+      <h2 class="font-display-lg text-display-lg tracking-tight mb-md">Offre</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-[560px]">Ce que ça coûte, et ce que ça comprend.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 32 · L'INVESTISSEMENT ============ -->
+<section class="slide" id="slide-32">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="flex items-center gap-sm mb-sm">
+      <div class="h-2 w-2 bg-primary"></div>
+      <div class="font-eyebrow text-eyebrow uppercase tracking-[0.18em] text-on-surface-variant">09 · Offre</div>
+    </div>
+    <h2 class="font-headline-md text-headline-md tracking-tight mb-md max-w-[900px]">Construire l'exosquelette de Dreamspark</h2>
+
+    <div class="grid md:grid-cols-12 gap-gutter max-w-[1440px] items-stretch mb-md">
+      <div class="md:col-span-4 card-sockets relative border border-on-background bg-surface-container-lowest p-md flex flex-col gap-sm">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <div class="font-code-label text-code-label text-primary uppercase tracking-widest">Temps 1 · Diagnostic</div>
+        <div class="big-num">2 399 € HT</div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">2 semaines · septembre</div>
+        <div class="flex flex-col gap-xs pt-sm border-t border-outline-variant flex-1">
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-base leading-none mt-[2px]">check_circle</span><p class="font-body-reg text-body-reg">Atelier de cartographie 4h</p></div>
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-base leading-none mt-[2px]">check_circle</span><p class="font-body-reg text-body-reg">30 min avec Numa sur l'existant</p></div>
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-base leading-none mt-[2px]">check_circle</span><p class="font-body-reg text-body-reg">Carte du cycle de vente chiffrée</p></div>
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-base leading-none mt-[2px]">check_circle</span><p class="font-body-reg text-body-reg">Backlog priorisé + spec du 1er processus</p></div>
+        </div>
+      </div>
+
+      <div class="md:col-span-8 card-sockets relative border-2 border-primary bg-primary text-on-primary p-md flex flex-col gap-sm">
+        <span class="cs tl" style="background:#fcf9f8"></span><span class="cs tr" style="background:#fcf9f8"></span>
+        <span class="cs bl" style="background:#fcf9f8"></span><span class="cs br" style="background:#fcf9f8"></span>
+        <div class="font-code-label text-code-label uppercase tracking-widest opacity-80">Temps 2 · Mise en autonomie</div>
+        <div class="flex items-baseline gap-sm flex-wrap">
+          <div class="big-num-xl big-num">3 000 € HT</div>
+          <div class="font-title-sm text-title-sm opacity-90">/ mois · 3 mois d'engagement</div>
+        </div>
+        <p class="font-body-reg text-body-reg opacity-90">Un processus complet mis en autonomie chaque mois. Octobre, novembre, décembre.</p>
+        <div class="grid md:grid-cols-2 gap-x-md gap-y-xs pt-sm border-t border-on-primary/25 flex-1">
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-secondary-fixed text-base leading-none mt-[2px]">check_circle</span><p class="font-body-reg text-body-reg">Spec écrite et validée avant chaque build</p></div>
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-secondary-fixed text-base leading-none mt-[2px]">check_circle</span><p class="font-body-reg text-body-reg">Construction dans votre Notion, sans toucher à la prod</p></div>
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-secondary-fixed text-base leading-none mt-[2px]">check_circle</span><p class="font-body-reg text-body-reg">Formation de l'équipe et fiche d'usage</p></div>
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-secondary-fixed text-base leading-none mt-[2px]">check_circle</span><p class="font-body-reg text-body-reg">Corrections en continu jusqu'à l'usage réel</p></div>
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-secondary-fixed text-base leading-none mt-[2px]">check_circle</span><p class="font-body-reg text-body-reg">Point hebdo de 30 min si vous le voulez</p></div>
+          <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-secondary-fixed text-base leading-none mt-[2px]">check_circle</span><p class="font-body-reg text-body-reg">Bilan de fin de mois écrit</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-[auto_1fr] gap-md items-center border-t-2 border-on-background pt-md max-w-[1440px]">
+      <div class="flex items-baseline gap-sm">
+        <span class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Total sur 4 mois</span>
+        <span class="font-headline-md text-headline-md">11 399 € HT</span>
+      </div>
+      <p class="font-body-reg text-body-reg text-on-surface-variant md:text-right">
+        Diagnostic payé à la commande · abonnement facturé en début de mois · reconductible après décembre, sans engagement · le contenu des mois 2 et 3 se décide au diagnostic, pas aujourd'hui
+      </p>
+    </div>
+    <div class="font-code-label text-code-label text-outline uppercase tracking-widest mt-md max-w-[1440px]">Confidentiel · préparé pour Dreamspark · offre valable jusqu'au 12 septembre 2026</div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 33 · MERCI ============ -->
+<section class="slide grid-bg" id="slide-33">
+  <div class="slide-body justify-center px-margin max-w-[1600px] mx-auto w-full">
+    <div class="max-w-[900px]">
+      <h2 class="font-display-lg text-display-lg tracking-tight mb-lg">Merci Moe,<br/>merci Fabienne</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mb-lg max-w-[620px]">
+        On commence par regarder, pas par construire. C'est la seule façon de ne pas casser ce qui marche déjà chez vous.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-gutter mb-lg max-w-[720px]">
+        <div class="border-t-2 border-primary pt-sm">
+          <div class="font-code-label text-code-label text-primary uppercase tracking-widest mb-xs">Décision</div>
+          <div class="font-title-sm text-title-sm">Avant le 12 septembre</div>
+        </div>
+        <div class="border-t-2 border-secondary pt-sm">
+          <div class="font-code-label text-code-label text-secondary uppercase tracking-widest mb-xs">Atelier de cartographie</div>
+          <div class="font-title-sm text-title-sm">Semaine du 15 septembre</div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-md pt-md border-t border-outline-variant max-w-[720px]">
+        <a href="mailto:sylvain@ramalogic.com" class="font-body-reg text-body-reg text-primary hover:underline">sylvain@ramalogic.com</a>
+        <div class="w-px h-3 bg-outline-variant"></div>
+        <div class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Rama Logic</div>
+      </div>
+      <div class="font-code-label text-code-label text-outline uppercase tracking-widest mt-lg">Confidentiel · préparé pour Dreamspark · 31 juillet 2026</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ====== OVERVIEW GRID (ESC) ====== -->
+<div id="overview" class="fixed inset-0 z-[60] bg-background/95 backdrop-blur-md hidden overflow-y-auto p-margin">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="flex items-center justify-between mb-lg sticky top-0 py-sm">
+      <div class="flex items-center gap-md">
+        <div class="font-title-sm text-title-sm font-medium tracking-tight">Vue d'ensemble</div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Dreamspark · 33 slides</span>
+      </div>
+      <button id="overview-close" aria-label="Fermer" class="bg-surface-container-lowest border border-on-background w-10 h-10 flex items-center justify-center hover:bg-on-background hover:text-on-primary transition-colors">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div id="overview-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-md"></div>
+  </div>
+</div>
+
+<nav class="nav-controls fixed bottom-margin right-margin z-50 flex flex-col gap-sm">
+  <button id="prev-btn" aria-label="Slide précédente" class="bg-surface-container-lowest border border-on-background w-12 h-12 flex items-center justify-center hover:bg-on-background hover:text-on-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_upward</span>
+  </button>
+  <button id="next-btn" aria-label="Slide suivante" class="bg-on-background text-on-primary border border-on-background w-12 h-12 flex items-center justify-center hover:bg-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_downward</span>
+  </button>
+</nav>
+
+<script>
+  const viewport = document.querySelector('.slides-viewport');
+  const slides = document.querySelectorAll('.slide');
+  const headerBar = document.getElementById('header-bar');
+  const total = slides.length;
+  document.getElementById('total-slides').textContent = String(total);
+
+  let currentIdx = 0;
+
+  function updateCounter() {
+    const viewportRect = viewport.getBoundingClientRect();
+    const center = viewportRect.top + viewportRect.height / 2;
+    let closest = 0;
+    let closestDist = Infinity;
+    slides.forEach((slide, idx) => {
+      const r = slide.getBoundingClientRect();
+      const slideCenter = r.top + r.height / 2;
+      const dist = Math.abs(slideCenter - center);
+      if (dist < closestDist) { closestDist = dist; closest = idx; }
+    });
+    currentIdx = closest;
+    document.getElementById('current-slide').textContent = String(closest + 1);
+    if (closest === 0) { headerBar.classList.add('is-hidden'); }
+    else { headerBar.classList.remove('is-hidden'); }
+  }
+
+  function goToSlide(idx) {
+    if (idx < 0 || idx >= total) return;
+    slides[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.getElementById('prev-btn').addEventListener('click', () => goToSlide(currentIdx - 1));
+  document.getElementById('next-btn').addEventListener('click', () => goToSlide(currentIdx + 1));
+
+  const overview = document.getElementById('overview');
+  const overviewGrid = document.getElementById('overview-grid');
+  const labels = [
+    "Cover", "Sommaire",
+    "01 / 09 · Contexte", "01 · On ne repart pas de zéro", "01 · L'IA chez vous aujourd'hui",
+    "02 / 09 · Le cœur du réacteur", "02 · Le cycle de vente", "02 · Où la chaîne casse", "02 · Le seul chiffre",
+    "03 / 09 · Ce que j'y vois", "03 · La cause racine", "03 · Si rien ne change", "03 · Le point aveugle Docsend",
+    "04 / 09 · Là où on va", "04 · Aujourd'hui / Demain",
+    "05 / 09 · La méthode", "05 · Ce qui tourne chez moi", "05 · Ce que ça donne chez vous", "05 · Pourquoi comme ça",
+    "05 · Deux temps", "Temps 1 · Diagnostic", "Temps 2 · Mise en autonomie", "05 · Le déroulé d'un mois",
+    "06 / 09 · Roadmap", "06 · Le calendrier", "06 · Votre implication",
+    "07 / 09 · Références", "07 · Deux cas proches",
+    "08 / 09 · Engagements", "08 · Ce sur quoi tu peux compter",
+    "09 / 09 · Offre", "09 · L'investissement",
+    "Merci Moe"
+  ];
+  slides.forEach((slide, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'overview-card';
+    const num = document.createElement('span');
+    num.className = 'ov-num';
+    num.textContent = String(idx + 1).padStart(2, '0');
+    const label = document.createElement('span');
+    label.className = 'ov-label';
+    label.textContent = labels[idx] || ('Slide ' + (idx + 1));
+    btn.appendChild(num);
+    btn.appendChild(label);
+    btn.addEventListener('click', () => { closeOverview(); setTimeout(() => goToSlide(idx), 60); });
+    overviewGrid.appendChild(btn);
+  });
+  function openOverview() { overview.classList.remove('hidden'); }
+  function closeOverview() { overview.classList.add('hidden'); }
+  document.getElementById('overview-btn').addEventListener('click', openOverview);
+  document.getElementById('overview-close').addEventListener('click', closeOverview);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      overview.classList.contains('hidden') ? openOverview() : closeOverview();
+      return;
+    }
+    if (!overview.classList.contains('hidden')) return;
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) {
+      e.preventDefault();
+      goToSlide(currentIdx + 1);
+    } else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) {
+      e.preventDefault();
+      goToSlide(currentIdx - 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      goToSlide(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      goToSlide(total - 1);
+    }
+  });
+
+  viewport.addEventListener('scroll', () => {
+    requestAnimationFrame(updateCounter);
+  });
+
+  updateCounter();
+</script>
+
+</body>
+</html>

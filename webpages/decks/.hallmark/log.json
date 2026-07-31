@@ -47,5 +47,28 @@
       "offer": "carte prix asymetrique 5/12 fond primary + carte inclus 7/12 en grille 2x3, forfait unique sans ventilation ni jours -- vs carte + satellite Operate (evmt), dual ferme/estimate (argos)"
     },
     "preemit": "P5 H5 E4 S5 R4 V5"
+  },
+  {
+    "deck": "2026-07-31_dreamspark_d7m4k2",
+    "date": "2026-07-31",
+    "macrostructures": {
+      "context": "inventaire en 2 bandes : rangee de 4 chips 'deja construit' + verbatim borde + bande noire -- vs diptyque asymetrique (cleany), timeline verticale (evmt)",
+      "etat_ia": "3 cards usage avec footer-verdict par card (studio / 1 licence / il y a 3 mois) + phrase de bascule -- macrostructure neuve",
+      "process": "CHAINE VERTICALE 9 maillons numerotes en 2 colonnes, pastilles carrees Space Mono + rail 1px -- macrostructure neuve (vs chaine horizontale 3 maillons cleany)",
+      "ruptures": "liste editoriale pleine largeur 3 colonnes (numero du maillon / constat / verdict Space Mono aligne a droite) -- vs cards (argos/evmt), verbatim-first (cleany)",
+      "cout": "big-num solitaire 80% en flex-end + 3 questions ouvertes bordees a gauche + aveu assume de non-chiffrage -- vs 3 colonnes sans metrique (cleany)",
+      "insight": "SCHEMA DE LOCALISATION 3 zones dont une en pointilles rouges (l'orpheline) + bloc cause racine sous separateur 2px -- vs pivot vertical (cleany), diptyque (evmt)",
+      "objectifs": "2 colonnes symetriques aujourd'hui/demain (standard skill, non utilise depuis 3 decks)",
+      "preuve": "RANGEES HORAIRES type crontab : heure Space Mono a gauche, agent + description inline a droite -- macrostructure neuve, la plus distinctive du deck",
+      "mapping": "rows verbatim -> capacite avec fleche centrale en colonne du milieu -- macrostructure neuve",
+      "why_method": "3 colonnes separees par filets verticaux, 2 paragraphes par colonne -- vs 3 rows (argos)",
+      "plan_overview": "diptyque de largeur PROPORTIONNELLE a la duree (1fr diagnostic / 2.2fr abonnement), le 2e en fond primary avec sous-grille des 3 mois -- macrostructure neuve",
+      "phases": "template rigide x2 (standard skill) : 2 colonnes pourquoi/actions + grand rectangle LIVRABLES 2px secondary",
+      "sprint": "swimlane 4 bandes standard skill, gate 'valider la spec' en rouge dans la bande Quoi",
+      "roadmap": "CALENDRIER en 5 colonnes mensuelles border-top coloree (pause grise / actives primary / derniere secondary) -- vs rail vertical (cleany), timeline horizontale (evmt)",
+      "references": "2 cards big-num STRUCTUREL (8 etapes / 35 etapes), aucune metrique inventee, disclaimer secteur assume en pied",
+      "offer": "asymetrie 4/12 + 8/12 : carte diagnostic neutre + carte abonnement fond primary avec prix mensuel et 6 inclus en 2 colonnes, bande total en pied -- vs 5/12+7/12 (cleany), carte+satellite (evmt), dual ferme/estimate (argos)"
+    },
+    "preemit": "P5 H5 E4 S5 R4 V5"
   }
 ]
