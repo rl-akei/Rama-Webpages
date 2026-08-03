@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Créer un CRM Notion qui se met à jour tout seul — support vidéo Rama Logic</title>
+
+<!-- Fonts : Clash Grotesk (Fontshare) + Work Sans / Space Mono (Google) -->
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* ===========================================
+   TOKENS — Rama Logic Core (DESIGN.md verrouillé)
+   =========================================== */
+:root {
+  --cream: #fcf9f8;
+  --ink: #1c1b1b;
+  --ink-soft: #424844;
+  --aloe: #446254;
+  --aloe-deep: #2f4d3f;
+  --aloe-fixed: #c8ead8;
+  --mindaro: #d9eb95;
+  --mindaro-ink: #56641e;
+  --error: #ba1a1a;
+  --error-bg: #ffdad6;
+  --line: rgba(28, 27, 27, 0.14);
+  --line-strong: rgba(28, 27, 27, 0.55);
+
+  --font-display: 'Clash Grotesk', sans-serif;
+  --font-body: 'Work Sans', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Type fluide — jamais de px fixes */
+  --display-xl: clamp(2.6rem, 6.5vw, 5.6rem);
+  --display: clamp(2.1rem, 4.8vw, 4.2rem);
+  --headline: clamp(1.5rem, 3.2vw, 2.7rem);
+  --title: clamp(1.05rem, 1.8vw, 1.5rem);
+  --body: clamp(0.95rem, 1.25vw, 1.2rem);
+  --small: clamp(0.8rem, 1vw, 0.95rem);
+  --eyebrow-size: clamp(0.72rem, 0.9vw, 0.85rem);
+
+  --slide-padding: clamp(1.5rem, 5vw, 5rem);
+  --content-gap: clamp(0.75rem, 2.2vw, 2rem);
+}
+
+/* ===========================================
+   VIEWPORT FITTING — base obligatoire
+   =========================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow-x: hidden; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.slide {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: var(--cream);
+}
+
+/* Grille de fond subtile (grid-bg Rama Logic) */
+.slide::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(28,27,27,0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28,27,27,0.045) 1px, transparent 1px);
+  background-size: clamp(40px, 6vw, 72px) clamp(40px, 6vw, 72px);
+  pointer-events: none;
+}
+.slide.dark::before {
+  background-image:
+    linear-gradient(to right, rgba(252,249,248,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(252,249,248,0.06) 1px, transparent 1px);
+}
+
+.slide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 100%;
+  overflow: hidden;
+  padding: var(--slide-padding);
+  padding-bottom: calc(var(--slide-padding) * 0.8);
+  position: relative;
+  z-index: 1;
+  gap: var(--content-gap);
+}
+
+/* ===========================================
+   HEADER / FOOTER de slide
+   =========================================== */
+.slide-header {
+  position: absolute;
+  top: clamp(0.9rem, 2.2vh, 1.6rem);
+  left: var(--slide-padding);
+  right: var(--slide-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--eyebrow-size);
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  z-index: 2;
+}
+.slide.dark .slide-header { color: rgba(252,249,248,0.65); }
+.slide-header .brand-dot {
+  display: inline-block;
+  width: 0.55em; height: 0.55em;
+  background: var(--aloe);
+  border-radius: 50%;
+  margin-right: 0.6em;
+  vertical-align: baseline;
+}
+.slide.dark .slide-header .brand-dot { background: var(--mindaro); }
+
+/* ===========================================
+   TYPO
+   =========================================== */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--eyebrow-size);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--aloe);
+}
+.slide.dark .eyebrow { color: var(--mindaro); }
+.eyebrow.red { color: var(--error); }
+
+h1 {
+  font-family: var(--font-display);
+  font-size: var(--display-xl);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  max-width: 16ch;
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: var(--display);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  max-width: 18ch;
+}
+.statement {
+  font-family: var(--font-display);
+  font-size: var(--headline);
+  font-weight: 500;
+  line-height: 1.18;
+  max-width: 26ch;
+}
+.sub {
+  font-family: var(--font-display);
+  font-size: var(--headline);
+  font-weight: 400;
+  color: var(--aloe);
+  line-height: 1.2;
+}
+p.body { font-size: var(--body); line-height: 1.55; color: var(--ink-soft); max-width: 58ch; }
+.accent { color: var(--aloe); }
+.accent-lime { color: var(--mindaro-ink); }
+
+/* ===========================================
+   COMPOSANTS
+   =========================================== */
+
+/* Socket corners : ancrage géométrique Rama Logic */
+.socketed { position: relative; border: 1px solid var(--line-strong); background: var(--cream); }
+.socketed .sk {
+  position: absolute; width: 7px; height: 7px;
+  background: var(--aloe); border-radius: 50%;
+}
+.socketed .sk.tl { top: -4px; left: -4px; }
+.socketed .sk.tr { top: -4px; right: -4px; }
+.socketed .sk.bl { bottom: -4px; left: -4px; }
+.socketed .sk.br { bottom: -4px; right: -4px; }
+
+/* Liste numérotée éditoriale */
+.num-list { display: flex; flex-direction: column; }
+.num-list .row {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1rem, 2.5vw, 2.2rem);
+  padding: clamp(0.7rem, 1.9vh, 1.4rem) 0;
+  border-bottom: 1px solid var(--line);
+}
+.num-list .row:first-child { border-top: 1px solid var(--line); }
+.num-list .num {
+  font-family: var(--font-mono);
+  font-size: var(--title);
+  font-weight: 700;
+  color: var(--aloe);
+  min-width: 2.2ch;
+}
+.num-list .row-title {
+  font-family: var(--font-display);
+  font-size: var(--title);
+  font-weight: 500;
+  min-width: clamp(9ch, 16vw, 16ch);
+}
+.num-list .row-desc { font-size: var(--small); color: var(--ink-soft); line-height: 1.45; }
+
+/* Cards 3 rôles */
+.roles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.7rem, 1.6vw, 1.4rem);
+  align-items: stretch;
+}
+.role-card {
+  padding: clamp(0.9rem, 2vw, 1.6rem);
+  display: flex; flex-direction: column;
+  gap: clamp(0.4rem, 1vh, 0.7rem);
+}
+.role-card .who {
+  font-family: var(--font-mono);
+  font-size: var(--eyebrow-size);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.role-card .role-name {
+  font-family: var(--font-display);
+  font-size: var(--title);
+  font-weight: 600;
+  line-height: 1.15;
+}
+.role-card .role-desc { font-size: var(--small); color: var(--ink-soft); line-height: 1.45; }
+.role-card.hero { background: var(--aloe); border-color: var(--aloe-deep); }
+.role-card.hero .who { color: var(--mindaro); }
+.role-card.hero .role-name, .role-card.hero .role-desc { color: var(--cream); }
+.role-card.hero .sk { background: var(--mindaro); }
+.role-card .never {
+  font-family: var(--font-mono);
+  font-size: var(--eyebrow-size);
+  color: var(--error);
+  letter-spacing: 0.05em;
+  margin-top: auto;
+}
+.role-card.hero .never { color: var(--mindaro); }
+
+/* Bande leçon */
+.lesson-band {
+  background: var(--mindaro);
+  color: var(--ink);
+  padding: clamp(0.7rem, 1.8vh, 1.2rem) clamp(1rem, 2vw, 1.6rem);
+  display: flex;
+  align-items: baseline;
+  gap: clamp(0.8rem, 2vw, 1.6rem);
+  border: 1px solid var(--mindaro-ink);
+}
+.lesson-band .tag {
+  font-family: var(--font-mono);
+  font-size: var(--eyebrow-size);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--mindaro-ink);
+  white-space: nowrap;
+}
+.lesson-band .txt {
+  font-family: var(--font-display);
+  font-size: var(--title);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+/* Slides sombres (bascule démo) */
+.slide.dark { background: var(--ink); color: var(--cream); }
+.slide.dark .socketed { background: transparent; border-color: rgba(252,249,248,0.35); }
+.demo-label {
+  font-family: var(--font-mono);
+  font-size: var(--eyebrow-size);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--ink);
+  background: var(--mindaro);
+  display: inline-block;
+  padding: 0.5em 1em;
+  width: fit-content;
+}
+.demo-title {
+  font-family: var(--font-display);
+  font-size: var(--display);
+  font-weight: 500;
+  line-height: 1.08;
+  color: var(--cream);
+}
+.demo-list { display: flex; flex-direction: column; }
+.demo-list .item {
+  display: flex; align-items: baseline;
+  gap: clamp(0.8rem, 1.8vw, 1.4rem);
+  padding: clamp(0.55rem, 1.5vh, 1rem) 0;
+  border-bottom: 1px solid rgba(252,249,248,0.18);
+  font-size: var(--body);
+  color: rgba(252,249,248,0.88);
+}
+.demo-list .item:first-child { border-top: 1px solid rgba(252,249,248,0.18); }
+.demo-list .tick { color: var(--mindaro); font-family: var(--font-mono); font-weight: 700; }
+
+/* Cycle 4 étapes */
+.cycle {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.6rem, 1.4vw, 1.2rem);
+}
+.cycle .step {
+  padding: clamp(0.8rem, 1.8vw, 1.3rem);
+  display: flex; flex-direction: column;
+  gap: clamp(0.35rem, 0.9vh, 0.6rem);
+}
+.cycle .step-num {
+  font-family: var(--font-mono);
+  font-size: var(--eyebrow-size);
+  font-weight: 700;
+  color: var(--aloe);
+  letter-spacing: 0.1em;
+}
+.cycle .step-name {
+  font-family: var(--font-display);
+  font-size: var(--title);
+  font-weight: 600;
+}
+.cycle .step-desc { font-size: var(--small); color: var(--ink-soft); line-height: 1.4; }
+.cycle .step.gate { background: var(--ink); border-color: var(--ink); }
+.cycle .step.gate .step-name, .cycle .step.gate .step-desc { color: var(--cream); }
+.cycle .step.gate .step-num { color: var(--mindaro); }
+.cycle .step.gate .sk { background: var(--mindaro); }
+
+/* Terminal (données réelles) */
+.terminal {
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  font-family: var(--font-mono);
+  font-size: clamp(0.62rem, 1.05vw, 0.92rem);
+  line-height: 1.75;
+  padding: clamp(1rem, 2.2vw, 1.8rem);
+  color: #d5d1cf;
+  overflow: hidden;
+}
+.terminal .t-bar { display: flex; gap: 6px; margin-bottom: clamp(0.6rem, 1.4vh, 1rem); }
+.terminal .t-bar span { width: 9px; height: 9px; border-radius: 50%; background: rgba(252,249,248,0.25); display: block; }
+.terminal .cmd { color: var(--mindaro); }
+.terminal .cmd::before { content: '$ '; color: rgba(252,249,248,0.45); }
+.terminal .out { color: #d5d1cf; }
+.terminal .hl { color: #fff; font-weight: 700; }
+.terminal .green { color: #9fd6b4; }
+
+/* Incident 3 étapes */
+.incident {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.7rem, 1.6vw, 1.4rem);
+}
+.incident .ph {
+  padding: clamp(0.9rem, 2vw, 1.5rem);
+  display: flex; flex-direction: column;
+  gap: clamp(0.35rem, 1vh, 0.6rem);
+}
+.incident .ph-name {
+  font-family: var(--font-mono);
+  font-size: var(--title);
+  font-weight: 700;
+  color: var(--error);
+  letter-spacing: 0.04em;
+}
+.incident .ph:last-child .ph-name { color: var(--aloe); }
+.incident .ph-desc { font-size: var(--small); color: var(--ink-soft); line-height: 1.45; }
+.incident .ph .sk { background: var(--error); }
+.incident .ph:last-child .sk { background: var(--aloe); }
+
+/* Stack rows */
+.stack-rows { display: flex; flex-direction: column; }
+.stack-rows .srow {
+  display: flex; align-items: baseline;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  padding: clamp(0.55rem, 1.6vh, 1.1rem) 0;
+  border-bottom: 1px solid var(--line);
+}
+.stack-rows .srow:first-child { border-top: 1px solid var(--line); }
+.stack-rows .tech {
+  font-family: var(--font-mono);
+  font-size: var(--body);
+  font-weight: 700;
+  min-width: clamp(16ch, 24vw, 24ch);
+}
+.stack-rows .use { font-size: var(--small); color: var(--ink-soft); }
+
+/* Big numbers */
+.bignums {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.7rem, 1.6vw, 1.4rem);
+}
+.bignums .bn {
+  padding: clamp(0.9rem, 2vw, 1.5rem);
+  display: flex; flex-direction: column;
+  gap: clamp(0.2rem, 0.7vh, 0.45rem);
+}
+.bignums .bn-val {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.2vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--aloe);
+}
+.bignums .bn-label { font-family: var(--font-mono); font-size: var(--eyebrow-size); letter-spacing: 0.08em; color: var(--ink-soft); text-transform: uppercase; }
+
+/* CTA */
+.cta-list { display: flex; flex-direction: column; }
+.cta-list .crow {
+  display: flex; align-items: baseline;
+  gap: clamp(1rem, 2.2vw, 1.8rem);
+  padding: clamp(0.75rem, 2vh, 1.3rem) 0;
+  border-bottom: 1px solid var(--line);
+}
+.cta-list .crow:first-child { border-top: 1px solid var(--line); }
+.cta-list .arrow { font-family: var(--font-mono); color: var(--aloe); font-weight: 700; font-size: var(--title); }
+.cta-list .c-title { font-family: var(--font-display); font-size: var(--title); font-weight: 600; min-width: clamp(14ch, 22vw, 22ch); }
+.cta-list .c-desc { font-size: var(--small); color: var(--ink-soft); }
+
+/* ===========================================
+   NAVIGATION
+   =========================================== */
+.nav-counter {
+  position: fixed;
+  bottom: clamp(0.8rem, 2vh, 1.4rem);
+  right: clamp(1rem, 2.5vw, 2rem);
+  font-family: var(--font-mono);
+  font-size: var(--eyebrow-size);
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+  background: var(--cream);
+  border: 1px solid var(--line);
+  padding: 0.45em 0.9em;
+  z-index: 50;
+}
+.keyboard-hint {
+  position: fixed;
+  bottom: clamp(0.8rem, 2vh, 1.4rem);
+  left: clamp(1rem, 2.5vw, 2rem);
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 0.8vw, 0.75rem);
+  color: var(--ink-soft);
+  opacity: 0.55;
+  z-index: 50;
+}
+
+/* ===========================================
+   ANIMATIONS — reveal au chargement
+   =========================================== */
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+.slide-content > * { animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.slide-content > *:nth-child(1) { animation-delay: 0.05s; }
+.slide-content > *:nth-child(2) { animation-delay: 0.15s; }
+.slide-content > *:nth-child(3) { animation-delay: 0.25s; }
+.slide-content > *:nth-child(4) { animation-delay: 0.35s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ===========================================
+   BREAKPOINTS hauteur
+   =========================================== */
+@media (max-height: 700px) {
+  :root {
+    --slide-padding: clamp(1rem, 3.5vw, 3rem);
+    --content-gap: clamp(0.5rem, 1.6vw, 1.2rem);
+    --display-xl: clamp(2rem, 5.5vw, 4rem);
+    --display: clamp(1.7rem, 4vw, 3rem);
+  }
+}
+@media (max-height: 600px) {
+  :root { --content-gap: clamp(0.35rem, 1.2vw, 0.8rem); }
+  .keyboard-hint { display: none; }
+}
+@media (max-width: 800px) {
+  .roles, .cycle, .incident, .bignums { grid-template-columns: 1fr 1fr; }
+  .num-list .row, .cta-list .crow, .stack-rows .srow { flex-wrap: wrap; }
+}
+@media (max-width: 560px) {
+  .roles, .cycle, .incident, .bignums { grid-template-columns: 1fr; }
+}
+
+/* ===========================================
+   AJOUTS — support vidéo CRM
+   =========================================== */
+
+/* Duo oui / non */
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.7rem, 1.8vw, 1.5rem); align-items: stretch; }
+.duo .col { padding: clamp(0.9rem, 2vw, 1.6rem); display: flex; flex-direction: column; gap: clamp(0.45rem, 1.1vh, 0.8rem); }
+.duo .col-head { font-family: var(--font-mono); font-size: var(--eyebrow-size); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.duo .col.ok { border-color: var(--aloe); }
+.duo .col.ok .col-head { color: var(--aloe); }
+.duo .col.ok .sk { background: var(--aloe); }
+.duo .col.ko { border-color: var(--error); }
+.duo .col.ko .col-head { color: var(--error); }
+.duo .col.ko .sk { background: var(--error); }
+.duo .col li { font-size: var(--small); color: var(--ink-soft); line-height: 1.5; list-style: none; padding-left: 1.2em; position: relative; }
+.duo .col li + li { margin-top: 0.5em; }
+.duo .col.ok li::before { content: '+'; position: absolute; left: 0; color: var(--aloe); font-family: var(--font-mono); font-weight: 700; }
+.duo .col.ko li::before { content: '\2212'; position: absolute; left: 0; color: var(--error); font-family: var(--font-mono); font-weight: 700; }
+
+/* Checklist claire */
+.check { display: flex; flex-direction: column; }
+.check .item { display: flex; align-items: baseline; gap: clamp(0.7rem, 1.6vw, 1.2rem);
+  padding: clamp(0.5rem, 1.4vh, 0.95rem) 0; border-bottom: 1px solid var(--line); font-size: var(--small); color: var(--ink-soft); line-height: 1.45; }
+.check .item:first-child { border-top: 1px solid var(--line); }
+.check .box { font-family: var(--font-mono); font-weight: 700; color: var(--aloe); font-size: var(--body); }
+.check .item strong { color: var(--ink); font-family: var(--font-display); font-weight: 600; font-size: var(--title); min-width: clamp(10ch, 18vw, 18ch); display: inline-block; }
+
+/* Flux horizontal */
+.flow { display: flex; align-items: stretch; gap: clamp(0.4rem, 1vw, 0.9rem); flex-wrap: wrap; }
+.flow .node { flex: 1 1 0; min-width: 8ch; padding: clamp(0.7rem, 1.6vw, 1.2rem); display: flex; flex-direction: column; gap: 0.35em; }
+.flow .node .n-lab { font-family: var(--font-mono); font-size: var(--eyebrow-size); letter-spacing: 0.1em; color: var(--aloe); text-transform: uppercase; }
+.flow .node .n-name { font-family: var(--font-display); font-size: var(--title); font-weight: 600; line-height: 1.15; }
+.flow .node .n-desc { font-size: var(--small); color: var(--ink-soft); line-height: 1.4; }
+.flow .node.core { background: var(--aloe); border-color: var(--aloe-deep); }
+.flow .node.core .n-lab { color: var(--mindaro); }
+.flow .node.core .n-name, .flow .node.core .n-desc { color: var(--cream); }
+.flow .node.core .sk { background: var(--mindaro); }
+.flow .arrow-h { align-self: center; font-family: var(--font-mono); color: var(--aloe); font-weight: 700; font-size: var(--title); }
+
+/* Bandeau outil (sponsor / intégration) */
+.tool { display: flex; align-items: baseline; gap: clamp(0.8rem, 2vw, 1.6rem); flex-wrap: wrap;
+  padding: clamp(0.7rem, 1.8vh, 1.2rem) clamp(1rem, 2vw, 1.6rem); border: 1px solid var(--line-strong); background: var(--cream); }
+.tool .t-name { font-family: var(--font-display); font-size: var(--title); font-weight: 600; }
+.tool .t-meta { font-family: var(--font-mono); font-size: var(--eyebrow-size); letter-spacing: 0.08em; color: var(--ink-soft); text-transform: uppercase; }
+
+@media (max-width: 800px) { .duo, .flow { grid-template-columns: 1fr; flex-direction: column; } .flow .arrow-h { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- 01 COVER -->
+<section class="slide" id="s1">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>TUTO CRM NOTION</span></div>
+  <div class="slide-content">
+    <div class="eyebrow">Le cœur commercial de ta boîte, construit en une vidéo</div>
+    <h1>Je construis un CRM Notion qui se met à jour <span class="accent">tout&nbsp;seul.</span></h1>
+    <p class="sub">Un prompt le construit. Trois branchements le remplissent.</p>
+  </div>
+</section>
+
+<!-- 02 HOOK -->
+<section class="slide dark" id="s2">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>LE CONSTAT</span></div>
+  <div class="slide-content">
+    <div class="demo-label">SÉQ 0 · TEASER</div>
+    <div class="demo-title">1 000 connexions.<br>0 opportunité pilotée.</div>
+    <p class="body" style="color: rgba(252,249,248,0.75); max-width: 46ch;">Le réseau, tu l'as déjà. Ce qui manque, c'est l'endroit où il se transforme en chiffre d'affaires.</p>
+  </div>
+</section>
+
+<!-- 03 KESAKO -->
+<section class="slide" id="s3">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>KESAKO</span></div>
+  <div class="slide-content">
+    <div class="eyebrow">Chapitre 1</div>
+    <h2>Un CRM, ce n'est pas<br>un fichier de contacts.</h2>
+    <div class="num-list">
+      <div class="row"><span class="num">01</span><span class="row-title">Une mémoire</span><span class="row-desc">Ce qui a été dit, quand, par qui. Le jour où tu délègues, c'est la seule chose qui reste.</span></div>
+      <div class="row"><span class="num">02</span><span class="row-title">Une vue</span><span class="row-desc">Combien de deals en cours, pour quel montant, à quelle étape. En une vue, pas en trois heures.</span></div>
+      <div class="row"><span class="num">03</span><span class="row-title">Un rappel</span><span class="row-desc">Qui tu dois relancer aujourd'hui. Sans que ça dépende de ta mémoire.</span></div>
+    </div>
+    <div class="lesson-band"><span class="tag">LA DÉFINITION</span><span class="txt">Un CRM, c'est l'endroit où ton pipeline existe en dehors de ta tête.</span></div>
+  </div>
+</section>
+
+<!-- 04 POURQUOI ÇA NE PILOTE RIEN -->
+<section class="slide" id="s4">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>LE PIÈGE</span></div>
+  <div class="slide-content">
+    <div class="eyebrow">Chapitre 2 · pourquoi ton CRM ne pilote rien</div>
+    <h2>Trois symptômes.<br>Toujours les mêmes.</h2>
+    <div class="incident">
+      <div class="ph socketed"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="ph-name">TOUT À LA MAIN</span><span class="ph-desc">Chaque ligne demande une saisie. Donc au bout de trois semaines, plus personne ne saisit.</span></div>
+      <div class="ph socketed"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="ph-name">TOUT À PLAT</span><span class="ph-desc">Un onglet, des colonnes. Aucune relation. Impossible de dire ce que pèse un client sur trois deals.</span></div>
+      <div class="ph socketed"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="ph-name">TOUT DANS TA TÊTE</span><span class="ph-desc">Les relances vivent dans ta mémoire. Le CRM ne te rappelle rien, il t'enregistre.</span></div>
+    </div>
+    <p class="body">Un CRM mal construit ne coûte pas zéro. Il coûte la confiance que tu lui accordes. Tu arrêtes de le regarder, et tu repilotes de mémoire.</p>
+  </div>
+</section>
+
+<!-- 05 LA THÈSE -->
+<section class="slide dark" id="s5">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>LA THÈSE</span></div>
+  <div class="slide-content">
+    <div class="demo-label">LE VRAI PROBLÈME</div>
+    <div class="demo-title">Le problème d'un CRM,<br>ce n'est pas de le construire.<br><span style="color: var(--mindaro);">C'est de le tenir à jour.</span></div>
+    <p class="body" style="color: rgba(252,249,248,0.75); max-width: 48ch;">Un CRM à jour à 80 % vaut mieux qu'un CRM parfait à 0 %. Toute la vidéo sert cette phrase.</p>
+  </div>
+</section>
+
+<!-- 06 ARCHITECTURE -->
+<section class="slide" id="s6">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>ARCHITECTURE</span></div>
+  <div class="slide-content">
+    <div class="eyebrow">Chapitre 3 · une bonne construction</div>
+    <h2>Quatre bases.<br>Pas une de plus.</h2>
+    <div class="flow">
+      <div class="node socketed"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="n-lab">Base 1</span><span class="n-name">Entreprises</span><span class="n-desc">Qui achète. Secteur, taille, site.</span></div>
+      <span class="arrow-h">↔</span>
+      <div class="node socketed"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="n-lab">Base 2</span><span class="n-name">Contacts</span><span class="n-desc">Qui décide. Rattaché à une entreprise.</span></div>
+      <span class="arrow-h">→</span>
+      <div class="node socketed"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="n-lab">Base 3</span><span class="n-name">Opportunités</span><span class="n-desc">Ce qui peut se signer. Montant, étape, prochaine action.</span></div>
+      <span class="arrow-h">→</span>
+      <div class="node socketed core"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="n-lab">Base 4</span><span class="n-name">Interactions</span><span class="n-desc">Ce qui s'est passé. Reliée aux trois autres.</span></div>
+    </div>
+    <div class="lesson-band"><span class="tag">LEÇON 1</span><span class="txt">Moins de colonnes = plus de chances que ce soit rempli.</span></div>
+  </div>
+</section>
+
+<!-- 07 INTERACTIONS = LE CŒUR -->
+<section class="slide" id="s7">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>LE CŒUR</span></div>
+  <div class="slide-content">
+    <div class="eyebrow">La base que personne ne remplit</div>
+    <h2>Le pilotage vient du log,<br>pas des fiches.</h2>
+    <p class="body">Une fiche contact te dit qui c'est. Une ligne d'interaction te dit où tu en es. C'est la seule base qui produit de la décision : dernier contact, relance due, deal qui dort.</p>
+    <div class="check">
+      <div class="item"><span class="box">→</span><strong>Dernière interaction</strong><span>un rollup sur Contacts et sur Opportunités. La date la plus récente, automatiquement.</span></div>
+      <div class="item"><span class="box">→</span><strong>Vue « ça dort »</strong><span>tout ce qui n'a pas bougé depuis 14 jours. C'est ta liste de relances du lundi.</span></div>
+      <div class="item"><span class="box">→</span><strong>Zéro saisie manuelle</strong><span>c'est précisément la base qu'on va faire remplir par les branchements et l'IA.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 NOTION OUI SI / NON SI -->
+<section class="slide" id="s8">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>HONNÊTETÉ</span></div>
+  <div class="slide-content">
+    <div class="eyebrow">Chapitre 4 · Notion est ultime, à une condition</div>
+    <h2>Ce qui fait qu'un CRM Notion tient,<br>et ce qui le tue.</h2>
+    <div class="duo">
+      <div class="col socketed ok"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="col-head">Notion, oui, si</span>
+        <ul>
+          <li>tu es entre 1 et 50, et ton cycle de vente se compte en semaines</li>
+          <li>tu veux le CRM au même endroit que tes projets, tes tâches, tes docs</li>
+          <li>tu acceptes de paramétrer une fois pour de bon plutôt que d'empiler des colonnes</li>
+          <li>tu branches les entrées : sans branchement, ce n'est qu'un joli tableau</li>
+        </ul>
+      </div>
+      <div class="col socketed ko"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="col-head">Notion, non, si</span>
+        <ul>
+          <li>tu as une équipe commerciale qui a besoin de séquences d'emails automatisées à grande échelle</li>
+          <li>tu veux du scoring, du dialer, du reporting commercial avancé natif</li>
+          <li>personne n'est responsable du paramétrage : un CRM sans propriétaire meurt, quel que soit l'outil</li>
+          <li>tu comptes sur l'outil pour créer la discipline. C'est l'inverse.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 LE MASTER PROMPT -->
+<section class="slide dark" id="s9">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>LE MASTER PROMPT</span></div>
+  <div class="slide-content">
+    <div class="demo-label">CHAPITRE 5 · DÉMO</div>
+    <div class="demo-title">Un prompt.<br>Quatre bases.</div>
+    <div class="demo-list">
+      <div class="item"><span class="tick">01</span><span>Bloc 1 : les 4 bases et leurs propriétés</span></div>
+      <div class="item"><span class="tick">02</span><span>Bloc 2 : les relations, une par une (là où l'IA se plante)</span></div>
+      <div class="item"><span class="tick">03</span><span>Bloc 3 : les rollups, dernière interaction et montant pondéré</span></div>
+      <div class="item"><span class="tick">04</span><span>Bloc 4 : les vues, kanban pipeline et relances dues</span></div>
+      <div class="item"><span class="tick">05</span><span>Bloc 5 : la page d'accueil du CRM</span></div>
+      <div class="item"><span class="tick">06</span><span>Bloc 6 : les données de test, pour voir tout de suite si ça tient</span></div>
+    </div>
+    <p class="body" style="color: rgba(252,249,248,0.72); max-width: 52ch;">Six blocs, jamais un seul bloc. Un prompt monolithique génère une bouillie que tu ne peux pas déboguer.</p>
+  </div>
+</section>
+
+<!-- 10 CE QUE LE PROMPT NE FAIT PAS -->
+<section class="slide" id="s10">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>LE CONTRÔLE</span></div>
+  <div class="slide-content">
+    <div class="eyebrow">Personne ne corrige sa propre copie</div>
+    <h2>Ce que tu vérifies<br>après la génération.</h2>
+    <div class="check">
+      <div class="item"><span class="box">01</span><strong>Les relations</strong><span>ouvre un contact, ajoute une entreprise : la ligne apparaît-elle des deux côtés ? Sinon la relation n'est pas bidirectionnelle.</span></div>
+      <div class="item"><span class="box">02</span><strong>Les rollups</strong><span>« dernière interaction » doit afficher une date, pas un vide. C'est l'erreur la plus fréquente.</span></div>
+      <div class="item"><span class="box">03</span><strong>Les statuts</strong><span>six étapes, dans l'ordre, sans doublon de couleur. L'IA en invente souvent une septième.</span></div>
+      <div class="item"><span class="box">04</span><strong>Les boutons</strong><span>ils ne se génèrent pas. C'est le chapitre suivant, et c'est à la main.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 LES BOUTONS -->
+<section class="slide" id="s11">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>EXPÉRIENCE</span></div>
+  <div class="slide-content">
+    <div class="eyebrow">Chapitre 6 · l'écart entre un CRM utilisé et un CRM abandonné</div>
+    <h2>Trois boutons.<br>Trois frictions en moins.</h2>
+    <div class="num-list">
+      <div class="row"><span class="num">01</span><span class="row-title">Loguer un échange</span><span class="row-desc">Depuis la fiche contact. Crée l'interaction, date du jour, contact et opportunité préremplis. Deux secondes au lieu de six clics.</span></div>
+      <div class="row"><span class="num">02</span><span class="row-title">Faire avancer le deal</span><span class="row-desc">Passe l'opportunité à l'étape suivante et logue le changement. Ton pipeline reste vrai sans effort.</span></div>
+      <div class="row"><span class="num">03</span><span class="row-title">Programmer la relance</span><span class="row-desc">Pose une prochaine action à J+7. Une opportunité sans prochaine action datée est une opportunité morte.</span></div>
+    </div>
+    <div class="lesson-band"><span class="tag">LEÇON 2</span><span class="txt">Chaque clic que tu supprimes est une ligne qui sera vraiment saisie.</span></div>
+  </div>
+</section>
+
+<!-- 12 LES 3 PORTES D'ENTRÉE -->
+<section class="slide" id="s12">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>LE REMPLISSAGE</span></div>
+  <div class="slide-content">
+    <div class="eyebrow">Chapitre 7 · un CRM ne vaut rien si tu ne logues pas</div>
+    <h2>Tes échanges arrivent<br>par trois portes.</h2>
+    <div class="roles">
+      <div class="role-card socketed hero"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="who">Porte 1</span><span class="role-name">Le mail</span><span class="role-desc">80 % de tes échanges. La porte la plus rentable à automatiser, et la plus pénible à faire à la main.</span><span class="never">→ Slap</span></div>
+      <div class="role-card socketed"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="who">Porte 2</span><span class="role-name">Le rendez-vous</span><span class="role-desc">Le signal le plus fort de ton funnel. Un lead qui réserve doit exister dans le CRM avant que tu ouvres l'ordinateur.</span><span class="never" style="color: var(--aloe);">→ Cal.com</span></div>
+      <div class="role-card socketed"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="who">Porte 3</span><span class="role-name">Tout le reste</span><span class="role-desc">L'appel, le café, le message LinkedIn. Ça, aucune API ne le capte. C'est là que tu parles à l'IA.</span><span class="never" style="color: var(--aloe);">→ Agent Notion / Claude</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 SLAP -->
+<section class="slide dark" id="s13">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>PORTE 1 · LE MAIL</span></div>
+  <div class="slide-content">
+    <div class="demo-label">DÉMO · SLAP</div>
+    <div class="demo-title">Ta boîte mail<br>devient une base Notion.</div>
+    <div class="demo-list">
+      <div class="item"><span class="tick">→</span><span>Gmail ou Outlook branché : chaque email devient une page de base de données</span></div>
+      <div class="item"><span class="tick">→</span><span>Le fil se relie tout seul au bon contact et à la bonne opportunité</span></div>
+      <div class="item"><span class="tick">→</span><span>Tu réponds depuis Notion, sans ouvrir ta boîte mail</span></div>
+      <div class="item"><span class="tick">→</span><span>Les pièces jointes atterrissent dans Notion, pas dans un fil perdu</span></div>
+      <div class="item"><span class="tick">→</span><span>Boîte partagée entre coéquipiers : ton associé voit l'échange sans que tu transfères</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 SLAP EN CLAIR -->
+<section class="slide" id="s14">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>PORTE 1 · LE VERDICT</span></div>
+  <div class="slide-content">
+    <div class="eyebrow">Ce que ça remplace, ce que ça ne remplace pas</div>
+    <h2>Slap, en clair.</h2>
+    <div class="duo">
+      <div class="col socketed ok"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="col-head">Pourquoi je le montre</span>
+        <ul>
+          <li>c'est le seul chaînon que Notion ne sait pas faire seul : la synchro mail bidirectionnelle</li>
+          <li>ça tue la double saisie, qui est la cause n°1 d'un CRM abandonné</li>
+          <li>SlapPortal en bonus : transformer une base en portail client sécurisé</li>
+        </ul>
+      </div>
+      <div class="col socketed ko"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="col-head">Ce que ça n'est pas</span>
+        <ul>
+          <li>ce n'est pas un CRM : sans les 4 bases derrière, tu n'as qu'une boîte mail déguisée</li>
+          <li>ce n'est pas gratuit : c'est un abonnement par utilisateur, à ajouter à ton coût Notion</li>
+          <li>ce n'est pas magique : le rattachement au bon contact se vérifie les premiers jours</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tool">
+      <span class="t-name">getslap.co</span>
+      <span class="t-meta">SlapMail 8 $ / utilisateur / mois · SlapPortal à partir de 12 $ / mois · essai sans carte</span>
+      <span class="t-meta" style="color: var(--error);">tarifs relevés le 03/08/2026, à revérifier avant tournage</span>
+    </div>
+  </div>
+</section>
+
+<!-- 15 CAL.COM -->
+<section class="slide" id="s15">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>PORTE 2 · LE RDV</span></div>
+  <div class="slide-content">
+    <div class="eyebrow">Mon intégration réelle, celle qui tourne chez moi</div>
+    <h2>Un lead réserve.<br>Le CRM le sait avant toi.</h2>
+    <div class="flow">
+      <div class="node socketed"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="n-lab">Étape 1</span><span class="n-name">Il réserve</span><span class="n-desc">Sur ton lien Cal.com public.</span></div>
+      <span class="arrow-h">→</span>
+      <div class="node socketed"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="n-lab">Étape 2</span><span class="n-name">Le webhook part</span><span class="n-desc">Cal.com prévient Notion à la seconde où le créneau est pris.</span></div>
+      <span class="arrow-h">→</span>
+      <div class="node socketed core"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="n-lab">Étape 3</span><span class="n-name">Le CRM se remplit</span><span class="n-desc">Contact créé ou retrouvé par email, statut « 1er RDV », date du rendez-vous, interaction loguée.</span></div>
+    </div>
+    <div class="lesson-band"><span class="tag">MONEY SHOT</span><span class="txt">0 saisie. Le rendez-vous s'est logué tout seul.</span></div>
+  </div>
+</section>
+
+<!-- 16 PORTE 3 : LES 2 VOIES -->
+<section class="slide" id="s16">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>PORTE 3 · LA VOIX</span></div>
+  <div class="slide-content">
+    <div class="eyebrow">« J'ai eu Marc au téléphone, il veut une propale pour septembre »</div>
+    <h2>Deux voies.<br>Choisis ton niveau.</h2>
+    <div class="duo">
+      <div class="col socketed ok"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="col-head">Voie A · agent Notion AI</span>
+        <ul>
+          <li>tout reste dans Notion, rien à installer, rien à connecter</li>
+          <li>tu écris en français, il crée l'interaction, met à jour l'opportunité, pose la prochaine action</li>
+          <li>le plus simple à donner à une équipe qui n'est pas technique</li>
+        </ul>
+      </div>
+      <div class="col socketed ok"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="col-head">Voie B · Claude connecté</span>
+        <ul>
+          <li>même chose, plus la recherche web et le croisement avec tes autres outils</li>
+          <li>il peut préparer ton lundi : synthèse du pipeline, relances dues, message de relance rédigé</li>
+          <li>c'est la voie que j'utilise au quotidien</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 17 AGENT ENRICHISSEMENT -->
+<section class="slide dark" id="s17">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>BONUS · L'ENRICHISSEMENT</span></div>
+  <div class="slide-content">
+    <div class="demo-label">DÉMO · AGENT ENRICHISSEMENT</div>
+    <div class="demo-title">Tu tapes un nom.<br>Il ramène la fiche entreprise.</div>
+    <div class="demo-list">
+      <div class="item"><span class="tick">→</span><span>Déclencheur : un contact est ajouté au CRM</span></div>
+      <div class="item"><span class="tick">→</span><span>L'agent cherche l'entreprise sur les sources publiques : Pappers, société.com, le site officiel, LinkedIn</span></div>
+      <div class="item"><span class="tick">→</span><span>Il remplit SIREN, forme juridique, secteur, effectif, dernier chiffre d'affaires publié, dirigeant, ville</span></div>
+      <div class="item"><span class="tick">→</span><span>Il cite ses sources et laisse vide ce qu'il n'a pas trouvé. Jamais d'invention.</span></div>
+      <div class="item"><span class="tick">→</span><span>Résultat : tu sais si le prospect est dans ta cible avant même le premier message</span></div>
+    </div>
+    <p class="body" style="color: rgba(252,249,248,0.72); max-width: 52ch;">Les comptes déposés ne sont pas toujours publics. Un champ vide est une réponse correcte.</p>
+  </div>
+</section>
+
+<!-- 18 LE DASHBOARD -->
+<section class="slide" id="s18">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>LE RÉSULTAT</span></div>
+  <div class="slide-content">
+    <div class="eyebrow">La seule page que tu ouvres le lundi matin</div>
+    <h2>Ton pipeline,<br>en une vue.</h2>
+    <div class="bignums">
+      <div class="bn socketed"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="bn-val">4</span><span class="bn-label">bases reliées</span></div>
+      <div class="bn socketed"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="bn-val">3</span><span class="bn-label">portes d'entrée branchées</span></div>
+      <div class="bn socketed"><span class="sk tl"></span><span class="sk tr"></span><span class="sk bl"></span><span class="sk br"></span>
+        <span class="bn-val">0</span><span class="bn-label">saisie manuelle obligatoire</span></div>
+    </div>
+    <div class="check">
+      <div class="item"><span class="box">→</span><strong>Kanban pipeline</strong><span>le montant total par colonne. Tu vois ce qui est en discussion, en propale, en signature.</span></div>
+      <div class="item"><span class="box">→</span><strong>Relances dues</strong><span>tout ce qui dort depuis 14 jours. Ta liste d'appels de la semaine.</span></div>
+      <div class="item"><span class="box">→</span><strong>Derniers échanges</strong><span>ce qui s'est logué tout seul depuis vendredi.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 19 PREUVE -->
+<section class="slide" id="s19">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>EN VRAI</span></div>
+  <div class="slide-content">
+    <div class="eyebrow">Un client, une quinzaine de personnes</div>
+    <h2>Avant, tout arrivait dans les mails.<br>Et le dirigeant redispatchait à la main.</h2>
+    <p class="body">Un restaurant qui fait aussi de l'événementiel et du traiteur pour des entreprises. Les opérations vivaient entre Google Docs, WhatsApp et des outils dispersés. Aucune vision d'ensemble, aucun CRM, des relances impossibles à suivre.</p>
+    <p class="body">On a construit le CRM et le suivi opérationnel sur plusieurs bases reliées, du premier contact commercial jusqu'à la livraison. Aujourd'hui tout retombe dans Notion et chacun prend la tâche qui le concerne. Le dirigeant n'est plus le routeur.</p>
+    <div class="lesson-band"><span class="tag">CE QUI A CHANGÉ</span><span class="txt">Le dirigeant a arrêté d'être le point de passage obligé.</span></div>
+  </div>
+</section>
+
+<!-- 20 LES 3 LEÇONS -->
+<section class="slide" id="s20">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>À RETENIR</span></div>
+  <div class="slide-content">
+    <h2>Trois choses à garder.</h2>
+    <div class="num-list">
+      <div class="row"><span class="num">01</span><span class="row-title">L'architecture</span><span class="row-desc">Quatre bases reliées, pas plus. Interactions est le cœur, c'est de là que vient le pilotage.</span></div>
+      <div class="row"><span class="num">02</span><span class="row-title">Le remplissage</span><span class="row-desc">Un CRM ne meurt jamais de sa structure, il meurt de sa saisie. Branche les entrées avant d'ajouter des colonnes.</span></div>
+      <div class="row"><span class="num">03</span><span class="row-title">La décision</span><span class="row-desc">L'IA remplit et propose. Toi tu tranches. C'est la seule répartition qui tient dans le temps.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 21 CTA -->
+<section class="slide" id="s21">
+  <div class="slide-header"><span><span class="brand-dot"></span>RAMA LOGIC</span><span>ET TOI ?</span></div>
+  <div class="slide-content">
+    <h2>Tout est en description.</h2>
+    <div class="cta-list">
+      <div class="crow"><span class="arrow">01</span><span class="c-title">Le template CRM</span><span class="c-desc">Le workspace exact construit dans la vidéo, à dupliquer</span></div>
+      <div class="crow"><span class="arrow">02</span><span class="c-title">Le master prompt</span><span class="c-desc">Les 6 blocs à coller, plus les 2 prompts d'agent (log et enrichissement)</span></div>
+      <div class="crow"><span class="arrow">03</span><span class="c-title">Le guide écrit</span><span class="c-desc">ramalogic.com · créer un CRM sur Notion pour ta PME</span></div>
+    </div>
+    <div class="lesson-band"><span class="tag">EN COMMENTAIRE</span><span class="txt">Ton CRM aujourd'hui, c'est quoi : un outil, un tableur, ou ta mémoire ?</span></div>
+  </div>
+</section>
+
+<div class="nav-counter" id="counter">1 / 21</div>
+<div class="keyboard-hint">← → naviguer</div>
+
+<script>
+(function () {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const counter = document.getElementById('counter');
+  let current = 0;
+  function go(i) {
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    slides[current].scrollIntoView({ behavior: 'smooth' });
+  }
+  function syncCounter() {
+    const idx = Math.round(window.scrollY / window.innerHeight);
+    current = Math.max(0, Math.min(slides.length - 1, idx));
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+  }
+  document.addEventListener('keydown', (e) => {
+    if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); go(current + 1); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); go(current - 1); }
+    else if (e.key === 'Home') { e.preventDefault(); go(0); }
+    else if (e.key === 'End') { e.preventDefault(); go(slides.length - 1); }
+  });
+  window.addEventListener('scroll', syncCounter, { passive: true });
+  syncCounter();
+})();
+</script>
+</body>
+</html>
