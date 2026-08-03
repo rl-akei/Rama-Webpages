@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Argos Multilingual × Rama Logic — Notion Orchestration Layer</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;family=Work+Sans:ital,wght@0,300..900;1,300..900&amp;display=swap" rel="stylesheet"/>
+<!-- Clash Grotesk is a Fontshare face, not a Google face. The template's Google Fonts link silently failed and every deck fell back to a system sans. -->
+<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: { extend: {
+    "colors": {
+      "surface-dim": "#dcd9d9", "secondary-fixed-dim": "#bdcf7c", "secondary-fixed": "#d9eb95",
+      "on-tertiary": "#ffffff", "surface-tint": "#466556", "on-secondary": "#ffffff",
+      "on-background": "#1c1b1b", "surface-container-highest": "#e5e2e1", "inverse-primary": "#accebc",
+      "error": "#ba1a1a", "on-tertiary-fixed": "#0c1d27", "background": "#fcf9f8",
+      "on-primary-fixed-variant": "#2f4d3f", "primary-fixed-dim": "#accebc", "on-primary-container": "#f5fff7",
+      "surface-container-lowest": "#ffffff", "primary-fixed": "#c8ead8", "surface-variant": "#e5e2e1",
+      "on-primary": "#ffffff", "on-error-container": "#93000a", "on-error": "#ffffff",
+      "primary": "#446254", "outline": "#727974", "on-surface": "#1c1b1b",
+      "tertiary-container": "#657783", "on-tertiary-container": "#fcfcff", "on-tertiary-fixed-variant": "#384954",
+      "tertiary": "#4d5e6a", "on-surface-variant": "#424844", "surface-bright": "#fcf9f8",
+      "error-container": "#ffdad6", "on-secondary-container": "#5c6b24", "surface-container-high": "#ebe7e7",
+      "on-secondary-fixed": "#171e00", "secondary-container": "#d9eb95", "inverse-surface": "#313030",
+      "outline-variant": "#c1c8c2", "surface-container-low": "#f6f3f2", "secondary": "#56641e",
+      "on-primary-fixed": "#012115", "on-secondary-fixed-variant": "#3f4c05", "inverse-on-surface": "#f3f0ef",
+      "surface-container": "#f0edec", "primary-container": "#5c7b6c", "tertiary-fixed-dim": "#b7c9d6",
+      "tertiary-fixed": "#d3e5f3", "surface": "#fcf9f8"
+    },
+    "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+    "spacing": {
+      "md": "24px", "margin": "clamp(16px, 3.3vw, 32px)", "lg": "clamp(24px, 5vw, 48px)",
+      "xl": "clamp(40px, 8vw, 80px)", "sm": "12px", "gutter": "24px", "base": "8px", "xs": "4px"
+    },
+    "fontFamily": {
+      "body-reg": ["Work Sans"], "code-label": ["Space Mono"], "title-sm": ["Clash Grotesk"],
+      "eyebrow": ["Space Mono"], "display-lg": ["Clash Grotesk"], "headline-md": ["Clash Grotesk"]
+    },
+    "fontSize": {
+      "display-lg":  ["clamp(2.75rem, 5.5vw, 5rem)",    { "lineHeight": "1.05", "fontWeight": "500" }],
+      "headline-md": ["clamp(1.75rem, 3.6vw, 3rem)",     { "lineHeight": "1.2",  "fontWeight": "500" }],
+      "title-sm":    ["clamp(1.05rem, 1.7vw, 1.5rem)",   { "lineHeight": "1.4",  "fontWeight": "500" }],
+      "body-reg":    ["clamp(0.9rem, 1vw, 1rem)",        { "lineHeight": "1.6",  "fontWeight": "400" }],
+      "code-label":  ["clamp(0.78rem, 0.9vw, 0.875rem)", { "lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400" }],
+      "eyebrow":     ["clamp(0.7rem, 0.85vw, 0.75rem)",  { "lineHeight": "1.0",  "fontWeight": "500" }]
+    }
+  } }
+}
+</script>
+<style>
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(28,27,27,.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28,27,27,.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+/* ---- viewport-fit ---- */
+.slides-viewport { height: 100vh; height: 100dvh; }
+.slide { height: 100vh; height: 100dvh; min-height: 100vh; overflow: hidden; display: none; }
+.slide.is-active { display: flex; }
+.slide > * { min-height: 0; }
+.slide img { max-height: min(50vh, 420px); object-fit: contain; }
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.2s !important; }
+  html { scroll-behavior: auto; }
+}
+/* ---- socket ---- */
+.sock::before,.sock::after,.sock>.s3,.sock>.s4{content:"";position:absolute;width:6px;height:6px;background:#1c1b1b;}
+.sock::before{top:0;left:0;transform:translate(-50%,-50%);}
+.sock::after{top:0;right:0;transform:translate(50%,-50%);}
+.sock>.s3{bottom:0;left:0;transform:translate(-50%,50%);}
+.sock>.s4{bottom:0;right:0;transform:translate(50%,50%);}
+/* ---- nav ---- */
+.nav-controls{position:fixed;bottom:18px;right:18px;z-index:60;display:flex;align-items:center;gap:8px;}
+.nav-btn{width:34px;height:34px;display:grid;place-items:center;border:1px solid #1c1b1b;background:#fcf9f8;cursor:pointer;}
+.nav-btn:hover{background:#c8ead8;}
+.counter{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.05em;border:1px solid #1c1b1b;padding:8px 10px;background:#fcf9f8;}
+#overview{position:fixed;inset:0;background:#fcf9f8;z-index:80;display:none;padding:28px;overflow:auto;}
+#overview.on{display:block;}
+.ov-card{border:1px solid #1c1b1b;padding:12px;cursor:pointer;background:#fff;}
+.ov-card:hover{background:#c8ead8;}
+@media print{.nav-controls,#overview{display:none !important;}.slide{display:flex !important;page-break-after:always;height:100vh;}}
+body.show-all .slide{display:flex !important;}
+body.show-all .nav-controls{display:none !important;}
+</style>
+</head>
+<body class="bg-background text-on-background font-body-reg antialiased">
+<div class="slides-viewport">
+
+<!-- ============ 1 · COVER ============ -->
+<section class="slide is-active grid-bg items-center justify-center p-margin" data-slide="1">
+  <div class="max-w-5xl w-full relative sock border border-on-background/15 bg-surface-container-lowest/80 p-xl"><span class="s3"></span><span class="s4"></span>
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase py-xs px-sm bg-primary-fixed/40 border border-primary-fixed inline-block">Phase 1 audit · findings &amp; Phase 2 proposal</span>
+    <h1 class="font-display-lg text-display-lg mt-lg tracking-tight">Notion<br/>Orchestration Layer</h1>
+    <div class="w-24 h-1 bg-secondary my-md"></div>
+    <p class="font-headline-md text-headline-md text-on-surface-variant leading-tight">Argos Multilingual<br/><span class="text-outline">Frontier AI Data Services BU</span></p>
+    <div class="mt-lg pt-md border-t border-outline-variant flex flex-wrap items-center justify-between gap-sm">
+      <p class="font-code-label text-code-label text-tertiary uppercase tracking-wider">Prepared for Mitchell Ison · by Sylvain Ramaradjou · Rama Logic</p>
+      <p class="font-code-label text-code-label text-outline uppercase tracking-wider">4 August 2026 · Confidential</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 · CONTENTS ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="2">
+  <div class="max-w-5xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">Contents</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-lg">What we will cover</h2>
+    <div class="divide-y divide-on-background/10 border-y border-on-background/10">
+      <div class="flex gap-md py-sm items-baseline"><span class="font-code-label text-code-label text-primary w-8">01</span><span class="font-title-sm text-title-sm w-64">What we found</span><span class="text-on-surface-variant">Four findings from 3 hours with your team and two system walkthroughs</span></div>
+      <div class="flex gap-md py-sm items-baseline"><span class="font-code-label text-code-label text-primary w-8">02</span><span class="font-title-sm text-title-sm w-64">The tool landscape</span><span class="text-on-surface-variant">Everything the BU runs on, and where a single fact actually lives</span></div>
+      <div class="flex gap-md py-sm items-baseline"><span class="font-code-label text-code-label text-primary w-8">03</span><span class="font-title-sm text-title-sm w-64">What I see</span><span class="text-on-surface-variant">The root cause nobody named, and where this goes if nothing changes</span></div>
+      <div class="flex gap-md py-sm items-baseline"><span class="font-code-label text-code-label text-primary w-8">04</span><span class="font-title-sm text-title-sm w-64">The system</span><span class="text-on-surface-variant">Target architecture, your morning screen, and why this approach</span></div>
+      <div class="flex gap-md py-sm items-baseline"><span class="font-code-label text-code-label text-primary w-8">05</span><span class="font-title-sm text-title-sm w-64">The plan</span><span class="text-on-surface-variant">Three sprints, the timeline, and what we need from you</span></div>
+      <div class="flex gap-md py-sm items-baseline"><span class="font-code-label text-code-label text-primary w-8">06</span><span class="font-title-sm text-title-sm w-64">Investment</span><span class="text-on-surface-variant">The decision on the table today</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 · DIVIDER ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="3">
+  <div class="max-w-5xl w-full mx-auto relative sock border-l-2 border-primary pl-lg py-lg"><span class="s3"></span><span class="s4"></span>
+    <span class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase">01 / 05</span>
+    <h2 class="font-display-lg text-display-lg mt-sm tracking-tight">What we found</h2>
+    <p class="font-title-sm text-title-sm text-on-surface-variant mt-md">Three hours of your team's honesty, and two walkthroughs of the systems underneath.</p>
+  </div>
+</section>
+
+<!-- ============ 4 · PHASE 1 RECAP ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="4">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">Phase 1 · RL-2026-ARG-P1</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-lg">What this audit covered</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-lg">
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-display-lg text-display-lg text-primary leading-none">3h</p>
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase mt-sm">Workshop, full team</p></div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-display-lg text-display-lg text-primary leading-none">9</p>
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase mt-sm">Participants, 6 functions</p></div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-display-lg text-display-lg text-primary leading-none">4</p>
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase mt-sm">Calls &amp; walkthroughs</p></div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-display-lg text-display-lg text-secondary leading-none">32</p>
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase mt-sm">Data sources mapped</p></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-gutter">
+      <div class="border-l border-on-background/15 pl-md">
+        <p class="font-code-label text-code-label text-primary uppercase mb-sm">What we did</p>
+        <ul class="space-y-xs text-on-surface-variant">
+          <li>Discovery calls with the Program Director and the GM, 6 and 13 July</li>
+          <li>End-to-end process workshop with all functions, 23 July</li>
+          <li>Supply chain system walkthrough: XTRF, Vendra, the trackers, 29 July</li>
+          <li>Delivery system walkthrough: XTRF, Myriad, the PM tracker, 3 August</li>
+        </ul>
+      </div>
+      <div class="border-l border-on-background/15 pl-md">
+        <p class="font-code-label text-code-label text-primary uppercase mb-sm">What you walked out with</p>
+        <ul class="space-y-xs text-on-surface-variant">
+          <li>A validated end-to-end map, from client request to freelancer paid</li>
+          <li>A tool inventory with a decision on every single one</li>
+          <li>One morning screen defined by each role, in their own words</li>
+          <li>This findings pack, and the Statement of Work behind it</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · THE FOUR FINDINGS ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="5">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">Findings</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-lg">Four things, and they are all the same thing</h2>
+    <div class="grid md:grid-cols-2 gap-gutter">
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <span class="font-code-label text-code-label text-secondary uppercase">/ F1 · Orchestration</span>
+        <p class="font-title-sm text-title-sm mt-xs mb-sm">You have systems of record. You have no orchestration layer.</p>
+        <p class="text-on-surface-variant">XTRF knows the money. Myriad knows the production. Nobody knows the state of the work.</p>
+        <p class="font-code-label text-code-label text-error mt-sm">Every role asked for the same thing first: one screen.</p></div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <span class="font-code-label text-code-label text-secondary uppercase">/ F2 · Duplication</span>
+        <p class="font-title-sm text-title-sm mt-xs mb-sm">The same fact is typed up to eight times.</p>
+        <p class="text-on-surface-variant">One vendor on one batch exists in eleven places. Two teams copy the same facts to each other, line by line.</p>
+        <p class="font-code-label text-code-label text-error mt-sm">"Supply chain does not interact with our trackers."</p></div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <span class="font-code-label text-code-label text-secondary uppercase">/ F3 · Margin</span>
+        <p class="font-title-sm text-title-sm mt-xs mb-sm">Your margin lives in one person's spreadsheet.</p>
+        <p class="text-on-surface-variant">Buy rate, sell rate and margin per vendor exist in the supply chain master tracker, and nowhere you can query.</p>
+        <p class="font-code-label text-code-label text-error mt-sm">Not visible on any dashboard, by anyone.</p></div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <span class="font-code-label text-code-label text-secondary uppercase">/ F4 · Fraud</span>
+        <p class="font-title-sm text-title-sm mt-xs mb-sm">Fraud screening is a manual tax that grows with you.</p>
+        <p class="text-on-surface-variant">CVs reviewed one by one. Candidates declare one country and enter another. Interviews scheduled by hand.</p>
+        <p class="font-code-label text-code-label text-error mt-sm">It scales with volume. Your ambition is thousands.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 · DIVIDER ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="6">
+  <div class="max-w-5xl w-full mx-auto relative sock border-l-2 border-primary pl-lg py-lg"><span class="s3"></span><span class="s4"></span>
+    <span class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase">02 / 05</span>
+    <h2 class="font-display-lg text-display-lg mt-sm tracking-tight">The tool landscape</h2>
+    <p class="font-title-sm text-title-sm text-on-surface-variant mt-md">Everything the BU runs on, and where a single fact actually lives.</p>
+  </div>
+</section>
+
+<!-- ============ 7 · THE INVENTORY ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="7">
+  <div class="max-w-6xl w-full mx-auto">
+    <div class="flex flex-wrap items-end justify-between gap-sm mb-md">
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">The inventory</span>
+        <h2 class="font-headline-md text-headline-md mt-xs">What one business unit runs on</h2>
+      </div>
+      <div class="flex gap-md items-end">
+        <div class="text-right"><p class="font-display-lg text-display-lg text-primary leading-none">22</p><p class="font-code-label text-code-label text-on-surface-variant uppercase">applications</p></div>
+        <div class="text-right"><p class="font-display-lg text-display-lg text-secondary leading-none">10</p><p class="font-code-label text-code-label text-on-surface-variant uppercase">spreadsheet families</p></div>
+      </div>
+    </div>
+    <p class="font-code-label text-code-label text-on-surface-variant uppercase mb-sm">Applications</p>
+    <div class="flex flex-wrap gap-xs mb-md">
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">XTRF</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">Myriad</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">Asana</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">Vendra</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">Google Sheets</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">Google Drive</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">SharePoint</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">Outlook</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">Teams</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">Slack</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">Upwork</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">TangoCard</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">LinkedIn</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">GMS</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">Social ads</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">inATS</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">HubSpot</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">Salesforce</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">Tableau</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">Jira</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">Notion</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label bg-surface-container-lowest">Zoom / Meet</span>
+    </div>
+    <p class="font-code-label text-code-label text-secondary uppercase mb-sm">Spreadsheets, where the orchestration actually happens</p>
+    <div class="flex flex-wrap gap-xs mb-md">
+      <span class="border border-secondary/50 bg-secondary-fixed/40 px-sm py-xs font-code-label text-code-label">S1 · Supply chain master tracker</span>
+      <span class="border border-secondary/50 bg-secondary-fixed/40 px-sm py-xs font-code-label text-code-label">S2 · Vendor / referral tracker</span>
+      <span class="border border-secondary/50 bg-secondary-fixed/40 px-sm py-xs font-code-label text-code-label">S3 · Weekly payment report</span>
+      <span class="border border-secondary/50 bg-secondary-fixed/40 px-sm py-xs font-code-label text-code-label">S4 · PM project tracker (one per PM)</span>
+      <span class="border border-secondary/50 bg-secondary-fixed/40 px-sm py-xs font-code-label text-code-label">S5 · PM reference tab</span>
+      <span class="border border-secondary/50 bg-secondary-fixed/40 px-sm py-xs font-code-label text-code-label">S6 · PM contacted tab</span>
+      <span class="border border-secondary/50 bg-secondary-fixed/40 px-sm py-xs font-code-label text-code-label">S7 · QA team trackers</span>
+      <span class="border border-secondary/50 bg-secondary-fixed/40 px-sm py-xs font-code-label text-code-label">S8 · Myriad payment export</span>
+      <span class="border border-secondary/50 bg-secondary-fixed/40 px-sm py-xs font-code-label text-code-label">S9 · Dev standup tracker</span>
+      <span class="border border-secondary/50 bg-secondary-fixed/40 px-sm py-xs font-code-label text-code-label">S10 · Queries tracker</span>
+    </div>
+    <div class="bg-on-background text-background px-md py-sm">
+      <p class="font-title-sm text-title-sm">The orchestration lives in none of the 22 applications. It lives in the spreadsheets, several of them personal, held together by copy-paste between people.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 · WRITE ONCE ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="8">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">The principle</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-xs">Write once, read everywhere</h2>
+    <p class="text-on-surface-variant mb-md max-w-4xl">A fact is entered one time, by the person closest to it, and it appears everywhere it is needed. Three real examples from your own operation.</p>
+    <div class="border-y border-on-background/15">
+      <div class="grid md:grid-cols-12 gap-md py-sm border-b border-on-background/10">
+        <p class="md:col-span-3 font-title-sm text-title-sm">"This vendor is excluded, no response"</p>
+        <div class="md:col-span-5"><span class="font-code-label text-code-label text-error uppercase">Today</span><p class="text-on-surface-variant">The PM writes it in her tracker, then opens the supply chain tracker and copies it across one by one. If she does not, supply chain never knows and the next project contacts the person again.</p></div>
+        <div class="md:col-span-4"><span class="font-code-label text-code-label text-primary uppercase">After</span><p class="text-on-surface-variant">One field. It appears on the Supply Chain Board, on the vendor record with its reason, in the funnel counts, and in the team memory next year.</p></div>
+      </div>
+      <div class="grid md:grid-cols-12 gap-md py-sm border-b border-on-background/10">
+        <p class="md:col-span-3 font-title-sm text-title-sm">"The agreed buy rate is 20 USD"</p>
+        <div class="md:col-span-5"><span class="font-code-label text-code-label text-error uppercase">Today</span><p class="text-on-surface-variant">Negotiated by supply chain, typed into the master tracker, copied by the PM into her tracker, typed again into XTRF at PO time. Three entries, three chances to diverge.</p></div>
+        <div class="md:col-span-4"><span class="font-code-label text-code-label text-primary uppercase">After</span><p class="text-on-surface-variant">Entered once. Margin computes itself, rolls up to the project, and lands on your dashboard against target.</p></div>
+      </div>
+      <div class="grid md:grid-cols-12 gap-md py-sm">
+        <p class="md:col-span-3 font-title-sm text-title-sm">"Test result: borderline"</p>
+        <div class="md:col-span-5"><span class="font-code-label text-code-label text-error uppercase">Today</span><p class="text-on-surface-variant">Quality writes it in their tracker, then re-enters it in the PM's tracker in order to talk to them. Supply chain reads it somewhere else again.</p></div>
+        <div class="md:col-span-4"><span class="font-code-label text-code-label text-primary uppercase">After</span><p class="text-on-surface-variant">One record. It updates the vendor history, the funnel, the performance flag and the Quality Board, in the same second.</p></div>
+      </div>
+    </div>
+    <div class="mt-md border border-primary bg-primary-fixed/30 px-md py-sm relative sock"><span class="s3"></span><span class="s4"></span>
+      <p class="font-title-sm text-title-sm">One owner, one home, and everyone else gets a <span class="text-primary">view</span>, never a copy. That is the difference between ten spreadsheets and one system, and it is why the trackers can actually die.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9 · WHAT IT COSTS ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="9">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">The cost today</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-lg">What the copy-paste is costing you</h2>
+    <div class="grid md:grid-cols-4 gap-gutter mb-md">
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <span class="font-code-label text-code-label text-secondary uppercase">Onboarding</span>
+        <p class="font-display-lg text-display-lg text-error leading-none my-xs">7-10<span class="font-title-sm text-title-sm"> min</span></p>
+        <p class="text-on-surface-variant">Per vendor, one by one. No batch upload. Projects run 10 to 500 people, the ambition is thousands.</p></div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <span class="font-code-label text-code-label text-secondary uppercase">Purchase orders</span>
+        <p class="font-display-lg text-display-lg text-error leading-none my-xs">40</p>
+        <p class="text-on-surface-variant">Typed by hand on one mid-sized project, read line by line from a Myriad export. "Very easy to do, but totally manual."</p></div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <span class="font-code-label text-code-label text-secondary uppercase">Supply chain day</span>
+        <p class="font-display-lg text-display-lg text-error leading-none my-xs">90<span class="font-title-sm text-title-sm">%</span></p>
+        <p class="text-on-surface-variant">"Ninety percent of our work is sending emails and replying to emails and scammers."</p></div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <span class="font-code-label text-code-label text-secondary uppercase">Quality</span>
+        <p class="font-display-lg text-display-lg text-error leading-none my-xs">0</p>
+        <p class="text-on-surface-variant">Places where quality is tracked. "Quality not really tracked anywhere at this point."</p></div>
+    </div>
+    <div class="bg-on-background text-background px-md py-sm">
+      <p class="font-title-sm text-title-sm">None of these numbers is a people problem. Every one of them is the same structural problem: the work has no home, so people become the integration layer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 · DIVIDER ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="10">
+  <div class="max-w-5xl w-full mx-auto relative sock border-l-2 border-primary pl-lg py-lg"><span class="s3"></span><span class="s4"></span>
+    <span class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase">03 / 05</span>
+    <h2 class="font-display-lg text-display-lg mt-sm tracking-tight">What I see</h2>
+    <p class="font-title-sm text-title-sm text-on-surface-variant mt-md">The cause underneath the four findings, and where this goes.</p>
+  </div>
+</section>
+
+<!-- ============ 11 · ROOT CAUSE / TODAY-TOMORROW ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="11">
+  <div class="max-w-6xl w-full mx-auto">
+    <div class="grid md:grid-cols-2 gap-lg">
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">The root cause</span>
+        <h2 class="font-headline-md text-headline-md mt-sm mb-sm">Your tools each own a noun. Nobody owns the verb.</h2>
+        <p class="text-on-surface-variant mb-md">XTRF owns the money. Myriad owns the production. Vendra owns the paperwork. Every tool holds a thing. Not one of them holds the <span class="text-on-background">work in progress</span>, so the only place it exists is in spreadsheets and in people's heads. That is why adding a tool has never fixed it, and why Asana did not stick.</p>
+        <div class="border border-error/40 bg-error-container/40 p-md relative sock"><span class="s3"></span><span class="s4"></span>
+          <span class="font-code-label text-code-label text-error uppercase">If nothing changes</span>
+          <p class="mt-xs">The manual cost is linear in headcount. Going from 500 vendors to thousands multiplies onboarding minutes, purchase orders, fraud reviews and email volume by the same factor. The team does not break at 2x. It breaks at the point where nobody can answer "where are we?" without a meeting.</p>
+        </div>
+      </div>
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">Where we are going</span>
+        <div class="mt-sm border-t border-on-background/15">
+          <div class="grid grid-cols-2 gap-md py-sm border-b border-on-background/10">
+            <div><span class="font-code-label text-code-label text-error uppercase">Today</span></div>
+            <div><span class="font-code-label text-code-label text-primary uppercase">After</span></div>
+          </div>
+          <div class="grid grid-cols-2 gap-md py-sm border-b border-on-background/10">
+            <p class="text-on-surface-variant">Four trackers, one per team, none talking</p>
+            <p>One staffing line, read by everyone</p>
+          </div>
+          <div class="grid grid-cols-2 gap-md py-sm border-b border-on-background/10">
+            <p class="text-on-surface-variant">Margin in a private spreadsheet column</p>
+            <p>Margin against target, on your screen</p>
+          </div>
+          <div class="grid grid-cols-2 gap-md py-sm border-b border-on-background/10">
+            <p class="text-on-surface-variant">40 POs typed from a manual export</p>
+            <p>The lines assembled, ready to issue</p>
+          </div>
+          <div class="grid grid-cols-2 gap-md py-sm border-b border-on-background/10">
+            <p class="text-on-surface-variant">Quality tracked nowhere</p>
+            <p>Every check owned, scored and attached to the vendor</p>
+          </div>
+          <div class="grid grid-cols-2 gap-md py-sm">
+            <p class="text-on-surface-variant">"I ask people for movement updates"</p>
+            <p>One screen, every morning, no meeting</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 · DIVIDER ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="12">
+  <div class="max-w-5xl w-full mx-auto relative sock border-l-2 border-primary pl-lg py-lg"><span class="s3"></span><span class="s4"></span>
+    <span class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase">04 / 05</span>
+    <h2 class="font-display-lg text-display-lg mt-sm tracking-tight">The system</h2>
+    <p class="font-title-sm text-title-sm text-on-surface-variant mt-md">One orchestration layer on top of the systems you keep.</p>
+  </div>
+</section>
+
+<!-- ============ 13 · TARGET ARCHITECTURE ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="13">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">Target architecture</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">Notion orchestrates. XTRF and Myriad keep what they own.</h2>
+    <div class="grid md:grid-cols-3 gap-gutter mb-md">
+      <div class="md:col-span-2 relative sock border-2 border-primary p-md bg-primary-fixed/20"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-primary uppercase mb-sm">Notion · the orchestration layer (new)</p>
+        <div class="grid grid-cols-2 gap-sm">
+          <div class="border border-on-background/20 bg-surface-container-lowest p-sm"><p class="font-title-sm text-title-sm">Projects</p><p class="text-on-surface-variant">One status carries the 12 phases</p></div>
+          <div class="border border-on-background/20 bg-surface-container-lowest p-sm"><p class="font-title-sm text-title-sm">Batches</p><p class="text-on-surface-variant">The unit of work, of PO and of quality</p></div>
+          <div class="border border-on-background/20 bg-surface-container-lowest p-sm"><p class="font-title-sm text-title-sm">Vendors</p><p class="text-on-surface-variant">One status carries the whole funnel</p></div>
+          <div class="border border-on-background/20 bg-surface-container-lowest p-sm"><p class="font-title-sm text-title-sm">Project Staffing</p><p class="text-on-surface-variant">Vendor × project, rates and margin</p></div>
+          <div class="border border-on-background/20 bg-surface-container-lowest p-sm"><p class="font-title-sm text-title-sm">QA Checks</p><p class="text-on-surface-variant">Quality, as a layer across everything</p></div>
+          <div class="border border-on-background/20 bg-surface-container-lowest p-sm"><p class="font-title-sm text-title-sm">Tasks</p><p class="text-on-surface-variant">Every function converges here</p></div>
+          <div class="border border-on-background/20 bg-surface-container-lowest p-sm"><p class="font-title-sm text-title-sm">Meetings</p><p class="text-on-surface-variant">Transcript in, notes and tasks out</p></div>
+          <div class="border border-on-background/20 bg-surface-container-lowest p-sm"><p class="font-title-sm text-title-sm">Clients</p><p class="text-on-surface-variant">The delivery-side record</p></div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-gutter">
+        <div class="relative sock border border-on-background/25 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+          <p class="font-code-label text-code-label text-tertiary uppercase mb-xs">XTRF · kept, untouched</p>
+          <p class="text-on-surface-variant">Profiles, price list, jobs, POs, client invoices, revenue. Vendors invoice themselves there.</p>
+          <p class="font-code-label text-code-label text-primary mt-sm">Bridge: XTRF project ID + PO reference</p>
+        </div>
+        <div class="relative sock border border-on-background/25 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+          <p class="font-code-label text-code-label text-tertiary uppercase mb-xs">Myriad · kept, untouched</p>
+          <p class="text-on-surface-variant">Where annotators work. One project per batch, payment report export.</p>
+          <p class="font-code-label text-code-label text-primary mt-sm">Bridge: Myriad project + volume processed</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-on-background text-background px-md py-sm">
+      <p class="font-title-sm text-title-sm">No writes into XTRF. No changes to Myriad. Two bridges, one direction each. Notion never becomes a second rate engine.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 14 · YOUR MORNING SCREEN ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="14">
+  <div class="max-w-6xl w-full mx-auto">
+    <div class="flex flex-wrap items-end justify-between gap-sm mb-md">
+      <div><span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">Your morning screen</span>
+      <h2 class="font-headline-md text-headline-md mt-xs">GM Command Center</h2></div>
+      <p class="font-code-label text-code-label text-on-surface-variant max-w-md">"A full funnel end-to-end view. So I don't have to bug everyone on this call on a continual basis to provide movement updates."</p>
+    </div>
+    <div class="relative sock border-2 border-on-background bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+      <div class="flex items-center justify-between px-md py-sm border-b border-on-background/20 bg-on-background text-background">
+        <p class="font-code-label text-code-label uppercase tracking-widest">GM Command Center</p>
+        <p class="font-code-label text-code-label">Mon 03 Aug 2026</p>
+      </div>
+      <div class="grid md:grid-cols-12">
+        <div class="md:col-span-3 p-md border-r border-on-background/15">
+          <p class="font-code-label text-code-label text-secondary uppercase mb-sm">Delivery funnel</p>
+          <div class="space-y-xs">
+            <div class="flex justify-between border-b border-on-background/10 pb-xs"><span>Intake</span><span class="font-code-label text-code-label">3</span></div>
+            <div class="flex justify-between border-b border-on-background/10 pb-xs"><span>Scoping</span><span class="font-code-label text-code-label">5</span></div>
+            <div class="flex justify-between border-b border-on-background/10 pb-xs"><span>Sourcing</span><span class="font-code-label text-code-label">4</span></div>
+            <div class="flex justify-between border-b border-on-background/10 pb-xs"><span>In production</span><span class="font-code-label text-code-label text-primary">8</span></div>
+            <div class="flex justify-between"><span>Delivered</span><span class="font-code-label text-code-label">6</span></div>
+          </div>
+        </div>
+        <div class="md:col-span-5 p-md border-r border-on-background/15">
+          <p class="font-code-label text-code-label text-secondary uppercase mb-sm">Portfolio health</p>
+          <div class="space-y-sm">
+            <div class="flex items-start gap-sm"><span class="w-2 h-2 mt-2 bg-[#e08a1e] shrink-0"></span><div class="w-full"><div class="flex justify-between"><p>AGI-DS · Word Alignment</p><span class="font-code-label text-code-label text-[#a8690f]">at risk</span></div><p class="font-code-label text-code-label text-on-surface-variant">62% staffed · batch 2 in QA · due 22 Aug</p></div></div>
+            <div class="flex items-start gap-sm"><span class="w-2 h-2 mt-2 bg-primary shrink-0"></span><div class="w-full"><div class="flex justify-between"><p>Hermes · Speech annotation</p><span class="font-code-label text-code-label text-primary">on track</span></div><p class="font-code-label text-code-label text-on-surface-variant">91% staffed · 3 batches delivered</p></div></div>
+            <div class="flex items-start gap-sm"><span class="w-2 h-2 mt-2 bg-error shrink-0"></span><div class="w-full"><div class="flex justify-between"><p>Atlas · Data collection</p><span class="font-code-label text-code-label text-error">blocked</span></div><p class="font-code-label text-code-label text-on-surface-variant">38% staffed · sourcing gap 120 vendors</p></div></div>
+          </div>
+        </div>
+        <div class="md:col-span-4 p-md">
+          <p class="font-code-label text-code-label text-secondary uppercase mb-sm">Margin vs target</p>
+          <div class="flex items-baseline gap-sm"><p class="font-display-lg text-display-lg text-primary leading-none">38%</p><p class="font-code-label text-code-label text-error">target 42%</p></div>
+          <p class="font-code-label text-code-label text-on-surface-variant mt-xs mb-sm">Portfolio, rolled up from staffing lines</p>
+          <p class="font-code-label text-code-label text-secondary uppercase mb-xs">Movement since last week</p>
+          <p class="text-on-surface-variant">4 projects changed status · 2 batches delivered · 1 new sourcing gap</p>
+        </div>
+      </div>
+      <div class="px-md py-sm border-t border-on-background/15 bg-surface-container-low">
+        <p class="font-code-label text-code-label text-on-surface-variant">Good news feed · 2 projects closed in the last 30 days, lessons pages ready for the next proposal</p>
+      </div>
+    </div>
+    <div class="mt-md flex flex-wrap gap-xs items-center">
+      <span class="font-code-label text-code-label text-on-surface-variant uppercase mr-xs">Six more, one per role:</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label">Program Cockpit</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label">Delivery Board</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label">Quality Board</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label">Supply Chain Board</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label">Solutions Board</span>
+      <span class="border border-on-background/25 px-sm py-xs font-code-label text-code-label">Project One-Pager</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 15 · WHY THIS APPROACH ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="15">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">Why this approach</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-lg">The three alternatives, taken seriously</h2>
+    <div class="grid md:grid-cols-3 gap-gutter">
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-secondary uppercase mb-sm">vs turning on XTRF workflows</p>
+        <p class="text-on-surface-variant mb-sm">A fair question, and worth asking internally: XTRF ships a workflow engine, templates and job offers, and other Argos teams use them. This BU does not.</p>
+        <p>But XTRF orchestrates <span class="text-on-background">XTRF</span>. It does not orchestrate Myriad, Vendra, Asana, Drive, Outlook and ten spreadsheets. The gap is between the tools, which is exactly where XTRF cannot reach.</p>
+      </div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-secondary uppercase mb-sm">vs your internal vendor portal</p>
+        <p class="text-on-surface-variant mb-sm">You already have a requirements document for a single vendor management system. It is a good project and it stays yours.</p>
+        <p>It solves the vendor-facing side. It does not give the PM, Quality or leadership a view of the work. The two are complementary, and this layer is the data foundation the portal would read from anyway.</p>
+      </div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-secondary uppercase mb-sm">vs doing nothing this year</p>
+        <p class="text-on-surface-variant mb-sm">Defensible if volumes were flat. They are not: the stated ambition is thousands of vendors per project.</p>
+        <p>Every cost in this pack scales linearly with that. The spreadsheets do not fail loudly, they fail as a slow tax on every person, and by then the knowledge has already left with whoever owned the file.</p>
+      </div>
+    </div>
+    <div class="mt-md border border-primary bg-primary-fixed/30 px-md py-sm relative sock"><span class="s3"></span><span class="s4"></span>
+      <p class="font-title-sm text-title-sm">One finding worth acting on regardless of this proposal: check whether the XTRF Vendor Portal module is already in your licence. Your vendors already log in and invoice there.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 16 · THE PLAN ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="16">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">05 / 05 · The plan</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">Three sprints, live on 2 October</h2>
+    <div class="grid md:grid-cols-3 gap-gutter mb-md">
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-primary uppercase">Sprint 1 · 10-21 Aug</p>
+        <p class="font-title-sm text-title-sm my-xs">Project backbone</p>
+        <p class="text-on-surface-variant">Projects, Batches, Clients, Tasks, Meetings. The 12-phase lifecycle, the intake form, the Program Cockpit and the Project One-Pager. Piloted on 2-3 live projects.</p>
+      </div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-primary uppercase">Sprint 2 · 7-18 Sep</p>
+        <p class="font-title-sm text-title-sm my-xs">Vendor funnel &amp; quality</p>
+        <p class="text-on-surface-variant">Vendors, Staffing with rates and margin, QA Checks, the sourcing form, onboarding and offboarding checklists, the fraud flag and its review queue, the Supply Chain Board.</p>
+      </div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-primary uppercase">Sprint 3 · 21 Sep-2 Oct</p>
+        <p class="font-title-sm text-title-sm my-xs">Screens, AI, adoption</p>
+        <p class="text-on-surface-variant">The seven morning screens, the XTRF bridge automations, the Meeting Agent, the SOP pack, and two full days of training. Go-live.</p>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-gutter">
+      <div class="border-l-2 border-secondary pl-md">
+        <p class="font-code-label text-code-label text-secondary uppercase mb-sm">What we need from you</p>
+        <ul class="space-y-xs text-on-surface-variant">
+          <li>Admin access to a Notion workspace on the Business plan with AI</li>
+          <li>Read access to Asana, the project Drive folders and the four trackers</li>
+          <li>2-3 live projects for the Sprint 1 pilot, and a tracker export for Sprint 2</li>
+          <li>The named people who clear a flagged candidate</li>
+          <li>One champion per function for training and adoption</li>
+        </ul>
+      </div>
+      <div class="border-l-2 border-on-background/20 pl-md">
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase mb-sm">Two dates to note</p>
+        <p class="text-on-surface-variant mb-sm">Rama Logic is closed 24 August to 6 September, announced from the start and already built into the plan. Sprint 1 lands before it, Sprint 2 starts after.</p>
+        <p class="text-on-surface-variant">Your Program Director is on leave until mid-August. Sprint 1 does not need her daily, so the build starts on schedule and the adoption checkpoint moves to the week of 17 August.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 17 · INVESTMENT ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="17">
+  <div class="max-w-6xl w-full mx-auto">
+    <div class="grid md:grid-cols-3 gap-gutter mb-md">
+      <div class="border-l-2 border-primary pl-md"><p class="font-code-label text-code-label text-primary uppercase mb-xs">Deadlines held</p><p class="text-on-surface-variant">Every deliverable lands on the day agreed. If one will not, you hear it from me 48 hours before, not after.</p></div>
+      <div class="border-l-2 border-primary pl-md"><p class="font-code-label text-code-label text-primary uppercase mb-xs">Transparency</p><p class="text-on-surface-variant">A weekly 30-minute checkpoint, a shared workspace updated live, and an answer within 24 hours.</p></div>
+      <div class="border-l-2 border-primary pl-md"><p class="font-code-label text-code-label text-primary uppercase mb-xs">100% adoption guarantee</p><p class="text-on-surface-variant">If a deliverable does not match the agreed brief, I rebuild it at no extra cost. We iterate until the system is actually used.</p></div>
+    </div>
+    <div class="relative sock border-2 border-on-background bg-surface-container-lowest p-md"><span class="s3"></span><span class="s4"></span>
+      <div class="grid md:grid-cols-12 gap-md items-start">
+        <div class="md:col-span-5 border-r-0 md:border-r border-on-background/15 md:pr-md">
+          <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">Phase 2 · fixed fee</span>
+          <h2 class="font-headline-md text-headline-md mt-xs">Notion Orchestration Layer</h2>
+          <p class="font-display-lg text-display-lg text-primary leading-none my-sm">16 000 €</p>
+          <p class="font-code-label text-code-label text-on-surface-variant uppercase">excl. VAT · 50% at kickoff, 50% at go-live</p>
+          <p class="mt-sm">8 databases, the 12-phase lifecycle and the vendor funnel, 10 automations, the seven morning screens, the Meeting Agent, the fraud review queue, the SOP pack, two full days of training, and a 30-day adoption window under the guarantee.</p>
+        </div>
+        <div class="md:col-span-7">
+          <p class="font-code-label text-code-label text-secondary uppercase mb-sm">Priced separately, decided whenever you want</p>
+          <div class="divide-y divide-on-background/10 border-y border-on-background/10">
+            <div class="flex justify-between gap-md py-xs"><span>A · Vendor portal (check your XTRF licence first)</span><span class="font-code-label text-code-label text-on-surface-variant shrink-0">on quote</span></div>
+            <div class="flex justify-between gap-md py-xs"><span>B · Client-facing progress portal</span><span class="font-code-label text-code-label text-on-surface-variant shrink-0">on quote</span></div>
+            <div class="flex justify-between gap-md py-xs"><span>C · Agentic pack: lessons learned, vendor queries, fraud engine</span><span class="font-code-label text-code-label text-on-surface-variant shrink-0">on quote</span></div>
+            <div class="flex justify-between gap-md py-xs"><span>D · XTRF read-only sync, 3 to 4 days</span><span class="font-code-label text-code-label text-primary shrink-0">3 200 - 4 800 €</span></div>
+            <div class="flex justify-between gap-md py-xs"><span>E · Weekly vendor payment run</span><span class="font-code-label text-code-label text-on-surface-variant shrink-0">on quote</span></div>
+            <div class="flex justify-between gap-md py-xs"><span>Operate · ongoing run after the adoption window</span><span class="font-code-label text-code-label text-primary shrink-0">1 500 € / month</span></div>
+          </div>
+          <p class="font-code-label text-code-label text-outline uppercase mt-sm">Confidential · prepared for Argos Multilingual</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 18 · CLOSING ============ -->
+<section class="slide grid-bg items-center justify-center p-margin" data-slide="18">
+  <div class="max-w-5xl w-full relative sock border border-on-background/15 bg-surface-container-lowest/80 p-xl"><span class="s3"></span><span class="s4"></span>
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">Thank you</span>
+    <h2 class="font-display-lg text-display-lg mt-sm tracking-tight">One place where the<br/>work actually lives.</h2>
+    <div class="w-24 h-1 bg-secondary my-md"></div>
+    <p class="font-title-sm text-title-sm text-on-surface-variant max-w-3xl">Thank you to the nine of you who gave three hours of honesty, and to Melina and Valeria for walking me through the systems underneath. That is the raw material this proposal is built on.</p>
+    <div class="grid md:grid-cols-3 gap-md mt-lg pt-md border-t border-outline-variant">
+      <div><p class="font-code-label text-code-label text-primary uppercase">Decision</p><p>Green light on Phase 2</p></div>
+      <div><p class="font-code-label text-code-label text-primary uppercase">Kickoff</p><p>Week of 10 August</p></div>
+      <div><p class="font-code-label text-code-label text-primary uppercase">Go-live</p><p>2 October 2026</p></div>
+    </div>
+    <p class="font-code-label text-code-label text-tertiary uppercase tracking-wider mt-md">Sylvain Ramaradjou · sylvain@ramalogic.com · Rama Logic</p>
+    <p class="font-code-label text-code-label text-outline uppercase mt-xs">Notion Solution Partner · PMP® · Black Belt Lean Six Sigma</p>
+  </div>
+</section>
+
+</div>
+
+<div class="nav-controls">
+  <button class="nav-btn" id="prev" aria-label="Previous slide"><span class="material-symbols-outlined" style="font-size:18px">chevron_left</span></button>
+  <div class="counter"><span id="cur">1</span> / 18</div>
+  <button class="nav-btn" id="next" aria-label="Next slide"><span class="material-symbols-outlined" style="font-size:18px">chevron_right</span></button>
+  <button class="nav-btn" id="grid" aria-label="Overview"><span class="material-symbols-outlined" style="font-size:18px">grid_view</span></button>
+</div>
+<div id="overview"></div>
+
+<script>
+if(location.search.indexOf('all=1')>-1){document.body.classList.add('show-all');}
+const slides=[...document.querySelectorAll('.slide')];
+const titles=["Cover","Contents","What we found","Phase 1 recap","The four findings","The tool landscape","The inventory","Write once, read everywhere","What it costs today","What I see","Root cause & target","The system","Target architecture","Your morning screen","Why this approach","The plan","Investment","Thank you"];
+let i=0;
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('is-active',k===i));document.getElementById('cur').textContent=i+1;}
+document.getElementById('next').onclick=()=>show(i+1);
+document.getElementById('prev').onclick=()=>show(i-1);
+const ov=document.getElementById('overview');
+ov.innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">'+slides.map((s,k)=>`<div class="ov-card" data-k="${k}"><div style="font-family:Space Mono,monospace;font-size:11px;color:#446254">${String(k+1).padStart(2,'0')}</div><div style="font-family:Clash Grotesk,sans-serif;font-size:14px;margin-top:4px">${titles[k]}</div></div>`).join('')+'</div>';
+ov.onclick=e=>{const c=e.target.closest('.ov-card');if(c){show(+c.dataset.k);ov.classList.remove('on');}};
+document.getElementById('grid').onclick=()=>ov.classList.toggle('on');
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();show(i+1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();show(i-1);}
+  if(e.key==='Escape'){ov.classList.toggle('on');}
+});
+</script>
+</body></html>
