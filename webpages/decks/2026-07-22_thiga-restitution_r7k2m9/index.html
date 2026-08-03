@@ -229,9 +229,15 @@
       </div>
 
     </div>
-    <div class="mt-md bg-on-background text-inverse-on-surface p-sm px-md flex items-center gap-sm">
-      <span class="material-symbols-outlined text-primary-fixed text-[20px]">alt_route</span>
-      <p class="font-body-reg text-body-reg">Ces trois processus n'ont ni les mêmes utilisateurs, ni le même rythme, ni les mêmes besoins d'outil. <strong class="text-primary-fixed">Les traiter comme un seul sujet « Notion » est ce qui bloque la décision depuis avril.</strong></p>
+    <div class="mt-md flex flex-col gap-1">
+      <div class="bg-on-background text-inverse-on-surface p-sm px-md flex items-center gap-sm">
+        <span class="material-symbols-outlined text-primary-fixed text-[20px]">alt_route</span>
+        <p class="font-body-reg text-body-reg">Ces trois processus n'ont ni les mêmes utilisateurs, ni le même rythme, ni les mêmes besoins d'outil. <strong class="text-primary-fixed">Les traiter comme un seul sujet « Notion » est ce qui bloque la décision depuis avril.</strong></p>
+      </div>
+      <div class="border border-outline-variant border-dashed p-sm px-md flex items-center gap-sm">
+        <span class="material-symbols-outlined text-outline text-[18px]">block</span>
+        <p class="font-code-label text-code-label text-on-surface-variant"><strong class="text-on-background">La quatrième famille reste hors périmètre :</strong> la donnée de gestion quotidienne (missions, rentabilité, staffing, effectifs). Elle vit déjà dans l'ERP, remontée sous Tableau et Google Sheets. Elle fonctionne, on n'y touche pas.</p>
+      </div>
     </div>
     <div class="pt-sm mt-sm border-t border-outline-variant flex justify-between font-code-label text-code-label text-outline"><span>Confidentiel · Thiga</span></div>
   </div>
@@ -837,7 +843,7 @@
       <div class="border border-outline-variant p-sm flex flex-col justify-center"><span class="font-code-label text-code-label text-primary mb-1">R6</span><h3 class="font-title-sm text-title-sm mb-1">Cycle de vie</h3><p class="font-code-label text-code-label text-on-surface-variant">Naissance par formulaire ou dépôt d'un garant. À la date de revue, sans action, le document bascule en Périmé. <strong class="text-on-background">On n'efface pas, on déclasse.</strong></p></div>
       <div class="socket bg-on-background text-inverse-on-surface p-sm flex flex-col justify-center"><span class="sk sk-bl" style="background:#fcf9f8"></span><span class="sk sk-br" style="background:#fcf9f8"></span><span class="font-code-label text-code-label text-primary-fixed mb-1">R7</span><h3 class="font-title-sm text-title-sm mb-1">La masse propose, les garants publient</h3><p class="font-code-label text-code-label text-surface-variant">Chacun peut contribuer par formulaire sans pouvoir casser quoi que ce soit. Zéro doublon accidentel.</p></div>
       <div class="socket bg-on-background text-inverse-on-surface p-sm flex flex-col justify-center"><span class="sk sk-bl" style="background:#fcf9f8"></span><span class="sk sk-br" style="background:#fcf9f8"></span><span class="font-code-label text-code-label text-primary-fixed mb-1">R8</span><h3 class="font-title-sm text-title-sm mb-1">Les nudges accrochés à la mission</h3><p class="font-code-label text-code-label text-surface-variant">La propale déposée ouvre les droits de mission. La clôture de facturation déclenche « dépose ton REX ». <strong class="text-primary-fixed">Instruit par le système, pas par la com.</strong></p></div>
-      <div class="border border-outline-variant p-sm flex flex-col justify-center"><span class="font-code-label text-code-label text-primary mb-1">R9 · R10</span><h3 class="font-title-sm text-title-sm mb-1">Stack interne fixe · on dépose où il faut</h3><p class="font-code-label text-code-label text-on-surface-variant">Un nouvel outil interne ne s'installe qu'avec un propriétaire et une décision explicite. Et le document final va dans le hub.</p></div>
+      <div class="border border-outline-variant p-sm flex flex-col justify-center"><span class="font-code-label text-code-label text-primary mb-1">R9 · R10</span><h3 class="font-title-sm text-title-sm mb-1">La stack interne est fixe</h3><p class="font-code-label text-code-label text-on-surface-variant">Un nouvel outil interne ne s'installe qu'avec un propriétaire, une source de vérité désignée et une décision explicite. <strong class="text-on-background">C'est la règle qui arrête les 150 heures passées à redévelopper ce qui existe</strong>, et qui sépare la stack interne des expérimentations client. Et le document final va dans le hub.</p></div>
     </div>
     <div class="pt-sm mt-sm border-t border-outline-variant flex justify-between font-code-label text-code-label text-outline"><span>Confidentiel · Thiga</span></div>
   </div>
@@ -894,8 +900,54 @@
   </div>
 </section>
 
-<!-- ============ SLIDE 19 · PLAN DE MIGRATION ============ -->
-<section class="slide grid-bg" data-slide="19" data-title="Plan de migration">
+<!-- ============ SLIDE 19 · COMMENT ÇA S'INSTALLE ============ -->
+<section class="slide grid-bg" data-slide="19" data-title="Comment ça s'installe">
+  <div class="slide-inner">
+    <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-md">
+      <span class="font-title-sm text-title-sm">Rama Logic</span>
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">L'adoption</span>
+    </div>
+    <div class="mb-md">
+      <div class="inline-flex items-center gap-2 mb-sm"><div class="h-2 w-2 bg-primary"></div><span class="font-code-label text-code-label text-outline uppercase tracking-widest">Le vrai risque n'est pas technique</span></div>
+      <h1 class="font-headline-md text-headline-md tracking-tight max-w-4xl">On n'arrive pas avec une solution toute faite</h1>
+    </div>
+    <div class="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-5 gap-gutter">
+      <div class="lg:col-span-2 socket bg-on-background text-inverse-on-surface p-md flex flex-col justify-center">
+        <span class="sk sk-bl" style="background:#fcf9f8"></span><span class="sk sk-br" style="background:#fcf9f8"></span>
+        <span class="font-code-label text-code-label text-primary-fixed uppercase tracking-widest mb-sm">Le principe</span>
+        <p class="font-headline-md text-headline-md text-inverse-on-surface leading-tight mb-md">Une proposition entérinée bat une directive.</p>
+        <p class="font-body-reg text-body-reg text-surface-variant mb-sm">Deux réorganisations internes ont déjà échoué chez Thiga. Jamais par manque de compétence : par manque de mandat, de temps dédié et d'adhésion.</p>
+        <p class="font-body-reg text-body-reg text-surface-variant">On sait où on veut aller. Mais on y arrive <strong class="text-primary-fixed">avec les utilisateurs, pas contre eux</strong>, sinon le troisième essai finit comme les deux premiers.</p>
+      </div>
+      <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-sm">
+        <div class="socket bg-surface-container-lowest border border-on-background p-md flex flex-col justify-center"><span class="sk sk-bl"></span><span class="sk sk-br"></span>
+          <span class="font-code-label text-code-label text-primary mb-sm">01 · AOÛT</span>
+          <h3 class="font-title-sm text-title-sm mb-1">L'appel à candidatures</h3>
+          <p class="font-code-label text-code-label text-on-surface-variant">Un message de Stéphane sur le Slack général : voilà le diagnostic, voilà où on va, qui veut participer ? <strong class="text-on-background">Les garants sortent des volontaires</strong>, pas d'une nomination descendante. Ceux qui lèvent la main sont ceux qui tiendront.</p>
+        </div>
+        <div class="socket bg-surface-container-lowest border border-on-background p-md flex flex-col justify-center"><span class="sk sk-bl"></span><span class="sk sk-br"></span>
+          <span class="font-code-label text-code-label text-primary mb-sm">02 · SEPTEMBRE</span>
+          <h3 class="font-title-sm text-title-sm mb-1">Le POC sur une tribu pilote</h3>
+          <p class="font-code-label text-code-label text-on-surface-variant">On ne déploie pas sur 300 personnes d'un coup. Une tribu volontaire, un périmètre réel, six semaines. <strong class="text-on-background">Si ça marche là, ça devient l'argument</strong> pour les suivantes. Si ça coince, on corrige avant d'avoir engagé la boîte.</p>
+        </div>
+        <div class="socket bg-surface-container-lowest border border-on-background p-md flex flex-col justify-center"><span class="sk sk-bl"></span><span class="sk sk-br"></span>
+          <span class="font-code-label text-code-label text-primary mb-sm">03 · À CHAQUE ÉTAPE</span>
+          <h3 class="font-title-sm text-title-sm mb-1">La charte se co-valide</h3>
+          <p class="font-code-label text-code-label text-on-surface-variant">Les règles de la slide précédente sont soumises aux garants et aux managers <strong class="text-on-background">avant</strong> d'être publiées. Ce qu'ils ont amendé, ils le défendent. Ce qu'on leur impose, ils le contournent.</p>
+        </div>
+        <div class="socket bg-primary-fixed/25 border-2 border-primary p-md flex flex-col justify-center"><span class="sk sk-bl"></span><span class="sk sk-br"></span>
+          <span class="font-code-label text-code-label text-primary mb-sm">04 · TOUT DU LONG</span>
+          <h3 class="font-title-sm text-title-sm mb-1">Zéro perte, et c'est vérifiable</h3>
+          <p class="font-code-label text-code-label text-on-surface-variant">La crainte n°1 est légitime : la migration Confluence a bel et bien perdu des pages privées. Donc <strong class="text-on-background">rien n'est coupé avant d'avoir été transféré et recetté</strong>, et une archive markdown froide de tout le workspace est conservée, même de ce qu'on n'a pas retenu.</p>
+        </div>
+      </div>
+    </div>
+    <div class="pt-sm mt-sm border-t border-outline-variant flex justify-between font-code-label text-code-label text-outline"><span>Confidentiel · Thiga</span></div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 20 · PLAN DE MIGRATION ============ -->
+<section class="slide grid-bg" data-slide="20" data-title="Plan de migration">
   <div class="slide-inner">
     <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-md">
       <span class="font-title-sm text-title-sm">Rama Logic</span>
@@ -921,14 +973,14 @@
         </div>
         <div class="socket bg-surface-container-lowest border border-on-background p-sm flex flex-col"><span class="sk sk-bl"></span><span class="sk sk-br"></span>
           <div class="flex items-baseline justify-between mb-sm"><span class="font-code-label text-code-label text-primary bg-primary-fixed px-2 py-1">V2</span><span class="font-code-label text-code-label text-outline">Septembre</span></div>
-          <h3 class="font-title-sm text-title-sm mb-sm">Tri décisionnel</h3>
-          <p class="font-code-label text-code-label text-on-surface-variant">Espace par espace : garder / migrer / archiver / supprimer. Priorité absolue aux REX, puis aux propales finales, puis aux bases vivantes.</p>
+          <h3 class="font-title-sm text-title-sm mb-sm">Tri décisionnel + tribu pilote</h3>
+          <p class="font-code-label text-code-label text-on-surface-variant">Espace par espace : garder / migrer / archiver / supprimer. <strong class="text-on-background">Le contenu statique passe en premier</strong> pour tenir l'objectif de fin septembre. En parallèle, le POC tourne sur la tribu volontaire.</p>
           <p class="font-code-label text-code-label text-outline mt-auto pt-sm border-t border-outline-variant">Garants + Rama Logic</p>
         </div>
         <div class="socket bg-surface-container-lowest border border-on-background p-sm flex flex-col"><span class="sk sk-bl"></span><span class="sk sk-br"></span>
           <div class="flex items-baseline justify-between mb-sm"><span class="font-code-label text-code-label text-primary bg-primary-fixed px-2 py-1">V3</span><span class="font-code-label text-code-label text-outline">Octobre</span></div>
-          <h3 class="font-title-sm text-title-sm mb-sm">Bascule</h3>
-          <p class="font-code-label text-code-label text-on-surface-variant">Construction du hub, libellés et formulaires, transfert du contenu retenu, formation par niveau, activation des nudges.</p>
+          <h3 class="font-title-sm text-title-sm mb-sm">Généralisation</h3>
+          <p class="font-code-label text-code-label text-on-surface-variant">Le pilote validé sert de modèle : hub complet, libellés et formulaires, transfert du contenu retenu, formation par niveau, activation des nudges, tribu après tribu.</p>
           <p class="font-code-label text-code-label text-outline mt-auto pt-sm border-t border-outline-variant">Selon la voie retenue</p>
         </div>
       </div>
@@ -945,8 +997,8 @@
   </div>
 </section>
 
-<!-- ============ SLIDE 20 · CE QU'IL NOUS MANQUE ============ -->
-<section class="slide grid-bg" data-slide="20" data-title="Ce qu'il nous manque">
+<!-- ============ SLIDE 21 · CE QU'IL NOUS MANQUE ============ -->
+<section class="slide grid-bg" data-slide="21" data-title="Ce qu'il nous manque">
   <div class="slide-inner">
     <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-md">
       <span class="font-title-sm text-title-sm">Rama Logic</span>
@@ -957,26 +1009,26 @@
       <h1 class="font-headline-md text-headline-md tracking-tight">Ce qu'il nous manque pour figer les chiffres</h1>
     </div>
     <div class="flex-1 min-h-0 flex flex-col gap-sm">
-      <div class="socket bg-on-background text-inverse-on-surface p-md flex items-start gap-sm"><span class="sk sk-bl" style="background:#fcf9f8"></span><span class="sk sk-br" style="background:#fcf9f8"></span>
+      <div class="socket bg-on-background text-inverse-on-surface p-sm px-md flex items-start gap-sm"><span class="sk sk-bl" style="background:#fcf9f8"></span><span class="sk sk-br" style="background:#fcf9f8"></span>
         <span class="material-symbols-outlined text-error-container text-[22px] mt-0.5">priority_high</span>
         <div><p class="font-title-sm text-title-sm text-primary-fixed mb-1">1 · Votre édition Google Workspace</p><p class="font-body-reg text-body-reg text-surface-variant">Le plus gros enjeu financier du dossier, et le plus rapide à lever. Business Starter au lieu de Standard = <strong class="text-inverse-on-surface">24 400 €/an de plus</strong>, et l'économie divisée par cinq. <strong class="text-inverse-on-surface">Une minute dans la console admin suffit à trancher.</strong></p></div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-sm flex-1 min-h-0">
-        <div class="border border-outline-variant p-md flex items-start gap-sm">
-          <span class="material-symbols-outlined text-error text-[18px] mt-0.5">event</span>
-          <div><p class="font-code-label text-code-label text-on-background font-bold mb-1">2 · L'échéance contractuelle exacte</p><p class="font-code-label text-code-label text-on-surface-variant">Le plan et le prix sont désormais établis (Plus, 298 sièges, 10 $/mois). Restent deux dates contradictoires en circulation, <strong class="text-on-background">31/10 ou 22/11</strong>, et les conditions de résiliation.</p></div>
-        </div>
-        <div class="border border-outline-variant p-md flex items-start gap-sm">
+        <div class="border border-outline-variant p-sm px-md flex items-start gap-sm">
           <span class="material-symbols-outlined text-error text-[18px] mt-0.5">group</span>
-          <div><p class="font-code-label text-code-label text-on-background font-bold mb-1">3 · L'export admin d'activité par membre</p><p class="font-code-label text-code-label text-on-surface-variant">Seule base fiable pour nommer les licences à couper. L'auto-déclaration ne suffit pas : 2 des 13 power users déclarés le sont à tort, au moins 1 vrai power user est hors liste.</p></div>
+          <div><p class="font-code-label text-code-label text-on-background font-bold mb-1">2 · L'export admin d'activité par membre</p><p class="font-code-label text-code-label text-on-surface-variant">Seule base fiable pour nommer les licences à couper. L'auto-déclaration ne suffit pas : 2 des 13 power users déclarés le sont à tort, au moins 1 vrai power user est hors liste.</p></div>
         </div>
-        <div class="border border-outline-variant p-md flex items-start gap-sm">
+        <div class="border border-outline-variant p-sm px-md flex items-start gap-sm">
           <span class="material-symbols-outlined text-secondary text-[18px] mt-0.5">badge</span>
-          <div><p class="font-code-label text-code-label text-on-background font-bold mb-1">4 · La nomination des garants</p><p class="font-code-label text-code-label text-on-surface-variant">~10 garants de contenu et 2 à 3 Knowledge Managers. Sans eux, aucune option ne tient six mois. Engagement pris le 27/07.</p></div>
+          <div><p class="font-code-label text-code-label text-on-background font-bold mb-1">3 · La nomination des garants</p><p class="font-code-label text-code-label text-on-surface-variant">~10 garants de contenu et 2 à 3 Knowledge Managers. Sans eux, aucune option ne tient six mois. Engagement pris le 27/07.</p></div>
         </div>
-        <div class="border border-outline-variant p-md flex items-start gap-sm">
+        <div class="border border-outline-variant p-sm px-md flex items-start gap-sm">
           <span class="material-symbols-outlined text-secondary text-[18px] mt-0.5">help</span>
-          <div><p class="font-code-label text-code-label text-on-background font-bold mb-1">5 · La source de vérité des CV</p><p class="font-code-label text-code-label text-on-surface-variant">Trois systèmes en concurrence sans arbitrage : l'outil RH (incomplet), Notion (source de fait, 350 CV), un outil Sales vers lequel la CVthèque bascule déjà sans décision formelle.</p></div>
+          <div><p class="font-code-label text-code-label text-on-background font-bold mb-1">4 · La source de vérité des CV</p><p class="font-code-label text-code-label text-on-surface-variant">Trois systèmes en concurrence sans arbitrage : l'outil RH (incomplet), Notion (source de fait, 350 CV), un outil Sales vers lequel la CVthèque bascule déjà sans décision formelle.</p></div>
+        </div>
+        <div class="border border-outline-variant p-sm px-md flex items-start gap-sm md:col-span-2">
+          <span class="material-symbols-outlined text-error text-[18px] mt-0.5">flag</span>
+          <div><p class="font-code-label text-code-label text-on-background font-bold mb-1">5 · Le sort des comptes espagnols</p><p class="font-code-label text-code-label text-on-surface-variant">Des sièges espagnols sont comptés dans les 298, la cession est en cours, et l'Espagne a un vrai besoin de Notion pour son LMS. <strong class="text-on-background">Leur transfert vers un futur domaine doit être planifié avant toute extinction de licence</strong>, sinon on coupe l'accès d'une entité qu'on est en train de vendre. Hors périmètre de ce plan, mais bloquant pour le calendrier.</p></div>
         </div>
       </div>
       <div class="border border-primary bg-primary-fixed/25 p-sm px-md flex items-center gap-sm">
@@ -988,8 +1040,8 @@
   </div>
 </section>
 
-<!-- ============ SLIDE 21 · QUI CONSTRUIT ============ -->
-<section class="slide grid-bg" data-slide="21" data-title="Qui construit">
+<!-- ============ SLIDE 22 · QUI CONSTRUIT ============ -->
+<section class="slide grid-bg" data-slide="22" data-title="Qui construit">
   <div class="slide-inner">
     <div class="flex items-center justify-between border-b border-outline-variant pb-sm mb-md">
       <span class="font-title-sm text-title-sm">Rama Logic</span>
@@ -1035,8 +1087,8 @@
   </div>
 </section>
 
-<!-- ============ SLIDE 22 · LA DÉCISION DEMANDÉE ============ -->
-<section class="slide grid-bg" data-slide="22" data-title="La décision demandée">
+<!-- ============ SLIDE 23 · LA DÉCISION DEMANDÉE ============ -->
+<section class="slide grid-bg" data-slide="23" data-title="La décision demandée">
   <div class="slide-inner items-center justify-center text-center relative">
     <div class="absolute top-1/4 -right-1/4 w-[600px] h-[600px] bg-primary-fixed opacity-25 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
     <div class="socket max-w-4xl w-full bg-surface-container-lowest/80 border border-outline-variant px-lg py-xl backdrop-blur-sm">
@@ -1046,7 +1098,7 @@
       <p class="font-headline-md text-headline-md text-on-surface-variant max-w-2xl mx-auto leading-tight mb-lg">Sur <span class="text-primary">O4</span>, et sur la nomination des garants.</p>
       <div class="grid grid-cols-3 gap-md mb-xl">
         <div class="border border-outline-variant px-sm py-sm"><span class="font-code-label text-code-label text-on-background block mb-1">1</span><span class="font-code-label text-code-label text-on-surface-variant">Valider l'option O4</span></div>
-        <div class="border-2 border-primary px-sm py-sm"><span class="font-code-label text-code-label text-primary block mb-1">2</span><span class="font-code-label text-code-label text-on-surface-variant">Nommer les 2-3 KM et les ~10 garants</span></div>
+        <div class="border-2 border-primary px-sm py-sm"><span class="font-code-label text-code-label text-primary block mb-1">2</span><span class="font-code-label text-code-label text-on-surface-variant">Poster l'appel à candidatures sur le Slack général</span></div>
         <div class="border border-outline-variant px-sm py-sm"><span class="font-code-label text-code-label text-on-background block mb-1">3</span><span class="font-code-label text-code-label text-on-surface-variant">Vérifier l'édition Google Workspace</span></div>
       </div>
       <div class="pt-lg border-t border-outline-variant flex items-center justify-center gap-md flex-wrap">
@@ -1062,7 +1114,7 @@
 <!-- NAV -->
 <div id="nav" data-pdf-hide>
   <button id="prev" aria-label="Précédent"><span class="material-symbols-outlined" style="font-size:20px">chevron_left</span></button>
-  <span id="counter">01 / 22</span>
+  <span id="counter">01 / 23</span>
   <button id="next" aria-label="Suivant"><span class="material-symbols-outlined" style="font-size:20px">chevron_right</span></button>
   <button id="grid" aria-label="Vue d'ensemble"><span class="material-symbols-outlined" style="font-size:18px">grid_view</span></button>
 </div>
