@@ -59,6 +59,7 @@ tailwind.config = {
   background-size: 32px 32px;
 }
 /* ---- viewport-fit ---- */
+html, body { overflow-x: clip; }
 .slides-viewport { height: 100vh; height: 100dvh; }
 .slide { height: 100vh; height: 100dvh; min-height: 100vh; overflow: hidden; display: none; }
 .slide.is-active { display: flex; }
@@ -84,6 +85,13 @@ tailwind.config = {
 .ov-card{border:1px solid #1c1b1b;padding:12px;cursor:pointer;background:#fff;}
 .ov-card:hover{background:#c8ead8;}
 @media print{.nav-controls,#overview{display:none !important;}.slide{display:flex !important;page-break-after:always;height:100vh;}}
+/* Must come AFTER the .slide base rule: equal specificity, later wins.
+   On a phone a 16:9 scene clips its own content, so the scene grows instead.
+   flex-start because align-items:center makes the top of an overflowing child unreachable. */
+@media (max-width: 900px){
+  .slides-viewport{height:auto;}
+  .slide{height:auto;min-height:100dvh;overflow:visible;align-items:flex-start;padding-top:40px;padding-bottom:40px;}
+}
 body.show-all .slide{display:flex !important;}
 body.show-all .nav-controls{display:none !important;}
 </style>
@@ -437,9 +445,9 @@ body.show-all .nav-controls{display:none !important;}
       <p class="font-code-label text-code-label text-on-surface-variant max-w-md">"A full funnel end-to-end view. So I don't have to bug everyone on this call on a continual basis to provide movement updates."</p>
     </div>
     <div class="relative sock border-2 border-on-background bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
-      <div class="flex items-center justify-between px-md py-sm border-b border-on-background/20 bg-on-background text-background">
+      <div class="flex items-center justify-between gap-sm px-md py-sm border-b border-on-background/20 bg-on-background text-background">
         <p class="font-code-label text-code-label uppercase tracking-widest">GM Command Center</p>
-        <p class="font-code-label text-code-label">Mon 03 Aug 2026</p>
+        <p class="font-code-label text-code-label text-secondary-fixed-dim uppercase">Illustrative layout · sample figures, not your data</p>
       </div>
       <div class="grid md:grid-cols-12">
         <div class="md:col-span-3 p-md border-r border-on-background/15">
