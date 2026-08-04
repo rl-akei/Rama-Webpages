@@ -70,5 +70,29 @@
       "offer": "asymetrie 4/12 + 8/12 : carte diagnostic neutre + carte abonnement fond primary avec prix mensuel et 6 inclus en 2 colonnes, bande total en pied -- vs 5/12+7/12 (cleany), carte+satellite (evmt), dual ferme/estimate (argos)"
     },
     "preemit": "P5 H5 E4 S5 R4 V5"
+  },
+  {
+    "deck": "2026-08-04_le-patio-opera_p4t9x2",
+    "date": "2026-08-04",
+    "macrostructures": {
+      "context": "FICHE D'IDENTITE facon carte de restaurant : rangees label/valeur reliees par un filet POINTILLE, derniere ligne 'outil de pilotage transverse = Aucun' en rouge sous separateur -- macrostructure neuve, tres liee au secteur du prospect",
+      "ou_vit_l_info": "grille 3x2 de supports (cahier / WhatsApp / tetes / CRM / archives / reunions), chaque card finit par un verdict rouge en Space Mono sous filet + bande noire verbatim -- vs grille 2x2 verbatim-first (cleany)",
+      "frictions": "liste editoriale 3 rangees, le VERBATIM est en headline-md (le plus gros texte de la slide) avec numero geant en primary-fixed-dim a gauche, constat en petit dessous -- vs rows editoriales (argos), cards classeur (evmt)",
+      "cout": "TABLEAU DE COMPTEURS VIDES : 3 lignes dont la colonne valeur affiche uniquement le chip 'non mesure', puis bande noire 'ce tableau est vide et ce n'est pas un oubli' -- macrostructure neuve, le vide EST le message (vs 3 colonnes sans metrique cleany, big-num solitaire dreamspark)",
+      "insight": "diptyque 2 cards bordees 2px, cause racine en primary vs si-rien-ne-change en error, verbatim 'poulpe' en pied de slide -- proche evmt, acceptable car non utilise depuis 4 decks",
+      "objectifs": "2 colonnes symetriques aujourd'hui/demain SANS gouttiere, separees par un filet interne dans un seul conteneur borde, colonne demain sur fond primary-fixed -- variante du standard skill",
+      "solution": "4 BANDES horizontales empilees numerotees 01-04, la 4e (les agents) en accent secondary 2px -- vs chaine horizontale (cleany), chaine verticale 9 maillons (dreamspark)",
+      "zoom_agent": "flux horizontal 3 etapes avec connecteurs arrow_forward en colonne intercalaire, 3e etape en accent, puis bande noire verdict",
+      "why_method": "3 colonnes separees par divide-x dans un bloc border-y, 1 paragraphe par colonne -- vs 3 colonnes filets verticaux (dreamspark), 3 rows (argos)",
+      "plan_overview": "3 cards egales cote a cote, la 3e en accent secondary, footer duree sous separateur -- classique assume",
+      "etapes": "template rigide x3 (standard skill) : 2 colonnes pourquoi/actions bordees a gauche + grand rectangle LIVRABLES 2px secondary en 3 colonnes",
+      "sprint": "swimlane 4 bandes standard skill, gate 'valider la spec' en rouge, bande Quoi en flex-wrap (le nowrap coupait le contenu au-dela de 1150px)",
+      "roadmap": "RAIL VERTICAL 7 jalons avec pastilles carrees, le jalon 'pause absence Sylvain' en opacity-60 et gris intercale -- proche du rail cleany mais 7 jalons et pause assumee",
+      "implication": "2 cards avec gros chiffre display-lg (4h / 1h+1h) + bande noire rassurante -- standard skill",
+      "references": "2 cards big-num STRUCTUREL (35 etapes / 8 etapes), chip secteur en haut a droite, disclaimer anti-metrique-inventee en pied",
+      "engagements": "3 cards egales + footer credentials 1 ligne sous separateur -- standard skill",
+      "offer": "asymetrie 5/12 + 7/12 : carte prix fond primary avec HT en headline inline dans le display, carte inclus en grille 2x3 + bloc 'bornes du forfait' sous separateur, puis bandeau Operate pleine largeur -- le bloc BORNES est neuf"
+    },
+    "preemit": "P5 H5 E4 S5 R5 V5"
   }
 ]
