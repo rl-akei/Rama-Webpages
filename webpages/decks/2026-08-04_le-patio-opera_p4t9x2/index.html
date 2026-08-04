@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Le Patio Opéra × Rama Logic — Le cockpit du Patio</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;family=Work+Sans:ital,wght@0,300..900;1,300..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: { extend: {
+    "colors": {
+      "surface-dim": "#dcd9d9", "secondary-fixed-dim": "#bdcf7c", "secondary-fixed": "#d9eb95",
+      "on-tertiary": "#ffffff", "surface-tint": "#466556", "on-secondary": "#ffffff",
+      "on-background": "#1c1b1b", "surface-container-highest": "#e5e2e1", "inverse-primary": "#accebc",
+      "error": "#ba1a1a", "on-tertiary-fixed": "#0c1d27", "background": "#fcf9f8",
+      "on-primary-fixed-variant": "#2f4d3f", "primary-fixed-dim": "#accebc", "on-primary-container": "#f5fff7",
+      "surface-container-lowest": "#ffffff", "primary-fixed": "#c8ead8", "surface-variant": "#e5e2e1",
+      "on-primary": "#ffffff", "on-error-container": "#93000a", "on-error": "#ffffff",
+      "primary": "#446254", "outline": "#727974", "on-surface": "#1c1b1b",
+      "tertiary-container": "#657783", "on-tertiary-container": "#fcfcff", "on-tertiary-fixed-variant": "#384954",
+      "tertiary": "#4d5e6a", "on-surface-variant": "#424844", "surface-bright": "#fcf9f8",
+      "error-container": "#ffdad6", "on-secondary-container": "#5c6b24", "surface-container-high": "#ebe7e7",
+      "on-secondary-fixed": "#171e00", "secondary-container": "#d9eb95", "inverse-surface": "#313030",
+      "outline-variant": "#c1c8c2", "surface-container-low": "#f6f3f2", "secondary": "#56641e",
+      "on-primary-fixed": "#012115", "on-secondary-fixed-variant": "#3f4c05", "inverse-on-surface": "#f3f0ef",
+      "surface-container": "#f0edec", "primary-container": "#5c7b6c", "tertiary-fixed-dim": "#b7c9d6",
+      "tertiary-fixed": "#d3e5f3", "surface": "#fcf9f8"
+    },
+    "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+    "spacing": {
+      "md": "24px", "margin": "clamp(16px, 3.3vw, 32px)", "lg": "clamp(24px, 5vw, 48px)",
+      "xl": "clamp(40px, 8vw, 80px)", "sm": "12px", "gutter": "24px", "base": "8px", "xs": "4px"
+    },
+    "fontFamily": {
+      "body-reg": ["Work Sans"], "code-label": ["Space Mono"], "title-sm": ["Clash Grotesk"],
+      "eyebrow": ["Space Mono"], "display-lg": ["Clash Grotesk"], "headline-md": ["Clash Grotesk"]
+    },
+    "fontSize": {
+      "display-lg":  ["clamp(2.75rem, 5.5vw, 5rem)",    { "lineHeight": "1.05", "fontWeight": "500" }],
+      "headline-md": ["clamp(1.75rem, 3.6vw, 3rem)",     { "lineHeight": "1.2",  "fontWeight": "500" }],
+      "title-sm":    ["clamp(1.05rem, 1.7vw, 1.5rem)",   { "lineHeight": "1.4",  "fontWeight": "500" }],
+      "body-reg":    ["clamp(0.9rem, 1vw, 1rem)",        { "lineHeight": "1.6",  "fontWeight": "400" }],
+      "code-label":  ["clamp(0.78rem, 0.9vw, 0.875rem)", { "lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400" }],
+      "eyebrow":     ["clamp(0.7rem, 0.85vw, 0.75rem)",  { "lineHeight": "1.0",  "fontWeight": "500" }]
+    }
+  } }
+}
+</script>
+<style>
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(28,27,27,.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28,27,27,.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+/* ---- viewport-fit ---- */
+html, body { overflow-x: clip; }
+.slides-viewport { height: 100vh; height: 100dvh; }
+.slide { height: 100vh; height: 100dvh; min-height: 100vh; overflow: hidden; display: none; }
+.slide.is-active { display: flex; }
+.slide > * { min-height: 0; }
+.slide img { max-height: min(50vh, 420px); object-fit: contain; }
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.2s !important; }
+  html { scroll-behavior: auto; }
+}
+/* ---- socket ---- */
+.sock::before,.sock::after,.sock>.s3,.sock>.s4{content:"";position:absolute;width:6px;height:6px;background:#1c1b1b;}
+.sock::before{top:0;left:0;transform:translate(-50%,-50%);}
+.sock::after{top:0;right:0;transform:translate(50%,-50%);}
+.sock>.s3{bottom:0;left:0;transform:translate(-50%,50%);}
+.sock>.s4{bottom:0;right:0;transform:translate(50%,50%);}
+/* ---- carte : filet pointille entre label et valeur ---- */
+.dotrow{display:flex;align-items:baseline;gap:10px;}
+.dotrow .fill{flex:1 1 auto;border-bottom:1px dotted rgba(28,27,27,.35);transform:translateY(-4px);}
+/* ---- nav ---- */
+.nav-controls{position:fixed;bottom:18px;right:18px;z-index:60;display:flex;align-items:center;gap:8px;}
+.nav-btn{width:34px;height:34px;display:grid;place-items:center;border:1px solid #1c1b1b;background:#fcf9f8;cursor:pointer;}
+.nav-btn:hover{background:#c8ead8;}
+.counter{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.05em;border:1px solid #1c1b1b;padding:8px 10px;background:#fcf9f8;}
+#overview{position:fixed;inset:0;background:#fcf9f8;z-index:80;display:none;padding:28px;overflow:auto;}
+#overview.on{display:block;}
+.ov-card{border:1px solid #1c1b1b;padding:12px;cursor:pointer;background:#fff;}
+.ov-card:hover{background:#c8ead8;}
+@media print{.nav-controls,#overview{display:none !important;}.slide{display:flex !important;page-break-after:always;height:100vh;}}
+@media (max-width: 900px){
+  .slides-viewport{height:auto;}
+  .slide{height:auto;min-height:100dvh;overflow:visible;align-items:flex-start;padding-top:40px;padding-bottom:40px;}
+}
+body.show-all .slide{display:flex !important;}
+body.show-all .nav-controls{display:none !important;}
+</style>
+</head>
+<body class="bg-background text-on-background font-body-reg antialiased">
+<div class="slides-viewport">
+
+<!-- ============ 1 · COVER ============ -->
+<section class="slide is-active grid-bg items-center justify-center p-margin" data-slide="1">
+  <div class="max-w-5xl w-full relative sock border border-on-background/15 bg-surface-container-lowest/80 p-xl"><span class="s3"></span><span class="s4"></span>
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase py-xs px-sm bg-primary-fixed/40 border border-primary-fixed inline-block">Objectif de la mission</span>
+    <h1 class="font-display-lg text-display-lg mt-lg tracking-tight">Un seul endroit<br/>où le Patio se pilote</h1>
+    <div class="w-24 h-1 bg-secondary my-md"></div>
+    <p class="font-headline-md text-headline-md text-on-surface-variant leading-tight">Le Patio Opéra<br/><span class="text-outline">Restauration et événementiel · 900 m² · 20 personnes</span></p>
+    <div class="mt-lg pt-md border-t border-outline-variant flex flex-wrap items-center justify-between gap-sm">
+      <p class="font-code-label text-code-label text-tertiary uppercase tracking-wider">Préparé pour Valérie · par Sylvain Ramaradjou · Rama Logic</p>
+      <p class="font-code-label text-code-label text-outline uppercase tracking-wider">4 août 2026 · Confidentiel</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 · SOMMAIRE ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="2">
+  <div class="max-w-5xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">Sommaire</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-lg">Ce qu'on va dérouler</h2>
+    <div class="divide-y divide-on-background/10 border-y border-on-background/10">
+      <div class="flex gap-md py-sm items-baseline"><span class="font-code-label text-code-label text-primary w-8">01</span><span class="font-title-sm text-title-sm w-56 shrink-0">Le décor</span><span class="text-on-surface-variant">Ce que j'ai retenu de notre échange du 3 août</span></div>
+      <div class="flex gap-md py-sm items-baseline"><span class="font-code-label text-code-label text-primary w-8">02</span><span class="font-title-sm text-title-sm w-56 shrink-0">Ce qui bloque</span><span class="text-on-surface-variant">Où vit l'information aujourd'hui, et ce que ça coûte</span></div>
+      <div class="flex gap-md py-sm items-baseline"><span class="font-code-label text-code-label text-primary w-8">03</span><span class="font-title-sm text-title-sm w-56 shrink-0">Ce que j'y vois</span><span class="text-on-surface-variant">La cause racine, et là où on va si on s'y met</span></div>
+      <div class="flex gap-md py-sm items-baseline"><span class="font-code-label text-code-label text-primary w-8">04</span><span class="font-title-sm text-title-sm w-56 shrink-0">Le système</span><span class="text-on-surface-variant">Le cockpit, l'agent qui répond, et pourquoi Notion</span></div>
+      <div class="flex gap-md py-sm items-baseline"><span class="font-code-label text-code-label text-primary w-8">05</span><span class="font-title-sm text-title-sm w-56 shrink-0">Le plan</span><span class="text-on-surface-variant">Trois étapes, le calendrier, et ce qu'on attend de vous</span></div>
+      <div class="flex gap-md py-sm items-baseline"><span class="font-code-label text-code-label text-primary w-8">06</span><span class="font-title-sm text-title-sm w-56 shrink-0">La preuve</span><span class="text-on-surface-variant">Deux maisons comparables et mes engagements</span></div>
+      <div class="flex gap-md py-sm items-baseline"><span class="font-code-label text-code-label text-primary w-8">07</span><span class="font-title-sm text-title-sm w-56 shrink-0">L'offre</span><span class="text-on-surface-variant">La décision qui est sur la table</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 · DIVIDER 01 ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="3">
+  <div class="max-w-5xl w-full mx-auto relative sock border-l-2 border-primary pl-lg py-lg"><span class="s3"></span><span class="s4"></span>
+    <span class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase">01 / 07</span>
+    <h2 class="font-display-lg text-display-lg mt-sm tracking-tight">Le décor</h2>
+    <p class="font-title-sm text-title-sm text-on-surface-variant mt-md">Là où le Patio en est aujourd'hui, dans tes mots.</p>
+  </div>
+</section>
+
+<!-- ============ 4 · LE PATIO EN UNE PAGE ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="4">
+  <div class="max-w-4xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">01 · Le décor</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">Le Patio en une page</h2>
+    <div class="relative sock border border-on-background/15 bg-surface-container-lowest p-lg space-y-sm"><span class="s3"></span><span class="s4"></span>
+      <div class="dotrow"><span class="font-code-label text-code-label text-on-surface-variant uppercase">Établissement</span><span class="fill"></span><span class="font-title-sm text-title-sm">900 m², Paris Opéra</span></div>
+      <div class="dotrow"><span class="font-code-label text-code-label text-on-surface-variant uppercase">Activités</span><span class="fill"></span><span class="font-title-sm text-title-sm">Restauration en continu + événementiel</span></div>
+      <div class="dotrow"><span class="font-code-label text-code-label text-on-surface-variant uppercase">Format événement</span><span class="fill"></span><span class="font-title-sm text-title-sm">De 20 à 300 personnes</span></div>
+      <div class="dotrow"><span class="font-code-label text-code-label text-on-surface-variant uppercase">Chiffre d'affaires</span><span class="fill"></span><span class="font-title-sm text-title-sm">Plus de 2 M€ HT</span></div>
+      <div class="dotrow"><span class="font-code-label text-code-label text-on-surface-variant uppercase">Équipe</span><span class="fill"></span><span class="font-title-sm text-title-sm">20 personnes, dont 5 à 6 transverses</span></div>
+      <div class="dotrow"><span class="font-code-label text-code-label text-on-surface-variant uppercase">Zones commercialisables</span><span class="fill"></span><span class="font-title-sm text-title-sm">5 à 6</span></div>
+      <div class="dotrow"><span class="font-code-label text-code-label text-on-surface-variant uppercase">Ancienneté</span><span class="fill"></span><span class="font-title-sm text-title-sm">15 ans d'archives</span></div>
+      <div class="dotrow"><span class="font-code-label text-code-label text-on-surface-variant uppercase">Outils métier</span><span class="fill"></span><span class="font-title-sm text-title-sm text-right">CRM maison 2019 · OpenTable · TheFork<br/>Agendrix · Malou · Outlook · WhatsApp</span></div>
+      <div class="dotrow pt-sm border-t border-on-background/15"><span class="font-code-label text-code-label text-error uppercase">Outil de pilotage transverse</span><span class="fill"></span><span class="font-title-sm text-title-sm text-error">Aucun</span></div>
+    </div>
+    <p class="font-code-label text-code-label text-on-surface-variant mt-md">Sept outils métier qui marchent. Une seule ligne vide, la dernière. C'est celle qui nous intéresse.</p>
+  </div>
+</section>
+
+<!-- ============ 5 · OU VIT L'INFORMATION ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="5">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">01 · Le décor</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">Où vit la mémoire du Patio aujourd'hui</h2>
+    <div class="grid md:grid-cols-3 gap-gutter">
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-title-sm text-title-sm">Le cahier</p>
+        <p class="text-on-surface-variant mt-xs">Les projets en cours, les décisions, les suites à donner.</p>
+        <p class="font-code-label text-code-label text-error uppercase mt-sm pt-sm border-t border-on-background/10">Lisible par une seule personne</p></div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-title-sm text-title-sm">Le groupe WhatsApp « tuto »</p>
+        <p class="text-on-surface-variant mt-xs">Les vidéos du quotidien, comme débloquer l'ascenseur.</p>
+        <p class="font-code-label text-code-label text-error uppercase mt-sm pt-sm border-t border-on-background/10">Introuvable trois semaines plus tard</p></div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-title-sm text-title-sm">Les têtes de l'équipe</p>
+        <p class="text-on-surface-variant mt-xs">Les tours de main, les habitudes, les exceptions.</p>
+        <p class="font-code-label text-code-label text-error uppercase mt-sm pt-sm border-t border-on-background/10">Part avec le turnover</p></div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-title-sm text-title-sm">Le CRM maison</p>
+        <p class="text-on-surface-variant mt-xs">Les affaires événementielles, 20 à 30 par mois.</p>
+        <p class="font-code-label text-code-label text-error uppercase mt-sm pt-sm border-t border-on-background/10">Le CA par zone se ressort à la main</p></div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-title-sm text-title-sm">15 ans de PDF et d'Excel</p>
+        <p class="text-on-surface-variant mt-xs">L'histoire de la maison, la charte, les fiches techniques.</p>
+        <p class="font-code-label text-code-label text-error uppercase mt-sm pt-sm border-t border-on-background/10">Jamais rouvert</p></div>
+      <div class="relative sock border border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-title-sm text-title-sm">Les réunions</p>
+        <p class="text-on-surface-variant mt-xs">Là où les projets avancent réellement.</p>
+        <p class="font-code-label text-code-label text-error uppercase mt-sm pt-sm border-t border-on-background/10">Rien n'en sort d'écrit et d'assigné</p></div>
+    </div>
+    <div class="mt-md bg-on-background text-background p-md relative sock"><span class="s3"></span><span class="s4"></span>
+      <p class="font-title-sm text-title-sm italic">« Là, moi, je gère avec le bon vieux cahier. »</p>
+      <p class="font-code-label text-code-label opacity-70 uppercase mt-xs">Valérie, 3 août 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 · DIVIDER 02 ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="6">
+  <div class="max-w-5xl w-full mx-auto relative sock border-l-2 border-primary pl-lg py-lg"><span class="s3"></span><span class="s4"></span>
+    <span class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase">02 / 07</span>
+    <h2 class="font-display-lg text-display-lg mt-sm tracking-tight">Ce qui bloque</h2>
+    <p class="font-title-sm text-title-sm text-on-surface-variant mt-md">Trois frictions, et le chiffre que personne ne peut sortir.</p>
+  </div>
+</section>
+
+<!-- ============ 7 · LES 3 FRICTIONS ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="7">
+  <div class="max-w-5xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">02 · Ce qui bloque</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">Trois frictions, dans tes mots</h2>
+    <div class="divide-y divide-on-background/15 border-y border-on-background/15">
+      <div class="py-md flex gap-md items-start">
+        <span class="font-display-lg text-display-lg text-primary-fixed-dim leading-none shrink-0 w-16 text-center">1</span>
+        <div>
+          <p class="font-headline-md text-headline-md leading-tight">« Si je ne suis pas moteur,<br/>ça avance plus difficilement. »</p>
+          <p class="text-on-surface-variant mt-sm">Deux bons managers, et pourtant tout repart de toi. Sans ta relance, les projets traînent.</p>
+        </div>
+      </div>
+      <div class="py-md flex gap-md items-start">
+        <span class="font-display-lg text-display-lg text-primary-fixed-dim leading-none shrink-0 w-16 text-center">2</span>
+        <div>
+          <p class="font-headline-md text-headline-md leading-tight">« On est obligé de le faire à la main. »</p>
+          <p class="text-on-surface-variant mt-sm">Le chiffre d'affaires par zone se recalcule chaque mois depuis le CRM. Cinq à six zones, 20 à 30 affaires par mois, aucune analytique native.</p>
+        </div>
+      </div>
+      <div class="py-md flex gap-md items-start">
+        <span class="font-display-lg text-display-lg text-primary-fixed-dim leading-none shrink-0 w-16 text-center">3</span>
+        <div>
+          <p class="font-headline-md text-headline-md leading-tight">« C'est quoi le code de l'ascenseur ? »</p>
+          <p class="text-on-surface-variant mt-sm">Chaque question simple consomme quelqu'un qui n'est pas disponible. Et elle se repose au prochain arrivant.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 · CE QUE CA COUTE ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="8">
+  <div class="max-w-4xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">02 · Ce qui bloque</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">Ce que ça coûte au Patio</h2>
+    <div class="relative sock border border-on-background/15 bg-surface-container-lowest divide-y divide-on-background/10"><span class="s3"></span><span class="s4"></span>
+      <div class="flex items-center justify-between gap-md p-md">
+        <p class="text-on-surface-variant">Heures passées chaque semaine à chercher une information</p>
+        <p class="font-code-label text-code-label text-outline uppercase border border-outline-variant px-sm py-xs shrink-0">non mesuré</p>
+      </div>
+      <div class="flex items-center justify-between gap-md p-md">
+        <p class="text-on-surface-variant">Délai moyen entre l'idée d'un projet et son lancement réel</p>
+        <p class="font-code-label text-code-label text-outline uppercase border border-outline-variant px-sm py-xs shrink-0">non mesuré</p>
+      </div>
+      <div class="flex items-center justify-between gap-md p-md">
+        <p class="text-on-surface-variant">Marge réelle par type d'événement et par zone</p>
+        <p class="font-code-label text-code-label text-outline uppercase border border-outline-variant px-sm py-xs shrink-0">non mesuré</p>
+      </div>
+    </div>
+    <div class="mt-md bg-on-background text-background p-lg relative sock"><span class="s3"></span><span class="s4"></span>
+      <p class="font-title-sm text-title-sm">Ce tableau est vide, et ce n'est pas un oubli de ma part.</p>
+      <p class="mt-sm opacity-90">Aucun de ces trois chiffres n'existe aujourd'hui au Patio. Je ne vais pas t'inventer un coût caché en euros pour rendre la proposition plus impressionnante. Rendre ces trois lignes lisibles, c'est justement un des livrables du projet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9 · DIVIDER 03 ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="9">
+  <div class="max-w-5xl w-full mx-auto relative sock border-l-2 border-primary pl-lg py-lg"><span class="s3"></span><span class="s4"></span>
+    <span class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase">03 / 07</span>
+    <h2 class="font-display-lg text-display-lg mt-sm tracking-tight">Ce que j'y vois</h2>
+    <p class="font-title-sm text-title-sm text-on-surface-variant mt-md">La cause qui est sous les trois frictions.</p>
+  </div>
+</section>
+
+<!-- ============ 10 · CAUSE RACINE ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="10">
+  <div class="max-w-5xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">03 · Ce que j'y vois</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">Le Patio n'a pas un problème d'outils</h2>
+    <div class="grid md:grid-cols-2 gap-gutter">
+      <div class="relative sock border-2 border-primary p-lg bg-primary-fixed/20"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider">La cause racine</p>
+        <p class="font-title-sm text-title-sm mt-sm">Il a sept outils métier, et ils marchent bien. Ce qui manque, c'est l'étage au-dessus.</p>
+        <p class="text-on-surface-variant mt-sm">L'endroit où une décision devient une tâche, où la tâche devient une donnée, et où cette donnée redevient une décision.</p>
+        <p class="text-on-surface-variant mt-sm">Aujourd'hui, cet étage existe. C'est toi. Tu es le système d'exploitation de la maison, et tu tournes en permanence.</p>
+      </div>
+      <div class="relative sock border-2 border-error/40 p-lg bg-error-container/30"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-error uppercase tracking-wider">Si rien ne change</p>
+        <p class="font-title-sm text-title-sm mt-sm">Ça continue de tenir. Tant que tu es là.</p>
+        <p class="text-on-surface-variant mt-sm">Le jour où tu veux déléguer pour de vrai, ouvrir une activité de plus, ou simplement partir trois semaines, la maison ralentit au rythme de ta disponibilité.</p>
+        <p class="text-on-surface-variant mt-sm">Et les 15 ans d'archives restent inexploitables une année de plus, pendant que le turnover continue d'emporter ce que les gens savaient.</p>
+      </div>
+    </div>
+    <p class="font-code-label text-code-label text-on-surface-variant mt-md">Tu l'as dit toi-même : « j'ai l'impression d'être un poulpe ».</p>
+  </div>
+</section>
+
+<!-- ============ 11 · OBJECTIFS ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="11">
+  <div class="max-w-5xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">03 · Ce que j'y vois</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">Là où on va</h2>
+    <div class="grid md:grid-cols-2 gap-0 border border-on-background/15 relative sock bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+      <div class="p-lg md:border-r border-on-background/15">
+        <p class="font-code-label text-code-label text-outline uppercase tracking-wider mb-md">Aujourd'hui</p>
+        <p class="py-sm border-b border-on-background/10">Les projets vivent dans un cahier<br/><span class="font-code-label text-code-label text-on-surface-variant">lisible par une seule personne</span></p>
+        <p class="py-sm border-b border-on-background/10">Le CA par zone se calcule à la main<br/><span class="font-code-label text-code-label text-on-surface-variant">une fois par mois, en ressortant le CRM</span></p>
+        <p class="py-sm">Les réponses aux questions courantes<br/><span class="font-code-label text-code-label text-on-surface-variant">sont dans la tête de quelqu'un</span></p>
+      </div>
+      <div class="p-lg bg-primary-fixed/15">
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider mb-md">Demain</p>
+        <p class="py-sm border-b border-on-background/10">Les projets vivent dans un espace partagé<br/><span class="font-code-label text-code-label text-on-surface-variant">chacun voit ce qui le concerne, et rien d'autre</span></p>
+        <p class="py-sm border-b border-on-background/10">Le CA par zone s'affiche<br/><span class="font-code-label text-code-label text-on-surface-variant">à jour à chaque import, sans recalcul</span></p>
+        <p class="py-sm">Les réponses sont dans la mémoire<br/><span class="font-code-label text-code-label text-on-surface-variant">accessibles depuis un téléphone, en salle</span></p>
+      </div>
+    </div>
+    <div class="mt-md p-md border-l-2 border-secondary bg-secondary-fixed/20">
+      <p class="font-title-sm text-title-sm">Tu redeviens celle qui décide, pas celle qui relance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 · DIVIDER 04 ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="12">
+  <div class="max-w-5xl w-full mx-auto relative sock border-l-2 border-primary pl-lg py-lg"><span class="s3"></span><span class="s4"></span>
+    <span class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase">04 / 07</span>
+    <h2 class="font-display-lg text-display-lg mt-sm tracking-tight">Le système</h2>
+    <p class="font-title-sm text-title-sm text-on-surface-variant mt-md">Ce qu'on construit, et pourquoi comme ça.</p>
+  </div>
+</section>
+
+<!-- ============ 13 · LE COCKPIT EN 4 COUCHES ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="13">
+  <div class="max-w-5xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">04 · Le système</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">Le cockpit, en quatre couches</h2>
+    <div class="space-y-sm">
+      <div class="relative sock border border-on-background/15 bg-surface-container-lowest p-md flex gap-md items-start"><span class="s3"></span><span class="s4"></span>
+        <span class="font-code-label text-code-label text-primary shrink-0 pt-1">01</span>
+        <div><p class="font-title-sm text-title-sm">La mémoire</p>
+        <p class="text-on-surface-variant">Tout ce que la maison sait : procédures, tutos, fiches techniques, historique, charte. Une seule source, cherchable, alimentée par l'équipe.</p></div>
+      </div>
+      <div class="relative sock border border-on-background/15 bg-surface-container-lowest p-md flex gap-md items-start"><span class="s3"></span><span class="s4"></span>
+        <span class="font-code-label text-code-label text-primary shrink-0 pt-1">02</span>
+        <div><p class="font-title-sm text-title-sm">Les projets</p>
+        <p class="text-on-surface-variant">Chaque projet avec ses étapes, son responsable, sa date et son budget. De l'idée du nouveau petit-déjeuner jusqu'à son bilan de rentabilité.</p></div>
+      </div>
+      <div class="relative sock border border-on-background/15 bg-surface-container-lowest p-md flex gap-md items-start"><span class="s3"></span><span class="s4"></span>
+        <span class="font-code-label text-code-label text-primary shrink-0 pt-1">03</span>
+        <div><p class="font-title-sm text-title-sm">La data</p>
+        <p class="text-on-surface-variant">Les chiffres qui comptent, rapatriés chaque mois : CA par zone, volume d'affaires, rentabilité par type d'événement.</p></div>
+      </div>
+      <div class="relative sock border-2 border-secondary bg-secondary-fixed/25 p-md flex gap-md items-start"><span class="s3"></span><span class="s4"></span>
+        <span class="font-code-label text-code-label text-secondary shrink-0 pt-1">04</span>
+        <div><p class="font-title-sm text-title-sm">Les agents</p>
+        <p class="text-on-surface-variant">Une IA branchée sur la mémoire, qui répond aux questions courantes depuis un téléphone, sans déranger personne.</p></div>
+      </div>
+    </div>
+    <p class="font-code-label text-code-label text-on-surface-variant mt-md">Le sommaire garde un bouton d'accès direct vers TheFork, OpenTable, Agendrix et Malou. On ne remplace aucun outil métier, on pose un étage au-dessus.</p>
+  </div>
+</section>
+
+<!-- ============ 14 · L'AGENT ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="14">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">04 · Le système</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">L'agent qui répond à la place de l'équipe</h2>
+    <div class="grid md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-sm items-stretch">
+      <div class="relative sock border-2 border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-primary uppercase">Étape 1</p>
+        <p class="font-title-sm text-title-sm mt-xs">En salle, sur son téléphone</p>
+        <p class="text-on-surface-variant mt-xs">Un serveur ouvre l'espace. Pas de formation, pas d'ordinateur.</p></div>
+      <div class="hidden md:flex items-center justify-center text-primary"><span class="material-symbols-outlined">arrow_forward</span></div>
+      <div class="relative sock border-2 border-on-background/15 p-md bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-primary uppercase">Étape 2</p>
+        <p class="font-title-sm text-title-sm mt-xs">Il pose sa question</p>
+        <p class="text-on-surface-variant mt-xs">En langage normal. « C'est quoi le code de l'ascenseur ? »</p></div>
+      <div class="hidden md:flex items-center justify-center text-primary"><span class="material-symbols-outlined">arrow_forward</span></div>
+      <div class="relative sock border-2 border-secondary p-md bg-secondary-fixed/25"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-secondary uppercase">Étape 3</p>
+        <p class="font-title-sm text-title-sm mt-xs">L'agent répond</p>
+        <p class="text-on-surface-variant mt-xs">Il cherche dans la mémoire du Patio et donne la réponse.</p></div>
+    </div>
+    <div class="mt-md bg-on-background text-background p-md relative sock"><span class="s3"></span><span class="s4"></span>
+      <p class="font-title-sm text-title-sm">Personne n'a été interrompu. Et la question ne se reposera plus à un humain.</p>
+    </div>
+    <p class="font-code-label text-code-label text-on-surface-variant mt-md">L'agent ne sait que ce que la mémoire contient. C'est exactement pour ça que la première étape du plan, c'est la mémoire, et pas l'IA.</p>
+  </div>
+</section>
+
+<!-- ============ 15 · POURQUOI CETTE METHODE ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="15">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">04 · Le système</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-lg">Pourquoi cette méthode</h2>
+    <div class="grid md:grid-cols-3 divide-x divide-on-background/15 border-y border-on-background/15">
+      <div class="p-md">
+        <p class="font-title-sm text-title-sm">vs garder le cahier</p>
+        <p class="text-on-surface-variant mt-sm">Le cahier ne coûte rien et il fonctionne, tant que c'est toi qui le tiens. Il ne se partage pas, ne se cherche pas, et ne survit pas à un départ. Le cockpit fait la même chose, en lisible par tous.</p>
+      </div>
+      <div class="p-md">
+        <p class="font-title-sm text-title-sm">vs refaire le CRM</p>
+        <p class="text-on-surface-variant mt-sm">Ton CRM de 2019 fait bien son travail sur l'événementiel, tu l'as dit. Le refaire coûterait plusieurs fois ce projet, pour résoudre un problème qui n'est pas le tien aujourd'hui. On le garde et on lui prend ses chiffres.</p>
+      </div>
+      <div class="p-md">
+        <p class="font-title-sm text-title-sm">vs un ChatGPT d'entreprise</p>
+        <p class="text-on-surface-variant mt-sm">Une IA sans mémoire d'entreprise répond des généralités que n'importe qui peut obtenir. Ce qui a de la valeur, c'est ce que le Patio sait et que personne d'autre ne sait. On construit d'abord ça.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 16 · DIVIDER 05 ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="16">
+  <div class="max-w-5xl w-full mx-auto relative sock border-l-2 border-primary pl-lg py-lg"><span class="s3"></span><span class="s4"></span>
+    <span class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase">05 / 07</span>
+    <h2 class="font-display-lg text-display-lg mt-sm tracking-tight">Le plan</h2>
+    <p class="font-title-sm text-title-sm text-on-surface-variant mt-md">Trois étapes, sept semaines de construction.</p>
+  </div>
+</section>
+
+<!-- ============ 17 · LES 3 ETAPES ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="17">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">05 · Le plan</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-lg">Trois étapes pour y arriver</h2>
+    <div class="grid md:grid-cols-3 gap-gutter">
+      <div class="relative sock border border-on-background/15 p-lg bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider">Étape 01 · 2 semaines</p>
+        <p class="font-title-sm text-title-sm mt-sm">Le socle</p>
+        <p class="text-on-surface-variant mt-sm">La mémoire d'entreprise et l'architecture de l'espace. Ce sur quoi tout le reste s'appuie.</p></div>
+      <div class="relative sock border border-on-background/15 p-lg bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider">Étape 02 · 3 semaines</p>
+        <p class="font-title-sm text-title-sm mt-sm">Le cockpit projets</p>
+        <p class="text-on-surface-variant mt-sm">La gestion de projet et les vues par personne. C'est ce qui te retire du chemin critique.</p></div>
+      <div class="relative sock border-2 border-secondary p-lg bg-secondary-fixed/25"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-secondary uppercase tracking-wider">Étape 03 · 2 semaines</p>
+        <p class="font-title-sm text-title-sm mt-sm">La data et les agents</p>
+        <p class="text-on-surface-variant mt-sm">Les tableaux de bord et l'agent de réponse. C'est ce qui transforme l'outil en outil de décision.</p></div>
+    </div>
+    <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider mt-lg pt-md border-t border-on-background/15">Durée totale · 7 semaines de construction, puis recette et formation</p>
+  </div>
+</section>
+
+<!-- ============ 18 · ETAPE 1 ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="18">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">Étape 01 sur 03</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">Le socle</h2>
+    <div class="grid md:grid-cols-2 gap-gutter mb-md">
+      <div class="border-l-2 border-primary pl-md">
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider">Pourquoi c'est indispensable</p>
+        <p class="text-on-surface-variant mt-sm">Tout le reste s'appuie dessus. Sans mémoire, l'agent répond du vide et le cockpit reste une coquille. C'est aussi l'étape où on décide ensemble ce qui rentre dans le système et ce qui reste dehors.</p>
+      </div>
+      <div class="border-l-2 border-outline-variant pl-md">
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Ce qu'on va y faire</p>
+        <p class="mt-sm">1. Un atelier de 4h avec l'équipe transverse pour cartographier ce que la maison sait et où ça vit</p>
+        <p>2. Construire l'architecture de l'espace : la mémoire, les projets, les zones, les fiches</p>
+        <p>3. Reprendre un premier corpus, les 20 documents et tutos les plus utilisés, choisis par toi</p>
+      </div>
+    </div>
+    <div class="relative sock border-2 border-secondary bg-secondary-fixed/15 p-lg"><span class="s3"></span><span class="s4"></span>
+      <p class="font-code-label text-code-label text-secondary uppercase tracking-wider mb-sm">Livrables</p>
+      <div class="grid md:grid-cols-3 gap-md">
+        <p class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span><span>Espace Notion structuré et nommé en français</span></p>
+        <p class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span><span>Base mémoire avec les 20 premiers documents repris</span></p>
+        <p class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span><span>Règle d'alimentation écrite, une page, pour que l'équipe continue seule</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 19 · ETAPE 2 ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="19">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">Étape 02 sur 03</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">Le cockpit projets</h2>
+    <div class="grid md:grid-cols-2 gap-gutter mb-md">
+      <div class="border-l-2 border-primary pl-md">
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider">Pourquoi c'est indispensable</p>
+        <p class="text-on-surface-variant mt-sm">C'est la partie qui te retire du chemin critique. Un projet lancé doit avancer sans que tu relances. Tant que la seule mécanique de relance c'est toi en réunion, rien ne change.</p>
+      </div>
+      <div class="border-l-2 border-outline-variant pl-md">
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Ce qu'on va y faire</p>
+        <p class="mt-sm">1. Modéliser un projet type du Patio, de l'idée au bilan, avec ses étapes et ses responsables</p>
+        <p>2. Construire les bases Projets et Actions, reliées, avec une vue par personne</p>
+        <p>3. Former les 5 à 6 transverses sur leur écran à eux, pas sur Notion en général</p>
+      </div>
+    </div>
+    <div class="relative sock border-2 border-secondary bg-secondary-fixed/15 p-lg"><span class="s3"></span><span class="s4"></span>
+      <p class="font-code-label text-code-label text-secondary uppercase tracking-wider mb-sm">Livrables</p>
+      <div class="grid md:grid-cols-3 gap-md">
+        <p class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span><span>Bases Projets et Actions reliées, avec responsable et échéance</span></p>
+        <p class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span><span>Une vue par personne, lisible sur téléphone</span></p>
+        <p class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span><span>Un parcours type prêt à cloner à chaque nouveau projet</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 20 · ETAPE 3 ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="20">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">Étape 03 sur 03</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">La data et les agents</h2>
+    <div class="grid md:grid-cols-2 gap-gutter mb-md">
+      <div class="border-l-2 border-primary pl-md">
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider">Pourquoi c'est indispensable</p>
+        <p class="text-on-surface-variant mt-sm">C'est ce qui transforme le cockpit en outil de décision. Sans chiffres, tu continues à arbitrer au ressenti et à ressortir le CRM à la main tous les mois.</p>
+      </div>
+      <div class="border-l-2 border-outline-variant pl-md">
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">Ce qu'on va y faire</p>
+        <p class="mt-sm">1. Définir avec toi les cinq chiffres qui comptent vraiment pour piloter</p>
+        <p>2. Mettre en place l'import mensuel depuis le CRM et les outils de réservation, et les tableaux de bord</p>
+        <p>3. Brancher l'agent sur la mémoire et le tester en vrai avec deux personnes de l'équipe</p>
+      </div>
+    </div>
+    <div class="relative sock border-2 border-secondary bg-secondary-fixed/15 p-lg"><span class="s3"></span><span class="s4"></span>
+      <p class="font-code-label text-code-label text-secondary uppercase tracking-wider mb-sm">Livrables</p>
+      <div class="grid md:grid-cols-3 gap-md">
+        <p class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span><span>Tableau de bord CA par zone et rentabilité par type d'événement</span></p>
+        <p class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span><span>Procédure d'import mensuel, environ 10 minutes par mois</span></p>
+        <p class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span><span>Agent de réponse accessible depuis un téléphone</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 21 · DEROULE D'UNE ETAPE ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="21">
+  <div class="max-w-6xl w-full mx-auto">
+    <div class="flex flex-wrap items-baseline justify-between gap-sm mb-md">
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">05 · Le plan</span>
+        <h2 class="font-headline-md text-headline-md mt-sm">Comment se déroule une étape</h2>
+      </div>
+      <p class="font-title-sm text-title-sm text-primary">Étape · 2 à 3 semaines</p>
+    </div>
+    <div class="overflow-x-auto">
+    <div style="min-width:1000px" class="space-y-xs">
+      <div class="flex gap-sm items-stretch">
+        <div class="w-28 shrink-0 flex items-center gap-xs font-code-label text-code-label uppercase text-on-surface-variant">Quoi<span class="material-symbols-outlined text-primary" style="font-size:14px">arrow_forward</span></div>
+        <div class="flex-1 bg-secondary-fixed/30 p-sm flex flex-wrap gap-xs items-center">
+          <span class="bg-surface-container-lowest border border-on-background/15 px-sm py-xs font-code-label text-code-label">Cadrer</span>
+          <span class="bg-surface-container-lowest border border-on-background/15 px-sm py-xs font-code-label text-code-label">Cartographier</span>
+          <span class="bg-surface-container-lowest border border-on-background/15 px-sm py-xs font-code-label text-code-label">Définir la cible</span>
+          <span class="bg-error text-on-error px-sm py-xs font-code-label text-code-label">▲ valider la spec</span>
+          <span class="bg-surface-container-lowest border border-on-background/15 px-sm py-xs font-code-label text-code-label">Construire</span>
+          <span class="bg-surface-container-lowest border border-on-background/15 px-sm py-xs font-code-label text-code-label">Former</span>
+          <span class="bg-surface-container-lowest border border-on-background/15 px-sm py-xs font-code-label text-code-label">Tester et ajuster</span>
+        </div>
+      </div>
+      <div class="flex gap-sm items-stretch">
+        <div class="w-28 shrink-0 flex items-center gap-xs font-code-label text-code-label uppercase text-on-surface-variant">Qui<span class="material-symbols-outlined text-primary" style="font-size:14px">arrow_forward</span></div>
+        <div class="flex-1 bg-tertiary-fixed/40 p-sm flex gap-xs items-center">
+          <span class="bg-surface-container-lowest border border-on-background/15 px-sm py-xs font-code-label text-code-label" style="flex:3">Rama Logic + Le Patio</span>
+          <span class="bg-surface-container-lowest border border-on-background/15 px-sm py-xs font-code-label text-code-label" style="flex:3">Rama Logic</span>
+          <span class="bg-surface-container-lowest border border-on-background/15 px-sm py-xs font-code-label text-code-label" style="flex:2">Le Patio</span>
+          <span class="bg-surface-container-lowest border border-on-background/15 px-sm py-xs font-code-label text-code-label" style="flex:2">Rama Logic</span>
+        </div>
+      </div>
+      <div class="flex gap-sm items-stretch">
+        <div class="w-28 shrink-0 flex items-center gap-xs font-code-label text-code-label uppercase text-on-surface-variant">Livrables<span class="material-symbols-outlined text-primary" style="font-size:14px">arrow_forward</span></div>
+        <div class="flex-1 bg-primary-fixed/20 p-sm flex gap-xs items-center">
+          <span class="bg-surface-container-lowest border border-on-background/15 px-sm py-xs font-code-label text-code-label flex gap-xs items-center" style="flex:1"><span class="material-symbols-outlined text-primary" style="font-size:13px">check_circle</span>Carte de l'existant</span>
+          <span class="bg-surface-container-lowest border border-on-background/15 px-sm py-xs font-code-label text-code-label flex gap-xs items-center" style="flex:1"><span class="material-symbols-outlined text-primary" style="font-size:13px">check_circle</span>Spec validée</span>
+          <span class="bg-surface-container-lowest border border-on-background/15 px-sm py-xs font-code-label text-code-label flex gap-xs items-center" style="flex:1"><span class="material-symbols-outlined text-primary" style="font-size:13px">check_circle</span>L'espace construit</span>
+          <span class="bg-surface-container-lowest border border-on-background/15 px-sm py-xs font-code-label text-code-label flex gap-xs items-center" style="flex:1"><span class="material-symbols-outlined text-primary" style="font-size:13px">check_circle</span>Mode d'emploi</span>
+        </div>
+      </div>
+      <div class="flex gap-sm items-stretch">
+        <div class="w-28 shrink-0 flex items-center gap-xs font-code-label text-code-label uppercase text-on-surface-variant">Bénéfice<span class="material-symbols-outlined text-primary" style="font-size:14px">arrow_forward</span></div>
+        <div class="flex-1 p-sm flex gap-md items-center border border-on-background/10">
+          <span class="text-primary" style="flex:1">→ On sait ce qu'on construit avant de construire</span>
+          <span class="text-primary" style="flex:1">→ Tu valides avant que ça coûte du temps</span>
+          <span class="text-primary" style="flex:1">→ L'équipe sait s'en servir le jour de la livraison</span>
+        </div>
+      </div>
+    </div>
+    </div>
+    <p class="font-code-label text-code-label text-on-surface-variant mt-md">Ce cycle se répète à l'identique pour chacune des trois étapes.</p>
+  </div>
+</section>
+
+<!-- ============ 22 · CALENDRIER ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="22">
+  <div class="max-w-5xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">05 · Le plan</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">Le calendrier</h2>
+    <div class="border-l-2 border-outline-variant pl-lg space-y-md">
+      <div class="relative"><span class="absolute -left-[57px] top-1 w-3 h-3 bg-primary"></span>
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider">Vendredi 7 août</p>
+        <p class="font-title-sm text-title-sm">Présentation de cette proposition</p></div>
+      <div class="relative"><span class="absolute -left-[57px] top-1 w-3 h-3 bg-primary"></span>
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider">Vendredi 14 août</p>
+        <p class="font-title-sm text-title-sm">Décision</p></div>
+      <div class="relative"><span class="absolute -left-[57px] top-1 w-3 h-3 bg-primary"></span>
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider">Jeudi 20 août</p>
+        <p class="font-title-sm text-title-sm">Atelier de cadrage, 4h, avec l'équipe transverse</p></div>
+      <div class="relative opacity-60"><span class="absolute -left-[57px] top-1 w-3 h-3 bg-outline"></span>
+        <p class="font-code-label text-code-label text-outline uppercase tracking-wider">24 août au 6 septembre</p>
+        <p class="font-title-sm text-title-sm text-outline">Pause. Je suis indisponible, je te le dis maintenant plutôt qu'après signature.</p></div>
+      <div class="relative"><span class="absolute -left-[57px] top-1 w-3 h-3 bg-primary"></span>
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider">8 septembre au 24 octobre</p>
+        <p class="font-title-sm text-title-sm">Construction, les trois étapes s'enchaînent</p></div>
+      <div class="relative"><span class="absolute -left-[57px] top-1 w-3 h-3 bg-primary"></span>
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider">Semaine du 27 octobre</p>
+        <p class="font-title-sm text-title-sm">Recette et formation des équipes</p></div>
+      <div class="relative"><span class="absolute -left-[57px] top-1 w-3 h-3 bg-secondary"></span>
+        <p class="font-code-label text-code-label text-secondary uppercase tracking-wider">Lundi 3 novembre</p>
+        <p class="font-title-sm text-title-sm">Mise en service</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 23 · VOTRE IMPLICATION ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="23">
+  <div class="max-w-5xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">05 · Le plan</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">Ce qu'on attend de vos équipes</h2>
+    <div class="grid md:grid-cols-2 gap-gutter">
+      <div class="relative sock border-2 border-primary bg-primary-fixed/20 p-lg"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider">Au démarrage · une fois</p>
+        <p class="font-display-lg text-display-lg text-primary leading-none mt-sm">4h</p>
+        <p class="mt-sm">L'atelier de cadrage, avec les 5 à 6 personnes transverses. C'est la seule fois où on mobilise tout le monde en même temps.</p>
+      </div>
+      <div class="relative sock border border-on-background/15 bg-surface-container-lowest p-lg"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider">À chaque étape · récurrent</p>
+        <p class="font-display-lg text-display-lg leading-none mt-sm">1h + 1h</p>
+        <p class="mt-sm">1h de validation avec toi en fin d'étape, et 1h de formation pour les personnes concernées par ce qui vient d'être livré.</p>
+      </div>
+    </div>
+    <div class="mt-md bg-on-background text-background p-md relative sock"><span class="s3"></span><span class="s4"></span>
+      <p class="font-title-sm text-title-sm">C'est tout. Un référent joignable, et la validation des trois jalons. Le reste, c'est nous.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 24 · DIVIDER 06 ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="24">
+  <div class="max-w-5xl w-full mx-auto relative sock border-l-2 border-primary pl-lg py-lg"><span class="s3"></span><span class="s4"></span>
+    <span class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase">06 / 07</span>
+    <h2 class="font-display-lg text-display-lg mt-sm tracking-tight">La preuve</h2>
+    <p class="font-title-sm text-title-sm text-on-surface-variant mt-md">Deux maisons comparables, et ce sur quoi je m'engage.</p>
+  </div>
+</section>
+
+<!-- ============ 25 · REFERENCES ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="25">
+  <div class="max-w-6xl w-full mx-auto">
+    <div class="flex flex-wrap items-baseline justify-between gap-sm mb-md">
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">06 · La preuve</span>
+        <h2 class="font-headline-md text-headline-md mt-sm">Deux maisons qui avaient le même problème</h2>
+      </div>
+      <p class="font-code-label text-code-label text-outline uppercase tracking-wider">2 cas concrets</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-gutter">
+      <div class="relative sock border border-on-background/15 bg-surface-container-lowest p-lg"><span class="s3"></span><span class="s4"></span>
+        <div class="flex items-baseline justify-between gap-sm">
+          <p class="font-title-sm text-title-sm">Station Krishna</p>
+          <span class="font-code-label text-code-label text-outline uppercase border border-outline-variant px-sm py-xs">Restauration événementielle</span>
+        </div>
+        <p class="font-display-lg text-display-lg text-primary leading-none mt-md">35</p>
+        <p class="text-on-surface-variant mt-xs">étapes d'un parcours événement, de la dégustation au jour J, pilotées dans un seul espace</p>
+        <p class="mt-md pt-sm border-t border-on-background/10">Exactement ton événementiel : un devis, une date, un lieu, une équipe et cinquante détails qui ne doivent pas tomber. Signé en avril 2026, livré fin juillet 2026.</p>
+      </div>
+      <div class="relative sock border border-on-background/15 bg-surface-container-lowest p-lg"><span class="s3"></span><span class="s4"></span>
+        <div class="flex items-baseline justify-between gap-sm">
+          <p class="font-title-sm text-title-sm">HOLY Softdrinks</p>
+          <span class="font-code-label text-code-label text-outline uppercase border border-outline-variant px-sm py-xs">Studio interne · PME</span>
+        </div>
+        <p class="font-display-lg text-display-lg text-primary leading-none mt-md">8</p>
+        <p class="text-on-surface-variant mt-xs">étapes du process de production, de la demande à la validation, dans un seul outil</p>
+        <p class="mt-md pt-sm border-t border-on-background/10">Une équipe qui recevait ses demandes par messages et les perdait. Chacun a maintenant son écran et ne voit que ce qui le concerne. Livraison prévue le 21 août 2026.</p>
+      </div>
+    </div>
+    <p class="font-code-label text-code-label text-on-surface-variant mt-md">Je te montre ce qui a été construit, pas un pourcentage de gain que je ne pourrais pas te prouver.</p>
+  </div>
+</section>
+
+<!-- ============ 26 · ENGAGEMENTS ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="26">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">06 · La preuve</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-lg">Ce sur quoi tu peux compter</h2>
+    <div class="grid md:grid-cols-3 gap-gutter">
+      <div class="relative sock border border-on-background/15 p-lg bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider">Délais tenus</p>
+        <p class="mt-sm">Chaque livrable arrive au jour prévu. Si un jalon doit bouger, tu le sais 48h avant, pas le jour même.</p></div>
+      <div class="relative sock border border-on-background/15 p-lg bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider">Transparence</p>
+        <p class="mt-sm">Un point de 30 minutes à chaque fin d'étape, un espace partagé à jour en permanence, une réponse sous 24h en semaine.</p></div>
+      <div class="relative sock border border-on-background/15 p-lg bg-surface-container-lowest"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-primary uppercase tracking-wider">Exigence sur le résultat</p>
+        <p class="mt-sm">Si un livrable ne correspond pas à ce qui a été validé au cadrage, je le reprends sans surcoût.</p></div>
+    </div>
+    <div class="mt-lg pt-md border-t border-outline-variant">
+      <p class="font-code-label text-code-label text-outline uppercase tracking-widest">Notion Solution Partner · PMP® · Black Belt Lean Six Sigma</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 27 · DIVIDER 07 ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="27">
+  <div class="max-w-5xl w-full mx-auto relative sock border-l-2 border-primary pl-lg py-lg"><span class="s3"></span><span class="s4"></span>
+    <span class="font-eyebrow text-eyebrow text-outline tracking-widest uppercase">07 / 07</span>
+    <h2 class="font-display-lg text-display-lg mt-sm tracking-tight">L'offre</h2>
+    <p class="font-title-sm text-title-sm text-on-surface-variant mt-md">La décision qui est sur la table.</p>
+  </div>
+</section>
+
+<!-- ============ 28 · OFFRE ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="28">
+  <div class="max-w-6xl w-full mx-auto">
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">07 · L'offre</span>
+    <h2 class="font-headline-md text-headline-md mt-sm mb-md">Le cockpit du Patio</h2>
+    <div class="grid md:grid-cols-12 gap-gutter">
+      <div class="md:col-span-5 relative sock bg-primary text-on-primary p-lg flex flex-col justify-between"><span class="s3"></span><span class="s4"></span>
+        <div>
+          <p class="font-code-label text-code-label uppercase tracking-wider opacity-80">Construction, forfait</p>
+          <p class="font-display-lg text-display-lg leading-none mt-sm whitespace-nowrap">6 400 €<span class="font-headline-md text-headline-md align-baseline ml-sm">HT</span></p>
+          <p class="mt-md opacity-90">Un seul endroit où les projets, la mémoire et les chiffres du Patio se pilotent, et une équipe capable de s'en servir sans toi.</p>
+        </div>
+        <div class="mt-md pt-md border-t border-on-primary/30">
+          <p class="font-code-label text-code-label uppercase tracking-wider opacity-80">Paiement</p>
+          <p>50% à la signature, 50% à la recette</p>
+        </div>
+      </div>
+      <div class="md:col-span-7 relative sock border border-on-background/15 bg-surface-container-lowest p-lg"><span class="s3"></span><span class="s4"></span>
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-wider mb-sm">Ce qui est inclus</p>
+        <div class="grid sm:grid-cols-2 gap-md">
+          <p class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span><span><b>Cadrage et architecture</b><br/><span class="font-code-label text-code-label text-on-surface-variant">atelier 4h + espace structuré</span></span></p>
+          <p class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span><span><b>Mémoire d'entreprise</b><br/><span class="font-code-label text-code-label text-on-surface-variant">20 documents repris + règle de suite</span></span></p>
+          <p class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span><span><b>Cockpit projets</b><br/><span class="font-code-label text-code-label text-on-surface-variant">vues par personne, lisibles sur mobile</span></span></p>
+          <p class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span><span><b>Tableaux de bord</b><br/><span class="font-code-label text-code-label text-on-surface-variant">CA par zone, rentabilité par événement</span></span></p>
+          <p class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span><span><b>Agent de réponse</b><br/><span class="font-code-label text-code-label text-on-surface-variant">branché sur la mémoire, sur téléphone</span></span></p>
+          <p class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span><span><b>Formation et recette</b><br/><span class="font-code-label text-code-label text-on-surface-variant">1h par étape, sur l'écran de chacun</span></span></p>
+        </div>
+        <div class="mt-md pt-sm border-t border-on-background/10">
+          <p class="font-code-label text-code-label text-outline uppercase tracking-wider">Bornes du forfait</p>
+          <p class="font-code-label text-code-label text-on-surface-variant mt-xs">Reprise limitée aux 20 documents choisis au cadrage. Import des chiffres par export mensuel, sans connecteur temps réel avec le CRM. Au-delà, on chiffre à part plutôt que de rogner sur la qualité.</p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-md relative sock border-2 border-secondary bg-secondary-fixed/20 p-md flex flex-wrap items-center justify-between gap-sm"><span class="s3"></span><span class="s4"></span>
+      <div>
+        <p class="font-code-label text-code-label text-secondary uppercase tracking-wider">Ensuite, en option</p>
+        <p class="font-title-sm text-title-sm">Operate · on garde le système vivant</p>
+        <p class="text-on-surface-variant">Nouveaux processus, ajustements, formation des arrivants. Sans engagement de durée.</p>
+      </div>
+      <p class="font-headline-md text-headline-md text-secondary shrink-0">1 500 € HT / mois</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 29 · MERCI ============ -->
+<section class="slide grid-bg items-center justify-center p-margin" data-slide="29">
+  <div class="max-w-5xl w-full relative sock border border-on-background/15 bg-surface-container-lowest/80 p-xl"><span class="s3"></span><span class="s4"></span>
+    <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">Merci</span>
+    <h2 class="font-display-lg text-display-lg mt-sm tracking-tight">Le Patio sait déjà tout.<br/>Il ne sait juste pas<br/>où il l'a rangé.</h2>
+    <div class="w-24 h-1 bg-secondary my-md"></div>
+    <p class="font-title-sm text-title-sm text-on-surface-variant max-w-3xl">Merci pour ces trente minutes du 3 août. Tu as décrit ton problème mieux que la plupart des dirigeants que je rencontre, et c'est ce qui a permis d'écrire cette proposition en trois jours.</p>
+    <div class="grid md:grid-cols-3 gap-md mt-lg pt-md border-t border-outline-variant">
+      <div><p class="font-code-label text-code-label text-primary uppercase">Décision</p><p>Vendredi 14 août</p></div>
+      <div><p class="font-code-label text-code-label text-primary uppercase">Cadrage</p><p>Jeudi 20 août</p></div>
+      <div><p class="font-code-label text-code-label text-primary uppercase">Mise en service</p><p>Lundi 3 novembre</p></div>
+    </div>
+    <p class="font-code-label text-code-label text-tertiary uppercase tracking-wider mt-md">Sylvain Ramaradjou · sylvain@ramalogic.com · Rama Logic</p>
+    <p class="font-code-label text-code-label text-outline uppercase mt-xs">Confidentiel · préparé pour Le Patio Opéra</p>
+  </div>
+</section>
+
+</div>
+
+<div class="nav-controls">
+  <button class="nav-btn" id="prev" aria-label="Diapositive précédente"><span class="material-symbols-outlined" style="font-size:18px">chevron_left</span></button>
+  <div class="counter"><span id="cur">1</span> / 29</div>
+  <button class="nav-btn" id="next" aria-label="Diapositive suivante"><span class="material-symbols-outlined" style="font-size:18px">chevron_right</span></button>
+  <button class="nav-btn" id="grid" aria-label="Vue d'ensemble"><span class="material-symbols-outlined" style="font-size:18px">grid_view</span></button>
+</div>
+<div id="overview"></div>
+
+<script>
+if(location.search.indexOf('all=1')>-1){document.body.classList.add('show-all');}
+const slides=[...document.querySelectorAll('.slide')];
+const titles=["Cover","Sommaire","01 Le décor","Le Patio en une page","Où vit la mémoire","02 Ce qui bloque","Trois frictions","Ce que ça coûte","03 Ce que j'y vois","Cause racine","Là où on va","04 Le système","Le cockpit","L'agent","Pourquoi cette méthode","05 Le plan","Trois étapes","Étape 1 · Le socle","Étape 2 · Le cockpit","Étape 3 · Data et agents","Déroulé d'une étape","Le calendrier","Votre implication","06 La preuve","Références","Engagements","07 L'offre","L'offre","Merci"];
+let i=0;
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('is-active',k===i));document.getElementById('cur').textContent=i+1;}
+document.getElementById('next').onclick=()=>show(i+1);
+document.getElementById('prev').onclick=()=>show(i-1);
+const ov=document.getElementById('overview');
+ov.innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">'+slides.map((s,k)=>`<div class="ov-card" data-k="${k}"><div style="font-family:Space Mono,monospace;font-size:11px;color:#446254">${String(k+1).padStart(2,'0')}</div><div style="font-family:Clash Grotesk,sans-serif;font-size:14px;margin-top:4px">${titles[k]}</div></div>`).join('')+'</div>';
+ov.onclick=e=>{const c=e.target.closest('.ov-card');if(c){show(+c.dataset.k);ov.classList.remove('on');}};
+document.getElementById('grid').onclick=()=>ov.classList.toggle('on');
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();show(i+1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();show(i-1);}
+  if(e.key==='Escape'){ov.classList.toggle('on');}
+});
+</script>
+</body></html>
