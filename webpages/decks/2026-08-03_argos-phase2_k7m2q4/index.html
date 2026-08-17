@@ -718,36 +718,57 @@ body.show-all .nav-controls{display:none !important;}
 <section class="slide grid-bg items-center p-margin" data-slide="18">
   <div class="max-w-6xl w-full mx-auto">
     <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase">AI, and the team memory</span>
-    <h2 class="font-headline-md text-headline-md mt-xs mb-xs">Your AI is already here, and it is already useless</h2>
-    <p class="text-on-surface-variant max-w-5xl mb-sm">One assistant per tool, each able to see only the tab in front of it, plus individual ChatGPT accounts nobody has counted. An assistant inside a spreadsheet can summarise that spreadsheet. It cannot tell you this vendor was excluded from a similar project last year. Not because the model is weak, but because <b>nothing it can read contains the answer</b>.</p>
-    <div class="grid md:grid-cols-12 gap-gutter">
-      <div class="md:col-span-4">
-        <div class="relative sock border-2 border-on-background bg-primary text-on-primary p-md h-full flex flex-col justify-center"><span class="s3"></span><span class="s4"></span>
-          <span class="font-code-label text-code-label uppercase opacity-80">What changes on day one</span>
-          <p class="font-title-sm text-title-sm mt-xs">The individual AI subscriptions stop.</p>
-          <p class="opacity-90 mt-xs">Notion Business carries AI on every seat, inside your tenant, under your DPA. What the BU pays today for private assistants comes off the licence line, and the client data under NDA stops leaving through personal accounts.</p>
-          <div class="mt-md pt-sm border-t border-on-primary/25">
-            <p class="font-title-sm text-title-sm">And it finally reads something.</p>
-            <p class="opacity-90 mt-xs">Projects, batches, vendors, QA results and meetings, in one place, related to each other.</p>
+    <h2 class="font-headline-md text-headline-md mt-xs mb-md">One assistant, instead of six that see nothing</h2>
+
+    <div class="grid md:grid-cols-12 gap-gutter items-stretch">
+
+      <div class="md:col-span-5">
+        <div class="border-2 border-on-background/25 bg-surface-container-lowest p-md h-full flex flex-col justify-center">
+          <span class="font-code-label text-code-label text-outline uppercase">Today</span>
+          <p class="font-title-sm text-title-sm text-on-surface-variant mt-xs mb-sm">One assistant per tool. Each one sees a single tab.</p>
+          <div class="grid grid-cols-3 gap-sm">
+            <div class="border border-on-background/25 bg-surface-container px-sm py-xs text-center"><span class="material-symbols-outlined text-outline" style="font-size:22px">smart_toy</span><p class="font-code-label text-code-label text-on-surface-variant">XTRF</p></div>
+            <div class="border border-on-background/25 bg-surface-container px-sm py-xs text-center"><span class="material-symbols-outlined text-outline" style="font-size:22px">smart_toy</span><p class="font-code-label text-code-label text-on-surface-variant">Myriad</p></div>
+            <div class="border border-on-background/25 bg-surface-container px-sm py-xs text-center"><span class="material-symbols-outlined text-outline" style="font-size:22px">smart_toy</span><p class="font-code-label text-code-label text-on-surface-variant">Asana</p></div>
+            <div class="border border-on-background/25 bg-surface-container px-sm py-xs text-center"><span class="material-symbols-outlined text-outline" style="font-size:22px">smart_toy</span><p class="font-code-label text-code-label text-on-surface-variant">Sheets</p></div>
+            <div class="border border-on-background/25 bg-surface-container px-sm py-xs text-center"><span class="material-symbols-outlined text-outline" style="font-size:22px">smart_toy</span><p class="font-code-label text-code-label text-on-surface-variant">Outlook</p></div>
+            <div class="border border-on-background/25 bg-surface-container px-sm py-xs text-center"><span class="material-symbols-outlined text-outline" style="font-size:22px">smart_toy</span><p class="font-code-label text-code-label text-on-surface-variant">Drive</p></div>
           </div>
+          <p class="text-on-surface-variant mt-sm leading-tight">Plus the personal ChatGPT accounts nobody has counted, with client data under NDA going into them.</p>
         </div>
       </div>
-      <div class="md:col-span-8">
-        <div class="relative sock border-2 border-on-background bg-surface-container-lowest h-full"><span class="s3"></span><span class="s4"></span>
-          <div class="grid grid-cols-12 gap-md px-md py-sm border-b border-on-background/15 bg-surface-container">
-            <div class="col-span-7"><span class="font-code-label text-code-label text-secondary uppercase">What anyone can ask the workspace, from day one</span></div>
-            <div class="col-span-5"><span class="font-code-label text-code-label text-secondary uppercase">What it replaces today</span></div>
+
+      <div class="md:col-span-2 flex items-center justify-center">
+        <span class="material-symbols-outlined text-primary" style="font-size:56px">trending_flat</span>
+      </div>
+
+      <div class="md:col-span-5">
+        <div class="relative sock border-2 border-on-background bg-primary text-on-primary p-md h-full flex flex-col justify-center"><span class="s3"></span><span class="s4"></span>
+          <span class="font-code-label text-code-label uppercase opacity-80">After</span>
+          <div class="flex items-center gap-sm mt-xs mb-sm">
+            <span class="material-symbols-outlined" style="font-size:64px">smart_toy</span>
+            <p class="font-headline-md text-headline-md leading-none">One assistant</p>
           </div>
-          <div class="grid grid-cols-12 gap-md px-md py-xs border-b border-on-background/10 items-baseline"><div class="col-span-7 font-title-sm text-title-sm">&ldquo;Who has worked on word alignment for this client, and how did they perform?&rdquo;</div><div class="col-span-5 text-on-surface-variant leading-tight">Asking three people on Teams, or opening four trackers</div></div>
-          <div class="grid grid-cols-12 gap-md px-md py-xs border-b border-on-background/10 items-baseline"><div class="col-span-7 font-title-sm text-title-sm">&ldquo;What went wrong on the last two projects of this type?&rdquo;</div><div class="col-span-5 text-on-surface-variant leading-tight">Nothing today. That knowledge leaves with the person</div></div>
-          <div class="grid grid-cols-12 gap-md px-md py-xs border-b border-on-background/10 items-baseline"><div class="col-span-7 font-title-sm text-title-sm">&ldquo;Why did we exclude this candidate?&rdquo;</div><div class="col-span-5 text-on-surface-variant leading-tight">A note in one PM's personal spreadsheet</div></div>
-          <div class="grid grid-cols-12 gap-md px-md py-xs border-b border-on-background/10 items-baseline"><div class="col-span-7 font-title-sm text-title-sm">&ldquo;Summarise where every open project stands for the leadership update&rdquo;</div><div class="col-span-5 text-on-surface-variant leading-tight">&ldquo;Too many manual status updates because I need to report that to other people&rdquo;</div></div>
-          <div class="grid grid-cols-12 gap-md px-md py-xs border-b border-on-background/10 items-baseline"><div class="col-span-7 font-title-sm text-title-sm">&ldquo;Draft the quality section of this proposal, from what we did on similar work&rdquo;</div><div class="col-span-5 text-on-surface-variant leading-tight">Rewriting it from memory, every time</div></div>
+          <p class="opacity-90 mb-sm">It reads the layer where all the work lives, and the bridges keep that layer fed.</p>
+          <div class="grid grid-cols-3 gap-sm">
+            <div class="border border-on-primary/40 px-sm py-xs text-center"><span class="material-symbols-outlined" style="font-size:20px">folder_open</span><p class="font-code-label text-code-label">Projects</p></div>
+            <div class="border border-on-primary/40 px-sm py-xs text-center"><span class="material-symbols-outlined" style="font-size:20px">group</span><p class="font-code-label text-code-label">Vendors</p></div>
+            <div class="border border-on-primary/40 px-sm py-xs text-center"><span class="material-symbols-outlined" style="font-size:20px">inventory_2</span><p class="font-code-label text-code-label">Batches</p></div>
+            <div class="border border-on-primary/40 px-sm py-xs text-center"><span class="material-symbols-outlined" style="font-size:20px">verified</span><p class="font-code-label text-code-label">QA checks</p></div>
+            <div class="border border-on-primary/40 px-sm py-xs text-center"><span class="material-symbols-outlined" style="font-size:20px">forum</span><p class="font-code-label text-code-label">Meetings</p></div>
+            <div class="border border-on-primary/40 px-sm py-xs text-center"><span class="material-symbols-outlined" style="font-size:20px">task_alt</span><p class="font-code-label text-code-label">Tasks</p></div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="bg-on-background text-background px-md py-sm mt-sm">
-      <p class="font-title-sm text-title-sm">The team memory is a by-product of writing things once, in one place. It starts compounding on day one of Sprint 1, not on the day someone builds an agent. Build the agents first and they hallucinate; build the layer first and the agents become obvious.</p>
+
+    <div class="grid md:grid-cols-12 gap-gutter mt-md">
+      <div class="md:col-span-8 bg-on-background text-background px-md py-sm">
+        <p class="font-title-sm text-title-sm">&ldquo;Who worked on word alignment for this client, and how did they do?&rdquo; &nbsp;&middot;&nbsp; &ldquo;What went wrong on the last two projects like this one?&rdquo; &nbsp;&middot;&nbsp; &ldquo;Where does every open project stand?&rdquo; Nobody can answer these today. From Sprint 1, anyone can.</p>
+      </div>
+      <div class="md:col-span-4">
+        <p class="text-on-surface-variant leading-tight"><b class="text-on-surface">The individual subscriptions stop.</b> Notion Business carries AI on every seat, in your tenant, under your DPA. What you pay today for private assistants comes off the licence line.</p>
+      </div>
     </div>
   </div>
 </section>
