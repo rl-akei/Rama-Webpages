@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Dreamspark × Rama Logic — La chaîne facturation</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;family=Work+Sans:ital,wght@0,300..900;1,300..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: { extend: {
+    "colors": {
+      "surface-dim": "#dcd9d9", "secondary-fixed-dim": "#bdcf7c", "secondary-fixed": "#d9eb95",
+      "on-tertiary": "#ffffff", "surface-tint": "#466556", "on-secondary": "#ffffff",
+      "on-background": "#1c1b1b", "surface-container-highest": "#e5e2e1", "inverse-primary": "#accebc",
+      "error": "#ba1a1a", "on-tertiary-fixed": "#0c1d27", "background": "#fcf9f8",
+      "on-primary-fixed-variant": "#2f4d3f", "primary-fixed-dim": "#accebc", "on-primary-container": "#f5fff7",
+      "surface-container-lowest": "#ffffff", "primary-fixed": "#c8ead8", "surface-variant": "#e5e2e1",
+      "on-primary": "#ffffff", "on-error-container": "#93000a", "on-error": "#ffffff",
+      "primary": "#446254", "outline": "#727974", "on-surface": "#1c1b1b",
+      "tertiary-container": "#657783", "on-tertiary-container": "#fcfcff", "on-tertiary-fixed-variant": "#384954",
+      "tertiary": "#4d5e6a", "on-surface-variant": "#424844", "surface-bright": "#fcf9f8",
+      "error-container": "#ffdad6", "on-secondary-container": "#5c6b24", "surface-container-high": "#ebe7e7",
+      "on-secondary-fixed": "#171e00", "secondary-container": "#d9eb95", "inverse-surface": "#313030",
+      "outline-variant": "#c1c8c2", "surface-container-low": "#f6f3f2", "secondary": "#56641e",
+      "on-primary-fixed": "#012115", "on-secondary-fixed-variant": "#3f4c05", "inverse-on-surface": "#f3f0ef",
+      "surface-container": "#f0edec", "primary-container": "#5c7b6c", "tertiary-fixed-dim": "#b7c9d6",
+      "tertiary-fixed": "#d3e5f3", "surface": "#fcf9f8"
+    },
+    "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+    "spacing": {
+      "md": "24px", "margin": "clamp(16px, 3.3vw, 32px)", "lg": "clamp(24px, 5vw, 48px)",
+      "xl": "clamp(40px, 8vw, 80px)", "sm": "12px", "gutter": "24px", "base": "8px", "xs": "4px"
+    },
+    "fontFamily": {
+      "body-reg": ["Work Sans"], "code-label": ["Space Mono"], "title-sm": ["Clash Grotesk"],
+      "eyebrow": ["Space Mono"], "display-lg": ["Clash Grotesk"], "headline-md": ["Clash Grotesk"]
+    },
+    "fontSize": {
+      "display-lg":  ["clamp(2.75rem, 5.5vw, 5rem)",    { "lineHeight": "1.05", "fontWeight": "500" }],
+      "headline-md": ["clamp(1.75rem, 3.6vw, 3rem)",     { "lineHeight": "1.2",  "fontWeight": "500" }],
+      "title-sm":    ["clamp(1.05rem, 1.7vw, 1.5rem)",   { "lineHeight": "1.4",  "fontWeight": "500" }],
+      "body-reg":    ["clamp(0.9rem, 1vw, 1rem)",        { "lineHeight": "1.6",  "fontWeight": "400" }],
+      "code-label":  ["clamp(0.78rem, 0.9vw, 0.875rem)", { "lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400" }],
+      "eyebrow":     ["clamp(0.7rem, 0.85vw, 0.75rem)",  { "lineHeight": "1.0",  "fontWeight": "500" }]
+    }
+  } }
+}
+</script>
+<style>
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(28,27,27,.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28,27,27,.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+/* ---- viewport-fit ---- */
+html, body { overflow-x: clip; }
+.slides-viewport { height: 100vh; height: 100dvh; }
+.slide { height: 100vh; height: 100dvh; min-height: 100vh; overflow: hidden; display: none; }
+.slide.is-active { display: flex; }
+.slide > * { min-height: 0; }
+.slide img { max-height: min(50vh, 420px); object-fit: contain; }
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.2s !important; }
+  html { scroll-behavior: auto; }
+}
+/* ---- socket ---- */
+.sock::before,.sock::after,.sock>.s3,.sock>.s4{content:"";position:absolute;width:6px;height:6px;background:#1c1b1b;}
+.sock::before{top:0;left:0;transform:translate(-50%,-50%);}
+.sock::after{top:0;right:0;transform:translate(50%,-50%);}
+.sock>.s3{bottom:0;left:0;transform:translate(-50%,50%);}
+.sock>.s4{bottom:0;right:0;transform:translate(50%,50%);}
+/* ---- filet pointille ---- */
+.dotrow{display:flex;align-items:baseline;gap:10px;}
+.dotrow .fill{flex:1 1 auto;border-bottom:1px dotted rgba(28,27,27,.35);transform:translateY(-4px);}
+/* ---- nav ---- */
+.nav-controls{position:fixed;bottom:18px;right:18px;z-index:60;display:flex;align-items:center;gap:8px;}
+.nav-btn{width:34px;height:34px;display:grid;place-items:center;border:1px solid #1c1b1b;background:#fcf9f8;cursor:pointer;}
+.nav-btn:hover{background:#c8ead8;}
+.counter{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.05em;border:1px solid #1c1b1b;padding:8px 10px;background:#fcf9f8;}
+#overview{position:fixed;inset:0;background:#fcf9f8;z-index:80;display:none;padding:28px;overflow:auto;}
+#overview.on{display:block;}
+.ov-card{border:1px solid #1c1b1b;padding:12px;cursor:pointer;background:#fff;}
+.ov-card:hover{background:#c8ead8;}
+@media print{.nav-controls,#overview{display:none !important;}.slide{display:flex !important;page-break-after:always;height:100vh;}}
+@media (max-width: 900px){
+  .slides-viewport{height:auto;}
+  .slide{height:auto;min-height:100dvh;overflow:visible;align-items:flex-start;padding-top:40px;padding-bottom:40px;}
+}
+body.show-all .slide{display:flex !important;}
+body.show-all .nav-controls{display:none !important;}
+</style>
+</head>
+<body class="bg-background text-on-background font-body-reg antialiased">
+<div class="slides-viewport">
+
+<!-- ============ 1 · CE QU'ON CONSTRUIT ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="1">
+  <div class="max-w-6xl w-full mx-auto">
+
+    <div class="flex items-baseline justify-between mb-md">
+      <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase py-xs px-sm bg-primary-fixed/40 border border-primary-fixed">La mission</span>
+      <span class="font-code-label text-code-label text-outline">Dreamspark × Rama Logic</span>
+    </div>
+
+    <h1 class="font-display-lg text-display-lg tracking-tight">Votre chaîne facturation,<br/>de la signature à l'encaissement</h1>
+    <div class="w-24 h-1 bg-secondary my-md"></div>
+
+    <div class="grid md:grid-cols-3 gap-md mt-lg">
+
+      <div class="relative sock border border-on-background/15 bg-surface-container-lowest p-md"><span class="s3"></span><span class="s4"></span>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-widest">01 · Le contrat</div>
+        <h2 class="font-title-sm text-title-sm mt-sm leading-snug">Le contrat devient<br/>un échéancier</h2>
+        <p class="text-body-reg text-on-surface-variant mt-sm">L'agent lit le contrat signé et propose les factures à émettre, avec leurs dates et leurs montants.</p>
+        <div class="mt-md pt-sm border-t border-on-background/10">
+          <p class="font-code-label text-code-label text-primary">Vous validez. Rien ne part sans vous.</p>
+        </div>
+      </div>
+
+      <div class="relative sock border border-on-background/15 bg-surface-container-lowest p-md"><span class="s3"></span><span class="s4"></span>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-widest">02 · Le lien Qonto</div>
+        <h2 class="font-title-sm text-title-sm mt-sm leading-snug">Notion et Qonto,<br/>dans les deux sens</h2>
+        <p class="text-body-reg text-on-surface-variant mt-sm">Vous émettez depuis Notion, Qonto exécute, et le statut de paiement redescend tout seul.</p>
+        <div class="mt-md pt-sm border-t border-on-background/10">
+          <p class="font-code-label text-code-label text-primary">Plus besoin d'ouvrir Qonto pour savoir.</p>
+        </div>
+      </div>
+
+      <div class="relative sock border border-on-background/15 bg-surface-container-lowest p-md"><span class="s3"></span><span class="s4"></span>
+        <div class="font-code-label text-code-label text-secondary uppercase tracking-widest">03 · Les fournisseurs</div>
+        <h2 class="font-title-sm text-title-sm mt-sm leading-snug">La boîte fournisseurs<br/>se dépouille seule</h2>
+        <p class="text-body-reg text-on-surface-variant mt-sm">Chaque facture reçue devient une ligne à valider, classée dans Dropbox, transmise à Qonto avec son label.</p>
+        <div class="mt-md pt-sm border-t border-on-background/10">
+          <p class="font-code-label text-code-label text-primary">Aucun doublon ne passe.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-lg bg-on-background text-background p-md relative sock"><span class="s3"></span><span class="s4"></span>
+      <p class="text-body-reg">Et chaque facture, entrante ou sortante, est rattachée à sa production. <span class="text-secondary-fixed">La marge se lit en direct, sans retraitement.</span></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 2 · LE PLAN ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="2">
+  <div class="max-w-6xl w-full mx-auto">
+
+    <div class="flex items-baseline justify-between mb-md">
+      <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase py-xs px-sm bg-primary-fixed/40 border border-primary-fixed">Le plan</span>
+      <span class="font-code-label text-code-label text-outline">4 semaines</span>
+    </div>
+
+    <h1 class="font-headline-md text-headline-md tracking-tight">Trois étapes, et c'est en production</h1>
+    <div class="w-24 h-1 bg-secondary my-md"></div>
+
+    <div class="grid md:grid-cols-3 gap-md">
+
+      <div class="relative sock border border-on-background/15 bg-surface-container-lowest p-md"><span class="s3"></span><span class="s4"></span>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest">Étape 01</div>
+        <h2 class="font-title-sm text-title-sm mt-xs">Le socle</h2>
+        <p class="text-body-reg text-on-surface-variant mt-sm">Les trois bases Contrats, Factures clients et Factures fournisseurs, raccordées à ce que Numa a déjà construit.</p>
+        <p class="font-code-label text-code-label text-primary mt-sm">On ne démonte rien de l'existant.</p>
+      </div>
+
+      <div class="relative sock border border-on-background/15 bg-surface-container-lowest p-md"><span class="s3"></span><span class="s4"></span>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest">Étape 02</div>
+        <h2 class="font-title-sm text-title-sm mt-xs">Les intégrations</h2>
+        <p class="text-body-reg text-on-surface-variant mt-sm">Qonto branché dans les deux sens. Émission depuis Notion, statut de paiement qui redescend toutes les 4 heures.</p>
+        <p class="font-code-label text-code-label text-primary mt-sm">Le cœur du réacteur.</p>
+      </div>
+
+      <div class="relative sock border border-on-background/15 bg-surface-container-lowest p-md"><span class="s3"></span><span class="s4"></span>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest">Étape 03</div>
+        <h2 class="font-title-sm text-title-sm mt-xs">Les agents</h2>
+        <p class="text-body-reg text-on-surface-variant mt-sm">Lecture des contrats et dépouillement de la boîte fournisseurs, avec relances et alertes.</p>
+        <p class="font-code-label text-code-label text-primary mt-sm">Validation humaine à chaque fois.</p>
+      </div>
+
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-md mt-lg">
+
+      <div class="relative sock border-2 border-secondary bg-secondary-fixed/15 p-md"><span class="s3"></span><span class="s4"></span>
+        <div class="font-code-label text-code-label text-on-secondary-container uppercase tracking-widest">Ce qu'on vous demande</div>
+        <div class="flex items-baseline gap-md mt-sm">
+          <span class="font-display-lg text-headline-md text-secondary">2h</span>
+          <p class="text-body-reg text-on-surface-variant">d'atelier au démarrage avec Sophie et Sébastien, pour verrouiller les process.</p>
+        </div>
+        <div class="flex items-baseline gap-md mt-sm pt-sm border-t border-secondary/30">
+          <span class="font-display-lg text-headline-md text-secondary">3h</span>
+          <p class="text-body-reg text-on-surface-variant">de recette à la fin, sur vos vraies factures.</p>
+        </div>
+        <p class="font-code-label text-code-label text-on-secondary-container mt-sm">Le reste, c'est nous.</p>
+      </div>
+
+      <div class="relative sock border border-on-background/15 bg-surface-container-lowest p-md"><span class="s3"></span><span class="s4"></span>
+        <div class="font-code-label text-code-label text-outline uppercase tracking-widest">Le calendrier</div>
+        <div class="dotrow mt-md"><span class="text-body-reg">Atelier de cadrage</span><span class="fill"></span><span class="font-code-label text-code-label text-primary">10/09</span></div>
+        <div class="dotrow mt-sm"><span class="text-body-reg">Démarrage du build</span><span class="fill"></span><span class="font-code-label text-code-label text-primary">sem. du 22/09</span></div>
+        <div class="dotrow mt-sm"><span class="text-body-reg">Recette sur vos données</span><span class="fill"></span><span class="font-code-label text-code-label text-primary">sem. du 20/10</span></div>
+        <div class="dotrow mt-sm"><span class="text-body-reg font-semibold">Mise en production</span><span class="fill"></span><span class="font-code-label text-code-label text-secondary font-bold">fin octobre</span></div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 3 · L'OFFRE ============ -->
+<section class="slide grid-bg items-center p-margin" data-slide="3">
+  <div class="max-w-6xl w-full mx-auto">
+
+    <div class="flex items-baseline justify-between mb-md">
+      <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase py-xs px-sm bg-primary-fixed/40 border border-primary-fixed">L'offre</span>
+      <span class="font-code-label text-code-label text-outline">Confidentiel · préparé pour Dreamspark</span>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-lg items-start">
+
+      <div>
+        <h1 class="font-display-lg text-display-lg tracking-tight text-primary">8 400 € HT</h1>
+        <div class="w-24 h-1 bg-secondary my-md"></div>
+        <p class="font-title-sm text-title-sm leading-snug">Plus aucune facture ne passe à travers.<br/>Ni la vôtre, ni celle d'un fournisseur.</p>
+
+        <div class="mt-lg relative sock border border-on-background/15 bg-surface-container-lowest p-md"><span class="s3"></span><span class="s4"></span>
+          <div class="font-code-label text-code-label text-outline uppercase tracking-widest">Modalités</div>
+          <div class="dotrow mt-sm"><span class="text-body-reg">À la commande</span><span class="fill"></span><span class="font-code-label text-code-label">40 % · 3 360 € HT</span></div>
+          <div class="dotrow mt-xs"><span class="text-body-reg">À la livraison</span><span class="fill"></span><span class="font-code-label text-code-label">60 % · 5 040 € HT</span></div>
+        </div>
+
+        <p class="font-code-label text-code-label text-outline mt-md leading-relaxed">Offre distincte de la proposition du 31/07 sur le cycle de vente, qui reste ouverte de son côté.</p>
+      </div>
+
+      <div>
+        <div class="relative sock border-2 border-secondary bg-secondary-fixed/15 p-md"><span class="s3"></span><span class="s4"></span>
+          <div class="font-code-label text-code-label text-on-secondary-container uppercase tracking-widest">Ce qui est inclus</div>
+          <ul class="mt-sm space-y-xs">
+            <li class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px;line-height:1.5">check_circle</span><span class="text-body-reg">Les trois bases Notion et les vues par rôle</span></li>
+            <li class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px;line-height:1.5">check_circle</span><span class="text-body-reg">L'intégration Qonto dans les deux sens</span></li>
+            <li class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px;line-height:1.5">check_circle</span><span class="text-body-reg">Les deux agents, contrat et fournisseurs, avec validation humaine</span></li>
+            <li class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px;line-height:1.5">check_circle</span><span class="text-body-reg">Relances impayés, alertes et rentabilité par production</span></li>
+            <li class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary" style="font-size:18px;line-height:1.5">check_circle</span><span class="text-body-reg">Recette sur vos données réelles et passation</span></li>
+          </ul>
+        </div>
+
+        <div class="relative sock border border-on-background/15 bg-surface-container-lowest p-md mt-md"><span class="s3"></span><span class="s4"></span>
+          <div class="font-code-label text-code-label text-outline uppercase tracking-widest">En option</div>
+          <div class="dotrow mt-sm"><span class="text-body-reg">Agent de prise de rendez-vous</span><span class="fill"></span><span class="font-code-label text-code-label">800 € HT</span></div>
+          <div class="dotrow mt-xs"><span class="text-body-reg">Automatisation supplémentaire</span><span class="fill"></span><span class="font-code-label text-code-label">600 € HT l'unité</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-lg bg-on-background text-background p-md relative sock flex flex-wrap items-center justify-between gap-md"><span class="s3"></span><span class="s4"></span>
+      <p class="text-body-reg">On en reparle le <span class="text-secondary-fixed font-semibold">10 septembre à 15h</span> avec Sophie.</p>
+      <p class="font-code-label text-code-label text-background/70">Sylvain Ramaradjou · sylvain@ramalogic.com</p>
+    </div>
+
+  </div>
+</section>
+
+</div>
+
+<div class="nav-controls">
+  <div class="counter"><span id="cur">1</span> / 3</div>
+  <button class="nav-btn" id="prev" aria-label="Slide précédente"><span class="material-symbols-outlined" style="font-size:18px">chevron_left</span></button>
+  <button class="nav-btn" id="grid" aria-label="Vue d'ensemble"><span class="material-symbols-outlined" style="font-size:18px">grid_view</span></button>
+  <button class="nav-btn" id="next" aria-label="Slide suivante"><span class="material-symbols-outlined" style="font-size:18px">chevron_right</span></button>
+</div>
+<div id="overview"></div>
+
+<script>
+if(location.search.indexOf('all=1')>-1){document.body.classList.add('show-all');}
+const slides=[...document.querySelectorAll('.slide')];
+const titles=["Ce qu'on construit","Le plan","L'offre"];
+let i=0;
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('is-active',k===i));document.getElementById('cur').textContent=i+1;}
+document.getElementById('next').onclick=()=>show(i+1);
+document.getElementById('prev').onclick=()=>show(i-1);
+const ov=document.getElementById('overview');
+ov.innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">'+slides.map((s,k)=>`<div class="ov-card" data-k="${k}"><div style="font-family:Space Mono,monospace;font-size:11px;color:#446254">${String(k+1).padStart(2,'0')}</div><div style="font-family:Clash Grotesk,sans-serif;font-size:14px;margin-top:4px">${titles[k]}</div></div>`).join('')+'</div>';
+ov.onclick=e=>{const c=e.target.closest('.ov-card');if(c){show(+c.dataset.k);ov.classList.remove('on');}};
+document.getElementById('grid').onclick=()=>ov.classList.toggle('on');
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();show(i+1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();show(i-1);}
+  if(e.key==='Escape'){ov.classList.toggle('on');}
+});
+show(0);
+</script>
+</body></html>
