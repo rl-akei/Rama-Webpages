@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Operate · Station Krishna × Rama Logic</title>
+
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600&display=swap"/>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        "background":"#fcf9f8","surface":"#fcf9f8","surface-container-lowest":"#ffffff",
+        "surface-container-low":"#f6f3f2","surface-container":"#f0edec","surface-container-high":"#ebe7e7",
+        "surface-container-highest":"#e5e2e1","surface-dim":"#dcd9d9","surface-variant":"#e5e2e1",
+        "on-background":"#1c1b1b","on-surface":"#1c1b1b","on-surface-variant":"#424844",
+        "inverse-surface":"#313030","inverse-on-surface":"#f3f0ef",
+        "outline":"#727974","outline-variant":"#c1c8c2","surface-tint":"#466556",
+        "primary":"#446254","on-primary":"#ffffff","primary-container":"#5c7b6c","on-primary-container":"#f5fff7",
+        "inverse-primary":"#accebc","primary-fixed":"#c8ead8","primary-fixed-dim":"#accebc",
+        "on-primary-fixed":"#012115","on-primary-fixed-variant":"#2f4d3f",
+        "secondary":"#56641e","on-secondary":"#ffffff","secondary-container":"#d9eb95",
+        "on-secondary-container":"#5c6b24","secondary-fixed":"#d9eb95","secondary-fixed-dim":"#bdcf7c",
+        "on-secondary-fixed":"#171e00","on-secondary-fixed-variant":"#3f4c05",
+        "tertiary":"#4d5e6a","on-tertiary":"#ffffff","tertiary-container":"#657783",
+        "on-tertiary-container":"#fcfcff","tertiary-fixed":"#d3e5f3","tertiary-fixed-dim":"#b7c9d6",
+        "on-tertiary-fixed":"#0c1d27","on-tertiary-fixed-variant":"#384954",
+        "error":"#ba1a1a","on-error":"#ffffff","error-container":"#ffdad6","on-error-container":"#93000a"
+      },
+      borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},
+      fontFamily:{
+        "display":["Clash Grotesk","Work Sans","sans-serif"],
+        "body":["Work Sans","system-ui","sans-serif"],
+        "mono":["Space Mono","monospace"]
+      },
+      fontSize:{
+        "display-lg":["clamp(2.5rem, 6.2vw, 5rem)",{"lineHeight":"1.03","fontWeight":"500","letterSpacing":"-0.02em"}],
+        "display-md":["clamp(2rem, 4.4vw, 3.4rem)",{"lineHeight":"1.08","fontWeight":"500","letterSpacing":"-0.015em"}],
+        "headline":["clamp(1.6rem, 3vw, 2.5rem)",{"lineHeight":"1.15","fontWeight":"500","letterSpacing":"-0.01em"}],
+        "title":["clamp(1.1rem, 1.6vw, 1.45rem)",{"lineHeight":"1.35","fontWeight":"500"}],
+        "body-lg":["clamp(1.02rem, 1.25vw, 1.2rem)",{"lineHeight":"1.65","fontWeight":"400"}],
+        "body-reg":["clamp(0.94rem, 1vw, 1.03rem)",{"lineHeight":"1.65","fontWeight":"400"}],
+        "code-label":["clamp(0.75rem, 0.85vw, 0.84rem)",{"lineHeight":"1.5","letterSpacing":"0.06em","fontWeight":"400"}],
+        "eyebrow":["clamp(0.66rem, 0.75vw, 0.74rem)",{"lineHeight":"1.1","letterSpacing":"0.16em","fontWeight":"700"}]
+      }
+    }
+  }
+}
+</script>
+
+<style>
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { background:#fcf9f8; color:#1c1b1b; font-family:"Work Sans",system-ui,sans-serif; }
+  ::selection { background:#d9eb95; color:#171e00; }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(28,27,27,0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(28,27,27,0.045) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Socket : petits carrés d'ancrage aux coins d'un conteneur */
+  .socket { position: relative; }
+  .socket::before, .socket::after {
+    content:""; position:absolute; width:6px; height:6px;
+    background:#446254; pointer-events:none;
+  }
+  .socket::before { top:-3.5px; left:-3.5px; }
+  .socket::after  { bottom:-3.5px; right:-3.5px; }
+
+  .rule { height:1px; background:rgba(28,27,27,0.12); }
+
+  /* Numéro de section en Space Mono, aligné sur la grille */
+  .step-num {
+    font-family:"Space Mono",monospace; font-size:0.74rem; letter-spacing:0.16em;
+    font-weight:700; color:#446254;
+  }
+
+  .reveal { opacity:0; transform:translateY(14px); transition:opacity .55s ease, transform .55s ease; }
+  .reveal.in { opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior:auto; }
+    .reveal { opacity:1; transform:none; transition:none; }
+  }
+
+  @media print {
+    .no-print { display:none !important; }
+    .reveal { opacity:1 !important; transform:none !important; }
+    section { break-inside: avoid; page-break-inside: avoid; }
+    body { background:#fff; }
+  }
+</style>
+</head>
+
+<body class="antialiased">
+
+<!-- ══ Barre supérieure ══ -->
+<header class="no-print sticky top-0 z-40 bg-background/85 backdrop-blur border-b border-on-background/10">
+  <div class="mx-auto max-w-[1180px] px-6 md:px-10 h-14 flex items-center justify-between">
+    <span class="font-display text-[1.05rem] font-medium tracking-tight">Rama&nbsp;Logic</span>
+    <span class="font-mono text-eyebrow uppercase text-on-surface-variant">Operate · Station Krishna</span>
+  </div>
+</header>
+
+<!-- ══ 1 · Accroche ══ -->
+<section class="grid-bg border-b border-on-background/10">
+  <div class="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-32">
+    <p class="font-mono text-eyebrow uppercase text-primary mb-7">Operate · Partenaire stratégique</p>
+
+    <h1 class="font-display text-display-lg max-w-[19ch]">
+      Le système tourne.<br/>
+      <span class="text-primary">Reste à piloter la boîte.</span>
+    </h1>
+
+    <p class="mt-9 max-w-[62ch] text-body-lg text-on-surface-variant">
+      90 minutes par semaine avec vous deux, pour que Station Krishna se dirige
+      sur des chiffres plutôt que sur des impressions.
+    </p>
+
+    <div class="mt-14 flex flex-wrap items-center gap-x-10 gap-y-4 font-mono text-code-label text-on-surface-variant">
+      <span>Préparé pour Ajith &amp; Nirushan Rajaratnam</span>
+      <span class="hidden sm:inline text-outline-variant">/</span>
+      <span>Septembre 2026</span>
+      <span class="hidden sm:inline text-outline-variant">/</span>
+      <span>Sylvain Ramaradjou</span>
+    </div>
+
+    <div class="mt-16 inline-flex items-center gap-3 border border-secondary bg-secondary-fixed/40 px-5 py-3 socket">
+      <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
+      <span class="font-mono text-code-label text-on-secondary-fixed">Le premier mois est offert</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 2 · Le constat ══ -->
+<section class="border-b border-on-background/10">
+  <div class="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-28">
+    <div class="grid md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-10 md:gap-16">
+
+      <div class="reveal md:sticky md:top-24 md:self-start">
+        <p class="font-mono text-eyebrow uppercase text-primary mb-5">01 · Le constat</p>
+        <h2 class="font-display text-headline max-w-[14ch]">Où vous en êtes</h2>
+        <p class="mt-6 text-body-reg text-on-surface-variant max-w-[38ch]">
+          Ce qui suit vient de l'audit du 17 avril et de ce que le système enregistre depuis.
+          Rien d'inventé.
+        </p>
+      </div>
+
+      <div class="reveal space-y-0">
+        <div class="border-t border-on-background/12 py-7">
+          <p class="step-num mb-3">01</p>
+          <p class="text-body-lg max-w-[60ch]">
+            Vous avez décidé de passer de <strong class="font-medium">70&nbsp;% mariages</strong> à
+            <strong class="font-medium">60&nbsp;% corporate</strong>. C'est le virage le plus important
+            de votre histoire. Aujourd'hui, personne ne mesure chaque semaine si vous le prenez vraiment.
+          </p>
+        </div>
+
+        <div class="border-t border-on-background/12 py-7">
+          <p class="step-num mb-3">02</p>
+          <p class="text-body-lg max-w-[60ch]">
+            Vous faites tourner trois modèles en même temps&nbsp;: l'événementiel,
+            les 150&nbsp;repas hebdomadaires en livraison, et le labo Click&nbsp;&amp;&nbsp;Collect.
+            Trois marges, trois cycles, trois façons de perdre de l'argent sans le voir.
+          </p>
+        </div>
+
+        <div class="border-t border-on-background/12 py-7">
+          <p class="step-num mb-3">03</p>
+          <p class="text-body-lg max-w-[60ch]">
+            Le système Notion enregistre le pipeline, les projets et les factures depuis avril.
+            Il sait déjà répondre à la moitié de vos questions.
+            Il n'y a simplement aucun moment dans la semaine où quelqu'un les pose.
+          </p>
+        </div>
+
+        <div class="border-t border-b border-on-background/12 py-7">
+          <p class="step-num mb-3">04</p>
+          <p class="text-body-lg max-w-[60ch]">
+            En avril, on avait listé ce qui viendrait ensuite&nbsp;: taux de transformation par canal,
+            marge par type d'événement, taux de retour des clients B2B, saisonnalité du chiffre d'affaires.
+            Ce sont exactement les quatre chiffres qui disent si le virage corporate fonctionne.
+            Aucun n'est regardé.
+          </p>
+        </div>
+
+        <p class="mt-9 font-display text-title text-primary max-w-[52ch]">
+          Ce n'est pas un problème d'outil. C'est qu'il manque le moment où l'on s'assoit et où l'on regarde.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ 3 · Le rôle ══ -->
+<section class="bg-surface-container-low border-b border-on-background/10">
+  <div class="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-28">
+    <p class="font-mono text-eyebrow uppercase text-primary mb-5 reveal">02 · Le rôle</p>
+    <h2 class="font-display text-headline max-w-[24ch] reveal">Ce que je deviens pour Station Krishna</h2>
+    <p class="mt-6 max-w-[64ch] text-body-lg text-on-surface-variant reveal">
+      Un partenaire stratégique. Quelqu'un qui connaît déjà vos process, qui revient chaque semaine,
+      et dont le seul travail est de vous aider à décider juste.
+    </p>
+
+    <div class="mt-14 grid md:grid-cols-2 gap-6 md:gap-8">
+
+      <div class="reveal bg-surface-container-lowest border border-on-background/15 p-8 md:p-10 socket">
+        <p class="font-mono text-eyebrow uppercase text-primary mb-6">Ce que c'est</p>
+        <ul class="space-y-5">
+          <li class="flex gap-4">
+            <span class="mt-[9px] w-2 h-2 bg-primary shrink-0"></span>
+            <span class="text-body-reg">Un créneau fixe chaque semaine, avec vous deux, qui ne saute pas.</span>
+          </li>
+          <li class="flex gap-4">
+            <span class="mt-[9px] w-2 h-2 bg-primary shrink-0"></span>
+            <span class="text-body-reg">Les questions que personne ne pose en interne, parce que tout le monde est dans le service.</span>
+          </li>
+          <li class="flex gap-4">
+            <span class="mt-[9px] w-2 h-2 bg-primary shrink-0"></span>
+            <span class="text-body-reg">Une décision écrite à chaque séance, et le suivi de cette décision à la séance suivante.</span>
+          </li>
+          <li class="flex gap-4">
+            <span class="mt-[9px] w-2 h-2 bg-primary shrink-0"></span>
+            <span class="text-body-reg">Un regard extérieur qui a déjà vu vos chiffres et votre organisation de l'intérieur.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="reveal bg-surface-container-lowest border border-on-background/15 p-8 md:p-10">
+        <p class="font-mono text-eyebrow uppercase text-on-surface-variant mb-6">Ce que ce n'est pas</p>
+        <ul class="space-y-5 text-on-surface-variant">
+          <li class="flex gap-4">
+            <span class="mt-[9px] w-2 h-2 border border-outline shrink-0"></span>
+            <span class="text-body-reg">Un rapport de consultant que vous recevez et que personne n'ouvre.</span>
+          </li>
+          <li class="flex gap-4">
+            <span class="mt-[9px] w-2 h-2 border border-outline shrink-0"></span>
+            <span class="text-body-reg">De la formation Notion. Vos équipes savent s'en servir.</span>
+          </li>
+          <li class="flex gap-4">
+            <span class="mt-[9px] w-2 h-2 border border-outline shrink-0"></span>
+            <span class="text-body-reg">Quelqu'un qui exécute à votre place. Vous décidez, vos équipes exécutent.</span>
+          </li>
+          <li class="flex gap-4">
+            <span class="mt-[9px] w-2 h-2 border border-outline shrink-0"></span>
+            <span class="text-body-reg">Une réunion de plus. Si elle ne produit pas de décision, elle ne sert à rien.</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4 · Le parcours ══ -->
+<section class="grid-bg border-b border-on-background/10">
+  <div class="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-28">
+    <p class="font-mono text-eyebrow uppercase text-primary mb-5 reveal">03 · Le parcours</p>
+    <h2 class="font-display text-headline max-w-[22ch] reveal">Le premier mois, dans l'ordre</h2>
+
+    <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-on-background/12 border border-on-background/12">
+
+      <div class="reveal bg-background p-7 md:p-8">
+        <p class="step-num mb-5">01</p>
+        <h3 class="font-display text-title mb-3">L'état des lieux</h3>
+        <p class="text-body-reg text-on-surface-variant">
+          Avant la première séance, vous remplissez un questionnaire sur la boîte et sur vous deux
+          en tant que dirigeants. C'est là que sortent les sujets dont on ne parle jamais en réunion.
+        </p>
+      </div>
+
+      <div class="reveal bg-background p-7 md:p-8">
+        <p class="step-num mb-5">02</p>
+        <h3 class="font-display text-title mb-3">Les chiffres</h3>
+        <p class="text-body-reg text-on-surface-variant">
+          On va les chercher là où ils sont vraiment&nbsp;: Notion, Qotid, la banque, vos têtes.
+          On les rassemble à un seul endroit et on décide lesquels comptent.
+        </p>
+      </div>
+
+      <div class="reveal bg-background p-7 md:p-8">
+        <p class="step-num mb-5">03</p>
+        <h3 class="font-display text-title mb-3">Vision et objectifs</h3>
+        <p class="text-body-reg text-on-surface-variant">
+          Où va Station Krishna dans douze mois, formulé en une phrase que vos équipes peuvent répéter.
+          Puis les trois chiffres qui disent si vous y allez.
+        </p>
+      </div>
+
+      <div class="reveal bg-background p-7 md:p-8">
+        <p class="step-num mb-5">04</p>
+        <h3 class="font-display text-title mb-3">Portefeuille et rituel</h3>
+        <p class="text-body-reg text-on-surface-variant">
+          La liste de vos projets, priorisée, avec un porteur pour chacun.
+          Et le point hebdomadaire qui la fait avancer une fois que je ne suis plus là.
+        </p>
+      </div>
+
+    </div>
+
+    <p class="mt-9 font-mono text-code-label text-on-surface-variant reveal">
+      Quatre séances. Un mois. Actionnable dès la première.
+    </p>
+  </div>
+</section>
+
+<!-- ══ 5 · Les 90 minutes ══ -->
+<section class="border-b border-on-background/10">
+  <div class="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-28">
+    <div class="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] gap-10 md:gap-16">
+
+      <div class="reveal md:sticky md:top-24 md:self-start">
+        <p class="font-mono text-eyebrow uppercase text-primary mb-5">04 · Le rituel</p>
+        <h2 class="font-display text-headline max-w-[15ch]">Ce qui se passe chaque semaine</h2>
+        <p class="mt-6 text-body-reg text-on-surface-variant max-w-[40ch]">
+          Toujours la même structure. C'est ce qui fait qu'une séance de 90 minutes
+          produit plus qu'une journée d'atelier.
+        </p>
+      </div>
+
+      <div class="reveal">
+        <div class="border border-on-background/15 bg-surface-container-lowest divide-y divide-on-background/12 socket">
+          <div class="flex gap-6 p-6 md:p-7">
+            <span class="font-mono text-code-label text-primary w-[92px] shrink-0 pt-[3px]">00&nbsp;→&nbsp;15</span>
+            <div>
+              <p class="font-display text-title mb-1">Les chiffres de la semaine</p>
+              <p class="text-body-reg text-on-surface-variant">Pipeline, encaissements, événements à venir. Ce qui a bougé, ce qui coince.</p>
+            </div>
+          </div>
+          <div class="flex gap-6 p-6 md:p-7">
+            <span class="font-mono text-code-label text-primary w-[92px] shrink-0 pt-[3px]">15&nbsp;→&nbsp;45</span>
+            <div>
+              <p class="font-display text-title mb-1">Le sujet de la semaine</p>
+              <p class="text-body-reg text-on-surface-variant">Un seul, choisi à l'avance. Le virage corporate, la marge livraison, le recrutement, la trésorerie.</p>
+            </div>
+          </div>
+          <div class="flex gap-6 p-6 md:p-7">
+            <span class="font-mono text-code-label text-primary w-[92px] shrink-0 pt-[3px]">45&nbsp;→&nbsp;75</span>
+            <div>
+              <p class="font-display text-title mb-1">Les arbitrages</p>
+              <p class="text-body-reg text-on-surface-variant">On tranche. Ce qu'on lance, ce qu'on repousse, ce qu'on arrête.</p>
+            </div>
+          </div>
+          <div class="flex gap-6 p-6 md:p-7">
+            <span class="font-mono text-code-label text-primary w-[92px] shrink-0 pt-[3px]">75&nbsp;→&nbsp;90</span>
+            <div>
+              <p class="font-display text-title mb-1">Qui fait quoi</p>
+              <p class="text-body-reg text-on-surface-variant">Les décisions deviennent des tâches datées dans votre Notion, avec un nom en face.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 border-l-2 border-secondary bg-secondary-fixed/25 px-7 py-6">
+          <p class="font-mono text-eyebrow uppercase text-on-secondary-fixed-variant mb-3">Ce qui n'entre pas dans les 90 minutes</p>
+          <p class="text-body-reg max-w-[58ch]">
+            Le développement. Si une décision demande de construire quelque chose dans Notion,
+            on la note et on la chiffre à part. L'accompagnement, c'est le pilotage, pas le chantier.
+            C'est ce qui garantit que la séance reste consacrée à votre entreprise et pas à un outil.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ 6 · Le livrable ══ -->
+<section class="bg-inverse-surface text-inverse-on-surface border-b border-on-background/10">
+  <div class="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-28">
+    <p class="font-mono text-eyebrow uppercase text-secondary-fixed-dim mb-5 reveal">05 · Le livrable</p>
+    <h2 class="font-display text-display-md max-w-[16ch] reveal">Au bout d'un mois, vous avez un plan à 90 jours</h2>
+    <p class="mt-7 max-w-[60ch] text-body-lg text-inverse-on-surface/75 reveal">
+      Pas un rapport. Une page vivante dans votre Notion, mise à jour à chaque séance,
+      que vos équipes peuvent ouvrir.
+    </p>
+
+    <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+      <div class="reveal border-t-2 border-secondary-fixed-dim pt-6">
+        <p class="font-mono text-code-label text-secondary-fixed-dim mb-3">Les chantiers</p>
+        <p class="text-body-reg text-inverse-on-surface/85">Cinq au maximum sur les trois prochains mois, classés par ordre d'impact.</p>
+      </div>
+      <div class="reveal border-t-2 border-secondary-fixed-dim pt-6">
+        <p class="font-mono text-code-label text-secondary-fixed-dim mb-3">Les porteurs</p>
+        <p class="text-body-reg text-inverse-on-surface/85">Un nom en face de chaque chantier. Vous, Axel, un chef, un recrutement à faire.</p>
+      </div>
+      <div class="reveal border-t-2 border-secondary-fixed-dim pt-6">
+        <p class="font-mono text-code-label text-secondary-fixed-dim mb-3">La mesure</p>
+        <p class="text-body-reg text-inverse-on-surface/85">Le chiffre qui dit si ça marche, et l'endroit exact où le lire chaque semaine.</p>
+      </div>
+      <div class="reveal border-t-2 border-secondary-fixed-dim pt-6">
+        <p class="font-mono text-code-label text-secondary-fixed-dim mb-3">Ce qu'on arrête</p>
+        <p class="text-body-reg text-inverse-on-surface/85">La partie la plus utile. Ce que vous continuez de faire par habitude et qui ne rapporte plus.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 7 · Ce qu'on attend de vous ══ -->
+<section class="border-b border-on-background/10">
+  <div class="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-28">
+    <p class="font-mono text-eyebrow uppercase text-primary mb-5 reveal">06 · Votre part</p>
+    <h2 class="font-display text-headline max-w-[20ch] reveal">Ce qu'on attend de vous</h2>
+    <p class="mt-6 max-w-[60ch] text-body-lg text-on-surface-variant reveal">
+      C'est court, et c'est non négociable. Sans ces quatre choses, le rituel ne produit rien.
+    </p>
+
+    <div class="mt-12 grid md:grid-cols-2 gap-x-14 gap-y-0">
+      <div class="reveal border-t border-on-background/12 py-7 flex gap-5">
+        <span class="step-num pt-1 shrink-0">A</span>
+        <div>
+          <p class="font-display text-title mb-2">Le questionnaire rempli</p>
+          <p class="text-body-reg text-on-surface-variant">Avant la première séance, tous les deux, chacun de son côté.</p>
+        </div>
+      </div>
+      <div class="reveal border-t border-on-background/12 py-7 flex gap-5">
+        <span class="step-num pt-1 shrink-0">B</span>
+        <div>
+          <p class="font-display text-title mb-2">90 minutes bloquées</p>
+          <p class="text-body-reg text-on-surface-variant">Le même créneau chaque semaine, vous deux présents. Une séance décalée reste une séance tenue.</p>
+        </div>
+      </div>
+      <div class="reveal border-t border-on-background/12 py-7 flex gap-5">
+        <span class="step-num pt-1 shrink-0">C</span>
+        <div>
+          <p class="font-display text-title mb-2">Les décisions exécutées</p>
+          <p class="text-body-reg text-on-surface-variant">Entre deux séances. C'est vous et vos équipes qui faites avancer, pas moi.</p>
+        </div>
+      </div>
+      <div class="reveal border-t border-b border-on-background/12 py-7 flex gap-5">
+        <span class="step-num pt-1 shrink-0">D</span>
+        <div>
+          <p class="font-display text-title mb-2">Vos vrais chiffres</p>
+          <p class="text-body-reg text-on-surface-variant">Y compris ceux qui ne sont pas beaux. C'est en général là que se trouve l'argent.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-10 font-display text-title text-primary reveal">C'est tout. Le reste, c'est mon travail.</p>
+  </div>
+</section>
+
+<!-- ══ 8 · Le cadre ══ -->
+<section class="grid-bg border-b border-on-background/10">
+  <div class="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-28">
+    <p class="font-mono text-eyebrow uppercase text-primary mb-5 reveal">07 · Le cadre</p>
+    <h2 class="font-display text-headline max-w-[18ch] reveal">Comment ça se passe concrètement</h2>
+
+    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-on-background/12 border border-on-background/12 reveal">
+      <div class="bg-background p-7">
+        <p class="font-mono text-eyebrow uppercase text-on-surface-variant mb-4">Rythme</p>
+        <p class="font-display text-display-md leading-none">1h30</p>
+        <p class="mt-3 text-body-reg text-on-surface-variant">par semaine</p>
+      </div>
+      <div class="bg-background p-7">
+        <p class="font-mono text-eyebrow uppercase text-on-surface-variant mb-4">Horizon</p>
+        <p class="font-display text-display-md leading-none">3 mois</p>
+        <p class="mt-3 text-body-reg text-on-surface-variant">le délai pour voir des résultats</p>
+      </div>
+      <div class="bg-background p-7">
+        <p class="font-mono text-eyebrow uppercase text-on-surface-variant mb-4">Participants</p>
+        <p class="font-display text-display-md leading-none">2</p>
+        <p class="mt-3 text-body-reg text-on-surface-variant">Ajith et Nirushan</p>
+      </div>
+      <div class="bg-background p-7">
+        <p class="font-mono text-eyebrow uppercase text-on-surface-variant mb-4">Engagement</p>
+        <p class="font-display text-display-md leading-none">Aucun</p>
+        <p class="mt-3 text-body-reg text-on-surface-variant">vous arrêtez quand vous voulez</p>
+      </div>
+    </div>
+
+    <div class="mt-10 reveal border-2 border-primary bg-primary-fixed/35 p-8 md:p-11 socket">
+      <p class="font-mono text-eyebrow uppercase text-on-primary-fixed-variant mb-5">L'offre faite à Station Krishna</p>
+      <p class="font-display text-headline max-w-[20ch]">Le premier mois est offert.</p>
+      <p class="mt-6 max-w-[62ch] text-body-lg">
+        Vous êtes le premier client Operate de Rama Logic. Quatre séances, le questionnaire,
+        et le plan à 90 jours, sans rien payer. En échange, je vous demande une seule chose&nbsp;:
+        votre retour honnête à la fin du mois, y compris s'il est mauvais.
+      </p>
+      <p class="mt-6 max-w-[62ch] text-body-reg text-on-surface-variant">
+        Au bout des quatre séances, vous décidez si on continue. Si c'est non, vous gardez le plan
+        et on se serre la main. Il n'y a rien à résilier.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 9 · La suite ══ -->
+<section>
+  <div class="mx-auto max-w-[1180px] px-6 md:px-10 py-24 md:py-32">
+    <p class="font-mono text-eyebrow uppercase text-primary mb-7 reveal">08 · La suite</p>
+
+    <h2 class="font-display text-display-md max-w-[17ch] reveal">On cale la première séance.</h2>
+
+    <p class="mt-8 max-w-[58ch] text-body-lg text-on-surface-variant reveal">
+      En avril, on a construit l'outil qui range votre activité.
+      Ce qu'on fait maintenant est d'un autre ordre&nbsp;: on s'en sert pour décider où va la maison.
+    </p>
+
+    <div class="mt-16 rule reveal"></div>
+
+    <div class="mt-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-8 reveal">
+      <div>
+        <p class="font-display text-title">Sylvain Ramaradjou</p>
+        <p class="mt-1 font-mono text-code-label text-on-surface-variant">Rama Logic · sylvain@ramalogic.com</p>
+      </div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2 font-mono text-eyebrow uppercase text-on-surface-variant">
+        <span>Notion Solution Partner</span>
+        <span class="text-outline-variant">·</span>
+        <span>PMP</span>
+        <span class="text-outline-variant">·</span>
+        <span>Black Belt Lean Six Sigma</span>
+      </div>
+    </div>
+
+    <p class="mt-14 font-mono text-eyebrow uppercase text-outline">
+      Confidentiel · préparé pour Station Krishna · septembre 2026
+    </p>
+  </div>
+</section>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 55 + 'ms';
+    io.observe(el);
+  });
+</script>
+
+</body>
+</html>
