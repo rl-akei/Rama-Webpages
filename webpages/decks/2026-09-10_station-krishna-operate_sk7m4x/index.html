@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="robots" content="noindex,nofollow"/>
 <title>Operate · Station Krishna × Rama Logic</title>
+<script>document.documentElement.classList.add('js');</script>
 
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600&display=swap"/>
@@ -44,9 +45,9 @@ tailwind.config = {
         "headline":["clamp(1.6rem, 3vw, 2.5rem)",{"lineHeight":"1.15","fontWeight":"500","letterSpacing":"-0.01em"}],
         "title":["clamp(1.1rem, 1.6vw, 1.45rem)",{"lineHeight":"1.35","fontWeight":"500"}],
         "body-lg":["clamp(1.02rem, 1.25vw, 1.2rem)",{"lineHeight":"1.65","fontWeight":"400"}],
-        "body-reg":["clamp(0.94rem, 1vw, 1.03rem)",{"lineHeight":"1.65","fontWeight":"400"}],
-        "code-label":["clamp(0.75rem, 0.85vw, 0.84rem)",{"lineHeight":"1.5","letterSpacing":"0.06em","fontWeight":"400"}],
-        "eyebrow":["clamp(0.66rem, 0.75vw, 0.74rem)",{"lineHeight":"1.1","letterSpacing":"0.16em","fontWeight":"700"}]
+        "body-reg":["clamp(1rem, 1.05vw, 1.06rem)",{"lineHeight":"1.65","fontWeight":"400"}],
+        "code-label":["clamp(0.78rem, 0.88vw, 0.86rem)",{"lineHeight":"1.5","letterSpacing":"0.06em","fontWeight":"400"}],
+        "eyebrow":["clamp(0.75rem, 0.8vw, 0.8rem)",{"lineHeight":"1.35","letterSpacing":"0.14em","fontWeight":"700"}]
       }
     }
   }
@@ -54,7 +55,7 @@ tailwind.config = {
 </script>
 
 <style>
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; }
   body { background:#fcf9f8; color:#1c1b1b; font-family:"Work Sans",system-ui,sans-serif; }
   ::selection { background:#d9eb95; color:#171e00; }
 
@@ -78,20 +79,27 @@ tailwind.config = {
 
   /* Numéro de section en Space Mono, aligné sur la grille */
   .step-num {
-    font-family:"Space Mono",monospace; font-size:0.74rem; letter-spacing:0.16em;
+    font-family:"Space Mono",monospace; font-size:0.8rem; letter-spacing:0.14em;
     font-weight:700; color:#446254;
   }
 
-  .reveal { opacity:0; transform:translateY(14px); transition:opacity .55s ease, transform .55s ease; }
-  .reveal.in { opacity:1; transform:none; }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior:auto; }
-    .reveal { opacity:1; transform:none; transition:none; }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+
+  .mail-link { text-decoration: underline; text-decoration-color: rgba(28,27,27,0.3); text-underline-offset: 0.2em; text-decoration-thickness: from-font; transition: color 150ms ease-out, text-decoration-color 150ms ease-out; }
+  @media (hover: hover) { .mail-link:hover { color:#446254; text-decoration-color:#446254; } }
+
+  /* Apparition au scroll : opt-in (JS actif ET mouvement non réduit), sinon tout reste visible */
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    html.js .reveal { opacity:0; transform:translateY(12px); filter:blur(4px);
+      transition-property: opacity, transform, filter; transition-duration: 400ms; transition-timing-function: ease-out; }
+    html.js .reveal.in { opacity:1; transform:none; filter:none; }
   }
 
   @media print {
     .no-print { display:none !important; }
-    .reveal { opacity:1 !important; transform:none !important; }
+    .reveal { opacity:1 !important; transform:none !important; filter:none !important; }
     section { break-inside: avoid; page-break-inside: avoid; }
     body { background:#fff; }
   }
@@ -102,11 +110,13 @@ tailwind.config = {
 
 <!-- ══ Barre supérieure ══ -->
 <header class="no-print sticky top-0 z-40 bg-background/85 backdrop-blur border-b border-on-background/10">
-  <div class="mx-auto max-w-[1180px] px-6 md:px-10 h-14 flex items-center justify-between">
+  <div class="mx-auto max-w-[1180px] px-6 md:px-10 min-h-14 py-2 flex items-center justify-between gap-4">
     <span class="font-display text-[1.05rem] font-medium tracking-tight">Rama&nbsp;Logic</span>
-    <span class="font-mono text-eyebrow uppercase text-on-surface-variant">Operate · Station Krishna</span>
+    <span class="font-mono text-eyebrow uppercase text-on-surface-variant text-right">Operate · Station Krishna</span>
   </div>
 </header>
+
+<main>
 
 <!-- ══ 1 · Accroche ══ -->
 <section class="grid-bg border-b border-on-background/10">
@@ -114,8 +124,8 @@ tailwind.config = {
     <p class="font-mono text-eyebrow uppercase text-primary mb-7">Operate · Partenaire stratégique</p>
 
     <h1 class="font-display text-display-lg max-w-[19ch]">
-      Le système tourne.<br/>
-      <span class="text-primary">Reste à piloter la boîte.</span>
+      <span class="block">Le système tourne.</span>
+      <span class="block text-primary">Reste à piloter la boîte.</span>
     </h1>
 
     <p class="mt-9 max-w-[62ch] text-body-lg text-on-surface-variant">
@@ -125,9 +135,9 @@ tailwind.config = {
 
     <div class="mt-14 flex flex-wrap items-center gap-x-10 gap-y-4 font-mono text-code-label text-on-surface-variant">
       <span>Préparé pour Ajith &amp; Nirushan Rajaratnam</span>
-      <span class="hidden sm:inline text-outline-variant">/</span>
+      <span class="hidden sm:inline text-outline-variant" aria-hidden="true">/</span>
       <span>Septembre 2026</span>
-      <span class="hidden sm:inline text-outline-variant">/</span>
+      <span class="hidden sm:inline text-outline-variant" aria-hidden="true">/</span>
       <span>Sylvain Ramaradjou</span>
     </div>
 
@@ -147,27 +157,27 @@ tailwind.config = {
         <p class="font-mono text-eyebrow uppercase text-primary mb-5">01 · Le constat</p>
         <h2 class="font-display text-headline max-w-[14ch]">Où vous en êtes</h2>
         <p class="mt-6 text-body-reg text-on-surface-variant max-w-[38ch]">
-          Ce qui suit vient de l'audit du 17 avril et de ce que le système enregistre depuis.
-          Rien d'inventé.
+          Ce qui suit vient de l’audit du 17 avril et de ce que le système enregistre depuis.
+          Rien d’inventé.
         </p>
       </div>
 
-      <div class="reveal space-y-0">
+      <div class="reveal">
         <div class="border-t border-on-background/12 py-7">
           <p class="step-num mb-3">01</p>
           <p class="text-body-lg max-w-[60ch]">
             Vous avez décidé de passer de <strong class="font-medium">70&nbsp;% mariages</strong> à
-            <strong class="font-medium">60&nbsp;% corporate</strong>. C'est le virage le plus important
-            de votre histoire. Aujourd'hui, personne ne mesure chaque semaine si vous le prenez vraiment.
+            <strong class="font-medium">60&nbsp;% corporate</strong>. C’est le virage le plus important
+            de votre histoire. Aujourd’hui, personne ne mesure chaque semaine si vous le prenez vraiment.
           </p>
         </div>
 
         <div class="border-t border-on-background/12 py-7">
           <p class="step-num mb-3">02</p>
           <p class="text-body-lg max-w-[60ch]">
-            Vous faites tourner trois modèles en même temps&nbsp;: l'événementiel,
+            Vous faites tourner trois modèles en même temps&nbsp;: l’événementiel,
             les 150&nbsp;repas hebdomadaires en livraison, et le labo Click&nbsp;&amp;&nbsp;Collect.
-            Trois marges, trois cycles, trois façons de perdre de l'argent sans le voir.
+            Trois marges, trois cycles, trois façons de perdre de l’argent sans le voir.
           </p>
         </div>
 
@@ -176,7 +186,7 @@ tailwind.config = {
           <p class="text-body-lg max-w-[60ch]">
             Le système Notion enregistre le pipeline, les projets et les factures depuis avril.
             Il sait déjà répondre à la moitié de vos questions.
-            Il n'y a simplement aucun moment dans la semaine où quelqu'un les pose.
+            Il n’y a simplement aucun moment dans la semaine où quelqu’un les pose.
           </p>
         </div>
 
@@ -184,14 +194,14 @@ tailwind.config = {
           <p class="step-num mb-3">04</p>
           <p class="text-body-lg max-w-[60ch]">
             En avril, on avait listé ce qui viendrait ensuite&nbsp;: taux de transformation par canal,
-            marge par type d'événement, taux de retour des clients B2B, saisonnalité du chiffre d'affaires.
+            marge par type d’événement, taux de retour des clients B2B, saisonnalité du chiffre d’affaires.
             Ce sont exactement les quatre chiffres qui disent si le virage corporate fonctionne.
-            Aucun n'est regardé.
+            Aucun n’est regardé.
           </p>
         </div>
 
         <p class="mt-9 font-display text-title text-primary max-w-[52ch]">
-          Ce n'est pas un problème d'outil. C'est qu'il manque le moment où l'on s'assoit et où l'on regarde.
+          Ce n’est pas un problème d’outil. C’est qu’il manque le moment où l’on s’assoit et où l’on regarde.
         </p>
       </div>
 
@@ -205,14 +215,14 @@ tailwind.config = {
     <p class="font-mono text-eyebrow uppercase text-primary mb-5 reveal">02 · Le rôle</p>
     <h2 class="font-display text-headline max-w-[24ch] reveal">Ce que je deviens pour Station Krishna</h2>
     <p class="mt-6 max-w-[64ch] text-body-lg text-on-surface-variant reveal">
-      Un partenaire stratégique. Quelqu'un qui connaît déjà vos process, qui revient chaque semaine,
+      Un partenaire stratégique. Quelqu’un qui connaît déjà vos process, qui revient chaque semaine,
       et dont le seul travail est de vous aider à décider juste.
     </p>
 
     <div class="mt-14 grid md:grid-cols-2 gap-6 md:gap-8">
 
       <div class="reveal bg-surface-container-lowest border border-on-background/15 p-8 md:p-10 socket">
-        <p class="font-mono text-eyebrow uppercase text-primary mb-6">Ce que c'est</p>
+        <p class="font-mono text-eyebrow uppercase text-primary mb-6">Ce que c’est</p>
         <ul class="space-y-5">
           <li class="flex gap-4">
             <span class="mt-[9px] w-2 h-2 bg-primary shrink-0"></span>
@@ -228,25 +238,25 @@ tailwind.config = {
           </li>
           <li class="flex gap-4">
             <span class="mt-[9px] w-2 h-2 bg-primary shrink-0"></span>
-            <span class="text-body-reg">Un regard extérieur qui a déjà vu vos chiffres et votre organisation de l'intérieur.</span>
+            <span class="text-body-reg">Un regard extérieur qui a déjà vu vos chiffres et votre organisation de l’intérieur.</span>
           </li>
         </ul>
       </div>
 
       <div class="reveal bg-surface-container-lowest border border-on-background/15 p-8 md:p-10">
-        <p class="font-mono text-eyebrow uppercase text-on-surface-variant mb-6">Ce que ce n'est pas</p>
+        <p class="font-mono text-eyebrow uppercase text-on-surface-variant mb-6">Ce que ce n’est pas</p>
         <ul class="space-y-5 text-on-surface-variant">
           <li class="flex gap-4">
             <span class="mt-[9px] w-2 h-2 border border-outline shrink-0"></span>
-            <span class="text-body-reg">Un rapport de consultant que vous recevez et que personne n'ouvre.</span>
+            <span class="text-body-reg">Un rapport de consultant que vous recevez et que personne n’ouvre.</span>
           </li>
           <li class="flex gap-4">
             <span class="mt-[9px] w-2 h-2 border border-outline shrink-0"></span>
-            <span class="text-body-reg">De la formation Notion. Vos équipes savent s'en servir.</span>
+            <span class="text-body-reg">De la formation Notion. Vos équipes savent s’en servir.</span>
           </li>
           <li class="flex gap-4">
             <span class="mt-[9px] w-2 h-2 border border-outline shrink-0"></span>
-            <span class="text-body-reg">Quelqu'un qui exécute à votre place. Vous décidez, vos équipes exécutent.</span>
+            <span class="text-body-reg">Quelqu’un qui exécute à votre place. Vous décidez, vos équipes exécutent.</span>
           </li>
           <li class="flex gap-4">
             <span class="mt-[9px] w-2 h-2 border border-outline shrink-0"></span>
@@ -263,16 +273,16 @@ tailwind.config = {
 <section class="grid-bg border-b border-on-background/10">
   <div class="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-28">
     <p class="font-mono text-eyebrow uppercase text-primary mb-5 reveal">03 · Le parcours</p>
-    <h2 class="font-display text-headline max-w-[22ch] reveal">Le premier mois, dans l'ordre</h2>
+    <h2 class="font-display text-headline max-w-[22ch] reveal">Le premier mois, dans l’ordre</h2>
 
     <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-on-background/12 border border-on-background/12">
 
       <div class="reveal bg-background p-7 md:p-8">
         <p class="step-num mb-5">01</p>
-        <h3 class="font-display text-title mb-3">L'état des lieux</h3>
+        <h3 class="font-display text-title mb-3">L’état des lieux</h3>
         <p class="text-body-reg text-on-surface-variant">
           Avant la première séance, vous remplissez un questionnaire sur la boîte et sur vous deux
-          en tant que dirigeants. C'est là que sortent les sujets dont on ne parle jamais en réunion.
+          en tant que dirigeants. C’est là que sortent les sujets dont on ne parle jamais en réunion.
         </p>
       </div>
 
@@ -320,36 +330,36 @@ tailwind.config = {
         <p class="font-mono text-eyebrow uppercase text-primary mb-5">04 · Le rituel</p>
         <h2 class="font-display text-headline max-w-[15ch]">Ce qui se passe chaque semaine</h2>
         <p class="mt-6 text-body-reg text-on-surface-variant max-w-[40ch]">
-          Toujours la même structure. C'est ce qui fait qu'une séance de 90 minutes
-          produit plus qu'une journée d'atelier.
+          Toujours la même structure. C’est ce qui fait qu’une séance de 90 minutes
+          produit plus qu’une journée d’atelier.
         </p>
       </div>
 
       <div class="reveal">
         <div class="border border-on-background/15 bg-surface-container-lowest divide-y divide-on-background/12 socket">
-          <div class="flex gap-6 p-6 md:p-7">
-            <span class="font-mono text-code-label text-primary w-[92px] shrink-0 pt-[3px]">00&nbsp;→&nbsp;15</span>
+          <div class="flex flex-col sm:flex-row gap-2 sm:gap-6 p-6 md:p-7">
+            <span class="font-mono text-code-label text-primary sm:w-[92px] shrink-0 sm:pt-[3px]">00&nbsp;→&nbsp;15</span>
             <div>
               <p class="font-display text-title mb-1">Les chiffres de la semaine</p>
               <p class="text-body-reg text-on-surface-variant">Pipeline, encaissements, événements à venir. Ce qui a bougé, ce qui coince.</p>
             </div>
           </div>
-          <div class="flex gap-6 p-6 md:p-7">
-            <span class="font-mono text-code-label text-primary w-[92px] shrink-0 pt-[3px]">15&nbsp;→&nbsp;45</span>
+          <div class="flex flex-col sm:flex-row gap-2 sm:gap-6 p-6 md:p-7">
+            <span class="font-mono text-code-label text-primary sm:w-[92px] shrink-0 sm:pt-[3px]">15&nbsp;→&nbsp;45</span>
             <div>
               <p class="font-display text-title mb-1">Le sujet de la semaine</p>
-              <p class="text-body-reg text-on-surface-variant">Un seul, choisi à l'avance. Le virage corporate, la marge livraison, le recrutement, la trésorerie.</p>
+              <p class="text-body-reg text-on-surface-variant">Un seul, choisi à l’avance. Le virage corporate, la marge livraison, le recrutement, la trésorerie.</p>
             </div>
           </div>
-          <div class="flex gap-6 p-6 md:p-7">
-            <span class="font-mono text-code-label text-primary w-[92px] shrink-0 pt-[3px]">45&nbsp;→&nbsp;75</span>
+          <div class="flex flex-col sm:flex-row gap-2 sm:gap-6 p-6 md:p-7">
+            <span class="font-mono text-code-label text-primary sm:w-[92px] shrink-0 sm:pt-[3px]">45&nbsp;→&nbsp;75</span>
             <div>
               <p class="font-display text-title mb-1">Les arbitrages</p>
-              <p class="text-body-reg text-on-surface-variant">On tranche. Ce qu'on lance, ce qu'on repousse, ce qu'on arrête.</p>
+              <p class="text-body-reg text-on-surface-variant">On tranche. Ce qu’on lance, ce qu’on repousse, ce qu’on arrête.</p>
             </div>
           </div>
-          <div class="flex gap-6 p-6 md:p-7">
-            <span class="font-mono text-code-label text-primary w-[92px] shrink-0 pt-[3px]">75&nbsp;→&nbsp;90</span>
+          <div class="flex flex-col sm:flex-row gap-2 sm:gap-6 p-6 md:p-7">
+            <span class="font-mono text-code-label text-primary sm:w-[92px] shrink-0 sm:pt-[3px]">75&nbsp;→&nbsp;90</span>
             <div>
               <p class="font-display text-title mb-1">Qui fait quoi</p>
               <p class="text-body-reg text-on-surface-variant">Les décisions deviennent des tâches datées dans votre Notion, avec un nom en face.</p>
@@ -358,11 +368,11 @@ tailwind.config = {
         </div>
 
         <div class="mt-8 border-l-2 border-secondary bg-secondary-fixed/25 px-7 py-6">
-          <p class="font-mono text-eyebrow uppercase text-on-secondary-fixed-variant mb-3">Ce qui n'entre pas dans les 90 minutes</p>
+          <p class="font-mono text-eyebrow uppercase text-on-secondary-fixed-variant mb-3">Ce qui n’entre pas dans les 90 minutes</p>
           <p class="text-body-reg max-w-[58ch]">
             Le développement. Si une décision demande de construire quelque chose dans Notion,
-            on la note et on la chiffre à part. L'accompagnement, c'est le pilotage, pas le chantier.
-            C'est ce qui garantit que la séance reste consacrée à votre entreprise et pas à un outil.
+            on la note et on la chiffre à part. L’accompagnement, c’est le pilotage, pas le chantier.
+            C’est ce qui garantit que la séance reste consacrée à votre entreprise et pas à un outil.
           </p>
         </div>
       </div>
@@ -375,7 +385,7 @@ tailwind.config = {
 <section class="bg-inverse-surface text-inverse-on-surface border-b border-on-background/10">
   <div class="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-28">
     <p class="font-mono text-eyebrow uppercase text-secondary-fixed-dim mb-5 reveal">05 · Le livrable</p>
-    <h2 class="font-display text-display-md max-w-[16ch] reveal">Au bout d'un mois, vous avez un plan à 90 jours</h2>
+    <h2 class="font-display text-display-md max-w-[16ch] reveal">Au bout d’un mois, vous avez un plan à 90 jours</h2>
     <p class="mt-7 max-w-[60ch] text-body-lg text-inverse-on-surface/75 reveal">
       Pas un rapport. Une page vivante dans votre Notion, mise à jour à chaque séance,
       que vos équipes peuvent ouvrir.
@@ -384,7 +394,7 @@ tailwind.config = {
     <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
       <div class="reveal border-t-2 border-secondary-fixed-dim pt-6">
         <p class="font-mono text-code-label text-secondary-fixed-dim mb-3">Les chantiers</p>
-        <p class="text-body-reg text-inverse-on-surface/85">Cinq au maximum sur les trois prochains mois, classés par ordre d'impact.</p>
+        <p class="text-body-reg text-inverse-on-surface/85">Cinq au maximum sur les trois prochains mois, classés par ordre d’impact.</p>
       </div>
       <div class="reveal border-t-2 border-secondary-fixed-dim pt-6">
         <p class="font-mono text-code-label text-secondary-fixed-dim mb-3">Les porteurs</p>
@@ -392,10 +402,10 @@ tailwind.config = {
       </div>
       <div class="reveal border-t-2 border-secondary-fixed-dim pt-6">
         <p class="font-mono text-code-label text-secondary-fixed-dim mb-3">La mesure</p>
-        <p class="text-body-reg text-inverse-on-surface/85">Le chiffre qui dit si ça marche, et l'endroit exact où le lire chaque semaine.</p>
+        <p class="text-body-reg text-inverse-on-surface/85">Le chiffre qui dit si ça marche, et l’endroit exact où le lire chaque semaine.</p>
       </div>
       <div class="reveal border-t-2 border-secondary-fixed-dim pt-6">
-        <p class="font-mono text-code-label text-secondary-fixed-dim mb-3">Ce qu'on arrête</p>
+        <p class="font-mono text-code-label text-secondary-fixed-dim mb-3">Ce qu’on arrête</p>
         <p class="text-body-reg text-inverse-on-surface/85">La partie la plus utile. Ce que vous continuez de faire par habitude et qui ne rapporte plus.</p>
       </div>
     </div>
@@ -406,9 +416,9 @@ tailwind.config = {
 <section class="border-b border-on-background/10">
   <div class="mx-auto max-w-[1180px] px-6 md:px-10 py-20 md:py-28">
     <p class="font-mono text-eyebrow uppercase text-primary mb-5 reveal">06 · Votre part</p>
-    <h2 class="font-display text-headline max-w-[20ch] reveal">Ce qu'on attend de vous</h2>
+    <h2 class="font-display text-headline max-w-[20ch] reveal">Ce qu’on attend de vous</h2>
     <p class="mt-6 max-w-[60ch] text-body-lg text-on-surface-variant reveal">
-      C'est court, et c'est non négociable. Sans ces quatre choses, le rituel ne produit rien.
+      C’est court, et c’est non négociable. Sans ces quatre choses, le rituel ne produit rien.
     </p>
 
     <div class="mt-12 grid md:grid-cols-2 gap-x-14 gap-y-0">
@@ -430,19 +440,19 @@ tailwind.config = {
         <span class="step-num pt-1 shrink-0">C</span>
         <div>
           <p class="font-display text-title mb-2">Les décisions exécutées</p>
-          <p class="text-body-reg text-on-surface-variant">Entre deux séances. C'est vous et vos équipes qui faites avancer, pas moi.</p>
+          <p class="text-body-reg text-on-surface-variant">Entre deux séances. C’est vous et vos équipes qui faites avancer, pas moi.</p>
         </div>
       </div>
       <div class="reveal border-t border-b border-on-background/12 py-7 flex gap-5">
         <span class="step-num pt-1 shrink-0">D</span>
         <div>
           <p class="font-display text-title mb-2">Vos vrais chiffres</p>
-          <p class="text-body-reg text-on-surface-variant">Y compris ceux qui ne sont pas beaux. C'est en général là que se trouve l'argent.</p>
+          <p class="text-body-reg text-on-surface-variant">Y compris ceux qui ne sont pas beaux. C’est en général là que se trouve l’argent.</p>
         </div>
       </div>
     </div>
 
-    <p class="mt-10 font-display text-title text-primary reveal">C'est tout. Le reste, c'est mon travail.</p>
+    <p class="mt-10 font-display text-title text-primary reveal">C’est tout. Le reste, c’est mon travail.</p>
   </div>
 </section>
 
@@ -476,16 +486,16 @@ tailwind.config = {
     </div>
 
     <div class="mt-10 reveal border-2 border-primary bg-primary-fixed/35 p-8 md:p-11 socket">
-      <p class="font-mono text-eyebrow uppercase text-on-primary-fixed-variant mb-5">L'offre faite à Station Krishna</p>
+      <p class="font-mono text-eyebrow uppercase text-on-primary-fixed-variant mb-5">L’offre faite à Station Krishna</p>
       <p class="font-display text-headline max-w-[20ch]">Le premier mois est offert.</p>
       <p class="mt-6 max-w-[62ch] text-body-lg">
         Vous êtes le premier client Operate de Rama Logic. Quatre séances, le questionnaire,
         et le plan à 90 jours, sans rien payer. En échange, je vous demande une seule chose&nbsp;:
-        votre retour honnête à la fin du mois, y compris s'il est mauvais.
+        votre retour honnête à la fin du mois, y compris s’il est mauvais.
       </p>
       <p class="mt-6 max-w-[62ch] text-body-reg text-on-surface-variant">
-        Au bout des quatre séances, vous décidez si on continue. Si c'est non, vous gardez le plan
-        et on se serre la main. Il n'y a rien à résilier.
+        Au bout des quatre séances, vous décidez si on continue. Si c’est non, vous gardez le plan
+        et on se serre la main. Il n’y a rien à résilier.
       </p>
     </div>
   </div>
@@ -499,8 +509,8 @@ tailwind.config = {
     <h2 class="font-display text-display-md max-w-[17ch] reveal">On cale la première séance.</h2>
 
     <p class="mt-8 max-w-[58ch] text-body-lg text-on-surface-variant reveal">
-      En avril, on a construit l'outil qui range votre activité.
-      Ce qu'on fait maintenant est d'un autre ordre&nbsp;: on s'en sert pour décider où va la maison.
+      En avril, on a construit l’outil qui range votre activité.
+      Ce qu’on fait maintenant est d’un autre ordre&nbsp;: on s’en sert pour décider où va la maison.
     </p>
 
     <div class="mt-16 rule reveal"></div>
@@ -508,31 +518,37 @@ tailwind.config = {
     <div class="mt-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-8 reveal">
       <div>
         <p class="font-display text-title">Sylvain Ramaradjou</p>
-        <p class="mt-1 font-mono text-code-label text-on-surface-variant">Rama Logic · sylvain@ramalogic.com</p>
+        <p class="mt-1 font-mono text-code-label text-on-surface-variant">Rama Logic · <a class="mail-link" href="mailto:sylvain@ramalogic.com?subject=Operate%20Station%20Krishna%20%3A%20premi%C3%A8re%20s%C3%A9ance">sylvain@ramalogic.com</a></p>
       </div>
       <div class="flex flex-wrap gap-x-6 gap-y-2 font-mono text-eyebrow uppercase text-on-surface-variant">
         <span>Notion Solution Partner</span>
-        <span class="text-outline-variant">·</span>
+        <span class="text-outline-variant" aria-hidden="true">·</span>
         <span>PMP</span>
-        <span class="text-outline-variant">·</span>
+        <span class="text-outline-variant" aria-hidden="true">·</span>
         <span>Black Belt Lean Six Sigma</span>
       </div>
     </div>
 
-    <p class="mt-14 font-mono text-eyebrow uppercase text-outline">
+    <p class="mt-14 font-mono text-eyebrow uppercase text-on-surface-variant">
       Confidentiel · préparé pour Station Krishna · septembre 2026
     </p>
   </div>
 </section>
 
+</main>
+
 <script>
+  // Les blocs entrés dans la vue au même moment apparaissent dans l'ordre de lecture, 100 ms d'écart
   const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    entries.filter((e) => e.isIntersecting)
+      .sort((a, b) => a.target.compareDocumentPosition(b.target) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1)
+      .forEach((e, i) => {
+        e.target.style.transitionDelay = Math.min(i, 4) * 100 + 'ms';
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      });
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach((el, i) => {
-    el.style.transitionDelay = (i % 4) * 55 + 'ms';
-    io.observe(el);
-  });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 </script>
 
 </body>
