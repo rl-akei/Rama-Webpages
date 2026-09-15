@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3 erreurs carrousels IA · cafe.ramalogic</title>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@300,500&display=swap">
+<style>
+  :root{
+    --cream:#FFFCF7;
+    --ink:#0D1A14;
+    --slate:#5C6661;
+    --beige:#D2CFC9;
+    --aloe-dark:#475E54;
+    --aloe:#6A8D7E;
+    --mindaro:#DFE971;
+    --mindaro-light:#F6FBC6;
+    --flame:#F76420;
+    --s:1;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background:var(--beige); color:var(--ink);
+    font-family:'Clash Grotesk','General Sans',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding:32px 16px 64px;
+  }
+
+  /* en-tête de la page (hors slides) */
+  .page-head{ max-width:1080px; margin:0 auto 32px; font-weight:300; font-size:16px; line-height:1.6; color:var(--aloe-dark); }
+  .page-head b{ font-weight:500; color:var(--ink); }
+  .page-head a{ color:var(--aloe-dark); }
+
+  .deck{ zoom:var(--s); }
+
+  .slide{
+    position:relative;
+    width:1080px; height:1350px;
+    background:var(--cream);
+    color:var(--ink);
+    padding:120px 96px;
+    display:flex; flex-direction:column;
+    overflow:hidden;
+    margin:0 auto 40px;
+  }
+  .slide.dark{ background:var(--ink); color:var(--cream); }
+
+  .num{
+    position:absolute; right:96px; bottom:72px;
+    font-weight:300; font-size:24px; letter-spacing:.04em;
+    color:var(--beige);
+  }
+  .slide.dark .num{ color:#3A4642; }
+
+  .spacer{ flex:1; }
+
+  h1{ font-weight:500; font-size:104px; line-height:1.02; letter-spacing:-0.035em; }
+  h1.md{ font-size:92px; }
+  h1.sm{ font-size:80px; }
+
+  .sub{ font-weight:300; font-size:38px; line-height:1.35; color:var(--slate); letter-spacing:-0.01em; }
+  .small{ font-weight:300; font-size:32px; line-height:1.45; color:var(--slate); letter-spacing:-0.005em; }
+
+  .eyebrow{
+    font-weight:500; font-size:24px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--aloe-dark);
+  }
+
+  .rule{ width:120px; height:6px; background:var(--flame); }
+
+  /* surlignage Flame sous le mot (le texte reste en Ink) */
+  .mark{
+    padding:0 4px;
+    background-image:linear-gradient(to bottom,
+      transparent 0 70%, var(--flame) 70% 88%, transparent 88% 100%);
+    box-decoration-break:clone; -webkit-box-decoration-break:clone;
+  }
+
+  .mt-16{ margin-top:16px; } .mt-24{ margin-top:24px; } .mt-32{ margin-top:32px; }
+  .mt-40{ margin-top:40px; } .mt-48{ margin-top:48px; } .mt-64{ margin-top:64px; }
+
+  /* ---- 01 · couverture : trois carrousels identiques ---- */
+  .clones{ display:flex; gap:24px; }
+  .clone{
+    flex:1; height:300px;
+    border:1.5px solid var(--beige); border-radius:14px;
+    padding:28px 24px; display:flex; flex-direction:column; gap:14px;
+    background:var(--cream);
+  }
+  .clone i{ display:block; height:14px; border-radius:7px; background:var(--beige); }
+  .clone i.t{ height:22px; width:86%; background:#BDB9B2; }
+  .clone i.t2{ height:22px; width:58%; background:#BDB9B2; }
+  .clone i.w70{ width:70%; } .clone i.w90{ width:90%; } .clone i.w50{ width:50%; }
+  .clone .box{ flex:1; border-radius:8px; background:#ECEAE5; margin-top:6px; }
+  .clones-cap{ font-weight:300; font-size:26px; color:var(--slate); letter-spacing:-0.005em; }
+
+  .swipe{
+    position:absolute; left:96px; bottom:72px;
+    font-weight:300; font-size:24px; letter-spacing:.04em; color:var(--slate);
+  }
+
+  /* ---- 02 à 04 · les erreurs ---- */
+  .ask{
+    border:1.5px solid var(--beige); border-radius:14px;
+    padding:32px 36px;
+  }
+  .ask .lbl{
+    font-weight:500; font-size:20px; letter-spacing:.1em; text-transform:uppercase; color:var(--slate);
+  }
+  .ask p{ font-weight:300; font-size:40px; line-height:1.3; letter-spacing:-0.015em; color:var(--ink); margin-top:12px; }
+
+  .result{ font-weight:300; font-size:48px; line-height:1.25; letter-spacing:-0.02em; }
+  .result b{ font-weight:500; }
+
+  .fix{
+    background:var(--mindaro-light); border-radius:14px;
+    padding:36px 40px; margin-top:32px;
+    display:flex; gap:24px; align-items:flex-start;
+  }
+  .fix .dot{ width:18px; height:18px; border-radius:50%; background:var(--mindaro); border:2px solid var(--aloe); flex:none; margin-top:14px; }
+  .fix .lbl{ font-weight:500; font-size:20px; letter-spacing:.1em; text-transform:uppercase; color:var(--aloe-dark); }
+  .fix p{ font-weight:300; font-size:36px; line-height:1.35; letter-spacing:-0.01em; color:var(--ink); margin-top:8px; }
+  .fix p b{ font-weight:500; }
+
+  /* ---- 05 · appel à l'action ---- */
+  .dark .sub{ color:#8FA39A; }
+  .cta{ font-weight:300; font-size:48px; line-height:1.3; letter-spacing:-0.02em; color:var(--cream); }
+  .kw{
+    display:inline-block; font-weight:500; color:var(--ink); background:var(--mindaro);
+    border-radius:9999px; padding:4px 30px 8px; letter-spacing:.02em;
+  }
+  .handle{
+    display:flex; align-items:center; gap:36px;
+    font-weight:300; font-size:32px; letter-spacing:.02em; color:#C9D2CD;
+  }
+  .logo{ height:84px; width:auto; flex:none; }
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <b>3 erreurs qui rendent tes carrousels IA fades</b> · carrousel Instagram @cafe.ramalogic · 5 slides 1080×1350<br>
+  Images prêtes à poster :
+  <a href="slide-01.png">01</a> · <a href="slide-02.png">02</a> · <a href="slide-03.png">03</a> · <a href="slide-04.png">04</a> · <a href="slide-05.png">05</a>
+</header>
+
+<main class="deck">
+
+<!-- 01 · HOOK -->
+<section class="slide" id="s1">
+  <div class="clones" aria-hidden="true">
+    <div class="clone"><i class="t"></i><i class="t2"></i><i class="w90 mt-16"></i><i class="w70"></i><div class="box"></div></div>
+    <div class="clone"><i class="t"></i><i class="t2"></i><i class="w90 mt-16"></i><i class="w70"></i><div class="box"></div></div>
+    <div class="clone"><i class="t"></i><i class="t2"></i><i class="w90 mt-16"></i><i class="w70"></i><div class="box"></div></div>
+  </div>
+  <p class="clones-cap mt-24">Trois entreprises. Le même carrousel.</p>
+  <div class="spacer"></div>
+  <div class="rule"></div>
+  <h1 class="md mt-48">3 erreurs qui rendent tes carrousels IA <span class="mark">fades</span>.</h1>
+  <p class="sub mt-40">Tout le monde a le même outil. La différence, c'est ce que tu lui donnes avant.</p>
+  <div class="spacer" style="flex:.6"></div>
+  <div class="swipe">Glisse →</div>
+  <div class="num">01</div>
+</section>
+
+<!-- 02 · ERREUR 1 -->
+<section class="slide" id="s2">
+  <p class="eyebrow">Erreur 1 sur 3</p>
+  <h1 class="sm mt-32">Demander sans contexte.</h1>
+  <div class="ask mt-48">
+    <p class="lbl">La demande</p>
+    <p>«&nbsp;Fais-moi un carrousel sur nos services.&nbsp;»</p>
+  </div>
+  <p class="small mt-40">Sans ta charte, ton ton ni ta cible, l'IA fait la moyenne de tout ce qu'elle a déjà vu. C'est propre. Et c'est le carrousel de ton concurrent.</p>
+  <div class="spacer" style="flex:.6"></div>
+  <p class="result">Résultat&nbsp;: <b class="mark">du générique</b>.</p>
+  <div class="fix">
+    <i class="dot"></i>
+    <div>
+      <p class="lbl">À faire</p>
+      <p>Donne-lui <b>ta marque une fois</b>&nbsp;: couleurs, typo, ton, cible. Il s'en sert à chaque demande.</p>
+    </div>
+  </div>
+  <div class="spacer" style="flex:.45"></div>
+  <div class="num">02</div>
+</section>
+
+<!-- 03 · ERREUR 2 -->
+<section class="slide" id="s3">
+  <p class="eyebrow">Erreur 2 sur 3</p>
+  <h1 class="sm mt-32">Demander une image.</h1>
+  <div class="ask mt-48">
+    <p class="lbl">La demande</p>
+    <p>«&nbsp;Génère-moi l'image d'un carrousel sur la productivité.&nbsp;»</p>
+  </div>
+  <p class="small mt-40">Un visuel généré ne se corrige pas. Une coquille, un chiffre faux&nbsp;: tu relances tout, et tu perds ce qui était réussi.</p>
+  <div class="spacer" style="flex:.6"></div>
+  <p class="result">Résultat&nbsp;: <b class="mark">impossible à corriger</b>.</p>
+  <div class="fix">
+    <i class="dot"></i>
+    <div>
+      <p class="lbl">À faire</p>
+      <p>Demande <b>une page web</b>. Tu corriges au mot près, puis tu l'exportes en images.</p>
+    </div>
+  </div>
+  <div class="spacer" style="flex:.45"></div>
+  <div class="num">03</div>
+</section>
+
+<!-- 04 · ERREUR 3 -->
+<section class="slide" id="s4">
+  <p class="eyebrow">Erreur 3 sur 3</p>
+  <h1 class="sm mt-32">Tout recommencer à chaque fois.</h1>
+  <div class="ask mt-48">
+    <p class="lbl">Chaque lundi</p>
+    <p>«&nbsp;Alors, ma charte, c'est vert sauge, le ton est posé, la cible…&nbsp;»</p>
+  </div>
+  <p class="small mt-40">Nouvelle conversation, on réexplique tout. Et le carrousel de cette semaine ne ressemble déjà plus à celui de la semaine dernière.</p>
+  <div class="spacer" style="flex:.6"></div>
+  <p class="result">Résultat&nbsp;: <b class="mark">jamais la même marque</b>.</p>
+  <div class="fix">
+    <i class="dot"></i>
+    <div>
+      <p class="lbl">À faire</p>
+      <p>Garde <b>un modèle</b>. Ta charte et ton format restent en mémoire, tu ne changes que le sujet.</p>
+    </div>
+  </div>
+  <div class="spacer" style="flex:.45"></div>
+  <div class="num">04</div>
+</section>
+
+<!-- 05 · CTA -->
+<section class="slide dark" id="s5">
+  <div class="spacer" style="flex:.8"></div>
+  <div class="rule"></div>
+  <h1 class="md mt-48">Ce carrousel,<br>Claude l'a fait.</h1>
+  <p class="sub mt-40">À partir d'un seul message et de 3 questions. Ma charte, mon ton, mon compte&nbsp;: il les connaissait déjà.</p>
+  <div class="spacer"></div>
+  <p class="cta">Commente <span class="kw">CARROUSEL</span><br>et je t'envoie la méthode.</p>
+  <div class="handle mt-64">
+    <img class="logo" src="logo-rl-blanc.png" alt="Rama Logic">
+    <span>@cafe.ramalogic</span>
+  </div>
+  <div class="spacer" style="flex:.5"></div>
+  <div class="num">05</div>
+</section>
+
+</main>
+
+<script>
+  // Les slides font 1080 px : on réduit l'affichage pour tenir sur un téléphone.
+  function fit(){
+    var avail = document.documentElement.clientWidth - 32;
+    document.documentElement.style.setProperty('--s', Math.min(1, avail / 1080));
+  }
+  fit(); addEventListener('resize', fit);
+</script>
+</body>
+</html>
