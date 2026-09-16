@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les 5 choses pour que ton IA voie clair · cafe.ramalogic</title>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@300,500&display=swap">
+<style>
+  :root{
+    --cream:#FFFCF7;
+    --ink:#0D1A14;
+    --slate:#5C6661;
+    --beige:#D2CFC9;
+    --aloe-dark:#475E54;
+    --aloe:#6A8D7E;
+    --aloe-light:#B4C6BE;
+    --mindaro:#DFE971;
+    --mindaro-light:#F6FBC6;
+    --flame:#F76420;
+    --s:1;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background:var(--beige); color:var(--ink);
+    font-family:'Clash Grotesk','General Sans',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:geometricPrecision; /* évite les trous entre lettres (placement au pixel entier) */
+    padding:32px 16px 64px;
+  }
+  b{ font-weight:500; }
+
+  /* en-tête de la page (hors slides) */
+  .page-head{ max-width:1080px; margin:0 auto 32px; font-weight:300; font-size:16px; line-height:1.6; color:var(--aloe-dark); }
+  .page-head b{ font-weight:500; color:var(--ink); }
+  .page-head a{ color:var(--aloe-dark); }
+
+  .deck{ zoom:var(--s); }
+
+  .slide{
+    position:relative;
+    width:1080px; height:1350px;
+    background:var(--cream);
+    color:var(--ink);
+    padding:120px 96px;
+    display:flex; flex-direction:column;
+    overflow:hidden;
+    margin:0 auto 40px;
+  }
+  .slide.dark{ background:var(--ink); color:var(--cream); }
+
+  .num{
+    position:absolute; right:96px; bottom:72px;
+    font-weight:300; font-size:24px; letter-spacing:.04em;
+    color:var(--beige);
+  }
+  .slide.dark .num{ color:#3A4642; }
+
+  .spacer{ flex:1; }
+
+  h1{ font-weight:500; font-size:104px; line-height:1.02; letter-spacing:-0.035em; text-wrap:balance; }
+  h1.md{ font-size:92px; }
+  h1.sm{ font-size:80px; }
+  p{ text-wrap:pretty; }
+
+  .sub{ font-weight:300; font-size:38px; line-height:1.35; color:var(--slate); letter-spacing:-0.01em; }
+
+  .eyebrow{
+    font-weight:500; font-size:24px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--aloe-dark);
+  }
+
+  .rule{ width:120px; height:6px; background:var(--flame); }
+
+  /* surlignage Flame sous le mot (le texte reste en Ink) */
+  .mark{
+    padding:0 4px; margin:0 -4px; /* le trait déborde, le texte ne bouge pas */
+    background-image:linear-gradient(to bottom,
+      transparent 0 70%, var(--flame) 70% 88%, transparent 88% 100%);
+    box-decoration-break:clone; -webkit-box-decoration-break:clone;
+  }
+
+  .mt-24{ margin-top:24px; } .mt-32{ margin-top:32px; }
+  .mt-40{ margin-top:40px; } .mt-48{ margin-top:48px; } .mt-56{ margin-top:56px; } .mt-72{ margin-top:72px; } .mt-64{ margin-top:64px; }
+
+  /* ---- 01 · couverture : cinq documents que l'IA ne voit pas ---- */
+  .tiles{ display:flex; gap:16px; }
+  .tile{
+    flex:1; height:232px;
+    border:2px dashed var(--beige); border-radius:14px;
+    padding:24px 20px; display:flex; flex-direction:column; gap:12px;
+  }
+  .tile i{ display:block; height:12px; border-radius:6px; background:#ECEAE5; }
+  .tile i.t{ height:18px; width:78%; background:#DEDBD5; margin-bottom:8px; }
+  .tile i.w90{ width:90%; } .tile i.w70{ width:70%; } .tile i.w80{ width:80%; } .tile i.w50{ width:50%; }
+
+  .swipe{
+    position:absolute; left:96px; bottom:72px;
+    font-weight:300; font-size:24px; letter-spacing:.04em; color:var(--slate);
+  }
+
+  /* ---- 02 à 06 · les cinq chantiers (même gabarit) ---- */
+  .step{ display:flex; align-items:flex-end; justify-content:space-between; }
+  .step .n{
+    font-weight:300; font-size:176px; line-height:.78; letter-spacing:-0.04em;
+    color:var(--aloe);
+  }
+  .pips{ display:flex; gap:10px; padding-bottom:8px; }
+  .pips i{ display:block; width:44px; height:6px; border-radius:3px; background:var(--beige); }
+  .pips i.on{ background:var(--aloe-dark); }
+
+  .step-title{ min-height:calc(80px * 1.02 * 2); }
+
+  .block{
+    border-radius:14px;
+    padding:36px 40px;
+    display:flex; gap:24px; align-items:flex-start;
+  }
+  .block .marker{ width:18px; height:18px; border-radius:50%; flex:none; margin-top:9px; }
+  .block .lbl{ font-weight:500; font-size:22px; letter-spacing:.1em; text-transform:uppercase; }
+  .block p.txt{ font-weight:300; font-size:36px; line-height:1.35; letter-spacing:-0.01em; color:var(--ink); margin-top:10px; }
+
+  .without{ border:1.5px solid var(--beige); }
+  .without .marker{ border:2px solid var(--slate); }
+  .without .lbl{ color:var(--slate); }
+
+  .fix{ background:var(--mindaro-light); margin-top:32px; }
+  .fix .marker{ background:var(--mindaro); border:2px solid var(--aloe); }
+  .fix .lbl{ color:var(--aloe-dark); }
+
+  /* ---- 07 · fin ---- */
+  .dark .sub{ color:#8FA39A; }
+  .dark .sub b{ color:var(--cream); }
+  .cta{ font-weight:300; font-size:48px; line-height:1.3; letter-spacing:-0.02em; color:var(--cream); }
+  .cta-row{ display:flex; align-items:center; gap:24px; margin-top:20px; }
+  .kw{
+    display:inline-block; font-weight:500; color:var(--ink); background:var(--mindaro);
+    border-radius:9999px; padding:4px 30px 8px; letter-spacing:-0.005em;
+  }
+  .bio{ color:#C9D2CD; }
+  .bio .sep{ margin-right:16px; }
+  .handle{
+    display:flex; align-items:center; gap:36px;
+    font-weight:300; font-size:32px; letter-spacing:.02em; color:#C9D2CD;
+  }
+  .logo{ height:84px; width:auto; flex:none; }
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <b>Ton IA n'est pas bête. Elle est aveugle.</b> · carrousel Instagram @cafe.ramalogic · 7 slides 1080×1350<br>
+  Images prêtes à poster :
+  <a href="slide-01.png">01</a> · <a href="slide-02.png">02</a> · <a href="slide-03.png">03</a> · <a href="slide-04.png">04</a> · <a href="slide-05.png">05</a> · <a href="slide-06.png">06</a> · <a href="slide-07.png">07</a>
+</header>
+
+<main class="deck">
+
+<!-- 01 · COUVERTURE -->
+<section class="slide" id="s1">
+  <div class="tiles" aria-hidden="true">
+    <div class="tile"><i class="t"></i><i class="w90"></i><i class="w70"></i><i class="w80"></i><i class="w50"></i></div>
+    <div class="tile"><i class="t"></i><i class="w80"></i><i class="w90"></i><i class="w50"></i><i class="w70"></i></div>
+    <div class="tile"><i class="t"></i><i class="w70"></i><i class="w90"></i><i class="w80"></i><i class="w50"></i></div>
+    <div class="tile"><i class="t"></i><i class="w90"></i><i class="w50"></i><i class="w80"></i><i class="w70"></i></div>
+    <div class="tile"><i class="t"></i><i class="w80"></i><i class="w70"></i><i class="w90"></i><i class="w50"></i></div>
+  </div>
+  <div class="spacer"></div>
+  <div class="rule"></div>
+  <p class="eyebrow mt-48">Le contexte est le nouveau roi</p>
+  <h1 class="md mt-24">Ton IA n'est pas bête.<br>Elle est <span class="mark">aveugle</span>.</h1>
+  <p class="sub mt-40">Les 5 choses à mettre en place dans ta boîte pour qu'elle arrête de répondre à côté.</p>
+  <div class="spacer" style="flex:.6"></div>
+  <div class="swipe">Glisse →</div>
+  <div class="num">01</div>
+</section>
+
+<!-- 02 · CHANTIER 1 -->
+<section class="slide" id="s2">
+  <div class="step">
+    <span class="n">1</span>
+    <div class="pips" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+  </div>
+  <h1 class="sm step-title mt-64">Tes réunions,<br><span class="mark">notées et partagées</span></h1>
+  <div class="block without mt-72">
+    <i class="marker"></i>
+    <div>
+      <p class="lbl">Sans ça</p>
+      <p class="txt">«&nbsp;On en a parlé en réunion.&nbsp;» Et personne ne sait ce&nbsp;qui a été décidé.</p>
+    </div>
+  </div>
+  <div class="block fix">
+    <i class="marker"></i>
+    <div>
+      <p class="lbl">À faire</p>
+      <p class="txt"><b>Un seul preneur de notes IA</b> pour toute l'équipe (Fathom, Notion AI), annoncé en début de réunion. Le&nbsp;compte rendu va dans une base Notion que tout&nbsp;le&nbsp;monde&nbsp;voit.</p>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="num">02</div>
+</section>
+
+<!-- 03 · CHANTIER 2 -->
+<section class="slide" id="s3">
+  <div class="step">
+    <span class="n">2</span>
+    <div class="pips" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i><i></i></div>
+  </div>
+  <h1 class="sm step-title mt-64">Écrit quelque part,<br><span class="mark">même moche</span></h1>
+  <div class="block without mt-72">
+    <i class="marker"></i>
+    <div>
+      <p class="lbl">Sans ça</p>
+      <p class="txt">Le process est dans une seule tête. Tout le monde vient te poser la question.</p>
+    </div>
+  </div>
+  <div class="block fix">
+    <i class="marker"></i>
+    <div>
+      <p class="lbl">À faire</p>
+      <p class="txt"><b>Une page par sujet qui revient.</b> Un titre qu'on ne confond pas avec la version de l'an dernier. Le&nbsp;rangement viendra après.</p>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="num">03</div>
+</section>
+
+<!-- 04 · CHANTIER 3 -->
+<section class="slide" id="s4">
+  <div class="step">
+    <span class="n">3</span>
+    <div class="pips" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i></div>
+  </div>
+  <h1 class="sm step-title mt-64">Le chat décide,<br><span class="mark">la doc retient</span></h1>
+  <div class="block without mt-72">
+    <i class="marker"></i>
+    <div>
+      <p class="lbl">Sans ça</p>
+      <p class="txt">La vraie info est dans WhatsApp. La&nbsp;doc&nbsp;date&nbsp;de&nbsp;six&nbsp;mois.</p>
+    </div>
+  </div>
+  <div class="block fix">
+    <i class="marker"></i>
+    <div>
+      <p class="lbl">À faire</p>
+      <p class="txt">Chaque décision prise par message devient <b>une&nbsp;ligne&nbsp;datée</b> dans la page du sujet. Le vendredi, 15&nbsp;minutes&nbsp;: qu'est-ce qui a changé et n'est pas écrit&nbsp;?</p>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="num">04</div>
+</section>
+
+<!-- 05 · CHANTIER 4 -->
+<section class="slide" id="s5">
+  <div class="step">
+    <span class="n">4</span>
+    <div class="pips" aria-hidden="true"><i></i><i></i><i></i><i class="on"></i><i></i></div>
+  </div>
+  <h1 class="sm step-title mt-64"><span class="mark">Un seul</span> dictionnaire<br>des chiffres</h1>
+  <div class="block without mt-72">
+    <i class="marker"></i>
+    <div>
+      <p class="lbl">Sans ça</p>
+      <p class="txt">Le commercial compte 40&nbsp;clients, la compta&nbsp;28. L'IA&nbsp;te donne un chiffre sans dire lequel.</p>
+    </div>
+  </div>
+  <div class="block fix">
+    <i class="marker"></i>
+    <div>
+      <p class="lbl">À faire</p>
+      <p class="txt"><b>Une page «&nbsp;Nos définitions&nbsp;»</b>&nbsp;: client actif, CA signé, CA encaissé, projet en cours. Dix lignes, les mêmes mots partout.</p>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="num">05</div>
+</section>
+
+<!-- 06 · CHANTIER 5 -->
+<section class="slide" id="s6">
+  <div class="step">
+    <span class="n">5</span>
+    <div class="pips" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on"></i></div>
+  </div>
+  <h1 class="sm step-title mt-64"><span class="mark">Public par défaut</span>,<br>privé par exception</h1>
+  <div class="block without mt-72">
+    <i class="marker"></i>
+    <div>
+      <p class="lbl">Sans ça</p>
+      <p class="txt">Chacun garde ses notes. Le nouveau n'a accès à rien. L'IA non plus.</p>
+    </div>
+  </div>
+  <div class="block fix">
+    <i class="marker"></i>
+    <div>
+      <p class="lbl">À faire</p>
+      <p class="txt">Privé&nbsp;: RH, paie, perso. <b>Tout&nbsp;le&nbsp;reste&nbsp;est&nbsp;ouvert.</b> Et tu poses tes questions à l'IA devant&nbsp;l'équipe. Toi&nbsp;le&nbsp;premier.</p>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="num">06</div>
+</section>
+
+<!-- 07 · FIN -->
+<section class="slide dark" id="s7">
+  <div class="spacer" style="flex:.7"></div>
+  <div class="rule"></div>
+  <h1 class="md mt-48">Le modèle,<br>tu le loues.<br>Le contexte,<br><span class="mark">il t'appartient</span>.</h1>
+  <p class="sub mt-40"><b>Par où commencer&nbsp;:</b> une équipe, un cas, quatre&nbsp;semaines. Les réunions d'abord.</p>
+  <div class="spacer"></div>
+  <p class="cta">On regarde ce qui manque à ta boîte&nbsp;?</p>
+  <div class="cta-row cta"><span class="kw">Réserve un appel</span><span class="bio"><span class="sep">·</span>lien en bio</span></div>
+  <div class="handle mt-64">
+    <img class="logo" src="logo-rl-blanc.png" alt="Rama Logic">
+    <span>@cafe.ramalogic</span>
+  </div>
+  <div class="spacer" style="flex:.5"></div>
+  <div class="num">07</div>
+</section>
+
+</main>
+
+<script>
+  // Les slides font 1080 px : on réduit l'affichage pour tenir sur un téléphone.
+  function fit(){
+    var avail = document.documentElement.clientWidth - 32;
+    document.documentElement.style.setProperty('--s', Math.min(1, avail / 1080));
+  }
+  fit(); addEventListener('resize', fit);
+</script>
+</body>
+</html>
