@@ -70,7 +70,18 @@
   .chip { font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.08em; padding:3px 8px; display:inline-block; }
   .chip-now { background:#d9eb95; color:#3f4c05; }
   .chip-next { background:#e5e2e1; color:#424844; }
-  .arrow-down { width:1px; height:20px; background:#727974; margin:0 auto; }
+  .arrow-down { width:1px; height:18px; background:#727974; margin:0 auto; }
+  .flow { display:flex; align-items:stretch; gap:10px; flex-wrap:wrap; }
+  .fbox { flex:1 1 0; min-width:150px; background:#ffffff; border:1px solid #c1c8c2; padding:14px; display:flex; flex-direction:column; justify-content:center; }
+  .fbox.accent { background:#c8ead8; border-color:#446254; }
+  .fbox.soft { background:#f0edec; }
+  .fbox.dark { background:#1c1b1b; color:#fcf9f8; border-color:#1c1b1b; }
+  .fbox .t { font-family:'Clash Grotesk',sans-serif; font-weight:500; font-size:clamp(.95rem,1.25vw,1.15rem); line-height:1.3; }
+  .fbox .s { font-family:'Work Sans',sans-serif; font-size:clamp(.78rem,.92vw,.9rem); color:#424844; margin-top:6px; line-height:1.45; }
+  .fbox.dark .s { color:#dcd9d9; }
+  .farrow { flex:0 0 auto; display:flex; align-items:center; font-family:'Clash Grotesk',sans-serif; font-size:1.5rem; color:#727974; }
+  .fq { flex:1 1 0; min-width:150px; background:#d9eb95; border:1px solid #56641e; padding:14px; display:flex; flex-direction:column; justify-content:center; text-align:center; }
+  .fq .t { font-family:'Clash Grotesk',sans-serif; font-weight:500; font-size:clamp(.95rem,1.25vw,1.15rem); color:#3f4c05; line-height:1.3; }
   #chrome { position: fixed; bottom: 18px; right: 18px; z-index: 90; display:flex; align-items:center; gap:8px; }
   #chrome button { width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:#1c1b1b; color:#fcf9f8; border:none; cursor:pointer; transition:opacity .15s; font-family:'Space Mono',monospace; }
   #chrome button:hover { opacity:.85; }
@@ -87,6 +98,7 @@
   @media (max-width: 900px) {
     .slides-viewport { scroll-snap-type: none; }
     .slide { height: auto; min-height: 100vh; overflow: visible; scroll-snap-align: none; }
+    .farrow { display:none; }
   }
 </style>
 </head>
@@ -212,57 +224,137 @@
   </div>
 </section>
 
-<!-- ============ 3 — LA CAUSE TECHNIQUE ============ -->
-<section class="slide grid-bg bg-background" data-title="La cause technique">
+<!-- ============ 3 — COCHER NE SUFFIT PAS ============ -->
+<section class="slide grid-bg bg-background" data-title="Cocher ne suffit pas">
   <div class="h-full flex flex-col px-margin py-lg">
     <div class="shrink-0">
       <span class="num text-secondary">03</span>
-      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Pourquoi l'avancement ne remontait jamais</h2>
-      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Ce n'était pas une question de discipline. C'était une question de tuyau.</p>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Cocher une tâche ne fait pas avancer un dossier</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">C'est le vrai problème, et il a deux causes. La première est technique, la seconde tient au modèle.</p>
     </div>
     <div class="flex-grow min-h-0 flex items-center">
-      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-lg">
-        <div class="card p-md">
-          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-on-surface-variant mb-md">Avant</div>
-          <div class="flex items-center justify-center gap-md py-md">
-            <div class="text-center">
-              <div class="w-28 h-20 border border-outline flex items-center justify-center font-body-reg text-body-reg bg-surface-container">Tâche</div>
-            </div>
+      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-lg items-stretch">
+        <div class="card p-md flex flex-col">
+          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-on-surface-variant mb-sm">Cause 1 · le lien était à sens unique</div>
+          <div class="flex items-center justify-center gap-md py-sm">
+            <div class="w-24 h-16 border border-outline flex items-center justify-center font-body-reg text-body-reg bg-surface-container">Tâche</div>
             <div class="font-display-lg text-headline-md text-outline">→</div>
-            <div class="text-center">
-              <div class="w-28 h-20 border border-outline flex items-center justify-center font-body-reg text-body-reg bg-surface-container">Dossier</div>
-            </div>
+            <div class="w-24 h-16 border border-outline flex items-center justify-center font-body-reg text-body-reg bg-surface-container">Dossier</div>
           </div>
-          <p class="font-body-reg text-body-reg text-on-surface-variant">La tâche savait à quel dossier elle appartenait. Le dossier, lui, ne voyait aucune de ses tâches. Donc rien ne pouvait remonter, et il fallait tout reconstituer à la main.</p>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">La tâche savait à quel dossier elle appartenait. Le dossier, lui, ne voyait aucune de ses tâches.</p>
+          <p class="font-body-reg text-body-reg mt-sm"><span class="chip chip-now">RÉPARÉ</span> &nbsp;Le lien fonctionne maintenant dans les deux sens.</p>
         </div>
-        <div class="card p-md border-primary">
-          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-primary mb-md">Maintenant</div>
-          <div class="flex items-center justify-center gap-md py-md">
-            <div class="text-center">
-              <div class="w-28 h-20 border border-primary bg-primary-fixed/40 flex items-center justify-center font-body-reg text-body-reg">Tâche</div>
-            </div>
-            <div class="font-display-lg text-headline-md text-primary">⇄</div>
-            <div class="text-center">
-              <div class="w-28 h-20 border border-primary bg-primary-fixed/40 flex items-center justify-center font-body-reg text-body-reg">Dossier</div>
-            </div>
+        <div class="card p-md flex flex-col border-primary">
+          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-primary mb-sm">Cause 2 · toutes les tâches ne se valent pas</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mb-sm">Même avec le lien réparé, une liste de quarante tâches cochées ne dit pas où en est le dossier. Relancer un syndic et déposer le dossier à la commission ne pèsent pas la même chose.</p>
+          <div class="bg-surface-container p-sm mb-sm">
+            <p class="font-body-reg text-body-reg">« 28 tâches sur 40 sont faites » ne veut rien dire pour une copropriété.</p>
           </div>
-          <p class="font-body-reg text-body-reg text-on-surface-variant">Le dossier voit ses tâches. Quand vous cochez, son avancement bouge tout seul. <strong>Personne n'a plus à faire le point à votre place.</strong></p>
+          <p class="font-body-reg text-body-reg"><strong>Ce qui fait avancer un dossier, ce sont ses jalons.</strong> C'est l'objet de la page suivante.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 4 — UNE TÂCHE ============ -->
-<section class="slide grid-bg bg-background" data-title="Une tâche est une action">
+<!-- ============ 4 — LE MODÈLE : JALONS ============ -->
+<section class="slide grid-bg bg-background" data-title="Jalons, tâches, sous-tâches">
   <div class="h-full flex flex-col px-margin py-lg">
     <div class="shrink-0">
       <span class="num text-secondary">04</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Le dossier, ses jalons, leurs tâches</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Un jalon, c'est un moment où le dossier a vraiment avancé. Les tâches, elles, servent à y arriver.</p>
+    </div>
+    <div class="flex-grow min-h-0 flex items-center">
+      <div class="w-full grid grid-cols-1 lg:grid-cols-5 gap-lg items-stretch">
+        <div class="lg:col-span-2 flex flex-col justify-center">
+          <div class="card p-sm text-center bg-primary-fixed/40 border-primary">
+            <div class="font-title-sm text-title-sm">Le dossier</div>
+            <div class="font-code-label text-code-label text-on-surface-variant">sa phase : DTG, MOE, travaux, paiement</div>
+          </div>
+          <div class="arrow-down"></div>
+          <div class="card p-sm text-center bg-secondary-container/60">
+            <div class="font-title-sm text-title-sm">Ses jalons</div>
+            <div class="font-code-label text-code-label text-on-surface-variant">vos 36 étapes, celles que vous aviez déjà écrites</div>
+          </div>
+          <div class="arrow-down"></div>
+          <div class="card p-sm text-center">
+            <div class="font-title-sm text-title-sm">Les tâches du jalon</div>
+            <div class="font-code-label text-code-label text-on-surface-variant">ce qu'il faut faire pour l'atteindre</div>
+          </div>
+          <div class="arrow-down"></div>
+          <div class="card p-sm text-center bg-surface-container">
+            <div class="font-title-sm text-title-sm">Les sous-tâches</div>
+            <div class="font-code-label text-code-label text-on-surface-variant">quand le détail mérite d'être suivi</div>
+          </div>
+        </div>
+        <div class="lg:col-span-3 card p-md flex flex-col justify-center">
+          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-on-surface-variant mb-sm">Un dossier en phase DTG</div>
+          <div class="space-y-xs">
+            <div class="flex items-center gap-sm"><span class="chip chip-now">JALON</span><span class="font-body-reg text-body-reg font-medium">Éléments reçus du syndic</span></div>
+            <div class="flex items-center gap-sm"><span class="chip chip-now">JALON</span><span class="font-body-reg text-body-reg font-medium">Version définitive du DTG</span></div>
+            <div class="pl-lg border-l border-outline-variant ml-md space-y-xs py-xs">
+              <div class="font-body-reg text-body-reg text-on-surface-variant">Réaliser l'étude financière sur audit</div>
+              <div class="font-body-reg text-body-reg text-on-surface-variant">Produire le diaporama</div>
+            </div>
+            <div class="flex items-center gap-sm"><span class="chip chip-now">JALON</span><span class="font-body-reg text-body-reg font-medium">Étude présentée au conseil syndical</span></div>
+            <div class="flex items-center gap-sm"><span class="chip chip-now">JALON</span><span class="font-body-reg text-body-reg font-medium">Réunion générale tenue</span></div>
+            <div class="flex items-center gap-sm"><span class="chip chip-now">JALON</span><span class="font-body-reg text-body-reg font-medium">AG de vote de la MOE</span></div>
+          </div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mt-md pt-sm border-t border-outline-variant">Cinq jalons franchis sur cinq, la phase DTG est finie. C'est <strong>ça</strong>, l'avancement d'un dossier. Pas un pourcentage de cases cochées.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 — JUSQU'OÙ DÉCOUPER ============ -->
+<section class="slide grid-bg bg-background" data-title="Jusqu'où découper">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">05</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Jusqu'où faut-il découper</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Une sous-tâche se justifie quand quelqu'un doit la suivre. Sinon, elle encombre.</p>
+    </div>
+    <div class="flex-grow min-h-0 flex items-center">
+      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-lg items-stretch">
+        <div class="card p-md flex flex-col border-primary">
+          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-primary mb-sm">Une vraie sous-tâche</div>
+          <div class="font-title-sm text-title-sm mb-sm">Réaliser le mailing crédit</div>
+          <ul class="space-y-xs font-body-reg text-body-reg border-l border-outline-variant pl-md">
+            <li>Calculer les quotes-parts</li>
+            <li>Préparer les fiches FTE</li>
+            <li>Faire valider par le syndic</li>
+            <li>Rédiger le courrier</li>
+            <li>Envoyer</li>
+          </ul>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mt-md">Plusieurs jours, plusieurs personnes, une validation extérieure. Chaque ligne mérite son responsable et sa date.</p>
+        </div>
+        <div class="card p-md flex flex-col bg-surface-container-low">
+          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-on-surface-variant mb-sm">Une simple liste à cocher</div>
+          <div class="font-title-sm text-title-sm mb-sm">Préparer la réunion du conseil syndical</div>
+          <ul class="space-y-xs font-body-reg text-body-reg border-l border-outline-variant pl-md">
+            <li>☐ Réserver la salle</li>
+            <li>☐ Imprimer les simulations</li>
+            <li>☐ Envoyer l'ordre du jour</li>
+          </ul>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mt-md">Une heure de travail, une seule personne. Ça reste <strong>dans la page de la tâche</strong>, en cases à cocher. Pas besoin d'en faire des lignes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 — UNE TÂCHE ============ -->
+<section class="slide grid-bg bg-background" data-title="Une tâche est une action">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">06</span>
       <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Une tâche, c'est une action</h2>
       <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Un verbe, puis un complément. Si on ne peut pas la cocher, ce n'est pas une tâche.</p>
     </div>
     <div class="flex-grow min-h-0 flex items-center">
-      <div class="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-lg">
+      <div class="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-lg items-stretch">
         <div class="card p-md">
           <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-error mb-md">Ce n'est pas une tâche</div>
           <ul class="space-y-sm font-body-reg text-body-reg">
@@ -288,11 +380,11 @@
   </div>
 </section>
 
-<!-- ============ 5 — UN MÉMO ============ -->
+<!-- ============ 7 — UN MÉMO ============ -->
 <section class="slide grid-bg bg-background" data-title="Un mémo est une information">
   <div class="h-full flex flex-col px-margin py-lg">
     <div class="shrink-0">
-      <span class="num text-secondary">05</span>
+      <span class="num text-secondary">07</span>
       <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Un mémo, c'est une information</h2>
       <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Vous les écriviez déjà, et vous aviez raison de le faire. Ils n'étaient simplement pas au bon endroit.</p>
     </div>
@@ -318,19 +410,21 @@
   </div>
 </section>
 
-<!-- ============ 6 — RESPONSABLE ET ÉCHÉANCE ============ -->
+<!-- ============ 8 — RESPONSABLE ET ÉCHÉANCE ============ -->
 <section class="slide grid-bg bg-background" data-title="Responsable et échéance">
   <div class="h-full flex flex-col px-margin py-lg">
     <div class="shrink-0">
-      <span class="num text-secondary">06</span>
+      <span class="num text-secondary">08</span>
       <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Un responsable, et une date</h2>
       <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Ce sont les deux seules informations qu'on vous demande d'ajouter. Tout le reste en découle.</p>
     </div>
     <div class="flex-grow min-h-0 flex items-center">
-      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-lg">
-        <div class="card p-md">
-          <div class="font-title-sm text-title-sm mb-sm">Un responsable</div>
-          <p class="font-body-reg text-body-reg text-on-surface-variant mb-md">Sans nom sur la ligne, la tâche n'appartient à personne, et elle n'apparaît sur l'écran de personne.</p>
+      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-lg items-stretch">
+        <div class="card p-md flex flex-col justify-between">
+          <div>
+            <div class="font-title-sm text-title-sm mb-sm">Un responsable</div>
+            <p class="font-body-reg text-body-reg text-on-surface-variant mb-md">Sans nom sur la ligne, la tâche n'appartient à personne, et elle n'apparaît sur l'écran de personne.</p>
+          </div>
           <div class="bg-surface-container p-sm">
             <span class="font-display-lg text-headline-md text-error leading-none">279</span>
             <span class="font-body-reg text-body-reg"> tâches ouvertes n'ont personne aujourd'hui</span>
@@ -350,120 +444,122 @@
   </div>
 </section>
 
-<!-- ============ 7 — TÂCHES ET SOUS-TÂCHES ============ -->
-<section class="slide grid-bg bg-background" data-title="Tâches et sous-tâches">
-  <div class="h-full flex flex-col px-margin py-lg">
-    <div class="shrink-0">
-      <span class="num text-secondary">07</span>
-      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Le dossier, ses tâches, leurs sous-tâches</h2>
-      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Une grande tâche peut se décomposer autant que nécessaire. C'est ce qui permet de suivre un dossier qui dure quatre ans.</p>
-    </div>
-    <div class="flex-grow min-h-0 flex items-center">
-      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-lg items-stretch">
-        <div class="flex flex-col justify-center">
-          <div class="card p-sm text-center bg-primary-fixed/40 border-primary">
-            <div class="font-title-sm text-title-sm">Le dossier</div>
-            <div class="font-code-label text-code-label text-on-surface-variant">phase DTG, MOE, travaux, paiement</div>
-          </div>
-          <div class="arrow-down"></div>
-          <div class="card p-sm text-center">
-            <div class="font-title-sm text-title-sm">Les tâches de la phase</div>
-            <div class="font-code-label text-code-label text-on-surface-variant">vos étapes, celles que vous avez déjà écrites</div>
-          </div>
-          <div class="arrow-down"></div>
-          <div class="card p-sm text-center bg-secondary-container/50">
-            <div class="font-title-sm text-title-sm">Les sous-tâches</div>
-            <div class="font-code-label text-code-label text-on-surface-variant">le détail du travail réel</div>
-          </div>
-        </div>
-        <div class="card p-md">
-          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-on-surface-variant mb-sm">Un exemple que vous connaissez</div>
-          <div class="font-title-sm text-title-sm mb-sm">Réaliser le mailing crédit</div>
-          <ul class="space-y-xs font-body-reg text-body-reg border-l border-outline-variant pl-md">
-            <li>Calculer les quotes-parts</li>
-            <li>Préparer les fiches FTE</li>
-            <li>Faire valider par le syndic</li>
-            <li>Rédiger le courrier</li>
-            <li>Envoyer</li>
-          </ul>
-          <p class="font-body-reg text-body-reg text-on-surface-variant mt-md">Une seule ligne dans le dossier. Cinq lignes pour celui qui le fait. Et l'avancement se calcule tout seul, sans que personne ne le demande.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 8 — STATUT ET PRIORITÉ ============ -->
-<section class="slide grid-bg bg-background" data-title="Statut et priorité">
-  <div class="h-full flex flex-col px-margin py-lg">
-    <div class="shrink-0">
-      <span class="num text-secondary">08</span>
-      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Où ça en est, et dans quel ordre</h2>
-      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Ce sont deux questions différentes. Aujourd'hui, une seule colonne répond aux deux, donc il faut choisir.</p>
-    </div>
-    <div class="flex-grow min-h-0 flex items-center">
-      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-lg">
-        <div class="card p-md">
-          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-error mb-md">Une colonne, deux questions</div>
-          <div class="flex flex-wrap gap-xs mb-md">
-            <span class="chip bg-error-container text-on-error-container">01 Top priorité</span>
-            <span class="chip bg-error-container text-on-error-container">02 Urgent</span>
-            <span class="chip bg-surface-container">03 À faire</span>
-            <span class="chip bg-surface-container">04 En cours</span>
-            <span class="chip bg-surface-container">05 En attente retour</span>
-            <span class="chip bg-surface-container">08 Fait</span>
-          </div>
-          <p class="font-body-reg text-body-reg text-on-surface-variant">Une tâche urgente qui est en cours : on ne peut écrire qu'une seule des deux choses. L'autre information est perdue, et les tris ne veulent plus rien dire.</p>
-        </div>
-        <div class="card p-md border-primary">
-          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-primary mb-md">Deux colonnes, deux réponses</div>
-          <div class="mb-md">
-            <div class="font-code-label text-code-label text-on-surface-variant mb-xs">Statut · où ça en est</div>
-            <div class="flex flex-wrap gap-xs">
-              <span class="chip bg-surface-container">À faire</span>
-              <span class="chip bg-surface-container">En cours</span>
-              <span class="chip bg-surface-container">En attente</span>
-              <span class="chip bg-surface-container">Fait</span>
-            </div>
-          </div>
-          <div>
-            <div class="font-code-label text-code-label text-on-surface-variant mb-xs">Priorité · dans quel ordre</div>
-            <div class="flex flex-wrap gap-xs">
-              <span class="chip chip-now">Haute</span>
-              <span class="chip bg-surface-container">Normale</span>
-              <span class="chip bg-surface-container">Basse</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="shrink-0 pt-md border-t border-outline-variant">
-      <p class="font-body-reg text-body-reg"><span class="chip chip-next">À DÉCIDER</span> &nbsp;Séparer les deux touche vos 12 000 lignes existantes. C'est un chantier à part, à valider avec Laurent.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 9 — VOS ÉCRANS ============ -->
-<section class="slide grid-bg bg-background" data-title="Vos écrans">
+<!-- ============ 9 — FLOW : UNE INFORMATION ARRIVE ============ -->
+<section class="slide grid-bg bg-background" data-title="Flow · une information arrive">
   <div class="h-full flex flex-col px-margin py-lg">
     <div class="shrink-0">
       <span class="num text-secondary">09</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Une information arrive</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Un mail, un appel, une remarque en réunion. La question est toujours la même : est-ce qu'il y a quelque chose à faire ?</p>
+    </div>
+    <div class="flex-grow min-h-0 flex flex-col justify-center gap-md">
+      <div class="flow">
+        <div class="fbox soft"><div class="t">Un mail, un appel</div><div class="s">Le syndic, l'architecte, la banque, un copropriétaire</div></div>
+        <div class="farrow">→</div>
+        <div class="fq"><div class="t">Est-ce qu'il y a quelque chose à faire ?</div></div>
+        <div class="farrow">→</div>
+        <div class="fbox accent"><div class="t">Oui : une tâche</div><div class="s">Un verbe, mon nom, une date, sur le bon dossier</div></div>
+      </div>
+      <div class="flow">
+        <div class="fbox" style="visibility:hidden"><div class="t">.</div></div>
+        <div class="farrow" style="visibility:hidden">→</div>
+        <div class="fbox" style="visibility:hidden"><div class="t">.</div></div>
+        <div class="farrow" style="visibility:hidden">→</div>
+        <div class="fbox"><div class="t">Non : un mémo</div><div class="s">Daté, sur le dossier. Il reste lisible par tous, des années après</div></div>
+      </div>
+      <div class="flow">
+        <div class="fbox dark" style="flex:1 1 100%"><div class="t">Et plus tard, si le mémo appelle une action</div><div class="s">Il fait naître une tâche, reliée au même dossier. Rien ne se perd entre le moment où on apprend quelque chose et le moment où on agit.</div></div>
+      </div>
+    </div>
+    <div class="shrink-0 pt-sm">
+      <p class="font-code-label text-code-label text-on-surface-variant">Le réflexe à prendre : ne rien laisser uniquement dans sa tête ou dans sa boîte mail.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 — FLOW : MA JOURNÉE ============ -->
+<section class="slide grid-bg bg-background" data-title="Flow · ma journée">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">10</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Ma journée</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Le matin, on n'ouvre plus la base commune. On ouvre son écran, et on descend la page.</p>
+    </div>
+    <div class="flex-grow min-h-0 flex flex-col justify-center gap-md">
+      <div class="flow">
+        <div class="fbox accent"><div class="t">J'ouvre mon écran</div><div class="s">Il ne montre que ce qui me concerne</div></div>
+        <div class="farrow">→</div>
+        <div class="fbox"><div class="t">Ce qui attend un retour</div><div class="s">Le plus ancien en haut. Je relance qui de droit</div></div>
+        <div class="farrow">→</div>
+        <div class="fbox"><div class="t">Ce qui n'a pas bougé</div><div class="s">Plus de 30 jours sans mouvement. Je tranche : je fais, je reporte ou j'abandonne</div></div>
+      </div>
+      <div class="flow">
+        <div class="fbox"><div class="t">Ma semaine</div><div class="s">Ce que j'ai décidé de faire, dans l'ordre</div></div>
+        <div class="farrow">→</div>
+        <div class="fbox"><div class="t">Je coche ce qui est fait</div><div class="s">Dix secondes. C'est le seul moment où le système apprend quelque chose</div></div>
+        <div class="farrow">→</div>
+        <div class="fbox dark"><div class="t">Le jalon tombe</div><div class="s">Quand ses tâches sont finies. Le dossier avance, et tout le monde le voit</div></div>
+      </div>
+    </div>
+    <div class="shrink-0 pt-sm">
+      <p class="font-code-label text-code-label text-on-surface-variant">Personne n'a plus besoin de demander « où ça en est » : la réponse est déjà à l'écran.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 — FLOW : LE DOSSIER AVANCE ============ -->
+<section class="slide grid-bg bg-background" data-title="Flow · le dossier avance">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">11</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Le dossier passe une phase</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Vous n'avez pas à recréer la même liste de tâches à chaque fois. C'est le bouton qui le fait.</p>
+    </div>
+    <div class="flex-grow min-h-0 flex flex-col justify-center gap-md">
+      <div class="flow">
+        <div class="fbox soft"><div class="t">L'AG a voté la MOE</div><div class="s">Le dossier change de phase</div></div>
+        <div class="farrow">→</div>
+        <div class="fbox accent"><div class="t">Je clique sur le bouton</div><div class="s">« Générer les tâches de la phase »</div></div>
+        <div class="farrow">→</div>
+        <div class="fbox"><div class="t">Les jalons et leurs tâches sont créés</div><div class="s">Reliés au dossier, avec leur responsable</div></div>
+      </div>
+      <div class="flow">
+        <div class="fbox"><div class="t">Chacun pose ses dates</div><div class="s">Selon sa charge et les contraintes du dossier</div></div>
+        <div class="farrow">→</div>
+        <div class="fbox"><div class="t">Le travail se fait</div><div class="s">Et se coche au fil de l'eau</div></div>
+        <div class="farrow">→</div>
+        <div class="fbox dark"><div class="t">La phase se termine</div><div class="s">Tous les jalons franchis. On passe à la suivante</div></div>
+      </div>
+    </div>
+    <div class="shrink-0 pt-sm">
+      <p class="font-code-label text-code-label text-on-surface-variant">Le bouton marche aussi sur les 360 dossiers déjà en cours, pas seulement sur les nouveaux.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 — VOS ÉCRANS ============ -->
+<section class="slide grid-bg bg-background" data-title="Vos écrans">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">12</span>
       <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Vos écrans</h2>
-      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Les mêmes données qu'avant. Présentées selon ce que vous avez à faire, et non selon la façon dont elles sont rangées.</p>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Les mêmes données qu'avant, présentées selon ce que vous avez à faire. Deux écrans aujourd'hui, deux autres dans un second temps.</p>
     </div>
     <div class="flex-grow min-h-0 flex items-center">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter w-full">
-        <div class="card p-md">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter w-full items-stretch">
+        <div class="card p-md border-primary">
+          <div class="mb-xs"><span class="chip chip-now">AUJOURD'HUI</span></div>
           <div class="font-title-sm text-title-sm mb-xs">Chargé de projet</div>
           <div class="font-code-label text-code-label text-on-surface-variant mb-sm">Gabriel, Clara et l'équipe projet</div>
           <ul class="space-y-xs font-body-reg text-body-reg">
             <li>· Ma semaine</li>
             <li>· Ce qui attend un retour de quelqu'un</li>
             <li>· Ce qui n'a pas bougé depuis un mois</li>
-            <li>· Mes dossiers, par phase, avec leur avancement</li>
+            <li>· Mes dossiers, par phase, avec leurs jalons</li>
           </ul>
         </div>
-        <div class="card p-md">
+        <div class="card p-md border-primary">
+          <div class="mb-xs"><span class="chip chip-now">AUJOURD'HUI</span></div>
           <div class="font-title-sm text-title-sm mb-xs">Crédits et administratif</div>
           <div class="font-code-label text-code-label text-on-surface-variant mb-sm">Élise, Alan et le pôle administratif</div>
           <ul class="space-y-xs font-body-reg text-body-reg">
@@ -473,40 +569,33 @@
             <li>· Les dossiers copropriétaires du pôle</li>
           </ul>
         </div>
-        <div class="card p-md">
+        <div class="card p-md bg-surface-container-low">
+          <div class="mb-xs"><span class="chip chip-next">SECOND TEMPS</span></div>
           <div class="font-title-sm text-title-sm mb-xs">Pilotage</div>
           <div class="font-code-label text-code-label text-on-surface-variant mb-sm">Aurélie</div>
-          <ul class="space-y-xs font-body-reg text-body-reg">
-            <li>· Le portefeuille par phase, avec l'avancement réel</li>
-            <li>· Les dossiers sans activité</li>
-            <li>· La charge par personne</li>
-            <li>· Ce qui reste à qualifier</li>
-          </ul>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">Le portefeuille par phase, les dossiers sans activité, la charge par personne. Il se construira sur ce que les deux premiers écrans auront produit.</p>
         </div>
-        <div class="card p-md">
+        <div class="card p-md bg-surface-container-low">
+          <div class="mb-xs"><span class="chip chip-next">SECOND TEMPS</span></div>
           <div class="font-title-sm text-title-sm mb-xs">Direction</div>
           <div class="font-code-label text-code-label text-on-surface-variant mb-sm">Laurent</div>
-          <ul class="space-y-xs font-body-reg text-body-reg">
-            <li>· Les dossiers en cours par phase</li>
-            <li>· Ceux qui ne bougent plus</li>
-            <li>· Les crédits et les subventions en attente</li>
-          </ul>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">Les quelques chiffres qui comptent vraiment, à caler avec vous sur votre page Points clefs.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 10 — VOS TROIS GESTES ============ -->
+<!-- ============ 13 — VOS TROIS GESTES ============ -->
 <section class="slide grid-bg bg-background" data-title="Vos trois gestes">
   <div class="h-full flex flex-col px-margin py-lg">
     <div class="shrink-0">
-      <span class="num text-secondary">10</span>
+      <span class="num text-secondary">13</span>
       <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Vos trois gestes, tous les matins</h2>
       <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Si vous ne retenez qu'une chose de cette heure, c'est celle-ci.</p>
     </div>
     <div class="flex-grow min-h-0 flex items-center">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter w-full">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter w-full items-stretch">
         <div class="card p-md">
           <div class="font-display-lg text-headline-md text-secondary leading-none mb-sm">1</div>
           <div class="font-title-sm text-title-sm mb-xs">J'ouvre mon écran</div>
@@ -515,7 +604,7 @@
         <div class="card p-md">
           <div class="font-display-lg text-headline-md text-secondary leading-none mb-sm">2</div>
           <div class="font-title-sm text-title-sm mb-xs">Je coche ce qui est fait</div>
-          <p class="font-body-reg text-body-reg text-on-surface-variant">C'est le seul moment où le pilotage se met à jour. Dix secondes pour vous, une heure de moins pour Aurélie.</p>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">C'est ce qui fait tomber les jalons. Dix secondes pour vous, une heure de moins pour Aurélie.</p>
         </div>
         <div class="card p-md">
           <div class="font-display-lg text-headline-md text-secondary leading-none mb-sm">3</div>
@@ -527,34 +616,34 @@
   </div>
 </section>
 
-<!-- ============ 11 — AUJOURD'HUI ET LA SUITE ============ -->
+<!-- ============ 14 — AUJOURD'HUI ET LA SUITE ============ -->
 <section class="slide grid-bg bg-background" data-title="Aujourd'hui et la suite">
   <div class="h-full flex flex-col px-margin py-lg">
     <div class="shrink-0">
-      <span class="num text-secondary">11</span>
+      <span class="num text-secondary">14</span>
       <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Ce qui est livré, ce qui reste à décider</h2>
       <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Ce premier lot n'a rien supprimé et rien converti. Il a ajouté ce qu'il fallait pour rendre lisible ce que vous aviez déjà.</p>
     </div>
     <div class="flex-grow min-h-0 flex items-center">
-      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-lg">
+      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-lg items-stretch">
         <div class="card p-md border-primary">
           <div class="mb-sm"><span class="chip chip-now">LIVRÉ AUJOURD'HUI</span></div>
           <ul class="space-y-sm font-body-reg text-body-reg">
-            <li>· Les dossiers voient leurs tâches, et leur avancement se calcule</li>
-            <li>· Un écran par métier, au lieu d'une base commune</li>
-            <li>· Les alertes : dossiers sans activité, informations manquantes</li>
+            <li>· Les dossiers voient leurs tâches</li>
+            <li>· Les jalons portent l'avancement, phase par phase</li>
             <li>· La base Mémos, séparée des tâches</li>
-            <li>· Les sous-tâches, pour décomposer le travail réel</li>
+            <li>· Les sous-tâches, pour le travail qui le mérite</li>
+            <li>· Deux écrans : chargé de projet, crédits et administratif</li>
             <li>· Un bouton qui crée les tâches d'une phase d'un seul coup</li>
           </ul>
         </div>
         <div class="card p-md">
           <div class="mb-sm"><span class="chip chip-next">À DÉCIDER ENSEMBLE</span></div>
           <ul class="space-y-sm font-body-reg text-body-reg text-on-surface-variant">
+            <li>· Les écrans de pilotage et de direction</li>
             <li>· Déplacer les 1 990 mémos déjà écrits</li>
             <li>· Séparer le statut et la priorité sur les 12 000 lignes</li>
             <li>· Ramener les colonnes de 86 à une quarantaine</li>
-            <li>· Une base pour les aides et leurs montants, une pour l'historique hebdomadaire</li>
             <li>· Les automatisations, dont la facture déclenchée par son jalon</li>
             <li>· Les boîtes mail partagées, le premier poste de temps perdu</li>
           </ul>
@@ -567,13 +656,13 @@
   </div>
 </section>
 
-<!-- ============ 12 — CETTE SEMAINE ============ -->
+<!-- ============ 15 — CETTE SEMAINE ============ -->
 <section class="slide grid-bg bg-background" data-title="Cette semaine">
   <div class="h-full flex flex-col">
     <main class="flex-grow min-h-0 px-margin flex items-center relative overflow-hidden">
       <div class="absolute top-1/4 -right-1/4 w-[600px] h-[600px] bg-secondary-container opacity-40 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
       <div class="max-w-4xl w-full mx-auto">
-        <span class="num text-secondary">12</span>
+        <span class="num text-secondary">15</span>
         <h2 class="font-display-lg text-display-lg tracking-tight leading-none mb-md mt-xs">Cette semaine,<br/>on regarde ensemble</h2>
         <div class="rule mb-md"></div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mt-lg">
@@ -603,7 +692,7 @@
 </div>
 
 <div id="chrome">
-  <span id="counter">1 / 13</span>
+  <span id="counter">1 / 16</span>
   <button id="btnOverview" title="Sommaire">☰</button>
   <button id="btnPrev" title="Précédent">←</button>
   <button id="btnNext" title="Suivant">→</button>
@@ -635,6 +724,7 @@
     updateCounter();
   }
   function updateCounter() { counter.textContent = (current + 1) + ' / ' + slides.length; }
+  updateCounter();
 
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
