@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html class="light" lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Vert Durable × Rama Logic · Prise en main de votre Notion</title>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Work+Sans:ital,wght@0,300..700;1,300..600&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-dim": "#dcd9d9", "secondary-fixed-dim": "#bdcf7c", "secondary-fixed": "#d9eb95",
+          "on-tertiary": "#ffffff", "surface-tint": "#466556", "on-secondary": "#ffffff",
+          "on-background": "#1c1b1b", "surface-container-highest": "#e5e2e1", "inverse-primary": "#accebc",
+          "error": "#ba1a1a", "on-tertiary-fixed": "#0c1d27", "background": "#fcf9f8",
+          "on-primary-fixed-variant": "#2f4d3f", "primary-fixed-dim": "#accebc", "on-primary-container": "#f5fff7",
+          "surface-container-lowest": "#ffffff", "primary-fixed": "#c8ead8", "surface-variant": "#e5e2e1",
+          "on-primary": "#ffffff", "on-error-container": "#93000a", "on-error": "#ffffff",
+          "primary": "#446254", "outline": "#727974", "on-surface": "#1c1b1b",
+          "tertiary-container": "#657783", "on-tertiary-container": "#fcfcff", "on-tertiary-fixed-variant": "#384954",
+          "tertiary": "#4d5e6a", "on-surface-variant": "#424844", "surface-bright": "#fcf9f8",
+          "error-container": "#ffdad6", "on-secondary-container": "#5c6b24", "surface-container-high": "#ebe7e7",
+          "on-secondary-fixed": "#171e00", "secondary-container": "#d9eb95", "inverse-surface": "#313030",
+          "outline-variant": "#c1c8c2", "surface-container-low": "#f6f3f2", "secondary": "#56641e",
+          "on-primary-fixed": "#012115", "on-secondary-fixed-variant": "#3f4c05", "inverse-on-surface": "#f3f0ef",
+          "surface-container": "#f0edec", "primary-container": "#5c7b6c", "tertiary-fixed-dim": "#b7c9d6",
+          "tertiary-fixed": "#d3e5f3", "surface": "#fcf9f8"
+        },
+        borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        spacing: {
+          "md": "24px", "margin": "clamp(16px, 3.3vw, 32px)", "lg": "clamp(24px, 5vw, 48px)",
+          "xl": "clamp(40px, 8vw, 80px)", "sm": "12px", "gutter": "24px", "base": "8px", "xs": "4px"
+        },
+        fontFamily: {
+          "body-reg": ["Work Sans"], "code-label": ["Space Mono"], "title-sm": ["Clash Grotesk"],
+          "eyebrow": ["Space Mono"], "display-lg": ["Clash Grotesk"], "headline-md": ["Clash Grotesk"]
+        },
+        fontSize: {
+          "display-lg":  ["clamp(2.5rem, 5vw, 4.5rem)",     { "lineHeight": "1.05", "fontWeight": "500" }],
+          "headline-md": ["clamp(1.6rem, 3.2vw, 2.7rem)",   { "lineHeight": "1.2",  "fontWeight": "500" }],
+          "title-sm":    ["clamp(1.05rem, 1.7vw, 1.5rem)",  { "lineHeight": "1.4",  "fontWeight": "500" }],
+          "body-reg":    ["clamp(0.9rem, 1.05vw, 1.05rem)", { "lineHeight": "1.6",  "fontWeight": "400" }],
+          "code-label":  ["clamp(0.78rem, 0.9vw, 0.875rem)",{ "lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400" }],
+          "eyebrow":     ["clamp(0.7rem, 0.85vw, 0.75rem)", { "lineHeight": "1.0",  "fontWeight": "500" }]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(28,27,27,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(28,27,27,0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .slides-viewport { height: 100vh; height: 100dvh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+  .slide { height: 100vh; height: 100dvh; min-height: 100vh; overflow: hidden; scroll-snap-align: start; position: relative; }
+  .slide > * { min-height: 0; }
+  .num { font-family:'Space Mono',monospace; font-size: 12px; letter-spacing:.12em; }
+  .card { background:#ffffff; border:1px solid #c1c8c2; }
+  .card-dark { background:#1c1b1b; color:#fcf9f8; }
+  .rule { width:64px; height:4px; background:#56641e; }
+  .kill { text-decoration: line-through; text-decoration-color:#ba1a1a; text-decoration-thickness:2px; }
+  .chip { font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.08em; padding:3px 8px; display:inline-block; }
+  .chip-now { background:#d9eb95; color:#3f4c05; }
+  .chip-next { background:#e5e2e1; color:#424844; }
+  .arrow-down { width:1px; height:20px; background:#727974; margin:0 auto; }
+  #chrome { position: fixed; bottom: 18px; right: 18px; z-index: 90; display:flex; align-items:center; gap:8px; }
+  #chrome button { width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:#1c1b1b; color:#fcf9f8; border:none; cursor:pointer; transition:opacity .15s; font-family:'Space Mono',monospace; }
+  #chrome button:hover { opacity:.85; }
+  #counter { font-family:'Space Mono',monospace; font-size:13px; background:#fcf9f8; border:1px solid #1c1b1b; padding:8px 12px; }
+  #overview { position:fixed; inset:0; z-index:100; background:rgba(28,27,27,.94); display:none; padding:5vh 5vw; overflow-y:auto; }
+  #overview.open { display:block; }
+  #overview h2 { font-family:'Clash Grotesk',sans-serif; color:#fcf9f8; font-size:1.5rem; margin-bottom:24px; }
+  #ovgrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+  #ovgrid button { text-align:left; background:#fcf9f8; border:1px solid #727974; padding:14px 16px; cursor:pointer; display:flex; gap:12px; align-items:baseline; transition:background .15s; }
+  #ovgrid button:hover { background:#d9eb95; }
+  #ovgrid .n { font-family:'Space Mono',monospace; font-size:12px; color:#56641e; }
+  #ovgrid .t { font-family:'Work Sans',sans-serif; font-size:14px; color:#1c1b1b; }
+  @media (prefers-reduced-motion: reduce) { *,*::before,*::after{ animation-duration:.01ms!important; transition-duration:.2s!important;} .slides-viewport{scroll-behavior:auto;} }
+  @media (max-width: 900px) {
+    .slides-viewport { scroll-snap-type: none; }
+    .slide { height: auto; min-height: 100vh; overflow: visible; scroll-snap-align: none; }
+  }
+</style>
+</head>
+<body class="bg-background text-on-background font-body-reg antialiased">
+<div class="slides-viewport" id="viewport">
+
+<!-- ============ 0 — COUVERTURE ============ -->
+<section class="slide grid-bg bg-background" data-title="Couverture">
+  <div class="h-full flex flex-col">
+    <header class="flex items-center justify-between px-margin py-base shrink-0">
+      <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary"></span><span class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</span></div>
+      <span class="font-eyebrow text-eyebrow tracking-[0.2em] uppercase text-on-surface-variant">Vert Durable</span>
+    </header>
+    <main class="flex-grow min-h-0 px-margin flex items-center relative overflow-hidden">
+      <div class="absolute top-1/4 -right-1/4 w-[700px] h-[700px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+      <div class="absolute -bottom-1/4 -left-1/4 w-[500px] h-[500px] bg-secondary-container opacity-40 rounded-full blur-[100px] -z-10 mix-blend-multiply"></div>
+      <div class="max-w-5xl w-full mx-auto relative">
+        <div class="mb-lg">
+          <span class="font-eyebrow text-eyebrow text-primary tracking-[0.2em] uppercase py-xs px-sm bg-primary-fixed/40 border border-primary-fixed inline-block">Prise en main · mardi 22 septembre 2026</span>
+        </div>
+        <h1 class="font-display-lg text-display-lg tracking-tight leading-none mb-md">Votre Notion,<br/>version&nbsp;2</h1>
+        <div class="rule mb-md"></div>
+        <p class="font-headline-md text-headline-md text-on-surface-variant max-w-3xl leading-tight">
+          Votre structure était faite pour être lue d'en haut. Vous, vous travaillez dossier par dossier. On a rapproché les deux.
+        </p>
+        <div class="mt-lg pt-md border-t border-outline-variant flex flex-wrap items-center gap-x-lg gap-y-sm">
+          <div>
+            <div class="font-eyebrow text-eyebrow uppercase text-on-surface-variant tracking-widest mb-xs">Avec</div>
+            <div class="font-body-reg text-body-reg font-medium">L'équipe Vert Durable</div>
+          </div>
+          <div>
+            <div class="font-eyebrow text-eyebrow uppercase text-on-surface-variant tracking-widest mb-xs">Par</div>
+            <div class="font-body-reg text-body-reg font-medium">Sylvain Ramaradjou · Rama Logic</div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="px-margin py-sm shrink-0"><span class="font-code-label text-code-label text-on-surface-variant">Flèches ou espace pour avancer · Échap pour le sommaire</span></footer>
+  </div>
+</section>
+
+<!-- ============ 1 — CE QU'ON A REGARDÉ ============ -->
+<section class="slide grid-bg bg-background" data-title="Ce qu'on a regardé">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">01</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Ce qu'on a regardé</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Le 15 septembre, on a passé l'après-midi avec vous. Puis on a mesuré votre espace, base par base. Voilà ce qu'il dit.</p>
+    </div>
+    <div class="flex-grow min-h-0 flex items-center">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter w-full">
+        <div class="card p-md">
+          <div class="font-display-lg text-headline-md text-primary leading-none">731</div>
+          <div class="font-body-reg text-body-reg mt-xs">dossiers, dont <strong>360 en cours</strong></div>
+          <div class="font-code-label text-code-label text-on-surface-variant mt-sm">195 DTG · 80 MOE · 60 travaux · 18 paiement de subventions</div>
+        </div>
+        <div class="card p-md">
+          <div class="font-display-lg text-headline-md text-primary leading-none">1 866</div>
+          <div class="font-body-reg text-body-reg mt-xs">tâches ouvertes</div>
+          <div class="font-code-label text-code-label text-on-surface-variant mt-sm">31 % ont une date · 279 n'ont personne</div>
+        </div>
+        <div class="card p-md">
+          <div class="font-display-lg text-headline-md text-primary leading-none">1 990</div>
+          <div class="font-body-reg text-body-reg mt-xs">mémos rangés avec les tâches</div>
+          <div class="font-code-label text-code-label text-on-surface-variant mt-sm">une ligne sur six n'est pas une action à faire</div>
+        </div>
+        <div class="card p-md">
+          <div class="font-display-lg text-headline-md text-primary leading-none">86 / 47</div>
+          <div class="font-body-reg text-body-reg mt-xs">colonnes sur les dossiers, sur les tâches</div>
+          <div class="font-code-label text-code-label text-on-surface-variant mt-sm">dont 22 dates de création créées automatiquement</div>
+        </div>
+        <div class="card p-md">
+          <div class="font-display-lg text-headline-md text-primary leading-none">36</div>
+          <div class="font-body-reg text-body-reg mt-xs">étapes déjà écrites par vous</div>
+          <div class="font-code-label text-code-label text-on-surface-variant mt-sm">utilisées sur 3 lignes : le travail existait, il n'était branché sur rien</div>
+        </div>
+        <div class="card-dark p-md flex items-center">
+          <p class="font-title-sm text-title-sm leading-snug">Rien de tout ça n'est un défaut de sérieux. C'est ce qui arrive quand un espace grandit plus vite que ses règles.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 — LES 10 CLICS ============ -->
+<section class="slide grid-bg bg-background" data-title="Dix clics">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">02</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Dix clics pour retrouver son information</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Avec Gabriel, on a refait le chemin. Aujourd'hui, tout le monde part du même grand tableau.</p>
+    </div>
+    <div class="flex-grow min-h-0 flex items-center">
+      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-lg items-stretch">
+        <div class="card p-md flex flex-col justify-between">
+          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-on-surface-variant mb-sm">Aujourd'hui</div>
+          <ol class="space-y-sm">
+            <li class="flex gap-sm items-baseline"><span class="num text-outline">01</span><span class="font-body-reg text-body-reg">J'ouvre la base commune</span></li>
+            <li class="flex gap-sm items-baseline"><span class="num text-outline">02</span><span class="font-body-reg text-body-reg">Je cherche le bon onglet parmi les vues de tout le monde</span></li>
+            <li class="flex gap-sm items-baseline"><span class="num text-outline">03</span><span class="font-body-reg text-body-reg">Je scrolle jusqu'à mes dossiers</span></li>
+            <li class="flex gap-sm items-baseline"><span class="num text-outline">04</span><span class="font-body-reg text-body-reg">Je filtre, je trie, je me repère dans 86 colonnes</span></li>
+            <li class="flex gap-sm items-baseline"><span class="num text-outline">…</span><span class="font-body-reg text-body-reg">J'ouvre le dossier, je cherche où en est le travail</span></li>
+          </ol>
+          <div class="mt-md pt-sm border-t border-outline-variant flex items-baseline gap-sm">
+            <span class="font-display-lg text-headline-md text-error leading-none">≈ 10</span>
+            <span class="font-body-reg text-body-reg">clics, plusieurs fois par jour, pour chacun</span>
+          </div>
+        </div>
+        <div class="card-dark p-md flex flex-col justify-between">
+          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-secondary-fixed mb-sm">À partir d'aujourd'hui</div>
+          <ol class="space-y-sm">
+            <li class="flex gap-sm items-baseline"><span class="num text-secondary-fixed-dim">01</span><span class="font-body-reg text-body-reg">J'ouvre mon écran</span></li>
+            <li class="flex gap-sm items-baseline"><span class="num text-secondary-fixed-dim">02</span><span class="font-body-reg text-body-reg">Je vois ce qui m'attend, à moi</span></li>
+            <li class="flex gap-sm items-baseline"><span class="num text-secondary-fixed-dim">03</span><span class="font-body-reg text-body-reg">J'ouvre le dossier concerné</span></li>
+          </ol>
+          <div class="mt-md pt-sm border-t border-outline/40 flex items-baseline gap-sm">
+            <span class="font-display-lg text-headline-md text-secondary-fixed leading-none">3</span>
+            <span class="font-body-reg text-body-reg">clics maximum. C'est l'objectif qu'on s'est fixé.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 — LA CAUSE TECHNIQUE ============ -->
+<section class="slide grid-bg bg-background" data-title="La cause technique">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">03</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Pourquoi l'avancement ne remontait jamais</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Ce n'était pas une question de discipline. C'était une question de tuyau.</p>
+    </div>
+    <div class="flex-grow min-h-0 flex items-center">
+      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-lg">
+        <div class="card p-md">
+          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-on-surface-variant mb-md">Avant</div>
+          <div class="flex items-center justify-center gap-md py-md">
+            <div class="text-center">
+              <div class="w-28 h-20 border border-outline flex items-center justify-center font-body-reg text-body-reg bg-surface-container">Tâche</div>
+            </div>
+            <div class="font-display-lg text-headline-md text-outline">→</div>
+            <div class="text-center">
+              <div class="w-28 h-20 border border-outline flex items-center justify-center font-body-reg text-body-reg bg-surface-container">Dossier</div>
+            </div>
+          </div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">La tâche savait à quel dossier elle appartenait. Le dossier, lui, ne voyait aucune de ses tâches. Donc rien ne pouvait remonter, et il fallait tout reconstituer à la main.</p>
+        </div>
+        <div class="card p-md border-primary">
+          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-primary mb-md">Maintenant</div>
+          <div class="flex items-center justify-center gap-md py-md">
+            <div class="text-center">
+              <div class="w-28 h-20 border border-primary bg-primary-fixed/40 flex items-center justify-center font-body-reg text-body-reg">Tâche</div>
+            </div>
+            <div class="font-display-lg text-headline-md text-primary">⇄</div>
+            <div class="text-center">
+              <div class="w-28 h-20 border border-primary bg-primary-fixed/40 flex items-center justify-center font-body-reg text-body-reg">Dossier</div>
+            </div>
+          </div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">Le dossier voit ses tâches. Quand vous cochez, son avancement bouge tout seul. <strong>Personne n'a plus à faire le point à votre place.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 — UNE TÂCHE ============ -->
+<section class="slide grid-bg bg-background" data-title="Une tâche est une action">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">04</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Une tâche, c'est une action</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Un verbe, puis un complément. Si on ne peut pas la cocher, ce n'est pas une tâche.</p>
+    </div>
+    <div class="flex-grow min-h-0 flex items-center">
+      <div class="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-lg">
+        <div class="card p-md">
+          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-error mb-md">Ce n'est pas une tâche</div>
+          <ul class="space-y-sm font-body-reg text-body-reg">
+            <li class="kill">Étude financière</li>
+            <li class="kill">Point sur le dossier</li>
+            <li class="kill">Le syndic a rappelé au sujet de l'AG</li>
+            <li class="kill">Attention, plan de financement à revoir</li>
+          </ul>
+          <p class="font-code-label text-code-label text-on-surface-variant mt-md">Un sujet, une information, une alerte. Utile, mais ça ne se coche pas.</p>
+        </div>
+        <div class="card p-md border-primary">
+          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-primary mb-md">C'est une tâche</div>
+          <ul class="space-y-sm font-body-reg text-body-reg">
+            <li><strong>Réaliser</strong> l'étude financière sur devis</li>
+            <li><strong>Présenter</strong> l'étude au conseil syndical</li>
+            <li><strong>Ouvrir</strong> le compte ANAH de la copropriété</li>
+            <li><strong>Traiter</strong> les relances de la banque</li>
+          </ul>
+          <p class="font-code-label text-code-label text-primary mt-md">On sait qui fait quoi, et on sait quand c'est fini.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 — UN MÉMO ============ -->
+<section class="slide grid-bg bg-background" data-title="Un mémo est une information">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">05</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Un mémo, c'est une information</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Vous les écriviez déjà, et vous aviez raison de le faire. Ils n'étaient simplement pas au bon endroit.</p>
+    </div>
+    <div class="flex-grow min-h-0 flex items-center">
+      <div class="w-full grid grid-cols-1 lg:grid-cols-3 gap-gutter items-stretch">
+        <div class="card p-md">
+          <div class="font-title-sm text-title-sm mb-sm">La tâche</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">Elle a un début et une fin. Elle appartient à quelqu'un. Elle disparaît de l'écran quand elle est faite.</p>
+        </div>
+        <div class="card p-md">
+          <div class="font-title-sm text-title-sm mb-sm">Le mémo</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">Il ne se termine pas. Il vit avec le dossier, du premier contact au versement de la subvention. Six mois plus tard, il explique encore pourquoi une décision a été prise.</p>
+        </div>
+        <div class="card-dark p-md">
+          <div class="font-title-sm text-title-sm mb-sm text-secondary-fixed">Le passage</div>
+          <p class="font-body-reg text-body-reg">Un mémo peut faire naître une tâche : « le syndic a rappelé » devient « rappeler le syndic avant vendredi ». L'inverse n'arrive jamais.</p>
+        </div>
+      </div>
+    </div>
+    <div class="shrink-0 pt-md border-t border-outline-variant">
+      <p class="font-body-reg text-body-reg"><span class="chip chip-now">FAIT</span> &nbsp;La base Mémos existe désormais à côté de vos tâches. Les 1 990 mémos déjà écrits restent où ils sont pour l'instant : leur déplacement fait partie de ce qu'on décidera avec Laurent.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 — RESPONSABLE ET ÉCHÉANCE ============ -->
+<section class="slide grid-bg bg-background" data-title="Responsable et échéance">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">06</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Un responsable, et une date</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Ce sont les deux seules informations qu'on vous demande d'ajouter. Tout le reste en découle.</p>
+    </div>
+    <div class="flex-grow min-h-0 flex items-center">
+      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-lg">
+        <div class="card p-md">
+          <div class="font-title-sm text-title-sm mb-sm">Un responsable</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mb-md">Sans nom sur la ligne, la tâche n'appartient à personne, et elle n'apparaît sur l'écran de personne.</p>
+          <div class="bg-surface-container p-sm">
+            <span class="font-display-lg text-headline-md text-error leading-none">279</span>
+            <span class="font-body-reg text-body-reg"> tâches ouvertes n'ont personne aujourd'hui</span>
+          </div>
+        </div>
+        <div class="card p-md border-primary">
+          <div class="font-title-sm text-title-sm mb-sm">Une date</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mb-md">Une échéance n'est pas un engagement. C'est une intention : quand je compte m'en occuper. « Fin du mois » ou « dans deux mois » suffit.</p>
+          <ul class="space-y-xs font-body-reg text-body-reg">
+            <li>· Elle se déplace en un clic, autant de fois qu'il faut.</li>
+            <li>· Elle sert à répartir le travail dans le temps, pas à juger.</li>
+            <li>· Sans elle, une tâche n'existe que le jour où quelqu'un y repense.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 — TÂCHES ET SOUS-TÂCHES ============ -->
+<section class="slide grid-bg bg-background" data-title="Tâches et sous-tâches">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">07</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Le dossier, ses tâches, leurs sous-tâches</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Une grande tâche peut se décomposer autant que nécessaire. C'est ce qui permet de suivre un dossier qui dure quatre ans.</p>
+    </div>
+    <div class="flex-grow min-h-0 flex items-center">
+      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-lg items-stretch">
+        <div class="flex flex-col justify-center">
+          <div class="card p-sm text-center bg-primary-fixed/40 border-primary">
+            <div class="font-title-sm text-title-sm">Le dossier</div>
+            <div class="font-code-label text-code-label text-on-surface-variant">phase DTG, MOE, travaux, paiement</div>
+          </div>
+          <div class="arrow-down"></div>
+          <div class="card p-sm text-center">
+            <div class="font-title-sm text-title-sm">Les tâches de la phase</div>
+            <div class="font-code-label text-code-label text-on-surface-variant">vos étapes, celles que vous avez déjà écrites</div>
+          </div>
+          <div class="arrow-down"></div>
+          <div class="card p-sm text-center bg-secondary-container/50">
+            <div class="font-title-sm text-title-sm">Les sous-tâches</div>
+            <div class="font-code-label text-code-label text-on-surface-variant">le détail du travail réel</div>
+          </div>
+        </div>
+        <div class="card p-md">
+          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-on-surface-variant mb-sm">Un exemple que vous connaissez</div>
+          <div class="font-title-sm text-title-sm mb-sm">Réaliser le mailing crédit</div>
+          <ul class="space-y-xs font-body-reg text-body-reg border-l border-outline-variant pl-md">
+            <li>Calculer les quotes-parts</li>
+            <li>Préparer les fiches FTE</li>
+            <li>Faire valider par le syndic</li>
+            <li>Rédiger le courrier</li>
+            <li>Envoyer</li>
+          </ul>
+          <p class="font-body-reg text-body-reg text-on-surface-variant mt-md">Une seule ligne dans le dossier. Cinq lignes pour celui qui le fait. Et l'avancement se calcule tout seul, sans que personne ne le demande.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 — STATUT ET PRIORITÉ ============ -->
+<section class="slide grid-bg bg-background" data-title="Statut et priorité">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">08</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Où ça en est, et dans quel ordre</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Ce sont deux questions différentes. Aujourd'hui, une seule colonne répond aux deux, donc il faut choisir.</p>
+    </div>
+    <div class="flex-grow min-h-0 flex items-center">
+      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-lg">
+        <div class="card p-md">
+          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-error mb-md">Une colonne, deux questions</div>
+          <div class="flex flex-wrap gap-xs mb-md">
+            <span class="chip bg-error-container text-on-error-container">01 Top priorité</span>
+            <span class="chip bg-error-container text-on-error-container">02 Urgent</span>
+            <span class="chip bg-surface-container">03 À faire</span>
+            <span class="chip bg-surface-container">04 En cours</span>
+            <span class="chip bg-surface-container">05 En attente retour</span>
+            <span class="chip bg-surface-container">08 Fait</span>
+          </div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">Une tâche urgente qui est en cours : on ne peut écrire qu'une seule des deux choses. L'autre information est perdue, et les tris ne veulent plus rien dire.</p>
+        </div>
+        <div class="card p-md border-primary">
+          <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-primary mb-md">Deux colonnes, deux réponses</div>
+          <div class="mb-md">
+            <div class="font-code-label text-code-label text-on-surface-variant mb-xs">Statut · où ça en est</div>
+            <div class="flex flex-wrap gap-xs">
+              <span class="chip bg-surface-container">À faire</span>
+              <span class="chip bg-surface-container">En cours</span>
+              <span class="chip bg-surface-container">En attente</span>
+              <span class="chip bg-surface-container">Fait</span>
+            </div>
+          </div>
+          <div>
+            <div class="font-code-label text-code-label text-on-surface-variant mb-xs">Priorité · dans quel ordre</div>
+            <div class="flex flex-wrap gap-xs">
+              <span class="chip chip-now">Haute</span>
+              <span class="chip bg-surface-container">Normale</span>
+              <span class="chip bg-surface-container">Basse</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="shrink-0 pt-md border-t border-outline-variant">
+      <p class="font-body-reg text-body-reg"><span class="chip chip-next">À DÉCIDER</span> &nbsp;Séparer les deux touche vos 12 000 lignes existantes. C'est un chantier à part, à valider avec Laurent.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9 — VOS ÉCRANS ============ -->
+<section class="slide grid-bg bg-background" data-title="Vos écrans">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">09</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Vos écrans</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Les mêmes données qu'avant. Présentées selon ce que vous avez à faire, et non selon la façon dont elles sont rangées.</p>
+    </div>
+    <div class="flex-grow min-h-0 flex items-center">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter w-full">
+        <div class="card p-md">
+          <div class="font-title-sm text-title-sm mb-xs">Chargé de projet</div>
+          <div class="font-code-label text-code-label text-on-surface-variant mb-sm">Gabriel, Clara et l'équipe projet</div>
+          <ul class="space-y-xs font-body-reg text-body-reg">
+            <li>· Ma semaine</li>
+            <li>· Ce qui attend un retour de quelqu'un</li>
+            <li>· Ce qui n'a pas bougé depuis un mois</li>
+            <li>· Mes dossiers, par phase, avec leur avancement</li>
+          </ul>
+        </div>
+        <div class="card p-md">
+          <div class="font-title-sm text-title-sm mb-xs">Crédits et administratif</div>
+          <div class="font-code-label text-code-label text-on-surface-variant mb-sm">Élise, Alan et le pôle administratif</div>
+          <ul class="space-y-xs font-body-reg text-body-reg">
+            <li>· Les dossiers rangés par étape de crédit</li>
+            <li>· Ce qui est bloqué à la banque, du plus ancien au plus récent</li>
+            <li>· Les dépôts d'aides et les paiements en attente</li>
+            <li>· Les dossiers copropriétaires du pôle</li>
+          </ul>
+        </div>
+        <div class="card p-md">
+          <div class="font-title-sm text-title-sm mb-xs">Pilotage</div>
+          <div class="font-code-label text-code-label text-on-surface-variant mb-sm">Aurélie</div>
+          <ul class="space-y-xs font-body-reg text-body-reg">
+            <li>· Le portefeuille par phase, avec l'avancement réel</li>
+            <li>· Les dossiers sans activité</li>
+            <li>· La charge par personne</li>
+            <li>· Ce qui reste à qualifier</li>
+          </ul>
+        </div>
+        <div class="card p-md">
+          <div class="font-title-sm text-title-sm mb-xs">Direction</div>
+          <div class="font-code-label text-code-label text-on-surface-variant mb-sm">Laurent</div>
+          <ul class="space-y-xs font-body-reg text-body-reg">
+            <li>· Les dossiers en cours par phase</li>
+            <li>· Ceux qui ne bougent plus</li>
+            <li>· Les crédits et les subventions en attente</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 — VOS TROIS GESTES ============ -->
+<section class="slide grid-bg bg-background" data-title="Vos trois gestes">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">10</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Vos trois gestes, tous les matins</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Si vous ne retenez qu'une chose de cette heure, c'est celle-ci.</p>
+    </div>
+    <div class="flex-grow min-h-0 flex items-center">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter w-full">
+        <div class="card p-md">
+          <div class="font-display-lg text-headline-md text-secondary leading-none mb-sm">1</div>
+          <div class="font-title-sm text-title-sm mb-xs">J'ouvre mon écran</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">Plus la base commune. Mon écran, celui qui ne montre que ce qui me concerne.</p>
+        </div>
+        <div class="card p-md">
+          <div class="font-display-lg text-headline-md text-secondary leading-none mb-sm">2</div>
+          <div class="font-title-sm text-title-sm mb-xs">Je coche ce qui est fait</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">C'est le seul moment où le pilotage se met à jour. Dix secondes pour vous, une heure de moins pour Aurélie.</p>
+        </div>
+        <div class="card p-md">
+          <div class="font-display-lg text-headline-md text-secondary leading-none mb-sm">3</div>
+          <div class="font-title-sm text-title-sm mb-xs">Je note ce qui arrive</div>
+          <p class="font-body-reg text-body-reg text-on-surface-variant">Une information devient un mémo. Quelque chose à faire devient une tâche, avec mon nom et une date.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 — AUJOURD'HUI ET LA SUITE ============ -->
+<section class="slide grid-bg bg-background" data-title="Aujourd'hui et la suite">
+  <div class="h-full flex flex-col px-margin py-lg">
+    <div class="shrink-0">
+      <span class="num text-secondary">11</span>
+      <h2 class="font-headline-md text-headline-md mt-xs mb-sm">Ce qui est livré, ce qui reste à décider</h2>
+      <p class="font-body-reg text-body-reg text-on-surface-variant max-w-3xl">Ce premier lot n'a rien supprimé et rien converti. Il a ajouté ce qu'il fallait pour rendre lisible ce que vous aviez déjà.</p>
+    </div>
+    <div class="flex-grow min-h-0 flex items-center">
+      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-lg">
+        <div class="card p-md border-primary">
+          <div class="mb-sm"><span class="chip chip-now">LIVRÉ AUJOURD'HUI</span></div>
+          <ul class="space-y-sm font-body-reg text-body-reg">
+            <li>· Les dossiers voient leurs tâches, et leur avancement se calcule</li>
+            <li>· Un écran par métier, au lieu d'une base commune</li>
+            <li>· Les alertes : dossiers sans activité, informations manquantes</li>
+            <li>· La base Mémos, séparée des tâches</li>
+            <li>· Les sous-tâches, pour décomposer le travail réel</li>
+            <li>· Un bouton qui crée les tâches d'une phase d'un seul coup</li>
+          </ul>
+        </div>
+        <div class="card p-md">
+          <div class="mb-sm"><span class="chip chip-next">À DÉCIDER ENSEMBLE</span></div>
+          <ul class="space-y-sm font-body-reg text-body-reg text-on-surface-variant">
+            <li>· Déplacer les 1 990 mémos déjà écrits</li>
+            <li>· Séparer le statut et la priorité sur les 12 000 lignes</li>
+            <li>· Ramener les colonnes de 86 à une quarantaine</li>
+            <li>· Une base pour les aides et leurs montants, une pour l'historique hebdomadaire</li>
+            <li>· Les automatisations, dont la facture déclenchée par son jalon</li>
+            <li>· Les boîtes mail partagées, le premier poste de temps perdu</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="shrink-0 pt-md border-t border-outline-variant">
+      <p class="font-body-reg text-body-reg text-on-surface-variant">La colonne de droite fait l'objet d'une proposition séparée, que Laurent tranchera. Rien n'y est engagé aujourd'hui.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 — CETTE SEMAINE ============ -->
+<section class="slide grid-bg bg-background" data-title="Cette semaine">
+  <div class="h-full flex flex-col">
+    <main class="flex-grow min-h-0 px-margin flex items-center relative overflow-hidden">
+      <div class="absolute top-1/4 -right-1/4 w-[600px] h-[600px] bg-secondary-container opacity-40 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+      <div class="max-w-4xl w-full mx-auto">
+        <span class="num text-secondary">12</span>
+        <h2 class="font-display-lg text-display-lg tracking-tight leading-none mb-md mt-xs">Cette semaine,<br/>on regarde ensemble</h2>
+        <div class="rule mb-md"></div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mt-lg">
+          <div>
+            <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-on-surface-variant mb-xs">Du 23 au 25 septembre</div>
+            <p class="font-body-reg text-body-reg">Vous travaillez normalement, depuis vos écrans.</p>
+          </div>
+          <div>
+            <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-on-surface-variant mb-xs">Ce qu'on attend de vous</div>
+            <p class="font-body-reg text-body-reg">Ce qui manque, ce qui gêne, ce qui ne se trouve pas. Même les petites choses.</p>
+          </div>
+          <div>
+            <div class="font-eyebrow text-eyebrow uppercase tracking-widest text-on-surface-variant mb-xs">Ce qu'on en fait</div>
+            <p class="font-body-reg text-body-reg">On corrige dans la foulée. Un écran se règle à l'usage, pas sur le papier.</p>
+          </div>
+        </div>
+        <p class="font-headline-md text-headline-md mt-xl leading-tight">Un système ne tient pas parce qu'il est bien construit.<br/><span class="text-primary">Il tient parce que vous vous en servez tous les jours.</span></p>
+      </div>
+    </main>
+    <footer class="px-margin py-sm shrink-0 flex items-center justify-between">
+      <span class="font-code-label text-code-label text-on-surface-variant">Rama Logic · Vert Durable · 22 septembre 2026</span>
+      <span class="font-code-label text-code-label text-on-surface-variant">sylvain@ramalogic.com</span>
+    </footer>
+  </div>
+</section>
+
+</div>
+
+<div id="chrome">
+  <span id="counter">1 / 13</span>
+  <button id="btnOverview" title="Sommaire">☰</button>
+  <button id="btnPrev" title="Précédent">←</button>
+  <button id="btnNext" title="Suivant">→</button>
+</div>
+
+<div id="overview">
+  <h2>Sommaire</h2>
+  <div id="ovgrid"></div>
+</div>
+
+<script>
+  const viewport = document.getElementById('viewport');
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const counter = document.getElementById('counter');
+  const overview = document.getElementById('overview');
+  const ovgrid = document.getElementById('ovgrid');
+  let current = 0;
+
+  slides.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.innerHTML = '<span class="n">' + String(i + 1).padStart(2, '0') + '</span><span class="t">' + (s.dataset.title || ('Slide ' + (i+1))) + '</span>';
+    b.addEventListener('click', () => { go(i); overview.classList.remove('open'); });
+    ovgrid.appendChild(b);
+  });
+
+  function go(i) {
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    slides[current].scrollIntoView({ behavior: 'smooth' });
+    updateCounter();
+  }
+  function updateCounter() { counter.textContent = (current + 1) + ' / ' + slides.length; }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        current = slides.indexOf(e.target);
+        updateCounter();
+      }
+    });
+  }, { root: viewport, threshold: [0.5] });
+  slides.forEach(s => io.observe(s));
+
+  document.getElementById('btnNext').addEventListener('click', () => go(current + 1));
+  document.getElementById('btnPrev').addEventListener('click', () => go(current - 1));
+  document.getElementById('btnOverview').addEventListener('click', () => overview.classList.toggle('open'));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { overview.classList.toggle('open'); return; }
+    if (overview.classList.contains('open')) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); go(0); }
+    if (e.key === 'End') { e.preventDefault(); go(slides.length - 1); }
+  });
+</script>
+</body>
+</html>
