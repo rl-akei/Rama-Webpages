@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex,nofollow"/>
+<meta name="description" content="L'Alternative × Rama Logic · Proposition confidentielle"/>
+<title>L'Alternative × Rama Logic · Le projet et son argent</title>
+
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600;700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-dim":"#dcd9d9","secondary-fixed-dim":"#bdcf7c","secondary-fixed":"#d9eb95",
+        "on-tertiary":"#ffffff","surface-tint":"#466556","on-secondary":"#ffffff",
+        "on-background":"#1c1b1b","surface-container-highest":"#e5e2e1","inverse-primary":"#accebc",
+        "error":"#ba1a1a","on-tertiary-fixed":"#0c1d27","background":"#fcf9f8",
+        "on-primary-fixed-variant":"#2f4d3f","primary-fixed-dim":"#accebc","on-primary-container":"#f5fff7",
+        "surface-container-lowest":"#ffffff","primary-fixed":"#c8ead8","surface-variant":"#e5e2e1",
+        "on-primary":"#ffffff","on-error-container":"#93000a","on-error":"#ffffff",
+        "primary":"#446254","outline":"#727974","on-surface":"#1c1b1b",
+        "tertiary-container":"#657783","on-tertiary-container":"#fcfcff",
+        "on-tertiary-fixed-variant":"#384954","tertiary":"#4d5e6a","on-surface-variant":"#424844",
+        "surface-bright":"#fcf9f8","error-container":"#ffdad6","on-secondary-container":"#5c6b24",
+        "surface-container-high":"#ebe7e7",
+        "inverse-surface":"#313030","outline-variant":"#c1c8c2","surface-container-low":"#f6f3f2",
+        "secondary":"#56641e","on-primary-fixed":"#012115","on-secondary-fixed-variant":"#3f4c05",
+        "inverse-on-surface":"#f3f0ef","surface-container":"#f0edec","primary-container":"#5c7b6c",
+        "tertiary-fixed-dim":"#b7c9d6","tertiary-fixed":"#d3e5f3","surface":"#fcf9f8",
+        "on-secondary-fixed":"#171e00","secondary-container":"#d9eb95"
+      },
+      borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},
+      spacing:{
+        "xs":"4px","base":"8px",
+        "sm":"clamp(7px, 0.9vh, 12px)",
+        "md":"clamp(11px, 1.7vh, 22px)",
+        "lg":"clamp(16px, 2.6vh, 34px)",
+        "xl":"clamp(22px, 4vh, 56px)",
+        "gutter":"clamp(14px, 1.4vw, 24px)",
+        "margin":"clamp(20px, 3vw, 40px)"
+      },
+      fontFamily:{
+        "body-reg":["Work Sans","system-ui","sans-serif"],
+        "code-label":["Space Mono","monospace"],
+        "title-sm":["Clash Grotesk","Work Sans","sans-serif"],
+        "eyebrow":["Space Mono","monospace"],
+        "display-lg":["Clash Grotesk","Work Sans","sans-serif"],
+        "headline-md":["Clash Grotesk","Work Sans","sans-serif"]
+      },
+      fontSize:{
+        "body-reg":["clamp(12.5px, 1.02vw, 15.5px)",{"lineHeight":"1.5","fontWeight":"400"}],
+        "code-label":["clamp(10.5px, 0.82vw, 12.5px)",{"lineHeight":"1.45","letterSpacing":"0.05em","fontWeight":"400"}],
+        "title-sm":["clamp(16px, 1.45vw, 21px)",{"lineHeight":"1.3","fontWeight":"500"}],
+        "eyebrow":["clamp(9.5px, 0.72vw, 11.5px)",{"lineHeight":"1.0","fontWeight":"500"}],
+        "display-lg":["clamp(38px, 5vw, 68px)",{"lineHeight":"1.02","fontWeight":"500"}],
+        "headline-md":["clamp(24px, 3.2vw, 42px)",{"lineHeight":"1.1","fontWeight":"500"}]
+      }
+    }
+  }
+}
+</script>
+
+<style>
+:root { --header-h: 52px; }
+html, body { scroll-behavior: smooth; overflow-x: clip; }
+body { font-family: 'Work Sans', system-ui, sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+.font-display-lg, .font-headline-md, h1 { overflow-wrap: anywhere; }
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #446254;
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(28,27,27,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28,27,27,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ===== viewport-fit ===== */
+.slides-viewport {
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+.slide {
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: var(--header-h);
+}
+.slide > * { min-height: 0; }
+.slide img { max-height: min(50vh, 420px); object-fit: contain; }
+.slide-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Socket corners ===== */
+.socket-corner-tl, .socket-corner-tr, .socket-corner-bl, .socket-corner-br {
+  position: absolute;
+  width: 8px; height: 8px;
+  background-color: #1c1b1b;
+}
+.socket-corner-tl { top: -4px; left: -4px; }
+.socket-corner-tr { top: -4px; right: -4px; }
+.socket-corner-bl { bottom: -4px; left: -4px; }
+.socket-corner-br { bottom: -4px; right: -4px; }
+
+.card-sockets > .cs { position:absolute; width:6px; height:6px; background:#1c1b1b; }
+.card-sockets > .cs.tl { top:0; left:0; } .card-sockets > .cs.tr { top:0; right:0; }
+.card-sockets > .cs.bl { bottom:0; left:0; } .card-sockets > .cs.br { bottom:0; right:0; }
+
+.divider-num {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: #446254;
+}
+.big-num {
+  font-family: 'Clash Grotesk', 'Work Sans', sans-serif;
+  font-weight: 500;
+  line-height: 0.98;
+  font-size: clamp(32px, 4.4vw, 54px);
+}
+.big-num-sm { font-size: clamp(24px, 3.1vw, 38px); }
+.big-num-xl { font-size: clamp(44px, 6.4vw, 88px); }
+
+/* ===== Chips "sujets ouverts" (slide 02.1) ===== */
+.subject-chip {
+  border: 1px solid #c1c8c2;
+  background: #ffffff;
+  padding: clamp(8px,1.2vh,14px) clamp(10px,1vw,16px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+}
+.subject-chip.is-tested { border-color: #1c1b1b; background: #f0edec; }
+
+/* ===== Pivot vertical (slide 03.1) ===== */
+.pivot-strike { position: relative; display: inline; }
+.pivot-strike::after {
+  content: ""; position: absolute; left: -2px; right: -2px; top: 52%;
+  height: 2px; background: #ba1a1a; opacity: .55;
+}
+
+/* ===== Rail vertical (roadmap) ===== */
+.tl-item { position: relative; padding-left: clamp(22px, 2.4vw, 34px); }
+.tl-item::before {
+  content: ""; position: absolute; left: 0; top: 6px;
+  width: 11px; height: 11px; background: #fcf9f8;
+  border: 2px solid #446254;
+}
+.tl-item:not(:last-child)::after {
+  content: ""; position: absolute; left: 5px; top: 17px; bottom: -2px;
+  width: 1px; background: #c1c8c2;
+}
+.tl-item.tl-accent-2::before { border-color: #56641e; }
+.tl-item.tl-pause::before { border-color: #727974; background: #e5e2e1; }
+
+/* ===== Connecteurs horizontaux (plan overview) ===== */
+.chain-arrow {
+  display: flex; align-items: center; justify-content: center;
+  color: #446254;
+}
+
+.overview-card {
+  border: 1px solid #c1c8c2;
+  background: #ffffff;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  transition: border-color 160ms, background 160ms, transform 160ms;
+  min-height: 80px;
+}
+.overview-card:hover { border-color: #446254; background: #f6f3f2; transform: translateY(-2px); }
+.overview-card .ov-num { font-family: 'Space Mono', monospace; font-size: 12px; color: #446254; letter-spacing: 0.05em; }
+.overview-card .ov-label { font-family: 'Work Sans', sans-serif; font-size: 13px; color: #1c1b1b; line-height: 1.3; }
+
+.header-bar { transition: opacity 200ms ease; }
+.header-bar.is-hidden { opacity: 0; pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html, body { scroll-behavior: auto; }
+  .overview-card, .group *, .header-bar { transition: none !important; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+}
+
+@media (max-width: 767px) {
+  .slides-viewport { scroll-snap-type: none; scroll-padding-top: var(--header-h); }
+  .slide { height: auto; min-height: 100dvh; overflow: visible; padding-top: 0; padding-bottom: 96px; }
+  .slide-body { justify-content: flex-start !important; padding-top: var(--header-h) !important; }
+  .chain-arrow { transform: rotate(90deg); }
+}
+
+
+/* ===== Tableaux comparatifs Furious / Notion ===== */
+.cmp { width: 100%; border-collapse: collapse; background: #ffffff; border: 1px solid #1c1b1b; }
+.cmp th, .cmp td { text-align: left; vertical-align: top; padding: clamp(5px,0.95vh,11px) clamp(8px,0.9vw,14px); border-bottom: 1px solid #c1c8c2; }
+.cmp tr:last-child td { border-bottom: 0; }
+.cmp th { font-family: 'Space Mono', monospace; font-size: clamp(9.5px,0.72vw,11.5px); text-transform: uppercase; letter-spacing: .12em; font-weight: 500; color: #727974; background: #f6f3f2; border-bottom: 1px solid #1c1b1b; }
+.cmp th.col-n { color: #446254; }
+.cmp td { font-family: 'Work Sans', sans-serif; font-size: clamp(11.5px,0.95vw,14.5px); line-height: 1.38; color: #424844; }
+.cmp td.dom { font-family: 'Clash Grotesk','Work Sans',sans-serif; font-weight: 500; color: #1c1b1b; font-size: clamp(12.5px,1.05vw,16px); width: 21%; }
+.cmp td.col-n { background: rgba(200,234,216,0.22); color: #1c1b1b; width: 40%; }
+.cmp td.col-f { width: 39%; }
+.tag { font-family: 'Space Mono', monospace; font-size: clamp(9px,0.68vw,11px); text-transform: uppercase; letter-spacing: .08em; padding: 1px 6px; border: 1px solid currentColor; white-space: nowrap; margin-right: 6px; }
+.tag.ok { color: #446254; } .tag.no { color: #ba1a1a; } .tag.mid { color: #56641e; } .tag.unk { color: #727974; }
+@media (max-width: 767px) {
+  .cmp, .cmp tbody, .cmp tr, .cmp td { display: block; width: 100% !important; }
+  .cmp thead { display: none; }
+  .cmp tr { border-bottom: 1px solid #1c1b1b; }
+  .cmp td { border-bottom: 0; }
+  .cmp td.col-f::before { content: "Furious · "; font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; color: #727974; }
+  .cmp td.col-n::before { content: "Notion · "; font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; color: #446254; }
+}
+
+.print-only { display: none; }
+@media print {
+  .slides-viewport { height: auto; overflow: visible; scroll-snap-type: none; }
+  .slide { page-break-after: always; height: auto; overflow: visible; min-height: 0; }
+  .nav-controls, .header-bar, #overview { display: none !important; }
+  .print-only { display: block; }
+}
+</style>
+</head>
+<body class="bg-background text-on-background antialiased">
+
+<!-- ====== STICKY HEADER ====== -->
+<header id="header-bar" class="header-bar fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant" style="height:52px">
+  <div class="flex justify-between items-center h-full px-margin max-w-[1600px] mx-auto">
+    <div class="flex items-center gap-md">
+      <div class="font-title-sm text-title-sm font-medium tracking-tight">Rama Logic</div>
+      <div class="hidden md:block w-px h-4 bg-outline-variant"></div>
+      <div class="hidden md:block font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Préparé pour L'Alternative</div>
+    </div>
+    <div class="flex items-center gap-md" data-pdf-hide>
+      <button id="overview-btn" aria-label="Vue d'ensemble" class="hidden md:flex items-center gap-1 font-code-label text-code-label text-on-surface-variant hover:text-on-background transition-colors">
+        <span class="material-symbols-outlined text-lg">grid_view</span><span class="uppercase tracking-widest">ESC</span>
+      </button>
+      <div class="font-code-label text-code-label text-on-surface-variant">
+        <span id="current-slide" class="text-on-background font-medium">1</span>
+        <span class="text-outline-variant mx-1">/</span>
+        <span id="total-slides">27</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="slides-viewport">
+
+<!-- ============ SLIDE 0 · Cover ============ -->
+<section class="slide grid-bg" id="slide-0" data-slide="0">
+  <div class="slide-body flex items-center justify-center relative overflow-hidden px-margin">
+    <div class="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+    <div class="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-secondary-container opacity-40 rounded-full blur-[100px] -z-10 mix-blend-multiply"></div>
+    <div class="max-w-5xl w-full relative z-10">
+      <div class="relative bg-surface-container-lowest/80 backdrop-blur-sm rounded-lg border border-outline-variant px-margin py-xl">
+        <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+        <div class="flex items-center justify-between flex-wrap gap-sm mb-lg">
+          <span class="font-eyebrow text-eyebrow text-primary tracking-widest uppercase py-xs px-sm bg-primary-fixed/30 rounded border border-primary-fixed inline-block">Proposition · Suite de l'audit du 22 septembre 2026</span>
+          <span class="font-title-sm text-title-sm font-medium tracking-tight text-on-background">Rama Logic</span>
+        </div>
+        <h1 class="font-display-lg text-display-lg text-on-background mb-md tracking-tight">
+          Un seul endroit pour le projet <span class="text-primary italic">et son argent.</span>
+        </h1>
+        <div class="w-24 h-1 bg-secondary mb-lg"></div>
+        <div class="flex items-end gap-md flex-wrap mb-lg">
+          <span class="font-display-lg text-on-background tracking-tight leading-none" style="font-size:clamp(40px,5vw,72px)">L'Alternative</span>
+          <span class="font-code-label text-code-label text-on-surface-variant pb-1 uppercase tracking-widest">Marc Pottier · Marie Fasso</span>
+        </div>
+        <div class="pt-lg border-t border-outline-variant flex items-center justify-between flex-wrap gap-sm">
+          <div class="flex items-center gap-sm">
+            <div class="h-2 w-2 bg-primary"></div>
+            <span class="font-code-label text-code-label text-on-surface-variant">Sylvain Ramaradjou · Architecte Notion &amp; IA · Octobre 2026</span>
+          </div>
+          <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Confidentiel · préparé pour L'Alternative</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 1 · Sommaire ============ -->
+<section class="slide grid-bg" id="slide-1" data-slide="1">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Sommaire</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce qu'on va voir <span class="text-primary italic">ensemble</span></h1>
+      <p class="font-code-label text-code-label text-outline mt-xs uppercase tracking-widest">7 sections, du constat à l'offre.</p>
+    </div>
+    <div class="flex flex-col">
+      <a href="#slide-2" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">01</span>
+        <span class="font-title-sm text-on-background w-52 md:w-72 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,18px)">Ce qu'on a vu</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">L'atelier du 22 septembre, et les chiffres de Marie.</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-6" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">02</span>
+        <span class="font-title-sm text-on-background w-52 md:w-72 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,18px)">Ce que j'y vois</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Furious n'a pas échoué pour la raison qu'on croit.</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-8" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">03</span>
+        <span class="font-title-sm text-on-background w-52 md:w-72 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,18px)">Furious ou Notion</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">L'étude complète, IA comprise, sans parti pris.</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-13" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">04</span>
+        <span class="font-title-sm text-on-background w-52 md:w-72 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,18px)">Le chemin</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Trois lots, une validation avant chaque suivant.</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-19" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">05</span>
+        <span class="font-title-sm text-on-background w-52 md:w-72 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,18px)">Calendrier</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Neuf semaines, et le temps que ça vous demande.</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-22" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">06</span>
+        <span class="font-title-sm text-on-background w-52 md:w-72 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,18px)">Engagements</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">Ce sur quoi vous pouvez compter.</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+      <a href="#slide-24" class="group flex items-baseline gap-md py-sm border-b border-outline-variant transition-colors hover:bg-surface-container-low px-sm">
+        <span class="font-code-label text-code-label text-outline w-8 shrink-0">07</span>
+        <span class="font-title-sm text-on-background w-52 md:w-72 shrink-0 group-hover:text-primary transition-colors" style="font-size:clamp(13px,1.15vw,18px)">Offre</span>
+        <span class="font-body-reg text-on-surface-variant hidden md:block flex-grow" style="font-size:clamp(11px,0.9vw,14px)">L'investissement, lot par lot.</span>
+        <span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition text-lg">arrow_forward</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 2 · 01 / 07 · Ce qu'on a vu ============ -->
+<section class="slide grid-bg" id="slide-2" data-slide="2">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">01</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 07</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Ce qu'on a vu</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">L'atelier du 22 septembre, et les chiffres de Marie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 3 · 01 · Une agence de 3,5 M€ ============ -->
+<section class="slide grid-bg" id="slide-3" data-slide="3">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">01 · Ce qu'on a vu</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">3,5 M€ pilotés <span class="text-primary italic">sur des fichiers Excel</span></h1>
+    </div>
+    <div class="grid md:grid-cols-3 gap-gutter">
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Facturé sur 12 mois</span>
+        <div class="big-num text-on-background mt-sm">3,5 M€</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">3 505 737 € HT du 1er septembre 2025 au 1er septembre 2026.</p>
+      </div>
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Projets gagnés par an</span>
+        <div class="big-num text-on-background mt-sm">≈ 93</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">70 gagnés sur les 9 premiers mois de 2026, soit environ 23 par cheffe de projet et par an.</p>
+      </div>
+      <div class="relative border-2 border-secondary bg-secondary-fixed/15 p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-secondary uppercase tracking-widest">Versions du même budget</span>
+        <div class="big-num text-on-background mt-sm">jusqu'à 4</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Quatre budgets et quatre plans de charge Excel sur un même dossier, ressaisis à chaque étape.</p>
+      </div>
+    </div>
+    <div class="mt-md bg-on-background text-inverse-on-surface px-md py-sm flex items-center gap-sm flex-wrap shrink-0">
+      <span class="material-symbols-outlined text-secondary-fixed-dim text-lg">arrow_forward</span>
+      <p class="font-body-reg text-body-reg">Le fichier que vous appelez « la colonne vertébrale » de l'agence est un Excel, <span class="text-secondary-fixed">remis à jour à la main chaque semaine</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 4 · 01 · Quatre frictions ============ -->
+<section class="slide grid-bg" id="slide-4" data-slide="4">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">01 · Ce qu'on a vu</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Quatre frictions, <span class="text-primary italic">vues à l’écran</span></h1>
+    </div>
+    <div class="border-t border-on-background bg-surface-container-lowest px-md">
+      <div class="grid md:grid-cols-12 gap-sm items-center border-b border-outline-variant py-sm">
+        <div class="md:col-span-3 flex items-center gap-sm"><span class="material-symbols-outlined text-primary">table_view</span><span class="font-title-sm text-title-sm text-on-background">Le budget vit en Excel</span></div>
+        <p class="md:col-span-6 font-body-reg text-body-reg text-on-surface-variant">Autant de versions que d'avenants. Il ne s'importait pas dans Furious il y a trois ans, et l'habitude est restée.</p>
+        <div class="md:col-span-3 bg-error-container text-on-error-container px-sm py-xs font-code-label text-code-label uppercase tracking-widest">Ressaisie à chaque étape</div>
+      </div>
+      <div class="grid md:grid-cols-12 gap-sm items-center border-b border-outline-variant py-sm">
+        <div class="md:col-span-3 flex items-center gap-sm"><span class="material-symbols-outlined text-primary">trending_flat</span><span class="font-title-sm text-title-sm text-on-background">Les provisions ne bougent pas</span></div>
+        <p class="md:col-span-6 font-body-reg text-body-reg text-on-surface-variant">Le prix d'achat réel ne remplace jamais l'estimation du devis. La trésorerie se reconstruit à côté.</p>
+        <div class="md:col-span-3 bg-error-container text-on-error-container px-sm py-xs font-code-label text-code-label uppercase tracking-widest">Marge connue à la clôture</div>
+      </div>
+      <div class="grid md:grid-cols-12 gap-sm items-center border-b border-outline-variant py-sm">
+        <div class="md:col-span-3 flex items-center gap-sm"><span class="material-symbols-outlined text-primary">receipt_long</span><span class="font-title-sm text-title-sm text-on-background">Pas de numéro de commande</span></div>
+        <p class="md:col-span-6 font-body-reg text-body-reg text-on-surface-variant">Une facture fournisseur sans numéro ne se rattache à aucun projet. Les tickets passent par WhatsApp.</p>
+        <div class="md:col-span-3 bg-error-container text-on-error-container px-sm py-xs font-code-label text-code-label uppercase tracking-widest">10 000 € en attente au 22/09</div>
+      </div>
+      <div class="grid md:grid-cols-12 gap-sm items-center border-b border-outline-variant py-sm">
+        <div class="md:col-span-3 flex items-center gap-sm"><span class="material-symbols-outlined text-primary">assignment_late</span><span class="font-title-sm text-title-sm text-on-background">La production démarre sans bon de commande</span></div>
+        <p class="md:col-span-6 font-body-reg text-body-reg text-on-surface-variant">« On a des OP de mai, on n'a toujours pas les PO. » Puis 60 jours de délai de paiement.</p>
+        <div class="md:col-span-3 bg-error-container text-on-error-container px-sm py-xs font-code-label text-code-label uppercase tracking-widest">Trésorerie immobilisée</div>
+      </div>
+    </div>
+    <div class="mt-md bg-on-background text-inverse-on-surface px-md py-sm flex items-center gap-sm flex-wrap shrink-0">
+      <span class="material-symbols-outlined text-secondary-fixed-dim text-lg">arrow_forward</span>
+      <p class="font-body-reg text-body-reg">Et une échéance : Rachel part fin octobre. Ce qu'elle sait des prestataires et des lieux <span class="text-secondary-fixed">n'est pas dans une base interrogeable</span>, et la dernière mise à jour a un an.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 5 · 01 · Ce que ça coûte ============ -->
+<section class="slide grid-bg" id="slide-5" data-slide="5">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">01 · Ce qu'on a vu</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce que ça coûte, <span class="text-primary italic">en ordre de grandeur</span></h1>
+    </div>
+    <div class="grid md:grid-cols-3 gap-gutter">
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Temps de Marie</span>
+        <div class="big-num text-on-background mt-sm">≈ 44 jours</div>
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mt-xs">par an, récupérables</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">60 % de son temps part en comptabilité et achats. Environ un tiers est de la ressaisie et du rapprochement à la main.</p>
+      </div>
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Marge</span>
+        <div class="big-num text-on-background mt-sm">35 000 €</div>
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mt-xs">par point de marge</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Sur 3,5 M€ facturés, un point de marge vaut 35 000 €. Aujourd'hui la marge réelle d'un projet n'est connue qu'à la clôture.</p>
+      </div>
+      <div class="relative border-2 border-secondary bg-secondary-fixed/15 p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-secondary uppercase tracking-widest">Factures fournisseurs</span>
+        <div class="big-num text-on-background mt-sm">10 000 €</div>
+        <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest mt-xs">non rattachés au 22/09</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Trois semaines après le passage à la facturation électronique, lu à l'écran pendant l'atelier.</p>
+      </div>
+    </div>
+    <div class="mt-md border-l-2 border-outline pl-md shrink-0">
+      <p class="font-body-reg text-body-reg text-on-surface-variant">Ce sont des ordres de grandeur, calculés avec les chiffres envoyés par Marie le 24 septembre. Les hypothèses se corrigent ensemble, ligne par ligne.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 6 · 02 / 07 · Ce que j'y vois ============ -->
+<section class="slide grid-bg" id="slide-6" data-slide="6">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">02</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 07</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Ce que j'y vois</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Furious n'a pas échoué pour la raison qu'on croit.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 7 · 02 · Un blocage mécanique ============ -->
+<section class="slide grid-bg" id="slide-7" data-slide="7">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">02 · Ce que j'y vois</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Le blocage est <span class="text-primary italic">mécanique</span>, pas culturel</h1>
+    </div>
+    <div class="grid md:grid-cols-2 gap-gutter items-stretch">
+      <div class="relative border-2 border-primary bg-primary-fixed/20 p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">La cause racine</span>
+        <p class="font-body-reg text-on-background mt-sm" style="font-size:clamp(14px,1.25vw,19px);line-height:1.4">La même information vit à trois endroits : le budget Excel de la cheffe de projet, Furious chez Marie, et le fichier de trésorerie.</p>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">L'équipe n'a pas refusé Furious. Trois verrous l'ont arrêtée : un budget Excel de plusieurs centaines de lignes qui ne s'importait pas à l'époque, un devis figé dès qu'il devient projet, des provisions qui ne suivent jamais le prix réel. Marie pense que l'import serait plus simple aujourd'hui : c'est à revérifier, les deux autres verrous sont confirmés.</p>
+      </div>
+      <div class="relative border border-error bg-error-container/30 p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-error uppercase tracking-widest">Si rien ne change</span>
+        <ul class="mt-sm flex flex-col gap-sm">
+          <li class="font-body-reg text-body-reg text-on-background">La facturation électronique fait grossir chaque mois le tas de factures à rattacher à la main.</li>
+          <li class="font-body-reg text-body-reg text-on-background">Rachel part fin octobre avec sa connaissance des prestataires et des lieux.</li>
+          <li class="font-body-reg text-body-reg text-on-background">La marge de chaque projet continue d'être découverte à la clôture, quand il est trop tard pour la corriger.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-md bg-on-background text-inverse-on-surface px-md py-sm flex items-center gap-sm flex-wrap shrink-0">
+      <span class="material-symbols-outlined text-secondary-fixed-dim text-lg">arrow_forward</span>
+      <p class="font-body-reg text-body-reg">La question n'est donc pas « comment mieux utiliser Furious », mais <span class="text-secondary-fixed">où doit vivre le projet</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 8 · 03 / 07 · Furious ou Notion ============ -->
+<section class="slide grid-bg" id="slide-8" data-slide="8">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">03</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 07</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Furious ou Notion</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">L'étude complète, IA comprise, sans parti pris.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 9 · 03 · Le projet et son argent ============ -->
+<section class="slide grid-bg" id="slide-9" data-slide="9">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">03 · Furious ou Notion</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Le projet <span class="text-primary italic">et son argent</span></h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-xs">Six sujets de l'atelier, avec ce qui a été montré à l'écran le 22 septembre.</p>
+    </div>
+    <table class="cmp">
+      <thead><tr><th>Sujet</th><th>Furious aujourd'hui</th><th class="col-n">Notion, système cible</th></tr></thead>
+      <tbody>
+        <tr><td class="dom">Budget et devis</td><td class="col-f"><span class="tag no">Devis figé</span>Un devis passé en projet ne se modifie plus. Import d'un budget Excel : impossible il y a 3 ans, à revérifier.</td><td class="col-n"><span class="tag ok">Oui</span>Import du fichier Excel, versions V1, V2, V3 sur les mêmes lignes, aucun verrou.</td></tr>
+        <tr><td class="dom">Achats et commandes</td><td class="col-f"><span class="tag mid">Partiel</span>Rattachement seulement si le numéro de devis figure sur la facture. Pas de numéro de commande interne.</td><td class="col-n"><span class="tag ok">À construire</span>Commande numérotée, achat rattaché à sa ligne de budget.</td></tr>
+        <tr><td class="dom">Provision et prix réel</td><td class="col-f"><span class="tag no">Non</span>La provision reste celle du premier devis.</td><td class="col-n"><span class="tag ok">À construire</span>Le réel se met à jour, alerte au-delà d'un seuil.</td></tr>
+        <tr><td class="dom">Production sans bon de commande</td><td class="col-f"><span class="tag unk">Non vérifié</span>Jamais montré, pas de réponse de l'éditeur.</td><td class="col-n"><span class="tag ok">À construire</span>Visible sur l'écran de Marc tant que le cadre manque.</td></tr>
+        <tr><td class="dom">Facture électronique, banque</td><td class="col-f"><span class="tag ok">Oui</span>Flux légal actif depuis le 1er septembre, banque connectée.</td><td class="col-n"><span class="tag no">Jamais</span>Notion n'émet pas de facture. Ça reste dans Furious.</td></tr>
+        <tr><td class="dom">Temps passés</td><td class="col-f"><span class="tag ok">Oui</span>Saisie hebdomadaire avec relances, c'est ce qui marche le mieux.</td><td class="col-n"><span class="tag mid">À reconstruire</span>Saisie plus rustique, mais lue au même endroit que le budget et les achats.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ SLIDE 10 · 03 · L'équipe et le pilotage ============ -->
+<section class="slide grid-bg" id="slide-10" data-slide="10">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">03 · Furious ou Notion</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">L'équipe <span class="text-primary italic">et le pilotage</span></h1>
+    </div>
+    <table class="cmp">
+      <thead><tr><th>Sujet</th><th>Furious aujourd'hui</th><th class="col-n">Notion, système cible</th></tr></thead>
+      <tbody>
+        <tr><td class="dom">Rétroplanning</td><td class="col-f"><span class="tag mid">Existe</span>L'onglet tâches est là. En nous le montrant : « on ne l'utilise pas ».</td><td class="col-n"><span class="tag ok">Oui</span>Tâches datées, modèle par format d'événement calculé à rebours.</td></tr>
+        <tr><td class="dom">Annuaire prestataires et lieux</td><td class="col-f"><span class="tag unk">Non vérifié</span>Base fournisseurs comptable, sans qualification métier connue.</td><td class="col-n"><span class="tag ok">À construire</span>Qui a fait quoi, pour combien, avec quel retour.</td></tr>
+        <tr><td class="dom">Contacts et suivi commercial</td><td class="col-f"><span class="tag mid">Partiel</span>Une fiche existe pour facturer. « Ce n'est pas propre, mais il existe. »</td><td class="col-n"><span class="tag ok">À construire</span>Source du lead, historique, règles pour la prospection.</td></tr>
+        <tr><td class="dom">Écrans par rôle</td><td class="col-f"><span class="tag ok">Oui</span>Tableaux de bord personnalisables, vus le 22/09.</td><td class="col-n"><span class="tag ok">Oui</span>Une vue par rôle sur les mêmes données, à jour.</td></tr>
+        <tr><td class="dom">Externes et prestataires</td><td class="col-f"><span class="tag unk">Non vérifié</span>Une licence par accès, environ 50 € d'après Marc.</td><td class="col-n"><span class="tag ok">Oui</span>Invités limités à leurs pages. Vos deux prestataires y travaillent déjà.</td></tr>
+        <tr><td class="dom">Clôture et ISO 20121</td><td class="col-f"><span class="tag unk">Non vérifié</span>Pas de documentation des procédures.</td><td class="col-n"><span class="tag ok">Possible</span>Checklist de clôture, historique, procédures au même endroit. Hors des trois lots présentés.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ SLIDE 11 · 03 · La partie IA ============ -->
+<section class="slide grid-bg" id="slide-11" data-slide="11">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">03 · Furious ou Notion</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">La partie <span class="text-primary italic">IA</span></h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-xs">« Non vu » veut dire : ni montré à l'atelier, ni confirmé par l'éditeur. Pas « n'existe pas ».</p>
+    </div>
+    <table class="cmp">
+      <thead><tr><th>Sujet</th><th>Furious aujourd'hui</th><th class="col-n">Notion, système cible</th></tr></thead>
+      <tbody>
+        <tr><td class="dom">Interroger les recos et les budgets passés</td><td class="col-f"><span class="tag unk">Non vu</span></td><td class="col-n"><span class="tag ok">Oui</span>Recherche IA sur tout l'espace, dès que les documents y vivent.</td></tr>
+        <tr><td class="dom">Compte rendu de réunion transformé en tâches</td><td class="col-f"><span class="tag unk">Non vu</span></td><td class="col-n"><span class="tag ok">Oui</span>Notes de réunion IA intégrées.</td></tr>
+        <tr><td class="dom">Lire une facture et proposer le projet</td><td class="col-f"><span class="tag mid">Partiel</span>Un assistant de rapprochement existe.</td><td class="col-n"><span class="tag ok">À construire</span>Un assistant sur mesure, branché sur vos lignes de budget.</td></tr>
+        <tr><td class="dom">Aider à saisir les temps</td><td class="col-f"><span class="tag ok">Annoncé</span>Présenté à Marie par l'éditeur.</td><td class="col-n"><span class="tag mid">À construire</span>Plus rustique. Seul point où Furious est devant.</td></tr>
+        <tr><td class="dom">Brancher Claude, ChatGPT ou Copilot sur vos données</td><td class="col-f"><span class="tag unk">Non vérifié</span>Pas d'information publique, pas de retour de l'éditeur à ce jour.</td><td class="col-n"><span class="tag ok">Oui</span>Connecteurs officiels.</td></tr>
+        <tr><td class="dom">Assistants sur mesure qui tournent seuls</td><td class="col-f"><span class="tag unk">Non vu</span></td><td class="col-n"><span class="tag ok">Oui</span>Sur déclencheur : relance préparée, contrôle avant clôture.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ SLIDE 12 · 03 · Le verdict ============ -->
+<section class="slide grid-bg" id="slide-12" data-slide="12">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">03 · Furious ou Notion</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Le verdict : <span class="text-primary italic">deux outils, chacun à sa place</span></h1>
+    </div>
+    <div class="grid md:grid-cols-12 gap-gutter items-stretch">
+      <div class="md:col-span-4 relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Furious garde</span>
+        <div class="big-num big-num-sm text-on-background mt-sm">Le légal</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Facture électronique, banque, comptabilité. Marie y saisit l'acompte et le solde : quelques lignes par projet au lieu de plusieurs centaines.</p>
+      </div>
+      <div class="md:col-span-4 relative border-2 border-primary bg-primary-fixed/20 p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Notion porte</span>
+        <div class="big-num big-num-sm text-on-background mt-sm">Le projet</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Budget, achats, temps, planning, prestataires, écrans de pilotage. Le numéro de devis Furious reste l'identifiant du projet, du brief au solde.</p>
+      </div>
+      <div class="md:col-span-4 relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Sur les 35 besoins de l'atelier</span>
+        <div class="flex items-baseline gap-md mt-sm">
+          <div><div class="big-num big-num-sm text-on-background">9</div><p class="font-code-label text-code-label text-outline uppercase tracking-widest">Furious, acquis</p></div>
+          <div><div class="big-num big-num-sm text-primary">31</div><p class="font-code-label text-code-label text-outline uppercase tracking-widest">Notion, couverts</p></div>
+        </div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Côté Furious, 8 des 9 ont été vus à l'écran et 17 besoins n'ont pas pu être vérifiés. Côté Notion, 21 des 31 sont à construire.</p>
+      </div>
+    </div>
+    <div class="mt-md border-l-2 border-secondary bg-secondary-fixed/20 px-md py-sm shrink-0">
+      <span class="font-eyebrow text-eyebrow text-secondary uppercase tracking-widest">Ce qu'on perd, dit franchement</span>
+      <p class="font-body-reg text-body-reg text-on-background mt-xs">Le devis généré par l'outil de facturation (il se prépare désormais à partir du budget Notion), le confort de saisie des temps de Furious, et le fait de n'avoir qu'un seul logiciel. Pousser Furious à fond reste une piste : elle n'est pas chiffrée ici, faute de réponse de l'éditeur sur les trois verrous.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 13 · 04 / 07 · Le chemin ============ -->
+<section class="slide grid-bg" id="slide-13" data-slide="13">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">04</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 07</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Le chemin</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Trois lots, une validation avant chaque suivant.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 14 · 04 · Trois lots ============ -->
+<section class="slide grid-bg" id="slide-14" data-slide="14">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">04 · Le chemin</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Trois lots, <span class="text-primary italic">une validation à chaque porte</span></h1>
+    </div>
+    <div class="flex flex-col md:flex-row items-stretch gap-sm">
+      <div class="flex-1 relative border-2 border-primary bg-primary-fixed/20 p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Lot 01 · On démarre ici</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Le projet, son argent, son pilotage</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Budget, achats, temps, marge réelle, planning et écrans par rôle. Livré et utilisé en 9 semaines.</p>
+      </div>
+      <div class="chain-arrow shrink-0 px-xs"><span class="material-symbols-outlined">arrow_forward</span></div>
+      <div class="flex-1 relative border border-dashed border-on-background bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Lot 02 · En option</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Acquisition et suivi commercial</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Une base de contacts unique, les leads de Marc tracés, Brevo et Let's Grow réconciliés.</p>
+      </div>
+      <div class="chain-arrow shrink-0 px-xs"><span class="material-symbols-outlined">arrow_forward</span></div>
+      <div class="flex-1 relative border-2 border-secondary bg-secondary-fixed/15 p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-secondary uppercase tracking-widest">Lot 03 · Trois mois</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">L'IA dans l'équipe</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Un rituel mensuel pour faire entrer l'IA dans le quotidien de l'agence, sur des données propres.</p>
+      </div>
+    </div>
+    <div class="mt-md flex items-center justify-between flex-wrap gap-sm border-t border-outline-variant pt-md shrink-0">
+      <span class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Chaque lot se valide sur des critères écrits</span>
+      <span class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Vous ne vous engagez que sur le lot 1</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 15 · Lot 1 · Le projet et son argent ============ -->
+<section class="slide grid-bg" id="slide-15" data-slide="15">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Lot 01 sur 03 · 13 octobre → 11 décembre</span>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight mt-xs">Le projet, son argent, <span class="text-primary italic">son pilotage</span></h1>
+    </div>
+    <div class="grid md:grid-cols-2 gap-gutter mb-md">
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Pourquoi c'est indispensable</span>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">C'est là que l'agence perd du temps et de la marge aujourd'hui. Tant que le budget, les achats et les temps ne vivent pas au même endroit, la marge se découvre à la clôture et Marie reconstruit la trésorerie chaque semaine. Et c'est le seul lot qui met par écrit ce que sait Rachel avant son départ.</p>
+      </div>
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Ce qu'on va y faire</span>
+        <ol class="mt-sm flex flex-col gap-sm">
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">1.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Semaines 1 et 2 : les règles de base (numéro de commande, bon de commande avant engagement, tickets hors WhatsApp) et la reprise des dossiers et prestataires de Rachel.</span></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">2.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Semaines 3 à 5 : la fiche projet, le budget en lignes importé d'Excel, les commandes, les achats, les alertes d'écart, et le démarrage de la saisie des temps.</span></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">3.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Semaines 6 à 9 : la marge réelle, le rétroplanning type, les écrans par rôle, la formation et la validation.</span></li>
+        </ol>
+      </div>
+    </div>
+    <div class="relative border-2 border-secondary bg-secondary-fixed/15 p-md card-sockets shrink-0">
+      <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+      <span class="font-eyebrow text-eyebrow text-secondary uppercase tracking-widest">Livrables</span>
+      <div class="grid md:grid-cols-3 gap-sm mt-sm">
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Une fiche projet unique, du brief au solde</span></div>
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Le budget en lignes, importé d'Excel, versions comprises</span></div>
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Achats, commandes et tickets rattachés, avec un assistant qui propose le projet et la ligne</span></div>
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Temps passés et marge réelle par projet</span></div>
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Un rétroplanning type et un écran du matin par rôle</span></div>
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">L'annuaire prestataires et lieux, démarré avec Rachel</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 16 · Lot 1 · Ce qui le valide ============ -->
+<section class="slide grid-bg" id="slide-16" data-slide="16">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Lot 01 · La porte de sortie</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce qui valide <span class="text-primary italic">le lot 1</span></h1>
+    </div>
+    <div class="grid md:grid-cols-2 gap-gutter">
+      <div class="relative border-2 border-secondary bg-secondary-fixed/15 p-md card-sockets flex gap-md items-start">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="divider-num" style="font-size:clamp(22px,2.6vw,34px)">01</span>
+        <div><h3 class="font-title-sm text-title-sm text-on-background">100 % des projets suivis dans Notion</h3><p class="font-body-reg text-body-reg text-on-surface-variant mt-xs">Tous les projets en cours et tous les nouveaux, sans exception et sans fichier à côté.</p></div>
+      </div>
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets flex gap-md items-start">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="divider-num" style="font-size:clamp(22px,2.6vw,34px)">02</span>
+        <div><h3 class="font-title-sm text-title-sm text-on-background">Une facture fournisseur rattachée sous 48 h</h3><p class="font-body-reg text-body-reg text-on-surface-variant mt-xs">Toute facture qui porte un numéro de commande retrouve son projet et sa ligne de budget en deux jours.</p></div>
+      </div>
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets flex gap-md items-start">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="divider-num" style="font-size:clamp(22px,2.6vw,34px)">03</span>
+        <div><h3 class="font-title-sm text-title-sm text-on-background">Le plan de charge refait à la main s'arrête</h3><p class="font-body-reg text-body-reg text-on-surface-variant mt-xs">Marie ne le reconstruit plus chaque semaine : l'écart entre prévu et réel se lit dans le système.</p></div>
+      </div>
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets flex gap-md items-start">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="divider-num" style="font-size:clamp(22px,2.6vw,34px)">04</span>
+        <div><h3 class="font-title-sm text-title-sm text-on-background">Les temps saisis par toute l'équipe</h3><p class="font-body-reg text-body-reg text-on-surface-variant mt-xs">Trois semaines de suite dans Notion, et la marge réelle d'un projet clos sort sans retraitement.</p></div>
+      </div>
+    </div>
+    <div class="mt-md bg-on-background text-inverse-on-surface px-md py-sm flex items-center gap-sm flex-wrap shrink-0">
+      <span class="material-symbols-outlined text-secondary-fixed-dim text-lg">arrow_forward</span>
+      <p class="font-body-reg text-body-reg">Ces quatre critères se constatent ensemble en semaine 9. <span class="text-secondary-fixed">C'est cette validation qui ouvre la suite</span>, pas le calendrier.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 17 · Lot 2 · Acquisition (option) ============ -->
+<section class="slide grid-bg" id="slide-17" data-slide="17">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Lot 02 sur 03 · En option · 3 à 4 semaines</span>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight mt-xs">Acquisition et <span class="text-primary italic">suivi commercial</span></h1>
+    </div>
+    <div class="grid md:grid-cols-2 gap-gutter mb-md">
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Pourquoi ce serait utile</span>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">L'essentiel des affaires vient du réseau de Marc, et elles vivent dans son téléphone et sa boîte mail. Let's Grow prospecte sur une base qui ne connaît pas l'historique client. Ce lot est une option : il se décide après le lot 1, sur des faits.</p>
+      </div>
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Ce qu'on va y faire</span>
+        <ol class="mt-sm flex flex-col gap-sm">
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">1.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Réunir les contacts et les sociétés dans une seule base, avec l'historique de facturation.</span></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">2.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Réconcilier Brevo et la base Let's Grow, et poser les règles d'exclusion.</span></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">3.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Tracer chaque brief entrant avec sa source, sans ressaisie pour Marc.</span></li>
+        </ol>
+      </div>
+    </div>
+    <div class="relative border-2 border-secondary bg-secondary-fixed/15 p-md card-sockets shrink-0">
+      <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+      <span class="font-eyebrow text-eyebrow text-secondary uppercase tracking-widest">Livrables</span>
+      <div class="grid md:grid-cols-3 gap-sm mt-sm">
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Une base contacts et sociétés unique, reliée aux projets</span></div>
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Les règles de prospection : qui on ne rappelle pas, et pourquoi</span></div>
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Le rendement de chaque canal, lisible au même endroit</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 18 · Lot 3 · L'IA dans l'équipe ============ -->
+<section class="slide grid-bg" id="slide-18" data-slide="18">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <span class="font-code-label text-code-label text-outline uppercase tracking-widest">Lot 03 sur 03 · Trois mois, après le lot 1</span>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight mt-xs">L'IA dans <span class="text-primary italic">l’équipe</span></h1>
+    </div>
+    <div class="grid md:grid-cols-2 gap-gutter mb-md">
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Pourquoi c'est indispensable</span>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">« On peut perdre facilement un tiers du temps imparti sur le concept. » Onze ans de recos et de budgets dorment dans Dropbox, et l'agence partage une seule licence ChatGPT. Une IA n'est utile que branchée sur des données propres : c'est pour ça que ce lot vient après le premier.</p>
+      </div>
+      <div>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Ce qu'on va y faire</span>
+        <ol class="mt-sm flex flex-col gap-sm">
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">1.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Chaque mois : un atelier avec l'équipe, un cas d'usage mis en service, les ajustements du mois.</span></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">2.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Rendre interrogeables les projets récents et une sélection de l'historique choisie par Marc.</span></li>
+          <li class="flex gap-sm"><span class="font-code-label text-code-label text-primary shrink-0">3.</span><span class="font-body-reg text-body-reg text-on-surface-variant">Former chaque rôle à s'en servir dans son travail de tous les jours.</span></li>
+        </ol>
+      </div>
+    </div>
+    <div class="relative border-2 border-secondary bg-secondary-fixed/15 p-md card-sockets shrink-0">
+      <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+      <span class="font-eyebrow text-eyebrow text-secondary uppercase tracking-widest">Ce qu'on met en service sur les trois mois</span>
+      <div class="grid md:grid-cols-3 gap-sm mt-sm">
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">La mémoire d'agence : projets récents et sélection de l'historique, interrogeables</span></div>
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Les comptes rendus de réunion transformés en tâches datées</span></div>
+        <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Une trame de budget pré-remplie à partir de projets comparables</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 19 · 05 / 07 · Calendrier ============ -->
+<section class="slide grid-bg" id="slide-19" data-slide="19">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">05</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 07</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Calendrier</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Neuf semaines, et le temps que ça vous demande.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 20 · 05 · Du 13 octobre au 11 décembre ============ -->
+<section class="slide grid-bg" id="slide-20" data-slide="20">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">05 · Calendrier</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Du <span class="text-primary italic">13 octobre</span> au 11 décembre</h1>
+    </div>
+    <div class="flex flex-col gap-md">
+      <div class="tl-item">
+        <span class="font-code-label text-code-label text-primary uppercase tracking-widest">13 octobre</span>
+        <h3 class="font-title-sm text-title-sm text-on-background">Démarrage</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Lancement avec Marc et Marie, premières règles posées le jour même.</p>
+      </div>
+      <div class="tl-item">
+        <span class="font-code-label text-code-label text-primary uppercase tracking-widest">13 → 24 octobre</span>
+        <h3 class="font-title-sm text-title-sm text-on-background">Les règles de base et le savoir de Rachel</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Numéro de commande, tickets, bon de commande. Ses dossiers en cours et ses prestataires sont listés dans Notion avant son départ.</p>
+      </div>
+      <div class="tl-item">
+        <span class="font-code-label text-code-label text-primary uppercase tracking-widest">27 octobre → 14 novembre</span>
+        <h3 class="font-title-sm text-title-sm text-on-background">Le projet et son argent</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Fiche projet, budget importé d'Excel, commandes, achats, alertes. Les cheffes de projet basculent leurs projets en cours avec un modèle d'import, les premiers avec moi. La saisie des temps démarre le 9 novembre.</p>
+      </div>
+      <div class="tl-item">
+        <span class="font-code-label text-code-label text-primary uppercase tracking-widest">17 novembre → 4 décembre</span>
+        <h3 class="font-title-sm text-title-sm text-on-background">Marge et pilotage</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Marge réelle, rétroplanning type, écrans par rôle. Formation de l'équipe.</p>
+      </div>
+      <div class="tl-item tl-accent-2">
+        <span class="font-code-label text-code-label text-secondary uppercase tracking-widest">7 → 11 décembre</span>
+        <h3 class="font-title-sm text-title-sm text-on-background">Validation du lot 1</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Les quatre critères constatés ensemble. On décide alors de la suite.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 21 · 05 · Votre implication ============ -->
+<section class="slide grid-bg" id="slide-21" data-slide="21">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">05 · Calendrier</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce qu'on attend <span class="text-primary italic">de vos équipes</span></h1>
+    </div>
+    <div class="grid md:grid-cols-3 gap-gutter">
+      <div class="relative border-2 border-primary bg-primary-fixed/25 p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Au démarrage · une fois</span>
+        <div class="big-num text-on-background mt-sm">2 h</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Le lancement avec Marc et Marie. Et une demi-journée de Rachel avant son départ, sur ses dossiers et ses prestataires.</p>
+      </div>
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Chaque semaine · Marie</span>
+        <div class="big-num text-on-background mt-sm">2 h</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Marie porte la donnée réelle. Un point hebdomadaire pour valider ce qui a été construit et corriger ce qui frotte.</p>
+      </div>
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Toute l'équipe · deux fois</span>
+        <div class="big-num text-on-background mt-sm">1 h + 1 h</div>
+        <p class="font-body-reg text-body-reg text-on-surface-variant mt-sm">Une formation à la mise en service du budget et des achats, une autre à celle des temps et des écrans.</p>
+      </div>
+    </div>
+    <div class="mt-md bg-on-background text-inverse-on-surface px-md py-sm flex items-center gap-sm flex-wrap shrink-0">
+      <span class="material-symbols-outlined text-secondary-fixed-dim text-lg">arrow_forward</span>
+      <p class="font-body-reg text-body-reg">Un référent côté agence, joignable dans la semaine, et Marc qui ouvre son écran chaque matin. <span class="text-secondary-fixed">Le reste, c'est nous.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 22 · 06 / 07 · Engagements ============ -->
+<section class="slide grid-bg" id="slide-22" data-slide="22">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">06</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 07</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Engagements</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">Ce sur quoi vous pouvez compter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 23 · 06 · Ce sur quoi vous pouvez compter ============ -->
+<section class="slide grid-bg" id="slide-23" data-slide="23">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-lg shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">06 · Engagements</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Ce sur quoi vous pouvez <span class="text-primary italic">compter</span></h1>
+    </div>
+    <div class="grid md:grid-cols-3 gap-gutter">
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary">verified</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Adoption garantie</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Tant que l'équipe n'utilise pas le système au quotidien, je continue l'accompagnement sans facturation supplémentaire sur le périmètre livré, dès lors que le référent, les points hebdomadaires et les formations sont tenus.</p>
+      </div>
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary">schedule</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Délais tenus</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Chaque livrable a une date. Si elle doit bouger, vous le savez 48 h avant, pas le jour même.</p>
+      </div>
+      <div class="relative border border-outline-variant bg-surface-container-lowest p-md card-sockets">
+        <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+        <span class="material-symbols-outlined text-primary">visibility</span>
+        <h3 class="font-title-sm text-title-sm text-on-background mt-sm mb-sm">Transparence totale</h3>
+        <p class="font-body-reg text-body-reg text-on-surface-variant">Un point chaque semaine, un espace partagé à jour en permanence, une réponse sous 24 h.</p>
+      </div>
+    </div>
+    <div class="mt-lg border-t border-outline-variant pt-md flex items-center gap-md flex-wrap shrink-0">
+      <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Certification · Méthode</span>
+      <span class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">PMP® · Green Belt Lean Six Sigma · Consultant Notion</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 24 · 07 / 07 · Offre ============ -->
+<section class="slide grid-bg" id="slide-24" data-slide="24">
+  <div class="slide-body justify-center px-margin py-md max-w-5xl mx-auto">
+    <div class="relative border-l border-r border-on-background/10 px-margin py-xl">
+      <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+      <div class="flex items-baseline gap-md mb-lg">
+        <span class="divider-num">07</span>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">/ 07</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Offre</h1>
+      <div class="w-24 h-1 bg-secondary mb-md"></div>
+      <p class="font-headline-md text-on-surface-variant" style="font-size:clamp(16px,2vw,24px);line-height:1.25">L'investissement, lot par lot.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 25 · 07 · L'investissement ============ -->
+<section class="slide grid-bg" id="slide-25" data-slide="25">
+  <div class="slide-body justify-center px-margin py-md max-w-6xl mx-auto w-full">
+    <div class="mb-md shrink-0">
+      <div class="inline-flex items-center gap-2 mb-sm">
+        <div class="h-2 w-2 bg-primary"></div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">07 · Offre</span>
+      </div>
+      <h1 class="font-headline-md text-headline-md text-on-background tracking-tight">Le projet, son argent, son pilotage</h1>
+      <p class="font-body-reg text-body-reg text-on-surface-variant mt-xs">13 octobre → 11 décembre 2026</p>
+    </div>
+    <div class="grid md:grid-cols-12 gap-gutter items-stretch">
+      <div class="md:col-span-5 relative bg-primary text-on-primary p-md card-sockets flex flex-col justify-center">
+        <span class="cs tl" style="background:#fcf9f8"></span><span class="cs tr" style="background:#fcf9f8"></span><span class="cs bl" style="background:#fcf9f8"></span><span class="cs br" style="background:#fcf9f8"></span>
+        <span class="font-eyebrow text-eyebrow uppercase tracking-widest opacity-80">Lot 1 · au forfait</span>
+        <div class="big-num big-num-xl mt-xs whitespace-nowrap" style="font-size:clamp(40px,5.4vw,76px)">9 800&nbsp;€<span style="font-size:clamp(14px,1.4vw,20px)">&nbsp;HT</span></div>
+        <p class="font-body-reg text-body-reg opacity-90 mt-sm">Livré et utilisé en 9 semaines. 100 % des projets suivis dans Notion.</p>
+        <div class="border-t border-on-primary/25 mt-md pt-md">
+          <span class="font-eyebrow text-eyebrow uppercase tracking-widest opacity-80">Paiement</span>
+          <p class="font-body-reg text-body-reg opacity-90 mt-xs">50 % à la commande, 50 % à la validation du lot.</p>
+        </div>
+      </div>
+      <div class="md:col-span-7 flex flex-col gap-gutter">
+        <div class="relative border border-on-background bg-surface-container-lowest p-md card-sockets">
+          <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+          <span class="font-eyebrow text-eyebrow text-primary uppercase tracking-widest">Inclus dans le lot 1</span>
+          <div class="grid sm:grid-cols-2 gap-sm mt-sm">
+            <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Fiche projet, budget en lignes, achats et commandes</span></div>
+            <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Temps passés et marge réelle par projet</span></div>
+            <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Rétroplanning type, écrans par rôle, assistant de rapprochement</span></div>
+            <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Annuaire prestataires et lieux, démarré avec Rachel</span></div>
+            <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Formation de toute l'équipe</span></div>
+            <div class="flex gap-sm items-start"><span class="material-symbols-outlined text-primary text-lg shrink-0">check_circle</span><span class="font-body-reg text-body-reg text-on-background">Adoption garantie sur le périmètre livré</span></div>
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-gutter">
+          <div class="relative border border-dashed border-on-background bg-surface-container-lowest p-md card-sockets">
+            <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+            <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Lot 2 · en option</span>
+            <div class="big-num big-num-sm text-on-background mt-xs whitespace-nowrap">3 500&nbsp;€<span style="font-size:clamp(11px,1vw,14px)">&nbsp;HT</span></div>
+            <p class="font-body-reg text-body-reg text-on-surface-variant mt-xs">Acquisition et suivi commercial. À décider après le lot 1.</p>
+          </div>
+          <div class="relative border-2 border-secondary bg-secondary-fixed/15 p-md card-sockets">
+            <span class="cs tl"></span><span class="cs tr"></span><span class="cs bl"></span><span class="cs br"></span>
+            <span class="font-eyebrow text-eyebrow text-secondary uppercase tracking-widest">Lot 3 · trois mois</span>
+            <div class="big-num big-num-sm text-on-background mt-xs whitespace-nowrap">2 500&nbsp;€<span style="font-size:clamp(11px,1vw,14px)">&nbsp;HT par mois</span></div>
+            <p class="font-body-reg text-body-reg text-on-surface-variant mt-xs">L'IA dans l'équipe, en rituel mensuel pendant 3 mois.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-md flex items-center gap-sm flex-wrap shrink-0">
+      <span class="material-symbols-outlined text-outline text-lg">info</span>
+      <p class="font-code-label text-code-label text-on-surface-variant uppercase tracking-widest">Hors forfait : l'abonnement Notion, offre Business, environ 20 € par personne et par mois, à confirmer · Furious est conservé · confidentiel, préparé pour L'Alternative.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 26 · Merci Marc, merci Marie ============ -->
+<section class="slide grid-bg" id="slide-26" data-slide="26">
+  <div class="slide-body flex items-center justify-center relative overflow-hidden px-margin">
+    <div class="absolute top-1/4 -left-1/4 w-[700px] h-[700px] bg-primary-fixed opacity-30 rounded-full blur-[120px] -z-10 mix-blend-multiply"></div>
+    <div class="max-w-4xl w-full relative z-10">
+      <div class="relative bg-surface-container-lowest/80 backdrop-blur-sm rounded-lg border border-outline-variant px-margin py-xl">
+        <div class="socket-corner-tl"></div><div class="socket-corner-tr"></div><div class="socket-corner-bl"></div><div class="socket-corner-br"></div>
+        <h1 class="font-display-lg text-display-lg text-on-background tracking-tight mb-md">Merci Marc, merci Marie.</h1>
+        <div class="w-24 h-1 bg-secondary mb-lg"></div>
+        <p class="font-headline-md text-on-surface-variant mb-lg" style="font-size:clamp(16px,2.2vw,28px);line-height:1.25">On valide le lot 1, et les dossiers de Rachel sont dans le système avant la fin du mois.</p>
+        <div class="grid sm:grid-cols-2 gap-md border-t border-outline-variant pt-lg">
+          <div>
+            <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Dates clés</span>
+            <p class="font-body-reg text-body-reg text-on-background mt-xs">Validation souhaitée : 9 octobre<br/>Démarrage : 13 octobre 2026</p>
+          </div>
+          <div>
+            <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Contact</span>
+            <p class="font-body-reg text-body-reg text-on-background mt-xs">Sylvain Ramaradjou<br/>sylvain@ramalogic.com</p>
+          </div>
+        </div>
+        <div class="mt-lg pt-md border-t border-outline-variant flex items-center justify-between flex-wrap gap-sm">
+          <div class="flex items-center gap-sm">
+            <div class="h-2 w-2 bg-primary"></div>
+            <span class="font-code-label text-code-label text-on-surface-variant">Rama Logic · Architecte Notion &amp; IA</span>
+          </div>
+          <span class="font-eyebrow text-eyebrow text-outline uppercase tracking-widest">Confidentiel · préparé pour L'Alternative</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ====== OVERVIEW GRID (ESC) ====== -->
+<div id="overview" class="fixed inset-0 z-[60] bg-background/95 backdrop-blur-md hidden overflow-y-auto p-margin">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="flex items-center justify-between mb-lg sticky top-0 py-sm">
+      <div class="flex items-center gap-md">
+        <div class="font-title-sm text-title-sm font-medium tracking-tight">Vue d'ensemble</div>
+        <span class="font-code-label text-code-label text-outline uppercase tracking-widest">L'Alternative · 27 slides</span>
+      </div>
+      <button id="overview-close" aria-label="Fermer" class="bg-surface-container-lowest border border-on-background w-10 h-10 flex items-center justify-center hover:bg-on-background hover:text-on-primary transition-colors">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div id="overview-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-md"></div>
+  </div>
+</div>
+
+<nav class="nav-controls fixed bottom-margin right-margin z-50 flex flex-col gap-sm">
+  <button id="prev-btn" aria-label="Slide précédente" class="bg-surface-container-lowest border border-on-background w-12 h-12 flex items-center justify-center hover:bg-on-background hover:text-on-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_upward</span>
+  </button>
+  <button id="next-btn" aria-label="Slide suivante" class="bg-on-background text-on-primary border border-on-background w-12 h-12 flex items-center justify-center hover:bg-primary transition-colors">
+    <span class="material-symbols-outlined">arrow_downward</span>
+  </button>
+</nav>
+
+<script>
+  const viewport = document.querySelector('.slides-viewport');
+  const slides = document.querySelectorAll('.slide');
+  const headerBar = document.getElementById('header-bar');
+  const total = slides.length;
+  document.getElementById('total-slides').textContent = String(total);
+
+  let currentIdx = 0;
+
+  function updateCounter() {
+    const viewportRect = viewport.getBoundingClientRect();
+    const center = viewportRect.top + viewportRect.height / 2;
+    let closest = 0;
+    let closestDist = Infinity;
+    slides.forEach((slide, idx) => {
+      const r = slide.getBoundingClientRect();
+      const slideCenter = r.top + r.height / 2;
+      const dist = Math.abs(slideCenter - center);
+      if (dist < closestDist) { closestDist = dist; closest = idx; }
+    });
+    currentIdx = closest;
+    document.getElementById('current-slide').textContent = String(closest + 1);
+    if (closest === 0) { headerBar.classList.add('is-hidden'); }
+    else { headerBar.classList.remove('is-hidden'); }
+  }
+
+  function goToSlide(idx) {
+    if (idx < 0 || idx >= total) return;
+    slides[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.getElementById('prev-btn').addEventListener('click', () => goToSlide(currentIdx - 1));
+  document.getElementById('next-btn').addEventListener('click', () => goToSlide(currentIdx + 1));
+
+  const overview = document.getElementById('overview');
+  const overviewGrid = document.getElementById('overview-grid');
+  const labels = ["Cover", "Sommaire", "01 / 07 · Ce qu'on a vu", "01 · Une agence de 3,5 M€", "01 · Quatre frictions", "01 · Ce que ça coûte", "02 / 07 · Ce que j'y vois", "02 · Un blocage mécanique", "03 / 07 · Furious ou Notion", "03 · Le projet et son argent", "03 · L'équipe et le pilotage", "03 · La partie IA", "03 · Le verdict", "04 / 07 · Le chemin", "04 · Trois lots", "Lot 1 · Le projet et son argent", "Lot 1 · Ce qui le valide", "Lot 2 · Acquisition (option)", "Lot 3 · L'IA dans l'équipe", "05 / 07 · Calendrier", "05 · Du 13 octobre au 11 décembre", "05 · Votre implication", "06 / 07 · Engagements", "06 · Ce sur quoi vous pouvez compter", "07 / 07 · Offre", "07 · L'investissement", "Merci Marc, merci Marie"];
+  slides.forEach((slide, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'overview-card';
+    const num = document.createElement('span');
+    num.className = 'ov-num';
+    num.textContent = String(idx + 1).padStart(2, '0');
+    const label = document.createElement('span');
+    label.className = 'ov-label';
+    label.textContent = labels[idx] || ('Slide ' + (idx + 1));
+    btn.appendChild(num);
+    btn.appendChild(label);
+    btn.addEventListener('click', () => { closeOverview(); setTimeout(() => goToSlide(idx), 60); });
+    overviewGrid.appendChild(btn);
+  });
+  function openOverview() { overview.classList.remove('hidden'); }
+  function closeOverview() { overview.classList.add('hidden'); }
+  document.getElementById('overview-btn').addEventListener('click', openOverview);
+  document.getElementById('overview-close').addEventListener('click', closeOverview);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      overview.classList.contains('hidden') ? openOverview() : closeOverview();
+      return;
+    }
+    if (!overview.classList.contains('hidden')) return;
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) {
+      e.preventDefault();
+      goToSlide(currentIdx + 1);
+    } else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) {
+      e.preventDefault();
+      goToSlide(currentIdx - 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      goToSlide(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      goToSlide(total - 1);
+    }
+  });
+
+  viewport.addEventListener('scroll', () => {
+    requestAnimationFrame(updateCounter);
+  });
+
+  updateCounter();
+</script>
+
+</body>
+</html>
