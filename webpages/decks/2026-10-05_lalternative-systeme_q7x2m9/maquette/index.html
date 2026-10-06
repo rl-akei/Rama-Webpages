@@ -1,164 +1,319 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><title>Maquette fiche projet</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,'Segoe UI','Inter','Helvetica Neue',Arial,sans-serif;color:#37352f;background:#fff;-webkit-font-smoothing:antialiased}
-.slide{width:1600px;height:1000px;overflow:hidden;padding:0;background:#fff;position:relative}
-.top{height:44px;border-bottom:1px solid #ececea;display:flex;align-items:center;padding:0 20px;font-size:13.5px;color:#73726e;gap:8px}
-.top b{color:#37352f;font-weight:500}
+body{font-family:Inter,ui-sans-serif,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#37352f;background:#fff;-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.5}
+.slide{width:1600px;height:1000px;overflow:hidden;position:relative;background:#fff;display:flex;flex-direction:column}
+.app{flex:1;display:flex;min-height:0}
+/* ---- barre laterale ---- */
+.side{width:204px;flex:none;background:#f8f8f7;border-right:1px solid #ecebe9;padding:8px 6px;display:flex;flex-direction:column;font-size:14px;color:#5f5e5b;font-weight:500}
+.ws{display:flex;align-items:center;gap:8px;padding:6px 8px;color:#37352f;font-weight:600;margin-bottom:6px}
+.ws .logo{width:22px;height:22px;border-radius:5px;background:#446254;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:600}
+.si{display:flex;align-items:center;gap:8px;padding:4px 8px;border-radius:6px;height:30px;white-space:nowrap}
+.si svg{flex:none;color:#91918e}
+.si.on{background:#efefed;color:#37352f}
+.si.l2{padding-left:26px}
+.si .em{width:18px;text-align:center;font-size:15px}
+.sh{font-size:12px;color:#91918e;padding:14px 8px 4px;font-weight:500}
+.side .sp{flex:1}
+/* ---- zone principale ---- */
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.top{height:44px;flex:none;display:flex;align-items:center;padding:0 14px;gap:6px;font-size:14px;color:#37352f}
+.top .crumb{display:flex;align-items:center;gap:6px;padding:2px 6px;border-radius:4px}
+.top .sl{color:#c7c6c4}
 .top .sp{flex:1}
-.top .pill{border:1px solid #e3e2df;border-radius:5px;padding:3px 9px;font-size:12.5px}
-.page{padding:34px 96px 0}
-.ico{font-size:44px;line-height:1}
-h1{font-size:36px;font-weight:700;letter-spacing:-.01em;margin:10px 0 16px}
-.props{display:grid;grid-template-columns:repeat(3,1fr);gap:7px 40px;font-size:14px;margin-bottom:22px}
-.prop{display:flex;gap:10px;align-items:center}
-.prop .l{color:#8f8e8a;width:150px;flex:none}
-.chip{display:inline-block;border-radius:4px;padding:1px 8px;font-size:13px;line-height:1.5}
-.c-blue{background:#d6e6f5;color:#1b4a73}.c-green{background:#dcebdc;color:#1f5b33}.c-yellow{background:#f7ecc7;color:#6b5210}
-.c-red{background:#f9dcd9;color:#8a2b21}.c-gray{background:#ebeae8;color:#4d4c48}.c-purple{background:#e7def0;color:#4f2f73}.c-orange{background:#f8e2cd;color:#7a4313}
-.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:10px}
-.kpi{border:1px solid #e9e8e5;border-radius:8px;padding:14px 16px;background:#fbfbfa}
-.kpi .l{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#8f8e8a}
-.kpi .v{font-size:27px;font-weight:650;margin-top:6px;letter-spacing:-.01em}
-.kpi .s{font-size:12.5px;color:#73726e;margin-top:4px}
-.kpi.main{background:#eaf3ec;border-color:#bcd8c4}
-.kpi.main .v{color:#1f5b33}
-.kpi.wait{background:#fdf6e3;border-color:#eddca6}
-.formula{font-size:13px;color:#73726e;margin:0 0 22px;display:flex;align-items:center;gap:8px}
-.formula code{background:#f3f2f0;border-radius:4px;padding:2px 7px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:#37352f}
-.tabs{display:flex;gap:4px;border-bottom:1px solid #e9e8e5;margin-bottom:0;font-size:14.5px}
-.tab{padding:9px 14px;color:#73726e;border-bottom:2px solid transparent;display:flex;gap:7px;align-items:center}
-.tab.on{color:#37352f;font-weight:600;border-bottom-color:#37352f}
-.tab .n{background:#ebeae8;border-radius:10px;font-size:11.5px;padding:0 7px;color:#4d4c48;font-weight:500}
-.bar{display:flex;align-items:center;gap:10px;padding:12px 0 8px;font-size:13px;color:#8f8e8a}
-.bar .btn{background:#2383e2;color:#fff;border-radius:5px;padding:5px 11px;font-weight:500;font-size:13px}
-.bar .sp{flex:1}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th{font-weight:400;color:#8f8e8a;text-align:left;font-size:13px;padding:8px 10px;border-top:1px solid #e9e8e5;border-bottom:1px solid #e9e8e5;white-space:nowrap}
-td{padding:9px 10px;border-bottom:1px solid #f0efed;vertical-align:middle}
-td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.top .m{color:#91918e;font-size:14px;margin-right:6px}
+.top .b{padding:3px 8px;border-radius:5px}
+.top .ic{color:#73726e;display:flex;padding:4px}
+.body{flex:1;display:flex;min-height:0}
+.page{flex:1;min-width:0;padding:18px 28px 0 44px;overflow:hidden}
+.pico{font-size:52px;line-height:1;margin-bottom:6px}
+.back{color:#b5b4b0;font-size:13px;display:flex;align-items:center;gap:6px;margin-bottom:2px}
+h1{font-size:38px;font-weight:700;line-height:1.2;letter-spacing:-.012em;margin-bottom:12px;color:#37352f}
+.pins{display:flex;gap:22px;margin-bottom:20px;flex-wrap:nowrap}
+.pin .l{font-size:12px;color:#91918e;display:flex;align-items:center;gap:5px;margin-bottom:3px;white-space:nowrap}
+.pin .v{font-size:14px;white-space:nowrap;display:flex;align-items:center;gap:6px;height:24px}
+.pin .v.big{font-weight:600}
+.pin .v.pos{color:#448361;font-weight:600}
+/* ---- pastilles ---- */
+.st{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:0 9px 0 7px;height:20px;font-size:14px;white-space:nowrap;line-height:20px}
+.st i{width:8px;height:8px;border-radius:50%;display:block}
+.st.blue{background:#d3e5ef;color:#183347}.st.blue i{background:#5b97bd}
+.st.green{background:#dbeddb;color:#1c3829}.st.green i{background:#6c9b7d}
+.st.yellow{background:#fdecc8;color:#402c1b}.st.yellow i{background:#cb912f}
+.st.gray{background:#e3e2e0;color:#32302c}.st.gray i{background:#91918e}
+.tag{display:inline-block;border-radius:3px;padding:0 6px;height:20px;line-height:20px;font-size:14px;white-space:nowrap}
+.tag.orange{background:#fadec9;color:#49290e}.tag.yellow{background:#fdecc8;color:#402c1b}.tag.blue{background:#d3e5ef;color:#183347}
+.tag.purple{background:#e8deee;color:#412454}.tag.green{background:#dbeddb;color:#1c3829}.tag.gray{background:#e3e2e0;color:#32302c}.tag.pink{background:#f5e0e9;color:#4c2337}
+.rel{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.rel span{border-bottom:1px solid #d9d8d5;line-height:1.25}
+.av{display:inline-flex;width:20px;height:20px;border-radius:50%;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;color:#fff;flex:none}
+.pers{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.file{display:inline-flex;align-items:center;gap:5px;background:#f1f1ef;border-radius:3px;padding:0 6px;height:20px;line-height:20px;font-size:13px;color:#37352f}
+.btnp{display:inline-flex;align-items:center;gap:5px;border:1px solid #e0dfdc;border-radius:5px;padding:0 8px;height:24px;font-size:13px;font-weight:500;background:#fff;box-shadow:0 1px 1px rgba(15,15,15,.04)}
+/* ---- onglets de mise en page ---- */
+.tabs{display:flex;align-items:center;gap:6px;padding-bottom:10px;border-bottom:1px solid #ecebe9}
+.tb{display:inline-flex;align-items:center;gap:6px;border:1px solid #e3e2df;border-radius:999px;padding:0 12px 0 10px;height:30px;font-size:14px;color:#73726e;font-weight:500;white-space:nowrap}
+.tb.on{color:#37352f;border-color:#37352f;box-shadow:inset 0 0 0 .5px #37352f}
+.tb svg{color:#91918e}.tb.on svg{color:#37352f}
+.tabs .sp{flex:1}
+.tabs .ic{color:#91918e;display:flex;padding:4px}
+.new{display:inline-flex;align-items:center;height:28px;border-radius:6px;background:#2383e2;color:#fff;font-weight:500;font-size:14px;overflow:hidden;margin-left:6px}
+.new b{padding:0 10px;font-weight:500}.new u{display:flex;align-items:center;padding:0 6px;border-left:1px solid rgba(255,255,255,.3);height:100%;text-decoration:none}
+/* ---- table Notion ---- */
+table{border-collapse:collapse;width:100%;table-layout:fixed}
+th{font-weight:400;color:#787774;text-align:left;font-size:14px;height:34px;padding:0 8px;border-bottom:1px solid #e9e9e7;border-right:1px solid #e9e9e7;white-space:nowrap;overflow:hidden}
+th:last-child,td:last-child{border-right:0}
+th .h{display:flex;align-items:center;gap:6px}
+th.num .h{justify-content:flex-end}
+th svg,th .g{color:#a4a3a0;flex:none}
+th .g{font-size:13px;font-weight:500;width:16px;text-align:center}
+td{height:34px;padding:0 8px;border-bottom:1px solid #e9e9e7;border-right:1px solid #e9e9e7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
 td.t{font-weight:500}
-tr.tot td{border-top:1px solid #d9d8d4;border-bottom:0;font-weight:600;background:#fbfbfa}
-.muted{color:#a3a29e}
-.warn{color:#b2452f;font-weight:600}
-.ok{color:#1f5b33}
-.lock{color:#8f8e8a;font-size:12px}
-.pdf{display:inline-flex;align-items:center;gap:5px;border:1px solid #e3e2df;border-radius:4px;padding:1px 7px;font-size:12.5px;color:#4d4c48}
-.note{margin-top:14px;font-size:13px;color:#73726e;background:#f7f6f3;border-radius:6px;padding:10px 14px;display:flex;gap:10px}
-.foot{margin:22px 96px 0;padding-top:12px;border-top:1px solid #ececea;font-size:12px;color:#a3a29e;display:flex;justify-content:space-between}
-.two{display:grid;grid-template-columns:1fr 1.25fr;gap:34px}
-.sub{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#8f8e8a;margin:14px 0 6px}
-.av{display:inline-flex;width:22px;height:22px;border-radius:50%;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;margin-right:7px;vertical-align:middle}
-.barh{height:8px;border-radius:4px;background:#ebeae8;overflow:hidden;width:150px;display:inline-block;vertical-align:middle;margin-left:8px}
-.barh i{display:block;height:100%;background:#446254}
-</style></head><body><section class="slide">
-  <div class="top"><span>Projets</span><span>/</span><b>2026-118 · Convention annuelle · Client Exemple</b><span class="sp"></span><span class="pill">Partager</span><span class="pill">Demander à l'IA</span></div>
-  <div class="page">
-    <div class="ico">🎪</div>
-    <h1>Convention annuelle · Client Exemple · 12 mars 2027</h1>
-    <div class="props">
-      <div class="prop"><span class="l">Statut</span><span class="chip c-blue">En production</span></div>
-      <div class="prop"><span class="l">Cheffe de projet</span><span><span class="av" style="background:#b06a3b">C</span>Camille</span></div>
-      <div class="prop"><span class="l">Date d'événement</span><span>12 mars 2027</span></div>
-      <div class="prop"><span class="l">Client</span><span>↗ Client Exemple SA</span></div>
-      <div class="prop"><span class="l">Opportunité d'origine</span><span>↗ Convention 2027 · gagnée</span></div>
-      <div class="prop"><span class="l">Cadre contractuel</span><span class="chip c-green">Bon de commande reçu</span></div>
-      <div class="prop"><span class="l">Format</span><span class="chip c-purple">Convention · plus de 200 personnes</span></div>
-      <div class="prop"><span class="l">Identifiant</span><span>2026-118</span></div>
-      <div class="prop"><span class="l">Dossier Dropbox</span><span>↗ Clients actifs / Client Exemple</span></div>
-    </div>
-    <div class="kpis">
-      <div class="kpi"><div class="l">Budget vendu</div><div class="v">84 000 €</div><div class="s">6 lignes · version V3</div></div>
-      <div class="kpi"><div class="l">Achats validés</div><div class="v">41 200 €</div><div class="s">5 factures payées par Marie</div></div>
-      <div class="kpi wait"><div class="l">Achats en attente</div><div class="v">6 300 €</div><div class="s">2 factures · lot du jeudi 16 h</div></div>
-      <div class="kpi"><div class="l">Temps passés</div><div class="v">9 850 €</div><div class="s">21,5 jours · <span class="lock">🔒 direction</span></div></div>
-      <div class="kpi main"><div class="l">Marge à date</div><div class="v">32 950 €</div><div class="s">39,2 % · 26 650 € une fois les factures en attente payées</div></div>
-    </div>
-    <div class="formula">Calcul : <code>Marge = budget vendu − achats validés − temps passés</code> <span>soit 84 000 € − 41 200 € − 9 850 €</span></div>
-    <div class="tabs"><div class="tab on">Plan de charge <span class="n">6</span></div><div class="tab ">Factures d'achat <span class="n">7</span></div><div class="tab ">Heures passées <span class="n">21,5 j</span></div><div class="tab ">Tâches <span class="n">34</span></div><div class="tab ">Documents <span class="n">12</span></div></div>
-
-    <div class="bar"><span>Vue : par ligne de budget</span><span>· Version V3, validée le 14 janvier</span><span class="sp"></span><span class="btn">Importer un budget Excel</span></div>
-    <table>
-      <tr><th>Poste</th><th>Famille</th><th class="num">Vente</th><th class="num">Provision d'achat</th><th class="num">Achats validés</th><th class="num">En attente</th><th>Reste</th><th class="num">Marge prévue</th></tr>
-      <tr><td class="t">Lieu</td><td><span class="chip c-orange">Lieu</span></td><td class="num">18 000 €</td><td class="num">14 000 €</td><td class="num">14 000 €</td><td class="num"><span class=muted>·</span></td><td><span class="ok">soldé</span></td><td class="num">4 000 €</td></tr><tr><td class="t">Traiteur</td><td><span class="chip c-yellow">Traiteur</span></td><td class="num">22 000 €</td><td class="num">17 000 €</td><td class="num">12 000 €</td><td class="num">4 800 €</td><td>200 € à engager</td><td class="num">5 000 €</td></tr><tr><td class="t">Son et lumière</td><td><span class="chip c-blue">Technique</span></td><td class="num">15 000 €</td><td class="num">10 500 €</td><td class="num">10 900 €</td><td class="num"><span class=muted>·</span></td><td><span class="warn">▲ dépassement de 400 €</span></td><td class="num">4 100 €</td></tr><tr><td class="t">Scénographie</td><td><span class="chip c-purple">Scénographie</span></td><td class="num">12 000 €</td><td class="num">8 000 €</td><td class="num">4 300 €</td><td class="num">1 500 €</td><td>2 200 € à engager</td><td class="num">4 000 €</td></tr><tr><td class="t">Hôtesses</td><td><span class="chip c-green">Hôtesses</span></td><td class="num">5 000 €</td><td class="num">3 600 €</td><td class="num"><span class=muted>·</span></td><td class="num"><span class=muted>·</span></td><td>3 600 € à engager</td><td class="num">1 400 €</td></tr><tr><td class="t">Honoraires agence</td><td><span class="chip c-gray">Honoraires</span></td><td class="num">12 000 €</td><td class="num"><span class=muted>·</span></td><td class="num"><span class=muted>·</span></td><td class="num"><span class=muted>·</span></td><td><span class="muted">temps passés</span></td><td class="num">12 000 €</td></tr>
-      <tr class="tot"><td>Total</td><td></td><td class="num">84 000 €</td><td class="num">53 100 €</td><td class="num">41 200 €</td><td class="num">6 300 €</td><td></td><td class="num">30 500 €</td></tr>
-    </table>
-    <div class="note"><span>💡</span><span>Les colonnes « Achats validés » et « En attente » se remplissent toutes seules à partir de l'onglet Factures d'achat. Un dépassement de provision remonte en rouge, ici sur le son et la lumière.</span></div>
-  </div><div class="foot"><span>Maquette de principe · données d'exemple, chiffres fictifs</span><span>Rama Logic pour L'Alternative</span></div></section><section class="slide">
-  <div class="top"><span>Projets</span><span>/</span><b>2026-118 · Convention annuelle · Client Exemple</b><span class="sp"></span><span class="pill">Partager</span><span class="pill">Demander à l'IA</span></div>
-  <div class="page">
-    <div class="ico">🎪</div>
-    <h1>Convention annuelle · Client Exemple · 12 mars 2027</h1>
-    <div class="props">
-      <div class="prop"><span class="l">Statut</span><span class="chip c-blue">En production</span></div>
-      <div class="prop"><span class="l">Cheffe de projet</span><span><span class="av" style="background:#b06a3b">C</span>Camille</span></div>
-      <div class="prop"><span class="l">Date d'événement</span><span>12 mars 2027</span></div>
-      <div class="prop"><span class="l">Client</span><span>↗ Client Exemple SA</span></div>
-      <div class="prop"><span class="l">Opportunité d'origine</span><span>↗ Convention 2027 · gagnée</span></div>
-      <div class="prop"><span class="l">Cadre contractuel</span><span class="chip c-green">Bon de commande reçu</span></div>
-      <div class="prop"><span class="l">Format</span><span class="chip c-purple">Convention · plus de 200 personnes</span></div>
-      <div class="prop"><span class="l">Identifiant</span><span>2026-118</span></div>
-      <div class="prop"><span class="l">Dossier Dropbox</span><span>↗ Clients actifs / Client Exemple</span></div>
-    </div>
-    <div class="kpis">
-      <div class="kpi"><div class="l">Budget vendu</div><div class="v">84 000 €</div><div class="s">6 lignes · version V3</div></div>
-      <div class="kpi"><div class="l">Achats validés</div><div class="v">41 200 €</div><div class="s">5 factures payées par Marie</div></div>
-      <div class="kpi wait"><div class="l">Achats en attente</div><div class="v">6 300 €</div><div class="s">2 factures · lot du jeudi 16 h</div></div>
-      <div class="kpi"><div class="l">Temps passés</div><div class="v">9 850 €</div><div class="s">21,5 jours · <span class="lock">🔒 direction</span></div></div>
-      <div class="kpi main"><div class="l">Marge à date</div><div class="v">32 950 €</div><div class="s">39,2 % · 26 650 € une fois les factures en attente payées</div></div>
-    </div>
-    <div class="formula">Calcul : <code>Marge = budget vendu − achats validés − temps passés</code> <span>soit 84 000 € − 41 200 € − 9 850 €</span></div>
-    <div class="tabs"><div class="tab ">Plan de charge <span class="n">6</span></div><div class="tab on">Factures d'achat <span class="n">7</span></div><div class="tab ">Heures passées <span class="n">21,5 j</span></div><div class="tab ">Tâches <span class="n">34</span></div><div class="tab ">Documents <span class="n">12</span></div></div>
-
-    <div class="bar"><span>Vue : toutes les factures du projet</span><span class="sp"></span><span class="btn">+ Déposer une facture</span></div>
-    <table>
-      <tr><th>Prestataire</th><th>Ligne de budget</th><th>Objet</th><th class="num">Montant HT</th><th>Déposée par</th><th>Le</th><th>État</th><th>Pièce</th></tr>
-      <tr><td class="t">Le Pavillon d'Exemple</td><td>Lieu</td><td>Acompte 50 %</td><td class="num">7 000 €</td><td>Camille</td><td>18 déc.</td><td><span class="chip c-green">Payée</span></td><td><span class="pdf">📄 facture.pdf</span></td></tr><tr><td class="t">Le Pavillon d'Exemple</td><td>Lieu</td><td>Solde</td><td class="num">7 000 €</td><td>Camille</td><td>22 janv.</td><td><span class="chip c-green">Payée</span></td><td><span class="pdf">📄 facture.pdf</span></td></tr><tr><td class="t">Maison Saveurs</td><td>Traiteur</td><td>Acompte</td><td class="num">12 000 €</td><td>Camille</td><td>15 janv.</td><td><span class="chip c-green">Payée</span></td><td><span class="pdf">📄 facture.pdf</span></td></tr><tr><td class="t">Audio Scène</td><td>Son et lumière</td><td>Prestation complète</td><td class="num">10 900 €</td><td>Camille</td><td>29 janv.</td><td><span class="chip c-green">Payée</span></td><td><span class="pdf">📄 facture.pdf</span></td></tr><tr><td class="t">Atelier Décor</td><td>Scénographie</td><td>Fabrication</td><td class="num">4 300 €</td><td>Séverine</td><td>29 janv.</td><td><span class="chip c-green">Payée</span></td><td><span class="pdf">📄 facture.pdf</span></td></tr><tr><td class="t">Maison Saveurs</td><td>Traiteur</td><td>Solde</td><td class="num">4 800 €</td><td>Camille</td><td>3 févr.</td><td><span class="chip c-yellow">À valider · jeudi 16 h</span></td><td><span class="pdf">📄 facture.pdf</span></td></tr><tr><td class="t">Atelier Décor</td><td>Scénographie</td><td>Pose sur site</td><td class="num">1 500 €</td><td>Camille</td><td>4 févr.</td><td><span class="chip c-yellow">À valider · jeudi 16 h</span></td><td><span class="pdf">📄 facture.pdf</span></td></tr>
-      <tr class="tot"><td>Total</td><td></td><td></td><td class="num">47 500 €</td><td></td><td></td><td>41 200 € payés · 6 300 € en attente</td><td></td></tr>
-    </table>
-    <div class="note"><span>💡</span><span>La cheffe de projet dépose la facture avec le bouton bleu. Une tâche « Facture à valider » arrive chez Marie. Quand Marie clique « C'est payé », la ligne passe en vert et le plan de charge se met à jour.</span></div>
-  </div><div class="foot"><span>Maquette de principe · données d'exemple, chiffres fictifs</span><span>Rama Logic pour L'Alternative</span></div></section><section class="slide">
-  <div class="top"><span>Projets</span><span>/</span><b>2026-118 · Convention annuelle · Client Exemple</b><span class="sp"></span><span class="pill">Partager</span><span class="pill">Demander à l'IA</span></div>
-  <div class="page">
-    <div class="ico">🎪</div>
-    <h1>Convention annuelle · Client Exemple · 12 mars 2027</h1>
-    <div class="props">
-      <div class="prop"><span class="l">Statut</span><span class="chip c-blue">En production</span></div>
-      <div class="prop"><span class="l">Cheffe de projet</span><span><span class="av" style="background:#b06a3b">C</span>Camille</span></div>
-      <div class="prop"><span class="l">Date d'événement</span><span>12 mars 2027</span></div>
-      <div class="prop"><span class="l">Client</span><span>↗ Client Exemple SA</span></div>
-      <div class="prop"><span class="l">Opportunité d'origine</span><span>↗ Convention 2027 · gagnée</span></div>
-      <div class="prop"><span class="l">Cadre contractuel</span><span class="chip c-green">Bon de commande reçu</span></div>
-      <div class="prop"><span class="l">Format</span><span class="chip c-purple">Convention · plus de 200 personnes</span></div>
-      <div class="prop"><span class="l">Identifiant</span><span>2026-118</span></div>
-      <div class="prop"><span class="l">Dossier Dropbox</span><span>↗ Clients actifs / Client Exemple</span></div>
-    </div>
-    <div class="kpis">
-      <div class="kpi"><div class="l">Budget vendu</div><div class="v">84 000 €</div><div class="s">6 lignes · version V3</div></div>
-      <div class="kpi"><div class="l">Achats validés</div><div class="v">41 200 €</div><div class="s">5 factures payées par Marie</div></div>
-      <div class="kpi wait"><div class="l">Achats en attente</div><div class="v">6 300 €</div><div class="s">2 factures · lot du jeudi 16 h</div></div>
-      <div class="kpi"><div class="l">Temps passés</div><div class="v">9 850 €</div><div class="s">21,5 jours · <span class="lock">🔒 direction</span></div></div>
-      <div class="kpi main"><div class="l">Marge à date</div><div class="v">32 950 €</div><div class="s">39,2 % · 26 650 € une fois les factures en attente payées</div></div>
-    </div>
-    <div class="formula">Calcul : <code>Marge = budget vendu − achats validés − temps passés</code> <span>soit 84 000 € − 41 200 € − 9 850 €</span></div>
-    <div class="tabs"><div class="tab ">Plan de charge <span class="n">6</span></div><div class="tab ">Factures d'achat <span class="n">7</span></div><div class="tab on">Heures passées <span class="n">21,5 j</span></div><div class="tab ">Tâches <span class="n">34</span></div><div class="tab ">Documents <span class="n">12</span></div></div>
-
-    <div class="two">
-      <div>
-        <div class="sub">Cumul par personne</div>
-        <table>
-          <tr><th>Personne</th><th>Rôle</th><th class="num">Temps passé</th><th class="num">Coût <span class="lock">🔒</span></th></tr>
-          <tr><td class="t"><span class="av" style="background:#b06a3b">C</span>Camille</td><td class="muted">Cheffe de projet</td><td class="num">14,0 j<span class="barh"><i style="width:100%"></i></span></td><td class="num">6 258 €</td></tr><tr><td class="t"><span class="av" style="background:#5b7fa6">S</span>Séverine</td><td class="muted">Direction de production</td><td class="num">3,0 j<span class="barh"><i style="width:21%"></i></span></td><td class="num">1 000 €</td></tr><tr><td class="t"><span class="av" style="background:#446254">M</span>Marc</td><td class="muted">Concept et direction</td><td class="num">2,5 j<span class="barh"><i style="width:18%"></i></span></td><td class="num">2 000 €</td></tr><tr><td class="t"><span class="av" style="background:#8a5aa8">M</span>Marie</td><td class="muted">Administration</td><td class="num">2,0 j<span class="barh"><i style="width:14%"></i></span></td><td class="num">592 €</td></tr>
-          <tr class="tot"><td>Total</td><td></td><td class="num">21,5 j</td><td class="num">9 850 €</td></tr>
-        </table>
-        <div class="note"><span>🔒</span><span>La colonne Coût n'est visible que de Marc et de Marie. Les cheffes de projet voient leurs temps, pas les coûts journaliers.</span></div>
+td.t .pi{display:inline-flex;vertical-align:-3px;margin-right:6px;color:#91918e}
+td.empty{color:#c7c6c4}
+.red{color:#d44c47;font-weight:500}.grn{color:#448361}.mut{color:#9b9a97}
+tr.newrow td{color:#b5b4b0;border-right:0}
+tr.calc td{border:0;height:32px;font-size:10.5px;color:#91918e;text-align:right;text-transform:uppercase;letter-spacing:.02em;overflow:visible;padding:0 8px 0 0}
+tr.calc td b{color:#37352f;font-size:13.5px;font-weight:500;text-transform:none;letter-spacing:0;margin-left:5px}
+tr.grp td{border-right:0;height:38px;font-weight:600;border-bottom:1px solid #e9e9e7}
+tr.grp td .cnt{color:#9b9a97;font-weight:400;margin-left:8px}
+tr.grp td .tri{display:inline-block;color:#9b9a97;margin-right:8px;font-size:10px;vertical-align:1px}
+tr.grp td .sum{float:right;font-weight:400;color:#91918e;font-size:12px;text-transform:uppercase}
+tr.grp td .sum b{color:#37352f;font-size:14px;font-weight:500;text-transform:none;margin-left:6px}
+/* ---- panneau Details ---- */
+.det{width:292px;flex:none;border-left:1px solid #ecebe9;padding:18px 14px 0 16px}
+.det .dh{font-size:12px;color:#91918e;font-weight:500;margin:0 0 6px;display:flex;justify-content:space-between}
+.det .sec{font-size:12px;color:#91918e;font-weight:500;margin:16px 0 4px;padding-top:12px;border-top:1px solid #ecebe9}
+.pr{display:flex;align-items:center;min-height:32px;font-size:14px}
+.pr .k{width:130px;flex:none;color:#787774;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.pr .k svg,.pr .k .g{color:#a4a3a0;flex:none}
+.pr .k .g{font-size:13px;font-weight:500;width:16px;text-align:center}
+.pr .val{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* ---- legende ---- */
+.cap{height:40px;flex:none;background:#37352f;color:#e9e8e4;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-size:13px}
+.cap b{color:#fff;font-weight:600}
+.cap span.r{color:#b5b4b0}
+</style></head><body><section class="slide"><div class="app"><aside class="side">
+      <div class="ws"><span class="logo">L</span>L'Alternative</div>
+      <div class="si"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg>Rechercher</div>
+      <div class="si"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7 8 2.5 13.5 7v6.5h-11z"/></svg>Accueil</div>
+      <div class="si"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5 9.3 6.7 13.5 8 9.3 9.3 8 13.5 6.7 9.3 2.5 8 6.7 6.7z"/></svg>Notion AI</div>
+      <div class="si"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9.5h3l1 1.5h3l1-1.5h3M2.5 9.5 4 3.5h8l1.5 6v3.5h-11z"/></svg>Boîte de réception</div>
+      <div class="sh">Espaces d'équipe</div>
+      <div class="si"><span class="em">🎪</span>Agence</div>
+      <div class="si l2"><span class="em">💼</span>Opportunités</div>
+      <div class="si l2 on"><span class="em">📁</span>Projets</div>
+      <div class="si l2"><span class="em">✅</span>Tâches</div>
+      <div class="si l2"><span class="em">🧾</span>Factures d'achat</div>
+      <div class="si l2"><span class="em">⏱️</span>Temps passés</div>
+      <div class="si l2"><span class="em">🤝</span>Prestataires et lieux</div>
+      <div class="si l2"><span class="em">👥</span>Contacts et sociétés</div>
+      <div class="si"><span class="em">📊</span>Direction</div>
+      <div class="si l2"><span class="em">📈</span>Pilotage</div>
+      <div class="sh">Privé</div>
+      <div class="si"><span class="em">🗒️</span>Mes notes</div>
+      <div class="sp"></div>
+      <div class="si"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Inviter des membres</div>
+    </aside>
+    <div class="main">
+      <div class="top">
+        <span class="crumb">🎪 Agence</span><span class="sl">/</span><span class="crumb">📁 Projets</span><span class="sl">/</span><span class="crumb">🎪 Convention annuelle · Client Exemple</span>
+        <span class="sp"></span><span class="m">Modifié à l'instant</span><span class="b">Partager</span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5h11v7.5H7l-3 2.5V11H2.5z"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2.5 1.7 3.5 3.8.5-2.8 2.7.7 3.8L8 11.2 4.6 13l.7-3.8L2.5 6.5l3.8-.5z"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M10 3v10"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="3.5" cy="8" r=".9" fill="currentColor"/><circle cx="8" cy="8" r=".9" fill="currentColor"/><circle cx="12.5" cy="8" r=".9" fill="currentColor"/></svg></span>
       </div>
-      <div>
-        <div class="sub">Dernières sessions de travail</div>
-        <table>
-          <tr><th>Qui</th><th>Tâche</th><th>Date</th><th class="num">Durée</th></tr>
-          <tr><td><span class="av" style="background:#b06a3b">C</span>Camille</td><td class="t">Repérage du lieu et plan d'implantation</td><td>3 févr.</td><td class="num">3 h 30</td></tr><tr><td><span class="av" style="background:#b06a3b">C</span>Camille</td><td class="t">Consultation traiteurs, 3 devis</td><td>2 févr.</td><td class="num">2 h 15</td></tr><tr><td><span class="av" style="background:#446254">M</span>Marc</td><td class="t">Concept et ligne créative V2</td><td>30 janv.</td><td class="num">4 h 00</td></tr><tr><td><span class="av" style="background:#5b7fa6">S</span>Séverine</td><td class="t">Validation du budget V3</td><td>29 janv.</td><td class="num">1 h 30</td></tr><tr><td><span class="av" style="background:#b06a3b">C</span>Camille</td><td class="t">Weekly client et compte rendu</td><td>28 janv.</td><td class="num">1 h 15</td></tr><tr><td><span class="av" style="background:#8a5aa8">M</span>Marie</td><td class="t">Factures du lot du jeudi</td><td>28 janv.</td><td class="num">0 h 45</td></tr>
-        </table>
-        <div class="note"><span>💡</span><span>Chaque session est lancée depuis une tâche du projet. Elle est donc rattachée au projet et au client sans rien ressaisir. Honoraires vendus : 12 000 €, temps passés : 9 850 €.</span></div>
+      <div class="body">
+        <div class="page">
+          <div class="pico">🎪</div>
+          <div class="back"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 5 11M5 6v5h5"/></svg> 1 lien entrant</div>
+          <h1>Convention annuelle · Client Exemple</h1>
+          <div class="pins">
+            <div class="pin"><div class="l"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5" stroke-dasharray="2.2 2.2"/></svg>Statut</div><div class="v"><span class="st blue"><i></i>En production</span></div></div>
+            <div class="pin"><div class="l"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Cheffe de projet</div><div class="v"><span class="pers"><span class="av" style="background:#c4733b">C</span>Camille</span></div></div>
+            <div class="pin"><div class="l"><span class="g">Σ</span>Budget vendu</div><div class="v big">84 000 €</div></div>
+            <div class="pin"><div class="l"><span class="g">Σ</span>Achats validés</div><div class="v big">41 200 €</div></div>
+            <div class="pin"><div class="l"><span class="g">Σ</span>Achats en attente</div><div class="v big">6 300 €</div></div>
+            <div class="pin"><div class="l"><span class="g">Σ</span>Temps passés</div><div class="v big">9 850 €</div></div>
+            <div class="pin"><div class="l"><span class="g">Σ</span>Marge à date</div><div class="v pos">32 950 € · 39,2&nbsp;%</div></div>
+          </div>
+          <div class="tabs"><span class="tb "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h10M3 8h10M3 11.5h6"/></svg>Contenu</span><span class="tb on"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M6.5 6.5V13"/></svg>Plan de charge</span><span class="tb "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg>Factures d'achat</span><span class="tb "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3.2l2 1.3"/></svg>Heures passées</span><span class="tb "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.8" fill="currentColor" stroke="none"/><path d="m5.6 8.2 1.7 1.7 3.2-3.5" stroke="#fff"/></svg>Tâches</span><span class="tb" style="padding:0 8px"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5v9M3.5 8h9"/></svg></span><span class="sp"></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h10M5 8h6M7 11.5h2"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v10m0 0-2-2m2 2 2-2M11 13V3m0 0-2 2m2-2 2 2"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="3.5" cy="8" r=".9" fill="currentColor"/><circle cx="8" cy="8" r=".9" fill="currentColor"/><circle cx="12.5" cy="8" r=".9" fill="currentColor"/></svg></span><span class="new"><b>Nouveau</b><u><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 6.5 3.5 3.5 3.5-3.5"/></svg></u></span></div>
+          <table>
+  <tr><th class="" style="width:160px"><div class="h"><span class="g">Aa</span>Poste</div></th><th class="" style="width:112px"><div class="h"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5"/><path d="m5.8 7.2 2.2 2.2 2.2-2.2"/></svg>Famille</div></th><th class="num" style="width:116px"><div class="h"><span class="g">#</span>Vente</div></th><th class="num" style="width:118px"><div class="h"><span class="g">#</span>Provision</div></th><th class="num" style="width:128px"><div class="h"><span class="g">Σ</span>Achats validés</div></th><th class="num" style="width:116px"><div class="h"><span class="g">Σ</span>En attente</div></th><th class=""><div class="h"><span class="g">Σ</span>Reste</div></th><th class="num" style="width:124px"><div class="h"><span class="g">Σ</span>Marge prévue</div></th></tr>
+  <tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Lieu</td><td><span class="tag orange">Lieu</span></td><td class="num">18 000 €</td><td class="num">14 000 €</td><td class="num">14 000 €</td><td class="num empty"></td><td><span class="grn">Soldé</span></td><td class="num">4 000 €</td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Traiteur</td><td><span class="tag yellow">Traiteur</span></td><td class="num">22 000 €</td><td class="num">17 000 €</td><td class="num">12 000 €</td><td class="num">4 800 €</td><td>200 € à engager</td><td class="num">5 000 €</td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Son et lumière</td><td><span class="tag blue">Technique</span></td><td class="num">15 000 €</td><td class="num">10 500 €</td><td class="num">10 900 €</td><td class="num empty"></td><td><span class="red">Dépasse de 400 €</span></td><td class="num">4 100 €</td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Scénographie</td><td><span class="tag purple">Scénographie</span></td><td class="num">12 000 €</td><td class="num">8 000 €</td><td class="num">4 300 €</td><td class="num">1 500 €</td><td>2 200 € à engager</td><td class="num">4 000 €</td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Hôtesses</td><td><span class="tag green">Hôtesses</span></td><td class="num">5 000 €</td><td class="num">3 600 €</td><td class="num empty"></td><td class="num empty"></td><td>3 600 € à engager</td><td class="num">1 400 €</td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Honoraires</td><td><span class="tag gray">Honoraires</span></td><td class="num">12 000 €</td><td class="num empty"></td><td class="num empty"></td><td class="num empty"></td><td><span class="mut">Temps passés</span></td><td class="num">12 000 €</td></tr>
+  <tr class="newrow"><td colspan="8">+ Nouvelle page</td></tr>
+  <tr class="calc"><td></td><td></td><td>Somme<b>84 000 €</b></td><td>Somme<b>53 100 €</b></td><td>Somme<b>41 200 €</b></td><td>Somme<b>6 300 €</b></td><td></td><td>Somme<b>30 500 €</b></td></tr>
+</table>
+        </div>
+        <aside class="det">
+          <div class="dh"><span>Détails</span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5M6 5h5v5"/></svg>Client</span><span class="val"><span class="rel">🏢 <span>Client Exemple</span></span></span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5M6 5h5v5"/></svg>Opportunité</span><span class="val"><span class="rel">💼 <span>Convention 2027</span></span></span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M5.5 2v2.5M10.5 2v2.5"/></svg>Événement</span><span class="val">12 mars 2027</span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5"/><path d="m5.8 7.2 2.2 2.2 2.2-2.2"/></svg>Format</span><span class="val"><span class="tag purple">Convention</span></span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5" stroke-dasharray="2.2 2.2"/></svg>Contrat</span><span class="val"><span class="st green"><i></i>PO reçu</span></span></div>
+          <div class="pr"><span class="k"><span class="g">#</span>Identifiant</span><span class="val">2026-118</span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.8 9.2a2.5 2.5 0 0 0 3.5 0l2-2a2.5 2.5 0 0 0-3.5-3.5l-.8.8M9.2 6.8a2.5 2.5 0 0 0-3.5 0l-2 2a2.5 2.5 0 0 0 3.5 3.5l.8-.8"/></svg>Dropbox</span><span class="val" style="color:#787774;text-decoration:underline">dropbox.com/…</span></div>
+          <div class="sec">Argent</div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Budget vendu</span><span class="val">84 000 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Provisions</span><span class="val">53 100 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Achats validés</span><span class="val">41 200 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>En attente</span><span class="val">6 300 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Temps passés</span><span class="val">9 850 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Marge prévue</span><span class="val">30 500 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Marge à date</span><span class="val grn" style="font-weight:600">32 950 €</span></div>
+          <div class="sec">Équipe</div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Pilote</span><span class="val"><span class="pers"><span class="av" style="background:#c4733b">C</span>Camille</span></span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Production</span><span class="val"><span class="pers"><span class="av" style="background:#5b7fa6">S</span>Séverine</span></span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Direction</span><span class="val"><span class="pers"><span class="av" style="background:#446254">M</span>Marc</span></span></div>
+        </aside>
       </div>
-    </div>
-  </div><div class="foot"><span>Maquette de principe · données d'exemple, chiffres fictifs</span><span>Rama Logic pour L'Alternative</span></div></section></body></html>
+    </div></div>
+    <div class="cap"><span><b>Maquette de principe, données d'exemple.</b> Le plan de charge : une ligne par poste. Les achats validés et en attente remontent tout seuls depuis les factures.</span><span class="r">Rama Logic pour L'Alternative</span></div>
+  </section><section class="slide"><div class="app"><aside class="side">
+      <div class="ws"><span class="logo">L</span>L'Alternative</div>
+      <div class="si"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg>Rechercher</div>
+      <div class="si"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7 8 2.5 13.5 7v6.5h-11z"/></svg>Accueil</div>
+      <div class="si"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5 9.3 6.7 13.5 8 9.3 9.3 8 13.5 6.7 9.3 2.5 8 6.7 6.7z"/></svg>Notion AI</div>
+      <div class="si"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9.5h3l1 1.5h3l1-1.5h3M2.5 9.5 4 3.5h8l1.5 6v3.5h-11z"/></svg>Boîte de réception</div>
+      <div class="sh">Espaces d'équipe</div>
+      <div class="si"><span class="em">🎪</span>Agence</div>
+      <div class="si l2"><span class="em">💼</span>Opportunités</div>
+      <div class="si l2 on"><span class="em">📁</span>Projets</div>
+      <div class="si l2"><span class="em">✅</span>Tâches</div>
+      <div class="si l2"><span class="em">🧾</span>Factures d'achat</div>
+      <div class="si l2"><span class="em">⏱️</span>Temps passés</div>
+      <div class="si l2"><span class="em">🤝</span>Prestataires et lieux</div>
+      <div class="si l2"><span class="em">👥</span>Contacts et sociétés</div>
+      <div class="si"><span class="em">📊</span>Direction</div>
+      <div class="si l2"><span class="em">📈</span>Pilotage</div>
+      <div class="sh">Privé</div>
+      <div class="si"><span class="em">🗒️</span>Mes notes</div>
+      <div class="sp"></div>
+      <div class="si"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Inviter des membres</div>
+    </aside>
+    <div class="main">
+      <div class="top">
+        <span class="crumb">🎪 Agence</span><span class="sl">/</span><span class="crumb">📁 Projets</span><span class="sl">/</span><span class="crumb">🎪 Convention annuelle · Client Exemple</span>
+        <span class="sp"></span><span class="m">Modifié à l'instant</span><span class="b">Partager</span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5h11v7.5H7l-3 2.5V11H2.5z"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2.5 1.7 3.5 3.8.5-2.8 2.7.7 3.8L8 11.2 4.6 13l.7-3.8L2.5 6.5l3.8-.5z"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M10 3v10"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="3.5" cy="8" r=".9" fill="currentColor"/><circle cx="8" cy="8" r=".9" fill="currentColor"/><circle cx="12.5" cy="8" r=".9" fill="currentColor"/></svg></span>
+      </div>
+      <div class="body">
+        <div class="page">
+          <div class="pico">🎪</div>
+          <div class="back"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 5 11M5 6v5h5"/></svg> 1 lien entrant</div>
+          <h1>Convention annuelle · Client Exemple</h1>
+          <div class="pins">
+            <div class="pin"><div class="l"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5" stroke-dasharray="2.2 2.2"/></svg>Statut</div><div class="v"><span class="st blue"><i></i>En production</span></div></div>
+            <div class="pin"><div class="l"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Cheffe de projet</div><div class="v"><span class="pers"><span class="av" style="background:#c4733b">C</span>Camille</span></div></div>
+            <div class="pin"><div class="l"><span class="g">Σ</span>Budget vendu</div><div class="v big">84 000 €</div></div>
+            <div class="pin"><div class="l"><span class="g">Σ</span>Achats validés</div><div class="v big">41 200 €</div></div>
+            <div class="pin"><div class="l"><span class="g">Σ</span>Achats en attente</div><div class="v big">6 300 €</div></div>
+            <div class="pin"><div class="l"><span class="g">Σ</span>Temps passés</div><div class="v big">9 850 €</div></div>
+            <div class="pin"><div class="l"><span class="g">Σ</span>Marge à date</div><div class="v pos">32 950 € · 39,2&nbsp;%</div></div>
+          </div>
+          <div class="tabs"><span class="tb "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h10M3 8h10M3 11.5h6"/></svg>Contenu</span><span class="tb "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M6.5 6.5V13"/></svg>Plan de charge</span><span class="tb on"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg>Factures d'achat</span><span class="tb "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3.2l2 1.3"/></svg>Heures passées</span><span class="tb "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.8" fill="currentColor" stroke="none"/><path d="m5.6 8.2 1.7 1.7 3.2-3.5" stroke="#fff"/></svg>Tâches</span><span class="tb" style="padding:0 8px"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5v9M3.5 8h9"/></svg></span><span class="sp"></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h10M5 8h6M7 11.5h2"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v10m0 0-2-2m2 2 2-2M11 13V3m0 0-2 2m2-2 2 2"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="3.5" cy="8" r=".9" fill="currentColor"/><circle cx="8" cy="8" r=".9" fill="currentColor"/><circle cx="12.5" cy="8" r=".9" fill="currentColor"/></svg></span><span class="new"><b>Nouveau</b><u><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 6.5 3.5 3.5 3.5-3.5"/></svg></u></span></div>
+          <table><tr><th class="" style="width:208px"><div class="h"><span class="g">Aa</span>Facture</div></th><th class="" style="width:152px"><div class="h"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5M6 5h5v5"/></svg>Ligne de budget</div></th><th class="num" style="width:108px"><div class="h"><span class="g">#</span>Montant HT</div></th><th class="" style="width:106px"><div class="h"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5" stroke-dasharray="2.2 2.2"/></svg>État</div></th><th class="" style="width:118px"><div class="h"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Déposée par</div></th><th class="" style="width:112px"><div class="h"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M5.5 2v2.5M10.5 2v2.5"/></svg>Déposée le</div></th><th class="" style="width:102px"><div class="h"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 7.5 7 11a2 2 0 0 1-2.8-2.8l4.3-4.3a1.3 1.3 0 0 1 1.9 1.9L6.3 9.9"/></svg>Pièce</div></th><th class=""><div class="h"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4 3 8 4.5-3.4 1L7 12z"/></svg>Validation</div></th></tr>
+  <tr class="grp"><td colspan="8"><span class="tri">▼</span><span class="st yellow"><i></i>À valider</span><span class="cnt">2</span><span class="sum">Somme<b>6 300 €</b></span></td></tr>
+  <tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Maison Saveurs · solde</td><td><span class="rel"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg><span>Traiteur</span></span></td><td class="num">4 800 €</td><td><span class="st yellow"><i></i>À valider</span></td><td><span class="pers"><span class="av" style="background:#c4733b">C</span>Camille</span></td><td>3 févr. 2027</td><td><span class="file"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 7.5 7 11a2 2 0 0 1-2.8-2.8l4.3-4.3a1.3 1.3 0 0 1 1.9 1.9L6.3 9.9"/></svg>facture.pdf</span></td><td><span class="btnp"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4 3 8 4.5-3.4 1L7 12z"/></svg>C'est payé</span></td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Atelier Décor · pose sur site</td><td><span class="rel"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg><span>Scénographie</span></span></td><td class="num">1 500 €</td><td><span class="st yellow"><i></i>À valider</span></td><td><span class="pers"><span class="av" style="background:#c4733b">C</span>Camille</span></td><td>4 févr. 2027</td><td><span class="file"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 7.5 7 11a2 2 0 0 1-2.8-2.8l4.3-4.3a1.3 1.3 0 0 1 1.9 1.9L6.3 9.9"/></svg>facture.pdf</span></td><td><span class="btnp"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4 3 8 4.5-3.4 1L7 12z"/></svg>C'est payé</span></td></tr>
+  <tr class="grp"><td colspan="8"><span class="tri">▼</span><span class="st green"><i></i>Payée</span><span class="cnt">5</span><span class="sum">Somme<b>41 200 €</b></span></td></tr>
+  <tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Le Pavillon · acompte</td><td><span class="rel"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg><span>Lieu</span></span></td><td class="num">7 000 €</td><td><span class="st green"><i></i>Payée</span></td><td><span class="pers"><span class="av" style="background:#c4733b">C</span>Camille</span></td><td>18 déc. 2026</td><td><span class="file"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 7.5 7 11a2 2 0 0 1-2.8-2.8l4.3-4.3a1.3 1.3 0 0 1 1.9 1.9L6.3 9.9"/></svg>facture.pdf</span></td><td><span class="mut">Validée</span></td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Le Pavillon · solde</td><td><span class="rel"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg><span>Lieu</span></span></td><td class="num">7 000 €</td><td><span class="st green"><i></i>Payée</span></td><td><span class="pers"><span class="av" style="background:#c4733b">C</span>Camille</span></td><td>22 janv. 2027</td><td><span class="file"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 7.5 7 11a2 2 0 0 1-2.8-2.8l4.3-4.3a1.3 1.3 0 0 1 1.9 1.9L6.3 9.9"/></svg>facture.pdf</span></td><td><span class="mut">Validée</span></td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Maison Saveurs · acompte</td><td><span class="rel"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg><span>Traiteur</span></span></td><td class="num">12 000 €</td><td><span class="st green"><i></i>Payée</span></td><td><span class="pers"><span class="av" style="background:#c4733b">C</span>Camille</span></td><td>15 janv. 2027</td><td><span class="file"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 7.5 7 11a2 2 0 0 1-2.8-2.8l4.3-4.3a1.3 1.3 0 0 1 1.9 1.9L6.3 9.9"/></svg>facture.pdf</span></td><td><span class="mut">Validée</span></td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Audio Scène · prestation</td><td><span class="rel"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg><span>Son et lumière</span></span></td><td class="num">10 900 €</td><td><span class="st green"><i></i>Payée</span></td><td><span class="pers"><span class="av" style="background:#c4733b">C</span>Camille</span></td><td>29 janv. 2027</td><td><span class="file"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 7.5 7 11a2 2 0 0 1-2.8-2.8l4.3-4.3a1.3 1.3 0 0 1 1.9 1.9L6.3 9.9"/></svg>facture.pdf</span></td><td><span class="mut">Validée</span></td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Atelier Décor · fabrication</td><td><span class="rel"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg><span>Scénographie</span></span></td><td class="num">4 300 €</td><td><span class="st green"><i></i>Payée</span></td><td><span class="pers"><span class="av" style="background:#5b7fa6">S</span>Séverine</span></td><td>29 janv. 2027</td><td><span class="file"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 7.5 7 11a2 2 0 0 1-2.8-2.8l4.3-4.3a1.3 1.3 0 0 1 1.9 1.9L6.3 9.9"/></svg>facture.pdf</span></td><td><span class="mut">Validée</span></td></tr>
+  <tr class="newrow"><td colspan="8">+ Nouvelle page</td></tr>
+</table>
+        </div>
+        <aside class="det">
+          <div class="dh"><span>Détails</span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5M6 5h5v5"/></svg>Client</span><span class="val"><span class="rel">🏢 <span>Client Exemple</span></span></span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5M6 5h5v5"/></svg>Opportunité</span><span class="val"><span class="rel">💼 <span>Convention 2027</span></span></span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M5.5 2v2.5M10.5 2v2.5"/></svg>Événement</span><span class="val">12 mars 2027</span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5"/><path d="m5.8 7.2 2.2 2.2 2.2-2.2"/></svg>Format</span><span class="val"><span class="tag purple">Convention</span></span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5" stroke-dasharray="2.2 2.2"/></svg>Contrat</span><span class="val"><span class="st green"><i></i>PO reçu</span></span></div>
+          <div class="pr"><span class="k"><span class="g">#</span>Identifiant</span><span class="val">2026-118</span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.8 9.2a2.5 2.5 0 0 0 3.5 0l2-2a2.5 2.5 0 0 0-3.5-3.5l-.8.8M9.2 6.8a2.5 2.5 0 0 0-3.5 0l-2 2a2.5 2.5 0 0 0 3.5 3.5l.8-.8"/></svg>Dropbox</span><span class="val" style="color:#787774;text-decoration:underline">dropbox.com/…</span></div>
+          <div class="sec">Argent</div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Budget vendu</span><span class="val">84 000 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Provisions</span><span class="val">53 100 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Achats validés</span><span class="val">41 200 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>En attente</span><span class="val">6 300 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Temps passés</span><span class="val">9 850 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Marge prévue</span><span class="val">30 500 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Marge à date</span><span class="val grn" style="font-weight:600">32 950 €</span></div>
+          <div class="sec">Équipe</div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Pilote</span><span class="val"><span class="pers"><span class="av" style="background:#c4733b">C</span>Camille</span></span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Production</span><span class="val"><span class="pers"><span class="av" style="background:#5b7fa6">S</span>Séverine</span></span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Direction</span><span class="val"><span class="pers"><span class="av" style="background:#446254">M</span>Marc</span></span></div>
+        </aside>
+      </div>
+    </div></div>
+    <div class="cap"><span><b>Maquette de principe, données d'exemple.</b> La cheffe de projet dépose la facture, Marie clique « C'est payé », le plan de charge se met à jour.</span><span class="r">Rama Logic pour L'Alternative</span></div>
+  </section><section class="slide"><div class="app"><aside class="side">
+      <div class="ws"><span class="logo">L</span>L'Alternative</div>
+      <div class="si"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg>Rechercher</div>
+      <div class="si"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7 8 2.5 13.5 7v6.5h-11z"/></svg>Accueil</div>
+      <div class="si"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5 9.3 6.7 13.5 8 9.3 9.3 8 13.5 6.7 9.3 2.5 8 6.7 6.7z"/></svg>Notion AI</div>
+      <div class="si"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9.5h3l1 1.5h3l1-1.5h3M2.5 9.5 4 3.5h8l1.5 6v3.5h-11z"/></svg>Boîte de réception</div>
+      <div class="sh">Espaces d'équipe</div>
+      <div class="si"><span class="em">🎪</span>Agence</div>
+      <div class="si l2"><span class="em">💼</span>Opportunités</div>
+      <div class="si l2 on"><span class="em">📁</span>Projets</div>
+      <div class="si l2"><span class="em">✅</span>Tâches</div>
+      <div class="si l2"><span class="em">🧾</span>Factures d'achat</div>
+      <div class="si l2"><span class="em">⏱️</span>Temps passés</div>
+      <div class="si l2"><span class="em">🤝</span>Prestataires et lieux</div>
+      <div class="si l2"><span class="em">👥</span>Contacts et sociétés</div>
+      <div class="si"><span class="em">📊</span>Direction</div>
+      <div class="si l2"><span class="em">📈</span>Pilotage</div>
+      <div class="sh">Privé</div>
+      <div class="si"><span class="em">🗒️</span>Mes notes</div>
+      <div class="sp"></div>
+      <div class="si"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Inviter des membres</div>
+    </aside>
+    <div class="main">
+      <div class="top">
+        <span class="crumb">🎪 Agence</span><span class="sl">/</span><span class="crumb">📁 Projets</span><span class="sl">/</span><span class="crumb">🎪 Convention annuelle · Client Exemple</span>
+        <span class="sp"></span><span class="m">Modifié à l'instant</span><span class="b">Partager</span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.5h11v7.5H7l-3 2.5V11H2.5z"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2.5 1.7 3.5 3.8.5-2.8 2.7.7 3.8L8 11.2 4.6 13l.7-3.8L2.5 6.5l3.8-.5z"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M10 3v10"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="3.5" cy="8" r=".9" fill="currentColor"/><circle cx="8" cy="8" r=".9" fill="currentColor"/><circle cx="12.5" cy="8" r=".9" fill="currentColor"/></svg></span>
+      </div>
+      <div class="body">
+        <div class="page">
+          <div class="pico">🎪</div>
+          <div class="back"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 5 11M5 6v5h5"/></svg> 1 lien entrant</div>
+          <h1>Convention annuelle · Client Exemple</h1>
+          <div class="pins">
+            <div class="pin"><div class="l"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5" stroke-dasharray="2.2 2.2"/></svg>Statut</div><div class="v"><span class="st blue"><i></i>En production</span></div></div>
+            <div class="pin"><div class="l"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Cheffe de projet</div><div class="v"><span class="pers"><span class="av" style="background:#c4733b">C</span>Camille</span></div></div>
+            <div class="pin"><div class="l"><span class="g">Σ</span>Budget vendu</div><div class="v big">84 000 €</div></div>
+            <div class="pin"><div class="l"><span class="g">Σ</span>Achats validés</div><div class="v big">41 200 €</div></div>
+            <div class="pin"><div class="l"><span class="g">Σ</span>Achats en attente</div><div class="v big">6 300 €</div></div>
+            <div class="pin"><div class="l"><span class="g">Σ</span>Temps passés</div><div class="v big">9 850 €</div></div>
+            <div class="pin"><div class="l"><span class="g">Σ</span>Marge à date</div><div class="v pos">32 950 € · 39,2&nbsp;%</div></div>
+          </div>
+          <div class="tabs"><span class="tb "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h10M3 8h10M3 11.5h6"/></svg>Contenu</span><span class="tb "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M6.5 6.5V13"/></svg>Plan de charge</span><span class="tb "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg>Factures d'achat</span><span class="tb on"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3.2l2 1.3"/></svg>Heures passées</span><span class="tb "><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.8" fill="currentColor" stroke="none"/><path d="m5.6 8.2 1.7 1.7 3.2-3.5" stroke="#fff"/></svg>Tâches</span><span class="tb" style="padding:0 8px"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5v9M3.5 8h9"/></svg></span><span class="sp"></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h10M5 8h6M7 11.5h2"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v10m0 0-2-2m2 2 2-2M11 13V3m0 0-2 2m2-2 2 2"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg></span><span class="ic"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="3.5" cy="8" r=".9" fill="currentColor"/><circle cx="8" cy="8" r=".9" fill="currentColor"/><circle cx="12.5" cy="8" r=".9" fill="currentColor"/></svg></span><span class="new"><b>Nouveau</b><u><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 6.5 3.5 3.5 3.5-3.5"/></svg></u></span></div>
+          <table>
+  <tr><th class="" style="width:330px"><div class="h"><span class="g">Aa</span>Session de travail</div></th><th class=""><div class="h"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5M6 5h5v5"/></svg>Tâche</div></th><th class="" style="width:140px"><div class="h"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M5.5 2v2.5M10.5 2v2.5"/></svg>Date</div></th><th class="num" style="width:100px"><div class="h"><span class="g">#</span>Durée</div></th><th class="num" style="width:120px"><div class="h"><span class="g">Σ</span>Coût</div></th></tr>
+  <tr class="grp"><td colspan="5"><span class="tri">▼</span><span class="pers"><span class="av" style="background:#c4733b">C</span>Camille</span><span class="cnt">31 sessions</span><span class="sum">Temps<b>14,0 j</b> &nbsp;&nbsp; Coût<b>6 258 €</b></span></td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Repérage du lieu, plan d'implantation</td><td><span class="rel"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.8" fill="currentColor" stroke="none"/><path d="m5.6 8.2 1.7 1.7 3.2-3.5" stroke="#fff"/></svg><span>Valider le lieu</span></span></td><td>3 févr. 2027</td><td class="num">3 h 30</td><td class="num">223 €</td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Trois devis traiteur comparés</td><td><span class="rel"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.8" fill="currentColor" stroke="none"/><path d="m5.6 8.2 1.7 1.7 3.2-3.5" stroke="#fff"/></svg><span>Consulter les traiteurs</span></span></td><td>2 févr. 2027</td><td class="num">2 h 15</td><td class="num">144 €</td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Weekly client et compte rendu</td><td><span class="rel"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.8" fill="currentColor" stroke="none"/><path d="m5.6 8.2 1.7 1.7 3.2-3.5" stroke="#fff"/></svg><span>Weekly client</span></span></td><td>28 janv. 2027</td><td class="num">1 h 15</td><td class="num">80 €</td></tr><tr class="grp"><td colspan="5"><span class="tri">▼</span><span class="pers"><span class="av" style="background:#446254">M</span>Marc</span><span class="cnt">6 sessions</span><span class="sum">Temps<b>2,5 j</b> &nbsp;&nbsp; Coût<b>2 000 €</b></span></td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Ligne créative V2</td><td><span class="rel"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.8" fill="currentColor" stroke="none"/><path d="m5.6 8.2 1.7 1.7 3.2-3.5" stroke="#fff"/></svg><span>Poser le concept</span></span></td><td>30 janv. 2027</td><td class="num">4 h 00</td><td class="num">457 €</td></tr><tr class="grp"><td colspan="5"><span class="tri">▼</span><span class="pers"><span class="av" style="background:#5b7fa6">S</span>Séverine</span><span class="cnt">8 sessions</span><span class="sum">Temps<b>3,0 j</b> &nbsp;&nbsp; Coût<b>1 000 €</b></span></td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Relecture du budget V3</td><td><span class="rel"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.8" fill="currentColor" stroke="none"/><path d="m5.6 8.2 1.7 1.7 3.2-3.5" stroke="#fff"/></svg><span>Valider le budget</span></span></td><td>29 janv. 2027</td><td class="num">1 h 30</td><td class="num">71 €</td></tr><tr class="grp"><td colspan="5"><span class="tri">▼</span><span class="pers"><span class="av" style="background:#8a5aa8">M</span>Marie</span><span class="cnt">5 sessions</span><span class="sum">Temps<b>2,0 j</b> &nbsp;&nbsp; Coût<b>592 €</b></span></td></tr><tr><td class="t"><span class="pi"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"/><path d="M9 2.5v3h3"/></svg></span>Lot de factures du jeudi</td><td><span class="rel"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.8" fill="currentColor" stroke="none"/><path d="m5.6 8.2 1.7 1.7 3.2-3.5" stroke="#fff"/></svg><span>Valider les factures</span></span></td><td>28 janv. 2027</td><td class="num">0 h 45</td><td class="num">32 €</td></tr>
+  <tr class="newrow"><td colspan="5">+ Nouvelle page</td></tr>
+</table>
+        </div>
+        <aside class="det">
+          <div class="dh"><span>Détails</span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5M6 5h5v5"/></svg>Client</span><span class="val"><span class="rel">🏢 <span>Client Exemple</span></span></span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5M6 5h5v5"/></svg>Opportunité</span><span class="val"><span class="rel">💼 <span>Convention 2027</span></span></span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M5.5 2v2.5M10.5 2v2.5"/></svg>Événement</span><span class="val">12 mars 2027</span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5"/><path d="m5.8 7.2 2.2 2.2 2.2-2.2"/></svg>Format</span><span class="val"><span class="tag purple">Convention</span></span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5.5" stroke-dasharray="2.2 2.2"/></svg>Contrat</span><span class="val"><span class="st green"><i></i>PO reçu</span></span></div>
+          <div class="pr"><span class="k"><span class="g">#</span>Identifiant</span><span class="val">2026-118</span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.8 9.2a2.5 2.5 0 0 0 3.5 0l2-2a2.5 2.5 0 0 0-3.5-3.5l-.8.8M9.2 6.8a2.5 2.5 0 0 0-3.5 0l-2 2a2.5 2.5 0 0 0 3.5 3.5l.8-.8"/></svg>Dropbox</span><span class="val" style="color:#787774;text-decoration:underline">dropbox.com/…</span></div>
+          <div class="sec">Argent</div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Budget vendu</span><span class="val">84 000 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Provisions</span><span class="val">53 100 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Achats validés</span><span class="val">41 200 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>En attente</span><span class="val">6 300 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Temps passés</span><span class="val">9 850 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Marge prévue</span><span class="val">30 500 €</span></div>
+          <div class="pr"><span class="k"><span class="g">Σ</span>Marge à date</span><span class="val grn" style="font-weight:600">32 950 €</span></div>
+          <div class="sec">Équipe</div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Pilote</span><span class="val"><span class="pers"><span class="av" style="background:#c4733b">C</span>Camille</span></span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Production</span><span class="val"><span class="pers"><span class="av" style="background:#5b7fa6">S</span>Séverine</span></span></div>
+          <div class="pr"><span class="k"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.6"/><path d="M3 13.5c.6-2.6 2.6-3.8 5-3.8s4.4 1.2 5 3.8"/></svg>Direction</span><span class="val"><span class="pers"><span class="av" style="background:#446254">M</span>Marc</span></span></div>
+        </aside>
+      </div>
+    </div></div>
+    <div class="cap"><span><b>Maquette de principe, données d'exemple.</b> Chaque session est lancée depuis une tâche. La colonne Coût n'est visible que de Marc et de Marie.</span><span class="r">Rama Logic pour L'Alternative</span></div>
+  </section></body></html>
