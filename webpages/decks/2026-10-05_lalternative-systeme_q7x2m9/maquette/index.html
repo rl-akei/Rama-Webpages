@@ -1,0 +1,164 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><title>Maquette fiche projet</title><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,'Segoe UI','Inter','Helvetica Neue',Arial,sans-serif;color:#37352f;background:#fff;-webkit-font-smoothing:antialiased}
+.slide{width:1600px;height:1000px;overflow:hidden;padding:0;background:#fff;position:relative}
+.top{height:44px;border-bottom:1px solid #ececea;display:flex;align-items:center;padding:0 20px;font-size:13.5px;color:#73726e;gap:8px}
+.top b{color:#37352f;font-weight:500}
+.top .sp{flex:1}
+.top .pill{border:1px solid #e3e2df;border-radius:5px;padding:3px 9px;font-size:12.5px}
+.page{padding:34px 96px 0}
+.ico{font-size:44px;line-height:1}
+h1{font-size:36px;font-weight:700;letter-spacing:-.01em;margin:10px 0 16px}
+.props{display:grid;grid-template-columns:repeat(3,1fr);gap:7px 40px;font-size:14px;margin-bottom:22px}
+.prop{display:flex;gap:10px;align-items:center}
+.prop .l{color:#8f8e8a;width:150px;flex:none}
+.chip{display:inline-block;border-radius:4px;padding:1px 8px;font-size:13px;line-height:1.5}
+.c-blue{background:#d6e6f5;color:#1b4a73}.c-green{background:#dcebdc;color:#1f5b33}.c-yellow{background:#f7ecc7;color:#6b5210}
+.c-red{background:#f9dcd9;color:#8a2b21}.c-gray{background:#ebeae8;color:#4d4c48}.c-purple{background:#e7def0;color:#4f2f73}.c-orange{background:#f8e2cd;color:#7a4313}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:10px}
+.kpi{border:1px solid #e9e8e5;border-radius:8px;padding:14px 16px;background:#fbfbfa}
+.kpi .l{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#8f8e8a}
+.kpi .v{font-size:27px;font-weight:650;margin-top:6px;letter-spacing:-.01em}
+.kpi .s{font-size:12.5px;color:#73726e;margin-top:4px}
+.kpi.main{background:#eaf3ec;border-color:#bcd8c4}
+.kpi.main .v{color:#1f5b33}
+.kpi.wait{background:#fdf6e3;border-color:#eddca6}
+.formula{font-size:13px;color:#73726e;margin:0 0 22px;display:flex;align-items:center;gap:8px}
+.formula code{background:#f3f2f0;border-radius:4px;padding:2px 7px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:#37352f}
+.tabs{display:flex;gap:4px;border-bottom:1px solid #e9e8e5;margin-bottom:0;font-size:14.5px}
+.tab{padding:9px 14px;color:#73726e;border-bottom:2px solid transparent;display:flex;gap:7px;align-items:center}
+.tab.on{color:#37352f;font-weight:600;border-bottom-color:#37352f}
+.tab .n{background:#ebeae8;border-radius:10px;font-size:11.5px;padding:0 7px;color:#4d4c48;font-weight:500}
+.bar{display:flex;align-items:center;gap:10px;padding:12px 0 8px;font-size:13px;color:#8f8e8a}
+.bar .btn{background:#2383e2;color:#fff;border-radius:5px;padding:5px 11px;font-weight:500;font-size:13px}
+.bar .sp{flex:1}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-weight:400;color:#8f8e8a;text-align:left;font-size:13px;padding:8px 10px;border-top:1px solid #e9e8e5;border-bottom:1px solid #e9e8e5;white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid #f0efed;vertical-align:middle}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td.t{font-weight:500}
+tr.tot td{border-top:1px solid #d9d8d4;border-bottom:0;font-weight:600;background:#fbfbfa}
+.muted{color:#a3a29e}
+.warn{color:#b2452f;font-weight:600}
+.ok{color:#1f5b33}
+.lock{color:#8f8e8a;font-size:12px}
+.pdf{display:inline-flex;align-items:center;gap:5px;border:1px solid #e3e2df;border-radius:4px;padding:1px 7px;font-size:12.5px;color:#4d4c48}
+.note{margin-top:14px;font-size:13px;color:#73726e;background:#f7f6f3;border-radius:6px;padding:10px 14px;display:flex;gap:10px}
+.foot{margin:22px 96px 0;padding-top:12px;border-top:1px solid #ececea;font-size:12px;color:#a3a29e;display:flex;justify-content:space-between}
+.two{display:grid;grid-template-columns:1fr 1.25fr;gap:34px}
+.sub{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#8f8e8a;margin:14px 0 6px}
+.av{display:inline-flex;width:22px;height:22px;border-radius:50%;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;margin-right:7px;vertical-align:middle}
+.barh{height:8px;border-radius:4px;background:#ebeae8;overflow:hidden;width:150px;display:inline-block;vertical-align:middle;margin-left:8px}
+.barh i{display:block;height:100%;background:#446254}
+</style></head><body><section class="slide">
+  <div class="top"><span>Projets</span><span>/</span><b>2026-118 · Convention annuelle · Client Exemple</b><span class="sp"></span><span class="pill">Partager</span><span class="pill">Demander à l'IA</span></div>
+  <div class="page">
+    <div class="ico">🎪</div>
+    <h1>Convention annuelle · Client Exemple · 12 mars 2027</h1>
+    <div class="props">
+      <div class="prop"><span class="l">Statut</span><span class="chip c-blue">En production</span></div>
+      <div class="prop"><span class="l">Cheffe de projet</span><span><span class="av" style="background:#b06a3b">C</span>Camille</span></div>
+      <div class="prop"><span class="l">Date d'événement</span><span>12 mars 2027</span></div>
+      <div class="prop"><span class="l">Client</span><span>↗ Client Exemple SA</span></div>
+      <div class="prop"><span class="l">Opportunité d'origine</span><span>↗ Convention 2027 · gagnée</span></div>
+      <div class="prop"><span class="l">Cadre contractuel</span><span class="chip c-green">Bon de commande reçu</span></div>
+      <div class="prop"><span class="l">Format</span><span class="chip c-purple">Convention · plus de 200 personnes</span></div>
+      <div class="prop"><span class="l">Identifiant</span><span>2026-118</span></div>
+      <div class="prop"><span class="l">Dossier Dropbox</span><span>↗ Clients actifs / Client Exemple</span></div>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="l">Budget vendu</div><div class="v">84 000 €</div><div class="s">6 lignes · version V3</div></div>
+      <div class="kpi"><div class="l">Achats validés</div><div class="v">41 200 €</div><div class="s">5 factures payées par Marie</div></div>
+      <div class="kpi wait"><div class="l">Achats en attente</div><div class="v">6 300 €</div><div class="s">2 factures · lot du jeudi 16 h</div></div>
+      <div class="kpi"><div class="l">Temps passés</div><div class="v">9 850 €</div><div class="s">21,5 jours · <span class="lock">🔒 direction</span></div></div>
+      <div class="kpi main"><div class="l">Marge à date</div><div class="v">32 950 €</div><div class="s">39,2 % · 26 650 € une fois les factures en attente payées</div></div>
+    </div>
+    <div class="formula">Calcul : <code>Marge = budget vendu − achats validés − temps passés</code> <span>soit 84 000 € − 41 200 € − 9 850 €</span></div>
+    <div class="tabs"><div class="tab on">Plan de charge <span class="n">6</span></div><div class="tab ">Factures d'achat <span class="n">7</span></div><div class="tab ">Heures passées <span class="n">21,5 j</span></div><div class="tab ">Tâches <span class="n">34</span></div><div class="tab ">Documents <span class="n">12</span></div></div>
+
+    <div class="bar"><span>Vue : par ligne de budget</span><span>· Version V3, validée le 14 janvier</span><span class="sp"></span><span class="btn">Importer un budget Excel</span></div>
+    <table>
+      <tr><th>Poste</th><th>Famille</th><th class="num">Vente</th><th class="num">Provision d'achat</th><th class="num">Achats validés</th><th class="num">En attente</th><th>Reste</th><th class="num">Marge prévue</th></tr>
+      <tr><td class="t">Lieu</td><td><span class="chip c-orange">Lieu</span></td><td class="num">18 000 €</td><td class="num">14 000 €</td><td class="num">14 000 €</td><td class="num"><span class=muted>·</span></td><td><span class="ok">soldé</span></td><td class="num">4 000 €</td></tr><tr><td class="t">Traiteur</td><td><span class="chip c-yellow">Traiteur</span></td><td class="num">22 000 €</td><td class="num">17 000 €</td><td class="num">12 000 €</td><td class="num">4 800 €</td><td>200 € à engager</td><td class="num">5 000 €</td></tr><tr><td class="t">Son et lumière</td><td><span class="chip c-blue">Technique</span></td><td class="num">15 000 €</td><td class="num">10 500 €</td><td class="num">10 900 €</td><td class="num"><span class=muted>·</span></td><td><span class="warn">▲ dépassement de 400 €</span></td><td class="num">4 100 €</td></tr><tr><td class="t">Scénographie</td><td><span class="chip c-purple">Scénographie</span></td><td class="num">12 000 €</td><td class="num">8 000 €</td><td class="num">4 300 €</td><td class="num">1 500 €</td><td>2 200 € à engager</td><td class="num">4 000 €</td></tr><tr><td class="t">Hôtesses</td><td><span class="chip c-green">Hôtesses</span></td><td class="num">5 000 €</td><td class="num">3 600 €</td><td class="num"><span class=muted>·</span></td><td class="num"><span class=muted>·</span></td><td>3 600 € à engager</td><td class="num">1 400 €</td></tr><tr><td class="t">Honoraires agence</td><td><span class="chip c-gray">Honoraires</span></td><td class="num">12 000 €</td><td class="num"><span class=muted>·</span></td><td class="num"><span class=muted>·</span></td><td class="num"><span class=muted>·</span></td><td><span class="muted">temps passés</span></td><td class="num">12 000 €</td></tr>
+      <tr class="tot"><td>Total</td><td></td><td class="num">84 000 €</td><td class="num">53 100 €</td><td class="num">41 200 €</td><td class="num">6 300 €</td><td></td><td class="num">30 500 €</td></tr>
+    </table>
+    <div class="note"><span>💡</span><span>Les colonnes « Achats validés » et « En attente » se remplissent toutes seules à partir de l'onglet Factures d'achat. Un dépassement de provision remonte en rouge, ici sur le son et la lumière.</span></div>
+  </div><div class="foot"><span>Maquette de principe · données d'exemple, chiffres fictifs</span><span>Rama Logic pour L'Alternative</span></div></section><section class="slide">
+  <div class="top"><span>Projets</span><span>/</span><b>2026-118 · Convention annuelle · Client Exemple</b><span class="sp"></span><span class="pill">Partager</span><span class="pill">Demander à l'IA</span></div>
+  <div class="page">
+    <div class="ico">🎪</div>
+    <h1>Convention annuelle · Client Exemple · 12 mars 2027</h1>
+    <div class="props">
+      <div class="prop"><span class="l">Statut</span><span class="chip c-blue">En production</span></div>
+      <div class="prop"><span class="l">Cheffe de projet</span><span><span class="av" style="background:#b06a3b">C</span>Camille</span></div>
+      <div class="prop"><span class="l">Date d'événement</span><span>12 mars 2027</span></div>
+      <div class="prop"><span class="l">Client</span><span>↗ Client Exemple SA</span></div>
+      <div class="prop"><span class="l">Opportunité d'origine</span><span>↗ Convention 2027 · gagnée</span></div>
+      <div class="prop"><span class="l">Cadre contractuel</span><span class="chip c-green">Bon de commande reçu</span></div>
+      <div class="prop"><span class="l">Format</span><span class="chip c-purple">Convention · plus de 200 personnes</span></div>
+      <div class="prop"><span class="l">Identifiant</span><span>2026-118</span></div>
+      <div class="prop"><span class="l">Dossier Dropbox</span><span>↗ Clients actifs / Client Exemple</span></div>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="l">Budget vendu</div><div class="v">84 000 €</div><div class="s">6 lignes · version V3</div></div>
+      <div class="kpi"><div class="l">Achats validés</div><div class="v">41 200 €</div><div class="s">5 factures payées par Marie</div></div>
+      <div class="kpi wait"><div class="l">Achats en attente</div><div class="v">6 300 €</div><div class="s">2 factures · lot du jeudi 16 h</div></div>
+      <div class="kpi"><div class="l">Temps passés</div><div class="v">9 850 €</div><div class="s">21,5 jours · <span class="lock">🔒 direction</span></div></div>
+      <div class="kpi main"><div class="l">Marge à date</div><div class="v">32 950 €</div><div class="s">39,2 % · 26 650 € une fois les factures en attente payées</div></div>
+    </div>
+    <div class="formula">Calcul : <code>Marge = budget vendu − achats validés − temps passés</code> <span>soit 84 000 € − 41 200 € − 9 850 €</span></div>
+    <div class="tabs"><div class="tab ">Plan de charge <span class="n">6</span></div><div class="tab on">Factures d'achat <span class="n">7</span></div><div class="tab ">Heures passées <span class="n">21,5 j</span></div><div class="tab ">Tâches <span class="n">34</span></div><div class="tab ">Documents <span class="n">12</span></div></div>
+
+    <div class="bar"><span>Vue : toutes les factures du projet</span><span class="sp"></span><span class="btn">+ Déposer une facture</span></div>
+    <table>
+      <tr><th>Prestataire</th><th>Ligne de budget</th><th>Objet</th><th class="num">Montant HT</th><th>Déposée par</th><th>Le</th><th>État</th><th>Pièce</th></tr>
+      <tr><td class="t">Le Pavillon d'Exemple</td><td>Lieu</td><td>Acompte 50 %</td><td class="num">7 000 €</td><td>Camille</td><td>18 déc.</td><td><span class="chip c-green">Payée</span></td><td><span class="pdf">📄 facture.pdf</span></td></tr><tr><td class="t">Le Pavillon d'Exemple</td><td>Lieu</td><td>Solde</td><td class="num">7 000 €</td><td>Camille</td><td>22 janv.</td><td><span class="chip c-green">Payée</span></td><td><span class="pdf">📄 facture.pdf</span></td></tr><tr><td class="t">Maison Saveurs</td><td>Traiteur</td><td>Acompte</td><td class="num">12 000 €</td><td>Camille</td><td>15 janv.</td><td><span class="chip c-green">Payée</span></td><td><span class="pdf">📄 facture.pdf</span></td></tr><tr><td class="t">Audio Scène</td><td>Son et lumière</td><td>Prestation complète</td><td class="num">10 900 €</td><td>Camille</td><td>29 janv.</td><td><span class="chip c-green">Payée</span></td><td><span class="pdf">📄 facture.pdf</span></td></tr><tr><td class="t">Atelier Décor</td><td>Scénographie</td><td>Fabrication</td><td class="num">4 300 €</td><td>Séverine</td><td>29 janv.</td><td><span class="chip c-green">Payée</span></td><td><span class="pdf">📄 facture.pdf</span></td></tr><tr><td class="t">Maison Saveurs</td><td>Traiteur</td><td>Solde</td><td class="num">4 800 €</td><td>Camille</td><td>3 févr.</td><td><span class="chip c-yellow">À valider · jeudi 16 h</span></td><td><span class="pdf">📄 facture.pdf</span></td></tr><tr><td class="t">Atelier Décor</td><td>Scénographie</td><td>Pose sur site</td><td class="num">1 500 €</td><td>Camille</td><td>4 févr.</td><td><span class="chip c-yellow">À valider · jeudi 16 h</span></td><td><span class="pdf">📄 facture.pdf</span></td></tr>
+      <tr class="tot"><td>Total</td><td></td><td></td><td class="num">47 500 €</td><td></td><td></td><td>41 200 € payés · 6 300 € en attente</td><td></td></tr>
+    </table>
+    <div class="note"><span>💡</span><span>La cheffe de projet dépose la facture avec le bouton bleu. Une tâche « Facture à valider » arrive chez Marie. Quand Marie clique « C'est payé », la ligne passe en vert et le plan de charge se met à jour.</span></div>
+  </div><div class="foot"><span>Maquette de principe · données d'exemple, chiffres fictifs</span><span>Rama Logic pour L'Alternative</span></div></section><section class="slide">
+  <div class="top"><span>Projets</span><span>/</span><b>2026-118 · Convention annuelle · Client Exemple</b><span class="sp"></span><span class="pill">Partager</span><span class="pill">Demander à l'IA</span></div>
+  <div class="page">
+    <div class="ico">🎪</div>
+    <h1>Convention annuelle · Client Exemple · 12 mars 2027</h1>
+    <div class="props">
+      <div class="prop"><span class="l">Statut</span><span class="chip c-blue">En production</span></div>
+      <div class="prop"><span class="l">Cheffe de projet</span><span><span class="av" style="background:#b06a3b">C</span>Camille</span></div>
+      <div class="prop"><span class="l">Date d'événement</span><span>12 mars 2027</span></div>
+      <div class="prop"><span class="l">Client</span><span>↗ Client Exemple SA</span></div>
+      <div class="prop"><span class="l">Opportunité d'origine</span><span>↗ Convention 2027 · gagnée</span></div>
+      <div class="prop"><span class="l">Cadre contractuel</span><span class="chip c-green">Bon de commande reçu</span></div>
+      <div class="prop"><span class="l">Format</span><span class="chip c-purple">Convention · plus de 200 personnes</span></div>
+      <div class="prop"><span class="l">Identifiant</span><span>2026-118</span></div>
+      <div class="prop"><span class="l">Dossier Dropbox</span><span>↗ Clients actifs / Client Exemple</span></div>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="l">Budget vendu</div><div class="v">84 000 €</div><div class="s">6 lignes · version V3</div></div>
+      <div class="kpi"><div class="l">Achats validés</div><div class="v">41 200 €</div><div class="s">5 factures payées par Marie</div></div>
+      <div class="kpi wait"><div class="l">Achats en attente</div><div class="v">6 300 €</div><div class="s">2 factures · lot du jeudi 16 h</div></div>
+      <div class="kpi"><div class="l">Temps passés</div><div class="v">9 850 €</div><div class="s">21,5 jours · <span class="lock">🔒 direction</span></div></div>
+      <div class="kpi main"><div class="l">Marge à date</div><div class="v">32 950 €</div><div class="s">39,2 % · 26 650 € une fois les factures en attente payées</div></div>
+    </div>
+    <div class="formula">Calcul : <code>Marge = budget vendu − achats validés − temps passés</code> <span>soit 84 000 € − 41 200 € − 9 850 €</span></div>
+    <div class="tabs"><div class="tab ">Plan de charge <span class="n">6</span></div><div class="tab ">Factures d'achat <span class="n">7</span></div><div class="tab on">Heures passées <span class="n">21,5 j</span></div><div class="tab ">Tâches <span class="n">34</span></div><div class="tab ">Documents <span class="n">12</span></div></div>
+
+    <div class="two">
+      <div>
+        <div class="sub">Cumul par personne</div>
+        <table>
+          <tr><th>Personne</th><th>Rôle</th><th class="num">Temps passé</th><th class="num">Coût <span class="lock">🔒</span></th></tr>
+          <tr><td class="t"><span class="av" style="background:#b06a3b">C</span>Camille</td><td class="muted">Cheffe de projet</td><td class="num">14,0 j<span class="barh"><i style="width:100%"></i></span></td><td class="num">6 258 €</td></tr><tr><td class="t"><span class="av" style="background:#5b7fa6">S</span>Séverine</td><td class="muted">Direction de production</td><td class="num">3,0 j<span class="barh"><i style="width:21%"></i></span></td><td class="num">1 000 €</td></tr><tr><td class="t"><span class="av" style="background:#446254">M</span>Marc</td><td class="muted">Concept et direction</td><td class="num">2,5 j<span class="barh"><i style="width:18%"></i></span></td><td class="num">2 000 €</td></tr><tr><td class="t"><span class="av" style="background:#8a5aa8">M</span>Marie</td><td class="muted">Administration</td><td class="num">2,0 j<span class="barh"><i style="width:14%"></i></span></td><td class="num">592 €</td></tr>
+          <tr class="tot"><td>Total</td><td></td><td class="num">21,5 j</td><td class="num">9 850 €</td></tr>
+        </table>
+        <div class="note"><span>🔒</span><span>La colonne Coût n'est visible que de Marc et de Marie. Les cheffes de projet voient leurs temps, pas les coûts journaliers.</span></div>
+      </div>
+      <div>
+        <div class="sub">Dernières sessions de travail</div>
+        <table>
+          <tr><th>Qui</th><th>Tâche</th><th>Date</th><th class="num">Durée</th></tr>
+          <tr><td><span class="av" style="background:#b06a3b">C</span>Camille</td><td class="t">Repérage du lieu et plan d'implantation</td><td>3 févr.</td><td class="num">3 h 30</td></tr><tr><td><span class="av" style="background:#b06a3b">C</span>Camille</td><td class="t">Consultation traiteurs, 3 devis</td><td>2 févr.</td><td class="num">2 h 15</td></tr><tr><td><span class="av" style="background:#446254">M</span>Marc</td><td class="t">Concept et ligne créative V2</td><td>30 janv.</td><td class="num">4 h 00</td></tr><tr><td><span class="av" style="background:#5b7fa6">S</span>Séverine</td><td class="t">Validation du budget V3</td><td>29 janv.</td><td class="num">1 h 30</td></tr><tr><td><span class="av" style="background:#b06a3b">C</span>Camille</td><td class="t">Weekly client et compte rendu</td><td>28 janv.</td><td class="num">1 h 15</td></tr><tr><td><span class="av" style="background:#8a5aa8">M</span>Marie</td><td class="t">Factures du lot du jeudi</td><td>28 janv.</td><td class="num">0 h 45</td></tr>
+        </table>
+        <div class="note"><span>💡</span><span>Chaque session est lancée depuis une tâche du projet. Elle est donc rattachée au projet et au client sans rien ressaisir. Honoraires vendus : 12 000 €, temps passés : 9 850 €.</span></div>
+      </div>
+    </div>
+  </div><div class="foot"><span>Maquette de principe · données d'exemple, chiffres fictifs</span><span>Rama Logic pour L'Alternative</span></div></section></body></html>
