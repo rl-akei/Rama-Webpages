@@ -94,5 +94,26 @@
       "offer": "asymetrie 5/12 + 7/12 : carte prix fond primary avec HT en headline inline dans le display, carte inclus en grille 2x3 + bloc 'bornes du forfait' sous separateur, puis bandeau Operate pleine largeur -- le bloc BORNES est neuf"
     },
     "preemit": "P5 H5 E4 S5 R5 V5"
+  },
+  {
+    "deck": "2026-10-07_beyond-crew_b7k3q9",
+    "date": "2026-10-07",
+    "macrostructures": {
+      "context": "diptyque paragraphe borde a gauche + grille 2x2 de tuiles chiffres -- vs fiche a filets pointilles (patio)",
+      "frictions": "3 cards verbatim en title-sm + verdict rouge en pied -- vs liste editoriale verbatim geant (patio)",
+      "cout": "1 big-num rouge avec hypothese visible + 3 lignes a chip 'non mesure / non chiffre / a preparer' -- hybride big-num (dreamspark) et compteurs vides (patio)",
+      "insight": "diptyque cause racine primary / si rien ne change error (standard)",
+      "objectifs": "2 colonnes sans gouttiere aujourd'hui/demain (variante patio)",
+      "solution": "chaine horizontale 4 bases avec fleches + bande IA secondary pleine largeur dessous",
+      "why_method": "3 colonnes divide-x (comme patio)",
+      "plan_overview": "3 cards de largeur proportionnelle a la duree (1fr / 2fr / 1fr)",
+      "etapes": "template rigide x3 (standard skill)",
+      "roadmap": "5 colonnes border-top coloree (comme dreamspark)",
+      "implication": "2 cards gros chiffre + bande noire (standard)",
+      "references": "1 card temoignage big-num cite par le client + 1 card big-num structurel (3 + 1), disclaimer en pied",
+      "engagements": "3 cards + footer credentials formulation prudente (annuaire Notion, PMP, Green Belt)",
+      "offer": "asymetrie 5/12 + 7/12 : carte prix fond primary + carte inclus 2x3 avec bornes du forfait (comme patio)"
+    },
+    "preemit": "P4 H4 E4 S5 R5 V3"
   }
 ]
