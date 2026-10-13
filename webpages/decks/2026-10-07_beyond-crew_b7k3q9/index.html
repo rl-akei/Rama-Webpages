@@ -389,19 +389,19 @@
   /* ── Le calendrier : une ligne par étape, sept semaines, les jalons et les livrables à droite ── */
   .agenda {
     display: grid; height: 100%;
-    grid-template-columns: minmax(0, 13fr) repeat(7, minmax(0, 4fr)) minmax(0, 25fr);
-    grid-template-rows: auto auto repeat(3, minmax(0, 1fr)) auto;
+    grid-template-columns: minmax(0, 13.5fr) repeat(9, minmax(0, 3.2fr)) minmax(0, 24fr);
+    grid-template-rows: auto auto minmax(0, 1fr) minmax(0, 1.35fr) minmax(0, 1fr) auto;
   }
   .agenda > li { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; min-height: 0; }
   .agenda > li + li { border-top: var(--rl-trait-filet) solid var(--filet); }
   .agenda .quoi { padding: var(--rl-espace-12) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: center; min-width: 0; }
   .agenda .quoi h3 { font-size: 1.5rem; line-height: 1.15; letter-spacing: -0.02em; margin-top: 0.375rem; }
-  .agenda .piste { grid-column: 2 / 9; display: grid; grid-template-columns: subgrid; grid-template-rows: minmax(0, 1fr); }
+  .agenda .piste { grid-column: 2 / 11; display: grid; grid-template-columns: subgrid; grid-template-rows: minmax(0, 1fr); }
   .agenda .piste > i { grid-row: 1; border-left: var(--rl-trait-filet) solid var(--filet); }
   .agenda .piste > i:nth-child(1) { grid-column: 1; } .agenda .piste > i:nth-child(2) { grid-column: 2; }
   .agenda .piste > i:nth-child(3) { grid-column: 3; } .agenda .piste > i:nth-child(4) { grid-column: 4; }
   .agenda .piste > i:nth-child(5) { grid-column: 5; } .agenda .piste > i:nth-child(6) { grid-column: 6; }
-  .agenda .piste > i:nth-child(7) { grid-column: 7; }
+  .agenda .piste > i:nth-child(7) { grid-column: 7; } .agenda .piste > i:nth-child(8) { grid-column: 8; } .agenda .piste > i:nth-child(9) { grid-column: 9; }
   .agenda .duree { grid-row: 1; align-self: center; height: 1.5rem; margin-inline: 0.375rem; z-index: 1; background: var(--rl-fond-sombre); border-radius: var(--rl-rayon-cellule); }
   .agenda .duree.pointille { background: transparent; border: var(--rl-trait-filet) dashed var(--rl-texte-principal); }
   .agenda .repere {
@@ -410,11 +410,11 @@
     width: 1.5rem; height: 1.5rem;
     background: var(--rl-accent-structure); border: var(--rl-trait-filet) solid var(--rl-texte-principal); border-radius: var(--rl-rayon-cellule);
   }
-  .agenda .sortie { grid-column: 9; border-left: var(--rl-trait-filet) solid var(--filet); padding: var(--rl-espace-12) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: center; gap: 0.5rem; min-width: 0; }
+  .agenda .sortie { grid-column: 11; border-left: var(--rl-trait-filet) solid var(--filet); padding: var(--rl-espace-12) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: center; gap: 0.5rem; min-width: 0; }
   .agenda .phase .piste, .agenda .usage .piste, .agenda .decision .piste { background: transparent; }
   .agenda .entete { height: auto; min-height: 0; padding: 0; border-bottom: 0; display: grid; }
   .agenda .entete .quoi, .agenda .entete .sortie { padding-block: var(--rl-espace-8); }
-  .agenda .entete .piste p { padding: var(--rl-espace-8) 0.5rem; border-left: var(--rl-trait-filet) solid var(--filet); display: flex; flex-direction: column; gap: 0.125rem; white-space: nowrap; color: var(--rl-texte-principal); }
+  .agenda .entete .piste p { padding: var(--rl-espace-8) 0.375rem; border-left: var(--rl-trait-filet) solid var(--filet); display: flex; flex-direction: column; gap: 0.125rem; white-space: nowrap; color: var(--rl-texte-principal); }
   .agenda .entete .piste p span { color: var(--rl-texte-libelle); }
   .jalon-texte { display: flex; align-items: center; gap: var(--rl-espace-12); }
   .jalon-texte b { font-weight: var(--rl-graisse-moyen); }
@@ -484,6 +484,30 @@
     .orbite { height: 26rem; }
     .orbite .coeur { display: none; }
   }
+
+  /* Sprints nommés dans la barre de la construction */
+  .agenda .duree.libelle { display: flex; align-items: center; padding-inline: 0.5rem; color: var(--rl-texte-sur-sombre-principal); white-space: nowrap; overflow: hidden; }
+
+  /* ── Écrans de partie : le parcours, le titre en grand, le numéro sur un pan Mindaro ── */
+  .inter { grid-template-rows: minmax(0, 1fr) auto; }
+  .parcours { display: grid; gap: 0.5rem; }
+  .parcours li { display: flex; align-items: center; gap: var(--rl-espace-12); }
+  .parcours li:not(.ici) .pave { background: transparent; color: var(--rl-texte-libelle); border: var(--rl-trait-filet) solid var(--filet); }
+  .parcours li.ici .libelle { color: var(--rl-texte-principal); }
+  .numero { padding: var(--v2) var(--rl-marge-cellule); background: var(--rl-accent-structure); min-width: 0; container-type: inline-size; }
+  .numero .libelle { color: var(--rl-texte-principal); }
+  .numero .chiffre { font-size: min(15.5rem, 76cqi); font-weight: var(--rl-graisse-moyen); line-height: 0.8; letter-spacing: -0.05em; color: var(--rl-texte-principal); }
+  .inter .trio .libelle { display: flex; align-items: center; gap: var(--rl-espace-12); }
+  @media print, (min-width: 60rem) { .g-inter { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); } }
+  @media screen and (max-width: 59.99rem) { .numero .chiffre { font-size: 8rem; line-height: 1; margin-top: var(--rl-espace-24); } .parcours { margin-bottom: var(--rl-espace-32); } }
+
+  /* ── Le socle : les flèches entre les bases ── */
+  .chaine > li { position: relative; }
+  .maillon { position: absolute; left: 0; top: 36%; translate: -50% -50%; z-index: 1; min-width: 2.75rem; height: 2.75rem; font-size: 1.25rem; }
+  .maillon .icone { width: 1.375rem; height: 1.375rem; }
+  .maillon.plus { background: var(--rl-fond-page); color: var(--rl-texte-principal); border: var(--rl-trait-filet) solid var(--filet); }
+  .chaine .pied { margin-top: var(--rl-espace-16); }
+  @media screen and (max-width: 59.99rem) { .maillon { display: none; } }
 </style>
 </head>
 <body>
@@ -560,14 +584,21 @@
       <span class="libelle">03 / 27</span>
     </header>
     
-    <div class="corps couv inter">
-      <div class="marques"><span class="pave jalon grand">01</span></div>
-      <div class="centre">
-        <p class="libelle">Partie 01 / 05</p>
-        <h2 class="t-ouverture e-24">Le décor</h2>
-        <p class="t-reponse secondaire e-24 prose">Là où Beyond Crew en est aujourd'hui, dans vos mots.</p>
+    <div class="corps inter">
+      <div class="grille g-inter">
+        <div class="cellule pile bas-colle">
+          <ol class="parcours"><li class=ici><span class="pave">01</span><span class="libelle">Le décor</span></li><li><span class="pave">02</span><span class="libelle">Ce que j'y vois</span></li><li><span class="pave">03</span><span class="libelle">La méthode</span></li><li><span class="pave">04</span><span class="libelle">La preuve</span></li><li><span class="pave">05</span><span class="libelle">L'offre</span></li></ol>
+          <div>
+            <h2 class="t-roi">Le décor</h2>
+            <p class="t-reponse secondaire e-24 prose">Là où Beyond Crew en est aujourd'hui, dans vos mots.</p>
+          </div>
+        </div>
+        <div class="numero pile bas-colle">
+          <p class="libelle">Partie 01 / 05</p>
+          <p class="chiffre" aria-hidden="true">01</p>
+        </div>
       </div>
-      <div class="trio" style="--n:3"><div><p class="libelle">D'abord</p><p class="e-8">Où vous en êtes</p></div><div><p class="libelle">Ensuite</p><p class="e-8">Trois frictions</p></div><div><p class="libelle">Enfin</p><p class="e-8">Ce que ça coûte, aujourd'hui et demain</p></div></div>
+      <div class="trio" style="--n:3"><div><p class="libelle"><span class="pave">1</span>D'abord</p><p class="t-accroche e-12">Où vous en êtes</p></div><div><p class="libelle"><span class="pave">2</span>Ensuite</p><p class="t-accroche e-12">Trois frictions</p></div><div><p class="libelle"><span class="pave">3</span>Enfin</p><p class="t-accroche e-12">Ce que ça coûte, aujourd'hui et demain</p></div></div>
     </div>
     <footer class="bas"><span class="libelle">Confidentiel · préparé pour Beyond Crew</span><span class="libelle">7 octobre 2026</span></footer>
   </div>
@@ -701,14 +732,21 @@
       <span class="libelle">08 / 27</span>
     </header>
     
-    <div class="corps couv inter">
-      <div class="marques"><span class="pave jalon grand">02</span></div>
-      <div class="centre">
-        <p class="libelle">Partie 02 / 05</p>
-        <h2 class="t-ouverture e-24">Ce que j'y vois</h2>
-        <p class="t-reponse secondaire e-24 prose">La cause qui est sous les trois frictions.</p>
+    <div class="corps inter">
+      <div class="grille g-inter">
+        <div class="cellule pile bas-colle">
+          <ol class="parcours"><li><span class="pave">01</span><span class="libelle">Le décor</span></li><li class=ici><span class="pave">02</span><span class="libelle">Ce que j'y vois</span></li><li><span class="pave">03</span><span class="libelle">La méthode</span></li><li><span class="pave">04</span><span class="libelle">La preuve</span></li><li><span class="pave">05</span><span class="libelle">L'offre</span></li></ol>
+          <div>
+            <h2 class="t-roi">Ce que j'y vois</h2>
+            <p class="t-reponse secondaire e-24 prose">La cause qui est sous les trois frictions.</p>
+          </div>
+        </div>
+        <div class="numero pile bas-colle">
+          <p class="libelle">Partie 02 / 05</p>
+          <p class="chiffre" aria-hidden="true">02</p>
+        </div>
       </div>
-      <div class="trio" style="--n:2"><div><p class="libelle">D'abord</p><p class="e-8">La cause racine, en un calcul</p></div><div><p class="libelle">Ensuite</p><p class="e-8">Ce qu'elle empêche de construire</p></div></div>
+      <div class="trio" style="--n:2"><div><p class="libelle"><span class="pave">1</span>D'abord</p><p class="t-accroche e-12">La cause racine, en un calcul</p></div><div><p class="libelle"><span class="pave">2</span>Ensuite</p><p class="t-accroche e-12">Ce qu'elle empêche de construire</p></div></div>
     </div>
     <footer class="bas"><span class="libelle">Confidentiel · préparé pour Beyond Crew</span><span class="libelle">7 octobre 2026</span></footer>
   </div>
@@ -786,14 +824,21 @@
       <span class="libelle">11 / 27</span>
     </header>
     
-    <div class="corps couv inter">
-      <div class="marques"><span class="pave jalon grand">03</span></div>
-      <div class="centre">
-        <p class="libelle">Partie 03 / 05</p>
-        <h2 class="t-ouverture e-24">La méthode</h2>
-        <p class="t-reponse secondaire e-24 prose">Ce qu'on construit, pourquoi comme ça, et en combien de temps.</p>
+    <div class="corps inter">
+      <div class="grille g-inter">
+        <div class="cellule pile bas-colle">
+          <ol class="parcours"><li><span class="pave">01</span><span class="libelle">Le décor</span></li><li><span class="pave">02</span><span class="libelle">Ce que j'y vois</span></li><li class=ici><span class="pave">03</span><span class="libelle">La méthode</span></li><li><span class="pave">04</span><span class="libelle">La preuve</span></li><li><span class="pave">05</span><span class="libelle">L'offre</span></li></ol>
+          <div>
+            <h2 class="t-roi">La méthode</h2>
+            <p class="t-reponse secondaire e-24 prose">Ce qu'on construit, pourquoi comme ça, et en combien de temps.</p>
+          </div>
+        </div>
+        <div class="numero pile bas-colle">
+          <p class="libelle">Partie 03 / 05</p>
+          <p class="chiffre" aria-hidden="true">03</p>
+        </div>
       </div>
-      <div class="trio" style="--n:3"><div><p class="libelle">D'abord</p><p class="e-8">Là où on va, et le socle</p></div><div><p class="libelle">Ensuite</p><p class="e-8">Pourquoi le contexte</p></div><div><p class="libelle">Enfin</p><p class="e-8">Trois étapes, un calendrier, votre temps</p></div></div>
+      <div class="trio" style="--n:3"><div><p class="libelle"><span class="pave">1</span>D'abord</p><p class="t-accroche e-12">Là où on va, et le socle</p></div><div><p class="libelle"><span class="pave">2</span>Ensuite</p><p class="t-accroche e-12">Pourquoi le contexte</p></div><div><p class="libelle"><span class="pave">3</span>Enfin</p><p class="t-accroche e-12">Trois étapes, un calendrier, votre temps</p></div></div>
     </div>
     <footer class="bas"><span class="libelle">Confidentiel · préparé pour Beyond Crew</span><span class="libelle">7 octobre 2026</span></footer>
   </div>
@@ -832,9 +877,9 @@
     <div class="corps etage3">
       <div class="tete">
         <h3 class="t-titre-section">Quatre bases reliées, et l'<span class="fort">IA</span> par-dessus.</h3>
-        <p class="t-reponse secondaire">Google Workspace reste en place pour les mails, l'agenda et le stockage. On ne remplace rien, on donne une adresse au pilotage.</p>
+        <p class="t-reponse secondaire">Les objectifs se déclinent en projets, les projets en tâches et en réunions. Google Workspace reste en place, on ne remplace rien.</p>
       </div>
-      <ol class="colonnes" style="--n:4"><li class="pile bas-colle"><div class="rang"><svg class="icone grande" aria-hidden="true"><use href="#i-resultat"/></svg><span class="pave">01</span></div><div><h4 class="t-accroche">Objectifs</h4><p class="secondaire e-8">Les objectifs du trimestre et leurs résultats clés.</p></div></li><li class="pile bas-colle"><div class="rang"><svg class="icone grande" aria-hidden="true"><use href="#i-projet"/></svg><span class="pave">02</span></div><div><h4 class="t-accroche">Projets</h4><p class="secondaire e-8">L'application, la création de la société, le contenu.</p></div></li><li class="pile bas-colle"><div class="rang"><svg class="icone grande" aria-hidden="true"><use href="#i-coche"/></svg><span class="pave">03</span></div><div><h4 class="t-accroche">Tâches</h4><p class="secondaire e-8">Qui fait quoi, pour quand. Une vue par personne.</p></div></li><li class="pile bas-colle"><div class="rang"><svg class="icone grande" aria-hidden="true"><use href="#i-message"/></svg><span class="pave">04</span></div><div><h4 class="t-accroche">Réunions</h4><p class="secondaire e-8">Comptes rendus et décisions, transformés en tâches.</p></div></li></ol>
+      <ol class="colonnes chaine" style="--n:4"><li class="pile bas-colle"><div class="rang"><svg class="icone grande" aria-hidden="true"><use href="#i-resultat"/></svg><span class="pave">01</span></div><div><h4 class="t-accroche">Objectifs</h4><p class="secondaire e-8">Les objectifs du trimestre et leurs résultats clés.</p><p class="libelle pied">Déclinés en projets</p></div></li><li class="pile bas-colle"><span class="pave maillon jalon" aria-hidden="true"><svg class="icone"><use href="#i-fleche-droite"/></svg></span><div class="rang"><svg class="icone grande" aria-hidden="true"><use href="#i-projet"/></svg><span class="pave">02</span></div><div><h4 class="t-accroche">Projets</h4><p class="secondaire e-8">L'application, la création de la société, le contenu.</p><p class="libelle pied">Déclinés en tâches et réunions</p></div></li><li class="pile bas-colle"><span class="pave maillon jalon" aria-hidden="true"><svg class="icone"><use href="#i-fleche-droite"/></svg></span><div class="rang"><svg class="icone grande" aria-hidden="true"><use href="#i-coche"/></svg><span class="pave">03</span></div><div><h4 class="t-accroche">Tâches</h4><p class="secondaire e-8">Qui fait quoi, pour quand. Une vue par personne.</p><p class="libelle pied">Chacune sert un projet</p></div></li><li class="pile bas-colle"><span class="pave maillon plus" aria-hidden="true">+</span><div class="rang"><svg class="icone grande" aria-hidden="true"><use href="#i-message"/></svg><span class="pave">04</span></div><div><h4 class="t-accroche">Réunions</h4><p class="secondaire e-8">Comptes rendus et décisions, transformés en tâches.</p><p class="libelle pied">Chacune sert un projet</p></div></li></ol>
       <div class="offre ruban">
         <svg class="icone" aria-hidden="true"><use href="#i-agent"/></svg>
         <div>
@@ -892,7 +937,7 @@
         <h3 class="t-titre-section">Et pourquoi pas <span class="fort">autrement</span>&nbsp;?</h3>
         <p class="t-reponse secondaire">Trois autres chemins, tous raisonnables.</p>
       </div>
-      <ol class="colonnes" style="--n:3"><li class="pile bas-colle"><div><p class="libelle">Option 01</p><h4 class="t-accroche e-12">Le construire vous-mêmes</h4><p class="secondaire e-16">Vous en êtes capables, Yannec construit déjà des agents. Mais ce serait du temps d'associé pris sur la sortie de l'application. Je livre un socle éprouvé en quatre semaines, vous gardez vos soirées.</p></div><p class="libelle pied">Ce que ça coûte · votre temps</p></li><li class="pile bas-colle"><div><p class="libelle">Option 02</p><h4 class="t-accroche e-12">Rester sur Drive et WhatsApp</h4><p class="secondaire e-16">Ça marche aujourd'hui, vous l'avez dit. Mais ça ne se cherche pas, ça ne se relie pas, et une IA ne peut pas s'appuyer dessus. Le socle garde vos habitudes et leur donne une structure.</p></div><p class="libelle pied">Ce qui manque · le contexte</p></li><li class="pile bas-colle"><div><p class="libelle">Option 03</p><h4 class="t-accroche e-12">Attendre l'application</h4><p class="secondaire e-16">Elle va gérer les membres, les coachs et les créneaux. Elle ne pilotera ni vos objectifs, ni vos projets, ni vos décisions d'associés. Ce sont deux étages différents.</p></div><p class="libelle pied">Ce qui manque · le pilotage</p></li></ol>
+      <ol class="colonnes" style="--n:3"><li class="pile bas-colle"><div><p class="libelle">Option 01</p><h4 class="t-accroche e-12">Le construire vous-mêmes</h4><p class="secondaire e-16">Vous en êtes capables, Yannec construit déjà des agents. Mais ce serait du temps d'associé pris sur la sortie de l'application. Je livre un socle éprouvé, formation comprise, en six semaines, vous gardez vos soirées.</p></div><p class="libelle pied">Ce que ça coûte · votre temps</p></li><li class="pile bas-colle"><div><p class="libelle">Option 02</p><h4 class="t-accroche e-12">Rester sur Drive et WhatsApp</h4><p class="secondaire e-16">Ça marche aujourd'hui, vous l'avez dit. Mais ça ne se cherche pas, ça ne se relie pas, et une IA ne peut pas s'appuyer dessus. Le socle garde vos habitudes et leur donne une structure.</p></div><p class="libelle pied">Ce qui manque · le contexte</p></li><li class="pile bas-colle"><div><p class="libelle">Option 03</p><h4 class="t-accroche e-12">Attendre l'application</h4><p class="secondaire e-16">Elle va gérer les membres, les coachs et les créneaux. Elle ne pilotera ni vos objectifs, ni vos projets, ni vos décisions d'associés. Ce sont deux étages différents.</p></div><p class="libelle pied">Ce qui manque · le pilotage</p></li></ol>
     </div>
     <footer class="bas"><span class="libelle">Confidentiel · préparé pour Beyond Crew</span><span class="libelle">7 octobre 2026</span></footer>
   </div>
@@ -905,13 +950,13 @@
       <span class="libelle objet">Proposition · Beyond Crew</span>
       <span class="libelle">16 / 27</span>
     </header>
-    <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">La méthode</h2><span class="libelle">Durée totale · 4 semaines</span></div>
+    <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">La méthode</h2><span class="libelle">6 semaines, puis 2 semaines d'usage</span></div>
     <div class="corps etage2">
       <div class="tete">
         <h3 class="t-titre-section">Trois étapes pour y <span class="fort">arriver</span>.</h3>
-        <p class="t-reponse secondaire">Quatre semaines, puis un point d'ajustement après deux semaines d'usage.</p>
+        <p class="t-reponse secondaire">Six semaines, puis un point d'ajustement après deux semaines d'usage.</p>
       </div>
-      <ol class="colonnes plan"><li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">01</p><span class="pave jalon">1 semaine</span></div><p class="t-reponse secondaire">19 → 23 octobre</p><div><h4 class="t-accroche">Le cadrage</h4><p class="secondaire e-12">Un atelier avec vous trois, puis l'architecture validée.</p></div></li><li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">02</p><span class="pave jalon">2 semaines</span></div><p class="t-reponse secondaire">26 octobre → 6 novembre</p><div><h4 class="t-accroche">La construction</h4><p class="secondaire e-12">Les quatre bases, les vues par rôle, la page d'accueil, et la reprise de vos projets et tâches en cours.</p></div></li><li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">03</p><span class="pave jalon">1 semaine</span></div><p class="t-reponse secondaire">À partir du 9 novembre</p><div><h4 class="t-accroche">La formation et l'IA</h4><p class="secondaire e-12">L'équipe prend la main, l'IA est activée.</p></div></li></ol>
+      <ol class="colonnes plan"><li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">01</p><span class="pave jalon">1 semaine</span></div><p class="t-reponse secondaire">19 → 23 octobre</p><div><h4 class="t-accroche">Le cadrage</h4><p class="secondaire e-12">Un atelier avec vous trois, puis l'architecture validée.</p></div></li><li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">02</p><span class="pave jalon">4 semaines</span></div><p class="t-reponse secondaire">26 octobre → 20 novembre</p><div><h4 class="t-accroche">La construction</h4><p class="secondaire e-12">Deux sprints de deux semaines&nbsp;: Objectifs et Projets, puis Tâches et Réunions. Avec les vues par rôle, la page d'accueil, et la reprise de vos projets et tâches en cours.</p></div></li><li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">03</p><span class="pave jalon">1 semaine</span></div><p class="t-reponse secondaire">À partir du 23 novembre</p><div><h4 class="t-accroche">La formation et l'IA</h4><p class="secondaire e-12">L'équipe prend la main, l'IA est activée.</p></div></li></ol>
     </div>
     <footer class="bas"><span class="libelle">Confidentiel · préparé pour Beyond Crew</span><span class="libelle">7 octobre 2026</span></footer>
   </div>
@@ -960,15 +1005,15 @@
       <div class="g57 grille">
         <div class="cellule pile bas-colle">
           <div>
-            <p class="libelle">Étape 02 · 2 semaines · 26 octobre → 6 novembre</p>
+            <p class="libelle">Étape 02 · 4 semaines · 26 octobre → 20 novembre</p>
             <h3 class="t-question e-16">La construction</h3>
           </div>
           <div>
             <p class="libelle">Pourquoi c'est indispensable</p>
-            <p class="e-12">C'est là que le pilotage prend une adresse. Les bases sont reliées entre elles&nbsp;: une tâche connaît son projet, un projet connaît son objectif, une décision de réunion devient une tâche.</p>
+            <p class="e-12">C'est là que le pilotage prend une adresse. On pose d'abord le haut, objectifs et projets, puis ce qui en découle, tâches et réunions&nbsp;: une tâche connaît son projet, un projet connaît son objectif.</p>
           </div>
         </div>
-        <ol class="lignes pleine"><li><span class="pave">1</span><p class="t-accroche">Construire les bases Objectifs, Projets, Tâches et Réunions</p></li><li><span class="pave">2</span><p class="t-accroche">Créer les vues par rôle et la page d'accueil de chacun</p></li><li><span class="pave">3</span><p class="t-accroche">Reprendre vos projets et vos tâches en cours</p></li></ol>
+        <ol class="lignes pleine"><li><span class="pave">1</span><p class="t-accroche">Sprint 1, deux semaines&nbsp;: les bases Objectifs et Projets, avec vos projets en cours repris</p></li><li><span class="pave">2</span><p class="t-accroche">Sprint 2, deux semaines&nbsp;: les bases Tâches et Réunions, avec vos tâches en cours reprises</p></li><li><span class="pave">3</span><p class="t-accroche">Les vues par rôle et la page d'accueil de chacun</p></li></ol>
       </div>
       <div class="offre livrables">
         <p class="t-accroche">Livrables</p>
@@ -991,7 +1036,7 @@
       <div class="g57 grille">
         <div class="cellule pile bas-colle">
           <div>
-            <p class="libelle">Étape 03 · 1 semaine · à partir du 9 novembre</p>
+            <p class="libelle">Étape 03 · 1 semaine · à partir du 23 novembre</p>
             <h3 class="t-question e-16">La formation et l'IA</h3>
           </div>
           <div>
@@ -999,7 +1044,7 @@
             <p class="e-12">Un socle que l'équipe ne remplit pas se vide en un mois. Et l'IA ne vaut que par ce qu'elle peut lire&nbsp;: on l'active une fois que le contexte est rangé.</p>
           </div>
         </div>
-        <ol class="lignes pleine"><li><span class="pave">1</span><p class="t-accroche">Former l'équipe sur ses propres écrans, pas sur Notion en général</p></li><li><span class="pave">2</span><p class="t-accroche">Activer l'IA de Notion et écrire vos deux premières procédures réutilisables</p></li><li><span class="pave">3</span><p class="t-accroche">Faire un point d'ajustement après deux semaines d'usage réel</p></li></ol>
+        <ol class="lignes pleine"><li><span class="pave">1</span><p class="t-accroche">Former l'équipe sur ses propres écrans, pas sur Notion en général</p></li><li><span class="pave">2</span><p class="t-accroche">Activer l'IA de Notion et écrire vos deux premières procédures réutilisables</p></li><li><span class="pave">3</span><p class="t-accroche">Faire un point d'ajustement après deux semaines d'usage réel, le 11 décembre</p></li></ol>
       </div>
       <div class="offre livrables">
         <p class="t-accroche">Livrables</p>
@@ -1020,8 +1065,8 @@
     <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">La méthode</h2><span class="libelle">Le calendrier · dates à caler ensemble mardi</span></div>
     <div class="corps">
       <ol class="agenda">
-        <li class="entete"><div class="quoi"><p class="libelle">Semaine du</p></div><div class="piste"><p class="libelle"><span>Oct.</span>12 → 16</p><p class="libelle"><span>Oct.</span>19 → 23</p><p class="libelle"><span>Oct.</span>26 → 30</p><p class="libelle"><span>Nov.</span>2 → 6</p><p class="libelle"><span>Nov.</span>9 → 13</p><p class="libelle"><span>Nov.</span>16 → 20</p><p class="libelle"><span>Nov.</span>23 → 27</p></div><div class="sortie"><p class="libelle">Jalons et livrables</p></div></li>
-        <li class="decision"><div class="quoi"><p class="libelle">Avant de démarrer</p><h3>La décision</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="repere" style="grid-column:1; --ou:30%"></span><span class="repere" style="grid-column:1; --ou:100%"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave jalon">Mar. 13/10</span><span><b>Présentation, à 14h</b></span></p><p class="jalon-texte"><span class="pave jalon">Ven. 16/10</span><span><b>Signature et lancement</b></span></p></div></li><li class="phase"><div class="quoi"><p class="libelle">Étape 01 · 1 semaine</p><h3>Le cadrage</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="duree" style="grid-column:2"></span><span class="repere" style="grid-column:2; --ou:100%"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave jalon">Ven. 23/10</span><span><b>Architecture validée</b></span></p><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Plan d'architecture validé par vous trois</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Liste des projets et objectifs à reprendre</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Règle écrite&nbsp;: Notion ou ailleurs</span></li></ul></div></li><li class="phase"><div class="quoi"><p class="libelle">Étape 02 · 2 semaines</p><h3>La construction</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="duree" style="grid-column:3 / 5"></span><span class="repere" style="grid-column:4; --ou:100%"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave jalon">Ven. 6/11</span><span><b>Livraison du socle</b></span></p><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Espace Notion, quatre bases reliées</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Une page d'accueil par rôle</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Vos projets et tâches en cours déjà dedans</span></li></ul></div></li><li class="phase"><div class="quoi"><p class="libelle">Étape 03 · 1 semaine</p><h3>La formation et l'IA</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="duree" style="grid-column:5"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave jalon">Dès le 9/11</span><span><b>Formation de l'équipe</b></span></p><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Session de formation de l'équipe</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Règles d'usage écrites, une page</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>IA de Notion activée, deux procédures</span></li></ul></div></li><li class="usage"><div class="quoi"><p class="libelle">Ensuite · 2 semaines</p><h3>L'usage réel</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="duree pointille" style="grid-column:6 / 8"></span><span class="repere" style="grid-column:7; --ou:100%"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave jalon">Ven. 27/11</span><span><b>Point d'ajustement, fin de mission</b></span></p></div></li>
+        <li class="entete"><div class="quoi"><p class="libelle">Semaine du</p></div><div class="piste"><p class="libelle"><span>Oct.</span>12</p><p class="libelle"><span>Oct.</span>19</p><p class="libelle"><span>Oct.</span>26</p><p class="libelle"><span>Nov.</span>2</p><p class="libelle"><span>Nov.</span>9</p><p class="libelle"><span>Nov.</span>16</p><p class="libelle"><span>Nov.</span>23</p><p class="libelle"><span>Nov.</span>30</p><p class="libelle"><span>Déc.</span>7</p></div><div class="sortie"><p class="libelle">Jalons et livrables</p></div></li>
+        <li class="decision"><div class="quoi"><p class="libelle">Avant de démarrer</p><h3>La décision</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="repere" style="grid-column:1; --ou:30%"></span><span class="repere" style="grid-column:1; --ou:100%"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave jalon">Mar. 13/10</span><span><b>Présentation, à 14h</b></span></p><p class="jalon-texte"><span class="pave jalon">Ven. 16/10</span><span><b>Signature et lancement</b></span></p></div></li><li class="phase"><div class="quoi"><p class="libelle">Étape 01 · 1 semaine</p><h3>Le cadrage</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="duree" style="grid-column:2"></span><span class="repere" style="grid-column:2; --ou:100%"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave jalon">Ven. 23/10</span><span><b>Architecture validée</b></span></p><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Plan d'architecture validé par vous trois</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Liste des projets et objectifs à reprendre</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Règle écrite&nbsp;: Notion ou ailleurs</span></li></ul></div></li><li class="phase"><div class="quoi"><p class="libelle">Étape 02 · 4 semaines</p><h3>La construction</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="duree libelle" style="grid-column:3 / 5">Sprint 1</span><span class="repere" style="grid-column:4; --ou:100%"></span><span class="duree libelle" style="grid-column:5 / 7">Sprint 2</span><span class="repere" style="grid-column:6; --ou:100%"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave jalon">Ven. 6/11</span><span><b>Sprint 1 · Objectifs et Projets</b></span></p><p class="jalon-texte"><span class="pave jalon">Ven. 20/11</span><span><b>Sprint 2 · livraison du socle</b></span></p><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Espace Notion, quatre bases reliées</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Une page d'accueil par rôle</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Vos projets et tâches en cours déjà dedans</span></li></ul></div></li><li class="phase"><div class="quoi"><p class="libelle">Étape 03 · 1 semaine</p><h3>La formation et l'IA</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="duree" style="grid-column:7"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave jalon">Dès le 23/11</span><span><b>Formation de l'équipe</b></span></p><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Session de formation de l'équipe</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Règles d'usage écrites, une page</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>IA de Notion activée, deux procédures</span></li></ul></div></li><li class="usage"><div class="quoi"><p class="libelle">Ensuite · 2 semaines</p><h3>L'usage réel</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="duree pointille" style="grid-column:8 / 10"></span><span class="repere" style="grid-column:9; --ou:100%"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave jalon">Ven. 11/12</span><span><b>Point d'ajustement, fin de mission</b></span></p></div></li>
       </ol>
     </div>
     <footer class="bas"><span class="libelle">Confidentiel · préparé pour Beyond Crew</span><span class="libelle">7 octobre 2026</span></footer>
@@ -1039,7 +1084,7 @@
     <div class="corps etage3">
       <div class="tete">
         <h3 class="t-titre-section">Ce que ça vous <span class="fort">demande</span>.</h3>
-        <p class="t-reponse secondaire">Sept heures en tout, sur six semaines.</p>
+        <p class="t-reponse secondaire">Sept heures en tout, sur huit semaines.</p>
       </div>
       <div class="g57 grille prix">
         <div class="cellule pile centre">
@@ -1055,7 +1100,7 @@
       </div>
       <div class="bandeau">
         <div><p class="libelle">C'est tout</p></div>
-        <div><p>Un référent joignable entre deux jalons, le reste c'est moi. Si la signature glisse d'une semaine, tout glisse d'une semaine.</p></div>
+        <div><p>Un référent joignable entre deux jalons, le reste c'est moi. À la fin de chaque sprint, je vous envoie un point écrit&nbsp;: rien à bloquer dans vos agendas. Si la signature glisse d'une semaine, tout glisse d'une semaine.</p></div>
       </div>
     </div>
     <footer class="bas"><span class="libelle">Confidentiel · préparé pour Beyond Crew</span><span class="libelle">7 octobre 2026</span></footer>
@@ -1070,14 +1115,21 @@
       <span class="libelle">22 / 27</span>
     </header>
     
-    <div class="corps couv inter">
-      <div class="marques"><span class="pave jalon grand">04</span></div>
-      <div class="centre">
-        <p class="libelle">Partie 04 / 05</p>
-        <h2 class="t-ouverture e-24">La preuve</h2>
-        <p class="t-reponse secondaire e-24 prose">Deux clients comparables, et ce sur quoi je m'engage.</p>
+    <div class="corps inter">
+      <div class="grille g-inter">
+        <div class="cellule pile bas-colle">
+          <ol class="parcours"><li><span class="pave">01</span><span class="libelle">Le décor</span></li><li><span class="pave">02</span><span class="libelle">Ce que j'y vois</span></li><li><span class="pave">03</span><span class="libelle">La méthode</span></li><li class=ici><span class="pave">04</span><span class="libelle">La preuve</span></li><li><span class="pave">05</span><span class="libelle">L'offre</span></li></ol>
+          <div>
+            <h2 class="t-roi">La preuve</h2>
+            <p class="t-reponse secondaire e-24 prose">Deux clients comparables, et ce sur quoi je m'engage.</p>
+          </div>
+        </div>
+        <div class="numero pile bas-colle">
+          <p class="libelle">Partie 04 / 05</p>
+          <p class="chiffre" aria-hidden="true">04</p>
+        </div>
       </div>
-      <div class="trio" style="--n:2"><div><p class="libelle">D'abord</p><p class="e-8">Un coach, et une jeune équipe de fondateurs</p></div><div><p class="libelle">Ensuite</p><p class="e-8">Trois engagements</p></div></div>
+      <div class="trio" style="--n:2"><div><p class="libelle"><span class="pave">1</span>D'abord</p><p class="t-accroche e-12">Un coach, et une jeune équipe de fondateurs</p></div><div><p class="libelle"><span class="pave">2</span>Ensuite</p><p class="t-accroche e-12">Trois engagements</p></div></div>
     </div>
     <footer class="bas"><span class="libelle">Confidentiel · préparé pour Beyond Crew</span><span class="libelle">7 octobre 2026</span></footer>
   </div>
@@ -1153,14 +1205,21 @@
       <span class="libelle">25 / 27</span>
     </header>
     
-    <div class="corps couv inter">
-      <div class="marques"><span class="pave jalon grand">05</span></div>
-      <div class="centre">
-        <p class="libelle">Partie 05 / 05</p>
-        <h2 class="t-ouverture e-24">L'offre</h2>
-        <p class="t-reponse secondaire e-24 prose">Un forfait, ce qu'il contient, et ses bornes.</p>
+    <div class="corps inter">
+      <div class="grille g-inter">
+        <div class="cellule pile bas-colle">
+          <ol class="parcours"><li><span class="pave">01</span><span class="libelle">Le décor</span></li><li><span class="pave">02</span><span class="libelle">Ce que j'y vois</span></li><li><span class="pave">03</span><span class="libelle">La méthode</span></li><li><span class="pave">04</span><span class="libelle">La preuve</span></li><li class=ici><span class="pave">05</span><span class="libelle">L'offre</span></li></ol>
+          <div>
+            <h2 class="t-roi">L'offre</h2>
+            <p class="t-reponse secondaire e-24 prose">Un forfait, ce qu'il contient, et ses bornes.</p>
+          </div>
+        </div>
+        <div class="numero pile bas-colle">
+          <p class="libelle">Partie 05 / 05</p>
+          <p class="chiffre" aria-hidden="true">05</p>
+        </div>
       </div>
-      <div class="trio" style="--n:2"><div><p class="libelle">Le forfait</p><p class="e-8">Ce qui est compris</p></div><div><p class="libelle">Ses bornes</p><p class="e-8">Ce qui ne l'est pas</p></div></div>
+      <div class="trio" style="--n:2"><div><p class="libelle"><span class="pave">1</span>Le forfait</p><p class="t-accroche e-12">Ce qui est compris</p></div><div><p class="libelle"><span class="pave">2</span>Ses bornes</p><p class="t-accroche e-12">Ce qui ne l'est pas</p></div></div>
     </div>
     <footer class="bas"><span class="libelle">Confidentiel · préparé pour Beyond Crew</span><span class="libelle">7 octobre 2026</span></footer>
   </div>
@@ -1177,7 +1236,7 @@
     <div class="corps g57 prix">
       <div class="cellule offre pile bas-colle">
         <div>
-          <p class="libelle">Au forfait · 16 octobre → 27 novembre</p>
+          <p class="libelle">Au forfait · 16 octobre → 11 décembre</p>
           <h3 class="t-accroche e-16">Le socle de pilotage Beyond Crew</h3>
           <p class="t-chiffre-geant montant e-24">6&nbsp;400&nbsp;€&nbsp;<span class="t-accroche">HT</span></p>
           <p class="e-24">Un seul endroit pour vos objectifs, vos projets, vos tâches et vos décisions, avant la sortie de l'application.</p>
@@ -1219,7 +1278,7 @@
       <div class="suite quatre">
         <div><p class="libelle">Présentation</p><p class="e-8">Mardi 13 octobre, 14h</p></div>
         <div><p class="libelle">Signature</p><p class="e-8">Vendredi 16 octobre</p></div>
-        <div><p class="libelle">Livraison du socle</p><p class="e-8">Vendredi 6 novembre</p></div>
+        <div><p class="libelle">Livraison du socle</p><p class="e-8">Vendredi 20 novembre</p></div>
         <div><p class="libelle">Une question</p><p class="e-8">sylvain@ramalogic.com</p></div>
       </div>
     </div>
