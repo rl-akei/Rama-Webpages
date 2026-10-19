@@ -509,6 +509,34 @@
   .chaine .pied { margin-top: var(--rl-espace-16); }
   @media screen and (max-width: 59.99rem) { .maillon { display: none; } }
 </style>
+
+<style>
+  /* Colonnes alignées : titres et textes sur la même ligne d'une colonne à l'autre (subgrid) */
+  .colonnes.aligne { grid-template-rows: auto minmax(0, 1fr) auto auto; }
+  .colonnes.aligne > li { grid-row: span 4; display: grid; grid-template-rows: subgrid; row-gap: 0; }
+  .colonnes.aligne > li > :first-child { grid-row: 1; }
+  .colonnes.aligne > li > div:last-child { display: contents; }
+  .colonnes.aligne > li h4 { grid-row: 3; align-self: start; }
+  .colonnes.aligne > li h4 + p { grid-row: 4; align-self: start; }
+  @media (max-width: 960px) { .colonnes.aligne { grid-template-rows: none; } .colonnes.aligne > li { grid-row: auto; display: block; } .colonnes.aligne > li > div:last-child { display: block; } }
+  /* Formule d'une bonne tâche */
+  .formule { display: grid; grid-template-columns: 0.9fr auto 1.25fr auto 1.35fr; align-items: stretch; border-bottom: var(--rl-trait-filet) solid var(--filet); }
+  .formule .bloc { padding: var(--v2) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: space-between; gap: var(--rl-espace-16); }
+  .formule .plus { display: flex; align-items: center; font-family: var(--rl-police-machine); font-size: var(--rl-type-titre-section-taille); color: var(--rl-texte-libelle); padding: 0 var(--rl-espace-8); }
+  .formule .bloc.resultat { background: var(--rl-fond-encadre); }
+  .formule .mot { white-space: nowrap; font-size: calc(var(--rl-type-titre-section-taille) * 0.9); line-height: 1.05; letter-spacing: -0.02em; }
+  .exemple { padding: var(--v2) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: center; gap: var(--rl-espace-16); }
+  .exemple .phrase { font-size: var(--rl-type-titre-section-taille); line-height: 1.15; letter-spacing: -0.02em; }
+  .exemple .phrase span { border-bottom: 3px solid var(--rl-couleur-aloe); padding-bottom: 2px; }
+  .exemple .phrase span.r { border-bottom-color: var(--rl-accent-emphase); }
+  .exemple .contre { color: var(--rl-texte-secondaire); font-size: var(--rl-type-reponse-taille, 1.25rem); }
+  .exemple .contre s { text-decoration-thickness: 2px; }
+  @media (prefers-reduced-motion: no-preference) {
+    body:not(.show-all) .slide.is-active .anime { animation: monte .6s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 220ms + 200ms); }
+  }
+  @keyframes monte { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 960px) { .formule { grid-template-columns: 1fr; } .formule .plus { padding: 0 var(--rl-marge-cellule); } }
+</style>
 </head>
 <body>
 <!--SPRITE:coche,garantie,fleche-droite,chevron-droit,menu,equipe,agent,resultat,projet,message-->
@@ -666,7 +694,7 @@
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Les moyens</span></div>
     <div class="corps etage2">
       <div class="tete"><h3 class="t-titre-section">Vous n'êtes pas <span class="fort">seuls</span>.</h3><p class="t-reponse secondaire">Les moyens qu'on vous donne, dès lundi.</p></div>
-      <ul class="colonnes" style="--n:4">
+      <ul class="colonnes aligne" style="--n:4">
         <li class="pile bas-colle"><p class="libelle">Sur place</p><div><h4 class="t-accroche">Sylvain, deux jours</h4><p class="secondaire e-12">En salle le matin, de poste en poste l'après-midi.</p></div></li>
         <li class="pile bas-colle"><p class="libelle">Les Champions</p><div><h4 class="t-accroche">Audrey, Sarah, Pauline, Gabrielle</h4><p class="secondaire e-12">Elles utilisent déjà Notion au quotidien.</p></div></li>
         <li class="pile bas-colle"><p class="libelle">L'IA de Notion</p><div><h4 class="t-accroche">Une question, une réponse</h4><p class="secondaire e-12">Elle connaît la Bible et vos projets.</p></div></li>
@@ -731,10 +759,10 @@
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Formation V1 · démo dans Notion</span></div>
     <div class="corps etage3">
       <div class="tete"><h3 class="t-titre-section">Faites-le <span class="fort">vôtre</span>.</h3><p class="t-reponse secondaire">Un espace qui vous ressemble, c'est un espace qu'on ouvre.</p></div>
-      <ol class="colonnes" style="--n:3">
-        <li class="pile bas-colle"><p class="libelle">Geste 1</p><div><h4 class="t-question">Une icône</h4><p class="secondaire e-12">Sur votre page d'accueil, celle que vous voulez.</p></div></li>
-        <li class="pile bas-colle"><p class="libelle">Geste 2</p><div><h4 class="t-question">Une couverture</h4><p class="secondaire e-12">Une photo, un visuel de l'agence.</p></div></li>
-        <li class="pile bas-colle"><p class="libelle">Geste 3</p><div><h4 class="t-question">Vos favoris</h4><p class="secondaire e-12">Votre projet pilote et la Bible, en haut de la barre de gauche.</p></div></li>
+      <ol class="colonnes aligne" style="--n:3">
+        <li class="pile bas-colle"><p class="libelle">Geste 1</p><div><h4 class="t-accroche">Une icône</h4><p class="secondaire e-12">Sur votre page d'accueil, celle que vous voulez.</p></div></li>
+        <li class="pile bas-colle"><p class="libelle">Geste 2</p><div><h4 class="t-accroche">Une couverture</h4><p class="secondaire e-12">Une photo, un visuel de l'agence.</p></div></li>
+        <li class="pile bas-colle"><p class="libelle">Geste 3</p><div><h4 class="t-accroche">Vos favoris</h4><p class="secondaire e-12">Votre projet pilote et la Bible, en haut de la barre de gauche.</p></div></li>
       </ol>
       <div class="bandeau"><div><p class="libelle">Cinq minutes</p></div><div><p>On le fait tous ensemble, tout de suite.</p></div></div>
     </div>
@@ -752,7 +780,7 @@
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Retour d'expérience · démo dans Notion</span></div>
     <div class="corps etage3">
       <div class="tete"><h3 class="t-titre-section">Le retour de Pauline et <span class="fort">Gabrielle</span>.</h3><p class="t-reponse secondaire">Maintenant que vous avez les bases : une semaine de chef de projet, sur leur vrai espace.</p></div>
-      <ol class="colonnes" style="--n:5"><li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">01</p><div><h4 class="t-accroche">J'ouvre mon projet</h4><p class="secondaire e-12">Depuis mon tableau de bord</p></div></li><li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">02</p><div><h4 class="t-accroche">Je génère l'étape en cours</h4><p class="secondaire e-12">Une étape à la fois, pas tout le projet</p></div></li><li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">03</p><div><h4 class="t-accroche">Je répartis et je date</h4><p class="secondaire e-12">Qui fait quoi, pour quand</p></div></li><li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">04</p><div><h4 class="t-accroche">Je tiens ma réunion</h4><p class="secondaire e-12">Le compte rendu se range dans le projet</p></div></li><li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">05</p><div><h4 class="t-accroche">Tout est sur la page</h4><p class="secondaire e-12">Échanges, tâches, documents</p></div></li></ol>
+      <ol class="colonnes aligne" style="--n:5"><li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">01</p><div><h4 class="t-accroche">J'ouvre mon projet</h4><p class="secondaire e-12">Depuis mon tableau de bord</p></div></li><li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">02</p><div><h4 class="t-accroche">Je génère l'étape en cours</h4><p class="secondaire e-12">Une étape à la fois, pas tout le projet</p></div></li><li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">03</p><div><h4 class="t-accroche">Je répartis et je date</h4><p class="secondaire e-12">Qui fait quoi, pour quand</p></div></li><li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">04</p><div><h4 class="t-accroche">Je tiens ma réunion</h4><p class="secondaire e-12">Le compte rendu se range dans le projet</p></div></li><li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">05</p><div><h4 class="t-accroche">Tout est sur la page</h4><p class="secondaire e-12">Échanges, tâches, documents</p></div></li></ol>
       <div class="bandeau"><div><p class="libelle">Ce que ça change</p></div><div><p>Si je suis absent, un collègue reprend mon projet sans rien perdre.</p></div></div>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
@@ -769,14 +797,14 @@
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Premier temps gagné · démo dans Notion</span></div>
     <div class="corps etage3">
       <div class="tete"><h3 class="t-titre-section">De la réunion aux tâches, sans <span class="fort">recopier</span>.</h3><p class="t-reponse secondaire">Le premier temps gagné : l'IA écrit le compte rendu et propose les tâches.</p></div>
-      <ol class="colonnes" style="--n:4"><li class="pile bas-colle"><p class="libelle">Avant</p><div><h4 class="t-accroche">J'ouvre la note depuis Notion</h4><p class="secondaire e-12">Depuis la page du projet. Je la relie aux participants.</p></div></li><li class="pile bas-colle"><p class="libelle">Pendant</p><div><h4 class="t-accroche">Je lance la transcription</h4><p class="secondaire e-12">Et je préviens que j'enregistre.</p></div></li><li class="pile bas-colle"><p class="libelle">Après</p><div><h4 class="t-accroche">Je tape « / » puis « fin de meeting »</h4><p class="secondaire e-12">L'IA propose les tâches : qui, quand, statut.</p></div></li><li class="pile bas-colle"><p class="libelle">Je valide</p><div><h4 class="t-accroche">Les tâches sont créées</h4><p class="secondaire e-12">Rattachées à la réunion et au projet.</p></div></li></ol>
+      <ol class="colonnes aligne" style="--n:4"><li class="pile bas-colle"><p class="libelle">Avant</p><div><h4 class="t-accroche">J'ouvre la note depuis Notion</h4><p class="secondaire e-12">Depuis la page du projet. Je la relie aux participants.</p></div></li><li class="pile bas-colle"><p class="libelle">Pendant</p><div><h4 class="t-accroche">Je lance la transcription</h4><p class="secondaire e-12">Et je préviens que j'enregistre.</p></div></li><li class="pile bas-colle"><p class="libelle">Après</p><div><h4 class="t-accroche">Je tape « / » puis « fin de meeting »</h4><p class="secondaire e-12">L'IA propose les tâches : qui, quand, statut.</p></div></li><li class="pile bas-colle"><p class="libelle">Je valide</p><div><h4 class="t-accroche">Les tâches sont créées</h4><p class="secondaire e-12">Rattachées à la réunion et au projet.</p></div></li></ol>
       <div class="offre ruban"><svg class="icone" aria-hidden="true"><use href="#i-garantie"/></svg><p class="t-accroche">Rien ne se crée sans votre accord. L'IA propose, vous corrigez ou validez. Rien n'est envoyé au client.</p></div>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 13 · Une tâche qui ne se perd pas ═══ -->
-<section class="slide" data-slide="13" data-titre="Une tâche qui ne se perd pas">
+<!-- ═══ 13 · Une bonne tâche ═══ -->
+<section class="slide" data-slide="13" data-titre="Une bonne tâche">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
@@ -785,14 +813,22 @@
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Premier temps gagné · les tâches</span></div>
     <div class="corps etage3">
-      <div class="tete"><h3 class="t-titre-section">Une tâche qui ne se perd <span class="fort">pas</span>.</h3><p class="t-reponse secondaire">Un titre clair, puis trois réflexes.</p></div>
-      <ol class="colonnes" style="--n:4">
-        <li class="pile bas-colle"><p class="libelle">Le titre</p><div><h4 class="t-question">Un verbe, puis un nom</h4><p class="secondaire e-12">« Envoyer le devis traiteur », pas « traiteur ».</p></div></li>
-        <li class="pile bas-colle"><p class="libelle">Réflexe 1</p><div><h4 class="t-question">Exécuté par</h4><p class="secondaire e-12">Vous, ou la personne qui doit la faire.</p></div></li>
-        <li class="pile bas-colle"><p class="libelle">Réflexe 2</p><div><h4 class="t-question">Projet</h4><p class="secondaire e-12">Le projet concerné.</p></div></li>
-        <li class="pile bas-colle"><p class="libelle">Réflexe 3</p><div><h4 class="t-question">Échéance</h4><p class="secondaire e-12">Sans date, elle n'apparaît pas dans votre calendrier.</p></div></li>
-      </ol>
-      <div class="bandeau"><div><p class="libelle">Le plus simple</p></div><div><p>Créez la tâche depuis la page du projet : le projet se remplit tout seul. Les tâches standards sont déjà dans le modèle de projet. Une petite demande ? Un commentaire suffit.</p></div></div>
+      <div class="tete"><h3 class="t-titre-section">Une bonne tâche tient en une <span class="fort">phrase</span>.</h3><p class="t-reponse secondaire">Toujours la même formule. Celui qui la lit sait quoi faire, et quand c'est fini.</p></div>
+      <div class="pile">
+        <div class="formule">
+          <div class="bloc anime" style="--i:0"><p class="libelle">1 · Un verbe à l'infinitif</p><p class="mot">Envoyer</p><p class="secondaire">L'action. Jamais un nom seul.</p></div>
+          <div class="plus anime" style="--i:1" aria-hidden="true">+</div>
+          <div class="bloc anime" style="--i:1"><p class="libelle">2 · Un nom</p><p class="mot">le devis traiteur</p><p class="secondaire">Sur quoi porte l'action.</p></div>
+          <div class="plus anime" style="--i:2" aria-hidden="true">+</div>
+          <div class="bloc resultat anime" style="--i:2"><p class="libelle">3 · Le résultat attendu</p><p class="mot">validé par le client</p><p class="secondaire">À quoi on voit que c'est fait.</p></div>
+        </div>
+        <div class="exemple anime" style="--i:3">
+          <p class="libelle">Ce qu'on lit dans Notion</p>
+          <p class="phrase"><span>Envoyer</span> <span>le devis traiteur</span> <span class="r">validé par le client</span></p>
+          <p class="contre">Et pas : <s>Traiteur</s> · <s>Devis</s> · <s>Voir avec le client</s></p>
+        </div>
+      </div>
+      <div class="bandeau"><div><p class="libelle">Puis trois réflexes</p></div><div><p><b>Exécuté par</b> · <b>Projet</b> · <b>Échéance</b>. Créez-la depuis la page du projet : le projet se remplit tout seul.</p></div></div>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
@@ -933,7 +969,7 @@
     <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Mardi 27</h2><span class="libelle">Trois groupes</span></div>
     <div class="corps etage3">
       <div class="tete"><h3 class="t-titre-section">Mardi, en petit <span class="fort">groupe</span>.</h3><p class="t-reponse secondaire">Les chefs de projet, par pôle. Horaires calés sur vos disponibilités.</p></div>
-      <ol class="colonnes" style="--n:3">
+      <ol class="colonnes aligne" style="--n:3">
         <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">01</p><span class="pave">[Horaire]</span></div><div><h4 class="t-accroche">Corporate</h4><p class="secondaire e-12">Chacun sur son projet pilote, avec Audrey.</p></div></li>
         <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">02</p><span class="pave">[Horaire]</span></div><div><h4 class="t-accroche">Brand Experience</h4><p class="secondaire e-12">Chacun sur son projet pilote.</p></div></li>
         <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">03</p><span class="pave">[Horaire]</span></div><div><h4 class="t-accroche">Global Council</h4><p class="secondaire e-12">Avec Céline et son équipe, sur le Global Council 2027.</p></div></li>
@@ -998,7 +1034,7 @@
     <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">Après le 27</h2><span class="libelle">Le chemin</span></div>
     <div class="corps etage3">
       <div class="tete"><h3 class="t-titre-section">Trois étapes vers 100 % des projets dans <span class="fort">Notion</span>.</h3></div>
-      <ol class="colonnes" style="--n:3">
+      <ol class="colonnes aligne" style="--n:3">
         <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">01</p><span class="pave">28 oct. → mi-nov.</span></div><div><h4 class="t-accroche">Le pilote</h4><p class="secondaire e-12">La Bible pour toute l'agence. Un projet pilote par personne. On corrige au fil de l'eau.</p></div></li>
         <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">02</p><span class="pave">mi-nov. → fin déc.</span></div><div><h4 class="t-accroche">L'élargissement</h4><p class="secondaire e-12">Chacun passe ses autres projets. On ajuste les modèles et les tableaux de bord.</p></div></li>
         <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">03</p><span class="pave">Janvier</span></div><div><h4 class="t-accroche">Le fonctionnement normal</h4><p class="secondaire e-12">Tout nouveau projet naît dans Notion. Tous les projets actifs y sont suivis.</p></div></li>
@@ -1042,7 +1078,7 @@
     <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">Après le 27</h2><span class="libelle">Quand ça coince</span></div>
     <div class="corps etage2">
       <div class="tete"><h3 class="t-titre-section">Trois réflexes avant de rester <span class="fort">bloqué</span>.</h3><p class="t-reponse secondaire">Dans cet ordre.</p></div>
-      <ol class="colonnes" style="--n:3">
+      <ol class="colonnes aligne" style="--n:3">
         <li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">01</p><div><h4 class="t-accroche">Demandez à l'IA</h4><p class="secondaire e-12">L'IA de Notion connaît la Bible et vos projets. La plupart des réponses sont là.</p></div></li>
         <li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">02</p><div><h4 class="t-accroche">Demandez à un Champion</h4><p class="secondaire e-12">Audrey, Sarah, Pauline ou Gabrielle. Pour une question rapide, pas pour tout refaire.</p></div></li>
         <li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">03</p><div><h4 class="t-accroche">Venez à l'office hour</h4><p class="secondaire e-12">Avec Sylvain, chaque semaine. Venez avec votre liste de questions.</p></div></li>
