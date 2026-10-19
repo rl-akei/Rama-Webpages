@@ -1,0 +1,164 @@
+/* Rama Logic · Brand System v2 · socle commun des gabarits
+ *
+ * À charger APRÈS polices.css et tokens.css. Ce fichier ne contient aucune valeur
+ * de marque : il ne fait qu'appeler les variables --rl-… de tokens.css.
+ * Les seules variables locales (--gab-…) sont des valeurs absentes des jetons,
+ * listées dans chaque FICHE.md comme « à ajouter au fichier de jetons ».
+ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--rl-fond-page);
+  color: var(--rl-texte-principal);
+  font-family: var(--rl-police-texte);
+  font-size: var(--rl-type-corps-taille);
+  font-weight: var(--rl-graisse-normal);
+  line-height: var(--rl-type-corps-interlignage);
+  font-synthesis: none;            /* jamais d'italique ni de gras fabriqués */
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+h1, h2, h3, h4, p, ul, ol, figure, dl, dd { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+h1, h2, h3, h4 { font-weight: var(--rl-graisse-moyen); text-wrap: balance; }
+p { text-wrap: pretty; }
+img, svg { display: block; }
+a { color: inherit; }
+em, i, cite { font-style: normal; }
+
+:focus-visible {
+  outline: var(--rl-trait-focus) solid var(--rl-focus-clair);
+  outline-offset: var(--rl-trait-focus-decalage);
+}
+.sombre :focus-visible, .offre :focus-visible { outline-color: var(--rl-focus-sombre); }
+
+/* ── Fonds ─────────────────────────────────────────────── */
+.sombre { background: var(--rl-fond-sombre); color: var(--rl-texte-sur-sombre-principal); }
+.offre  { background: var(--rl-fond-offre);  color: var(--rl-texte-sur-offre-principal); }
+.encadre { background: var(--rl-fond-encadre); color: var(--rl-texte-principal); border-radius: var(--rl-rayon-cellule); }
+
+/* ── Libellé machine ───────────────────────────────────── */
+.libelle {
+  font-family: var(--rl-police-machine);
+  font-size: var(--rl-type-libelle-taille);
+  font-weight: var(--rl-type-libelle-graisse);
+  line-height: var(--rl-type-libelle-interlignage);
+  letter-spacing: var(--rl-type-libelle-interlettrage);
+  text-transform: uppercase;
+  color: var(--rl-texte-libelle);
+}
+.sombre .libelle { color: var(--rl-texte-sur-sombre-libelle); }
+.offre .libelle  { color: var(--rl-texte-sur-offre-accent); }
+.encadre .libelle { color: var(--rl-texte-principal); }
+
+/* Libellé en puce : même texte dans un cadre à filet */
+.puce {
+  display: inline-flex; align-items: center;
+  padding: var(--rl-espace-4) var(--rl-espace-12);
+  border: var(--rl-trait-filet) solid var(--rl-filet-clair);
+  border-radius: var(--rl-rayon-cellule);
+}
+.sombre .puce { border-color: var(--rl-filet-sombre); }
+
+/* ── Mots de titre : l'emphase se fait par la couleur ──── */
+.fort    { color: var(--rl-accent-emphase); }             /* Flame : 2 éléments par écran au plus */
+.attenue { color: var(--rl-texte-sur-sombre-secondaire); } /* Aloe clair, sur fond Ink seulement */
+
+/* ── Texte ─────────────────────────────────────────────── */
+.secondaire { color: var(--rl-texte-secondaire); }
+.sombre .secondaire { color: var(--rl-texte-sur-sombre-secondaire); }
+.offre .secondaire  { color: var(--rl-texte-sur-offre-principal); }
+.mono { font-family: var(--rl-police-machine); font-weight: var(--rl-graisse-moyen); }
+
+/* ── Pavé numéroté (numéro de section, d'étape) ────────── */
+.pave {
+  display: inline-grid; place-items: center;
+  min-width: var(--rl-espace-32); height: var(--rl-espace-32);
+  padding: 0 var(--rl-espace-8);
+  border-radius: var(--rl-rayon-cellule);
+  background: var(--rl-fond-sombre); color: var(--rl-texte-sur-sombre-principal);
+  font-family: var(--rl-police-machine);
+  font-size: var(--rl-type-petit-taille);
+  font-weight: var(--rl-graisse-moyen);
+  line-height: 1;
+}
+.pave.jalon { background: var(--rl-accent-structure); color: var(--rl-texte-principal); } /* Mindaro = structure */
+.sombre .pave { background: var(--rl-fond-page); color: var(--rl-texte-principal); }
+.sombre .pave.jalon, .offre .pave.jalon { background: var(--rl-accent-structure); color: var(--rl-texte-principal); }
+
+/* ── Bouton : pilule, flèche dans une pastille ronde ───── */
+.bouton {
+  display: inline-flex; align-items: center; gap: var(--rl-espace-16);
+  min-height: var(--rl-hauteur-bouton);
+  padding: var(--rl-espace-8) var(--rl-espace-8) var(--rl-espace-8) var(--rl-espace-24);
+  border: 0; border-radius: var(--rl-rayon-pilule);
+  background: var(--rl-bouton-principal-fond); color: var(--rl-bouton-principal-texte);
+  font-family: inherit; font-size: var(--rl-type-corps-petit-taille);
+  font-weight: var(--rl-graisse-moyen); line-height: 1.2;
+  text-decoration: none; cursor: pointer;
+  transition: background-color var(--rl-mouvement-duree-base) var(--rl-mouvement-courbe-sortie),
+              transform var(--rl-mouvement-duree-appui) var(--rl-mouvement-courbe-sortie);
+}
+.bouton .fleche {
+  display: grid; place-items: center; flex: none;
+  width: var(--rl-hauteur-bouton-fleche); height: var(--rl-hauteur-bouton-fleche);
+  border-radius: var(--rl-rayon-pilule);
+  background: var(--rl-bouton-principal-fleche-fond);
+  transition: transform var(--rl-mouvement-duree-base) var(--rl-mouvement-courbe-sortie);
+}
+.bouton .fleche svg { width: var(--rl-espace-16); height: var(--rl-espace-16); }
+.sombre .bouton, .offre .bouton, .bouton.sur-sombre {
+  background: var(--rl-bouton-sur-sombre-fond); color: var(--rl-bouton-sur-sombre-texte);
+}
+.sombre .bouton .fleche, .offre .bouton .fleche, .bouton.sur-sombre .fleche { background: var(--rl-bouton-sur-sombre-fleche-fond); }
+.bouton:active { transform: scale(var(--rl-mouvement-echelle-appui)); }
+@media (hover: hover) and (pointer: fine) {
+  .bouton:hover { background: var(--rl-bouton-principal-fond-survol); }
+  .sombre .bouton:hover, .offre .bouton:hover, .bouton.sur-sombre:hover { background: var(--rl-bouton-sur-sombre-fond-survol); }
+  .bouton:hover .fleche { transform: translateX(var(--rl-mouvement-distance-fleche)); }
+}
+
+/* ── Icône au trait : la couleur vient du texte ────────── */
+.icone { width: var(--rl-espace-24); height: var(--rl-espace-24); flex: none; }
+
+/* ── Emplacement à remplir (texte entre crochets) ──────── */
+.vide { white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ── Échelle typographique : une classe par cran de la charte (section 4) ── */
+.t-roi { font-family: var(--rl-type-roi-police); font-size: var(--rl-type-roi-taille); font-weight: var(--rl-type-roi-graisse); line-height: var(--rl-type-roi-interlignage); letter-spacing: var(--rl-type-roi-interlettrage); }
+.t-ouverture { font-family: var(--rl-type-ouverture-police); font-size: var(--rl-type-ouverture-taille); font-weight: var(--rl-type-ouverture-graisse); line-height: var(--rl-type-ouverture-interlignage); letter-spacing: var(--rl-type-ouverture-interlettrage); }
+.t-chiffre-geant { font-family: var(--rl-type-chiffre-geant-police); font-size: var(--rl-type-chiffre-geant-taille); font-weight: var(--rl-type-chiffre-geant-graisse); line-height: var(--rl-type-chiffre-geant-interlignage); letter-spacing: var(--rl-type-chiffre-geant-interlettrage); }
+.t-question { font-family: var(--rl-type-question-police); font-size: var(--rl-type-question-taille); font-weight: var(--rl-type-question-graisse); line-height: var(--rl-type-question-interlignage); letter-spacing: var(--rl-type-question-interlettrage); }
+.t-titre-section { font-family: var(--rl-type-titre-section-police); font-size: var(--rl-type-titre-section-taille); font-weight: var(--rl-type-titre-section-graisse); line-height: var(--rl-type-titre-section-interlignage); letter-spacing: var(--rl-type-titre-section-interlettrage); }
+.t-chiffre-ouverture { font-family: var(--rl-type-chiffre-ouverture-police); font-size: var(--rl-type-chiffre-ouverture-taille); font-weight: var(--rl-type-chiffre-ouverture-graisse); line-height: var(--rl-type-chiffre-ouverture-interlignage); letter-spacing: var(--rl-type-chiffre-ouverture-interlettrage); }
+.t-accroche { font-family: var(--rl-type-accroche-police); font-size: var(--rl-type-accroche-taille); font-weight: var(--rl-type-accroche-graisse); line-height: var(--rl-type-accroche-interlignage); letter-spacing: var(--rl-type-accroche-interlettrage); }
+.t-barre-section { font-family: var(--rl-type-barre-section-police); font-size: var(--rl-type-barre-section-taille); font-weight: var(--rl-type-barre-section-graisse); line-height: var(--rl-type-barre-section-interlignage); letter-spacing: var(--rl-type-barre-section-interlettrage); }
+.t-reponse { font-family: var(--rl-type-reponse-police); font-size: var(--rl-type-reponse-taille); font-weight: var(--rl-type-reponse-graisse); line-height: var(--rl-type-reponse-interlignage); letter-spacing: var(--rl-type-reponse-interlettrage); }
+.t-corps { font-family: var(--rl-type-corps-police); font-size: var(--rl-type-corps-taille); font-weight: var(--rl-type-corps-graisse); line-height: var(--rl-type-corps-interlignage); letter-spacing: var(--rl-type-corps-interlettrage); }
+.t-numero-barre { font-family: var(--rl-type-numero-barre-police); font-size: var(--rl-type-numero-barre-taille); font-weight: var(--rl-type-numero-barre-graisse); line-height: var(--rl-type-numero-barre-interlignage); letter-spacing: var(--rl-type-numero-barre-interlettrage); }
+.t-corps-petit { font-family: var(--rl-type-corps-petit-police); font-size: var(--rl-type-corps-petit-taille); font-weight: var(--rl-type-corps-petit-graisse); line-height: var(--rl-type-corps-petit-interlignage); letter-spacing: var(--rl-type-corps-petit-interlettrage); }
+.t-petit { font-family: var(--rl-type-petit-police); font-size: var(--rl-type-petit-taille); font-weight: var(--rl-type-petit-graisse); line-height: var(--rl-type-petit-interlignage); letter-spacing: var(--rl-type-petit-interlettrage); }
+/* Les variables ne marchent pas dans @media : 48rem = --rl-rupture-mobile */
+@media (max-width: 48rem) {
+  .t-roi { font-size: var(--rl-type-roi-taille-mobile); }
+  .t-ouverture { font-size: var(--rl-type-ouverture-taille-mobile); }
+  .t-chiffre-geant { font-size: var(--rl-type-chiffre-geant-taille-mobile); }
+  .t-question { font-size: var(--rl-type-question-taille-mobile); }
+  .t-titre-section { font-size: var(--rl-type-titre-section-taille-mobile); }
+  .t-chiffre-ouverture { font-size: var(--rl-type-chiffre-ouverture-taille-mobile); }
+  .t-accroche { font-size: var(--rl-type-accroche-taille-mobile); }
+  .t-barre-section { font-size: var(--rl-type-barre-section-taille-mobile); }
+  .t-reponse { font-size: var(--rl-type-reponse-taille-mobile); }
+  .t-numero-barre { font-size: var(--rl-type-numero-barre-taille-mobile); }
+}
