@@ -534,6 +534,28 @@
   @media (prefers-reduced-motion: no-preference) {
     body:not(.show-all) .slide.is-active .anime { animation: monte .6s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 220ms + 200ms); }
   }
+
+  /* Motion : entrée en cascade des éléments de chaque écran actif (désactivée en ?all=1 et en mouvement réduit) */
+  @media (prefers-reduced-motion: no-preference) {
+    body:not(.show-all) .slide.is-active :is(.tete > *, .colonnes > li, .lignes > li, .trio > *, .suite > *, .corps.fin .centre > *, .corps.couv .centre > *, .bandeau, .offre, .encadre, .tableau tbody tr, .barre .libelle) { animation: monte .55s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 110ms + 150ms); }
+    body:not(.show-all) .slide.is-active :is(.colonnes, .lignes, .trio, .suite, .tableau tbody, .tete, .centre) > :nth-child(2) { --i: 1; }
+    body:not(.show-all) .slide.is-active :is(.colonnes, .lignes, .trio, .suite, .tableau tbody, .tete, .centre) > :nth-child(3) { --i: 2; }
+    body:not(.show-all) .slide.is-active :is(.colonnes, .lignes, .trio, .suite, .tableau tbody, .centre) > :nth-child(4) { --i: 3; }
+    body:not(.show-all) .slide.is-active :is(.colonnes, .lignes, .trio, .suite, .tableau tbody) > :nth-child(5) { --i: 4; }
+    body:not(.show-all) .slide.is-active :is(.colonnes, .lignes, .tableau tbody) > :nth-child(6) { --i: 5; }
+    body:not(.show-all) .slide.is-active .tableau tbody > :nth-child(n+7) { --i: 6; }
+    body:not(.show-all) .slide.is-active :is(.bandeau, .offre) { --i: 5; }
+    body:not(.show-all) .slide.is-active .encadre { --i: 2; }
+    /* Les grands chiffres des intercalaires montent depuis le bas de leur bloc */
+    body:not(.show-all) .slide.is-active .numero .chiffre { animation: chiffre .9s cubic-bezier(.2,.7,.2,1) both; animation-delay: .15s; }
+    body:not(.show-all) .slide.is-active .parcours li { animation: monte .45s ease both; }
+    body:not(.show-all) .slide.is-active .parcours li:nth-child(2) { animation-delay: .1s; }
+    body:not(.show-all) .slide.is-active .parcours li:nth-child(3) { animation-delay: .2s; }
+    /* Le mot accentué se souligne en Flame après l'arrivée du titre */
+    body:not(.show-all) .slide.is-active :is(h1, h2, h3) .fort { background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0 2px; animation: trait .7s .6s cubic-bezier(.2,.7,.2,1) forwards; }
+  }
+  @keyframes chiffre { from { opacity: 0; transform: translateY(30%); } to { opacity: 1; transform: none; } }
+  @keyframes trait { to { background-size: 100% 2px; } }
   @keyframes monte { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
   @media (max-width: 960px) { .formule { grid-template-columns: 1fr; } .formule .plus { padding: 0 var(--rl-marge-cellule); } }
 </style>
@@ -596,7 +618,7 @@
           <p class="libelle">Lundi après-midi</p>
           <p class="t-reponse e-12">Chacun avance sur son projet pilote. Sylvain passe voir les équipes une par une.</p>
           <p class="libelle e-24">Mardi 27</p>
-          <p class="t-reponse e-12">En petits groupes : Corporate, Brand Experience, Global Council.</p>
+          <p class="t-reponse e-12">En petits groupes, par pôle : Corporate, puis Brand Experience.</p>
         </div>
       </div>
       <ol class="lignes pleine"><li><span class="pave">9h30</span><div><h4 class="t-accroche">Le mot de Jérôme : notre façon de travailler</h4></div></li><li><span class="pave">9h45</span><div><h4 class="t-accroche">Formation Notion V1 : les bases</h4><p class="secondaire e-8">Se repérer, lire une page, filtrer une vue, commenter</p></div></li><li><span class="pave">10h30</span><div><h4 class="t-accroche">Le retour de Pauline et Gabrielle</h4><p class="secondaire e-8">Leur espace, en vrai. Puis une pause de 10 minutes</p></div></li><li><span class="pave">11h00</span><div><h4 class="t-accroche">Le premier temps gagné : réunions et tâches</h4><p class="secondaire e-8">L'IA écrit le compte rendu et propose les tâches</p></div></li><li><span class="pave">11h30</span><div><h4 class="t-accroche">La Bible, sur votre poste</h4></div></li><li><span class="pave">12h00</span><div><h4 class="t-accroche">Vos tâches de la semaine, sur votre projet pilote</h4><p class="secondaire e-8">Jusqu'à 12h30, avec vos questions</p></div></li></ol>
@@ -966,13 +988,13 @@
       <span class="libelle objet">Lancement Notion · EVMT</span>
       <span class="libelle">20 / 26</span>
     </header>
-    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Mardi 27</h2><span class="libelle">Trois groupes</span></div>
+    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Mardi 27</h2><span class="libelle">Trois groupes · horaires proposés</span></div>
     <div class="corps etage3">
       <div class="tete"><h3 class="t-titre-section">Mardi, en petit <span class="fort">groupe</span>.</h3><p class="t-reponse secondaire">Les chefs de projet, par pôle. Horaires calés sur vos disponibilités.</p></div>
       <ol class="colonnes aligne" style="--n:3">
-        <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">01</p><span class="pave">[Horaire]</span></div><div><h4 class="t-accroche">Corporate</h4><p class="secondaire e-12">Chacun sur son projet pilote, avec Audrey.</p></div></li>
-        <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">02</p><span class="pave">[Horaire]</span></div><div><h4 class="t-accroche">Brand Experience</h4><p class="secondaire e-12">Chacun sur son projet pilote.</p></div></li>
-        <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">03</p><span class="pave">[Horaire]</span></div><div><h4 class="t-accroche">Global Council</h4><p class="secondaire e-12">Avec Céline et son équipe, sur le Global Council 2027.</p></div></li>
+        <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">01</p><span class="pave">9h30 · 11h00</span></div><div><h4 class="t-accroche">Corporate · avec Audrey</h4><p class="secondaire e-12">Pauline et Léo, chacun sur son projet pilote.</p></div></li>
+        <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">02</p><span class="pave">11h15 · 12h45</span></div><div><h4 class="t-accroche">Corporate · avec Céline</h4><p class="secondaire e-12">Son équipe, chacun sur son projet pilote.</p></div></li>
+        <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">03</p><span class="pave">14h00 · 15h30</span></div><div><h4 class="t-accroche">Brand Experience</h4><p class="secondaire e-12">Chacun sur son projet pilote.</p></div></li>
       </ol>
       <div class="bandeau"><div><p class="libelle">Le reste du temps</p></div><div><p>Sylvain est disponible pour un temps individuel sur votre poste.</p></div></div>
     </div>
@@ -1062,7 +1084,7 @@
           <p class="secondaire e-12">Un créneau individuel de 15 ou 30 minutes, à réserver dès que vous avez une liste de questions.</p>
         </div>
       </div>
-      <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Notez vos questions au fil de l'eau</h4><p class="secondaire e-8">Sur votre projet pilote, en commentaire, ou dans une simple liste.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Un point Global Council tous les 2 ou 3 jours</h4><p class="secondaire e-8">Avec Céline et son équipe, le temps du démarrage.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">On ajuste l'outil, pas les personnes</h4><p class="secondaire e-8">Ce qui coince chez vous se corrige dans Notion.</p></div></li></ol>
+      <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Notez vos questions au fil de l'eau</h4><p class="secondaire e-8">Sur votre projet pilote, en commentaire, ou dans une simple liste.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Un point d'équipe tous les 2 ou 3 jours</h4><p class="secondaire e-8">Avec Céline et son équipe, le temps du démarrage.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">On ajuste l'outil, pas les personnes</h4><p class="secondaire e-8">Ce qui coince chez vous se corrige dans Notion.</p></div></li></ol>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
