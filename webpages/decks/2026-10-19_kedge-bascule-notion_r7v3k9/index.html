@@ -541,6 +541,16 @@
     .tableau.garde td:nth-child(2), .tableau.garde th:nth-child(2) { display: table-cell; }
     .tableau.garde td:first-child { white-space: normal; }
   }
+  .agenda.six { grid-template-rows: auto repeat(6, minmax(0, 1fr)); }
+  .agenda .sortie p { line-height: 1.3; }
+  .agenda .sortie .jalon-texte { gap: var(--rl-espace-8); }
+  .agenda .quoi .qui { color: var(--rl-texte-secondaire); margin-top: 0.25rem; font-size: 0.9375rem; }
+  .chiffres { display: grid; grid-template-columns: 1fr 1fr; flex: 1; }
+  .chiffres > li { padding: var(--v3) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: center; }
+  .chiffres > li:nth-child(even) { border-left: var(--rl-trait-filet) solid var(--filet); }
+  .chiffres > li:nth-child(n+3) { border-top: var(--rl-trait-filet) solid var(--filet); }
+  @media screen and (max-width: 39.99rem) { .chiffres { grid-template-columns: 1fr; } .chiffres > li { border-left: 0 !important; border-top: var(--rl-trait-filet) solid var(--filet); } }
+  .chiffres .t-question { line-height: 1; }
 </style>
 </head>
 <body>
@@ -561,301 +571,56 @@
 
 <div class="slides-viewport">
 
-<!-- ═══ 01 · Couverture ═══ -->
-<section class="slide sombre is-active" data-slide="1" data-titre="Couverture">
-  <div class="cadre sans-barre">
+<!-- ═══ 01 · Ce qui est fait ═══ -->
+<section class="slide is-active" data-slide="1" data-titre="Ce qui est fait">
+  <div class="cadre">
     <header class="haut">
-      <img class="logo" src="marque/logos/rama-logic_bloc_cream.svg" alt="Rama Logic" width="1241" height="526">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Bascule Notion · KEDGE Entrepreneurship</span>
-      <span class="libelle">01 / 15</span>
+      <span class="libelle">01 / 3</span>
     </header>
-    
-    <div class="corps couv">
-      <div class="marques"><div class="comarquage grand"><img class="logo" src="marque/logos/rama-logic_bloc_cream.svg" alt="Rama Logic" width="1241" height="526"></div></div>
-      <div class="centre">
-        <p class="libelle">Bascule Airtable vers Notion · point d'étape</p>
-        <h1 class="t-ouverture e-24">La bascule vers Notion est <span class="fort">sur les rails</span>.</h1>
-        <p class="t-reponse secondaire e-32 prose">Ce qui tourne déjà, ce que ça change, ce qui reste à faire et qui s'en charge, semaine par semaine jusqu'au 15 décembre.</p>
-      </div>
-      <div class="trio">
-        <div><p class="libelle">Pour</p><p class="e-8">Feyrouz Tripotin, Valentine Arnaud<br>et Julien Dupont</p></div>
-        <div><p class="libelle">Avec</p><p class="e-8">Sylvain Ramaradjou<br>Rama Logic</p></div>
-        <div><p class="libelle">Échéance</p><p class="e-8">L'équipe travaille dans Notion fin novembre<br>Airtable arrêté le 15 décembre</p></div>
+    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Ce qui est fait</h2><span class="libelle">Les données et les gains</span></div>
+    <div class="corps etage2">
+      <div class="tete"><h3 class="t-titre-section">La bascule vers Notion est <span class="fort">sur les rails</span>.</h3><p class="t-reponse secondaire">Les bases du quotidien sont dans votre Notion depuis le 11 septembre.</p></div>
+      <div class="g57 grille">
+        <div class="pile"><ul class="chiffres"><li><p class="t-question">2 300</p><p class="secondaire e-8">startups, dont 476 en accompagnement</p></li><li><p class="t-question">3 154</p><p class="secondaire e-8">rendez-vous de coaching</p></li><li><p class="t-question">2 559</p><p class="secondaire e-8">contacts</p></li><li><p class="t-question">2 395</p><p class="secondaire e-8">candidatures, 863 évaluations de jury</p></li></ul><div class="bandeau" style="grid-template-columns:1fr"><div><p class="secondaire"><b>Prêts, ouverture semaine du 26/10 :</b> l'espace coach (testé le 15/10) et le tableau de bord de Julien.</p></div></div></div>
+        <ol class="lignes pleine chantiers2"><li><span class="pave">01</span><div><h4 class="t-accroche">Une seule fiche par startup</h4><p class="secondaire e-8">De la candidature à l'alumni : fini les doublons et les recopies.</p></div></li><li><span class="pave">02</span><div><h4 class="t-accroche">Zéro ressaisie</h4><p class="secondaire e-8">Heures et comptes rendus des coachs arrivent seuls sur la fiche.</p></div></li><li><span class="pave">03</span><div><h4 class="t-accroche">Chacun voit ce qui le concerne</h4><p class="secondaire e-8">Un tableau de bord par personne, les coachs sans licence.</p></div></li><li><span class="pave">04</span><div><h4 class="t-accroche">L'IA sur vos données</h4><p class="secondaire e-8">Rendez-vous transcrits, réponses tirées de vos bases.</p></div></li><li><span class="pave">05</span><div><h4 class="t-accroche">Un outil de moins</h4><p class="secondaire e-8">Environ 1 900 € par an d'Airtable en moins à terme.</p></div></li></ol>
       </div>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour KEDGE Entrepreneurship · document de travail</span><span class="libelle">Point d'étape du 19 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 02 · L'essentiel ═══ -->
-<section class="slide" data-slide="2" data-titre="L'essentiel">
+<!-- ═══ 02 · Le rétroplanning ═══ -->
+<section class="slide" data-slide="2" data-titre="Le rétroplanning">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Bascule Notion · KEDGE Entrepreneurship</span>
-      <span class="libelle">02 / 15</span>
+      <span class="libelle">02 / 3</span>
     </header>
-    <div class="barre"><span class="num t-numero-barre">00</span><h2 class="t-barre-section">L'essentiel</h2><span class="libelle">En une page</span></div>
-    <div class="corps etage2">
-      <div class="tete"><h3 class="t-titre-section">Trois choses à retenir.</h3><p class="t-reponse secondaire">Le reste du document les détaille dans cet ordre.</p></div>
-      <ol class="colonnes" style="--n:3">
-        <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">01</p><span class="pave">Fait</span></div><div><h4 class="t-accroche">Le socle est en place</h4><p class="secondaire e-12">Les bases du quotidien sont dans votre Notion depuis le 11 septembre : startups, rendez-vous, contacts, candidatures. Une seule fiche par startup, plus de données en double.</p></div></li>
-        <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">02</p><span class="pave">À faire</span></div><div><h4 class="t-accroche">Ce qui reste est connu</h4><p class="secondaire e-12">Six chantiers, chacun avec un responsable et une date. Aucun n'est nouveau : ils découlent du cadrage de Julien et de la revue du 16 octobre.</p></div></li>
-        <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">03</p><span class="pave jalon">Sans perte</span></div><div><h4 class="t-accroche">Tout Airtable finira dans Notion</h4><p class="secondaire e-12">Avant l'arrêt de l'abonnement le 15 décembre, tout ce qui reste dans Airtable est migré dans Notion. Rien n'est perdu, rien ne reste à cheval sur deux outils.</p></div></li>
+    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Le rétroplanning</h2><span class="libelle">19 octobre → 15 décembre</span></div>
+    <div class="corps">
+      <ol class="agenda six">
+        <li class="entete"><div class="quoi"><p class="libelle">Semaine du</p></div><div class="piste"><p class="libelle"><span>Oct.</span>19</p><p class="libelle"><span>Oct.</span>26</p><p class="libelle"><span>Nov.</span>2</p><p class="libelle"><span>Nov.</span>9</p><p class="libelle"><span>Nov.</span>16</p><p class="libelle"><span>Nov.</span>23</p><p class="libelle"><span>Nov.</span>30</p><p class="libelle"><span>Déc.</span>7</p><p class="libelle"><span>Déc.</span>14</p></div><div class="sortie"><p class="libelle">Jalons</p></div></li>
+        <li class="phase"><div class="quoi"><p class="libelle">A · Sylvain</p><h3>Candidatures et jury</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="duree" style="grid-column:1 / 6"></span><span class="repere" style="grid-column:1; --ou:100%"></span><span class="repere" style="grid-column:5; --ou:100%"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave jalon">23/10</span><span><b>Clôture de l'appel à projets</b></span></p><p class="jalon-texte"><span class="pave">1-15/11</span><span><b>Jury dans Notion, résultats le 20/11</b></span></p></div></li><li class="phase"><div class="quoi"><p class="libelle">B · Sylvain</p><h3>Espace coach</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="duree" style="grid-column:1 / 3"></span><span class="repere" style="grid-column:2; --ou:100%"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave jalon">30/10</span><span><b>Espaces ouverts, vidéo d'accueil</b></span></p></div></li><li class="phase"><div class="quoi"><p class="libelle">C · Sylvain</p><h3>Espace startup</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="duree" style="grid-column:3 / 5"></span><span class="repere" style="grid-column:4; --ou:100%"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave">13/11</span><span><b>Page publique et espace privé, sans Airtable</b></span></p></div></li><li class="phase"><div class="quoi"><p class="libelle">D · Valentine</p><h3>Formulaires Fillout</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="duree pointille" style="grid-column:3 / 5"></span><span class="repere" style="grid-column:4; --ou:100%"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave">13/11</span><span><b>Recréés par KEDGE, sans migration automatique</b></span></p></div></li><li class="phase"><div class="quoi"><p class="libelle">E · Toute l'équipe</p><h3>Formation</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="duree" style="grid-column:3"></span><span class="duree pointille" style="grid-column:4 / 6"></span><span class="repere" style="grid-column:5; --ou:100%"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave">Début nov.</span><span><b>Demi-journée sur un campus</b></span></p><p class="jalon-texte"><span class="pave">20/11</span><span><b>Portefeuilles à jour</b></span></p></div></li><li class="phase"><div class="quoi"><p class="libelle">F · Sylvain</p><h3>Migration totale</h3></div><div class="piste"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="duree" style="grid-column:6 / 10"></span><span class="repere" style="grid-column:6; --ou:100%"></span><span class="repere" style="grid-column:9; --ou:40%"></span></div><div class="sortie"><p class="jalon-texte"><span class="pave jalon">27/11</span><span><b>L'équipe travaille dans Notion</b></span></p><p class="jalon-texte"><span class="pave jalon">15/12</span><span><b>Tout Airtable migré, abonnement arrêté</b></span></p></div></li>
       </ol>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour KEDGE Entrepreneurship · document de travail</span><span class="libelle">Point d'étape du 19 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 03 · 01 · Ce qui est fait ═══ -->
-<section class="slide" data-slide="3" data-titre="01 · Ce qui est fait">
-  <div class="cadre sans-barre">
-    <header class="haut">
-      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
-      <span class="libelle objet">Bascule Notion · KEDGE Entrepreneurship</span>
-      <span class="libelle">03 / 15</span>
-    </header>
-    
-    <div class="corps inter">
-      <div class="grille g-inter">
-        <div class="cellule pile bas-colle">
-          <ol class="parcours"><li class=ici><span class="pave">01</span><span class="libelle">Ce qui est fait</span></li><li><span class="pave">02</span><span class="libelle">Ce qui reste</span></li><li><span class="pave">03</span><span class="libelle">Le rétroplanning</span></li></ol>
-          <div><h2 class="t-roi">Ce qui est fait</h2><p class="t-reponse secondaire e-24 prose">Ce qui tourne aujourd'hui dans le Notion de KEDGE, et ce que ça change.</p></div>
-        </div>
-        <div class="numero pile bas-colle"><p class="libelle">Partie 01 / 03</p><p class="chiffre" aria-hidden="true">01</p></div>
-      </div>
-      <div class="trio" style="--n:3"><div><p class="libelle"><span class="pave">1</span>Les données</p><p class="t-accroche e-12">Reprises et reliées</p></div><div><p class="libelle"><span class="pave">2</span>Les gains</p><p class="t-accroche e-12">Ce que ça change au quotidien</p></div><div><p class="libelle"><span class="pave">3</span>Les outils</p><p class="t-accroche e-12">Ce qui tourne, ce qui ouvre</p></div></div>
-    </div>
-    <footer class="bas"><span class="libelle">Préparé pour KEDGE Entrepreneurship · document de travail</span><span class="libelle">Point d'étape du 19 octobre 2026</span></footer>
-  </div>
-</section>
-<!-- ═══ 04 · Les données reprises ═══ -->
-<section class="slide" data-slide="4" data-titre="Les données reprises">
+<!-- ═══ 03 · Qui fait quoi ═══ -->
+<section class="slide" data-slide="3" data-titre="Qui fait quoi">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Bascule Notion · KEDGE Entrepreneurship</span>
-      <span class="libelle">04 / 15</span>
+      <span class="libelle">03 / 3</span>
     </header>
-    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Ce qui est fait</h2><span class="libelle">Les données</span></div>
-    <div class="corps etage">
-      <ul class="quad">
-        <li><p class="libelle">Startups</p><p class="t-chiffre-geant e-12">2 300</p><p class="secondaire e-12">dont 476 au statut « Accompagnement »</p></li>
-        <li><p class="libelle">Rendez-vous de coaching</p><p class="t-chiffre-geant e-12">3 154</p><p class="secondaire e-12">dont 2 959 réalisés</p></li>
-        <li><p class="libelle">Contacts</p><p class="t-chiffre-geant e-12">2 559</p><p class="secondaire e-12">dont 2 458 reliés à leur startup</p></li>
-        <li><p class="libelle">Candidatures</p><p class="t-chiffre-geant e-12">2 395</p><p class="secondaire e-12">avec 863 évaluations de jury</p></li>
-      </ul>
-      <div class="bandeau"><div><p class="libelle">Le 15 octobre</p></div><div><p>159 startups absentes de l'export ont été rapatriées, et 410 rendez-vous reliés à leur startup.</p></div></div>
-    </div>
-    <footer class="bas"><span class="libelle">Préparé pour KEDGE Entrepreneurship · document de travail</span><span class="libelle">Point d'étape du 19 octobre 2026</span></footer>
-  </div>
-</section>
-<!-- ═══ 05 · Ce que ça change ═══ -->
-<section class="slide" data-slide="5" data-titre="Ce que ça change">
-  <div class="cadre">
-    <header class="haut">
-      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
-      <span class="libelle objet">Bascule Notion · KEDGE Entrepreneurship</span>
-      <span class="libelle">05 / 15</span>
-    </header>
-    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Ce qui est fait</h2><span class="libelle">Les gains</span></div>
-    <div class="corps etage2">
-      <div class="tete"><h3 class="t-titre-section">Ce que ça change au <span class="fort">quotidien</span>.</h3><p class="t-reponse secondaire">Les gains sont déjà là sur les bases reprises.</p></div>
-      <div class="g66 grille"><ol class="lignes pleine chantiers2"><li><span class="pave">01</span><div><h4 class="t-accroche">Une seule fiche par startup</h4><p class="secondaire e-8">De la candidature à l'alumni, la même page change de statut. Fini les doublons et les recopies d'une table à l'autre.</p></div></li><li><span class="pave">02</span><div><h4 class="t-accroche">Zéro ressaisie</h4><p class="secondaire e-8">Les coachs déclarent heures et comptes rendus par formulaire : tout arrive sur la fiche de la startup.</p></div></li><li><span class="pave">03</span><div><h4 class="t-accroche">Chacun voit ce qui le concerne</h4><p class="secondaire e-8">Un tableau de bord par personne. Les coachs n'ont accès qu'à leurs startups, sans licence à payer.</p></div></li></ol><ol class="lignes pleine chantiers2"><li><span class="pave">04</span><div><h4 class="t-accroche">L'IA travaille sur vos données</h4><p class="secondaire e-8">Les rendez-vous se transcrivent, et l'IA de Notion répond à partir de vos bases.</p></div></li><li><span class="pave">05</span><div><h4 class="t-accroche">Un outil de moins</h4><p class="secondaire e-8">Environ 1 900 € par an d'abonnement Airtable en moins, et une seule adresse pour toute l'équipe.</p></div></li><li><span class="pave">06</span><div><h4 class="t-accroche">Une équipe autonome</h4><p class="secondaire e-8">Chaque procédure est écrite : l'équipe modifie ses pages elle-même, sans dépendre de nous.</p></div></li></ol></div>
-    </div>
-    <footer class="bas"><span class="libelle">Préparé pour KEDGE Entrepreneurship · document de travail</span><span class="libelle">Point d'étape du 19 octobre 2026</span></footer>
-  </div>
-</section>
-<!-- ═══ 06 · Ce qui tourne déjà ═══ -->
-<section class="slide" data-slide="6" data-titre="Ce qui tourne déjà">
-  <div class="cadre">
-    <header class="haut">
-      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
-      <span class="libelle objet">Bascule Notion · KEDGE Entrepreneurship</span>
-      <span class="libelle">06 / 15</span>
-    </header>
-    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Ce qui est fait</h2><span class="libelle">Les outils</span></div>
-    <div class="corps etage2">
-      <div class="tete"><h3 class="t-titre-section">Ce qui tourne, ce qui <span class="fort">ouvre</span>.</h3><p class="t-reponse secondaire">Le plan Notion Business est actif depuis le 13 octobre.</p></div>
-      <ul class="colonnes" style="--n:3">
-        <li class="pile bas-colle"><div><p class="libelle">En service</p><h4 class="t-question e-16">L'équipe</h4></div><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Une fiche par startup, avec ses rendez-vous et comptes rendus</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Les tâches et projets internes</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Un tableau de bord par personne</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>La transcription des rendez-vous par l'IA de Notion</span></li></ul></li>
-        <li class="pile bas-colle"><div><p class="libelle">En service</p><h4 class="t-question e-16">Les formulaires</h4></div><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Le formulaire coach (heures et compte rendu), relié à Notion</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Le formulaire du Bassin des talents</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Les coachings regroupés par programme</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>52 procédures rédigées, dont 7 livrées</span></li></ul></li>
-        <li class="pile bas-colle"><div><p class="libelle">Prêt, à ouvrir</p><h4 class="t-question e-16">Coachs et direction</h4></div><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>L'espace coach, testé le 15 octobre : ouverture après validation de la liste des coachs</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Le tableau de bord de Julien : à lui présenter</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Les consignes de base pour l'IA de Notion</span></li></ul></li>
-      </ul>
-    </div>
-    <footer class="bas"><span class="libelle">Préparé pour KEDGE Entrepreneurship · document de travail</span><span class="libelle">Point d'étape du 19 octobre 2026</span></footer>
-  </div>
-</section>
-<!-- ═══ 07 · Les corrections de Valentine ═══ -->
-<section class="slide" data-slide="7" data-titre="Les corrections de Valentine">
-  <div class="cadre">
-    <header class="haut">
-      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
-      <span class="libelle objet">Bascule Notion · KEDGE Entrepreneurship</span>
-      <span class="libelle">07 / 15</span>
-    </header>
-    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Ce qui est fait</h2><span class="libelle">Les corrections</span></div>
-    <div class="corps etage2">
-      <div class="tete"><h3 class="t-titre-section">La page de corrections, point par <span class="fort">point</span>.</h3><p class="t-reponse secondaire">On la coche ensemble le 21 octobre.</p></div>
-      <div class="g57 grille">
-        <div class="cellule"><p class="libelle">Réglé</p><ul class="liv e-16"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Libellés du formulaire coach</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Startups sorties masquées du tableau de bord</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Coachs : lecture des autres comptes rendus, sans licence</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Vues par programme</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Bassin des talents relié à la base Candidatures</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Enregistrement des rendez-vous : l'IA de Notion suffit</span></li></ul></div>
-        <ol class="lignes pleine reglees"><li><span class="pave jalon">1</span><div><h4 class="t-accroche">Espace coach et tableau de bord de Julien</h4><p class="libelle e-8">Prêts, ouverture semaine du 26/10</p></div></li><li><span class="pave jalon">2</span><div><h4 class="t-accroche">Espace startup sans vues Airtable</h4><p class="libelle e-8">Semaine du 2/11</p></div></li><li><span class="pave jalon">3</span><div><h4 class="t-accroche">Formulaires Airtable refaits sur Fillout</h4><p class="libelle e-8">2/11 → 13/11</p></div></li><li><span class="pave jalon">4</span><div><h4 class="t-accroche">Guide d'entretien du diagnostic</h4><p class="libelle e-8">À trancher le 21/10</p></div></li><li><span class="pave">5</span><div><h4 class="t-accroche">Compte rendu envoyé par mail</h4><p class="libelle e-8">En attente du service Admin</p></div></li></ol>
-      </div>
-    </div>
-    <footer class="bas"><span class="libelle">Préparé pour KEDGE Entrepreneurship · document de travail</span><span class="libelle">Point d'étape du 19 octobre 2026</span></footer>
-  </div>
-</section>
-<!-- ═══ 08 · 02 · Ce qui reste ═══ -->
-<section class="slide" data-slide="8" data-titre="02 · Ce qui reste">
-  <div class="cadre sans-barre">
-    <header class="haut">
-      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
-      <span class="libelle objet">Bascule Notion · KEDGE Entrepreneurship</span>
-      <span class="libelle">08 / 15</span>
-    </header>
-    
-    <div class="corps inter">
-      <div class="grille g-inter">
-        <div class="cellule pile bas-colle">
-          <ol class="parcours"><li><span class="pave">01</span><span class="libelle">Ce qui est fait</span></li><li class=ici><span class="pave">02</span><span class="libelle">Ce qui reste</span></li><li><span class="pave">03</span><span class="libelle">Le rétroplanning</span></li></ol>
-          <div><h2 class="t-roi">Ce qui reste</h2><p class="t-reponse secondaire e-24 prose">Six chantiers pour finir la migration, sans en découvrir de nouveaux.</p></div>
-        </div>
-        <div class="numero pile bas-colle"><p class="libelle">Partie 02 / 03</p><p class="chiffre" aria-hidden="true">02</p></div>
-      </div>
-      <div class="trio" style="--n:3"><div><p class="libelle"><span class="pave">1</span>Le plus urgent</p><p class="t-accroche e-12">Candidatures et jury</p></div><div><p class="libelle"><span class="pave">2</span>Ensuite</p><p class="t-accroche e-12">Coachs, startups, formulaires</p></div><div><p class="libelle"><span class="pave">3</span>Pour finir</p><p class="t-accroche e-12">Formation et migration totale</p></div></div>
-    </div>
-    <footer class="bas"><span class="libelle">Préparé pour KEDGE Entrepreneurship · document de travail</span><span class="libelle">Point d'étape du 19 octobre 2026</span></footer>
-  </div>
-</section>
-<!-- ═══ 09 · Six chantiers ═══ -->
-<section class="slide" data-slide="9" data-titre="Six chantiers">
-  <div class="cadre">
-    <header class="haut">
-      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
-      <span class="libelle objet">Bascule Notion · KEDGE Entrepreneurship</span>
-      <span class="libelle">09 / 15</span>
-    </header>
-    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Ce qui reste</h2><span class="libelle">Les chantiers</span></div>
-    <div class="corps etage2">
-      <div class="tete"><h3 class="t-titre-section">Six chantiers, dans l'ordre de l'<span class="fort">urgence</span>.</h3><p class="t-reponse secondaire">Le premier suit le calendrier de l'appel à projets fixé par Julien.</p></div>
-      <div class="g66 grille"><ol class="lignes pleine chantiers2"><li><span class="pave">A</span><div><h4 class="t-accroche">Candidatures et jury</h4><p class="secondaire e-8">Un formulaire Fillout unique, reprise des projets triés, vue jury, notation, attribution aux startup managers.</p><p class="libelle e-12">23/10 → 20/11</p></div></li><li><span class="pave">B</span><div><h4 class="t-accroche">Coachs</h4><p class="secondaire e-8">Coachs actifs validés, formulaire « Séance projet KEDGE », espaces ouverts, vidéo d'accueil.</p><p class="libelle e-12">21/10 → 30/10</p></div></li><li><span class="pave">C</span><div><h4 class="t-accroche">Startups</h4><p class="secondaire e-8">Espace startup public sans Airtable, espace privé sur chaque fiche, vidéo d'accueil.</p><p class="libelle e-12">02/11 → 13/11</p></div></li></ol><ol class="lignes pleine chantiers2"><li><span class="pave">D</span><div><h4 class="t-accroche">Formulaires</h4><p class="secondaire e-8">Les formulaires Airtable retenus par Valentine, recréés dans Fillout par l'équipe KEDGE.</p><p class="libelle e-12">02/11 → 13/11</p></div></li><li><span class="pave">E</span><div><h4 class="t-accroche">Formation et données</h4><p class="secondaire e-8">Une demi-journée de formation sur un campus, puis des points courts. Statuts et référents à jour dans chaque portefeuille.</p><p class="libelle e-12">Début novembre → 20/11</p></div></li><li><span class="pave">F</span><div><h4 class="t-accroche">Migration totale d'Airtable</h4><p class="secondaire e-8">Tout ce qui reste dans Airtable passe dans Notion, puis l'abonnement s'arrête.</p><p class="libelle e-12">23/11 → 15/12</p></div></li></ol></div>
-    </div>
-    <footer class="bas"><span class="libelle">Préparé pour KEDGE Entrepreneurship · document de travail</span><span class="libelle">Point d'étape du 19 octobre 2026</span></footer>
-  </div>
-</section>
-<!-- ═══ 10 · Candidatures et jury ═══ -->
-<section class="slide" data-slide="10" data-titre="Candidatures et jury">
-  <div class="cadre">
-    <header class="haut">
-      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
-      <span class="libelle objet">Bascule Notion · KEDGE Entrepreneurship</span>
-      <span class="libelle">10 / 15</span>
-    </header>
-    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Ce qui reste</h2><span class="libelle">Chantier A</span></div>
-    <div class="corps g57">
-      <div class="cellule pile bas-colle">
-        <h3 class="t-titre-section">L'appel à projets ne s'arrête <span class="fort">jamais</span>.</h3>
-        <div>
-          <p class="libelle">Le principe</p>
-          <p class="t-reponse e-12">L'équipe finit son tri dans Airtable, sans rien changer à ses habitudes. Le pré-incubateur continue de recevoir des candidatures pendant toute la bascule.</p>
-          <p class="secondaire e-16">Un seul formulaire remplace les deux formulaires Airtable étudiants et alumni, et accueille aussi les externes. Seule la campagne 2026 passe au jury ; l'historique des candidatures reste consultable.</p>
-        </div>
-      </div>
-      <ol class="lignes pleine dates"><li><span class="pave jalon">23/10</span><div><h4 class="t-accroche">Clôture de l'appel à projets de l'incubateur</h4><p class="secondaire e-8">Le nouveau formulaire Fillout est prêt et testé.</p></div></li><li><span class="pave">27/10</span><div><h4 class="t-accroche">Fin du tri dans Airtable, le soir</h4><p class="secondaire e-8">Les formulaires Airtable ferment et renvoient vers le nouveau.</p></div></li><li><span class="pave">28-30/10</span><div><h4 class="t-accroche">Reprise des projets triés dans Notion</h4><p class="secondaire e-8">Avec la vue jury et le formulaire de notation Fillout.</p></div></li><li><span class="pave jalon">1-15/11</span><div><h4 class="t-accroche">Sessions de jury dans Notion</h4><p class="secondaire e-8">Résultats du 15 au 20 novembre.</p></div></li><li><span class="pave">Après le jury</span><div><h4 class="t-accroche">Les retenues passent dans la base Startups</h4><p class="secondaire e-8">Chacune arrive dans le tableau de bord de son startup manager.</p></div></li></ol>
-    </div>
-    <footer class="bas"><span class="libelle">Préparé pour KEDGE Entrepreneurship · document de travail</span><span class="libelle">Point d'étape du 19 octobre 2026</span></footer>
-  </div>
-</section>
-<!-- ═══ 11 · 03 · Le rétroplanning ═══ -->
-<section class="slide" data-slide="11" data-titre="03 · Le rétroplanning">
-  <div class="cadre sans-barre">
-    <header class="haut">
-      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
-      <span class="libelle objet">Bascule Notion · KEDGE Entrepreneurship</span>
-      <span class="libelle">11 / 15</span>
-    </header>
-    
-    <div class="corps inter">
-      <div class="grille g-inter">
-        <div class="cellule pile bas-colle">
-          <ol class="parcours"><li><span class="pave">01</span><span class="libelle">Ce qui est fait</span></li><li><span class="pave">02</span><span class="libelle">Ce qui reste</span></li><li class=ici><span class="pave">03</span><span class="libelle">Le rétroplanning</span></li></ol>
-          <div><h2 class="t-roi">Le rétroplanning</h2><p class="t-reponse secondaire e-24 prose">Sept semaines jusqu'à l'arrêt d'Airtable, avec un responsable pour chaque geste.</p></div>
-        </div>
-        <div class="numero pile bas-colle"><p class="libelle">Partie 03 / 03</p><p class="chiffre" aria-hidden="true">03</p></div>
-      </div>
-      <div class="trio" style="--n:3"><div><p class="libelle"><span class="pave">1</span>19/10 → 30/10</p><p class="t-accroche e-12">Coachs et candidatures</p></div><div><p class="libelle"><span class="pave">2</span>02/11 → 20/11</p><p class="t-accroche e-12">Formation, jury, startups</p></div><div><p class="libelle"><span class="pave">3</span>23/11 → 15/12</p><p class="t-accroche e-12">Migration totale, arrêt d'Airtable</p></div></div>
-    </div>
-    <footer class="bas"><span class="libelle">Préparé pour KEDGE Entrepreneurship · document de travail</span><span class="libelle">Point d'étape du 19 octobre 2026</span></footer>
-  </div>
-</section>
-<!-- ═══ 12 · Semaines 1 à 3 ═══ -->
-<section class="slide" data-slide="12" data-titre="Semaines 1 à 3">
-  <div class="cadre">
-    <header class="haut">
-      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
-      <span class="libelle objet">Bascule Notion · KEDGE Entrepreneurship</span>
-      <span class="libelle">12 / 15</span>
-    </header>
-    <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">Le rétroplanning</h2><span class="libelle">19 octobre → 6 novembre</span></div>
-    <div class="corps etage2">
-      <div class="tete"><h3 class="t-titre-section">Jusqu'au 6 novembre : coachs et <span class="fort">candidatures</span>.</h3><p class="t-reponse secondaire">Les jalons surlignés viennent de votre calendrier.</p></div>
-      <ol class="semaines pleine"><li><div><p class="libelle">Semaine du</p><p class="t-accroche e-8">19 octobre</p></div><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Liste des coachs actifs validée par Valentine</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Formulaire « Séance projet KEDGE »</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Formulaire de candidature unique prêt et testé</span></li></ul><div class="jalons"><p><span class="pave jalon">21/10</span><span class="secondaire">Point Feyrouz, puis Valentine et Sylvain</span></p><p><span class="pave jalon">23/10</span><span class="secondaire">Clôture de l'appel à projets</span></p></div></li><li><div><p class="libelle">Semaine du</p><p class="t-accroche e-8">26 octobre</p></div><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Espaces coach ouverts, vidéo d'accueil envoyée</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Tableau de bord présenté à Julien</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Redirection Airtable, reprise des projets triés, notation jury</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Valentine valide tous les parcours</span></li></ul><div class="jalons"><p><span class="pave jalon">27/10</span><span class="secondaire">Fin du tri Airtable, le soir</span></p><p><span class="pave">28/10</span><span class="secondaire">Formulaire de notation du jury</span></p></div></li><li><div><p class="libelle">Semaine du</p><p class="t-accroche e-8">2 novembre</p></div><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Formation de l'équipe : une demi-journée sur un campus</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Jury dans Notion</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Espace startup public sans Airtable</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Formulaires Airtable recréés dans Fillout</span></li></ul><div class="jalons"><p><span class="pave">Début nov.</span><span class="secondaire">Formation, campus à choisir</span></p><p><span class="pave jalon">1-15/11</span><span class="secondaire">Sessions de jury</span></p></div></li></ol>
-    </div>
-    <footer class="bas"><span class="libelle">Préparé pour KEDGE Entrepreneurship · document de travail</span><span class="libelle">Point d'étape du 19 octobre 2026</span></footer>
-  </div>
-</section>
-<!-- ═══ 13 · Semaines 4 à 7 ═══ -->
-<section class="slide" data-slide="13" data-titre="Semaines 4 à 7">
-  <div class="cadre">
-    <header class="haut">
-      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
-      <span class="libelle objet">Bascule Notion · KEDGE Entrepreneurship</span>
-      <span class="libelle">13 / 15</span>
-    </header>
-    <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">Le rétroplanning</h2><span class="libelle">9 novembre → 15 décembre</span></div>
-    <div class="corps etage2">
-      <div class="tete"><h3 class="t-titre-section">Jusqu'au 15 décembre : startups, recette, <span class="fort">migration</span>.</h3><p class="t-reponse secondaire">Airtable s'arrête quand tout est dans Notion.</p></div>
-      <ol class="semaines pleine"><li><div><p class="libelle">Semaine du</p><p class="t-accroche e-8">9 novembre</p></div><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Espace privé de chaque startup, avec sa vidéo</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Points courts de déblocage avec l'équipe</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Derniers formulaires sur Fillout</span></li></ul><div class="jalons"><p><span class="pave">13/11</span><span class="secondaire">Tous les formulaires sur Fillout</span></p></div></li><li><div><p class="libelle">Semaine du</p><p class="t-accroche e-8">16 novembre</p></div><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Startups retenues créées et attribuées</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Statuts et référents à jour dans chaque portefeuille</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Procédures relues par l'équipe</span></li></ul><div class="jalons"><p><span class="pave jalon">15-20/11</span><span class="secondaire">Résultats du jury</span></p><p><span class="pave">20/11</span><span class="secondaire">Portefeuilles à jour</span></p></div></li><li><div><p class="libelle">Semaine du</p><p class="t-accroche e-8">23 novembre</p></div><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Recette finale avec Valentine</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Procédures publiées</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Début de la migration totale d'Airtable</span></li></ul><div class="jalons"><p><span class="pave jalon">27/11</span><span class="secondaire">L'équipe travaille dans Notion</span></p></div></li><li><div><p class="libelle">Semaine du</p><p class="t-accroche e-8">30 novembre</p></div><ul class="liv"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Migration totale terminée et vérifiée</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Airtable en lecture seule, puis arrêté</span></li></ul><div class="jalons"><p><span class="pave jalon">15/12</span><span class="secondaire">Fin de l'abonnement Airtable</span></p></div></li></ol>
-    </div>
-    <footer class="bas"><span class="libelle">Préparé pour KEDGE Entrepreneurship · document de travail</span><span class="libelle">Point d'étape du 19 octobre 2026</span></footer>
-  </div>
-</section>
-<!-- ═══ 14 · Qui fait quoi ═══ -->
-<section class="slide" data-slide="14" data-titre="Qui fait quoi">
-  <div class="cadre">
-    <header class="haut">
-      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
-      <span class="libelle objet">Bascule Notion · KEDGE Entrepreneurship</span>
-      <span class="libelle">14 / 15</span>
-    </header>
-    <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">Le rétroplanning</h2><span class="libelle">Les responsabilités</span></div>
-    <div class="corps etage2">
-      <div class="tete"><h3 class="t-titre-section">Qui fait <span class="fort">quoi</span>, et pour quand.</h3><p class="t-reponse secondaire">Côté KEDGE, des gestes courts, chacun avec sa date.</p></div>
-      <table class="tableau garde qui"><thead><tr><th>Qui</th><th>Ce qu'il ou elle fait</th><th class="droite">Pour quand</th></tr></thead><tbody><tr><td><b>Valentine Arnaud</b><span class="secondaire">Pilote côté KEDGE</span></td><td>Valide la liste des coachs actifs et envoie le logo. Pose le message de redirection sur les formulaires Airtable. Recrée dans Fillout les formulaires retenus. Complète les photos de l'Espace startup. Teste chaque parcours. Relance le service Admin pour Outlook.</td><td class="droite">21/10 → 13/11</td></tr><tr><td><b>Julien Dupont</b><span class="secondaire">Chef des startup managers</span></td><td>Confirme la composition des jurys. Valide les heures des coachs, chaque mois ou trimestre (à confirmer).</td><td class="droite">23/10</td></tr><tr><td><b>L'équipe</b><span class="secondaire">Agnès, Juliette, Sabine, Diane</span></td><td>Finit le tri dans Airtable. Suit la formation. Met à jour statut et référent de son portefeuille.</td><td class="droite">27/10 → 20/11</td></tr><tr><td><b>Sylvain Ramaradjou</b><span class="secondaire">Rama Logic</span></td><td>Construit le reste : formulaires de candidature et de jury, espaces, reprise des candidatures, vidéos, formation, migration totale d'Airtable. Un point écrit chaque vendredi.</td><td class="droite">Chaque semaine</td></tr></tbody></table>
-    </div>
-    <footer class="bas"><span class="libelle">Préparé pour KEDGE Entrepreneurship · document de travail</span><span class="libelle">Point d'étape du 19 octobre 2026</span></footer>
-  </div>
-</section>
-<!-- ═══ 15 · Pour finir ═══ -->
-<section class="slide sombre" data-slide="15" data-titre="Pour finir">
-  <div class="cadre sans-barre">
-    <header class="haut">
-      <img class="logo" src="marque/logos/rama-logic_bloc_cream.svg" alt="Rama Logic" width="1241" height="526">
-      <span class="libelle objet">Bascule Notion · KEDGE Entrepreneurship</span>
-      <span class="libelle">15 / 15</span>
-    </header>
-    
-    <div class="corps fin">
-      <div class="centre">
-        <p class="libelle">Le cap</p>
-        <h2 class="t-roi e-24">Fin novembre, KEDGE pilote tout dans <span class="fort">Notion</span>.</h2>
-        <p class="t-reponse secondaire e-32 prose">Tout Airtable est migré avant le 15 décembre. Chaque procédure est écrite pour que l'équipe soit autonome après la mission.</p>
-      </div>
-      <div class="suite quatre">
-        <div><p class="libelle">Mercredi 21/10, 9h</p><p class="e-8">Présentation à Feyrouz</p></div>
-        <div><p class="libelle">Mercredi 21/10, 10h30</p><p class="e-8">Point Valentine et Sylvain</p></div>
-        <div><p class="libelle">Chaque vendredi</p><p class="e-8">Point écrit : fait, reste, bloqué</p></div>
-        <div><p class="libelle">Une question</p><p class="e-8">sylvain@ramalogic.com</p></div>
-      </div>
+    <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">Qui fait quoi</h2><span class="libelle">Les responsabilités</span></div>
+    <div class="corps etage3">
+      <div class="tete"><h3 class="t-titre-section">Qui fait <span class="fort">quoi</span>, et pour quand.</h3><p class="t-reponse secondaire">Prochain point : mercredi 21/10 à 10h30.</p></div>
+      <table class="tableau garde qui"><thead><tr><th>Qui</th><th>Ce qu'il ou elle fait</th><th class="droite">Pour quand</th></tr></thead><tbody><tr><td><b>Valentine Arnaud</b><span class="secondaire">Pilote côté KEDGE</span></td><td>Valide la liste des coachs actifs et envoie le logo. Pose la redirection sur les formulaires Airtable. Recrée dans Fillout les formulaires retenus. Teste chaque parcours. Relance le service Admin pour Outlook.</td><td class="droite">21/10 → 13/11</td></tr><tr><td><b>Julien Dupont</b><span class="secondaire">Chef des startup managers</span></td><td>Confirme la composition des jurys. Valide les heures des coachs, chaque mois ou trimestre (à confirmer).</td><td class="droite">23/10</td></tr><tr><td><b>L'équipe</b><span class="secondaire">Agnès, Juliette, Sabine, Diane</span></td><td>Finit le tri dans Airtable le 27/10. Suit la formation. Met à jour statut et référent de son portefeuille.</td><td class="droite">27/10 → 20/11</td></tr><tr><td><b>Sylvain Ramaradjou</b><span class="secondaire">Rama Logic</span></td><td>Formulaires de candidature et de jury, espaces coach et startup, vidéos, formation, migration totale d'Airtable. Un point écrit chaque vendredi.</td><td class="droite">Jusqu'au 15/12</td></tr></tbody></table>
+      <div class="bandeau"><div><p class="libelle">Formulaires Airtable</p></div><div><p>Aucun outil ne les migre automatiquement : Fillout n'importe pas les formulaires Airtable. Valentine les recrée, en collant leur adresse dans le générateur IA de Fillout pour gagner du temps.</p></div></div>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour KEDGE Entrepreneurship · document de travail</span><span class="libelle">Point d'étape du 19 octobre 2026</span></footer>
   </div>
@@ -865,7 +630,7 @@
 
 <div class="nav-controls" data-pdf-hide>
   <button class="nav-btn" id="prev" aria-label="Écran précédent"><svg aria-hidden="true" style="transform:scaleX(-1)"><use href="#i-chevron-droit"/></svg></button>
-  <div class="counter libelle"><span id="cur">1</span>&nbsp;/ 15</div>
+  <div class="counter libelle"><span id="cur">1</span>&nbsp;/ 3</div>
   <button class="nav-btn" id="next" aria-label="Écran suivant"><svg aria-hidden="true"><use href="#i-chevron-droit"/></svg></button>
   <button class="nav-btn" id="grid" aria-label="Vue d'ensemble"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
 </div>
