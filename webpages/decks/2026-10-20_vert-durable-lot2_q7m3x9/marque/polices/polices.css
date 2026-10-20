@@ -1,0 +1,60 @@
+/* Rama Logic · Brand System v2.0.0 · 2026-10-12
+ * Polices de la marque, fichiers locaux (chemins relatifs à ce fichier).
+ * Source : maquette du site, branche maquette/encre-filets (commit 5f2e7ce), public/fonts/.
+ *
+ * Deux familles, aucune autre :
+ *   Clash Grotesk  300 · 400 · 500 · 600   titres et texte
+ *   JetBrains Mono 400 · 500               libellés machine et chiffres
+ *
+ * Pas d'italique : aucune fonte italique n'est fournie. Ne jamais laisser le
+ * navigateur en fabriquer une (font-synthesis: none sur les titres). L'emphase
+ * dans un titre se fait par la couleur.
+ */
+
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("./clash-grotesk-300.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("./clash-grotesk-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("./clash-grotesk-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("./clash-grotesk-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./jetbrains-mono-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./jetbrains-mono-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}

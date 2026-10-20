@@ -1,0 +1,1094 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Vert Durable × Rama Logic · Lot 2</title>
+<!-- Brand System v2 « Encre et filets » : polices, jetons, socle commun des gabarits (copies locales dans marque/) -->
+<link rel="stylesheet" href="marque/polices/polices.css">
+<link rel="stylesheet" href="marque/tokens.css">
+<link rel="stylesheet" href="marque/base.css">
+<style>
+  /* ═══ Contrat repris de /sales-deck : une .slide par écran, .is-active, ?all=1, .nav-controls, #overview ═══ */
+
+  /* Valeurs propres au gabarit, absentes des jetons (listées dans FICHE.md) */
+  :root {
+    --gab-ecran-largeur: 90;     /* 1440 px de large = 1 rem de 16 px */
+    --gab-ecran-hauteur: 56.25;  /* 900 px de haut  = 1 rem de 16 px */
+    --gab-vw: 1vw; --gab-vh: 1vh; /* un centième de l'écran ; figés à l'impression (page de 1440 × 900) */
+    --v1: var(--rl-espace-48);   /* marges verticales d'une cellule : elles se resserrent sur un écran bas */
+    --v2: var(--rl-espace-32);
+    --v3: var(--rl-espace-24);
+  }
+
+  /* L'échelle de l'écran. Tous les jetons sont en rem : au-delà de 1440 × 900, tout grandit ensemble
+     (texte, cadre, barres, marges) pour que le contenu occupe l'écran. Jamais en dessous de 100 %. */
+  @media print, (min-width: 60rem) and (min-height: 40rem) {
+    html { font-size: clamp(100%, min(calc(100 * var(--gab-vw) / var(--gab-ecran-largeur)), calc(100 * var(--gab-vh) / var(--gab-ecran-hauteur))), 150%); }
+  }
+  @media screen and (min-width: 60rem) and (min-height: 40rem) and (max-height: 50rem) {
+    :root { --v1: var(--rl-espace-32); --v2: var(--rl-espace-24); --v3: var(--rl-espace-16); }
+  }
+
+  html, body { height: 100%; overflow-x: clip; }
+  .slides-viewport { height: 100vh; height: 100dvh; }
+  .slide {
+    --filet: var(--rl-filet-clair);
+    height: 100vh; height: 100dvh; overflow: hidden; display: none;
+    padding: 0 var(--rl-marge-cadre);
+  }
+  .slide.sombre { --filet: var(--rl-filet-sombre); }
+  .slide.is-active { display: block; }
+  body.show-all .slide { display: block; }
+  body.show-all .nav-controls { display: none; }
+
+  /* Le cadre : deux rails verticaux continus */
+  .cadre {
+    height: 100%; max-width: var(--rl-largeur-cadre); margin: 0 auto;
+    border-inline: var(--rl-trait-filet) solid var(--filet);
+    display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto;
+  }
+  .cadre.sans-barre { grid-template-rows: auto minmax(0, 1fr) auto; }
+  .cadre > * { min-height: 0; }
+
+  /* Barre du haut : logo, objet, numéro d'écran */
+  .haut {
+    height: var(--rl-hauteur-barre-haut);
+    display: flex; align-items: center; justify-content: space-between; gap: var(--rl-espace-24);
+    padding: 0 var(--rl-marge-cellule);
+    border-bottom: var(--rl-trait-filet) solid var(--filet);
+  }
+  .haut .logo { height: var(--rl-espace-32); width: auto; }  /* 32 px : taille minimale du logo complet */
+
+  /* Barre de section numérotée */
+  .barre {
+    height: var(--rl-hauteur-barre-section-numerotee);
+    display: flex; align-items: stretch;
+    border-bottom: var(--rl-trait-filet) solid var(--filet);
+  }
+  .barre .num {
+    display: grid; place-items: center; flex: none;
+    width: var(--rl-hauteur-barre-section-numerotee);
+    background: var(--rl-fond-sombre); color: var(--rl-texte-sur-sombre-principal);
+  }
+  .barre h2 { display: flex; align-items: center; padding: 0 var(--rl-marge-cellule); }
+  .barre .libelle { margin-left: auto; display: flex; align-items: center; padding: 0 var(--rl-marge-cellule); }
+
+  /* Barre du bas : mention de confidentialité */
+  .bas {
+    min-height: var(--rl-hauteur-barre-section);
+    display: flex; align-items: center; justify-content: space-between; gap: var(--rl-espace-24);
+    padding: 0 var(--rl-marge-cellule);
+    border-top: var(--rl-trait-filet) solid var(--filet);
+  }
+
+  /* Cellules collées, séparées par un filet */
+  .corps { display: grid; }
+  .cellule { padding: var(--v1) var(--rl-marge-cellule); min-width: 0; }
+  .g57 { grid-template-columns: 5fr 7fr; }
+  .g75 { grid-template-columns: 7fr 5fr; }
+  .g66 { grid-template-columns: 1fr 1fr; }
+  .g57 > * + *, .g75 > * + *, .g66 > * + * { border-left: var(--rl-trait-filet) solid var(--filet); }
+  .pile { display: flex; flex-direction: column; }
+  .pile.centre { justify-content: center; }
+  .pile.bas-colle { justify-content: space-between; gap: var(--rl-espace-32); }
+  .e-8 { margin-top: var(--rl-espace-8); } .e-12 { margin-top: var(--rl-espace-12); } .e-16 { margin-top: var(--rl-espace-16); }
+  .e-24 { margin-top: var(--rl-espace-24); } .e-32 { margin-top: var(--rl-espace-32); }
+  .e-48 { margin-top: var(--rl-espace-48); }
+  .prose { max-width: var(--rl-largeur-chapeau); }
+  .t-accroche, .t-reponse, .corps p, .tableau td { text-wrap: balance; }   /* pas de mot seul sur la dernière ligne */
+
+  /* Lignes : une liste dont chaque ligne est séparée par un filet */
+  .lignes > li {
+    display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--rl-espace-24); align-items: start;
+    padding: var(--v3) var(--rl-marge-cellule);
+    border-top: var(--rl-trait-filet) solid var(--filet);
+  }
+  .lignes > li:first-child { border-top: 0; }
+  .lignes.pleine { display: grid; }
+  .lignes.pleine > li { align-items: center; }
+
+  /* Sur un écran d'ordinateur, un titre ne dépasse jamais un tiers de la hauteur */
+  @media print, (min-width: 60rem) and (min-height: 40rem) {
+    .t-ouverture { font-size: min(var(--rl-type-ouverture-taille), calc(10 * var(--gab-vh))); }
+    .t-roi { font-size: min(var(--rl-type-roi-taille), calc(11 * var(--gab-vh))); }
+  }
+
+  /* ── 01 · Couverture ── */
+  .couv { grid-template-rows: auto minmax(0, 1fr) auto; }
+  .couv .marques { padding: var(--v1) var(--rl-marge-cellule) 0; }
+  .couv .centre { padding: var(--v2) var(--rl-marge-cellule) var(--v1); display: flex; flex-direction: column; justify-content: end; }
+  .couv h1 { max-width: 18ch; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); border-top: var(--rl-trait-filet) solid var(--filet); }
+  .trio > * { padding: var(--v3) var(--rl-marge-cellule); }
+  .trio > * + * { border-left: var(--rl-trait-filet) solid var(--filet); }
+
+  /* Co-marquage (règle provisoire) : hauteurs optiques égales, filet de 1 px, écart = zone de protection */
+  .comarquage {
+    --co-hauteur: var(--rl-espace-32);
+    --co-zone: calc(var(--co-hauteur) * 0.2);   /* zone de protection du logo : 20 % de sa hauteur */
+    display: flex; align-items: center; gap: var(--co-zone);
+  }
+  .comarquage.grand { --co-hauteur: var(--rl-espace-64); }
+  .comarquage .logo { height: var(--co-hauteur); width: auto; }
+  .comarquage .sep { width: var(--rl-trait-filet); height: var(--co-hauteur); background: var(--filet); flex: none; }
+  .logo-tiers {
+    height: var(--co-hauteur); aspect-ratio: 5 / 2;
+    display: grid; place-items: center;
+    border: var(--rl-trait-filet) dashed var(--filet);
+    border-radius: var(--rl-rayon-cellule);
+  }
+
+  /* ── 03 · Chiffre de preuve : il tient sur une ligne dans sa cellule ── */
+  .preuve .cellule { container-type: inline-size; }
+  .preuve .geant { color: var(--rl-accent-emphase); text-wrap: balance; }
+  @media print, (min-width: 60rem) { .preuve .geant { font-size: min(var(--rl-type-chiffre-geant-taille), 11.5cqi); } }
+  .mini { display: grid; }
+  .mini > li { padding: var(--v2) var(--rl-marge-cellule); border-top: var(--rl-trait-filet) solid var(--filet); display: flex; flex-direction: column; justify-content: center; }
+  .mini > li:first-child { border-top: 0; }
+
+  /* ── 04 · Méthode L-O-G-I-C : la lettre en haut, le texte et le livrable en bas ── */
+  .methode { grid-template-rows: auto minmax(0, 1fr); }
+  .methode .tete { padding: var(--v2) var(--rl-marge-cellule); border-bottom: var(--rl-trait-filet) solid var(--filet); display: flex; align-items: end; justify-content: space-between; gap: var(--rl-espace-48); }
+  .methode .tete p { max-width: 16em; flex: none; }
+  .logic { display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: minmax(0, 1fr) auto auto auto; }
+  /* Chaque colonne reprend les lignes de la grille : les noms, les textes et les livrables s'alignent d'une colonne à l'autre */
+  .logic > li { grid-row: 1 / -1; display: grid; grid-template-rows: subgrid; padding: var(--v2) var(--rl-espace-24); min-width: 0; }
+  .logic > li + li { border-left: var(--rl-trait-filet) solid var(--filet); }
+  .logic .rang { display: flex; align-items: start; justify-content: space-between; gap: var(--rl-espace-12); }
+  .logic .lettre { line-height: 0.8; }
+  .logic h4 { padding-top: var(--rl-espace-24); }
+  .logic .livrable { margin-top: var(--v3); padding-top: var(--rl-espace-16); border-top: var(--rl-trait-filet) solid var(--filet); }
+  @media print, (min-width: 60rem) and (min-height: 40rem) {
+    .logic .lettre { font-size: min(var(--rl-type-ouverture-taille), calc(10 * var(--gab-vh))); }
+  }
+
+  /* ── 05 · Offre : un seul bloc Aloe foncé par écran ── */
+  .slide .offre { --filet: var(--rl-filet-sur-offre); }
+  .inclus > li { display: flex; align-items: center; gap: var(--rl-espace-16); padding: var(--rl-espace-16) 0; border-top: var(--rl-trait-filet) solid var(--filet); }
+  .inclus .icone { color: var(--rl-accent-structure); }
+
+  /* ── 06 · Calendrier : une ligne par étape, les jalons reliés par un trait ── */
+  .cal { grid-template-rows: minmax(0, 1fr) auto; }
+  .phases { display: grid; }
+  .phases > li { display: grid; grid-template-columns: 2fr 3fr 4fr 3fr; min-width: 0; }
+  .phases > li + li { border-top: var(--rl-trait-filet) solid var(--filet); }
+  .phases > li > * { padding: var(--rl-espace-16) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+  .phases > li > * + * { border-left: var(--rl-trait-filet) solid var(--filet); }
+  .phases .jalon-ligne { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: start; align-content: center; gap: var(--rl-espace-8) var(--rl-espace-12); position: relative; }
+  .phases .jalon-ligne .pave { position: relative; }
+  .phases .jalon-ligne::before {   /* le trait qui relie les jalons, d'une ligne à l'autre */
+    content: ""; position: absolute; top: 0; bottom: 0;
+    left: calc(var(--rl-marge-cellule) + var(--rl-espace-16)); width: var(--rl-trait-filet);
+    background: var(--rl-texte-principal);
+  }
+  .phases > li:first-child .jalon-ligne::before { top: 50%; }
+  .phases > li:last-child .jalon-ligne::before { bottom: 50%; }
+  .bandeau { display: grid; grid-template-columns: 5fr 7fr; border-top: var(--rl-trait-filet) solid var(--filet); }
+  .bandeau > * { padding: var(--v3) var(--rl-marge-cellule); display: flex; align-items: center; }
+  .bandeau > * + * { border-left: var(--rl-trait-filet) solid var(--filet); }
+
+  /* ── 07 · Prix : le montant et « HT » sur une seule ligne, tableaux à filets qui remplissent la hauteur ── */
+  .prix .cellule { container-type: inline-size; }
+  .prix .montant { white-space: nowrap; font-size: min(var(--rl-type-chiffre-geant-taille), 14.5cqi); }
+  table.tableau { width: 100%; height: 100%; border-collapse: collapse; }
+  .tableau th, .tableau td { padding: var(--rl-espace-12) var(--rl-marge-cellule); text-align: left; border-bottom: var(--rl-trait-filet) solid var(--filet); font-weight: var(--rl-graisse-normal); vertical-align: middle; }
+  .tableau tbody tr:last-child td { border-bottom: 0; }
+  .tableau .droite { text-align: right; white-space: nowrap; }
+  .tableau td.droite { font-family: var(--rl-police-machine); font-weight: var(--rl-graisse-moyen); font-size: var(--rl-type-corps-petit-taille); }
+  .prix .tables { display: grid; grid-template-rows: 5fr 4fr; min-width: 0; }
+  .prix .tables > * + * { border-top: var(--rl-trait-filet) solid var(--filet); }
+
+  /* ── 08 · Garantie ── */
+  .encadre.garantie { padding: var(--rl-espace-24); display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--rl-espace-16); align-items: start; }
+
+  /* ── 09 · Prochaine étape : bandeau de conclusion ── */
+  .fin { grid-template-rows: minmax(0, 1fr) auto; }
+  .fin .centre { padding: var(--v1) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: center; }
+  .fin .t-roi { max-width: 14ch; }
+  .fin .t-reponse b { font-weight: var(--rl-graisse-moyen); color: var(--rl-texte-sur-sombre-principal); }
+  .suite { display: grid; grid-template-columns: auto repeat(3, 1fr); border-top: var(--rl-trait-filet) solid var(--filet); }
+  .suite > * { padding: var(--v3) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: center; align-items: start; min-width: 0; }
+  .suite > * + * { border-left: var(--rl-trait-filet) solid var(--filet); }
+  .suite p { overflow-wrap: anywhere; }
+
+  /* Écran d'ordinateur étroit (960 à 1200 px de large) : le bouton passe sur sa propre ligne, les colonnes de la méthode gagnent de la largeur */
+  @media screen and (min-width: 60rem) and (max-width: 74.99rem) {
+    .suite { grid-template-columns: repeat(3, 1fr); }
+    .suite > :first-child { grid-column: 1 / -1; border-bottom: var(--rl-trait-filet) solid var(--filet); }
+    .suite > :nth-child(2) { border-left: 0; }
+    .logic > li { padding-inline: var(--rl-espace-16); }
+  }
+
+  /* ═══ Navigation : dans la marge de droite, hors du cadre, pour ne jamais recouvrir le contenu ═══ */
+  .nav-controls {
+    --filet: var(--rl-filet-clair);
+    position: fixed; z-index: 60; bottom: var(--rl-espace-8);
+    right: calc((var(--rl-marge-cadre) - var(--rl-hauteur-cible-tactile)) / 2);
+    display: flex; flex-direction: column;
+    color: var(--rl-texte-principal);
+    border: var(--rl-trait-filet) solid var(--filet); border-radius: var(--rl-rayon-cellule);
+  }
+  .nav-controls.sombre { --filet: var(--rl-filet-sombre); color: var(--rl-texte-sur-sombre-principal); }
+  .nav-btn, .counter {
+    height: var(--rl-hauteur-cible-tactile); width: var(--rl-hauteur-cible-tactile);
+    display: grid; place-items: center; background: transparent; color: inherit; border: 0;
+  }
+  .nav-controls > * + * { border-top: var(--rl-trait-filet) solid var(--filet); }
+  .nav-btn { cursor: pointer; padding: 0; transition: background-color var(--rl-mouvement-duree-base) var(--rl-mouvement-courbe-sortie); }
+  .nav-btn svg { width: var(--rl-espace-16); height: var(--rl-espace-16); }
+  .counter { display: flex; align-items: center; justify-content: center; padding: 0; letter-spacing: 0; white-space: nowrap; }
+  @media (hover: hover) and (pointer: fine) { .nav-btn:hover { background: var(--rl-fond-encadre); color: var(--rl-texte-principal); } }
+  #overview { position: fixed; inset: 0; z-index: 80; display: none; overflow: auto; background: var(--rl-fond-page); padding: var(--rl-espace-32) var(--rl-marge-cadre); }
+  #overview.on { display: block; }
+  .ov-grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); border-top: var(--rl-trait-filet) solid var(--rl-filet-clair); border-left: var(--rl-trait-filet) solid var(--rl-filet-clair); }
+  .ov-card { text-align: left; font: inherit; color: inherit; background: var(--rl-fond-page); cursor: pointer; padding: var(--rl-espace-24); border: 0; border-right: var(--rl-trait-filet) solid var(--rl-filet-clair); border-bottom: var(--rl-trait-filet) solid var(--rl-filet-clair); }
+  @media (hover: hover) and (pointer: fine) { .ov-card:hover { background: var(--rl-fond-encadre); } }
+
+  /* Impression : un écran par page, au format de référence 1440 × 900 */
+  @page { size: 1440px 900px; margin: 0; }
+  @media print {
+    .nav-controls, #overview { display: none !important; }
+    :root { --gab-vw: 14.4px; --gab-vh: 9px; }
+    html, body, .slides-viewport { height: auto; }
+    .slide { display: block !important; height: calc(100 * var(--gab-vh)); break-inside: avoid; }
+    .slide + .slide { break-before: page; }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* ═══ Fenêtre étroite (moins de 960 px) ou très basse (moins de 640 px) : les écrans s'empilent et défilent ═══ */
+  @media screen and (max-width: 59.99rem), screen and (max-height: 39.99rem) {
+    html, body { height: auto; }
+    .slides-viewport { height: auto; }
+    .slides-viewport .slide { display: block; height: auto; overflow: visible; }
+    .slides-viewport .slide .cadre { height: auto; }
+    .slides-viewport .slide.sombre .cadre { min-height: 100vh; min-height: 100dvh; }
+    .nav-controls { display: none; }
+    .bas { padding-block: var(--rl-espace-12); }
+  }
+  /* Une seule colonne sous 960 px de large : le filet vertical devient horizontal */
+  @media screen and (max-width: 59.99rem) {
+    :root { --v1: var(--rl-espace-32); --v2: var(--rl-espace-24); --v3: var(--rl-espace-16); }
+    .g57, .g75, .g66, .trio, .logic, .bandeau, .suite, .phases > li { grid-template-columns: 1fr; }
+    .g57 > * + *, .g75 > * + *, .g66 > * + *, .trio > * + *, .logic > li + li, .bandeau > * + *, .suite > * + * {
+      border-left: 0; border-top: var(--rl-trait-filet) solid var(--filet);
+    }
+    .lignes > li { gap: var(--rl-espace-16); }
+    .barre .libelle { display: none; }
+    .haut .objet { display: none; }
+    .methode .tete { flex-direction: column; align-items: start; gap: var(--rl-espace-16); }
+    .methode .tete p { max-width: none; flex: initial; }
+    /* Méthode : la lettre à gauche, le texte à droite */
+    .logic { grid-template-rows: none; }
+    .logic > li { grid-row: auto; grid-template-rows: none; grid-template-columns: var(--rl-espace-48) minmax(0, 1fr); column-gap: var(--rl-espace-16); padding: var(--rl-espace-24) var(--rl-marge-cellule); }
+    .logic .rang { grid-row: 1 / span 3; flex-direction: column; justify-content: start; gap: var(--rl-espace-16); }
+    .logic .lettre { line-height: 1; }
+    .logic h4 { padding-top: 0; }
+    .logic > li > :not(.rang) { grid-column: 2; }
+    /* Calendrier : chaque étape redevient un bloc */
+    .phases > li { padding: var(--rl-espace-24) var(--rl-marge-cellule); row-gap: var(--rl-espace-12); }
+    .phases > li > * { padding: 0; }
+    .phases > li > * + * { border-left: 0; }
+    .phases .jalon-ligne::before { display: none; }
+    .phases .livrable { padding-top: var(--rl-espace-12); border-top: var(--rl-trait-filet) solid var(--filet); }
+    .bandeau > * + * { border-top: 0; padding-top: 0; }
+    .prix .tables { grid-template-rows: auto auto; }
+    table.tableau { height: auto; }
+    .comarquage.grand { --co-hauteur: var(--rl-espace-48); }
+    .couv .centre, .fin .centre { padding: var(--rl-espace-48) var(--rl-marge-cellule); }
+  }
+  /* Tablette debout (640 à 960 px) : les petits chiffres en trois colonnes, chaque étape du calendrier sur deux colonnes */
+  @media screen and (min-width: 40rem) and (max-width: 59.99rem) {
+    .mini { grid-template-columns: repeat(3, 1fr); }
+    .mini > li { border-top: 0; }
+    .mini > li + li { border-left: var(--rl-trait-filet) solid var(--filet); }
+    .phases > li { grid-template-columns: 5fr 7fr; column-gap: var(--rl-espace-24); }
+    .phases > li > :nth-child(1), .phases > li > :nth-child(2) { grid-column: 1; }
+    .phases > li > :nth-child(3) { grid-column: 2; grid-row: 1; align-self: center; }
+    .phases > li > :nth-child(4) { grid-column: 2; grid-row: 2; align-self: end; }
+  }
+
+
+  /* ═══ Ajouts propres à la propale Beyond Crew (mêmes jetons, mêmes filets) ═══ */
+
+  /* Fenêtre plus petite que 1440 × 900 : tout rétrécit ensemble plutôt que de couper un écran */
+  @media screen and (min-width: 60rem) and (min-height: 40rem) {
+    html { font-size: clamp(78%, min(calc(100 * var(--gab-vw) / var(--gab-ecran-largeur)), calc(100 * var(--gab-vh) / var(--gab-ecran-hauteur))), 150%); }
+  }
+
+  /* Étages : une tête, un milieu qui prend la place, un bandeau */
+  .grille { display: grid; min-height: 0; min-width: 0; }
+  .etage  { grid-template-rows: minmax(0, 1fr) auto; }
+  .etage2 { grid-template-rows: auto minmax(0, 1fr); }
+  .etage3 { grid-template-rows: auto minmax(0, 1fr) auto; }
+  .tete { padding: var(--v2) var(--rl-marge-cellule); border-bottom: var(--rl-trait-filet) solid var(--filet); display: flex; align-items: end; justify-content: space-between; gap: var(--rl-espace-48); }
+  .tete > p { max-width: 17em; flex: 0 1 auto; }
+  .bandeau p { text-wrap: pretty; }
+
+  /* Colonnes collées, séparées par un filet */
+  .colonnes { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); min-height: 0; }
+  .colonnes.plan { grid-template-columns: 1fr 2fr 1fr; }
+  .colonnes > li { padding: var(--v2) var(--rl-marge-cellule); min-width: 0; }
+  .colonnes > li + li { border-left: var(--rl-trait-filet) solid var(--filet); }
+  .rang { display: flex; align-items: start; justify-content: space-between; gap: var(--rl-espace-12); }
+  .lettre { line-height: 0.8; }
+  .pied { margin-top: var(--v3); padding-top: var(--rl-espace-16); border-top: var(--rl-trait-filet) solid var(--filet); }
+  .avec-icone { display: flex; align-items: center; gap: var(--rl-espace-12); }
+  .icone.grande { width: 2.5rem; height: 2.5rem; }
+  .prose-large { max-width: 40rem; }
+
+  /* Citation : Clash Grotesk droit, graisse 300, guillemets français */
+  .citation { font-size: var(--rl-type-reponse-taille); font-weight: var(--rl-graisse-leger); line-height: 1.3; letter-spacing: -0.01em; text-wrap: pretty; }
+  .citation.petite { font-size: 1.375rem; }
+
+  /* Quatre chiffres en carré */
+  .quad { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; min-height: 0; }
+  .quad > li { padding: var(--v2) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: center; min-width: 0; container-type: inline-size; }
+  .quad > li:nth-child(even) { border-left: var(--rl-trait-filet) solid var(--filet); }
+  .quad > li:nth-child(n + 3) { border-top: var(--rl-trait-filet) solid var(--filet); }
+  .quad .t-chiffre-geant { white-space: nowrap; font-size: min(var(--rl-type-chiffre-geant-taille), 34cqi); }
+
+  .encadre.note { padding: var(--rl-espace-24); }
+
+  /* Aujourd'hui / Demain */
+  .avant-apres { display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; }
+  .entete { height: var(--rl-hauteur-barre-section); padding: 0 var(--rl-marge-cellule); border-bottom: var(--rl-trait-filet) solid var(--filet); display: flex; align-items: center; gap: var(--rl-espace-12); }
+  .paires { display: grid; grid-template-rows: repeat(3, minmax(0, 1fr)); }
+  .paires > li { padding: var(--v3) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: center; }
+  .paires > li + li { border-top: var(--rl-trait-filet) solid var(--filet); }
+  .paires.attenuees .t-accroche { color: var(--rl-texte-secondaire); }
+
+  /* Blocs Aloe foncé pleine largeur (un seul par écran) */
+  .slide .offre.ruban, .slide .offre.livrables { --filet: var(--rl-filet-sur-offre); }
+  .offre.ruban { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--rl-espace-24); align-items: start; padding: var(--v3) var(--rl-marge-cellule); }
+  .offre.ruban .icone { color: var(--rl-accent-structure); width: var(--rl-espace-32); height: var(--rl-espace-32); }
+  .offre.livrables { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--rl-espace-48); align-items: center; padding: var(--v2) var(--rl-marge-cellule); }
+  .offre.livrables ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--rl-espace-32); }
+  .offre.livrables li { display: flex; gap: var(--rl-espace-12); align-items: start; font-size: 1.25rem; line-height: 1.35; font-weight: var(--rl-graisse-moyen); }
+  .offre.livrables .icone { color: var(--rl-accent-structure); margin-top: 0.1em; }
+  .inclus .mono { min-width: 3.5rem; color: var(--rl-texte-sur-offre-accent); }
+
+  /* Offre : ce qui est compris, puis les bornes */
+  .detail { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-width: 0; }
+  .detail .bloc { padding: var(--v2) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: center; }
+  .detail .bloc + .bloc { border-top: var(--rl-trait-filet) solid var(--filet); }
+  .compris { display: grid; grid-template-columns: 1fr 1fr; gap: var(--rl-espace-24) var(--rl-espace-32); margin-top: var(--rl-espace-24); }
+  .compris li { display: flex; gap: var(--rl-espace-12); align-items: start; }
+  .compris .icone { color: var(--rl-texte-lien); }
+
+  /* Écrans de partie */
+  .pave.grand { min-width: var(--rl-espace-64); height: var(--rl-espace-64); font-size: 1.5rem; }
+  @media print, (min-width: 60rem) {
+    .trio { grid-template-columns: repeat(var(--n, 3), 1fr); }
+    .suite.quatre { grid-template-columns: repeat(4, 1fr); }
+    .suite.quatre > :first-child { grid-column: auto; border-bottom: 0; }
+    .suite.quatre > :nth-child(2) { border-left: var(--rl-trait-filet) solid var(--filet); }
+  }
+
+  /* ── Le calendrier : une ligne par étape, sept semaines, les jalons et les livrables à droite ── */
+  .agenda {
+    display: grid; height: 100%;
+    grid-template-columns: minmax(0, 13.5fr) repeat(9, minmax(0, 3.2fr)) minmax(0, 24fr);
+    grid-template-rows: auto auto minmax(0, 1fr) minmax(0, 1.35fr) minmax(0, 1fr) auto;
+  }
+  .agenda > li { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; min-height: 0; }
+  .agenda > li + li { border-top: var(--rl-trait-filet) solid var(--filet); }
+  .agenda .quoi { padding: var(--rl-espace-12) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+  .agenda .quoi h3 { font-size: 1.5rem; line-height: 1.15; letter-spacing: -0.02em; margin-top: 0.375rem; }
+  .agenda .piste { grid-column: 2 / 11; display: grid; grid-template-columns: subgrid; grid-template-rows: minmax(0, 1fr); }
+  .agenda .piste > i { grid-row: 1; border-left: var(--rl-trait-filet) solid var(--filet); }
+  .agenda .piste > i:nth-child(1) { grid-column: 1; } .agenda .piste > i:nth-child(2) { grid-column: 2; }
+  .agenda .piste > i:nth-child(3) { grid-column: 3; } .agenda .piste > i:nth-child(4) { grid-column: 4; }
+  .agenda .piste > i:nth-child(5) { grid-column: 5; } .agenda .piste > i:nth-child(6) { grid-column: 6; }
+  .agenda .piste > i:nth-child(7) { grid-column: 7; } .agenda .piste > i:nth-child(8) { grid-column: 8; } .agenda .piste > i:nth-child(9) { grid-column: 9; }
+  .agenda .duree { grid-row: 1; align-self: center; height: 1.5rem; margin-inline: 0.375rem; z-index: 1; background: var(--rl-fond-sombre); border-radius: var(--rl-rayon-cellule); }
+  .agenda .duree.pointille { background: transparent; border: var(--rl-trait-filet) dashed var(--rl-texte-principal); }
+  .agenda .repere {
+    grid-row: 1; align-self: center; justify-self: start; z-index: 2;
+    position: relative; left: calc(var(--ou) - 0.375rem); translate: -100% 0;
+    width: 1.5rem; height: 1.5rem;
+    background: var(--rl-accent-structure); border: var(--rl-trait-filet) solid var(--rl-texte-principal); border-radius: var(--rl-rayon-cellule);
+  }
+  .agenda .sortie { grid-column: 11; border-left: var(--rl-trait-filet) solid var(--filet); padding: var(--rl-espace-12) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: center; gap: 0.5rem; min-width: 0; }
+  .agenda .phase .piste, .agenda .usage .piste, .agenda .decision .piste { background: transparent; }
+  .agenda .entete { height: auto; min-height: 0; padding: 0; border-bottom: 0; display: grid; }
+  .agenda .entete .quoi, .agenda .entete .sortie { padding-block: var(--rl-espace-8); }
+  .agenda .entete .piste p { padding: var(--rl-espace-8) 0.375rem; border-left: var(--rl-trait-filet) solid var(--filet); display: flex; flex-direction: column; gap: 0.125rem; white-space: nowrap; color: var(--rl-texte-principal); }
+  .agenda .entete .piste p span { color: var(--rl-texte-libelle); }
+  .jalon-texte { display: flex; align-items: center; gap: var(--rl-espace-12); }
+  .jalon-texte b { font-weight: var(--rl-graisse-moyen); }
+  .jalon-texte .pave { flex: none; white-space: nowrap; }
+  .liv { display: grid; gap: 0.125rem; }
+  .liv li { display: flex; gap: 0.625rem; align-items: start; line-height: 1.35; color: var(--rl-texte-secondaire); }
+  .liv .icone { width: 1.125rem; height: 1.125rem; margin-top: 0.2rem; color: var(--rl-texte-lien); }
+
+  /* ── L'orbite « le contexte est roi », reprise de la maquette du site ── */
+  .orbite { position: relative; min-height: 0; overflow: hidden; }
+  .orbite .anneau { position: absolute; left: 50%; top: 50%; translate: -50% -50%; border: var(--rl-trait-filet) solid var(--rl-couleur-transparence-cream-22); border-radius: 50%; }
+  .orbite .anneau[data-a="2"] { border-color: color-mix(in srgb, var(--rl-couleur-mindaro) 45%, transparent); }
+  .orbite .nom { position: absolute; left: 50%; z-index: 4; translate: -50% -50%; padding: var(--rl-espace-4) var(--rl-espace-12); white-space: nowrap; background: var(--rl-fond-sombre); }
+  .sombre .orbite .nom[data-a="1"] { color: var(--rl-texte-sur-sombre-principal); }
+  .sombre .orbite .nom[data-a="2"] { color: var(--rl-accent-structure); }
+  .orbite .coeur { position: absolute; left: 50%; top: 50%; translate: -50% -50%; font-size: 1.5rem; font-weight: var(--rl-graisse-moyen); letter-spacing: -0.02em; white-space: nowrap; }
+  .orbite .astre { position: absolute; top: 0; left: 0; will-change: transform; }
+  .jeton { display: flex; align-items: center; justify-content: center; }
+  .jeton.tuile { width: 3.5rem; height: 3.5rem; background: var(--rl-fond-page); border-radius: var(--rl-rayon-cellule); }
+  .jeton.tuile img { width: 2rem; height: 2rem; object-fit: contain; }
+  .jeton.pilule { gap: 0.5rem; padding: 0.5rem 0.875rem 0.5rem 0.75rem; white-space: nowrap; color: var(--rl-texte-sur-sombre-principal); font-size: var(--rl-type-pastille-taille); font-weight: var(--rl-type-pastille-graisse); line-height: 1; background: var(--rl-couleur-etat-ink-survol); border: var(--rl-trait-filet) solid var(--rl-couleur-transparence-cream-22); border-radius: var(--rl-rayon-pilule); }
+  .jeton.pilule::before { content: ""; width: 0.4375rem; height: 0.4375rem; background: var(--rl-fond-page); border-radius: var(--rl-rayon-cellule); }
+  .jeton.robot { width: 3rem; height: 3rem; color: var(--rl-icone-agent); background: var(--rl-fond-sombre); border: var(--rl-trait-filet) solid var(--rl-icone-agent); border-radius: var(--rl-rayon-pilule); }
+  .jeton.robot svg { width: 1.625rem; height: 1.625rem; }
+  .jeton.modele { width: 3rem; height: 3rem; background: var(--rl-fond-page); border-radius: var(--rl-rayon-pilule); }
+  .jeton.modele img { width: 1.625rem; height: 1.625rem; object-fit: contain; }
+
+  /* ═══ Sous 960 px de large : tout s'empile ═══ */
+  @media screen and (max-width: 59.99rem), screen and (max-height: 39.99rem) {
+    .etage, .etage2, .etage3 { grid-template-rows: none; }
+    .agenda { height: auto; }
+    .orbite { height: 24rem; }
+  }
+  @media screen and (max-width: 59.99rem) {
+    .colonnes, .colonnes.plan, .offre.livrables, .offre.livrables ul, .compris { grid-template-columns: 1fr; }
+    .colonnes > li + li { border-left: 0; border-top: var(--rl-trait-filet) solid var(--filet); }
+    .offre.livrables { gap: var(--rl-espace-16); }
+    .offre.livrables ul { gap: var(--rl-espace-12); }
+    .tete { flex-direction: column; align-items: start; gap: var(--rl-espace-16); }
+    .tete > p { max-width: none; }
+    .rang { margin-bottom: var(--rl-espace-16); }
+    .agenda { display: block; }
+    .agenda > li { display: block; padding: var(--rl-espace-24) 0; }
+    .agenda .entete, .agenda .piste { display: none; }
+    .agenda .quoi { padding-block: 0 var(--rl-espace-12); }
+    .agenda .sortie { border-left: 0; padding-block: 0; }
+    .jalon-texte { flex-wrap: wrap; }
+  }
+  @media screen and (max-width: 39.99rem) {
+    .quad { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* Retouches après relecture des captures */
+  .preuve .geant.plein { font-size: var(--rl-type-roi-taille); line-height: 0.9; }
+  .niveaux > li { padding: var(--rl-espace-16) 0; border-top: var(--rl-trait-filet) solid var(--filet); }
+  .niveaux > li:last-child { padding-bottom: 0; }
+  .niveaux b { font-weight: var(--rl-graisse-moyen); }
+  .sombre .niveaux li:first-child .libelle { color: var(--rl-accent-structure); }
+  @media screen and (max-width: 59.99rem) { .paires { grid-template-rows: none; } }
+  @media screen and (max-width: 59.99rem) {
+    .grille, .corps.g57, .corps.g66, .corps.g75 { grid-template-columns: minmax(0, 1fr); }
+    .tableau th, .tableau td { padding-inline: var(--rl-espace-8); }
+    .tableau th:nth-child(2), .tableau td:nth-child(2) { display: none; }
+    .tableau td:first-child { white-space: nowrap; }
+    .tableau th:first-child, .tableau td:first-child { padding-left: var(--rl-marge-cellule); }
+    .tableau th.droite { white-space: normal; }
+    .orbite { height: 26rem; }
+    .orbite .coeur { display: none; }
+  }
+
+  /* Sprints nommés dans la barre de la construction */
+  .agenda .duree.libelle { display: flex; align-items: center; padding-inline: 0.5rem; color: var(--rl-texte-sur-sombre-principal); white-space: nowrap; overflow: hidden; }
+
+  /* ── Écrans de partie : le parcours, le titre en grand, le numéro sur un pan Mindaro ── */
+  .inter { grid-template-rows: minmax(0, 1fr) auto; }
+  .parcours { display: grid; gap: 0.5rem; }
+  .parcours li { display: flex; align-items: center; gap: var(--rl-espace-12); }
+  .parcours li:not(.ici) .pave { background: transparent; color: var(--rl-texte-libelle); border: var(--rl-trait-filet) solid var(--filet); }
+  .parcours li.ici .libelle { color: var(--rl-texte-principal); }
+  .numero { padding: var(--v2) var(--rl-marge-cellule); background: var(--rl-accent-structure); min-width: 0; container-type: inline-size; }
+  .numero .libelle { color: var(--rl-texte-principal); }
+  .numero .chiffre { font-size: min(15.5rem, 76cqi); font-weight: var(--rl-graisse-moyen); line-height: 0.8; letter-spacing: -0.05em; color: var(--rl-texte-principal); }
+  .inter .trio .libelle { display: flex; align-items: center; gap: var(--rl-espace-12); }
+  @media print, (min-width: 60rem) { .g-inter { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); } }
+  @media screen and (max-width: 59.99rem) { .numero .chiffre { font-size: 8rem; line-height: 1; margin-top: var(--rl-espace-24); } .parcours { margin-bottom: var(--rl-espace-32); } }
+
+  /* ── Le socle : les flèches entre les bases ── */
+  .chaine > li { position: relative; }
+  .maillon { position: absolute; left: 0; top: 36%; translate: -50% -50%; z-index: 1; min-width: 2.75rem; height: 2.75rem; font-size: 1.25rem; }
+  .maillon .icone { width: 1.375rem; height: 1.375rem; }
+  .maillon.plus { background: var(--rl-fond-page); color: var(--rl-texte-principal); border: var(--rl-trait-filet) solid var(--filet); }
+  .chaine .pied { margin-top: var(--rl-espace-16); }
+  @media screen and (max-width: 59.99rem) { .maillon { display: none; } }
+</style>
+
+<style>
+  /* Colonnes alignées : titres et textes sur la même ligne d'une colonne à l'autre (subgrid) */
+  .colonnes.aligne { grid-template-rows: auto minmax(0, 1fr) auto auto; }
+  .colonnes.aligne > li { grid-row: span 4; display: grid; grid-template-rows: subgrid; row-gap: 0; }
+  .colonnes.aligne > li > :first-child { grid-row: 1; }
+  .colonnes.aligne > li > div:last-child { display: contents; }
+  .colonnes.aligne > li h4 { grid-row: 3; align-self: start; }
+  .colonnes.aligne > li h4 + p { grid-row: 4; align-self: start; }
+  @media (max-width: 960px) { .colonnes.aligne { grid-template-rows: none; } .colonnes.aligne > li { grid-row: auto; display: block; } .colonnes.aligne > li > div:last-child { display: block; } }
+  /* Formule d'une bonne tâche */
+  .formule { display: grid; grid-template-columns: 0.9fr auto 1.25fr auto 1.35fr; align-items: stretch; border-bottom: var(--rl-trait-filet) solid var(--filet); }
+  .formule .bloc { padding: var(--v2) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: space-between; gap: var(--rl-espace-16); }
+  .formule .plus { display: flex; align-items: center; font-family: var(--rl-police-machine); font-size: var(--rl-type-titre-section-taille); color: var(--rl-texte-libelle); padding: 0 var(--rl-espace-8); }
+  .formule .bloc.resultat { background: var(--rl-fond-encadre); }
+  .formule .mot { white-space: nowrap; font-size: calc(var(--rl-type-titre-section-taille) * 0.9); line-height: 1.05; letter-spacing: -0.02em; }
+  .exemple { padding: var(--v2) var(--rl-marge-cellule); display: flex; flex-direction: column; justify-content: center; gap: var(--rl-espace-16); }
+  .exemple .phrase { font-size: var(--rl-type-titre-section-taille); line-height: 1.15; letter-spacing: -0.02em; }
+  .exemple .phrase span { border-bottom: 3px solid var(--rl-couleur-aloe); padding-bottom: 2px; }
+  .exemple .phrase span.r { border-bottom-color: var(--rl-accent-emphase); }
+  .exemple .contre { color: var(--rl-texte-secondaire); font-size: var(--rl-type-reponse-taille, 1.25rem); }
+  .exemple .contre s { text-decoration-thickness: 2px; }
+  @media (prefers-reduced-motion: no-preference) {
+    body:not(.show-all) .slide.is-active .anime { animation: monte .6s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 220ms + 200ms); }
+  }
+
+  /* Motion : entrée en cascade des éléments de chaque écran actif (désactivée en ?all=1 et en mouvement réduit) */
+  @media (prefers-reduced-motion: no-preference) {
+    body:not(.show-all) .slide.is-active :is(.tete > *, .colonnes > li, .lignes > li, .trio > *, .suite > *, .corps.fin .centre > *, .corps.couv .centre > *, .bandeau, .offre, .encadre, .tableau tbody tr, .barre .libelle) { animation: monte .55s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 110ms + 150ms); }
+    body:not(.show-all) .slide.is-active :is(.colonnes, .lignes, .trio, .suite, .tableau tbody, .tete, .centre) > :nth-child(2) { --i: 1; }
+    body:not(.show-all) .slide.is-active :is(.colonnes, .lignes, .trio, .suite, .tableau tbody, .tete, .centre) > :nth-child(3) { --i: 2; }
+    body:not(.show-all) .slide.is-active :is(.colonnes, .lignes, .trio, .suite, .tableau tbody, .centre) > :nth-child(4) { --i: 3; }
+    body:not(.show-all) .slide.is-active :is(.colonnes, .lignes, .trio, .suite, .tableau tbody) > :nth-child(5) { --i: 4; }
+    body:not(.show-all) .slide.is-active :is(.colonnes, .lignes, .tableau tbody) > :nth-child(6) { --i: 5; }
+    body:not(.show-all) .slide.is-active .tableau tbody > :nth-child(n+7) { --i: 6; }
+    body:not(.show-all) .slide.is-active :is(.bandeau, .offre) { --i: 5; }
+    body:not(.show-all) .slide.is-active .encadre { --i: 2; }
+    /* Les grands chiffres des intercalaires montent depuis le bas de leur bloc */
+    body:not(.show-all) .slide.is-active .numero .chiffre { animation: chiffre .9s cubic-bezier(.2,.7,.2,1) both; animation-delay: .15s; }
+    body:not(.show-all) .slide.is-active .parcours li { animation: monte .45s ease both; }
+    body:not(.show-all) .slide.is-active .parcours li:nth-child(2) { animation-delay: .1s; }
+    body:not(.show-all) .slide.is-active .parcours li:nth-child(3) { animation-delay: .2s; }
+    /* Le mot accentué se souligne en Flame après l'arrivée du titre */
+    body:not(.show-all) .slide.is-active :is(h1, h2, h3) .fort { background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0 2px; animation: trait .7s .6s cubic-bezier(.2,.7,.2,1) forwards; }
+  }
+  @keyframes chiffre { from { opacity: 0; transform: translateY(30%); } to { opacity: 1; transform: none; } }
+  @keyframes trait { to { background-size: 100% 2px; } }
+  @keyframes monte { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 960px) { .formule { grid-template-columns: 1fr; } .formule .plus { padding: 0 var(--rl-marge-cellule); } }
+</style>
+</head>
+<body>
+<!--SPRITE:coche,garantie,fleche-droite,chevron-droit,menu,equipe,agent,resultat,projet,message-->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></symbol>
+<symbol id="i-garantie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8l7 2.6a1 1 0 0 1 .6.9v5.2c0 4.5-2.9 8-7.6 9.7-4.7-1.7-7.6-5.2-7.6-9.7V6.3a1 1 0 0 1 .6-.9z"/> <path d="M8.8 12l2.3 2.3 4.2-4.6"/></symbol>
+<symbol id="i-fleche-droite" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/> <path d="M14 6l6 6-6 6"/></symbol>
+<symbol id="i-chevron-droit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/> <path d="M4 12h16"/> <path d="M4 17h16"/></symbol>
+<symbol id="i-equipe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7.8" r="3.4"/> <path d="M2.5 20v-.5a5 5 0 0 1 5-5h3a5 5 0 0 1 5 5v.5"/> <path d="M15.8 4.6a3.4 3.4 0 0 1 0 6.4"/> <path d="M18.3 14.8a5 5 0 0 1 3.2 4.7v.5"/></symbol>
+<symbol id="i-agent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6V3.6"/> <rect x="5" y="6" width="14" height="11.5" rx="3.2"/> <path d="M2.8 10.6v2.6 M21.2 10.6v2.6"/> <path d="M9.4 11.6h.01 M14.6 11.6h.01" stroke-width="2.2"/> <path d="M10 14.6h4"/> <path d="M8.5 20.6h7"/></symbol>
+<symbol id="i-resultat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/> <circle cx="12" cy="12" r="4.5"/> <path d="M12 12h.01" stroke-width="2.2"/></symbol>
+<symbol id="i-projet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a3 3 0 0 1 3-3h3.2a2 2 0 0 1 1.6.8l1 1.4a2 2 0 0 0 1.6.8H18a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3z"/></symbol>
+<symbol id="i-message" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12a3 3 0 0 1 3 3v7.5a3 3 0 0 1-3 3h-6.5L7 21v-3.5H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z"/> <path d="M8 10.8h.01 M12 10.8h.01 M16 10.8h.01" stroke-width="2.2"/></symbol>
+</svg>
+<!--/SPRITE-->
+
+<div class="slides-viewport">
+
+<!-- ═══ 01 · Couverture ═══ -->
+<section class="slide sombre is-active" data-slide="1" data-titre="Couverture">
+  <div class="cadre sans-barre">
+    <header class="haut">
+      <span class="libelle">Proposition · Lot 2</span>
+      <span class="libelle">01 / 20</span>
+    </header>
+    
+    <div class="corps couv">
+      <div class="marques"><div class="comarquage grand"><img class="logo" src="marque/logos/rama-logic_bloc_cream.svg" alt="Rama Logic" width="1241" height="526"></div></div>
+      <div class="centre">
+        <p class="libelle">Proposition · Lot 2</p>
+        <h1 class="t-ouverture e-24">Piloter vos 360 dossiers d'un coup d'<span class="fort">œil</span>.</h1>
+        <p class="t-reponse secondaire e-32 prose">Le lot 1 a donné à chacun son écran. Le lot 2 donne à la direction la vue d'ensemble, l'historique et les automatismes.</p>
+      </div>
+      <div class="trio">
+        <div><p class="libelle">Pour</p><p class="e-8">Laurent Demas et Aurélie Delforge<br>Vert Durable</p></div>
+        <div><p class="libelle">Avec</p><p class="e-8">Sylvain Ramaradjou<br>Rama Logic</p></div>
+        <div><p class="libelle">Quand</p><p class="e-8">20 octobre 2026</p></div>
+      </div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 02 · 01 · Où on en est ═══ -->
+<section class="slide" data-slide="2" data-titre="01 · Où on en est">
+  <div class="cadre sans-barre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">02 / 20</span>
+    </header>
+    
+    <div class="corps inter">
+      <div class="grille g-inter">
+        <div class="cellule pile bas-colle">
+          <ol class="parcours"><li class=ici><span class="pave">01</span><span class="libelle">Où on en est</span></li><li><span class="pave">02</span><span class="libelle">Le lot 2</span></li><li><span class="pave">03</span><span class="libelle">L'offre</span></li></ol>
+          <div><h2 class="t-roi">Où on en est</h2><p class="t-reponse secondaire e-24 prose">Ce qui tourne depuis le 22 septembre, et ce que l'équipe en dit.</p></div>
+        </div>
+        <div class="numero pile bas-colle"><p class="libelle">Partie 01 / 03</p><p class="chiffre" aria-hidden="true">01</p></div>
+      </div>
+      <div class="trio" style="--n:3"><div><p class="libelle"><span class="pave">1</span>D'abord</p><p class="t-accroche e-12">Le lot 1, fait</p></div><div><p class="libelle"><span class="pave">2</span>Ensuite</p><p class="t-accroche e-12">Ce que vous nous dites</p></div><div><p class="libelle"><span class="pave">3</span>Enfin</p><p class="t-accroche e-12">Ce qui manque encore</p></div></div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 03 · Le lot 1 ═══ -->
+<section class="slide" data-slide="3" data-titre="Le lot 1">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">03 / 20</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Où on en est</h2><span class="libelle">Le lot 1</span></div>
+    <div class="corps etage3">
+      <div class="tete"><h3 class="t-titre-section">Le lot 1 : l'audit, puis l'écran de chaque <span class="fort">collaborateur</span>.</h3></div>
+      <div class="g66 grille">
+        <div class="cellule pile bas-colle">
+          <div>
+            <p class="libelle">L'audit · atelier du 15 septembre</p>
+            <h4 class="t-accroche e-16">Votre espace mesuré, base par base.</h4>
+            <p class="secondaire e-12">731 dossiers, 12 681 lignes de tâches, 86 propriétés sur les dossiers. Le cahier des spécifications a été relu et validé par toute l'équipe.</p>
+          </div>
+          <p class="libelle pied">Livré · cahier des spécifications</p>
+        </div>
+        <div class="cellule pile bas-colle">
+          <div>
+            <p class="libelle">Les quick wins · livrés le 22 septembre</p>
+            <h4 class="t-accroche e-16">Un tableau de bord par collaborateur.</h4>
+            <p class="secondaire e-12">Les tâches reliées à leurs dossiers, des boutons de création, les mémos rangés à part, les écrans Chargé de projet et Crédits, une échéance par défaut à 15 jours.</p>
+          </div>
+          <p class="libelle pied">Livré · prise en main par l'équipe</p>
+        </div>
+      </div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 04 · Ce que vous nous dites ═══ -->
+<section class="slide" data-slide="4" data-titre="Ce que vous nous dites">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">04 / 20</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Où on en est</h2><span class="libelle">Dans vos mots</span></div>
+    <div class="corps etage3">
+      <div class="tete"><h3 class="t-titre-section">Ce que vous nous <span class="fort">dites</span>.</h3></div>
+      <ul class="colonnes" style="--n:3">
+        <li class="pile bas-colle"><div><p class="libelle">01 · L'usage</p><p class="citation e-16">«&nbsp;Il semble que ceux qui l'utilisent sont contents.&nbsp;»</p><p class="secondaire e-16">L'outil plaît à ceux qui l'ont adopté. Reste à ce que tout le monde l'ouvre.</p></div><p class="libelle pied">Laurent, 9 octobre</p></li>
+        <li class="pile bas-colle"><div><p class="libelle">02 · Le point de départ</p><p class="citation e-16">«&nbsp;Son point de départ n'est pas évident.&nbsp;»</p><p class="secondaire e-16">L'écran doit être là où l'équipe arrive le matin.</p></div><p class="libelle pied">Laurent, 9 octobre</p></li>
+        <li class="pile bas-colle"><div><p class="libelle">03 · L'enjeu</p><p class="citation e-16">«&nbsp;Une fois la date passée, pas de retour en arrière.&nbsp;»</p><p class="secondaire e-16">Le rush de fin d'année ne pardonne aucun oubli.</p></div><p class="libelle pied">Laurent, 16 septembre</p></li>
+      </ul>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 05 · Ce que ça coûte encore ═══ -->
+<section class="slide" data-slide="5" data-titre="Ce que ça coûte encore">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">05 / 20</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Où on en est</h2><span class="libelle">Ce que ça coûte aujourd'hui</span></div>
+    <div class="corps etage">
+      <div class="g75 grille preuve">
+        <div class="cellule pile centre">
+          <p class="libelle">Pilotage reconstitué à la main</p>
+          <p class="t-chiffre-geant geant e-16">~10&nbsp;500&nbsp;€</p>
+          <p class="t-accroche e-24 prose">par an, en temps de direction et de chargés de projet.</p>
+          <p class="libelle e-32">Hypothèse · 3 h par semaine de direction et 30 min pour 7 chargés de projet, à 35 €/h. Jugée cohérente le 16/09.</p>
+        </div>
+        <ul class="mini">
+          <li><p>Honoraires facturés en retard, les 10 jalons suivis à la main</p><p class="libelle e-12">À chiffrer ensemble</p></li>
+          <li><p>Dossiers bloqués repérés trop tard</p><p class="libelle e-12">Un risque par dossier</p></li>
+          <li><p>Tri des boîtes mail partagées</p><p class="libelle e-12">~19&nbsp;300 à 23&nbsp;100 €/an</p></li>
+        </ul>
+      </div>
+      <div class="bandeau">
+        <div><p class="libelle">Ce que je chiffre</p></div>
+        <div><p>Seulement ce que le lot 2 traite à coup sûr. Les autres lignes sont réelles, je ne leur invente pas de montant.</p></div>
+      </div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 06 · La cause racine ═══ -->
+<section class="slide sombre" data-slide="6" data-titre="La cause racine">
+  <div class="cadre sans-barre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_cream.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">06 / 20</span>
+    </header>
+    
+    <div class="corps fin">
+      <div class="centre">
+        <p class="libelle">Ce que j'y vois</p>
+        <h2 class="t-roi e-24">Chacun voit ses tâches. Personne ne voit encore le <span class="fort">portefeuille</span>.</h2>
+        <p class="t-reponse secondaire e-32 prose">L'avancement existe, dossier par dossier. Il ne se lit pas encore d'un seul regard, ni d'une semaine à l'autre. C'est ce qui oblige à reconstituer l'état en réunion.</p>
+      </div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 07 · 02 · Le lot 2 ═══ -->
+<section class="slide" data-slide="7" data-titre="02 · Le lot 2">
+  <div class="cadre sans-barre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">07 / 20</span>
+    </header>
+    
+    <div class="corps inter">
+      <div class="grille g-inter">
+        <div class="cellule pile bas-colle">
+          <ol class="parcours"><li><span class="pave">01</span><span class="libelle">Où on en est</span></li><li class=ici><span class="pave">02</span><span class="libelle">Le lot 2</span></li><li><span class="pave">03</span><span class="libelle">L'offre</span></li></ol>
+          <div><h2 class="t-roi">Le lot 2</h2><p class="t-reponse secondaire e-24 prose">Quatre chantiers, de la vue d'ensemble à l'adoption par l'équipe.</p></div>
+        </div>
+        <div class="numero pile bas-colle"><p class="libelle">Partie 02 / 03</p><p class="chiffre" aria-hidden="true">02</p></div>
+      </div>
+      <div class="trio" style="--n:3"><div><p class="libelle"><span class="pave">1</span>Piloter</p><p class="t-accroche e-12">La vue d'ensemble</p></div><div><p class="libelle"><span class="pave">2</span>Alléger et automatiser</p><p class="t-accroche e-12">Moins de saisie</p></div><div><p class="libelle"><span class="pave">3</span>Faire adopter</p><p class="t-accroche e-12">Avec les retours de l'équipe</p></div></div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 08 · Là où on va ═══ -->
+<section class="slide" data-slide="8" data-titre="Là où on va">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">08 / 20</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Le lot 2</h2><span class="libelle">Aujourd'hui, demain</span></div>
+    <div class="corps etage2">
+      <div class="tete"><h3 class="t-titre-section">Là où on <span class="fort">va</span>.</h3></div>
+      <div class="g66 grille">
+        <ol class="lignes pleine"><li><span class="pave">·</span><div><h4 class="t-accroche">Aujourd'hui · l'état se reconstitue en réunion</h4></div></li><li><span class="pave">·</span><div><h4 class="t-accroche">Aujourd'hui · aucune trace d'une semaine à l'autre</h4></div></li><li><span class="pave">·</span><div><h4 class="t-accroche">Aujourd'hui · les jalons d'honoraires suivis à la main</h4></div></li></ol>
+        <ol class="lignes pleine"><li><span class="pave">→</span><div><h4 class="t-accroche">Demain · les écrans Pilotage et Direction le disent</h4></div></li><li><span class="pave">→</span><div><h4 class="t-accroche">Demain · une photo de chaque dossier, chaque lundi</h4></div></li><li><span class="pave">→</span><div><h4 class="t-accroche">Demain · le jalon atteint déclenche la facture</h4></div></li></ol>
+      </div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 09 · Quatre chantiers ═══ -->
+<section class="slide" data-slide="9" data-titre="Quatre chantiers">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">09 / 20</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Le lot 2</h2><span class="libelle">Vue d'ensemble</span></div>
+    <div class="corps etage3">
+      <div class="tete"><h3 class="t-titre-section">Quatre chantiers, un seul <span class="fort">lot</span>.</h3></div>
+      <ol class="colonnes aligne" style="--n:4">
+        <li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">01</p><div><h4 class="t-accroche">Piloter</h4><p class="secondaire e-12">Les écrans d'Aurélie et de Laurent, l'historique, les alertes.</p></div></li>
+        <li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">02</p><div><h4 class="t-accroche">Alléger</h4><p class="secondaire e-12">Des fiches qu'on peut remplir en entier, et les aides suivies à part.</p></div></li>
+        <li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">03</p><div><h4 class="t-accroche">Automatiser</h4><p class="secondaire e-12">Les tâches, les factures d'honoraires, les dossiers immobiles.</p></div></li>
+        <li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">04</p><div><h4 class="t-accroche">Faire adopter</h4><p class="secondaire e-12">Vos retours intégrés, l'équipe formée, un référent chez vous.</p></div></li>
+      </ol>
+      <div class="bandeau"><div><p class="libelle">La règle</p></div><div><p>Un chantier n'est terminé que lorsque l'équipe s'en sert.</p></div></div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 10 · Chantier 1 ═══ -->
+<section class="slide" data-slide="10" data-titre="Chantier 1">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">10 / 20</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Le lot 2</h2><span class="libelle">Chantier 01</span></div>
+    <div class="corps etage">
+      <div class="g57 grille">
+        <div class="cellule pile bas-colle">
+          <div><p class="libelle">Chantier 01 sur 04</p><h3 class="t-titre-section e-16">Piloter</h3></div>
+          <p class="secondaire">C'est ce qui vous manque vraiment : voir tout le portefeuille, et voir ce qui a bougé, sans convoquer de réunion.</p>
+        </div>
+        <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Les écrans Pilotage et Direction</h4><p class="secondaire e-8">Les indicateurs de votre page Points clefs, les échéances critiques en tête.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Une photo de chaque dossier, chaque lundi</h4><p class="secondaire e-8">Ce qui a avancé, ce qui est resté immobile.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Les alertes</h4><p class="secondaire e-8">Dossiers sans activité, dépôts à faire avant le 31/12.</p></div></li></ol>
+      </div>
+      <div class="offre livrables"><p class="t-accroche">Livrables</p><ul><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Écran Pilotage pour Aurélie, écran Direction pour Laurent</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Historique semaine par semaine du portefeuille</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Point du lundi prêt tout seul</span></li></ul></div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 11 · Chantier 2 ═══ -->
+<section class="slide" data-slide="11" data-titre="Chantier 2">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">11 / 20</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Le lot 2</h2><span class="libelle">Chantier 02</span></div>
+    <div class="corps etage">
+      <div class="g57 grille">
+        <div class="cellule pile bas-colle">
+          <div><p class="libelle">Chantier 02 sur 04</p><h3 class="t-titre-section e-16">Alléger</h3></div>
+          <p class="secondaire">Une fiche que personne ne peut remplir en entier n'est jamais à jour. On garde ce qui sert, on range le reste.</p>
+        </div>
+        <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Des fiches resserrées</h4><p class="secondaire e-8">Une quarantaine de propriétés sur les dossiers, une quinzaine sur les tâches. Rien n'est effacé, tout est archivé.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Un seul statut, une seule priorité</h4><p class="secondaire e-8">Fini les doublons qui se contredisent.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Une base Aides et financements</h4><p class="secondaire e-8">Chaque aide, ses montants prévus, demandés, versés, et sa date limite.</p></div></li></ol>
+      </div>
+      <div class="offre livrables"><p class="t-accroche">Livrables</p><ul><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Fiches dossier et tâche nettoyées</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Base Aides et financements reliée aux dossiers</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Espace Points 1:1 et stratégie pour la direction</span></li></ul></div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 12 · Chantier 3 ═══ -->
+<section class="slide" data-slide="12" data-titre="Chantier 3">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">12 / 20</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Le lot 2</h2><span class="libelle">Chantier 03</span></div>
+    <div class="corps etage">
+      <div class="g57 grille">
+        <div class="cellule pile bas-colle">
+          <div><p class="libelle">Chantier 03 sur 04</p><h3 class="t-titre-section e-16">Automatiser</h3></div>
+          <p class="secondaire">Ce que Notion peut faire seul ne doit plus dépendre de la mémoire de quelqu'un.</p>
+        </div>
+        <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Les tâches de chaque phase</h4><p class="secondaire e-8">Créées quand le dossier change de phase, sans doublon.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Les factures d'honoraires</h4><p class="secondaire e-8">Un jalon atteint crée la tâche « émettre la facture ».</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Les dossiers immobiles</h4><p class="secondaire e-8">Leur liste arrive à Aurélie chaque lundi.</p></div></li></ol>
+      </div>
+      <div class="offre livrables"><p class="t-accroche">Livrables</p><ul><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Génération des tâches sur toutes les phases</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Facturation des jalons déclenchée automatiquement</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Alerte hebdomadaire des dossiers sans activité</span></li></ul></div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 13 · Chantier 4 ═══ -->
+<section class="slide" data-slide="13" data-titre="Chantier 4">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">13 / 20</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Le lot 2</h2><span class="libelle">Chantier 04</span></div>
+    <div class="corps etage">
+      <div class="g57 grille">
+        <div class="cellule pile bas-colle">
+          <div><p class="libelle">Chantier 04 sur 04</p><h3 class="t-titre-section e-16">Faire adopter</h3></div>
+          <p class="secondaire">Un système qu'on n'ouvre pas ne vaut rien. Le lot 2 part de ce que l'équipe vit au quotidien.</p>
+        </div>
+        <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Vos retours d'abord</h4><p class="secondaire e-8">Un tour des utilisateurs au démarrage. Ce qui gêne se corrige dans le lot.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Un point de départ évident</h4><p class="secondaire e-8">Chaque écran accessible depuis la page d'accueil de l'équipe.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Un référent chez vous</h4><p class="secondaire e-8">Gabriel formé pour les petites demandes du quotidien.</p></div></li></ol>
+      </div>
+      <div class="offre livrables"><p class="t-accroche">Livrables</p><ul><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Ajustements issus des retours de l'équipe</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Prise en main de l'équipe et vidéo courte par écran</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Bilan d'usage deux semaines après la livraison</span></li></ul></div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 14 · Le coup d'après ═══ -->
+<section class="slide" data-slide="14" data-titre="Le coup d'après">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">14 / 20</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Le lot 2</h2><span class="libelle">Et ensuite</span></div>
+    <div class="corps etage3">
+      <div class="tete"><h3 class="t-titre-section">Le coup d'après : l'<span class="fort">IA</span>, sur un socle propre.</h3><p class="t-reponse secondaire">Une fois l'équipe sur ses écrans, l'IA peut lire vos dossiers à votre place.</p></div>
+      <ul class="colonnes aligne" style="--n:3">
+        <li class="pile bas-colle"><p class="libelle">Un dossier</p><div><h4 class="t-accroche">Le résumé en un clic</h4><p class="secondaire e-12">Où en est le dossier, ce qui bloque, la prochaine étape.</p></div></li>
+        <li class="pile bas-colle"><p class="libelle">Le lundi</p><div><h4 class="t-accroche">Le point rédigé</h4><p class="secondaire e-12">Ce qui a bougé dans la semaine, écrit pour la direction.</p></div></li>
+        <li class="pile bas-colle"><p class="libelle">Les mails</p><div><h4 class="t-accroche">Le tri de la boîte projet</h4><p class="secondaire e-12">Chaque mail rattaché à son dossier et à son porteur.</p></div></li>
+      </ul>
+      <div class="bandeau"><div><p class="libelle">Souveraineté</p></div><div><p>Une IA européenne, en s'appuyant sur la passerelle Mistral que votre équipe utilise déjà. On en parle quand le lot 2 tourne.</p></div></div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 15 · Le calendrier ═══ -->
+<section class="slide" data-slide="15" data-titre="Le calendrier">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">15 / 20</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Le lot 2</h2><span class="libelle">Le calendrier</span></div>
+    <div class="corps etage3">
+      <div class="tete"><h3 class="t-titre-section">Huit semaines, le pilotage en <span class="fort">premier</span>.</h3></div>
+      <ol class="colonnes aligne" style="--n:3">
+        <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">01</p><span class="pave">Sem. 1 à 3</span></div><div><h4 class="t-accroche">Vos retours, puis Piloter</h4><p class="secondaire e-12">Le tour des utilisateurs, puis les écrans Pilotage et Direction et l'historique.</p></div></li>
+        <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">02</p><span class="pave">Sem. 4 à 6</span></div><div><h4 class="t-accroche">Alléger et automatiser</h4><p class="secondaire e-12">Les fiches resserrées, les aides, les tâches et les factures automatiques.</p></div></li>
+        <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">03</p><span class="pave">Sem. 7 à 8</span></div><div><h4 class="t-accroche">Faire adopter</h4><p class="secondaire e-12">La prise en main, le référent, puis le bilan d'usage.</p></div></li>
+      </ol>
+      <div class="bandeau"><div><p class="libelle">La règle</p></div><div><p>On ne passe au chantier suivant que lorsque le précédent marche.</p></div></div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 16 · Votre implication ═══ -->
+<section class="slide" data-slide="16" data-titre="Votre implication">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">16 / 20</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Le lot 2</h2><span class="libelle">Votre implication</span></div>
+    <div class="corps g57">
+      <div class="cellule pile bas-colle">
+        <h3 class="t-titre-section">Ce qu'on attend de vos <span class="fort">équipes</span>.</h3>
+        <p class="t-reponse secondaire">Le reste, c'est nous.</p>
+      </div>
+      <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Au démarrage, vos retours</h4><p class="secondaire e-8">Un échange court avec chaque métier : ce qui sert, ce qui gêne.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">À chaque chantier, une validation</h4><p class="secondaire e-8">Aurélie et Laurent valident avant qu'on passe au suivant.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Un référent</h4><p class="secondaire e-8">Gabriel, pour relayer les questions de l'équipe.</p></div></li></ol>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 17 · Engagements ═══ -->
+<section class="slide" data-slide="17" data-titre="Engagements">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">17 / 20</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Le lot 2</h2><span class="libelle">Trois engagements</span></div>
+    <div class="corps g57">
+      <div class="cellule pile bas-colle">
+        <h3 class="t-titre-section">Ce sur quoi vous pouvez <span class="fort">compter</span>.</h3>
+        <div class="encadre garantie">
+          <svg class="icone" aria-hidden="true"><use href="#i-garantie"/></svg>
+          <div><p class="libelle">Qui s'engage</p><p class="e-8">Référencé dans l'annuaire officiel des consultants Notion · Certifié PMP® · Lean Six Sigma Green Belt</p></div>
+        </div>
+      </div>
+      <ol class="lignes pleine">
+        <li><span class="pave">01</span><div><h4 class="t-accroche">Délais tenus.</h4><p class="secondaire e-8">Si un jalon doit bouger, vous le savez 48&nbsp;h avant, pas le jour même.</p></div></li>
+        <li><span class="pave">02</span><div><h4 class="t-accroche">Transparence.</h4><p class="secondaire e-8">Un point chaque semaine, et une réponse sous 24&nbsp;h en semaine.</p></div></li>
+        <li><span class="pave">03</span><div><h4 class="t-accroche">Exigence sur le résultat.</h4><p class="secondaire e-8">Si un livrable ne correspond pas à ce qu'on a validé ensemble, je le reprends sans surcoût.</p></div></li>
+      </ol>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 18 · 03 · L'offre ═══ -->
+<section class="slide" data-slide="18" data-titre="03 · L'offre">
+  <div class="cadre sans-barre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">18 / 20</span>
+    </header>
+    
+    <div class="corps inter">
+      <div class="grille g-inter">
+        <div class="cellule pile bas-colle">
+          <ol class="parcours"><li><span class="pave">01</span><span class="libelle">Où on en est</span></li><li><span class="pave">02</span><span class="libelle">Le lot 2</span></li><li class=ici><span class="pave">03</span><span class="libelle">L'offre</span></li></ol>
+          <div><h2 class="t-roi">L'offre</h2><p class="t-reponse secondaire e-24 prose">Un forfait, ce qu'il contient, et ce que le lot 1 a déjà couvert.</p></div>
+        </div>
+        <div class="numero pile bas-colle"><p class="libelle">Partie 03 / 03</p><p class="chiffre" aria-hidden="true">03</p></div>
+      </div>
+      <div class="trio" style="--n:3"><div><p class="libelle"><span class="pave">1</span>Le forfait</p><p class="t-accroche e-12">Ce qui est compris</p></div><div><p class="libelle"><span class="pave">2</span>L'audit</p><p class="t-accroche e-12">Déjà réalisé, déduit</p></div><div><p class="libelle"><span class="pave">3</span>Le paiement</p><p class="t-accroche e-12">En deux temps</p></div></div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 19 · L'offre ═══ -->
+<section class="slide" data-slide="19" data-titre="L'offre">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">19 / 20</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">L'offre</h2><span class="libelle">Montants hors taxes</span></div>
+    <div class="corps g57 prix">
+      <div class="cellule offre pile bas-colle">
+        <div>
+          <p class="libelle">Au forfait · huit semaines</p>
+          <h3 class="t-accroche e-16">Lot 2 · Pilotage et refonte du Notion</h3>
+          <p class="t-chiffre-geant montant e-24">7&nbsp;201&nbsp;€&nbsp;<span class="t-accroche">HT</span></p>
+          <p class="e-24">La vue d'ensemble de vos dossiers, leur historique, et moins de saisie pour l'équipe.</p>
+        </div>
+        <ul class="inclus">
+          <li><span class="mono">50&nbsp;%</span><span>au démarrage</span></li>
+          <li><span class="mono">50&nbsp;%</span><span>à la livraison</span></li>
+          <li><span class="mono">30&nbsp;j</span><span>de validité pour cette offre</span></li>
+        </ul>
+      </div>
+      <div class="detail">
+        <div class="bloc">
+          <p class="libelle">Ce qui est compris</p>
+          <ul class="compris"><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Les écrans Pilotage et Direction</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>L'historique hebdomadaire et les alertes</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Les fiches resserrées et un seul statut</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Les bases Aides et financements, Points 1:1</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Les tâches et les factures automatiques</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Vos retours intégrés, la formation, le référent</span></li></ul>
+        </div>
+        <div class="bloc">
+          <p class="libelle">Le calcul</p>
+          <p class="secondaire e-12">Lot 2 complet : <s>9&nbsp;600&nbsp;€ HT</s>. L'audit, déjà réalisé au lot 1, est déduit : −&nbsp;2&nbsp;399&nbsp;€ HT. Reste 7&nbsp;201&nbsp;€ HT.</p>
+        </div>
+      </div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 20 · Merci ═══ -->
+<section class="slide sombre" data-slide="20" data-titre="Merci">
+  <div class="cadre sans-barre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_cream.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Proposition · Vert Durable</span>
+      <span class="libelle">20 / 20</span>
+    </header>
+    
+    <div class="corps fin">
+      <div class="centre">
+        <p class="t-reponse secondaire">Merci pour votre confiance depuis l'été.</p>
+        <h2 class="t-roi e-24">On lance le lot 2 <span class="fort">ensemble</span> ?</h2>
+      </div>
+      <div class="suite quatre">
+        <div><p class="libelle">Aujourd'hui</p><p class="e-8">Vos questions, vos retours</p></div>
+        <div><p class="libelle">Au démarrage</p><p class="e-8">Le tour des utilisateurs</p></div>
+        <div><p class="libelle">En premier</p><p class="e-8">Les écrans de pilotage</p></div>
+        <div><p class="libelle">Une question</p><p class="e-8">sylvain@ramalogic.com</p></div>
+      </div>
+    </div>
+    <footer class="bas"><span class="libelle">Confidentiel · préparé pour Vert Durable</span><span class="libelle">20 octobre 2026</span></footer>
+  </div>
+</section>
+
+</div>
+
+<div class="nav-controls" data-pdf-hide>
+  <button class="nav-btn" id="prev" aria-label="Écran précédent"><svg aria-hidden="true" style="transform:scaleX(-1)"><use href="#i-chevron-droit"/></svg></button>
+  <div class="counter libelle"><span id="cur">1</span>&nbsp;/ 20</div>
+  <button class="nav-btn" id="next" aria-label="Écran suivant"><svg aria-hidden="true"><use href="#i-chevron-droit"/></svg></button>
+  <button class="nav-btn" id="grid" aria-label="Vue d'ensemble"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+</div>
+<div id="overview" data-pdf-hide></div>
+
+<script>
+  // Même contrat que les decks /sales-deck : flèches, espace, Échap pour la vue d'ensemble, ?all=1 pour tout afficher.
+  if (location.search.indexOf('all=1') > -1) document.body.classList.add('show-all');
+  const slides = [...document.querySelectorAll('.slide')];
+  let i = 0;
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle('is-active', k === i));
+    document.getElementById('cur').textContent = i + 1;
+    document.querySelector('.nav-controls').classList.toggle('sombre', slides[i].classList.contains('sombre'));
+  }
+  document.getElementById('next').onclick = () => show(i + 1);
+  document.getElementById('prev').onclick = () => show(i - 1);
+  const ov = document.getElementById('overview');
+  const grille = document.createElement('div'); grille.className = 'ov-grille';
+  slides.forEach((s, k) => {
+    const b = document.createElement('button'); b.className = 'ov-card'; b.dataset.k = k;
+    const n = document.createElement('span'); n.className = 'libelle'; n.textContent = String(k + 1).padStart(2, '0');
+    const t = document.createElement('span'); t.className = 't-accroche'; t.style.display = 'block'; t.textContent = s.dataset.titre;
+    b.append(n, t); grille.append(b);
+  });
+  ov.append(grille);
+  show(0);
+  ov.onclick = e => { const c = e.target.closest('.ov-card'); if (c) { show(+c.dataset.k); ov.classList.remove('on'); } };
+  document.getElementById('grid').onclick = () => ov.classList.toggle('on');
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); show(i + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); show(i - 1); }
+    if (e.key === 'Escape') ov.classList.toggle('on');
+  });
+</script>
+</body>
+</html>
