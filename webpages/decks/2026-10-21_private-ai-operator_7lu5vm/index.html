@@ -71,6 +71,15 @@
   .modes h3 { margin: var(--rl-espace-12) 0 var(--rl-espace-8); }
   .note-garde { margin-top: var(--rl-espace-24); padding: var(--rl-espace-16) var(--rl-espace-24); }
 
+  /* ═══ Carte Archify intégrée : cadre interactif sur grand écran, aperçu cliquable sinon ═══ */
+  .carte { margin: 0 0 var(--rl-espace-64); }
+  .carte-cadre { border: var(--rl-trait-filet) solid var(--filet); border-radius: var(--rl-rayon-cellule); overflow: hidden; }
+  .carte-cadre iframe { display: block; width: 100%; height: 50rem; border: 0; }
+  .carte-apercu { display: none; border: var(--rl-trait-filet) solid var(--filet); border-radius: var(--rl-rayon-cellule); overflow: hidden; }
+  .carte-apercu img { width: 100%; height: auto; }
+  .carte figcaption { display: flex; align-items: center; justify-content: space-between; gap: var(--rl-espace-16); flex-wrap: wrap; margin-top: var(--rl-espace-16); }
+  .en-bref { margin-bottom: var(--rl-espace-24); }
+
   /* ═══ Schéma : trois colonnes reliées, empilées sur téléphone ═══ */
   .schema {
     display: grid;
@@ -159,6 +168,8 @@
 
   /* ═══ Tablette et téléphone ═══ */
   @media (max-width: 64rem) {
+    .carte-cadre { display: none; }
+    .carte-apercu { display: block; }
     .schema { grid-template-columns: minmax(0, 1fr); }
     .lien { flex-direction: row; height: var(--rl-espace-64); }
     .lien .trait { width: var(--rl-trait-filet); height: 100%; flex: none; }
@@ -234,6 +245,17 @@
     <section aria-labelledby="s2">
       <div class="barre"><span class="num t-numero-barre mono">02</span><h2 id="s2" class="t-barre-section">How it fits together</h2><span class="libelle">Our setup today</span></div>
       <div class="corps">
+        <!-- Carte d'architecture Archify (même gabarit que hub/archi/business), source : 9-technique/docs/archi/private-ai-operator.architecture.json -->
+        <figure class="carte">
+          <div class="carte-cadre"><iframe src="architecture/?theme=light" title="Interactive architecture map of the private AI operator" loading="lazy"></iframe></div>
+          <a class="carte-apercu" href="architecture/?theme=light"><img src="architecture/apercu.png" width="1376" height="605" alt="Architecture map: chat apps and a scheduler start the work; a chat gateway passes each message to Claude Code, which acts in your tools through MCP connectors, with skills, Notion memory and guardrails; an iPhone reaches the gateway through a Mac mini; Hermes Agent runs as a second agent on Telegram."></a>
+          <figcaption>
+            <p class="t-corps-petit secondaire">Interactive map. Pick a chapter above the map to follow one path, or open it on its own page.</p>
+            <a class="bouton" href="architecture/?theme=light" target="_blank" rel="noopener">Open the full map <span class="fleche" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h12M9 3l5 5-5 5"/></svg></span></a>
+          </figcaption>
+        </figure>
+
+        <h3 class="t-reponse en-bref">In short: three blocks</h3>
         <div class="schema" role="img" aria-label="Diagram: you talk to a private server through chat apps; on the server, Claude Code uses skills, a scheduler and memory; it reads and writes in your tools through connectors.">
 
           <!-- Colonne 1 : vous -->
