@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Private AI Operator · Rama Logic</title>
+<meta name="description" content="How Rama Logic runs its own always-on AI operator (Claude Code, Hermes Agent, connected tools), and what the same setup could look like with iMessage.">
+<!-- Brand System v2 « Encre et filets » : polices, jetons, socle commun (copies locales dans marque/) -->
+<link rel="stylesheet" href="marque/polices/polices.css">
+<link rel="stylesheet" href="marque/tokens.css">
+<link rel="stylesheet" href="marque/base.css">
+<style>
+  /* Page à défiler (note de briefing), pas un deck : un cadre à deux rails, des sections numérotées. */
+  :root { --filet: var(--rl-filet-clair); }
+
+  html { overflow-x: clip; }
+  .page { padding: 0 var(--rl-marge-cadre); }
+  .cadre {
+    max-width: var(--rl-largeur-cadre); margin: 0 auto;
+    border-inline: var(--rl-trait-filet) solid var(--filet);
+  }
+  .sombre { --filet: var(--rl-filet-sombre); }
+  .page.sombre .cadre { border-color: var(--rl-filet-sombre); }
+
+  /* Barre du haut */
+  .haut {
+    height: var(--rl-hauteur-barre-haut);
+    display: flex; align-items: center; justify-content: space-between; gap: var(--rl-espace-24);
+    padding: 0 var(--rl-marge-cellule);
+    border-bottom: var(--rl-trait-filet) solid var(--filet);
+  }
+  .haut .logo { height: var(--rl-espace-32); width: auto; }
+
+  /* Ouverture sombre */
+  .ouverture { padding: var(--rl-marge-section-petite) var(--rl-marge-cellule) var(--rl-espace-48); }
+  .ouverture h1 { max-width: 18ch; margin-top: var(--rl-espace-24); }
+  .ouverture .chapeau { max-width: var(--rl-largeur-chapeau); margin-top: var(--rl-espace-32); color: var(--rl-texte-sur-sombre-adouci); }
+  .chiffres {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: var(--rl-trait-filet) solid var(--filet);
+  }
+  .chiffres > div { padding: var(--rl-espace-32) var(--rl-marge-cellule); }
+  .chiffres > div + div { border-left: var(--rl-trait-filet) solid var(--filet); }
+  .chiffres .t-chiffre-ouverture { display: block; margin-bottom: var(--rl-espace-8); }
+  .chiffres p { color: var(--rl-texte-sur-sombre-secondaire); }
+
+  /* Barre de section numérotée */
+  .barre {
+    min-height: var(--rl-hauteur-barre-section-numerotee);
+    display: flex; align-items: stretch;
+    border-block: var(--rl-trait-filet) solid var(--filet);
+  }
+  .barre .num {
+    display: grid; place-items: center; flex: none;
+    width: var(--rl-hauteur-barre-section-numerotee);
+    background: var(--rl-fond-sombre); color: var(--rl-texte-sur-sombre-principal);
+  }
+  .barre h2 { display: flex; align-items: center; padding: var(--rl-espace-12) var(--rl-marge-cellule); }
+  .barre .libelle { margin-left: auto; display: flex; align-items: center; padding: 0 var(--rl-marge-cellule); white-space: nowrap; }
+
+  .corps { padding: var(--rl-espace-48) var(--rl-marge-cellule) var(--rl-espace-64); }
+  .prose { max-width: var(--rl-largeur-prose); }
+  .prose p + p, .prose p + ul, .prose ul + p { margin-top: var(--rl-espace-16); }
+  .intro { max-width: var(--rl-largeur-etroit); margin-bottom: var(--rl-espace-32); }
+
+  /* Trois façons de travailler */
+  .modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: var(--rl-espace-32); border: var(--rl-trait-filet) solid var(--filet); border-radius: var(--rl-rayon-cellule); }
+  .modes > div { padding: var(--rl-espace-24); }
+  .modes > div + div { border-left: var(--rl-trait-filet) solid var(--filet); }
+  .modes h3 { margin: var(--rl-espace-12) 0 var(--rl-espace-8); }
+  .note-garde { margin-top: var(--rl-espace-24); padding: var(--rl-espace-16) var(--rl-espace-24); }
+
+  /* ═══ Schéma : trois colonnes reliées, empilées sur téléphone ═══ */
+  .schema {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 7rem minmax(0, 1.45fr) 7rem minmax(0, 1fr);
+    align-items: stretch;
+  }
+  .col { border: var(--rl-trait-filet) solid var(--rl-couleur-ink); border-radius: var(--rl-rayon-cellule); display: flex; flex-direction: column; }
+  .col > header { padding: var(--rl-espace-12) var(--rl-espace-16); border-bottom: var(--rl-trait-filet) solid var(--rl-couleur-ink); display: flex; justify-content: space-between; align-items: center; gap: var(--rl-espace-8); }
+  .col ul { display: flex; flex-direction: column; }
+  .col li { padding: var(--rl-espace-12) var(--rl-espace-16); border-bottom: var(--rl-trait-filet) solid var(--filet); }
+  .col li:last-child { border-bottom: 0; }
+  .col li strong { font-weight: var(--rl-graisse-moyen); display: block; }
+  .col li span { color: var(--rl-texte-secondaire); }
+  .col li.pour-vous { background: var(--rl-fond-encadre); }
+
+  .serveur { padding: var(--rl-espace-12); gap: var(--rl-espace-12); }
+  .serveur > header { margin: calc(-1 * var(--rl-espace-12)) calc(-1 * var(--rl-espace-12)) 0; }
+  .bloc { border: var(--rl-trait-filet) solid var(--filet); border-radius: var(--rl-rayon-cellule); padding: var(--rl-espace-12) var(--rl-espace-16); }
+  .bloc strong { font-weight: var(--rl-graisse-moyen); display: block; }
+  .bloc span { color: var(--rl-texte-secondaire); }
+  .bloc.cerveau { background: var(--rl-fond-sombre); color: var(--rl-texte-sur-sombre-principal); border-color: var(--rl-fond-sombre); padding: var(--rl-espace-16); display: flex; gap: var(--rl-espace-16); align-items: center; }
+  .bloc.cerveau span { color: var(--rl-texte-sur-sombre-secondaire); }
+  .bloc.cerveau .point { width: var(--rl-espace-12); height: var(--rl-espace-12); border-radius: var(--rl-rayon-pilule); background: var(--rl-icone-agent); flex: none; }
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: var(--rl-espace-12); }
+  .bloc.garde { background: var(--rl-fond-encadre); border-color: var(--rl-fond-encadre); }
+  .fleche-v { display: grid; place-items: center; height: var(--rl-espace-16); color: var(--rl-texte-secondaire); }
+  .fleche-v svg { width: var(--rl-espace-16); height: var(--rl-espace-16); }
+
+  .lien { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--rl-espace-8); padding: 0 var(--rl-espace-4); }
+  .lien .trait { width: 100%; height: var(--rl-trait-filet); background: var(--rl-couleur-ink); position: relative; }
+  .lien .trait::before, .lien .trait::after { content: ""; position: absolute; top: 50%; width: 7px; height: 7px; border-top: var(--rl-trait-filet) solid var(--rl-couleur-ink); border-right: var(--rl-trait-filet) solid var(--rl-couleur-ink); }
+  .lien .trait::after { right: 0; transform: translateY(-50%) rotate(45deg); }
+  .lien .trait::before { left: 0; transform: translateY(-50%) rotate(-135deg); }
+  .lien .libelle { text-align: center; font-size: var(--rl-type-libelle-mini-taille); line-height: 1.4; padding: 0 var(--rl-espace-8); }
+  .cite { font-weight: var(--rl-graisse-moyen); }
+
+  .second {
+    margin-top: var(--rl-espace-24);
+    display: grid; grid-template-columns: auto 1fr; gap: var(--rl-espace-24); align-items: start;
+    border: var(--rl-trait-filet) dashed var(--rl-texte-secondaire); border-radius: var(--rl-rayon-cellule);
+    padding: var(--rl-espace-24);
+  }
+  .second p { max-width: var(--rl-largeur-prose); }
+
+  /* Couches de l'installation */
+  .couches { border-top: var(--rl-trait-filet) solid var(--filet); }
+  .couches li { display: grid; grid-template-columns: var(--rl-espace-48) minmax(0, 14rem) minmax(0, 1fr); gap: var(--rl-espace-24); padding: var(--rl-espace-24) 0; border-bottom: var(--rl-trait-filet) solid var(--filet); align-items: baseline; }
+  .couches h3 { font-weight: var(--rl-graisse-moyen); }
+  .couches p { max-width: var(--rl-largeur-prose); }
+
+  /* Cartes du quotidien */
+  .cartes { display: grid; grid-template-columns: repeat(3, 1fr); border-top: var(--rl-trait-filet) solid var(--filet); border-left: var(--rl-trait-filet) solid var(--filet); }
+  .cartes > article { padding: var(--rl-espace-24); border-right: var(--rl-trait-filet) solid var(--filet); border-bottom: var(--rl-trait-filet) solid var(--filet); display: flex; flex-direction: column; gap: var(--rl-espace-8); }
+  .cartes h3 { font-weight: var(--rl-graisse-moyen); margin-top: var(--rl-espace-4); }
+  .cartes p { color: var(--rl-texte-secondaire); }
+
+  /* Chemin iMessage */
+  .chemin { display: flex; align-items: stretch; flex-wrap: nowrap; margin: var(--rl-espace-32) 0; }
+  .chemin .etape { flex: 1 1 0; border: var(--rl-trait-filet) solid var(--rl-couleur-ink); border-radius: var(--rl-rayon-cellule); padding: var(--rl-espace-16); min-width: 0; }
+  .chemin .etape.mac { background: var(--rl-fond-encadre); }
+  .chemin .etape.agent { background: var(--rl-fond-sombre); color: var(--rl-texte-sur-sombre-principal); border-color: var(--rl-fond-sombre); }
+  .chemin .etape.agent .secondaire { color: var(--rl-texte-sur-sombre-secondaire); }
+  .chemin .etape.agent .libelle { color: var(--rl-texte-sur-sombre-libelle); }
+  .chemin .etape strong { display: block; font-weight: var(--rl-graisse-moyen); margin-top: var(--rl-espace-4); }
+  .chemin .entre { flex: none; width: var(--rl-espace-32); display: grid; place-items: center; }
+  .chemin .entre svg { width: var(--rl-espace-16); height: var(--rl-espace-16); }
+
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: var(--rl-espace-24); }
+  .option { border: var(--rl-trait-filet) solid var(--filet); border-radius: var(--rl-rayon-cellule); padding: var(--rl-espace-24); }
+  .option h3 { font-weight: var(--rl-graisse-moyen); margin: var(--rl-espace-12) 0 var(--rl-espace-12); }
+  .option dl { display: grid; grid-template-columns: auto 1fr; gap: var(--rl-espace-8) var(--rl-espace-16); margin-top: var(--rl-espace-16); }
+  .option dt { font-family: var(--rl-police-machine); font-size: var(--rl-type-libelle-taille); text-transform: uppercase; letter-spacing: var(--rl-type-libelle-interlettrage); color: var(--rl-texte-libelle); padding-top: 0.2em; }
+
+  .choix { margin-top: var(--rl-espace-48); }
+  .choix h3 { font-weight: var(--rl-graisse-moyen); margin-bottom: var(--rl-espace-16); }
+  .choix ul { border-top: var(--rl-trait-filet) solid var(--filet); }
+  .choix li { display: grid; grid-template-columns: minmax(0, 10rem) minmax(0, 1fr); gap: var(--rl-espace-24); padding: var(--rl-espace-16) 0; border-bottom: var(--rl-trait-filet) solid var(--filet); }
+  .reco { margin-top: var(--rl-espace-32); padding: var(--rl-espace-24); }
+  .reco p { max-width: var(--rl-largeur-prose); margin-top: var(--rl-espace-8); }
+
+  /* Suite */
+  .suite { padding: var(--rl-marge-section-petite) var(--rl-marge-cellule); }
+  .suite h2 { max-width: 20ch; margin-top: var(--rl-espace-16); }
+  .suite p { max-width: var(--rl-largeur-chapeau); margin-top: var(--rl-espace-24); color: var(--rl-texte-sur-sombre-adouci); }
+  .bas { display: flex; justify-content: space-between; gap: var(--rl-espace-16); flex-wrap: wrap; padding: var(--rl-espace-16) var(--rl-marge-cellule); border-top: var(--rl-trait-filet) solid var(--filet); }
+
+  /* ═══ Tablette et téléphone ═══ */
+  @media (max-width: 64rem) {
+    .schema { grid-template-columns: minmax(0, 1fr); }
+    .lien { flex-direction: row; height: var(--rl-espace-64); }
+    .lien .trait { width: var(--rl-trait-filet); height: 100%; flex: none; }
+    .lien .trait::after { top: auto; bottom: 0; right: 50%; transform: translateX(50%) rotate(135deg); }
+    .lien .trait::before { top: 0; left: 50%; transform: translateX(-50%) rotate(-45deg); }
+    .lien .libelle { text-align: left; max-width: 20rem; }
+    .cartes { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 48rem) {
+    .chiffres, .modes, .options, .cartes { grid-template-columns: 1fr; }
+    .chiffres > div + div { border-left: 0; border-top: var(--rl-trait-filet) solid var(--filet); }
+    .modes > div + div { border-left: 0; border-top: var(--rl-trait-filet) solid var(--filet); }
+    .couches li { grid-template-columns: var(--rl-espace-32) minmax(0, 1fr); }
+    .couches li p { grid-column: 2; }
+    .choix li { grid-template-columns: 1fr; gap: var(--rl-espace-4); }
+    .duo { grid-template-columns: 1fr; }
+    .second { grid-template-columns: 1fr; gap: var(--rl-espace-12); }
+    .chemin { flex-direction: column; }
+    .chemin .entre { width: auto; height: var(--rl-espace-24); }
+    .chemin .entre svg { transform: rotate(90deg); }
+    .barre .libelle { display: none; }
+    .haut .libelle { display: none; }
+  }
+
+  @media print {
+    .page { padding: 0; }
+    section, .schema, .cartes > article, .option { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ Ouverture sombre ═══ -->
+<div class="page sombre">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_cream.svg" alt="Rama Logic">
+      <span class="libelle">Briefing note · October 2026</span>
+    </header>
+    <div class="ouverture">
+      <span class="puce libelle">How we run it, and what it could look like for you</span>
+      <h1 class="t-ouverture">A private AI operator you run from your <span class="fort">messages</span>.</h1>
+      <p class="chapeau t-accroche">One always-on server, one AI brain, every tool plugged in, and a chat window as the front door. This note shows the setup we run every day at Rama Logic, then sketches the same thing for a founder who wants to drive it from iMessage.</p>
+    </div>
+    <div class="chiffres">
+      <div><span class="t-chiffre-ouverture mono">1</span><p class="t-corps-petit">server, always on. Ours is a rented Linux machine; a Mac mini at home works the same way.</p></div>
+      <div><span class="t-chiffre-ouverture mono">15+</span><p class="t-corps-petit">tools connected: email, calendar, notes, files, bank, payments, CRM, meeting recorder.</p></div>
+      <div><span class="t-chiffre-ouverture mono">~60</span><p class="t-corps-petit">scheduled jobs that run while we sleep and report back in the morning.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="cadre">
+
+    <!-- ═══ 01 · What it is ═══ -->
+    <section aria-labelledby="s1">
+      <div class="barre"><span class="num t-numero-barre mono">01</span><h2 id="s1" class="t-barre-section">What it is</h2><span class="libelle">In plain words</span></div>
+      <div class="corps">
+        <div class="prose t-corps">
+          <p>Think of it as a chief of staff that lives on a server. You write to it the way you would write to an assistant: <span class="cite">“What’s on my plate today?”</span>, <span class="cite">“Draft a reply to Anna”</span>, <span class="cite">“How much did we invoice in September?”</span>. It reads and writes in your tools, follows written procedures, and answers in the same thread.</p>
+        </div>
+        <div class="modes">
+          <div><span class="pave">A</span><h3 class="t-reponse">On demand</h3><p class="t-corps-petit secondaire">You send a message, it does the work and replies. From your phone, your laptop, anywhere.</p></div>
+          <div><span class="pave">B</span><h3 class="t-reponse">On schedule</h3><p class="t-corps-petit secondaire">Jobs run at set times: a 5 a.m. brief, inbox triage three times a day, a Monday finance update.</p></div>
+          <div><span class="pave">C</span><h3 class="t-reponse">On events</h3><p class="t-corps-petit secondaire">A signed contract or a newly booked call triggers the right follow-up in the CRM.</p></div>
+        </div>
+        <p class="note-garde encadre t-corps-petit">No hidden actions. Every action lands in Notion or in a log, and by default anything that moves money, sends a message to someone else or deletes data waits for a human yes. We made one deliberate exception: short LinkedIn follow-up reminders, two at most per person, only when there was no reply.</p>
+      </div>
+    </section>
+
+    <!-- ═══ 02 · How it fits together ═══ -->
+    <section aria-labelledby="s2">
+      <div class="barre"><span class="num t-numero-barre mono">02</span><h2 id="s2" class="t-barre-section">How it fits together</h2><span class="libelle">Our setup today</span></div>
+      <div class="corps">
+        <div class="schema" role="img" aria-label="Diagram: you talk to a private server through chat apps; on the server, Claude Code uses skills, a scheduler and memory; it reads and writes in your tools through connectors.">
+
+          <!-- Colonne 1 : vous -->
+          <div class="col">
+            <header><span class="libelle">You</span><span class="libelle">Phone · laptop</span></header>
+            <ul class="t-corps-petit">
+              <li><strong>Slack</strong><span>Our main channel. One thread per topic.</span></li>
+              <li><strong>Telegram</strong><span>Second channel.</span></li>
+              <li><strong>Claude app or terminal</strong><span>For long working sessions, picked up from any device.</span></li>
+              <li class="pour-vous"><strong>iMessage</strong><span>What you would use. See section 05.</span></li>
+            </ul>
+          </div>
+
+          <div class="lien"><span class="trait"></span><span class="libelle">Messages in<br>answers out</span></div>
+
+          <!-- Colonne 2 : le serveur -->
+          <div class="col serveur">
+            <header><span class="libelle">Private server</span><span class="libelle">Always on</span></header>
+            <div class="bloc t-corps-petit"><strong>Chat gateway</strong><span>Receives each message, opens or resumes the right conversation, streams the answer back.</span></div>
+            <div class="fleche-v" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v12M3 9l5 5 5-5"/></svg></div>
+            <div class="bloc cerveau"><span class="point" aria-hidden="true"></span><div class="t-corps-petit"><strong class="t-reponse">Claude Code, the brain</strong><span>Anthropic's agent. Reads, decides, uses the tools, writes back. One brain for everything, so the same rules apply everywhere.</span></div></div>
+            <div class="duo">
+              <div class="bloc t-corps-petit"><strong>Skills</strong><span>Written playbooks for recurring work: weekly review, inbox triage, lead follow-up.</span></div>
+              <div class="bloc t-corps-petit"><strong>Scheduler</strong><span>~60 timed jobs, about 20 of which call the AI, with spending caps.</span></div>
+            </div>
+            <div class="bloc t-corps-petit"><strong>Memory</strong><span>Notion as the source of truth (30+ databases: tasks, CRM, projects, finance), plus notes the agent keeps between sessions.</span></div>
+            <div class="bloc garde t-corps-petit"><strong>Guardrails</strong><span>Human approval for money, sending and deleting (one bounded exception) · cost of AI runs logged · weekly backup of the whole configuration.</span></div>
+          </div>
+
+          <div class="lien"><span class="trait"></span><span class="libelle">Connectors<br>(MCP)<br>read · write</span></div>
+
+          <!-- Colonne 3 : vos outils -->
+          <div class="col">
+            <header><span class="libelle">Your tools</span><span class="libelle">One login each</span></header>
+            <ul class="t-corps-petit">
+              <li><strong>Notion</strong><span>Tasks, CRM, projects, finance.</span></li>
+              <li><strong>Gmail · Calendar · Drive</strong><span>Read, sort, draft, schedule.</span></li>
+              <li><strong>Meeting recorder</strong><span>Transcripts become notes and tasks.</span></li>
+              <li><strong>Bank · Stripe</strong><span>Transactions, invoices, cash view.</span></li>
+              <li><strong>LinkedIn inbox</strong><span>Conversations and follow-ups.</span></li>
+              <li><strong>Accounting · e-signature · booking</strong><span>Plus the web dashboards we host ourselves.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="second">
+          <span class="pave jalon">+1</span>
+          <div class="t-corps-petit">
+            <h3 class="t-reponse">A second agent: Hermes Agent</h3>
+            <p class="secondaire" style="margin-top: var(--rl-espace-8)">An open-source agent gateway (by Nous Research, the same family of tool as OpenClaw), running on its own small server with a different, cheaper model (DeepSeek, an open-weights model we call through its API). We use it as a second assistant on Telegram and to test the open-source route. It connects to 15+ chat apps out of the box, iMessage included.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 03 · How we set it up ═══ -->
+    <section aria-labelledby="s3">
+      <div class="barre"><span class="num t-numero-barre mono">03</span><h2 id="s3" class="t-barre-section">How we set it up</h2><span class="libelle">Seven layers</span></div>
+      <div class="corps">
+        <ol class="couches t-corps">
+          <li><span class="pave">1</span><h3>The server</h3><p>A rented Linux machine (Ubuntu, 4 cores, 16 GB of memory), always on. Ours sits in a data centre rather than under a desk; the design is identical on a Mac mini at home.</p></li>
+          <li><span class="pave">2</span><h3>The brain</h3><p>Claude Code runs on the server. Interactively when we work with it, on its own when a scheduled job calls it. Long sessions survive a closed laptop and can be picked up from the phone.</p></li>
+          <li><span class="pave">3</span><h3>The connectors</h3><p>Each tool is plugged in through MCP (Model Context Protocol), the open standard for giving an AI agent access to an app, each with its own login. Adding a tool means adding a connector, not rebuilding the system.</p></li>
+          <li><span class="pave">4</span><h3>The playbooks</h3><p>Recurring work is written down once as a skill: a plain-text procedure. The agent follows it the same way every time, and when a result is off we fix the text, not the code.</p></li>
+          <li><span class="pave">5</span><h3>The scheduler</h3><p>Standard scheduled jobs launch the agent at fixed times, with spending caps. Results go to the chat and into Notion.</p></li>
+          <li><span class="pave">6</span><h3>The front door</h3><p>A small chat bot passes messages to the agent and streams the answer back. One thread is one conversation, so topics don’t get mixed up.</p></li>
+          <li><span class="pave">7</span><h3>The safety net</h3><p>API keys stay in configuration files on the server, never in the conversation. Sending, paying and deleting need a human tick by default; the only exception is short LinkedIn follow-up reminders, under strict limits. The configuration is backed up every week to a private Git repository, so the server can be rebuilt from scratch.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ═══ 04 · What it does for us ═══ -->
+    <section aria-labelledby="s4">
+      <div class="barre"><span class="num t-numero-barre mono">04</span><h2 id="s4" class="t-barre-section">What it does for us, day to day</h2><span class="libelle">Real examples</span></div>
+      <div class="corps">
+        <div class="cartes">
+          <article><span class="libelle">05:00 · every weekday</span><h3 class="t-reponse">Morning brief</h3><p class="t-corps-petit">Calendar, deals that need a move, overdue tasks, emails waiting for a reply. One message before the day starts.</p></article>
+          <article><span class="libelle">3× a day</span><h3 class="t-reponse">Inbox triage</h3><p class="t-corps-petit">Sorts the inbox, archives the noise, drafts the replies that matter. Drafts only: we press send.</p></article>
+          <article><span class="libelle">Twice a day</span><h3 class="t-reponse">Meeting notes</h3><p class="t-corps-petit">Every new call recording becomes a summary, decisions and follow-up tasks in Notion, linked to the right client.</p></article>
+          <article><span class="libelle">Every weekday</span><h3 class="t-reponse">Lead follow-ups</h3><p class="t-corps-petit">Reviews the contacts that need a nudge and writes the message. We tick “send”, then it sends. Only short LinkedIn reminders go out on their own, two at most per person.</p></article>
+          <article><span class="libelle">Monday · Friday</span><h3 class="t-reponse">Finance and client updates</h3><p class="t-corps-petit">Monday: bank transactions sorted, cash and pipeline updated. Friday: a draft status email per client, for review.</p></article>
+          <article><span class="libelle">Any time</span><h3 class="t-reponse">Ad-hoc requests</h3><p class="t-corps-petit"><span class="cite">“What did we promise this client last week?”</span> <span class="cite">“Prepare the October invoice draft.”</span> <span class="cite">“Find 30 minutes with Paul next week.”</span></p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 05 · For you ═══ -->
+    <section aria-labelledby="s5">
+      <div class="barre"><span class="num t-numero-barre mono">05</span><h2 id="s5" class="t-barre-section">What it could look like for you</h2><span class="libelle">iMessage first</span></div>
+      <div class="corps">
+        <div class="intro prose t-corps">
+          <p>Same architecture, adapted to running personal and business matters from iMessage, on a system you control.</p>
+          <p><strong style="font-weight: var(--rl-graisse-moyen)">The one hard constraint:</strong> iMessage only runs on Apple hardware and has no official API. The agent therefore needs a Mac signed in to Messages, with a bridge passing messages to and from the agent: BlueBubbles (open source) for Hermes Agent, its own imsg bridge for OpenClaw. Both work today.</p>
+        </div>
+
+        <div class="chemin t-corps-petit" role="img" aria-label="Path of a message: iPhone, iMessage, Mac with Messages and a bridge, the agent, your tools.">
+          <div class="etape"><span class="libelle">1</span><strong>Your iPhone</strong><span class="secondaire">You text the agent.</span></div>
+          <div class="entre" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h12M9 3l5 5-5 5"/></svg></div>
+          <div class="etape mac"><span class="libelle">2</span><strong>Mac · Messages + bridge</strong><span class="secondaire">BlueBubbles or imsg. Receives the iMessage, hands it over.</span></div>
+          <div class="entre" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h12M9 3l5 5-5 5"/></svg></div>
+          <div class="etape agent"><span class="libelle">3</span><strong>Agent</strong><span class="secondaire">Gateway (Hermes Agent or OpenClaw) + the AI model.</span></div>
+          <div class="entre" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h12M9 3l5 5-5 5"/></svg></div>
+          <div class="etape"><span class="libelle">4</span><strong>Your tools</strong><span class="secondaire">Acts, then replies in the same iMessage thread.</span></div>
+        </div>
+
+        <div class="options">
+          <div class="option">
+            <span class="puce libelle">Option A</span>
+            <h3 class="t-reponse">Everything on a Mac mini at home</h3>
+            <p class="t-corps-petit">One box runs Messages, the bridge and the agent.</p>
+            <dl class="t-corps-petit">
+              <dt>For</dt><dd>The agent and its data live in your house; fully local if paired with a local model. One machine to own.</dd>
+              <dt>Against</dt><dd>Depends on your home internet and power. Needs remote access for maintenance.</dd>
+            </dl>
+          </div>
+          <div class="option">
+            <span class="puce libelle">Option B</span>
+            <h3 class="t-reponse">Server for the agent, Mac mini for iMessage</h3>
+            <p class="t-corps-petit">This is our model, plus a Mac that only carries iMessage.</p>
+            <dl class="t-corps-petit">
+              <dt>For</dt><dd>Better uptime, easier to maintain and to grow. The Mac stays a simple relay.</dd>
+              <dt>Against</dt><dd>Two machines. The agent's data sits on a server you rent, not at home.</dd>
+            </dl>
+          </div>
+        </div>
+
+        <div class="choix">
+          <h3 class="t-reponse">Four choices to make together</h3>
+          <ul class="t-corps-petit">
+            <li><span class="libelle">AI model</span><span>A top cloud model (Claude) for quality, a local open model for maximum privacy, or both: local for sensitive data, cloud for heavy reasoning. With a cloud model, what the agent reads is sent to the provider’s API.</span></li>
+            <li><span class="libelle">Agent identity</span><span>Its own Apple ID, so you text it like a contact (simpler and safer), or sitting on yours, so it can read and answer your own messages.</span></li>
+            <li><span class="libelle">Tools, in order</span><span>Which personal and business apps come first: email, calendar, notes, files, bank in read-only, home, travel. Added one at a time.</span></li>
+            <li><span class="libelle">Rules</span><span>What it may do alone, what needs your yes, and where every action is logged.</span></li>
+          </ul>
+        </div>
+
+        <div class="reco encadre">
+          <span class="libelle">Our recommendation</span>
+          <p class="t-corps">Pick Option A if privacy is the driver, Option B if reliability is. Either way, start from 5 to 10 concrete things you want to do from iMessage, connect the tools those need, and grow from there.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ═══ Suite ═══ -->
+<div class="page sombre">
+  <div class="cadre">
+    <div class="barre"><span class="num t-numero-barre mono" style="background: var(--rl-fond-page); color: var(--rl-texte-principal)">06</span><h2 class="t-barre-section">Next step</h2></div>
+    <div class="suite">
+      <span class="libelle">If this sounds right</span>
+      <h2 class="t-titre-section">A 30-minute call, then a scoped proposal.</h2>
+      <p class="t-corps">Tell Hannes. We'll use the call to list what you want to run from iMessage and which tools matter most, then come back with a proposal: setup, timeline and budget.</p>
+    </div>
+    <footer class="bas">
+      <span class="libelle">Rama Logic · Notion &amp; AI operations · ramalogic.com</span>
+      <span class="libelle">Shared for discussion</span>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>
