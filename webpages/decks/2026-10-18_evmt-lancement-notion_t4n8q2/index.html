@@ -698,9 +698,25 @@
     body:not(.show-all) .slide.is-active .creneaux li { animation: monte .45s var(--rl-mouvement-courbe-sortie) both; animation-delay: calc(var(--i, 0) * 60ms + 300ms); }
   }
 
-  /* Mouvement réduit : les deux écrans animés arrivent en simple fondu */
+  /* ── Préparation : le panneau des réglages, les interrupteurs s'allument ── */
+  .reglages .props { margin-top: var(--rl-espace-8); margin-bottom: var(--rl-espace-24); }
+  .reglages .props:last-child { margin-bottom: 0; }
+  .reglages .props > div { grid-template-columns: minmax(0, 1fr) auto; padding: 0.875rem 0; }
+  .reglages .props dt { color: var(--rl-texte-principal); font-size: 1.1875rem; }
+  .bascule { position: relative; display: block; width: 2.5rem; height: 1.375rem; border-radius: var(--rl-rayon-pilule); background: var(--rl-fond-sombre); }
+  .bascule::after { content: ""; position: absolute; top: 3px; left: 3px; width: calc(1.375rem - 6px); height: calc(1.375rem - 6px); border-radius: 50%; background: var(--rl-fond-page); transform: translateX(1.125rem); }
+  @media (prefers-reduced-motion: no-preference) {
+    body:not(.show-all) .slide.is-active .reglages { animation: monte .55s var(--rl-mouvement-courbe-sortie) .3s both; }
+    body:not(.show-all) .slide.is-active .bascule { animation: allume .25s var(--rl-mouvement-courbe-sortie) both; animation-delay: calc(var(--b, 0) * 350ms + 1.1s); }
+    body:not(.show-all) .slide.is-active .bascule::after { animation: glisse .25s var(--rl-mouvement-courbe-sortie) both; animation-delay: calc(var(--b, 0) * 350ms + 1.1s); }
+    body:not(.show-all) .slide.is-active .reglages .choix { animation: fondu .3s ease 2s both; }
+  }
+  @keyframes allume { from { background: var(--filet); } to { background: var(--rl-fond-sombre); } }
+  @keyframes glisse { from { transform: none; } to { transform: translateX(1.125rem); } }
+
+  /* Mouvement réduit : les écrans animés arrivent en simple fondu */
   @media (prefers-reduced-motion: reduce) {
-    body:not(.show-all) .slide.is-active :is(.socle-zone, .maquette) { animation: fondu .3s ease both; }
+    body:not(.show-all) .slide.is-active :is(.socle-zone, .maquette, .reglages) { animation: fondu .3s ease both; }
   }
   @media (max-width: 960px) {
     .dessus, .attaches, .creneaux { grid-template-columns: 1fr; }
@@ -739,7 +755,7 @@
   <div class="cadre sans-barre">
     <header class="haut">
       <span class="libelle">Lancement Notion</span>
-      <span class="libelle">01 / 29</span>
+      <span class="libelle">01 / 30</span>
     </header>
     
     <div class="corps couv">
@@ -764,7 +780,7 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">02 / 29</span>
+      <span class="libelle">02 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">00</span><h2 class="t-barre-section">Le programme</h2><span class="libelle">Lundi 26 · 9h30 à 12h30 · toute l'agence</span></div>
     <div class="corps g57">
@@ -777,7 +793,7 @@
           <p class="t-reponse e-12">En petits groupes, par pôle&nbsp;: Corporate, puis Brand Experience.</p>
         </div>
       </div>
-      <ol class="lignes pleine"><li><span class="pave">9h30</span><div><h4 class="t-accroche">Le mot de Jérôme&nbsp;: la façon de travailler d'EVMT</h4></div></li><li><span class="pave">9h45</span><div><h4 class="t-accroche">Formation Notion V1&nbsp;: les bases</h4><p class="secondaire e-8">Se repérer, lire une page, filtrer une vue, commenter</p></div></li><li><span class="pave">10h30</span><div><h4 class="t-accroche">Le retour de Pauline et Gabrielle</h4><p class="secondaire e-8">Leurs bonnes pratiques, en vrai. Puis une pause de 10 minutes</p></div></li><li><span class="pave">11h00</span><div><h4 class="t-accroche">Projets, tâches et le premier temps gagné</h4><p class="secondaire e-8">L'IA de Notion, puis de la réunion aux tâches</p></div></li><li><span class="pave">11h30</span><div><h4 class="t-accroche">La Bible, sur votre poste</h4></div></li><li><span class="pave">12h00</span><div><h4 class="t-accroche">Vos tâches de la semaine, sur votre projet pilote</h4><p class="secondaire e-8">Jusqu'à 12h30, avec vos questions</p></div></li></ol>
+      <ol class="lignes pleine"><li><span class="pave">9h30</span><div><h4 class="t-accroche">Le mot de Jérôme&nbsp;: la façon de travailler d'EVMT</h4></div></li><li><span class="pave">9h45</span><div><h4 class="t-accroche">Formation Notion V1&nbsp;: les bases</h4><p class="secondaire e-8">Vos réglages, puis se repérer, lire une page, filtrer une vue, commenter</p></div></li><li><span class="pave">10h30</span><div><h4 class="t-accroche">Le retour de Pauline et Gabrielle</h4><p class="secondaire e-8">Leurs bonnes pratiques, en vrai. Puis une pause de 10 minutes</p></div></li><li><span class="pave">11h00</span><div><h4 class="t-accroche">Projets, tâches et le premier temps gagné</h4><p class="secondaire e-8">L'IA de Notion, puis de la réunion aux tâches</p></div></li><li><span class="pave">11h30</span><div><h4 class="t-accroche">La Bible, sur votre poste</h4></div></li><li><span class="pave">12h00</span><div><h4 class="t-accroche">Vos tâches de la semaine, sur votre projet pilote</h4><p class="secondaire e-8">Jusqu'à 12h30, avec vos questions</p></div></li></ol>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
@@ -788,7 +804,7 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">03 / 29</span>
+      <span class="libelle">03 / 30</span>
     </header>
     
     <div class="corps inter">
@@ -810,7 +826,7 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_cream.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">04 / 29</span>
+      <span class="libelle">04 / 30</span>
     </header>
     
     <div class="corps fin">
@@ -835,7 +851,7 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">05 / 29</span>
+      <span class="libelle">05 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Le mot de Jérôme</span></div>
     <div class="corps etage2">
@@ -854,7 +870,7 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_cream.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">06 / 29</span>
+      <span class="libelle">06 / 30</span>
     </header>
     
     <div class="corps fin">
@@ -873,7 +889,7 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">07 / 29</span>
+      <span class="libelle">07 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Les moyens</span></div>
     <div class="corps etage2">
@@ -894,7 +910,7 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">08 / 29</span>
+      <span class="libelle">08 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Les règles du jeu</span></div>
     <div class="corps etage2">
@@ -914,13 +930,40 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 09 · Formation Notion V1 ═══ -->
-<section class="slide" data-slide="9" data-titre="Formation Notion V1">
+<!-- ═══ 09 · Préparation ═══ -->
+<section class="slide" data-slide="9" data-titre="Préparation">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">09 / 29</span>
+      <span class="libelle">09 / 30</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Préparation · sur votre poste</span></div>
+    <div class="corps etage2">
+      <div class="tete"><h3 class="t-titre-section">Avant de démarrer, vos <span class="fort">réglages</span>.</h3><p class="t-reponse secondaire">Cinq minutes, tous ensemble. Chacun les fait pour soi, sur son poste.</p></div>
+      <div class="g57 grille">
+        <div class="cellule pile centre"><div class="fiche reglages">
+          <p class="libelle">Paramètres · Préférences</p>
+          <dl class="props">
+            <div style="--b:0"><dt>Contraste élevé</dt><dd><span class="bascule"></span></dd></div>
+            <div style="--b:1"><dt>Commencer la semaine le lundi</dt><dd><span class="bascule"></span></dd></div>
+          </dl>
+          <p class="libelle">Paramètres · IA de Notion</p>
+          <dl class="props"><div><dt>Base des réunions par défaut</dt><dd class="choix"><span class="puce">Meetings [DB]</span></dd></div></dl>
+        </div></div>
+        <ol class="lignes pleine compact"><li><span class="pave">1</span><div><h4 class="t-accroche">Ouvrir ses préférences</h4><p class="secondaire e-8">Dans la barre de gauche&nbsp;: Paramètres, puis Préférences.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Contraste élevé</h4><p class="secondaire e-8">Juste sous l'apparence. Les blocs se détachent mieux à l'écran.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Commencer la semaine le lundi</h4><p class="secondaire e-8">Le calendrier des échéances démarre le lundi. Même réglage dans Notion Calendar.</p></div></li><li><span class="pave">4</span><div><h4 class="t-accroche">Vos notes de réunion</h4><p class="secondaire e-8">Paramètres, puis IA de Notion&nbsp;: «&nbsp;Meetings [DB]&nbsp;» comme base par défaut. Chaque nouvelle note de réunion s'y crée toute seule.</p></div></li></ol>
+      </div>
+    </div>
+    <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 10 · Formation Notion V1 ═══ -->
+<section class="slide" data-slide="10" data-titre="Formation Notion V1">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Lancement Notion · EVMT</span>
+      <span class="libelle">10 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Formation V1 · démo dans Notion</span></div>
     <div class="corps g57">
@@ -937,13 +980,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 10 · Faites-le vôtre ═══ -->
-<section class="slide" data-slide="10" data-titre="Faites-le vôtre">
+<!-- ═══ 11 · Faites-le vôtre ═══ -->
+<section class="slide" data-slide="11" data-titre="Faites-le vôtre">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">10 / 29</span>
+      <span class="libelle">11 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Formation V1 · démo dans Notion</span></div>
     <div class="corps etage3">
@@ -958,13 +1001,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 11 · Le retour de Pauline et Gabrielle ═══ -->
-<section class="slide" data-slide="11" data-titre="Le retour de Pauline et Gabrielle">
+<!-- ═══ 12 · Le retour de Pauline et Gabrielle ═══ -->
+<section class="slide" data-slide="12" data-titre="Le retour de Pauline et Gabrielle">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">11 / 29</span>
+      <span class="libelle">12 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Retour d'expérience · démo dans Notion</span></div>
     <div class="corps etage3">
@@ -975,13 +1018,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 12 · Un projet, une page ═══ -->
-<section class="slide" data-slide="12" data-titre="Un projet, une page">
+<!-- ═══ 13 · Un projet, une page ═══ -->
+<section class="slide" data-slide="13" data-titre="Un projet, une page">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">12 / 29</span>
+      <span class="libelle">13 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Projets et tâches · démo dans Notion</span></div>
     <div class="corps etage3">
@@ -998,13 +1041,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 13 · Une bonne tâche ═══ -->
-<section class="slide" data-slide="13" data-titre="Une bonne tâche">
+<!-- ═══ 14 · Une bonne tâche ═══ -->
+<section class="slide" data-slide="14" data-titre="Une bonne tâche">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">13 / 29</span>
+      <span class="libelle">14 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Projets et tâches · la formule</span></div>
     <div class="corps etage3">
@@ -1028,13 +1071,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 14 · Les propriétés d'une tâche ═══ -->
-<section class="slide" data-slide="14" data-titre="Les propriétés d'une tâche">
+<!-- ═══ 15 · Les propriétés d'une tâche ═══ -->
+<section class="slide" data-slide="15" data-titre="Les propriétés d'une tâche">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">14 / 29</span>
+      <span class="libelle">15 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Projets et tâches · démo dans Notion</span></div>
     <div class="corps etage2">
@@ -1047,13 +1090,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 15 · L'IA de Notion ═══ -->
-<section class="slide" data-slide="15" data-titre="L'IA de Notion">
+<!-- ═══ 16 · L'IA de Notion ═══ -->
+<section class="slide" data-slide="16" data-titre="L'IA de Notion">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">15 / 29</span>
+      <span class="libelle">16 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Premier temps gagné · démo dans Notion</span></div>
     <div class="corps g57">
@@ -1070,13 +1113,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 16 · De la réunion aux tâches ═══ -->
-<section class="slide" data-slide="16" data-titre="De la réunion aux tâches">
+<!-- ═══ 17 · De la réunion aux tâches ═══ -->
+<section class="slide" data-slide="17" data-titre="De la réunion aux tâches">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">16 / 29</span>
+      <span class="libelle">17 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Premier temps gagné · démo dans Notion</span></div>
     <div class="corps etage3">
@@ -1097,13 +1140,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 17 · Votre tableau de bord ═══ -->
-<section class="slide" data-slide="17" data-titre="Votre tableau de bord">
+<!-- ═══ 18 · Votre tableau de bord ═══ -->
+<section class="slide" data-slide="18" data-titre="Votre tableau de bord">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">17 / 29</span>
+      <span class="libelle">18 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Premier temps gagné · démo dans Notion</span></div>
     <div class="corps g57">
@@ -1116,13 +1159,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 18 · La Bible ═══ -->
-<section class="slide" data-slide="18" data-titre="La Bible">
+<!-- ═══ 19 · La Bible ═══ -->
+<section class="slide" data-slide="19" data-titre="La Bible">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">18 / 29</span>
+      <span class="libelle">19 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">La Bible · démo dans Notion</span></div>
     <div class="corps g57">
@@ -1139,13 +1182,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 19 · Une Bible à jour ═══ -->
-<section class="slide" data-slide="19" data-titre="Une Bible à jour">
+<!-- ═══ 20 · Une Bible à jour ═══ -->
+<section class="slide" data-slide="20" data-titre="Une Bible à jour">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">19 / 29</span>
+      <span class="libelle">20 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">La Bible · les règles</span></div>
     <div class="corps g57">
@@ -1158,13 +1201,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 20 · Vos tâches de la semaine ═══ -->
-<section class="slide" data-slide="20" data-titre="Vos tâches de la semaine">
+<!-- ═══ 21 · Vos tâches de la semaine ═══ -->
+<section class="slide" data-slide="21" data-titre="Vos tâches de la semaine">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">20 / 29</span>
+      <span class="libelle">21 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">À vous · 30 minutes</span></div>
     <div class="corps g57">
@@ -1181,13 +1224,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 21 · 02 · En petits groupes ═══ -->
-<section class="slide" data-slide="21" data-titre="02 · En petits groupes">
+<!-- ═══ 22 · 02 · En petits groupes ═══ -->
+<section class="slide" data-slide="22" data-titre="02 · En petits groupes">
   <div class="cadre sans-barre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">21 / 29</span>
+      <span class="libelle">22 / 30</span>
     </header>
     
     <div class="corps inter">
@@ -1203,13 +1246,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 22 · Un projet pilote ═══ -->
-<section class="slide" data-slide="22" data-titre="Un projet pilote">
+<!-- ═══ 23 · Un projet pilote ═══ -->
+<section class="slide" data-slide="23" data-titre="Un projet pilote">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">22 / 29</span>
+      <span class="libelle">23 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">En petits groupes</h2><span class="libelle">Vos projets pilotes</span></div>
     <div class="corps g57">
@@ -1222,13 +1265,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 23 · Vos créneaux en petit groupe ═══ -->
-<section class="slide" data-slide="23" data-titre="Vos créneaux en petit groupe">
+<!-- ═══ 24 · Vos créneaux en petit groupe ═══ -->
+<section class="slide" data-slide="24" data-titre="Vos créneaux en petit groupe">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">23 / 29</span>
+      <span class="libelle">24 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Lundi 26 et mardi 27</h2><span class="libelle">Vos créneaux · dans votre agenda</span></div>
     <div class="corps etage3">
@@ -1242,13 +1285,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 24 · En atelier ═══ -->
-<section class="slide" data-slide="24" data-titre="En atelier">
+<!-- ═══ 25 · En atelier ═══ -->
+<section class="slide" data-slide="25" data-titre="En atelier">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">24 / 29</span>
+      <span class="libelle">25 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Mardi 27</h2><span class="libelle">Démo dans Notion</span></div>
     <div class="corps etage">
@@ -1264,13 +1307,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 25 · 03 · La suite ═══ -->
-<section class="slide" data-slide="25" data-titre="03 · La suite">
+<!-- ═══ 26 · 03 · La suite ═══ -->
+<section class="slide" data-slide="26" data-titre="03 · La suite">
   <div class="cadre sans-barre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">25 / 29</span>
+      <span class="libelle">26 / 30</span>
     </header>
     
     <div class="corps inter">
@@ -1286,13 +1329,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 26 · Trois étapes ═══ -->
-<section class="slide" data-slide="26" data-titre="Trois étapes">
+<!-- ═══ 27 · Trois étapes ═══ -->
+<section class="slide" data-slide="27" data-titre="Trois étapes">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">26 / 29</span>
+      <span class="libelle">27 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">Après le 27</h2><span class="libelle">Le chemin</span></div>
     <div class="corps etage3">
@@ -1307,13 +1350,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 27 · On ne vous lâche pas ═══ -->
-<section class="slide" data-slide="27" data-titre="On ne vous lâche pas">
+<!-- ═══ 28 · On ne vous lâche pas ═══ -->
+<section class="slide" data-slide="28" data-titre="On ne vous lâche pas">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">27 / 29</span>
+      <span class="libelle">28 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">Après le 27</h2><span class="libelle">L'accompagnement</span></div>
     <div class="corps g57">
@@ -1330,13 +1373,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 28 · Quand ça coince ═══ -->
-<section class="slide" data-slide="28" data-titre="Quand ça coince">
+<!-- ═══ 29 · Quand ça coince ═══ -->
+<section class="slide" data-slide="29" data-titre="Quand ça coince">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">28 / 29</span>
+      <span class="libelle">29 / 30</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">Après le 27</h2><span class="libelle">Quand ça coince</span></div>
     <div class="corps etage2">
@@ -1350,13 +1393,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 29 · Pour finir ═══ -->
-<section class="slide sombre" data-slide="29" data-titre="Pour finir">
+<!-- ═══ 30 · Pour finir ═══ -->
+<section class="slide sombre" data-slide="30" data-titre="Pour finir">
   <div class="cadre sans-barre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_cream.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">29 / 29</span>
+      <span class="libelle">30 / 30</span>
     </header>
     
     <div class="corps fin">
@@ -1379,7 +1422,7 @@
 
 <div class="nav-controls" data-pdf-hide>
   <button class="nav-btn" id="prev" aria-label="Écran précédent"><svg aria-hidden="true" style="transform:scaleX(-1)"><use href="#i-chevron-droit"/></svg></button>
-  <div class="counter libelle"><span id="cur">1</span>&nbsp;/ 29</div>
+  <div class="counter libelle"><span id="cur">1</span>&nbsp;/ 30</div>
   <button class="nav-btn" id="next" aria-label="Écran suivant"><svg aria-hidden="true"><use href="#i-chevron-droit"/></svg></button>
   <button class="nav-btn" id="grid" aria-label="Vue d'ensemble"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
 </div>
