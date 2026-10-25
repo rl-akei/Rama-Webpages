@@ -310,7 +310,7 @@
   }
 
 
-  /* ═══ Ajouts propres à la propale Beyond Crew (mêmes jetons, mêmes filets) ═══ */
+  /* ═══ Ajouts du gabarit (mêmes jetons, mêmes filets) ═══ */
 
   /* Fenêtre plus petite que 1440 × 900 : tout rétrécit ensemble plutôt que de couper un écran */
   @media screen and (min-width: 60rem) and (min-height: 40rem) {
@@ -558,6 +558,162 @@
   @keyframes trait { to { background-size: 100% 2px; } }
   @keyframes monte { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
   @media (max-width: 960px) { .formule { grid-template-columns: 1fr; } .formule .plus { padding: 0 var(--rl-marge-cellule); } }
+
+  /* Listes compactes pour les écrans à tête + 4 ou 5 lignes */
+  .lignes.compact > li { padding-block: var(--rl-espace-12); gap: var(--rl-espace-16); }
+  .lignes.compact .t-accroche { font-size: 1.375rem; line-height: 1.2; }
+  .lignes.compact p.secondaire { margin-top: 0.25rem; font-size: 1rem; line-height: 1.35; }
+  .temoins { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto minmax(0, 1fr); min-height: 0; }
+  .temoins > div { grid-row: span 2; display: grid; grid-template-rows: subgrid; min-width: 0; min-height: 0; }
+  .temoins > div + div { border-left: var(--rl-trait-filet) solid var(--filet); }
+  .temoins .qui { padding: var(--v3) var(--rl-marge-cellule); border-bottom: var(--rl-trait-filet) solid var(--filet); }
+  .temoins .citation { font-size: 1.5rem; }
+  .ruban.leger .t-reponse { font-size: 1.25rem; line-height: 1.35; }
+  .suite.bas > * { justify-content: end; }
+
+  /* ── Le socle : Notion en strates, les dossiers et Slack posés dessus ── */
+  .socle-zone { display: grid; grid-template-rows: auto auto minmax(0, 1fr); min-height: 0; }
+  .dessus { display: grid; grid-template-columns: 1fr 1fr; }
+  .dessus > li { padding: var(--v3) var(--rl-marge-cellule); display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr); gap: var(--rl-espace-24); align-items: center; min-width: 0; }
+  .dessus > li + li { border-left: var(--rl-trait-filet) solid var(--filet); }
+  .dessus .ex { font-size: 1.125rem; line-height: 1.35; padding: var(--rl-espace-12) var(--rl-espace-16); border: var(--rl-trait-filet) solid var(--filet); border-radius: var(--rl-rayon-cellule); text-wrap: pretty; }
+  .attaches { display: grid; grid-template-columns: 1fr 1fr; height: var(--rl-espace-48); border-top: var(--rl-trait-filet) solid var(--filet); }
+  .attaches > p { position: relative; display: flex; align-items: center; justify-content: center; }
+  .attaches .trait { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; translate: -50% 0; background: var(--rl-texte-principal); }
+  .attaches .libelle { position: relative; background: var(--rl-fond-page); padding: var(--rl-espace-4) var(--rl-espace-12); color: var(--rl-texte-principal); }
+  .socle { --filet: var(--rl-filet-sombre); display: grid; grid-template-rows: auto repeat(5, minmax(0, 1fr)); min-height: 0; }
+  .socle > * { display: grid; grid-template-columns: 2.25rem minmax(0, 0.95fr) minmax(0, 1.05fr) minmax(0, 1.5fr); gap: var(--rl-espace-24); align-items: center; padding: 0 var(--rl-marge-cellule); min-height: 0; }
+  .socle > * + * { border-top: var(--rl-trait-filet) solid var(--filet); }
+  .socle .entete-socle { padding-block: var(--rl-espace-12); }
+  .socle .entete-socle .t { grid-column: 1 / 3; color: var(--rl-accent-structure); }
+  .socle .num { font-family: var(--rl-police-machine); font-size: 0.875rem; color: var(--rl-texte-sur-sombre-libelle); }
+  .socle .nom { font-size: 1.625rem; line-height: 1.1; letter-spacing: -0.02em; font-weight: var(--rl-graisse-moyen); }
+  .socle .role { font-size: 1.0625rem; line-height: 1.3; }
+  .puce.page { justify-self: start; max-width: 100%; gap: var(--rl-espace-8); padding: var(--rl-espace-8) var(--rl-espace-12); font-size: 1rem; line-height: 1.3; }
+  @media (prefers-reduced-motion: no-preference) {
+    body:not(.show-all) .slide.is-active .socle { animation: fondu .4s var(--rl-mouvement-courbe-sortie) .25s both; }
+    /* Les strates se coulent du bas vers le haut, comme une fondation */
+    body:not(.show-all) .slide.is-active .socle > .strate { animation: coule .55s var(--rl-mouvement-courbe-sortie) both; animation-delay: calc(var(--s, 0) * 140ms + 450ms); }
+    /* Puis les dossiers et Slack se posent sur le socle */
+    body:not(.show-all) .slide.is-active .dessus > li { animation: pose .7s var(--rl-mouvement-courbe-sortie) 1.35s both; }
+    body:not(.show-all) .slide.is-active .dessus > li + li { animation-delay: 1.5s; }
+    body:not(.show-all) .slide.is-active .attaches .trait { transform-origin: top; animation: trace .45s var(--rl-mouvement-courbe-sortie) 2.05s both; }
+    body:not(.show-all) .slide.is-active .attaches .libelle { animation: fondu .35s ease 2.3s both; }
+  }
+  @keyframes coule { from { opacity: 0; clip-path: inset(100% 0 0 0); transform: translateY(0.5rem); } to { opacity: 1; clip-path: inset(0); transform: none; } }
+  @keyframes pose { from { opacity: 0; transform: translateY(-1.5rem); } to { opacity: 1; transform: none; } }
+  @keyframes trace { from { transform: scaleY(0); } to { transform: none; } }
+  @keyframes fondu { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes efface { from { opacity: 1; } to { opacity: 0; } }
+
+  /* ── De la réunion aux tâches : la note qui se remplit ── */
+  .reunion .etapes > li { padding-block: var(--rl-espace-16); }
+  .reunion .etapes .t-accroche { font-size: 1.375rem; line-height: 1.2; }
+  .reunion .etapes .pave { min-width: 6.75rem; }
+  .tableau th { white-space: nowrap; }
+  .maquette { display: flex; align-items: center; justify-content: center; padding: var(--v3) var(--rl-marge-cellule); min-height: 0; }
+  .note { width: 100%; max-width: 40rem; border: var(--rl-trait-filet) solid var(--filet); border-radius: var(--rl-rayon-cellule); background: var(--rl-fond-page); }
+  .note > * { padding: 0.625rem var(--rl-espace-24); }
+  .note > * + * { border-top: var(--rl-trait-filet) solid var(--filet); }
+  .note-tete { display: grid; gap: 0.375rem; }
+  .note-tete .ligne { display: flex; justify-content: space-between; gap: var(--rl-espace-16); }
+  .note-tete .titre { font-size: 1.375rem; line-height: 1.1; letter-spacing: -0.02em; font-weight: var(--rl-graisse-moyen); }
+  .participants { display: flex; flex-wrap: wrap; gap: var(--rl-espace-8); }
+  .participants .puce { font-size: 0.875rem; }
+  .enregistre { display: flex; align-items: center; gap: var(--rl-espace-12); }
+  .enregistre .point { width: 0.625rem; height: 0.625rem; border-radius: 50%; background: var(--rl-couleur-aloe); flex: none; }
+  .empile { display: grid; }
+  .empile > * { grid-area: 1 / 1; }
+  .empile .avant { opacity: 0; }
+  .commande { display: flex; align-items: center; gap: var(--rl-espace-12); }
+  .saisie { position: relative; display: inline-block; font-family: var(--rl-police-machine); font-weight: var(--rl-graisse-moyen); font-size: 1.125rem; padding: var(--rl-espace-4) var(--rl-espace-8); background: var(--rl-fond-encadre); border-radius: var(--rl-rayon-cellule); }
+  .saisie .curseur { position: absolute; left: var(--rl-espace-8); top: 18%; bottom: 18%; width: 2px; background: var(--rl-texte-principal); opacity: 0; }
+  .propositions > li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--rl-espace-12); align-items: center; padding: 0.5rem 0; }
+  .propositions > li + li { border-top: var(--rl-trait-filet) solid var(--filet); }
+  .propositions .quoi { font-size: 1rem; line-height: 1.3; }
+  .propositions .meta { display: block; font-size: 0.875rem; color: var(--rl-texte-secondaire); margin-top: 0.125rem; }
+  .case { position: relative; width: 1.375rem; height: 1.375rem; border: var(--rl-trait-filet) solid var(--rl-texte-principal); border-radius: var(--rl-rayon-cellule); display: grid; place-items: center; }
+  .case::before { content: ""; position: absolute; inset: -1px; background: var(--rl-fond-sombre); border-radius: var(--rl-rayon-cellule); }
+  .case .icone { position: relative; width: 0.875rem; height: 0.875rem; color: var(--rl-texte-sur-sombre-principal); }
+  .propositions .etat .puce { font-size: 0.75rem; justify-content: center; }
+  .propositions .etat .apres { background: var(--rl-fond-sombre); color: var(--rl-texte-sur-sombre-principal); border-color: var(--rl-fond-sombre); }
+  @media (prefers-reduced-motion: no-preference) {
+    body:not(.show-all) .slide.is-active .note { animation: monte .55s var(--rl-mouvement-courbe-sortie) .35s both; }
+    body:not(.show-all) .slide.is-active .note .enregistre { animation: monte .45s var(--rl-mouvement-courbe-sortie) 1.25s both; }
+    body:not(.show-all) .slide.is-active .enregistre .point { animation: rec .8s ease-in-out 1.25s 2; }
+    body:not(.show-all) .slide.is-active .enregistre .avant { animation: efface .25s ease 2.75s both; }
+    body:not(.show-all) .slide.is-active .enregistre .apres { animation: fondu .3s ease 2.9s both; }
+    body:not(.show-all) .slide.is-active .note .commande { animation: monte .45s var(--rl-mouvement-courbe-sortie) 2.9s both; }
+    /* « @fin de meeting » se tape lettre par lettre (15 signes en police machine : 1 signe = 1ch) */
+    body:not(.show-all) .slide.is-active .saisie .tape { display: inline-block; animation: tape .9s steps(15, end) 3.1s both; }
+    body:not(.show-all) .slide.is-active .saisie .curseur { animation: curseur 1.5s linear 2.9s both; }
+    body:not(.show-all) .slide.is-active .propositions > li { animation: monte .45s var(--rl-mouvement-courbe-sortie) both; animation-delay: calc(var(--p, 0) * 150ms + 4.05s); }
+    body:not(.show-all) .slide.is-active .case::before, body:not(.show-all) .slide.is-active .case .icone { animation: coche .3s var(--rl-mouvement-courbe-sortie) both; animation-delay: calc(var(--p, 0) * 200ms + 5.05s); }
+    body:not(.show-all) .slide.is-active .propositions .etat .avant { opacity: 1; animation: efface .2s ease both; animation-delay: calc(var(--p, 0) * 200ms + 5.05s); }
+    body:not(.show-all) .slide.is-active .propositions .etat .apres { animation: fondu .25s ease both; animation-delay: calc(var(--p, 0) * 200ms + 5.1s); }
+  }
+  @keyframes rec { 0%, 100% { background: var(--rl-accent-emphase); opacity: 1; } 50% { background: var(--rl-accent-emphase); opacity: 0.25; } }
+  @keyframes tape { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+  @keyframes curseur {
+    0% { opacity: 1; transform: none; }
+    13% { opacity: 1; transform: none; animation-timing-function: steps(15, end); }
+    73% { opacity: 1; transform: translateX(15ch); }
+    80% { opacity: 0; } 87% { opacity: 1; }
+    94% { opacity: 1; } 95%, 100% { opacity: 0; transform: translateX(15ch); }
+  }
+  @keyframes coche { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: none; } }
+
+  /* ── Une tâche, ouverte : ses propriétés ── */
+  .fiche { width: 100%; border: var(--rl-trait-filet) solid var(--filet); border-radius: var(--rl-rayon-cellule); background: var(--rl-fond-page); padding: var(--rl-espace-24); }
+  .fiche .titre { font-size: 1.5rem; line-height: 1.15; letter-spacing: -0.02em; font-weight: var(--rl-graisse-moyen); margin-top: var(--rl-espace-12); text-wrap: balance; }
+  .props { margin-top: var(--rl-espace-16); }
+  .props > div { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: var(--rl-espace-12); align-items: center; padding: 0.5rem 0; border-top: var(--rl-trait-filet) solid var(--filet); }
+  .props dt { display: flex; align-items: center; gap: var(--rl-espace-8); color: var(--rl-texte-secondaire); font-size: 1rem; }
+  .props dt .pave { min-width: 1.5rem; height: 1.5rem; font-size: 0.75rem; padding: 0 0.25rem; }
+  .props dt .sans { display: inline-block; width: 1.5rem; }
+  .props dd { font-size: 1rem; }
+  .props .cle dd { font-weight: var(--rl-graisse-moyen); }
+  .props .puce { font-size: 0.875rem; padding: 0.125rem 0.5rem; }
+
+  /* ── Un projet : ses états ── */
+  .etats > li { display: flex; align-items: center; gap: var(--rl-espace-16); padding: 0.3125rem 0; border-top: var(--rl-trait-filet) solid var(--filet); font-size: 1.0625rem; line-height: 1.2; }
+  .etats > li:first-child { border-top: 0; }
+  .etats .pave { min-width: 1.5rem; height: 1.5rem; font-size: 0.75rem; }
+  .type-projet { padding-top: var(--rl-espace-16); border-top: var(--rl-trait-filet) solid var(--filet); }
+  .etats .perdu { color: var(--rl-texte-secondaire); }
+  .etats .perdu .pave { background: transparent; color: var(--rl-texte-secondaire); border: var(--rl-trait-filet) solid var(--filet); }
+
+  /* ── Les créneaux des deux jours : une ligne par créneau, les deux jours alignés ── */
+  .creneaux { display: grid; grid-template-columns: 5fr 7fr; min-height: 0; }
+  .creneaux > div { display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; min-height: 0; }
+  .creneaux > div + div { border-left: var(--rl-trait-filet) solid var(--filet); }
+  .creneaux .jour { height: var(--rl-hauteur-barre-section); padding: 0 var(--rl-marge-cellule); display: flex; align-items: center; border-bottom: var(--rl-trait-filet) solid var(--filet); }
+  .creneaux ol { display: grid; grid-template-rows: repeat(7, minmax(0, 1fr)); min-height: 0; }
+  .creneaux li { display: grid; grid-template-columns: 7.25rem minmax(0, 1fr); gap: var(--rl-espace-16); align-items: center; padding: 0 var(--rl-marge-cellule); border-top: var(--rl-trait-filet) solid var(--filet); min-height: 0; }
+  .creneaux li:first-child { border-top: 0; }
+  .creneaux .heure { font-family: var(--rl-police-machine); font-weight: var(--rl-graisse-moyen); font-size: 0.875rem; white-space: nowrap; }
+  .creneaux h4 { font-size: 1.1875rem; line-height: 1.2; font-weight: var(--rl-graisse-moyen); letter-spacing: -0.01em; }
+  .creneaux h4 + p { font-size: 0.9375rem; line-height: 1.3; margin-top: 0.125rem; }
+  @media (prefers-reduced-motion: no-preference) {
+    body:not(.show-all) .slide.is-active .creneaux li { animation: monte .45s var(--rl-mouvement-courbe-sortie) both; animation-delay: calc(var(--i, 0) * 60ms + 300ms); }
+  }
+
+  /* Mouvement réduit : les deux écrans animés arrivent en simple fondu */
+  @media (prefers-reduced-motion: reduce) {
+    body:not(.show-all) .slide.is-active :is(.socle-zone, .maquette) { animation: fondu .3s ease both; }
+  }
+  @media (max-width: 960px) {
+    .dessus, .attaches, .creneaux { grid-template-columns: 1fr; }
+    .dessus > li { grid-template-columns: auto minmax(0, 1fr); }
+    .dessus > li .ex { grid-column: 1 / -1; }
+    .dessus > li + li, .creneaux > div + div { border-left: 0; border-top: var(--rl-trait-filet) solid var(--filet); }
+    .attaches { height: auto; } .attaches > p { padding: var(--rl-espace-12) 0; } .attaches .libelle { text-align: center; max-width: 80%; }
+    .socle > * { grid-template-columns: 2rem minmax(0, 1fr); row-gap: var(--rl-espace-8); padding-block: var(--rl-espace-16); }
+    .socle > * > :nth-child(n+3) { grid-column: 2; }
+    .socle .entete-socle > :nth-child(n+2) { display: none; }
+    .creneaux ol { grid-template-rows: none; }
+    .creneaux li { padding-block: var(--rl-espace-12); }
+  }
 </style>
 </head>
 <body>
@@ -583,7 +739,7 @@
   <div class="cadre sans-barre">
     <header class="haut">
       <span class="libelle">Lancement Notion</span>
-      <span class="libelle">01 / 26</span>
+      <span class="libelle">01 / 29</span>
     </header>
     
     <div class="corps couv">
@@ -608,7 +764,7 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">02 / 26</span>
+      <span class="libelle">02 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">00</span><h2 class="t-barre-section">Le programme</h2><span class="libelle">Lundi 26 · 9h30 à 12h30 · toute l'agence</span></div>
     <div class="corps g57">
@@ -618,10 +774,10 @@
           <p class="libelle">Lundi après-midi</p>
           <p class="t-reponse e-12">Chacun avance sur son projet pilote. Sylvain passe voir les équipes une par une.</p>
           <p class="libelle e-24">Mardi 27</p>
-          <p class="t-reponse e-12">En petits groupes, par pôle : Corporate, puis Brand Experience.</p>
+          <p class="t-reponse e-12">En petits groupes, par pôle&nbsp;: Corporate, puis Brand Experience.</p>
         </div>
       </div>
-      <ol class="lignes pleine"><li><span class="pave">9h30</span><div><h4 class="t-accroche">Le mot de Jérôme : notre façon de travailler</h4></div></li><li><span class="pave">9h45</span><div><h4 class="t-accroche">Formation Notion V1 : les bases</h4><p class="secondaire e-8">Se repérer, lire une page, filtrer une vue, commenter</p></div></li><li><span class="pave">10h30</span><div><h4 class="t-accroche">Le retour de Pauline et Gabrielle</h4><p class="secondaire e-8">Leur espace, en vrai. Puis une pause de 10 minutes</p></div></li><li><span class="pave">11h00</span><div><h4 class="t-accroche">Le premier temps gagné : réunions et tâches</h4><p class="secondaire e-8">L'IA écrit le compte rendu et propose les tâches</p></div></li><li><span class="pave">11h30</span><div><h4 class="t-accroche">La Bible, sur votre poste</h4></div></li><li><span class="pave">12h00</span><div><h4 class="t-accroche">Vos tâches de la semaine, sur votre projet pilote</h4><p class="secondaire e-8">Jusqu'à 12h30, avec vos questions</p></div></li></ol>
+      <ol class="lignes pleine"><li><span class="pave">9h30</span><div><h4 class="t-accroche">Le mot de Jérôme&nbsp;: la façon de travailler d'EVMT</h4></div></li><li><span class="pave">9h45</span><div><h4 class="t-accroche">Formation Notion V1&nbsp;: les bases</h4><p class="secondaire e-8">Se repérer, lire une page, filtrer une vue, commenter</p></div></li><li><span class="pave">10h30</span><div><h4 class="t-accroche">Le retour de Pauline et Gabrielle</h4><p class="secondaire e-8">Leurs bonnes pratiques, en vrai. Puis une pause de 10 minutes</p></div></li><li><span class="pave">11h00</span><div><h4 class="t-accroche">Projets, tâches et le premier temps gagné</h4><p class="secondaire e-8">L'IA de Notion, puis de la réunion aux tâches</p></div></li><li><span class="pave">11h30</span><div><h4 class="t-accroche">La Bible, sur votre poste</h4></div></li><li><span class="pave">12h00</span><div><h4 class="t-accroche">Vos tâches de la semaine, sur votre projet pilote</h4><p class="secondaire e-8">Jusqu'à 12h30, avec vos questions</p></div></li></ol>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
@@ -632,7 +788,7 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">03 / 26</span>
+      <span class="libelle">03 / 29</span>
     </header>
     
     <div class="corps inter">
@@ -654,14 +810,20 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_cream.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">04 / 26</span>
+      <span class="libelle">04 / 29</span>
     </header>
     
     <div class="corps fin">
       <div class="centre">
         <p class="libelle">Le mot de Jérôme</p>
-        <h2 class="t-roi e-24">C'est désormais notre façon de <span class="fort">travailler</span>.</h2>
-        <p class="t-reponse secondaire e-32 prose">Pas une option, pas une formation pour faire une formation. Une nouvelle façon de travailler ensemble, et les moyens qu'on vous donne pour la prendre en main.</p>
+        <h2 class="t-roi e-24">C'est désormais la façon de travailler d'<span class="fort">EVMT</span>.</h2>
+        <p class="t-reponse secondaire e-32 prose">Elle a été construite avec vous, en étroite collaboration avec celles qui l'utilisent déjà. Pas une option&nbsp;: une nouvelle façon de travailler ensemble, et les moyens de la prendre en main.</p>
+      </div>
+      <div class="suite quatre bas">
+        <div><p class="libelle">Cheffe de projet Corporate</p><p class="e-8">Pauline Denat</p></div>
+        <div><p class="libelle">Cheffe de projet Brand Experience</p><p class="e-8">Gabrielle Gervais</p></div>
+        <div><p class="libelle">Responsable Brand Experience</p><p class="e-8">Sarah Lepage</p></div>
+        <div><p class="libelle">Responsable Corporate</p><p class="e-8">Audrey Cazes</p></div>
       </div>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
@@ -673,14 +835,14 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">05 / 26</span>
+      <span class="libelle">05 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Le mot de Jérôme</span></div>
     <div class="corps etage2">
       <div class="tete"><h3 class="t-titre-section">Ce que chacun y <span class="fort">gagne</span>.</h3><p class="t-reponse secondaire">Pour l'équipe d'aujourd'hui, et pour celles et ceux qui nous rejoindront.</p></div>
       <div class="g66 grille">
-        <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Retrouver facilement ses informations</h4></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Organiser son travail selon ses préférences</h4></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Éviter les sollicitations et les relances inutiles</h4></div></li></ol>
-        <ol class="lignes pleine"><li><span class="pave">4</span><div><h4 class="t-accroche">Savoir qui fait quoi, et pour quand</h4></div></li><li><span class="pave">5</span><div><h4 class="t-accroche">Fluidifier les échanges entre collaborateurs</h4></div></li><li><span class="pave">6</span><div><h4 class="t-accroche">Gagner en autonomie et en efficacité</h4></div></li></ol>
+        <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Retrouver facilement ses informations</h4></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Organiser son travail de façon uniforme</h4></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Mieux travailler ensemble, de façon collaborative</h4></div></li></ol>
+        <ol class="lignes pleine"><li><span class="pave">4</span><div><h4 class="t-accroche">Savoir qui fait quoi, et pour quand</h4></div></li><li><span class="pave">5</span><div><h4 class="t-accroche">Fluidifier les échanges, sans relances inutiles</h4></div></li><li><span class="pave">6</span><div><h4 class="t-accroche">Gagner en autonomie et en efficacité</h4></div></li></ol>
       </div>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
@@ -692,14 +854,14 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_cream.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">06 / 26</span>
+      <span class="libelle">06 / 29</span>
     </header>
     
     <div class="corps fin">
       <div class="centre">
         <p class="libelle">L'esprit</p>
-        <h2 class="t-roi e-24">Vos tâches ne servent pas à vous <span class="fort">surveiller</span>.</h2>
-        <p class="t-reponse secondaire e-32 prose">Elles servent à ce que personne n'ait à demander « où on en est ? ». Et tout ne sera pas parfait au début : on ajuste ensemble.</p>
+        <h2 class="t-roi e-24">Vos tâches ne servent pas à vous surveiller, mais à <span class="fort">piloter</span> l'activité.</h2>
+        <p class="t-reponse secondaire e-32 prose">Savoir où on en est sans avoir à demander, voir qui a besoin d'un coup de main, décider au bon moment. Et tout ne sera pas parfait au début&nbsp;: on ajuste ensemble.</p>
       </div>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
@@ -711,7 +873,7 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">07 / 26</span>
+      <span class="libelle">07 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Les moyens</span></div>
     <div class="corps etage2">
@@ -732,17 +894,22 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">08 / 26</span>
+      <span class="libelle">08 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Les règles du jeu</span></div>
-    <div class="corps etage3">
-      <div class="tete"><h3 class="t-titre-section">Chaque chose à sa place, rien en <span class="fort">double</span>.</h3></div>
-      <ul class="colonnes" style="--n:3">
-        <li class="pile bas-colle"><div class="avec-icone"><svg class="icone grande" aria-hidden="true"><use href="#i-projet"/></svg><h4 class="t-question">Notion</h4></div><p class="t-reponse">Dit où on en est : les projets, les tâches, les réunions, les procédures.</p></li>
-        <li class="pile bas-colle"><div class="avec-icone"><svg class="icone grande" aria-hidden="true"><use href="#i-message"/></svg><h4 class="t-question">Slack</h4></div><p class="t-reponse">Sert à discuter. Une décision prise sur Slack se note dans Notion.</p></li>
-        <li class="pile bas-colle"><div class="avec-icone"><svg class="icone grande" aria-hidden="true"><use href="#i-fleche-droite"/></svg><h4 class="t-question">Vos dossiers</h4></div><p class="t-reponse">Les fichiers restent où ils sont. Notion n'en garde que le lien.</p></li>
-      </ul>
-      <div class="bandeau"><div><p class="libelle">La règle</p></div><div><p>On ne recopie rien d'un outil à l'autre.</p></div></div>
+    <div class="corps etage2">
+      <div class="tete"><h3 class="t-titre-section">Chaque chose à sa place, sur un même <span class="fort">socle</span>.</h3><p class="t-reponse secondaire">La règle&nbsp;: on ne recopie rien d'un outil à l'autre.</p></div>
+      <div class="socle-zone">
+        <ul class="dessus">
+          <li><svg class="icone grande" aria-hidden="true"><use href="#i-fleche-droite"/></svg><div><h4 class="t-accroche">Vos dossiers</h4><p class="secondaire e-8">Les fichiers, sur le Drive</p></div><p class="ex">Le manuel client, le devis signé, les visuels</p></li>
+          <li><svg class="icone grande" aria-hidden="true"><use href="#i-message"/></svg><div><h4 class="t-accroche">Slack</h4><p class="secondaire e-8">La conversation du moment</p></div><p class="ex">«&nbsp;Tu as deux minutes pour le rétroplanning&nbsp;?&nbsp;»</p></li>
+        </ul>
+        <div class="attaches"><p><span class="trait"></span><span class="libelle">La page du projet garde le lien</span></p><p><span class="trait"></span><span class="libelle">Aucune décision&nbsp;: elle se note dans Notion</span></p></div>
+        <div class="socle sombre">
+          <div class="entete-socle"><p class="libelle t">Notion · le socle</p><p class="libelle">À quoi ça sert</p><p class="libelle">Par exemple</p></div>
+          <div class="strate" style="--s:4"><span class="num">01</span><p class="nom">Les objectifs d'EVMT</p><p class="role secondaire">Où va l'agence</p><span class="puce page">Le cap de l'année, posé par Jérôme</span></div><div class="strate" style="--s:3"><span class="num">02</span><p class="nom">Les projets</p><p class="role secondaire">Un événement, une page</p><span class="puce page">Global Council 2027</span></div><div class="strate" style="--s:2"><span class="num">03</span><p class="nom">Les tâches</p><p class="role secondaire">Qui fait quoi, pour quand</p><span class="puce page">Envoyer le devis traiteur validé par le client</span></div><div class="strate" style="--s:1"><span class="num">04</span><p class="nom">Les réunions</p><p class="role secondaire">Le compte rendu, rangé dans le projet</p><span class="puce page">Point client du jeudi, et ses tâches</span></div><div class="strate" style="--s:0"><span class="num">05</span><p class="nom">La Bible</p><p class="role secondaire">Le savoir-faire commun de l'agence</p><span class="puce page">Faire une note de frais</span></div>
+        </div>
+      </div>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
@@ -753,19 +920,19 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">09 / 26</span>
+      <span class="libelle">09 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Formation V1 · démo dans Notion</span></div>
     <div class="corps g57">
       <div class="cellule pile bas-colle">
-        <h3 class="t-titre-section">Formation Notion V1 : les <span class="fort">bases</span>.</h3>
+        <h3 class="t-titre-section">Formation Notion V1&nbsp;: les <span class="fort">bases</span>.</h3>
         <div class="encadre note">
           <p class="libelle">À vous · en même temps que l'écran</p>
           <p class="t-accroche e-12">Chacun refait chaque geste sur son poste, au moment où on le montre.</p>
           <p class="secondaire e-12">Personne ne démarre sur son projet sans avoir fait ces cinq gestes une fois.</p>
         </div>
       </div>
-      <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Se repérer</h4><p class="secondaire e-8">La barre de gauche, votre page d'accueil, la recherche.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Lire une page</h4><p class="secondaire e-8">Une ligne de tableau est une page : on l'ouvre, on lit ses propriétés.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Changer de vue et filtrer</h4><p class="secondaire e-8">Tableau, liste, calendrier. Masquer ce qui ne vous concerne pas.</p></div></li><li><span class="pave">4</span><div><h4 class="t-accroche">Commenter et mentionner</h4><p class="secondaire e-8">Un « @ » prévient la bonne personne, sans mail ni relance.</p></div></li><li><span class="pave">5</span><div><h4 class="t-accroche">Suivre ses notifications</h4><p class="secondaire e-8">La boîte de réception de Notion : ce qu'on vous demande.</p></div></li></ol>
+      <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Se repérer</h4><p class="secondaire e-8">La barre de gauche, votre page d'accueil, la recherche.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Lire une page</h4><p class="secondaire e-8">Une ligne de tableau est une page&nbsp;: on l'ouvre, on lit ses propriétés.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Changer de vue et filtrer</h4><p class="secondaire e-8">Tableau, liste, calendrier. Masquer ce qui ne vous concerne pas.</p></div></li><li><span class="pave">4</span><div><h4 class="t-accroche">Commenter et mentionner</h4><p class="secondaire e-8">Un «&nbsp;@&nbsp;» prévient la bonne personne, sans mail ni relance.</p></div></li><li><span class="pave">5</span><div><h4 class="t-accroche">Suivre ses notifications</h4><p class="secondaire e-8">La boîte de réception de Notion&nbsp;: ce qu'on vous demande.</p></div></li></ol>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
@@ -776,7 +943,7 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">10 / 26</span>
+      <span class="libelle">10 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Formation V1 · démo dans Notion</span></div>
     <div class="corps etage3">
@@ -797,30 +964,36 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">11 / 26</span>
+      <span class="libelle">11 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Retour d'expérience · démo dans Notion</span></div>
     <div class="corps etage3">
-      <div class="tete"><h3 class="t-titre-section">Le retour de Pauline et <span class="fort">Gabrielle</span>.</h3><p class="t-reponse secondaire">Maintenant que vous avez les bases : une semaine de chef de projet, sur leur vrai espace.</p></div>
-      <ol class="colonnes aligne" style="--n:5"><li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">01</p><div><h4 class="t-accroche">J'ouvre mon projet</h4><p class="secondaire e-12">Depuis mon tableau de bord</p></div></li><li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">02</p><div><h4 class="t-accroche">Je génère l'étape en cours</h4><p class="secondaire e-12">Une étape à la fois, pas tout le projet</p></div></li><li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">03</p><div><h4 class="t-accroche">Je répartis et je date</h4><p class="secondaire e-12">Qui fait quoi, pour quand</p></div></li><li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">04</p><div><h4 class="t-accroche">Je tiens ma réunion</h4><p class="secondaire e-12">Le compte rendu se range dans le projet</p></div></li><li class="pile bas-colle"><p class="t-question lettre" aria-hidden="true">05</p><div><h4 class="t-accroche">Tout est sur la page</h4><p class="secondaire e-12">Échanges, tâches, documents</p></div></li></ol>
-      <div class="bandeau"><div><p class="libelle">Ce que ça change</p></div><div><p>Si je suis absent, un collègue reprend mon projet sans rien perdre.</p></div></div>
+      <div class="tete"><h3 class="t-titre-section">Le retour de Pauline et <span class="fort">Gabrielle</span>.</h3><p class="t-reponse secondaire">Cinq minutes chacune.</p></div>
+      <div class="temoins"><div><div class="qui"><p class="libelle">Pauline Denat · Cheffe de projet Corporate</p><p class="citation e-12">«&nbsp;C'est venu petit à petit, et je vois vraiment l'intérêt maintenant que j'y vois clair.&nbsp;»</p></div><ol class="lignes pleine compact"><li><span class="pave">1</span><div><h4 class="t-accroche">10 minutes chaque matin</h4><p class="secondaire e-8">Je relis mes tâches et mes échéances pour lancer ma journée.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Je remplis tous les champs</h4><p class="secondaire e-8">Qui, quand, quel projet&nbsp;: un collègue peut reprendre ma tâche.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Un projet annulé&nbsp;? Je le gèle</h4><p class="secondaire e-8">Statut «&nbsp;Gelé&nbsp;»&nbsp;: les tâches quittent mon tableau de bord, sans être perdues.</p></div></li></ol></div><div><div class="qui"><p class="libelle">Gabrielle Gervais · Cheffe de projet Brand Experience</p><p class="citation e-12">«&nbsp;Quel gain de temps, quel bonheur.&nbsp;»</p></div><ol class="lignes pleine compact"><li><span class="pave">1</span><div><h4 class="t-accroche">Je demande à l'IA</h4><p class="secondaire e-8">«&nbsp;Comment je fais une note de frais&nbsp;?&nbsp;» Elle me redonne tout le process, sans me renvoyer à la page 54.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">La Bible pour tous, ma page pour moi</h4><p class="secondaire e-8">Ce qui sert à toute l'agence va dans la Bible. Mes notes rapides restent sur ma page.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Les tâches pour s'entraider</h4><p class="secondaire e-8">Sur un projet à deux, je vois qui doit faire quoi, et qui a besoin d'un coup de main.</p></div></li></ol></div></div>
+      <div class="bandeau"><div><p class="libelle">Leur conseil</p></div><div><p>Ça vient petit à petit&nbsp;: prenez le pli dès cette semaine, et posez vos questions.</p></div></div>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 12 · De la réunion aux tâches ═══ -->
-<section class="slide" data-slide="12" data-titre="De la réunion aux tâches">
+<!-- ═══ 12 · Un projet, une page ═══ -->
+<section class="slide" data-slide="12" data-titre="Un projet, une page">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">12 / 26</span>
+      <span class="libelle">12 / 29</span>
     </header>
-    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Premier temps gagné · démo dans Notion</span></div>
+    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Projets et tâches · démo dans Notion</span></div>
     <div class="corps etage3">
-      <div class="tete"><h3 class="t-titre-section">De la réunion aux tâches, sans <span class="fort">recopier</span>.</h3><p class="t-reponse secondaire">Le premier temps gagné : l'IA écrit le compte rendu et propose les tâches.</p></div>
-      <ol class="colonnes aligne" style="--n:4"><li class="pile bas-colle"><p class="libelle">Avant</p><div><h4 class="t-accroche">J'ouvre la note depuis Notion</h4><p class="secondaire e-12">Depuis la page du projet. Je la relie aux participants.</p></div></li><li class="pile bas-colle"><p class="libelle">Pendant</p><div><h4 class="t-accroche">Je lance la transcription</h4><p class="secondaire e-12">Et je préviens que j'enregistre.</p></div></li><li class="pile bas-colle"><p class="libelle">Après</p><div><h4 class="t-accroche">Je tape « / » puis « fin de meeting »</h4><p class="secondaire e-12">L'IA propose les tâches : qui, quand, statut.</p></div></li><li class="pile bas-colle"><p class="libelle">Je valide</p><div><h4 class="t-accroche">Les tâches sont créées</h4><p class="secondaire e-12">Rattachées à la réunion et au projet.</p></div></li></ol>
-      <div class="offre ruban"><svg class="icone" aria-hidden="true"><use href="#i-garantie"/></svg><p class="t-accroche">Rien ne se crée sans votre accord. L'IA propose, vous corrigez ou validez. Rien n'est envoyé au client.</p></div>
+      <div class="tete"><h3 class="t-titre-section">Un projet, une <span class="fort">page</span>.</h3><p class="t-reponse secondaire">Un collègue l'ouvre et sait où on en est.</p></div>
+      <div class="g75 grille">
+        <ol class="lignes pleine compact"><li><span class="pave">1</span><div><h4 class="t-accroche">Les propriétés, en haut</h4><p class="secondaire e-8">État, pôle, chef de projet, Responsable, client, date de l'événement, lieu.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Générer les tâches</h4><p class="secondaire e-8">Un bouton par étape&nbsp;: on génère l'étape en cours, pas tout le projet.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Tous les échanges, toutes les tâches</h4><p class="secondaire e-8">Les réunions et les tâches du projet, au même endroit.</p></div></li><li><span class="pave">4</span><div><h4 class="t-accroche">Documentation client et interne</h4><p class="secondaire e-8">Le récap du projet, le déroulé, les liens vers le Drive.</p></div></li><li><span class="pave">5</span><div><h4 class="t-accroche">Retour d'expérience</h4><p class="secondaire e-8">Ce qu'on garde pour le prochain projet.</p></div></li></ol>
+        <div class="cellule pile bas-colle">
+          <div><p class="libelle">L'état du projet</p><ol class="etats e-12"><li><span class="pave">1</span>Avant vente</li><li><span class="pave">2</span>Production</li><li><span class="pave">3</span>Exploitation</li><li><span class="pave">4</span>Clôture interne</li><li><span class="pave">5</span>Clôture client</li><li><span class="pave">6</span>Terminé</li><li class="perdu"><span class="pave">×</span>Ou Perdu, s'il ne se fait pas</li></ol></div>
+          <div class="type-projet"><p class="libelle">Le type du projet</p><p class="e-8">Vert, orange ou rouge&nbsp;: comment le projet est suivi, avec la Responsable ou avec Jérôme.</p></div>
+        </div>
+      </div>
+      <div class="bandeau"><div><p class="libelle">Le réflexe</p></div><div><p>Une tâche se crée depuis la page du projet&nbsp;: elle s'y range toute seule.</p></div></div>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
@@ -831,9 +1004,9 @@
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">13 / 26</span>
+      <span class="libelle">13 / 29</span>
     </header>
-    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Premier temps gagné · les tâches</span></div>
+    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Projets et tâches · la formule</span></div>
     <div class="corps etage3">
       <div class="tete"><h3 class="t-titre-section">Une bonne tâche tient en une <span class="fort">phrase</span>.</h3><p class="t-reponse secondaire">Toujours la même formule. Celui qui la lit sait quoi faire, et quand c'est fini.</p></div>
       <div class="pile">
@@ -847,40 +1020,109 @@
         <div class="exemple anime" style="--i:3">
           <p class="libelle">Ce qu'on lit dans Notion</p>
           <p class="phrase"><span>Envoyer</span> <span>le devis traiteur</span> <span class="r">validé par le client</span></p>
-          <p class="contre">Et pas : <s>Traiteur</s> · <s>Devis</s> · <s>Voir avec le client</s></p>
+          <p class="contre">Et pas&nbsp;: <s>Traiteur</s> · <s>Devis</s> · <s>Voir avec le client</s></p>
         </div>
       </div>
-      <div class="bandeau"><div><p class="libelle">Puis trois réflexes</p></div><div><p><b>Exécuté par</b> · <b>Projet</b> · <b>Échéance</b>. Créez-la depuis la page du projet : le projet se remplit tout seul.</p></div></div>
+      <div class="bandeau"><div><p class="libelle">Puis trois réflexes</p></div><div><p><b>Exécuté par</b> · <b>Projet</b> · <b>Échéance</b>. Créez-la depuis la page du projet&nbsp;: le projet se remplit tout seul.</p></div></div>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 14 · Votre tableau de bord ═══ -->
-<section class="slide" data-slide="14" data-titre="Votre tableau de bord">
+<!-- ═══ 14 · Les propriétés d'une tâche ═══ -->
+<section class="slide" data-slide="14" data-titre="Les propriétés d'une tâche">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">14 / 26</span>
+      <span class="libelle">14 / 29</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Projets et tâches · démo dans Notion</span></div>
+    <div class="corps etage2">
+      <div class="tete"><h3 class="t-titre-section">Les propriétés d'une <span class="fort">tâche</span>.</h3><p class="t-reponse secondaire">Trois à remplir en la créant, une à tenir à jour. Les autres, quand elles servent.</p></div>
+      <div class="g57 grille">
+        <div class="cellule pile centre"><div class="fiche"><p class="libelle">Une tâche, ouverte</p><p class="titre">Envoyer le devis traiteur validé par le client</p><dl class="props"><div class=cle><dt><span class="pave">1</span>Exécuté par</dt><dd>Moi</dd></div><div class=cle><dt><span class="pave">2</span>Échéance</dt><dd>30 octobre 2026</dd></div><div class=cle><dt><span class="pave">3</span>Projet client</dt><dd>Global Council 2027</dd></div><div class=cle><dt><span class="pave">4</span>Statut</dt><dd><span class="puce">En cours</span></dd></div><div><dt><span class="sans"></span>Type</dt><dd>Production</dd></div><div><dt><span class="sans"></span>Niveau</dt><dd>Obligatoire</dd></div><div><dt><span class="sans"></span>Meetings</dt><dd>Point client du jeudi</dd></div><div><dt><span class="sans"></span>Note</dt><dd>Menu végétarien demandé</dd></div></dl></div></div>
+        <ol class="lignes pleine compact"><li><span class="pave">1</span><div><h4 class="t-accroche">Exécuté par</h4><p class="secondaire e-8">Qui la fait. C'est dans son tableau de bord qu'elle apparaît.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Échéance</h4><p class="secondaire e-8">Pour quand. Sans date, elle n'apparaît pas dans votre calendrier.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Projet client ou Projet interne</h4><p class="secondaire e-8">Où elle se range. Créée depuis la page du projet, il se remplit tout seul.</p></div></li><li><span class="pave">4</span><div><h4 class="t-accroche">Statut</h4><p class="secondaire e-8">A faire, En cours, Attente retour interne ou client, Terminée. «&nbsp;Gelé&nbsp;»&nbsp;: projet en pause ou annulé.</p></div></li><li><span class="pave">+</span><div><h4 class="t-accroche">Les autres, quand elles servent</h4><p class="secondaire e-8">Type (production, exploitation, admin…), Niveau (obligatoire, facultative, urgent), Meetings (la réunion d'origine), Note.</p></div></li></ol>
+      </div>
+    </div>
+    <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 15 · L'IA de Notion ═══ -->
+<section class="slide" data-slide="15" data-titre="L'IA de Notion">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Lancement Notion · EVMT</span>
+      <span class="libelle">15 / 29</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Premier temps gagné · démo dans Notion</span></div>
+    <div class="corps g57">
+      <div class="cellule pile bas-colle">
+        <div><h3 class="t-titre-section">Une demande&nbsp;? Demandez à l'<span class="fort">IA</span> de Notion.</h3><p class="t-reponse secondaire e-24">Vous lui parlez comme à ChatGPT, avec vos mots. Elle connaît la Bible et vos projets.</p></div>
+        <div class="encadre note">
+          <p class="libelle">Le réflexe</p>
+          <p class="t-accroche e-12" style="font-size: 1.5rem">Dès que vous avez une question ou une demande, demandez-lui d'abord.</p>
+          <p class="secondaire e-12">Laissez l'effort sur «&nbsp;Moyen&nbsp;», c'est plus rapide. Ce qui se fait en deux clics, faites-le vous-même&nbsp;: l'IA fonctionne avec des crédits.</p>
+        </div>
+      </div>
+      <ol class="lignes pleine compact"><li><span class="pave">Question</span><div><h4 class="t-accroche">«&nbsp;Comment je fais une note de frais&nbsp;?&nbsp;»</h4><p class="secondaire e-8">Elle redonne la procédure de la Bible, étape par étape.</p></div></li><li><span class="pave">Suivi</span><div><h4 class="t-accroche">«&nbsp;Quelles sont mes tâches en retard cette semaine&nbsp;?&nbsp;»</h4><p class="secondaire e-8">La liste, rangée par projet.</p></div></li><li><span class="pave">Action</span><div><h4 class="t-accroche">«&nbsp;Remets une échéance sur ces tâches, à partir du 2 novembre.&nbsp;»</h4><p class="secondaire e-8">Elle met les dates à jour. Vous vérifiez.</p></div></li><li><span class="pave">Réunion</span><div><h4 class="t-accroche">«&nbsp;Résume la dernière réunion du projet.&nbsp;»</h4><p class="secondaire e-8">Les décisions et les tâches, en quelques lignes.</p></div></li></ol>
+    </div>
+    <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 16 · De la réunion aux tâches ═══ -->
+<section class="slide" data-slide="16" data-titre="De la réunion aux tâches">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Lancement Notion · EVMT</span>
+      <span class="libelle">16 / 29</span>
+    </header>
+    <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Premier temps gagné · démo dans Notion</span></div>
+    <div class="corps etage3">
+      <div class="tete"><h3 class="t-titre-section">De la réunion aux tâches, sans <span class="fort">recopier</span>.</h3><p class="t-reponse secondaire">L'IA écrit le compte rendu et propose les tâches.</p></div>
+      <div class="g57 grille reunion">
+        <ol class="lignes pleine etapes"><li style="--i:2"><span class="pave">Avant</span><div><h4 class="t-accroche">J'ouvre la note depuis la page du projet</h4><p class="secondaire e-8">Je la relie aux participants.</p></div></li><li style="--i:10"><span class="pave">Pendant</span><div><h4 class="t-accroche">Je lance la transcription</h4><p class="secondaire e-8">Et je préviens que j'enregistre.</p></div></li><li style="--i:25"><span class="pave">Après</span><div><h4 class="t-accroche">Je lance «&nbsp;@fin de meeting&nbsp;»</h4><p class="secondaire e-8">L'IA propose les tâches&nbsp;: qui, quand, statut.</p></div></li><li style="--i:43"><span class="pave">Je valide</span><div><h4 class="t-accroche">Je relis, je corrige, je valide</h4><p class="secondaire e-8">Les tâches se créent, rattachées à la réunion et au projet.</p></div></li></ol>
+        <div class="maquette">
+          <div class="note">
+            <div class="note-tete"><div class="ligne"><p class="libelle">Réunion · reliée au projet</p><p class="libelle">Exemple</p></div><p class="titre">Point client du jeudi</p><p class="participants"><span class="puce">Moi</span><span class="puce">Mon binôme</span><span class="puce">Le client</span></p></div>
+            <div class="enregistre"><span class="point"></span><span class="empile"><span class="avant">Transcription en cours…</span><span class="apres">Transcription terminée · compte rendu rédigé</span></span></div>
+            <div class="commande"><span class="libelle">Je lance</span><span class="saisie"><span class="tape">@fin de meeting</span><span class="curseur" aria-hidden="true"></span></span></div>
+            <ul class="propositions"><li style="--p:0"><span class="case"><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg></span><p class="quoi">Envoyer le devis traiteur validé par le client<span class="meta">Moi · 30 oct.</span></p><span class="etat empile"><span class="puce avant">Proposée</span><span class="puce apres">Validée</span></span></li><li style="--p:1"><span class="case"><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg></span><p class="quoi">Confirmer le nombre de participants avec le client<span class="meta">Moi · 3 nov.</span></p><span class="etat empile"><span class="puce avant">Proposée</span><span class="puce apres">Validée</span></span></li><li style="--p:2"><span class="case"><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg></span><p class="quoi">Relancer le lieu pour le plan d'implantation<span class="meta">Mon binôme · 4 nov.</span></p><span class="etat empile"><span class="puce avant">Proposée</span><span class="puce apres">Validée</span></span></li></ul>
+          </div>
+        </div>
+      </div>
+      <div class="offre ruban leger" style="--i:52"><svg class="icone" aria-hidden="true"><use href="#i-garantie"/></svg><p class="t-reponse">Rien ne se crée sans votre accord. L'IA propose, vous corrigez ou validez. Rien n'est envoyé au client.</p></div>
+    </div>
+    <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
+  </div>
+</section>
+<!-- ═══ 17 · Votre tableau de bord ═══ -->
+<section class="slide" data-slide="17" data-titre="Votre tableau de bord">
+  <div class="cadre">
+    <header class="haut">
+      <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
+      <span class="libelle objet">Lancement Notion · EVMT</span>
+      <span class="libelle">17 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">Premier temps gagné · démo dans Notion</span></div>
     <div class="corps g57">
       <div class="cellule pile bas-colle">
         <h3 class="t-titre-section">Votre tableau de bord, et rien d'<span class="fort">autre</span>.</h3>
-        <p class="t-reponse secondaire">Filtré sur vous : chacun voit ses projets et ses tâches.</p>
+        <p class="t-reponse secondaire">Filtré sur vous&nbsp;: chacun voit ses projets et ses tâches.</p>
       </div>
-      <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Mes projets</h4><p class="secondaire e-8">Mon projet pilote en premier. Un filtre masque les projets terminés et perdus.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Mes tâches</h4><p class="secondaire e-8">Une seule liste, rangée par projet. Les tâches client et les tâches internes y sont distinguées.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Mon calendrier</h4><p class="secondaire e-8">La vue calendrier de Notion : mes tâches datées, semaine par semaine.</p></div></li></ol>
+      <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Mes projets</h4><p class="secondaire e-8">Mon projet pilote en premier. Un filtre masque les projets terminés et perdus.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Mes tâches</h4><p class="secondaire e-8">Une seule liste, rangée par projet. Les tâches client et les tâches internes y sont distinguées.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Mon calendrier</h4><p class="secondaire e-8">La vue calendrier de Notion&nbsp;: mes tâches datées, semaine par semaine.</p></div></li></ol>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 15 · La Bible ═══ -->
-<section class="slide" data-slide="15" data-titre="La Bible">
+<!-- ═══ 18 · La Bible ═══ -->
+<section class="slide" data-slide="18" data-titre="La Bible">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">15 / 26</span>
+      <span class="libelle">18 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">La Bible · démo dans Notion</span></div>
     <div class="corps g57">
@@ -889,21 +1131,21 @@
         <div class="encadre note">
           <p class="libelle">À vous · 20 minutes</p>
           <p class="t-accroche e-12">Trouvez dans la Bible la réponse à une vraie question de votre semaine.</p>
-          <p class="secondaire e-12">Vous ne trouvez pas ? Posez la question à l'IA de Notion, ou laissez un commentaire sur la page où vous l'auriez cherchée.</p>
+          <p class="secondaire e-12">Vous ne trouvez pas&nbsp;? Posez la question à l'IA de Notion, ou laissez un commentaire sur la page où vous l'auriez cherchée.</p>
         </div>
       </div>
-      <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Chercher une information</h4></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Retrouver une procédure ou un contact utile</h4></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Faire une note de frais</h4></div></li><li><span class="pave">4</span><div><h4 class="t-accroche">Proposer une correction en commentaire</h4></div></li><li><span class="pave">5</span><div><h4 class="t-accroche">Proposer une nouvelle procédure</h4><p class="secondaire e-8">Avec le skill « Nouvelle procédure ».</p></div></li></ol>
+      <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Chercher une information</h4></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Retrouver une procédure ou un contact utile</h4></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Faire une note de frais</h4></div></li><li><span class="pave">4</span><div><h4 class="t-accroche">Proposer une correction en commentaire</h4></div></li><li><span class="pave">5</span><div><h4 class="t-accroche">Proposer une nouvelle procédure</h4><p class="secondaire e-8">Avec le skill «&nbsp;Nouvelle procédure&nbsp;».</p></div></li></ol>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 16 · Une Bible à jour ═══ -->
-<section class="slide" data-slide="16" data-titre="Une Bible à jour">
+<!-- ═══ 19 · Une Bible à jour ═══ -->
+<section class="slide" data-slide="19" data-titre="Une Bible à jour">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">16 / 26</span>
+      <span class="libelle">19 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">La Bible · les règles</span></div>
     <div class="corps g57">
@@ -911,18 +1153,18 @@
         <h3 class="t-titre-section">Une Bible qui reste à <span class="fort">jour</span>.</h3>
         <p class="t-reponse secondaire">Tout le monde peut l'enrichir. Personne ne change un chiffre par erreur.</p>
       </div>
-      <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Tout le monde lit et commente</h4><p class="secondaire e-8">Une erreur, un oubli : un commentaire sur la page concernée.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Tout le monde peut créer une procédure</h4><p class="secondaire e-8">Un Responsable la valide avant qu'elle soit publiée.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Les Responsables et Jérôme modifient</h4><p class="secondaire e-8">Le texte d'une procédure existante, et intègrent vos commentaires.</p></div></li><li><span class="pave">4</span><div><h4 class="t-accroche">Une relecture chaque trimestre</h4></div></li></ol>
+      <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Tout le monde lit et commente</h4><p class="secondaire e-8">Une erreur, un oubli&nbsp;: un commentaire sur la page concernée.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Tout le monde peut créer une procédure</h4><p class="secondaire e-8">Un Responsable la valide avant qu'elle soit publiée.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Les Responsables et Jérôme modifient</h4><p class="secondaire e-8">Le texte d'une procédure existante, et intègrent vos commentaires.</p></div></li><li><span class="pave">4</span><div><h4 class="t-accroche">Une relecture chaque trimestre</h4></div></li></ol>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 17 · Vos tâches de la semaine ═══ -->
-<section class="slide" data-slide="17" data-titre="Vos tâches de la semaine">
+<!-- ═══ 20 · Vos tâches de la semaine ═══ -->
+<section class="slide" data-slide="20" data-titre="Vos tâches de la semaine">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">17 / 26</span>
+      <span class="libelle">20 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">01</span><h2 class="t-barre-section">Lundi 26</h2><span class="libelle">À vous · 30 minutes</span></div>
     <div class="corps g57">
@@ -939,20 +1181,20 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 18 · 02 · En petits groupes ═══ -->
-<section class="slide" data-slide="18" data-titre="02 · En petits groupes">
+<!-- ═══ 21 · 02 · En petits groupes ═══ -->
+<section class="slide" data-slide="21" data-titre="02 · En petits groupes">
   <div class="cadre sans-barre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">18 / 26</span>
+      <span class="libelle">21 / 29</span>
     </header>
     
     <div class="corps inter">
       <div class="grille g-inter">
         <div class="cellule pile bas-colle">
           <ol class="parcours"><li><span class="pave">01</span><span class="libelle">Lundi matin</span></li><li class=ici><span class="pave">02</span><span class="libelle">En petits groupes</span></li><li><span class="pave">03</span><span class="libelle">Après le 27</span></li></ol>
-          <div><h2 class="t-roi">En petits groupes</h2><p class="t-reponse secondaire e-24 prose">Lundi après-midi et mardi : chacun sur son projet pilote, avec son équipe.</p></div>
+          <div><h2 class="t-roi">En petits groupes</h2><p class="t-reponse secondaire e-24 prose">Lundi après-midi et mardi&nbsp;: chacun sur son projet pilote, avec son équipe.</p></div>
         </div>
         <div class="numero pile bas-colle"><p class="libelle">Partie 02 / 03</p><p class="chiffre" aria-hidden="true">02</p></div>
       </div>
@@ -961,53 +1203,52 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 19 · Un projet pilote ═══ -->
-<section class="slide" data-slide="19" data-titre="Un projet pilote">
+<!-- ═══ 22 · Un projet pilote ═══ -->
+<section class="slide" data-slide="22" data-titre="Un projet pilote">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">19 / 26</span>
+      <span class="libelle">22 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">En petits groupes</h2><span class="libelle">Vos projets pilotes</span></div>
     <div class="corps g57">
       <div class="cellule pile bas-colle">
         <h3 class="t-titre-section">Un projet pilote par <span class="fort">personne</span>.</h3>
-        <ol class="lignes"><li><span class="pave">1</span><div><h4 class="t-accroche">C'est votre priorité</h4><p class="secondaire e-8">Vos tâches, vos réunions, vos documents : tout y passe.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Vous êtes encadré</h4><p class="secondaire e-8">Par Audrey ou Céline, qui suivent le projet avec vous.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Vos autres projets restent visibles</h4><p class="secondaire e-8">Ce n'est pas votre priorité pour l'instant.</p></div></li></ol>
+        <ol class="lignes"><li><span class="pave">1</span><div><h4 class="t-accroche">C'est votre priorité</h4><p class="secondaire e-8">Vos tâches, vos réunions, vos documents&nbsp;: tout y passe.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Vous êtes encadré</h4><p class="secondaire e-8">Par Audrey, Céline ou Sarah, qui suivent le projet avec vous.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Vos autres projets restent visibles</h4><p class="secondaire e-8">Ce n'est pas votre priorité pour l'instant.</p></div></li></ol>
       </div>
-      <div class="cellule pile"><table class="tableau"><thead><tr><th>Qui</th><th>Encadré par</th><th>Projet pilote</th></tr></thead><tbody><tr><td>Pauline</td><td>Audrey</td><td>JD TMM</td></tr><tr><td>Léo</td><td>Audrey</td><td>Nuxe SMI 2027</td></tr><tr><td>Claire</td><td>Céline</td><td>NW Peranel pré Global Council 2027</td></tr><tr><td>Marion E, Lara, Chloé</td><td>Céline</td><td>NW Global Council 2027</td></tr><tr><td>Lisa</td><td>Céline</td><td>NW Séminaire Olivia Pradal 2027</td></tr><tr><td>Marion D</td><td>Céline</td><td>NW RNDV 2026 · à confirmer</td></tr><tr><td>Brand Experience</td><td>[à venir]</td><td>[liste à venir]</td></tr></tbody></table></div>
+      <div class="cellule pile"><table class="tableau"><thead><tr><th>Qui</th><th>Encadré par</th><th>Projet pilote</th></tr></thead><tbody><tr><td>Pauline</td><td>Audrey</td><td>[à confirmer avec Audrey]</td></tr><tr><td>Léo</td><td>Audrey</td><td>Nuxe SMI 2027</td></tr><tr><td>Claire</td><td>Céline</td><td>Peranel pré Global Council 2027</td></tr><tr><td>Marion E, Lara, Chloé</td><td>Céline</td><td>Global Council 2027</td></tr><tr><td>Lisa</td><td>Céline</td><td>Séminaire international (via Olivia Pradal)</td></tr><tr><td>Gabrielle</td><td>Sarah</td><td>Ride the City n°2 et Salons 2027</td></tr><tr><td>Ninon</td><td>Sarah</td><td>Christmas covering</td></tr><tr><td>Maëlyss</td><td>Sarah</td><td>Christmas covering Occitanie</td></tr></tbody></table></div>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 20 · Vos créneaux en petit groupe ═══ -->
-<section class="slide" data-slide="20" data-titre="Vos créneaux en petit groupe">
+<!-- ═══ 23 · Vos créneaux en petit groupe ═══ -->
+<section class="slide" data-slide="23" data-titre="Vos créneaux en petit groupe">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">20 / 26</span>
+      <span class="libelle">23 / 29</span>
     </header>
-    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Mardi 27</h2><span class="libelle">Trois groupes · horaires proposés</span></div>
+    <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Lundi 26 et mardi 27</h2><span class="libelle">Vos créneaux · dans votre agenda</span></div>
     <div class="corps etage3">
-      <div class="tete"><h3 class="t-titre-section">Mardi, en petit <span class="fort">groupe</span>.</h3><p class="t-reponse secondaire">Les chefs de projet, par pôle. Horaires calés sur vos disponibilités.</p></div>
-      <ol class="colonnes aligne" style="--n:3">
-        <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">01</p><span class="pave">9h30 · 11h00</span></div><div><h4 class="t-accroche">Corporate · avec Audrey</h4><p class="secondaire e-12">Pauline et Léo, chacun sur son projet pilote.</p></div></li>
-        <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">02</p><span class="pave">11h15 · 12h45</span></div><div><h4 class="t-accroche">Corporate · avec Céline</h4><p class="secondaire e-12">Son équipe, chacun sur son projet pilote.</p></div></li>
-        <li class="pile bas-colle"><div class="rang"><p class="t-question lettre" aria-hidden="true">03</p><span class="pave">14h00 · 15h30</span></div><div><h4 class="t-accroche">Brand Experience</h4><p class="secondaire e-12">Chacun sur son projet pilote.</p></div></li>
-      </ol>
-      <div class="bandeau"><div><p class="libelle">Le reste du temps</p></div><div><p>Sylvain est disponible pour un temps individuel sur votre poste.</p></div></div>
+      <div class="tete"><h3 class="t-titre-section">Lundi après-midi et mardi, en petit <span class="fort">groupe</span>.</h3><p class="t-reponse secondaire">Votre créneau est dans votre agenda. Ordinateur chargé, Notion ouvert.</p></div>
+      <div class="creneaux">
+        <div><p class="jour libelle">Lundi 26 · après-midi</p><ol><li style="--i:0"><span class="heure">14h00 · 14h30</span><div><h4>Tour des postes</h4><p class="secondaire">Chacun ouvre son projet pilote et pose ses tâches</p></div></li><li style="--i:1"><span class="heure">14h30 · 15h30</span><div><h4>Compta</h4><p class="secondaire">Patricia et Margot</p></div></li><li style="--i:2"><span class="heure">15h30 · 16h00</span><div><h4>Créa</h4><p class="secondaire">Laurie</p></div></li><li style="--i:3"><span class="heure">16h30 · 17h00</span><div><h4>Projet pilote de Pauline</h4><p class="secondaire">Pauline et Audrey</p></div></li><li style="--i:4"><span class="heure">17h00 · 17h30</span><div><h4>Tour des postes et déblocage</h4><p class="secondaire">Toute l'équipe</p></div></li></ol></div>
+        <div><p class="jour libelle">Mardi 27</p><ol><li style="--i:2"><span class="heure">9h00 · 10h00</span><div><h4>Rattrapage de la matinée de lundi</h4><p class="secondaire">Léo</p></div></li><li style="--i:3"><span class="heure">10h00 · 10h30</span><div><h4>Nuxe SMI 2027</h4><p class="secondaire">Léo et Audrey</p></div></li><li style="--i:4"><span class="heure">10h30 · 11h30</span><div><h4>Global Council 2027</h4><p class="secondaire">Céline, Marion E, Lara et Chloé</p></div></li><li style="--i:5"><span class="heure">11h30 · 12h30</span><div><h4>Peranel et Séminaire Pradal</h4><p class="secondaire">Céline, Claire et Lisa</p></div></li><li style="--i:6"><span class="heure">14h00 · 15h00</span><div><h4>Brand Experience · Christmas covering</h4><p class="secondaire">Sarah, Ninon et Maëlyss</p></div></li><li style="--i:7"><span class="heure">15h00 · 15h30</span><div><h4>Brand Experience · Ride the City et Salons</h4><p class="secondaire">Sarah et Gabrielle</p></div></li><li style="--i:8"><span class="heure">15h30 · 16h00</span><div><h4>Point final</h4><p class="secondaire">Les chefs de projet et les Responsables</p></div></li></ol></div>
+      </div>
+      <div class="bandeau"><div><p class="libelle">Le reste du temps</p></div><div><p>Sylvain passe de poste en poste. Les deux jours, il reste sur place après 17h30 si besoin.</p></div></div>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 21 · En atelier ═══ -->
-<section class="slide" data-slide="21" data-titre="En atelier">
+<!-- ═══ 24 · En atelier ═══ -->
+<section class="slide" data-slide="24" data-titre="En atelier">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">21 / 26</span>
+      <span class="libelle">24 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">02</span><h2 class="t-barre-section">Mardi 27</h2><span class="libelle">Démo dans Notion</span></div>
     <div class="corps etage">
@@ -1016,20 +1257,20 @@
           <div><p class="libelle">Dans chaque groupe</p><h3 class="t-question e-16">Votre projet pilote, en vrai</h3></div>
           <p class="secondaire">Chacun sur son poste, sur son vrai projet. On vérifie ensemble que c'est simple et que ça fait gagner du temps.</p>
         </div>
-        <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Mettre le projet à jour</h4><p class="secondaire e-8">Les tâches de l'étape en cours, datées et attribuées.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Travailler à plusieurs</h4><p class="secondaire e-8">Se répartir les tâches, savoir qui attend quoi.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Tenir une réunion</h4><p class="secondaire e-8">La note ouverte depuis le projet, « fin de meeting », tâches validées.</p></div></li><li><span class="pave">4</span><div><h4 class="t-accroche">Ranger les documents</h4><p class="secondaire e-8">Le lien du dossier client sur la page du projet.</p></div></li></ol>
+        <ol class="lignes pleine"><li><span class="pave">1</span><div><h4 class="t-accroche">Mettre le projet à jour</h4><p class="secondaire e-8">Les tâches de l'étape en cours, datées et attribuées.</p></div></li><li><span class="pave">2</span><div><h4 class="t-accroche">Travailler à plusieurs</h4><p class="secondaire e-8">Se répartir les tâches, savoir qui attend quoi.</p></div></li><li><span class="pave">3</span><div><h4 class="t-accroche">Tenir une réunion</h4><p class="secondaire e-8">La note ouverte depuis le projet, «&nbsp;@fin de meeting&nbsp;», tâches validées.</p></div></li><li><span class="pave">4</span><div><h4 class="t-accroche">Ranger les documents</h4><p class="secondaire e-8">Le lien du dossier client sur la page du projet.</p></div></li></ol>
       </div>
       <div class="offre livrables"><p class="t-accroche">En sortant</p><ul><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Votre projet pilote est à jour</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Vous savez le tenir seul</span></li><li><svg class="icone" aria-hidden="true"><use href="#i-coche"/></svg><span>Vos questions sont notées pour l'office hour</span></li></ul></div>
     </div>
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 22 · 03 · La suite ═══ -->
-<section class="slide" data-slide="22" data-titre="03 · La suite">
+<!-- ═══ 25 · 03 · La suite ═══ -->
+<section class="slide" data-slide="25" data-titre="03 · La suite">
   <div class="cadre sans-barre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">22 / 26</span>
+      <span class="libelle">25 / 29</span>
     </header>
     
     <div class="corps inter">
@@ -1045,13 +1286,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 23 · Trois étapes ═══ -->
-<section class="slide" data-slide="23" data-titre="Trois étapes">
+<!-- ═══ 26 · Trois étapes ═══ -->
+<section class="slide" data-slide="26" data-titre="Trois étapes">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">23 / 26</span>
+      <span class="libelle">26 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">Après le 27</h2><span class="libelle">Le chemin</span></div>
     <div class="corps etage3">
@@ -1066,13 +1307,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 24 · On ne vous lâche pas ═══ -->
-<section class="slide" data-slide="24" data-titre="On ne vous lâche pas">
+<!-- ═══ 27 · On ne vous lâche pas ═══ -->
+<section class="slide" data-slide="27" data-titre="On ne vous lâche pas">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">24 / 26</span>
+      <span class="libelle">27 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">Après le 27</h2><span class="libelle">L'accompagnement</span></div>
     <div class="corps g57">
@@ -1089,13 +1330,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 25 · Quand ça coince ═══ -->
-<section class="slide" data-slide="25" data-titre="Quand ça coince">
+<!-- ═══ 28 · Quand ça coince ═══ -->
+<section class="slide" data-slide="28" data-titre="Quand ça coince">
   <div class="cadre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_ink.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">25 / 26</span>
+      <span class="libelle">28 / 29</span>
     </header>
     <div class="barre"><span class="num t-numero-barre">03</span><h2 class="t-barre-section">Après le 27</h2><span class="libelle">Quand ça coince</span></div>
     <div class="corps etage2">
@@ -1109,13 +1350,13 @@
     <footer class="bas"><span class="libelle">Préparé pour EVMT · document de travail</span><span class="libelle">26 et 27 octobre 2026</span></footer>
   </div>
 </section>
-<!-- ═══ 26 · Pour finir ═══ -->
-<section class="slide sombre" data-slide="26" data-titre="Pour finir">
+<!-- ═══ 29 · Pour finir ═══ -->
+<section class="slide sombre" data-slide="29" data-titre="Pour finir">
   <div class="cadre sans-barre">
     <header class="haut">
       <img class="logo" src="marque/logos/rama-logic_bloc_cream.svg" alt="Rama Logic" width="1241" height="526">
       <span class="libelle objet">Lancement Notion · EVMT</span>
-      <span class="libelle">26 / 26</span>
+      <span class="libelle">29 / 29</span>
     </header>
     
     <div class="corps fin">
@@ -1138,7 +1379,7 @@
 
 <div class="nav-controls" data-pdf-hide>
   <button class="nav-btn" id="prev" aria-label="Écran précédent"><svg aria-hidden="true" style="transform:scaleX(-1)"><use href="#i-chevron-droit"/></svg></button>
-  <div class="counter libelle"><span id="cur">1</span>&nbsp;/ 26</div>
+  <div class="counter libelle"><span id="cur">1</span>&nbsp;/ 29</div>
   <button class="nav-btn" id="next" aria-label="Écran suivant"><svg aria-hidden="true"><use href="#i-chevron-droit"/></svg></button>
   <button class="nav-btn" id="grid" aria-label="Vue d'ensemble"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
 </div>
