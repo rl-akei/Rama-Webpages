@@ -1,0 +1,418 @@
+/* Rama Logic · Brand System v2.4.0 · 2026-10-21
+ *
+ * FICHIER GÉNÉRÉ. NE JAMAIS L'ÉDITER À LA MAIN.
+ * Source unique : rama-logic.tokens.json. Pour changer une valeur :
+ * modifier le JSON, puis lancer  python3 build_tokens.py
+ *
+ * Deux étages : les valeurs brutes d'abord, puis les rôles, qui pointent dessus.
+ * Dans un composant, on utilise un rôle (--rl-fond-page), pas une valeur brute.
+ * La règle d'usage de chaque jeton est dans le JSON ($description) et dans
+ * la charte RamaLogic-DESIGN.md.
+ */
+
+:root {
+  /* ═══ ÉTAGE 1 · VALEURS BRUTES ═══ */
+
+  /* couleur */
+  --rl-couleur-cream: #FFFCF7;
+  --rl-couleur-beige: #D2CFC9;
+  --rl-couleur-ink: #0D1A14;
+  --rl-couleur-slate: #5C6661;
+  --rl-couleur-aloe-fonce: #475E54;
+  --rl-couleur-aloe: #6A8D7E;
+  --rl-couleur-aloe-clair: #B4C6BE;
+  --rl-couleur-mindaro-fonce: #9FA55F;
+  --rl-couleur-mindaro: #DFE971;
+  --rl-couleur-mindaro-clair: #F6FBC6;
+  --rl-couleur-flame: #F76420;
+  --rl-couleur-bleu-fonce: #6F94A6;
+  --rl-couleur-bleu: #A7DEF9;
+  --rl-couleur-bleu-clair: #D3EEFC;
+  --rl-couleur-etat-ink-survol: #24352D;
+  --rl-couleur-etat-mindaro-survol: #EAF28F;
+  --rl-couleur-etat-cream-survol: #EAEDE7;
+  --rl-couleur-transparence-cream-0: rgb(255 252 247 / 0);
+  --rl-couleur-transparence-cream-14: rgb(255 252 247 / 0.14);
+  --rl-couleur-transparence-cream-16: rgb(255 252 247 / 0.16);
+  --rl-couleur-transparence-cream-22: rgb(255 252 247 / 0.22);
+  --rl-couleur-transparence-cream-72: rgb(255 252 247 / 0.72);
+  --rl-couleur-transparence-cream-80: rgb(255 252 247 / 0.8);
+  --rl-couleur-transparence-ink-10: rgb(13 26 20 / 0.1);
+
+  /* police */
+  --rl-police-texte: "Clash Grotesk", system-ui, -apple-system, sans-serif;
+  --rl-police-machine: "JetBrains Mono", ui-monospace, "SFMono-Regular", "Menlo", "Consolas", monospace;
+
+  /* graisse */
+  --rl-graisse-leger: 300;
+  --rl-graisse-normal: 400;
+  --rl-graisse-moyen: 500;
+  --rl-graisse-demi-gras: 600;
+
+  /* type */
+  --rl-type-roi-police: var(--rl-police-texte);
+  --rl-type-roi-taille: clamp(2.5rem, 7.4vw, 7rem);
+  --rl-type-roi-taille-mobile: min(9.7vw, clamp(2.5rem, 7.4vw, 7rem));
+  --rl-type-roi-graisse: var(--rl-graisse-moyen);
+  --rl-type-roi-interlignage: 0.98;
+  --rl-type-roi-interlettrage: -0.04em;
+  --rl-type-ouverture-police: var(--rl-police-texte);
+  --rl-type-ouverture-taille: clamp(2.5rem, 6.2vw, 5.75rem);
+  --rl-type-ouverture-taille-mobile: min(8.6vw, clamp(2.5rem, 6.2vw, 5.75rem));
+  --rl-type-ouverture-graisse: var(--rl-graisse-moyen);
+  --rl-type-ouverture-interlignage: 1.02;
+  --rl-type-ouverture-interlettrage: -0.03em;
+  --rl-type-chiffre-geant-police: var(--rl-police-texte);
+  --rl-type-chiffre-geant-taille: clamp(3.375rem, 6vw, 5.5rem);
+  --rl-type-chiffre-geant-taille-mobile: 3.375rem;
+  --rl-type-chiffre-geant-graisse: var(--rl-graisse-demi-gras);
+  --rl-type-chiffre-geant-interlignage: 0.95;
+  --rl-type-chiffre-geant-interlettrage: -0.035em;
+  --rl-type-question-police: var(--rl-police-texte);
+  --rl-type-question-taille: clamp(2rem, 4.6vw, 4.25rem);
+  --rl-type-question-taille-mobile: 2rem;
+  --rl-type-question-graisse: var(--rl-graisse-moyen);
+  --rl-type-question-interlignage: 1.02;
+  --rl-type-question-interlettrage: -0.035em;
+  --rl-type-titre-section-police: var(--rl-police-texte);
+  --rl-type-titre-section-taille: clamp(2rem, 3.4vw + 0.25rem, 3.25rem);
+  --rl-type-titre-section-taille-mobile: 2rem;
+  --rl-type-titre-section-graisse: var(--rl-graisse-moyen);
+  --rl-type-titre-section-interlignage: 1.06;
+  --rl-type-titre-section-interlettrage: -0.025em;
+  --rl-type-chiffre-ouverture-police: var(--rl-police-texte);
+  --rl-type-chiffre-ouverture-taille: clamp(1.75rem, 2.8vw, 2.5rem);
+  --rl-type-chiffre-ouverture-taille-mobile: 1.375rem;
+  --rl-type-chiffre-ouverture-graisse: var(--rl-graisse-demi-gras);
+  --rl-type-chiffre-ouverture-interlignage: 1;
+  --rl-type-chiffre-ouverture-interlettrage: -0.03em;
+  --rl-type-accroche-police: var(--rl-police-texte);
+  --rl-type-accroche-taille: clamp(1.5rem, 2.2vw, 2rem);
+  --rl-type-accroche-taille-mobile: 1.5rem;
+  --rl-type-accroche-graisse: var(--rl-graisse-moyen);
+  --rl-type-accroche-interlignage: 1.15;
+  --rl-type-accroche-interlettrage: -0.02em;
+  --rl-type-barre-section-police: var(--rl-police-texte);
+  --rl-type-barre-section-taille: clamp(1.375rem, 1.6vw + 0.75rem, 1.875rem);
+  --rl-type-barre-section-taille-mobile: 1.125rem;
+  --rl-type-barre-section-graisse: var(--rl-graisse-moyen);
+  --rl-type-barre-section-interlignage: 1.1;
+  --rl-type-barre-section-interlettrage: -0.025em;
+  --rl-type-reponse-police: var(--rl-police-texte);
+  --rl-type-reponse-taille: clamp(1.25rem, 2.2vw, 1.875rem);
+  --rl-type-reponse-taille-mobile: 1.25rem;
+  --rl-type-reponse-graisse: var(--rl-graisse-normal);
+  --rl-type-reponse-interlignage: 1.3;
+  --rl-type-reponse-interlettrage: -0.01em;
+  --rl-type-corps-police: var(--rl-police-texte);
+  --rl-type-corps-taille: 1.125rem;
+  --rl-type-corps-graisse: var(--rl-graisse-normal);
+  --rl-type-corps-interlignage: 1.6;
+  --rl-type-corps-interlettrage: 0;
+  --rl-type-numero-barre-police: var(--rl-police-machine);
+  --rl-type-numero-barre-taille: 1.125rem;
+  --rl-type-numero-barre-taille-mobile: 1rem;
+  --rl-type-numero-barre-graisse: var(--rl-graisse-moyen);
+  --rl-type-numero-barre-interlignage: 1.1;
+  --rl-type-numero-barre-interlettrage: 0;
+  --rl-type-corps-petit-police: var(--rl-police-texte);
+  --rl-type-corps-petit-taille: 1rem;
+  --rl-type-corps-petit-graisse: var(--rl-graisse-normal);
+  --rl-type-corps-petit-interlignage: 1.5;
+  --rl-type-corps-petit-interlettrage: 0;
+  --rl-type-petit-police: var(--rl-police-texte);
+  --rl-type-petit-taille: 0.875rem;
+  --rl-type-petit-graisse: var(--rl-graisse-normal);
+  --rl-type-petit-interlignage: 1.35;
+  --rl-type-petit-interlettrage: 0;
+  --rl-type-pastille-police: var(--rl-police-texte);
+  --rl-type-pastille-taille: 0.8125rem;
+  --rl-type-pastille-taille-mobile: 0.6875rem;
+  --rl-type-pastille-graisse: var(--rl-graisse-moyen);
+  --rl-type-pastille-interlignage: 1;
+  --rl-type-pastille-interlettrage: 0;
+  --rl-type-libelle-police: var(--rl-police-machine);
+  --rl-type-libelle-taille: 0.75rem;
+  --rl-type-libelle-graisse: var(--rl-graisse-moyen);
+  --rl-type-libelle-interlignage: 1.4;
+  --rl-type-libelle-interlettrage: 0.06em;
+  --rl-type-libelle-mini-police: var(--rl-police-machine);
+  --rl-type-libelle-mini-taille: 0.6875rem;
+  --rl-type-libelle-mini-graisse: var(--rl-graisse-moyen);
+  --rl-type-libelle-mini-interlignage: 1;
+  --rl-type-libelle-mini-interlettrage: 0.06em;
+
+  /* espace */
+  --rl-espace-4: 0.25rem;
+  --rl-espace-8: 0.5rem;
+  --rl-espace-12: 0.75rem;
+  --rl-espace-16: 1rem;
+  --rl-espace-24: 1.5rem;
+  --rl-espace-32: 2rem;
+  --rl-espace-48: 3rem;
+  --rl-espace-64: 4rem;
+  --rl-espace-96: 6rem;
+  --rl-espace-128: 8rem;
+
+  /* largeur */
+  --rl-largeur-cadre: 80rem;
+  --rl-largeur-contenu: 72rem;
+  --rl-largeur-etroit: 56rem;
+  --rl-largeur-chapeau: 34rem;
+  --rl-largeur-prose: 65ch;
+
+  /* marge */
+  --rl-marge-cadre: clamp(0.75rem, 5.5vw, 5rem);
+  --rl-marge-cellule: clamp(1rem, 2.5vw, 2rem);
+  --rl-marge-section: clamp(4rem, 8vw, 8rem);
+  --rl-marge-section-petite: clamp(3rem, 6vw, 6rem);
+
+  /* hauteur */
+  --rl-hauteur-barre-haut: 4rem;
+  --rl-hauteur-barre-section: 3rem;
+  --rl-hauteur-barre-section-numerotee: 4rem;
+  --rl-hauteur-bouton: 3.25rem;
+  --rl-hauteur-bouton-fleche: 2.25rem;
+  --rl-hauteur-cible-tactile: 2.75rem;
+
+  /* rayon */
+  --rl-rayon-cellule: 2px;
+  --rl-rayon-pilule: 9999px;
+  --rl-rayon-aucun: 0;
+
+  /* trait */
+  --rl-trait-filet: 1px;
+  --rl-trait-focus: 2px;
+  --rl-trait-focus-decalage: 2px;
+  --rl-trait-soulignement: 1.5px;
+  --rl-trait-icone: 1.5;
+  --rl-trait-icone-point: 2.2;
+  --rl-trait-icone-angle: 3;
+
+  /* mouvement */
+  --rl-mouvement-courbe-sortie: cubic-bezier(0.16, 1, 0.3, 1);
+  --rl-mouvement-courbe-entree: cubic-bezier(0.7, 0, 0.84, 0);
+  --rl-mouvement-courbe-transition: cubic-bezier(0.87, 0, 0.13, 1);
+  --rl-mouvement-duree-rapide: 150ms;
+  --rl-mouvement-duree-appui: 160ms;
+  --rl-mouvement-duree-base: 200ms;
+  --rl-mouvement-duree-lente: 300ms;
+  --rl-mouvement-duree-question: 500ms;
+  --rl-mouvement-duree-apparition: 600ms;
+  --rl-mouvement-duree-orbite: 700ms;
+  --rl-mouvement-duree-ouverture: 900ms;
+  --rl-mouvement-duree-compteur: 1200ms;
+  --rl-mouvement-decalage-liste: 80ms;
+  --rl-mouvement-decalage-titre: 100ms;
+  --rl-mouvement-decalage-question: 140ms;
+  --rl-mouvement-decalage-niveau: 650ms;
+  --rl-mouvement-distance-apparition: 12px;
+  --rl-mouvement-distance-question: 20px;
+  --rl-mouvement-distance-ouverture: 22px;
+  --rl-mouvement-distance-lateral: 28px;
+  --rl-mouvement-distance-fleche: 3px;
+  --rl-mouvement-echelle-appui: 0.97;
+  --rl-mouvement-echelle-apparition: 0.96;
+  --rl-mouvement-orbite-tour-contexte: 170;
+  --rl-mouvement-orbite-tour-agents: -135;
+  --rl-mouvement-orbite-tour-modeles: 220;
+
+  /* rupture */
+  --rl-rupture-telephone-petit: 25.75rem;
+  --rl-rupture-mobile: 48rem;
+  --rl-rupture-tablette: 64rem;
+  --rl-rupture-hauteur-courte: 43.75rem;
+
+  /* video */
+  --rl-video-format-vertical-largeur: 1080px;
+  --rl-video-format-vertical-hauteur: 1920px;
+  --rl-video-format-paysage-largeur: 1920px;
+  --rl-video-format-paysage-hauteur: 1080px;
+  --rl-video-format-portrait-largeur: 1080px;
+  --rl-video-format-portrait-hauteur: 1350px;
+  --rl-video-format-carre-largeur: 1080px;
+  --rl-video-format-carre-hauteur: 1080px;
+  --rl-video-format-cadence: 30;
+  --rl-video-zone-vertical-haut: 288px;
+  --rl-video-zone-vertical-bas: 672px;
+  --rl-video-zone-vertical-gauche: 120px;
+  --rl-video-zone-vertical-droite: 192px;
+  --rl-video-zone-vertical-colonne-tiktok: 300px;
+  --rl-video-zone-vertical-colonne-tiktok-hauteur: 1080px;
+  --rl-video-zone-paysage-haut: 184px;
+  --rl-video-zone-paysage-bas: 112px;
+  --rl-video-zone-paysage-cote: 96px;
+  --rl-video-zone-portrait-marge: 80px;
+  --rl-video-zone-carre-bas: 112px;
+  --rl-video-zone-carre-cote: 80px;
+  --rl-video-sous-titre-graisse: var(--rl-graisse-moyen);
+  --rl-video-sous-titre-interlignage: 1.15;
+  --rl-video-sous-titre-interlettrage: -0.01em;
+  --rl-video-sous-titre-lignes-maxi: 2;
+  --rl-video-sous-titre-plafond: 0.55;
+  --rl-video-sous-titre-fondu: 80ms;
+  --rl-video-sous-titre-duree-mini: 700ms;
+  --rl-video-sous-titre-duree-maxi: 2500ms;
+  --rl-video-sous-titre-vertical-taille: 64px;
+  --rl-video-sous-titre-vertical-taille-mini: 56px;
+  --rl-video-sous-titre-vertical-largeur: 696px;
+  --rl-video-sous-titre-vertical-bas: 672px;
+  --rl-video-sous-titre-vertical-mots-maxi: 6;
+  --rl-video-sous-titre-paysage-taille: 56px;
+  --rl-video-sous-titre-paysage-taille-mini: 48px;
+  --rl-video-sous-titre-paysage-largeur: 1344px;
+  --rl-video-sous-titre-paysage-bas: 128px;
+  --rl-video-sous-titre-paysage-mots-maxi: 9;
+  --rl-video-sous-titre-portrait-taille: 56px;
+  --rl-video-sous-titre-portrait-taille-mini: 48px;
+  --rl-video-sous-titre-portrait-largeur: 864px;
+  --rl-video-sous-titre-portrait-bas: 160px;
+  --rl-video-sous-titre-portrait-mots-maxi: 6;
+  --rl-video-sous-titre-carre-taille: 56px;
+  --rl-video-sous-titre-carre-taille-mini: 48px;
+  --rl-video-sous-titre-carre-largeur: 864px;
+  --rl-video-sous-titre-carre-bas: 160px;
+  --rl-video-sous-titre-carre-mots-maxi: 6;
+  --rl-video-cartouche-marge-verticale: 16px;
+  --rl-video-cartouche-marge-horizontale: 32px;
+  --rl-video-cartouche-rayon: var(--rl-rayon-cellule);
+  --rl-video-cartouche-filet: 3px;
+  --rl-video-titre-grand-vertical: 120px;
+  --rl-video-titre-grand-paysage: 160px;
+  --rl-video-titre-grand-interlignage: 1;
+  --rl-video-titre-grand-interlettrage: -0.035em;
+  --rl-video-titre-moyen: 96px;
+  --rl-video-titre-moyen-mini: 80px;
+  --rl-video-titre-nom: 56px;
+  --rl-video-titre-libelle: 36px;
+  --rl-video-titre-bouton: 48px;
+  --rl-video-titre-bouton-hauteur: 104px;
+  --rl-video-titre-accroche-mots-maxi: 6;
+  --rl-video-titre-accroche-duree: 3500ms;
+  --rl-video-titre-lecture-mini: 2500ms;
+  --rl-video-logo-hauteur-mini: 96px;
+  --rl-video-logo-hauteur-vertical: 160px;
+  --rl-video-logo-hauteur-paysage: 128px;
+  --rl-video-logo-duree-mini: 2000ms;
+  --rl-video-mouvement-distance: 32px;
+
+  /* ═══ ÉTAGE 2 · RÔLES ═══ */
+
+  /* fond */
+  --rl-fond-page: var(--rl-couleur-cream);
+  --rl-fond-sombre: var(--rl-couleur-ink);
+  --rl-fond-offre: var(--rl-couleur-aloe-fonce);
+  --rl-fond-encadre: var(--rl-couleur-mindaro-clair);
+  --rl-fond-entonnoir: var(--rl-couleur-aloe-clair);
+
+  /* texte */
+  --rl-texte-principal: var(--rl-couleur-ink);
+  --rl-texte-secondaire: var(--rl-couleur-slate);
+  --rl-texte-libelle: var(--rl-couleur-slate);
+  --rl-texte-lien: var(--rl-couleur-aloe-fonce);
+  --rl-texte-sur-sombre-principal: var(--rl-couleur-cream);
+  --rl-texte-sur-sombre-secondaire: var(--rl-couleur-aloe-clair);
+  --rl-texte-sur-sombre-libelle: var(--rl-couleur-aloe-clair);
+  --rl-texte-sur-sombre-adouci: var(--rl-couleur-transparence-cream-80);
+  --rl-texte-sur-offre-principal: var(--rl-couleur-cream);
+  --rl-texte-sur-offre-accent: var(--rl-couleur-mindaro-clair);
+
+  /* filet */
+  --rl-filet-clair: var(--rl-couleur-beige);
+  --rl-filet-sombre: var(--rl-couleur-transparence-cream-16);
+  --rl-filet-sur-offre: var(--rl-couleur-transparence-cream-22);
+
+  /* accent */
+  --rl-accent-structure: var(--rl-couleur-mindaro);
+  --rl-accent-emphase: var(--rl-couleur-flame);
+
+  /* bouton */
+  --rl-bouton-principal-fond: var(--rl-couleur-ink);
+  --rl-bouton-principal-texte: var(--rl-couleur-cream);
+  --rl-bouton-principal-fond-survol: var(--rl-couleur-etat-ink-survol);
+  --rl-bouton-principal-fleche-fond: var(--rl-couleur-transparence-cream-14);
+  --rl-bouton-sur-sombre-fond: var(--rl-couleur-mindaro);
+  --rl-bouton-sur-sombre-texte: var(--rl-couleur-ink);
+  --rl-bouton-sur-sombre-fond-survol: var(--rl-couleur-etat-mindaro-survol);
+  --rl-bouton-sur-sombre-fleche-fond: var(--rl-couleur-transparence-ink-10);
+  --rl-bouton-secondaire-fond: var(--rl-couleur-transparence-cream-0);
+  --rl-bouton-secondaire-texte: var(--rl-couleur-ink);
+  --rl-bouton-secondaire-filet: var(--rl-couleur-ink);
+  --rl-bouton-secondaire-fond-survol: var(--rl-couleur-etat-cream-survol);
+  --rl-bouton-secondaire-fleche-fond: var(--rl-couleur-transparence-ink-10);
+  --rl-bouton-secondaire-sur-sombre-fond: var(--rl-couleur-transparence-cream-0);
+  --rl-bouton-secondaire-sur-sombre-texte: var(--rl-couleur-cream);
+  --rl-bouton-secondaire-sur-sombre-filet: var(--rl-couleur-cream);
+  --rl-bouton-secondaire-sur-sombre-fond-survol: var(--rl-couleur-etat-ink-survol);
+  --rl-bouton-secondaire-sur-sombre-fleche-fond: var(--rl-couleur-transparence-cream-14);
+
+  /* focus */
+  --rl-focus-clair: var(--rl-couleur-aloe-fonce);
+  --rl-focus-sombre: var(--rl-couleur-mindaro);
+
+  /* champ */
+  --rl-champ-fond: var(--rl-couleur-cream);
+  --rl-champ-texte: var(--rl-couleur-ink);
+  --rl-champ-indication: var(--rl-couleur-slate);
+  --rl-champ-contour: var(--rl-couleur-slate);
+  --rl-champ-contour-survol: var(--rl-couleur-ink);
+  --rl-champ-contour-erreur: var(--rl-couleur-flame);
+  --rl-champ-message-erreur: var(--rl-couleur-ink);
+  --rl-champ-focus: var(--rl-focus-clair);
+  --rl-champ-hauteur: var(--rl-hauteur-bouton);
+  --rl-champ-rayon: var(--rl-rayon-cellule);
+
+  /* cellule */
+  --rl-cellule-survol: var(--rl-couleur-etat-cream-survol);
+  --rl-cellule-survol-sur-sombre: var(--rl-couleur-etat-ink-survol);
+
+  /* option */
+  --rl-option-recommandee-fond: var(--rl-fond-offre);
+  --rl-option-recommandee-texte: var(--rl-texte-sur-offre-principal);
+  --rl-option-recommandee-libelle: var(--rl-accent-structure);
+  --rl-option-recommandee-prix: var(--rl-texte-sur-offre-principal);
+
+  /* vitrine */
+  --rl-vitrine-cadre: var(--rl-couleur-ink);
+  --rl-vitrine-legende: var(--rl-texte-libelle);
+
+  /* alerte */
+  --rl-alerte-fond: var(--rl-couleur-flame);
+  --rl-alerte-texte: var(--rl-couleur-ink);
+
+  /* graphique */
+  --rl-graphique-fond: var(--rl-couleur-ink);
+  --rl-graphique-serie-1: var(--rl-couleur-bleu);
+  --rl-graphique-serie-2: var(--rl-couleur-cream);
+  --rl-graphique-serie-3: var(--rl-couleur-aloe);
+  --rl-graphique-serie-4: var(--rl-couleur-mindaro);
+  --rl-graphique-zone: var(--rl-couleur-bleu-clair);
+  --rl-graphique-texte: var(--rl-couleur-cream);
+  --rl-graphique-filet: var(--rl-couleur-transparence-cream-16);
+  --rl-graphique-accent: var(--rl-couleur-flame);
+  --rl-graphique-repli-fond: var(--rl-couleur-cream);
+  --rl-graphique-repli-serie-1: var(--rl-couleur-bleu-fonce);
+  --rl-graphique-repli-serie-2: var(--rl-couleur-ink);
+  --rl-graphique-repli-serie-3: var(--rl-couleur-aloe);
+  --rl-graphique-repli-serie-4: var(--rl-couleur-aloe-fonce);
+  --rl-graphique-repli-texte: var(--rl-couleur-ink);
+  --rl-graphique-repli-texte-secondaire: var(--rl-couleur-slate);
+  --rl-graphique-repli-filet: var(--rl-couleur-beige);
+
+  /* icone */
+  --rl-icone-sur-clair: var(--rl-couleur-ink);
+  --rl-icone-sur-sombre: var(--rl-couleur-cream);
+  --rl-icone-agent: var(--rl-couleur-mindaro);
+
+  /* video */
+  --rl-video-sous-titre-fond: var(--rl-couleur-ink);
+  --rl-video-sous-titre-texte: var(--rl-couleur-cream);
+  --rl-video-sous-titre-emphase: var(--rl-couleur-flame);
+  --rl-video-carte-fond: var(--rl-couleur-ink);
+  --rl-video-carte-texte: var(--rl-couleur-cream);
+  --rl-video-carte-libelle: var(--rl-couleur-aloe-clair);
+  --rl-video-carte-emphase: var(--rl-couleur-flame);
+  --rl-video-carte-filet: var(--rl-couleur-transparence-cream-16);
+  --rl-video-carte-bouton-fond: var(--rl-couleur-mindaro);
+  --rl-video-carte-bouton-texte: var(--rl-couleur-ink);
+}
